@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Future Council</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background: #000000;
+      color: #f7f3ee;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .gradient-border {
+      border-image: linear-gradient(135deg, rgba(255, 158, 89, 0.95), rgba(255, 158, 89, 0.65)) 1;
+    }
+    .soft-glow {
+      box-shadow: 0 0 45px rgba(255, 158, 89, 0.18);
+    }
+    .ring-glow {
+      box-shadow: inset 0 0 0 1px rgba(255, 158, 89, 0.3);
+    }
+    ::selection {
+      background: rgba(255, 158, 89, 0.2);
+      color: #fff;
+    }
+    .section-ghost::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 158, 89, 0.12), transparent 22%),
+        radial-gradient(circle at left center, rgba(255, 158, 89, 0.08), transparent 20%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .nav-backdrop {
+      backdrop-filter: blur(14px);
+      background: rgba(0, 0, 0, 0.92);
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+  <div class="fixed inset-x-0 top-0 z-50 nav-backdrop border-b border-white/5">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <a href="#hero" class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.35em] text-white">
+        <img src="TFC.png" alt="The Future Council logo" class="h-10 w-10 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+        <span class="hidden sm:inline">The Future Council</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+        <a href="#about" class="transition hover:text-white">About</a>
+        <a href="#initiatives" class="transition hover:text-white">Initiatives</a>
+        <a href="#join" class="transition hover:text-white">Join</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="rounded-full border border-[#FF9E59]/20 bg-[#FF9E59]/10 px-4 py-2 text-sm font-semibold text-[#FF9E59] transition hover:bg-[#FF9E59]/15 hover:text-white">Enter Council</a>
+        <button id="mobileMenuButton" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-200 md:hidden" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden border-t border-white/5 bg-slate-950/95 md:hidden">
+      <div class="flex items-center gap-3 border-b border-white/5 px-6 py-4 text-sm text-slate-300">
+        <img src="TFC.png" alt="The Future Council logo" class="h-10 w-10 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+        <span class="text-sm uppercase tracking-[0.35em] text-white">The Future Council</span>
+      </div>
+      <div class="space-y-1 px-6 py-4 text-sm text-slate-300">
+        <a href="#about" class="block rounded-2xl px-3 py-3 transition hover:bg-white/5 hover:text-white">About</a>
+        <a href="#initiatives" class="block rounded-2xl px-3 py-3 transition hover:bg-white/5 hover:text-white">Initiatives</a>
+        <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="block rounded-2xl px-3 py-3 transition hover:bg-white/5 hover:text-white">Join</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="relative pt-28">
+    <section id="hero" class="relative overflow-hidden px-6 pb-20 pt-10 sm:px-8 lg:px-10">
+      <div class="pointer-events-none absolute right-0 top-0 h-48 w-48 translate-x-16 rounded-full bg-[#FF9E59]/10 blur-3xl"></div>
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div class="relative z-10 max-w-2xl">
+            <div class="mt-6 flex items-center gap-3">
+              <img src="TFC.png" alt="The Future Council logo" class="h-12 w-12 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+              <span class="inline-flex rounded-full border border-[#FF9E59]/20 bg-[#FF9E59]/10 px-3 py-1 text-xs uppercase tracking-[0.35em] text-[#FF9E59]">University of Delhi • Entrepreneurship Cell</span>
+            </div>
+            <h1 class="mt-8 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">Stop building in silos. Start building the future.</h1>
+            <p class="mt-6 max-w-xl text-lg leading-8 text-slate-300">Delhi University has 90+ colleges and 1.5 lakh+ students, but the best builders are trapped in their own backyards. The Future Council is the first pan-DU, student-led innovation ecosystem designed to unite builders, strategists, and disruptors across campuses.</p>
+            <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="inline-flex items-center justify-center rounded-full bg-[#FF9E59] px-6 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-[#FF9E59]/90">Join the Collective</a>
+              <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#FF9E59]/50 hover:text-[#FF9E59]">Apply to The Future Council</a>
+            </div>
+          </div>
+          <div class="relative isolate overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_25px_80px_rgba(0,0,0,0.35)] sm:p-10">
+            <div class="absolute -top-8 left-0 h-20 w-20 rounded-full bg-[#FF9E59]/10 blur-2xl"></div>
+            <div class="absolute -bottom-8 right-4 h-24 w-24 rounded-full bg-[#FF9E59]/10 blur-3xl"></div>
+            <div class="relative z-10 grid gap-6">
+              <div class="rounded-[1.75rem] border border-white/5 bg-white/5 p-6 text-sm text-slate-300 ring-glow transition hover:-translate-y-1 hover:border-[#FF9E59]/20 hover:bg-white/10">
+                <p class="uppercase tracking-[0.3em] text-xs text-[#FF9E59]">Stay Connected</p>
+                <h2 class="mt-4 text-xl font-semibold text-white">Follow The Future Council</h2>
+                <p class="mt-2 leading-7 text-slate-400">Catch launch updates, member stories, event news, and cross-campus collaboration calls on our socials.</p>
+                <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <a href="https://www.instagram.com/thefuturecouncil.du/" target="_blank" rel="noreferrer noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-[#FF9E59]/10 px-4 py-3 text-sm font-semibold text-[#FF9E59] transition hover:bg-[#FF9E59]/15">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M7.75 2.5h8.5A5.25 5.25 0 0 1 21.5 7.75v8.5a5.25 5.25 0 0 1-5.25 5.25h-8.5A5.25 5.25 0 0 1 2.5 16.25v-8.5A5.25 5.25 0 0 1 7.75 2.5Zm0 1.5A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5Zm4.25 2.25a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5Zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Zm4.56-.72a1.06 1.06 0 1 1 0 2.12 1.06 1.06 0 0 1 0-2.12Z"/></svg>
+                    Instagram
+                  </a>
+                  <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noreferrer noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M4.98 3.5h14.04A1.48 1.48 0 0 1 20.5 4.98v14.04a1.48 1.48 0 0 1-1.48 1.48H4.98A1.48 1.48 0 0 1 3.5 19.02V4.98A1.48 1.48 0 0 1 4.98 3.5Zm0 1.5v14.04h14.04V5H4.98Zm4.07 2.84h1.9v1.7h.03c.26-.5.9-1.02 1.85-1.02 1.98 0 2.35 1.3 2.35 2.99v3.44h-1.9v-3.04c0-.72-.01-1.65-1.01-1.65-1.02 0-1.18.8-1.18 1.62v3.07h-1.9V8.84Zm-1.9 0h1.9v7.7h-1.9v-7.7ZM8.03 7.34a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-3xl border border-white/10 bg-slate-900/80 p-4 text-sm text-slate-300 transition hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+                  <p class="text-xs uppercase tracking-[0.25em] text-white/50">Now</p>
+                  <p class="mt-4 text-lg font-semibold text-white">Live socials & launch alerts</p>
+                </div>
+                <div class="rounded-3xl border border-white/10 bg-slate-900/80 p-4 text-sm text-slate-300 transition hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+                  <p class="text-xs uppercase tracking-[0.25em] text-white/50">Next</p>
+                  <p class="mt-4 text-lg font-semibold text-white">Cross-campus connection events</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="relative section-ghost px-6 pb-20 sm:px-8 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 max-w-2xl">
+          <div class="flex items-center gap-3">
+            <img src="TFC.png" alt="The Future Council logo" class="h-10 w-10 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+            <p class="text-sm uppercase tracking-[0.35em] text-[#FF9E59]">Why Now</p>
+          </div>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">90+ Colleges. Zero Connection.</h2>
+          <p class="mt-6 text-base leading-7 text-slate-300">Right now, your college E-Cell only knows your college E-Cell. Brilliant students are building incredible things, but unless you accidentally stumble across them on LinkedIn, you’ll never know they exist.
+Startup culture at DU is fragmented. We aren’t here to replace the great work individual college societies are doing—we’re here to bridge the gaps between them. It’s time to break down campus walls and build the biggest student entrepreneurship community in the country.</p>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_25px_70px_rgba(0,0,0,0.25)] transition hover:-translate-y-1 hover:border-[#FF9E59]/20">
+            <p class="text-xs uppercase tracking-[0.35em] text-[#FF9E59]">Structure</p>
+            <h3 class="mt-4 text-2xl font-semibold text-white">Community-first tech culture</h3>
+            <p class="mt-4 text-slate-400">Members trade strengths, host design critiques, and launch product squads that stay together beyond contests and semesters.</p>
+          </div>
+          <div class="rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_25px_70px_rgba(0,0,0,0.25)] transition hover:-translate-y-1 hover:border-[#FF9E59]/20">
+            <p class="text-xs uppercase tracking-[0.35em] text-[#FF9E59]">Vision</p>
+            <h3 class="mt-4 text-2xl font-semibold text-white">From curiosity to venture-ready</h3>
+            <p class="mt-4 text-slate-400">Every cohort is designed to surface high-potential founders and equip them with product, data, and go-to-market skills inside a fast-moving cell rhythm.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="initiatives" class="px-6 pb-24 sm:px-8 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-sm uppercase tracking-[0.35em] text-[#FF9E59]">What happens when DU builds together?</p>
+            <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">What happens when DU builds together?</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-6 text-slate-400">A new cross-campus ecosystem that connects creators, operators, and teams across Delhi University.</p>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-4">
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/85 p-6 transition hover:-translate-y-1 hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-[#FF9E59]/10 text-[#FF9E59] ring-1 ring-[#FF9E59]/20">01</div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Find Your Missing Piece</h3>
+            <p class="mt-4 text-slate-400">Cross-campus collaboration is finally seamless. Find a technical co-founder, a growth marketer, or a brilliant strategist from another DU college in minutes.</p>
+          </article>
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/85 p-6 transition hover:-translate-y-1 hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-[#FF9E59]/10 text-[#FF9E59] ring-1 ring-[#FF9E59]/20">02</div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Move From Ideation to MVP</h3>
+            <p class="mt-4 text-slate-400">We fuse deep technical execution with sharp strategic thinking. The Future Council serves as your peer-led launchpad to transform raw brilliance into market-ready ventures.</p>
+          </article>
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/85 p-6 transition hover:-translate-y-1 hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-[#FF9E59]/10 text-[#FF9E59] ring-1 ring-[#FF9E59]/20">03</div>
+            <h3 class="mt-6 text-xl font-semibold text-white">Learn from the Trenches</h3>
+            <p class="mt-4 text-slate-400">Skip the textbook theories. Get direct access to industry leaders, active founders, and seasoned mentors who have actually scaled companies.</p>
+          </article>
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/85 p-6 transition hover:-translate-y-1 hover:border-[#FF9E59]/30 hover:bg-slate-900/95">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-[#FF9E59]/10 text-[#FF9E59] ring-1 ring-[#FF9E59]/20">04</div>
+            <h3 class="mt-6 text-xl font-semibold text-white">University-Wide Challenges</h3>
+            <p class="mt-4 text-slate-400">Participate in hyper-focused ideathons, hackathons, and innovation challenges designed to push your limits alongside the most ambitious minds in the university.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="relative px-6 pb-28 sm:px-8 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="overflow-hidden rounded-[2.25rem] border border-white/10 bg-slate-950/90 p-10 sm:p-14">
+          <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div>
+              <p class="text-sm uppercase tracking-[0.35em] text-[#FF9E59]">The early stages are where the magic happens.</p>
+              <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">We are actively looking for the foundational builders, thinkers, and operators who want to help shape this ecosystem from day one.</h2>
+              <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">The early stages are where the magic happens. We are actively looking for the foundational builders, thinkers, and operators who want to help shape this ecosystem from day one.</p>
+            </div>
+            <div class="rounded-[2rem] border border-white/10 bg-slate-900/80 p-8">
+              <div class="flex items-center gap-4">
+                <img src="TFC.png" alt="The Future Council logo" class="h-14 w-14 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+                <div class="space-y-2 text-slate-300">
+                  <p class="text-sm uppercase tracking-[0.32em] text-slate-400">Apply to The Future Council</p>
+                  <p class="text-base leading-7">Click below to open The Future Council application in a new tab.</p>
+                </div>
+              </div>
+              <div class="mt-8">
+                <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="inline-flex w-full items-center justify-center rounded-full bg-[#FF9E59] px-6 py-4 text-sm font-semibold text-slate-950 transition hover:bg-[#FF9E59]/90">Open Application</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5 bg-slate-950/80 px-6 py-10 text-sm text-slate-400 sm:px-8 lg:px-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="TFC.png" alt="The Future Council logo" class="h-10 w-10 rounded-2xl border border-[#FF9E59]/20 bg-white/5 object-cover" />
+          <p class="font-semibold text-white">The Future Council</p>
+        </div>
+        <p class="mt-2 max-w-md leading-6">Established in the Faculty of Technology, The Future Council is PAN DU — a student-led innovation ecosystem for future founders and campus-scale tech ventures.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 text-slate-400">
+        <span>Delhi, India</span>
+        <span class="text-slate-500">•</span>
+        <span>2026 Cohort</span>
+        <span class="text-slate-500">•</span>
+        <span>Future Council</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const targetId = link.getAttribute('href').slice(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          event.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

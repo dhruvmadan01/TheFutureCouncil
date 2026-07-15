@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="TFC logo">
+  <rect width="120" height="120" rx="24" fill="#FF9E59" />
+  <g fill="#000">
+    <path d="M18 18H34V96H26V72H18V18Z" />
+    <path d="M44 18H66V30H52V48H66V60H52V96H44V60H34V48H44V30H34V18Z" />
+    <path d="M86 24C76 24 72 34 72 46C72 58 77 64 84 64C90 64 94 60 96 56C98 52 100 44 100 38C100 26 93 24 86 24ZM82 44C82 36 84 32 88 32C92 32 94 36 94 42C94 48 92 52 88 52C84 52 82 48 82 44Z" />
+  </g>
+</svg>
