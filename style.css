@@ -315,6 +315,73 @@ body {
   margin-top: 18px;
 }
 
+.founders-section {
+  margin-top: 18px;
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.founder-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  box-shadow: 6px 6px 0 var(--ink);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.founder-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.founder-photo {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border: 3px solid var(--ink);
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.founder-body h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.founder-role {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.founder-body p,
+.founder-body a {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.founder-body a {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .top-inline-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -467,7 +534,8 @@ body {
 @media (max-width: 900px) {
   .hero-grid,
   .content-grid,
-  .steps {
+  .steps,
+  .founders-grid {
     grid-template-columns: 1fr;
   }
 
@@ -493,6 +561,11 @@ body {
     min-width: 0;
     width: 100%;
     justify-content: center;
+  }
+
+  .founder-card {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .cta-band,
