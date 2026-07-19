@@ -150,10 +150,15 @@
           const badgeClass = startup.category === 'saas' ? 'badge-academic' : (startup.category === 'fintech' ? 'badge-corporate' : 'badge-venture');
           const badgeLabel = startup.category === 'saas' ? 'SaaS & AI' : (startup.category === 'fintech' ? 'Fintech' : 'D2C');
           
+          const isImage = startup.logo_stamp && startup.logo_stamp.startsWith('data:image/');
+          const stampHtml = isImage 
+            ? `<img src="${startup.logo_stamp}" style="width: 48px; height: 48px; object-fit: cover; border: 3px solid var(--ink); background: #fff;" />` 
+            : `<div class="partner-logo-stamp">${startup.logo_stamp || startup.name.slice(0,4)}</div>`;
+
           gridHtml += `
             <article class="partner-card panel" data-category="${startup.category}">
               <div class="partner-card-header">
-                <div class="partner-logo-stamp">${startup.logo_stamp || startup.name.slice(0,4)}</div>
+                ${stampHtml}
                 <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
               </div>
               <div class="partner-card-body">

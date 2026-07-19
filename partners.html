@@ -150,10 +150,15 @@
           const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
           const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
           
+          const isImage = partner.logo_stamp && partner.logo_stamp.startsWith('data:image/');
+          const stampHtml = isImage 
+            ? `<img src="${partner.logo_stamp}" style="width: 48px; height: 48px; object-fit: cover; border: 3px solid var(--ink); background: #fff;" />` 
+            : `<div class="partner-logo-stamp">${partner.logo_stamp || partner.name.slice(0,4)}</div>`;
+
           gridHtml += `
             <article class="partner-card panel" data-category="${partner.category}">
               <div class="partner-card-header">
-                <div class="partner-logo-stamp">${partner.logo_stamp || partner.name.slice(0,4)}</div>
+                ${stampHtml}
                 <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
               </div>
               <div class="partner-card-body">

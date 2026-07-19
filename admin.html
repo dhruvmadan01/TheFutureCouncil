@@ -91,8 +91,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="partnerLogo">Logo Stamp Text</label>
-              <input type="text" id="partnerLogo" class="form-control" placeholder="e.g. AWS" required />
+              <label for="partnerLogo">Logo Stamp Text (Optional)</label>
+              <input type="text" id="partnerLogo" class="form-control" placeholder="e.g. AWS" />
+            </div>
+            <div class="form-group">
+              <label for="partnerLogoFile">Or Upload Logo Image</label>
+              <input type="file" id="partnerLogoFile" class="form-control" accept="image/*" />
             </div>
             <div class="form-group">
               <label for="partnerLocation">Location / Subtitle</label>
@@ -127,8 +131,12 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="startupLogo">Logo Stamp Text</label>
-              <input type="text" id="startupLogo" class="form-control" placeholder="e.g. DORM" required />
+              <label for="startupLogo">Logo Stamp Text (Optional)</label>
+              <input type="text" id="startupLogo" class="form-control" placeholder="e.g. DORM" />
+            </div>
+            <div class="form-group">
+              <label for="startupLogoFile">Or Upload Logo Image</label>
+              <input type="file" id="startupLogoFile" class="form-control" accept="image/*" />
             </div>
             <div class="form-group">
               <label for="startupLocation">Founders & College</label>
@@ -179,6 +187,10 @@
             <div class="form-group">
               <label for="memberPassword">Password</label>
               <input type="text" id="memberPassword" class="form-control" placeholder="e.g. password123" required />
+            </div>
+            <div class="form-group">
+              <label for="memberImageFile">Profile Photo (Optional)</label>
+              <input type="file" id="memberImageFile" class="form-control" accept="image/*" />
             </div>
             <button type="submit" class="admin-submit-btn">Add Member</button>
           </form>
@@ -320,6 +332,45 @@
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
+      // Helper function to resize and read image files as Base64 Data URL
+      const getBase64 = (fileInput, callback) => {
+        const file = fileInput.files[0];
+        if (!file) {
+          callback(null);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const max_size = 120; // 120px is plenty for stamp logos & profile thumbnails
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+              if (width > max_size) {
+                height *= max_size / width;
+                width = max_size;
+              }
+            } else {
+              if (height > max_size) {
+                width *= max_size / height;
+                height = max_size;
+              }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.85); // JPEG compression
+            callback(dataUrl);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
       // Check Authentication
       const checkAuth = () => {
         const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true';
@@ -380,9 +431,14 @@
           const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
           const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
 
+          const isImage = partner.logo_stamp && partner.logo_stamp.startsWith('data:image/');
+          const logoHtml = isImage 
+            ? `<img src="${partner.logo_stamp}" class="admin-table-logo-img" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink);" />`
+            : `<div class="admin-badge ${badgeClass}">${partner.logo_stamp || ''}</div>`;
+
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><div class="admin-badge ${badgeClass}">${partner.logo_stamp || ''}</div></td>
+            <td>${logoHtml}</td>
             <td><a href="${partner.link}" target="_blank" class="font-bold underline text-black">${partner.name}</a></td>
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${partner.location || ''}</td>
@@ -432,9 +488,14 @@
           const badgeClass = startup.category === 'saas' ? 'badge-academic' : (startup.category === 'fintech' ? 'badge-corporate' : 'badge-venture');
           const badgeLabel = startup.category === 'saas' ? 'SaaS & AI' : (startup.category === 'fintech' ? 'Fintech' : 'D2C');
 
+          const isImage = startup.logo_stamp && startup.logo_stamp.startsWith('data:image/');
+          const logoHtml = isImage 
+            ? `<img src="${startup.logo_stamp}" class="admin-table-logo-img" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink);" />`
+            : `<div class="admin-badge ${badgeClass}">${startup.logo_stamp || ''}</div>`;
+
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><div class="admin-badge ${badgeClass}">${startup.logo_stamp || ''}</div></td>
+            <td>${logoHtml}</td>
             <td><a href="${startup.link}" target="_blank" class="font-bold underline text-black">${startup.name}</a></td>
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${startup.location || ''}</td>
@@ -463,27 +524,39 @@
         btn.disabled = true;
         btn.textContent = 'Adding...';
 
-        const newPartner = {
-          name: document.getElementById('partnerName').value,
-          category: document.getElementById('partnerCategory').value,
-          logo_stamp: document.getElementById('partnerLogo').value,
-          location: document.getElementById('partnerLocation').value,
-          description: document.getElementById('partnerDesc').value,
-          link: document.getElementById('partnerLink').value
-        };
+        const logoTextInput = document.getElementById('partnerLogo').value.trim();
+        const logoFileInput = document.getElementById('partnerLogoFile');
 
-        try {
-          const { error } = await supabaseClient.from('partners').insert([newPartner]);
-          if (error) throw error;
-          await renderPartnersTable();
-          partnerForm.reset();
-        } catch (err) {
-          console.error("Failed to add partner:", err);
-          alert("Failed to add partner: " + (err.message || err));
-        } finally {
+        if (!logoTextInput && !logoFileInput.files[0]) {
+          alert("Please provide either a logo stamp text or an image file.");
           btn.disabled = false;
           btn.textContent = 'Add Partner';
+          return;
         }
+
+        getBase64(logoFileInput, async (logoBase64) => {
+          const newPartner = {
+            name: document.getElementById('partnerName').value,
+            category: document.getElementById('partnerCategory').value,
+            logo_stamp: logoBase64 || logoTextInput,
+            location: document.getElementById('partnerLocation').value,
+            description: document.getElementById('partnerDesc').value,
+            link: document.getElementById('partnerLink').value
+          };
+
+          try {
+            const { error } = await supabaseClient.from('partners').insert([newPartner]);
+            if (error) throw error;
+            await renderPartnersTable();
+            partnerForm.reset();
+          } catch (err) {
+            console.error("Failed to add partner:", err);
+            alert("Failed to add partner: " + (err.message || err));
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Add Partner';
+          }
+        });
       });
 
       // Add Startup
@@ -493,27 +566,39 @@
         btn.disabled = true;
         btn.textContent = 'Adding...';
 
-        const newStartup = {
-          name: document.getElementById('startupName').value,
-          category: document.getElementById('startupCategory').value,
-          logo_stamp: document.getElementById('startupLogo').value,
-          location: document.getElementById('startupLocation').value,
-          description: document.getElementById('startupDesc').value,
-          link: document.getElementById('startupLink').value
-        };
+        const logoTextInput = document.getElementById('startupLogo').value.trim();
+        const logoFileInput = document.getElementById('startupLogoFile');
 
-        try {
-          const { error } = await supabaseClient.from('startups').insert([newStartup]);
-          if (error) throw error;
-          await renderStartupsTable();
-          startupForm.reset();
-        } catch (err) {
-          console.error("Failed to add startup:", err);
-          alert("Failed to add startup: " + (err.message || err));
-        } finally {
+        if (!logoTextInput && !logoFileInput.files[0]) {
+          alert("Please provide either a logo stamp text or an image file.");
           btn.disabled = false;
           btn.textContent = 'Add Startup';
+          return;
         }
+
+        getBase64(logoFileInput, async (logoBase64) => {
+          const newStartup = {
+            name: document.getElementById('startupName').value,
+            category: document.getElementById('startupCategory').value,
+            logo_stamp: logoBase64 || logoTextInput,
+            location: document.getElementById('startupLocation').value,
+            description: document.getElementById('startupDesc').value,
+            link: document.getElementById('startupLink').value
+          };
+
+          try {
+            const { error } = await supabaseClient.from('startups').insert([newStartup]);
+            if (error) throw error;
+            await renderStartupsTable();
+            startupForm.reset();
+          } catch (err) {
+            console.error("Failed to add startup:", err);
+            alert("Failed to add startup: " + (err.message || err));
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Add Startup';
+          }
+        });
       });
 
       // Delete Partner
@@ -581,10 +666,15 @@
         // Show Custom Members from localStorage
         const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
         customMembers.forEach((member, index) => {
+          const isImage = member.image && member.image.startsWith('data:image/');
+          const photoHtml = isImage 
+            ? `<img src="${member.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
+            : `<span style="font-size: 1.25rem; vertical-align: middle; margin-right: 8px;">🎓</span>`;
+
           const row = document.createElement('tr');
           row.innerHTML = `
             <td><span class="font-mono font-bold">${member.id}</span></td>
-            <td><strong>${member.name}</strong></td>
+            <td>${photoHtml}<strong>${member.name}</strong></td>
             <td>${member.email}</td>
             <td>${member.college}</td>
             <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
@@ -626,19 +716,24 @@
           return;
         }
 
-        const newMember = {
-          email: email,
-          name: document.getElementById('memberName').value.trim(),
-          college: document.getElementById('memberCollege').value.trim(),
-          tier: document.getElementById('memberTier').value,
-          id: document.getElementById('memberIdVal').value.trim(),
-          password: document.getElementById('memberPassword').value.trim()
-        };
+        const imageFileInput = document.getElementById('memberImageFile');
 
-        customMembers.push(newMember);
-        localStorage.setItem('tfc_members', JSON.stringify(customMembers));
-        renderMembersTable();
-        memberForm.reset();
+        getBase64(imageFileInput, (imageBase64) => {
+          const newMember = {
+            email: email,
+            name: document.getElementById('memberName').value.trim(),
+            college: document.getElementById('memberCollege').value.trim(),
+            tier: document.getElementById('memberTier').value,
+            id: document.getElementById('memberIdVal').value.trim(),
+            password: document.getElementById('memberPassword').value.trim(),
+            image: imageBase64 || ''
+          };
+
+          customMembers.push(newMember);
+          localStorage.setItem('tfc_members', JSON.stringify(customMembers));
+          renderMembersTable();
+          memberForm.reset();
+        });
       });
 
       // Initial check

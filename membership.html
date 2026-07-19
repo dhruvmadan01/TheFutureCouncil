@@ -95,7 +95,7 @@
                 <span>ID Card</span>
               </div>
               <div class="member-card-body">
-                <div class="member-card-photo-box">🎓</div>
+                <div class="member-card-photo-box" id="cardMemberPhoto">🎓</div>
                 <div class="member-card-details">
                   <h3 id="cardMemberName">Kartik Goel</h3>
                   <div class="member-card-meta" id="cardMemberCollege">SSCBS • Delhi University</div>
@@ -145,12 +145,14 @@
       const cardMemberCollege = document.getElementById('cardMemberCollege');
       const cardMemberTier = document.getElementById('cardMemberTier');
       const cardMemberId = document.getElementById('cardMemberId');
+      const cardMemberPhoto = document.getElementById('cardMemberPhoto');
 
       const AUTH_KEY = 'tfc_member_auth';
       const USERNAME_KEY = 'tfc_member_name';
       const COLLEGE_KEY = 'tfc_member_college';
       const TIER_KEY = 'tfc_member_tier';
       const ID_KEY = 'tfc_member_id';
+      const PHOTO_KEY = 'tfc_member_photo';
 
       // Pre-approved members list
       const ALLOWED_MEMBERS = {
@@ -182,6 +184,13 @@
           cardMemberCollege.textContent = sessionStorage.getItem(COLLEGE_KEY) || 'SSCBS • Delhi University';
           cardMemberTier.textContent = `Tier: ${sessionStorage.getItem(TIER_KEY) || 'Student Founder'}`;
           cardMemberId.textContent = `ID: ${sessionStorage.getItem(ID_KEY) || 'TFC-2026-0812'}`;
+          
+          const photo = sessionStorage.getItem(PHOTO_KEY);
+          if (photo && photo.startsWith('data:image/')) {
+            cardMemberPhoto.innerHTML = `<img src="${photo}" style="width:100%; height:100%; object-fit:cover;" />`;
+          } else {
+            cardMemberPhoto.textContent = '🎓';
+          }
           
           portalHero.querySelector('.hero-title').textContent = "Member Dashboard";
           portalHero.querySelector('.hero-text').textContent = "Access student cohort benefits, pitch feedback sessions, and verify your membership badge below.";
@@ -219,6 +228,7 @@
           sessionStorage.setItem(COLLEGE_KEY, member.college);
           sessionStorage.setItem(TIER_KEY, member.tier);
           sessionStorage.setItem(ID_KEY, member.id);
+          sessionStorage.setItem(PHOTO_KEY, member.image || '');
           loginError.classList.add('hidden');
           loginForm.reset();
           checkMemberAuth();
@@ -234,6 +244,7 @@
         sessionStorage.removeItem(COLLEGE_KEY);
         sessionStorage.removeItem(TIER_KEY);
         sessionStorage.removeItem(ID_KEY);
+        sessionStorage.removeItem(PHOTO_KEY);
         checkMemberAuth();
       });
 
