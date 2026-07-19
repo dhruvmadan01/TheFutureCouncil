@@ -25,6 +25,14 @@
       background: rgba(255, 158, 89, 0.2);
       color: #fff;
     }
+    @media (min-width: 901px) {
+      .admin-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .admin-table-panel {
+        grid-column: span 3;
+      }
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -138,6 +146,40 @@
           </form>
         </div>
 
+        <!-- Add Member Form -->
+        <div class="admin-form-panel">
+          <h2>Add New Member</h2>
+          <form id="memberForm">
+            <div class="form-group">
+              <label for="memberName">Full Name</label>
+              <input type="text" id="memberName" class="form-control" placeholder="e.g. Kartik Goel" required />
+            </div>
+            <div class="form-group">
+              <label for="memberEmail">Student Email</label>
+              <input type="email" id="memberEmail" class="form-control" placeholder="e.g. name@domain.com" required />
+            </div>
+            <div class="form-group">
+              <label for="memberCollege">College & Year</label>
+              <input type="text" id="memberCollege" class="form-control" placeholder="e.g. SSCBS, 2nd Year" required />
+            </div>
+            <div class="form-group">
+              <label for="memberTier">Member Tier</label>
+              <select id="memberTier" class="form-control" required>
+                <option value="Student Founder">Student Founder</option>
+                <option value="Founder">Founder</option>
+                <option value="Student">Student</option>
+                <option value="Partner">Partner</option>
+                <option value="Mentor">Mentor</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="memberIdVal">Member ID</label>
+              <input type="text" id="memberIdVal" class="form-control" placeholder="e.g. TFC-2026-0812" required />
+            </div>
+            <button type="submit" class="admin-submit-btn">Add Member</button>
+          </form>
+        </div>
+
         <!-- Manage Partners Table -->
         <div class="admin-table-panel">
           <h2>Ecosystem Partners List</h2>
@@ -170,6 +212,28 @@
                   <th>Name</th>
                   <th>Category</th>
                   <th>Founders & College</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Manage Members Table -->
+        <div class="admin-table-panel">
+          <h2>Ecosystem Members List</h2>
+          <div class="admin-table-wrapper">
+            <table class="admin-table" id="membersTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>College & Year</th>
+                  <th>Tier</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -239,8 +303,10 @@
       // Admin Management DOM elements
       const partnerForm = document.getElementById('partnerForm');
       const startupForm = document.getElementById('startupForm');
+      const memberForm = document.getElementById('memberForm');
       const partnersTableBody = document.querySelector('#partnersTable tbody');
       const startupsTableBody = document.querySelector('#startupsTable tbody');
+      const membersTableBody = document.querySelector('#membersTable tbody');
 
       const AUTH_KEY = 'tfc_auth';
 
@@ -257,6 +323,7 @@
           adminContent.classList.remove('hidden');
           renderPartnersTable();
           renderStartupsTable();
+          renderMembersTable();
         } else {
           loginContainer.classList.remove('hidden');
           adminContent.classList.add('hidden');
@@ -467,6 +534,102 @@
           alert("Failed to delete startup.");
         }
       };
+
+      // Hardcoded list (for reference and non-deletable display)
+      const SYSTEM_MEMBERS = {
+        'student@thefuturecouncil.in': {
+          name: 'Kartik Goel',
+          college: 'SSCBS • Delhi University',
+          tier: 'Student Founder',
+          id: 'TFC-2026-0812'
+        },
+        'dhruvmadan235@gmail.com': {
+          name: 'Dhruv Madan',
+          college: 'Faculty of Technology • Delhi University',
+          tier: 'Founder',
+          id: 'TFC-2026-0001'
+        }
+      };
+
+      const renderMembersTable = () => {
+        membersTableBody.innerHTML = '';
+        
+        // Show System Members first
+        Object.entries(SYSTEM_MEMBERS).forEach(([email, member]) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><span class="font-mono font-bold">${member.id}</span></td>
+            <td><strong>${member.name}</strong></td>
+            <td>${email}</td>
+            <td>${member.college}</td>
+            <td><span class="uppercase font-extrabold text-xs text-orange-500">${member.tier}</span></td>
+            <td>
+              <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">System</span>
+            </td>
+          `;
+          membersTableBody.appendChild(row);
+        });
+
+        // Show Custom Members from localStorage
+        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
+        customMembers.forEach((member, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><span class="font-mono font-bold">${member.id}</span></td>
+            <td><strong>${member.name}</strong></td>
+            <td>${member.email}</td>
+            <td>${member.college}</td>
+            <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
+            <td>
+              <button class="admin-delete-btn delete-member-btn" data-index="${index}">Delete</button>
+            </td>
+          `;
+          membersTableBody.appendChild(row);
+        });
+
+        // Attach delete events for members
+        membersTableBody.querySelectorAll('.delete-member-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'), 10);
+            deleteMember(index);
+          });
+        });
+      };
+
+      const deleteMember = (index) => {
+        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
+        customMembers.splice(index, 1);
+        localStorage.setItem('tfc_members', JSON.stringify(customMembers));
+        renderMembersTable();
+      };
+
+      // Add Member Form
+      memberForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('memberEmail').value.trim().toLowerCase();
+        
+        // Check if email already exists
+        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
+        const emailExists = SYSTEM_MEMBERS[email] || customMembers.some(m => m.email === email);
+        
+        if (emailExists) {
+          alert("A member with this email already exists!");
+          return;
+        }
+
+        const newMember = {
+          email: email,
+          name: document.getElementById('memberName').value.trim(),
+          college: document.getElementById('memberCollege').value.trim(),
+          tier: document.getElementById('memberTier').value,
+          id: document.getElementById('memberIdVal').value.trim()
+        };
+
+        customMembers.push(newMember);
+        localStorage.setItem('tfc_members', JSON.stringify(customMembers));
+        renderMembersTable();
+        memberForm.reset();
+      });
 
       // Initial check
       checkAuth();

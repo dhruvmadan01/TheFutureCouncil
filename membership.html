@@ -197,8 +197,20 @@
         const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const pass = document.getElementById('loginPassword').value;
 
-        if (ALLOWED_MEMBERS[email] && pass === 'member2026') {
-          const member = ALLOWED_MEMBERS[email];
+        // Merge hardcoded members and custom members from localStorage
+        const approvedMembers = { ...ALLOWED_MEMBERS };
+        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
+        customMembers.forEach(m => {
+          approvedMembers[m.email.toLowerCase()] = {
+            name: m.name,
+            college: m.college,
+            tier: m.tier,
+            id: m.id
+          };
+        });
+
+        if (approvedMembers[email] && pass === 'member2026') {
+          const member = approvedMembers[email];
           sessionStorage.setItem(AUTH_KEY, 'true');
           sessionStorage.setItem(USERNAME_KEY, member.name);
           sessionStorage.setItem(COLLEGE_KEY, member.college);
