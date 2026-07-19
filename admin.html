@@ -558,9 +558,19 @@
         // Attach edit events
         partnersTableBody.querySelectorAll('.partner-edit-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            const partner = partners.find(p => p.id == id);
-            if (partner) startEditPartner(partner);
+            try {
+              const id = e.currentTarget.getAttribute('data-id');
+              console.log("Edit partner clicked, id:", id);
+              const partner = partners.find(p => String(p.id) === String(id));
+              console.log("Found partner to edit:", partner);
+              if (partner) {
+                startEditPartner(partner);
+              } else {
+                console.error("Partner not found for ID:", id);
+              }
+            } catch (err) {
+              console.error("Error in partner edit click event:", err);
+            }
           });
         });
       };
@@ -625,9 +635,19 @@
         // Attach edit events
         startupsTableBody.querySelectorAll('.startup-edit-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            const startup = startups.find(s => s.id == id);
-            if (startup) startEditStartup(startup);
+            try {
+              const id = e.currentTarget.getAttribute('data-id');
+              console.log("Edit startup clicked, id:", id);
+              const startup = startups.find(s => String(s.id) === String(id));
+              console.log("Found startup to edit:", startup);
+              if (startup) {
+                startEditStartup(startup);
+              } else {
+                console.error("Startup not found for ID:", id);
+              }
+            } catch (err) {
+              console.error("Error in startup edit click event:", err);
+            }
           });
         });
       };
@@ -866,9 +886,19 @@
         // Attach edit events for members
         membersTableBody.querySelectorAll('.member-edit-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            const member = customMembers.find(m => m.id == id);
-            if (member) startEditMember(member);
+            try {
+              const id = e.currentTarget.getAttribute('data-id');
+              console.log("Edit member clicked, id:", id);
+              const member = customMembers.find(m => String(m.id) === String(id));
+              console.log("Found member to edit:", member);
+              if (member) {
+                startEditMember(member);
+              } else {
+                console.error("Member not found for ID:", id);
+              }
+            } catch (err) {
+              console.error("Error in member edit click event:", err);
+            }
           });
         });
       };
