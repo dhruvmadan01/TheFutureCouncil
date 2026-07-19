@@ -308,7 +308,7 @@
         checkMemberAuth();
       });
 
-      const loadEcosystemMembers = async () => {
+      const loadEcosystemMembers = () => {
         const membersTickerWrapper = document.getElementById('membersTickerWrapper');
         if (!membersTickerWrapper) return;
 
@@ -336,27 +336,9 @@
           }
         ];
 
-        // Fetch custom members from Supabase
-        let customMembers = [];
-        try {
-          const { data } = await supabaseClient
-            .from('members')
-            .select('name, college, tier');
-
-          if (data) {
-            customMembers = data;
-          }
-        } catch (err) {
-          console.error("Failed to load ecosystem members:", err);
-        }
-
-        // Combine static fake members and database members
-        const allDisplayMembers = [...customMembers, ...FAKE_MEMBERS];
-
         let tickerContent = '';
-        allDisplayMembers.forEach(m => {
-          const collegeName = m.college.split('•')[0].trim();
-          tickerContent += `<span class="ticker-item">⚡ [NEW MEMBER] <span>${m.name}</span> (${collegeName}) joined TFC </span>`;
+        FAKE_MEMBERS.forEach(m => {
+          tickerContent += `<span class="ticker-item">⚡ [NEW MEMBER] <span>${m.name}</span> (${m.college}) joined TFC </span>`;
         });
         
         // Double the content to create a seamless looping marquee effect
