@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Startups | The Future Council</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background: #000000;
+      color: #f7f3ee;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    ::selection {
+      background: rgba(255, 158, 89, 0.2);
+      color: #fff;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desktop-window">
+    <header class="window-bar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">The Future Council</div>
+    </header>
+    <nav class="window-tabs">
+      <a href="index.html" class="window-tab">Home Hub</a>
+      <a href="partners.html" class="window-tab">Our Partners</a>
+      <a href="startups.html" class="window-tab active">Our Startups</a>
+    </nav>
+
+    <section class="workspace">
+      <!-- Nav Header / Back Button -->
+      <div class="partners-nav-header">
+        <a href="index.html" class="back-link-btn">
+          <span class="icon">←</span>
+          <span>Back to Home</span>
+        </a>
+        <div class="brand-row mini-brand">
+          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
+          <span class="mini-kicker">Student Portfolios</span>
+        </div>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="partners-hero">
+        <h1 class="hero-title">Our Startups</h1>
+        <p class="hero-text">Meet the student-led startups and bold ventures emerging from Delhi University. From cutting-edge SaaS to community-first D2C brands, our members are shipping real products.</p>
+      </div>
+
+      <!-- Filters Section -->
+      <div class="filter-container">
+        <div class="mini-label">Filter Startups</div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All Startups</button>
+          <button class="filter-btn" data-filter="saas">SaaS & AI</button>
+          <button class="filter-btn" data-filter="fintech">Fintech & Web3</button>
+          <button class="filter-btn" data-filter="d2c">D2C & FoodTech</button>
+        </div>
+      </div>
+
+      <!-- Startups Grid -->
+      <div class="partners-grid" id="startupsGrid">
+        <!-- Startup 1: OmniClass -->
+        <article class="partner-card panel" data-category="saas">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">OMNI</div>
+            <span class="partner-badge badge-academic">SaaS & AI</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>OmniClass</h3>
+            <p class="partner-location">SSCBS • Founded by Rahul Sharma</p>
+            <p class="partner-desc">An AI study companion built specifically for college syllabus matching, custom flashcard generation, and lecture summaries.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://omniclass.ai" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Startup 2: DormCart -->
+        <article class="partner-card panel" data-category="d2c">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">DORMCART</div>
+            <span class="partner-badge badge-venture">D2C</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>DormCart</h3>
+            <p class="partner-location">SRCC • Founded by Sneha Iyer & Aman Sen</p>
+            <p class="partner-desc">A campus delivery network providing midnight snacks, study supplies, and personal care essentials within 15 minutes.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://dormcart.co" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Startup 3: FinFlow -->
+        <article class="partner-card panel" data-category="fintech">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">FINFLOW</div>
+            <span class="partner-badge badge-corporate">Fintech</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>FinFlow</h3>
+            <p class="partner-location">Hansraj College • Founded by Kartik Goel</p>
+            <p class="partner-desc">Split bills, track pocket money, and earn campus cashback rewards. The ultimate financial app designed for student groups.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://finflow.app" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Startup 4: Zesty -->
+        <article class="partner-card panel" data-category="d2c">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">ZESTY</div>
+            <span class="partner-badge badge-venture">FoodTech</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Zesty</h3>
+            <p class="partner-location">Hindu College • Founded by Divya Mehta</p>
+            <p class="partner-desc">A campus cafeteria pre-ordering app that lets students skip lines and order drinks and meals directly to classroom desks.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://zestyorder.in" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Startup 5: CollabLab -->
+        <article class="partner-card panel" data-category="saas">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">COLLAB</div>
+            <span class="partner-badge badge-academic">SaaS & AI</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>CollabLab</h3>
+            <p class="partner-location">St. Stephen's • Founded by Aarav Joshi</p>
+            <p class="partner-desc">Matchmaking platform linking student developers, designers, and marketers with DU founders looking to build MVPs.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://collablab.space" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Startup 6: Aura Wearables -->
+        <article class="partner-card panel" data-category="d2c">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">AURA</div>
+            <span class="partner-badge badge-venture">IoT / D2C</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Aura Wearables</h3>
+            <p class="partner-location">SGTB Khalsa • Founded by Aryaveer Chauhan</p>
+            <p class="partner-desc">Affordable smart rings tracking student stress, sleep levels, and exam-week focus metrics with a gamified dashboard.</p>
+          </div>
+          <div class="partner-card-footer">
+            <a href="https://aurarings.com" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+              <span>Visit Startup</span> <span class="arrow">↗</span>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Startup CTA -->
+      <section class="cta-band startups-cta">
+        <div>
+          <p class="mini-label">Are you building?</p>
+          <h2>Get listed in DU's premier student startup network.</h2>
+        </div>
+        <a href="mailto:contact@thefuturecouncil.in" class="pill-btn alt">
+          <span class="icon">🚀</span>
+          <span class="divider"></span>
+          <span>Submit Startup</span>
+        </a>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand-side">
+          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
+          <a href="index.html" class="footer-link">Back to Hub</a>
+        </div>
+        <div class="footer-meta">
+          <div class="apply-now">Join Our Ecosystem</div>
+          <div class="url-text">thefuturecouncil.in</div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const startupCards = document.querySelectorAll('.partner-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active button state
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.getAttribute('data-filter');
+
+          // Filter startup cards
+          startupCards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+              card.style.display = 'flex';
+              card.style.animation = 'none';
+              card.offsetHeight; /* trigger reflow */
+              card.style.animation = null;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
