@@ -11,6 +11,7 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -240,10 +241,12 @@
       const partnersTableBody = document.querySelector('#partnersTable tbody');
       const startupsTableBody = document.querySelector('#startupsTable tbody');
 
-      // LocalStorage keys
-      const PARTNERS_KEY = 'tfc_partners';
-      const STARTUPS_KEY = 'tfc_startups';
       const AUTH_KEY = 'tfc_auth';
+
+      // Initialize Supabase Client
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
       // Check Authentication
       const checkAuth = () => {
@@ -275,47 +278,43 @@
         }
       });
 
-      // Load data from storage
-      const getStorageData = (key) => {
-        try {
-          return JSON.parse(localStorage.getItem(key)) || [];
-        } catch (e) {
-          console.error("Failed to load local storage key: " + key, e);
-          return [];
-        }
-      };
-
-      // Save data to storage
-      const saveStorageData = (key, data) => {
-        try {
-          localStorage.setItem(key, JSON.stringify(data));
-        } catch (e) {
-          console.error("Failed to save local storage key: " + key, e);
-        }
-      };
-
       // Render Tables
-      const renderPartnersTable = () => {
-        const partners = getStorageData(PARTNERS_KEY);
-        partnersTableBody.innerHTML = '';
+      const renderPartnersTable = async () => {
+        partnersTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">Loading...</td></tr>';
+        
+        let partners = [];
+        try {
+          const { data, error } = await supabaseClient
+            .from('partners')
+            .select('*')
+            .order('name', { ascending: true });
 
+          if (error) throw error;
+          partners = data || [];
+        } catch (e) {
+          console.error("Error loading partners:", e);
+          partnersTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-red-500 py-6">Failed to load partners from database.</td></tr>';
+          return;
+        }
+
+        partnersTableBody.innerHTML = '';
         if (partners.length === 0) {
           partnersTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">No partners added yet.</td></tr>';
           return;
         }
 
-        partners.forEach((partner, index) => {
+        partners.forEach((partner) => {
           const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
           const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
 
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><div class="admin-badge ${badgeClass}">${partner.logoStamp || ''}</div></td>
+            <td><div class="admin-badge ${badgeClass}">${partner.logo_stamp || ''}</div></td>
             <td><a href="${partner.link}" target="_blank" class="font-bold underline text-black">${partner.name}</a></td>
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${partner.location || ''}</td>
             <td>
-              <button class="admin-delete-btn" data-index="${index}">Delete</button>
+              <button class="admin-delete-btn" data-id="${partner.id}">Delete</button>
             </td>
           `;
           partnersTableBody.appendChild(row);
@@ -323,34 +322,51 @@
 
         // Attach delete events
         partnersTableBody.querySelectorAll('.admin-delete-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.getAttribute('data-index'), 10);
-            deletePartner(index);
+          btn.addEventListener('click', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            e.target.disabled = true;
+            e.target.textContent = 'Deleting...';
+            await deletePartner(id);
           });
         });
       };
 
-      const renderStartupsTable = () => {
-        const startups = getStorageData(STARTUPS_KEY);
-        startupsTableBody.innerHTML = '';
+      const renderStartupsTable = async () => {
+        startupsTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">Loading...</td></tr>';
+        
+        let startups = [];
+        try {
+          const { data, error } = await supabaseClient
+            .from('startups')
+            .select('*')
+            .order('name', { ascending: true });
 
+          if (error) throw error;
+          startups = data || [];
+        } catch (e) {
+          console.error("Error loading startups:", e);
+          startupsTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-red-500 py-6">Failed to load startups from database.</td></tr>';
+          return;
+        }
+
+        startupsTableBody.innerHTML = '';
         if (startups.length === 0) {
           startupsTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">No startups added yet.</td></tr>';
           return;
         }
 
-        startups.forEach((startup, index) => {
+        startups.forEach((startup) => {
           const badgeClass = startup.category === 'saas' ? 'badge-academic' : (startup.category === 'fintech' ? 'badge-corporate' : 'badge-venture');
           const badgeLabel = startup.category === 'saas' ? 'SaaS & AI' : (startup.category === 'fintech' ? 'Fintech' : 'D2C');
 
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><div class="admin-badge ${badgeClass}">${startup.logoStamp || ''}</div></td>
+            <td><div class="admin-badge ${badgeClass}">${startup.logo_stamp || ''}</div></td>
             <td><a href="${startup.link}" target="_blank" class="font-bold underline text-black">${startup.name}</a></td>
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${startup.location || ''}</td>
             <td>
-              <button class="admin-delete-btn" data-index="${index}">Delete</button>
+              <button class="admin-delete-btn" data-id="${startup.id}">Delete</button>
             </td>
           `;
           startupsTableBody.appendChild(row);
@@ -358,65 +374,97 @@
 
         // Attach delete events
         startupsTableBody.querySelectorAll('.admin-delete-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.getAttribute('data-index'), 10);
-            deleteStartup(index);
+          btn.addEventListener('click', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            e.target.disabled = true;
+            e.target.textContent = 'Deleting...';
+            await deleteStartup(id);
           });
         });
       };
 
       // Add Partner
-      partnerForm.addEventListener('submit', (e) => {
+      partnerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const partners = getStorageData(PARTNERS_KEY);
+        const btn = partnerForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
+
         const newPartner = {
           name: document.getElementById('partnerName').value,
           category: document.getElementById('partnerCategory').value,
-          logoStamp: document.getElementById('partnerLogo').value,
+          logo_stamp: document.getElementById('partnerLogo').value,
           location: document.getElementById('partnerLocation').value,
           description: document.getElementById('partnerDesc').value,
           link: document.getElementById('partnerLink').value
         };
 
-        partners.push(newPartner);
-        saveStorageData(PARTNERS_KEY, partners);
-        renderPartnersTable();
-        partnerForm.reset();
+        try {
+          const { error } = await supabaseClient.from('partners').insert([newPartner]);
+          if (error) throw error;
+          await renderPartnersTable();
+          partnerForm.reset();
+        } catch (err) {
+          console.error("Failed to add partner:", err);
+          alert("Failed to add partner. Please make sure database tables are set up correctly.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Add Partner';
+        }
       });
 
       // Add Startup
-      startupForm.addEventListener('submit', (e) => {
+      startupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const startups = getStorageData(STARTUPS_KEY);
+        const btn = startupForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
+
         const newStartup = {
           name: document.getElementById('startupName').value,
           category: document.getElementById('startupCategory').value,
-          logoStamp: document.getElementById('startupLogo').value,
+          logo_stamp: document.getElementById('startupLogo').value,
           location: document.getElementById('startupLocation').value,
           description: document.getElementById('startupDesc').value,
           link: document.getElementById('startupLink').value
         };
 
-        startups.push(newStartup);
-        saveStorageData(STARTUPS_KEY, startups);
-        renderStartupsTable();
-        startupForm.reset();
+        try {
+          const { error } = await supabaseClient.from('startups').insert([newStartup]);
+          if (error) throw error;
+          await renderStartupsTable();
+          startupForm.reset();
+        } catch (err) {
+          console.error("Failed to add startup:", err);
+          alert("Failed to add startup. Please make sure database tables are set up correctly.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Add Startup';
+        }
       });
 
       // Delete Partner
-      const deletePartner = (index) => {
-        const partners = getStorageData(PARTNERS_KEY);
-        partners.splice(index, 1);
-        saveStorageData(PARTNERS_KEY, partners);
-        renderPartnersTable();
+      const deletePartner = async (id) => {
+        try {
+          const { error } = await supabaseClient.from('partners').delete().eq('id', id);
+          if (error) throw error;
+          await renderPartnersTable();
+        } catch (e) {
+          console.error("Failed to delete partner:", e);
+          alert("Failed to delete partner.");
+        }
       };
 
       // Delete Startup
-      const deleteStartup = (index) => {
-        const startups = getStorageData(STARTUPS_KEY);
-        startups.splice(index, 1);
-        saveStorageData(STARTUPS_KEY, startups);
-        renderStartupsTable();
+      const deleteStartup = async (id) => {
+        try {
+          const { error } = await supabaseClient.from('startups').delete().eq('id', id);
+          if (error) throw error;
+          await renderStartupsTable();
+        } catch (e) {
+          console.error("Failed to delete startup:", e);
+          alert("Failed to delete startup.");
+        }
       };
 
       // Initial check

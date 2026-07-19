@@ -11,6 +11,7 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -106,16 +107,27 @@
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       const partnersContent = document.getElementById('partnersContent');
       const filterContainer = document.getElementById('filterContainer');
 
-      // Load from localStorage
+      // Initialize Supabase Client
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // Load from Supabase
       let partners = [];
       try {
-        partners = JSON.parse(localStorage.getItem('tfc_partners')) || [];
+        const { data, error } = await supabaseClient
+          .from('partners')
+          .select('*')
+          .order('name', { ascending: true });
+
+        if (error) throw error;
+        partners = data || [];
       } catch (e) {
-        console.error("Error reading partners from localStorage", e);
+        console.error("Error reading partners from Supabase", e);
       }
 
       if (partners.length === 0) {
@@ -140,7 +152,7 @@
           gridHtml += `
             <article class="partner-card panel" data-category="${partner.category}">
               <div class="partner-card-header">
-                <div class="partner-logo-stamp">${partner.logoStamp || partner.name.slice(0,4)}</div>
+                <div class="partner-logo-stamp">${partner.logo_stamp || partner.name.slice(0,4)}</div>
                 <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
               </div>
               <div class="partner-card-body">
