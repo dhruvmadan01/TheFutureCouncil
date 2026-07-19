@@ -11,6 +11,7 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -154,6 +155,11 @@
       const ID_KEY = 'tfc_member_id';
       const PHOTO_KEY = 'tfc_member_photo';
 
+      // Initialize Supabase Client
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
       // Pre-approved members list
       const ALLOWED_MEMBERS = {
         'student@thefuturecouncil.in': {
@@ -203,21 +209,35 @@
       };
 
       // Login form handler
-      loginForm.addEventListener('submit', (e) => {
+      loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const pass = document.getElementById('loginPassword').value;
 
-        // Merge hardcoded members and custom members from localStorage
+        // Fetch custom members from Supabase
+        let customMembers = [];
+        try {
+          const { data, error } = await supabaseClient
+            .from('members')
+            .select('*');
+
+          if (!error && data) {
+            customMembers = data;
+          }
+        } catch (err) {
+          console.error("Failed to fetch members from database:", err);
+        }
+
+        // Merge hardcoded members and custom members from database
         const approvedMembers = { ...ALLOWED_MEMBERS };
-        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
         customMembers.forEach(m => {
           approvedMembers[m.email.toLowerCase()] = {
             name: m.name,
             college: m.college,
             tier: m.tier,
-            id: m.id,
-            password: m.password || 'member2026'
+            id: m.member_id || m.id,
+            password: m.password || 'member2026',
+            image: m.image || ''
           };
         });
 

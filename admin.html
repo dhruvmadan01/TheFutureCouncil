@@ -643,10 +643,11 @@
         }
       };
 
-      const renderMembersTable = () => {
-        membersTableBody.innerHTML = '';
+      const renderMembersTable = async () => {
+        membersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">Loading...</td></tr>';
         
         // Show System Members first
+        membersTableBody.innerHTML = '';
         Object.entries(SYSTEM_MEMBERS).forEach(([email, member]) => {
           const row = document.createElement('tr');
           row.innerHTML = `
@@ -663,9 +664,25 @@
           membersTableBody.appendChild(row);
         });
 
-        // Show Custom Members from localStorage
-        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
-        customMembers.forEach((member, index) => {
+        // Show Custom Members from Supabase
+        let customMembers = [];
+        try {
+          const { data, error } = await supabaseClient
+            .from('members')
+            .select('*')
+            .order('name', { ascending: true });
+
+          if (error) throw error;
+          customMembers = data || [];
+        } catch (e) {
+          console.error("Error loading members from Supabase:", e);
+          const errorMsg = document.createElement('tr');
+          errorMsg.innerHTML = '<td colspan="7" class="text-center text-red-500 py-6 font-semibold">Failed to load members from database. Please ensure the "members" table is created in Supabase.</td>';
+          membersTableBody.appendChild(errorMsg);
+          return;
+        }
+
+        customMembers.forEach((member) => {
           const isImage = member.image && member.image.startsWith('data:image/');
           const photoHtml = isImage 
             ? `<img src="${member.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
@@ -673,14 +690,14 @@
 
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td><span class="font-mono font-bold">${member.id}</span></td>
+            <td><span class="font-mono font-bold">${member.member_id || member.id}</span></td>
             <td>${photoHtml}<strong>${member.name}</strong></td>
             <td>${member.email}</td>
             <td>${member.college}</td>
             <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
             <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
             <td>
-              <button class="admin-delete-btn delete-member-btn" data-index="${index}">Delete</button>
+              <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
             </td>
           `;
           membersTableBody.appendChild(row);
@@ -688,51 +705,76 @@
 
         // Attach delete events for members
         membersTableBody.querySelectorAll('.delete-member-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.getAttribute('data-index'), 10);
-            deleteMember(index);
+          btn.addEventListener('click', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            e.target.disabled = true;
+            e.target.textContent = 'Deleting...';
+            await deleteMember(id);
           });
         });
       };
 
-      const deleteMember = (index) => {
-        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
-        customMembers.splice(index, 1);
-        localStorage.setItem('tfc_members', JSON.stringify(customMembers));
-        renderMembersTable();
+      const deleteMember = async (id) => {
+        try {
+          const { error } = await supabaseClient.from('members').delete().eq('id', id);
+          if (error) throw error;
+          await renderMembersTable();
+        } catch (e) {
+          console.error("Failed to delete member:", e);
+          alert("Failed to delete member from database.");
+        }
       };
 
       // Add Member Form
       memberForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = document.getElementById('memberEmail').value.trim().toLowerCase();
-        
-        // Check if email already exists
-        const customMembers = JSON.parse(localStorage.getItem('tfc_members')) || [];
-        const emailExists = SYSTEM_MEMBERS[email] || customMembers.some(m => m.email === email);
-        
-        if (emailExists) {
-          alert("A member with this email already exists!");
-          return;
-        }
+        const btn = memberForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
 
+        const email = document.getElementById('memberEmail').value.trim().toLowerCase();
         const imageFileInput = document.getElementById('memberImageFile');
 
-        getBase64(imageFileInput, (imageBase64) => {
+        getBase64(imageFileInput, async (imageBase64) => {
+          // Verify email uniqueness against custom members and static list
+          let customMembers = [];
+          try {
+            const { data } = await supabaseClient.from('members').select('email');
+            customMembers = data || [];
+          } catch (err) {
+            console.error(err);
+          }
+
+          const emailExists = SYSTEM_MEMBERS[email] || customMembers.some(m => m.email.toLowerCase() === email);
+          if (emailExists) {
+            alert("A member with this email already exists!");
+            btn.disabled = false;
+            btn.textContent = 'Add Member';
+            return;
+          }
+
           const newMember = {
             email: email,
             name: document.getElementById('memberName').value.trim(),
             college: document.getElementById('memberCollege').value.trim(),
             tier: document.getElementById('memberTier').value,
-            id: document.getElementById('memberIdVal').value.trim(),
+            member_id: document.getElementById('memberIdVal').value.trim(),
             password: document.getElementById('memberPassword').value.trim(),
             image: imageBase64 || ''
           };
 
-          customMembers.push(newMember);
-          localStorage.setItem('tfc_members', JSON.stringify(customMembers));
-          renderMembersTable();
-          memberForm.reset();
+          try {
+            const { error } = await supabaseClient.from('members').insert([newMember]);
+            if (error) throw error;
+            await renderMembersTable();
+            memberForm.reset();
+          } catch (err) {
+            console.error("Failed to add member:", err);
+            alert("Failed to add member to database. Please make sure the 'members' table is set up in Supabase.");
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Add Member';
+          }
         });
       });
 
