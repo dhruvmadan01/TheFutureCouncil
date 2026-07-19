@@ -176,6 +176,10 @@
               <label for="memberIdVal">Member ID</label>
               <input type="text" id="memberIdVal" class="form-control" placeholder="e.g. TFC-2026-0812" required />
             </div>
+            <div class="form-group">
+              <label for="memberPassword">Password</label>
+              <input type="text" id="memberPassword" class="form-control" placeholder="e.g. password123" required />
+            </div>
             <button type="submit" class="admin-submit-btn">Add Member</button>
           </form>
         </div>
@@ -234,6 +238,7 @@
                   <th>Email</th>
                   <th>College & Year</th>
                   <th>Tier</th>
+                  <th>Password</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -541,13 +546,15 @@
           name: 'Kartik Goel',
           college: 'SSCBS • Delhi University',
           tier: 'Student Founder',
-          id: 'TFC-2026-0812'
+          id: 'TFC-2026-0812',
+          password: 'member2026'
         },
         'dhruvmadan235@gmail.com': {
           name: 'Dhruv Madan',
           college: 'Faculty of Technology • Delhi University',
           tier: 'Founder',
-          id: 'TFC-2026-0001'
+          id: 'TFC-2026-0001',
+          password: 'member2026'
         }
       };
 
@@ -563,6 +570,7 @@
             <td>${email}</td>
             <td>${member.college}</td>
             <td><span class="uppercase font-extrabold text-xs text-orange-500">${member.tier}</span></td>
+            <td><span class="font-mono text-sm">${member.password}</span></td>
             <td>
               <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">System</span>
             </td>
@@ -580,6 +588,7 @@
             <td>${member.email}</td>
             <td>${member.college}</td>
             <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
+            <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
             <td>
               <button class="admin-delete-btn delete-member-btn" data-index="${index}">Delete</button>
             </td>
@@ -622,7 +631,8 @@
           name: document.getElementById('memberName').value.trim(),
           college: document.getElementById('memberCollege').value.trim(),
           tier: document.getElementById('memberTier').value,
-          id: document.getElementById('memberIdVal').value.trim()
+          id: document.getElementById('memberIdVal').value.trim(),
+          password: document.getElementById('memberPassword').value.trim()
         };
 
         customMembers.push(newMember);

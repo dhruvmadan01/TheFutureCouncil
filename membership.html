@@ -158,13 +158,15 @@
           name: 'Kartik Goel',
           college: 'SSCBS • Delhi University',
           tier: 'Student Founder',
-          id: 'TFC-2026-0812'
+          id: 'TFC-2026-0812',
+          password: 'member2026'
         },
         'dhruvmadan235@gmail.com': {
           name: 'Dhruv Madan',
           college: 'Faculty of Technology • Delhi University',
           tier: 'Founder',
-          id: 'TFC-2026-0001'
+          id: 'TFC-2026-0001',
+          password: 'member2026'
         }
       };
 
@@ -205,11 +207,12 @@
             name: m.name,
             college: m.college,
             tier: m.tier,
-            id: m.id
+            id: m.id,
+            password: m.password || 'member2026'
           };
         });
 
-        if (approvedMembers[email] && pass === 'member2026') {
+        if (approvedMembers[email] && pass === approvedMembers[email].password) {
           const member = approvedMembers[email];
           sessionStorage.setItem(AUTH_KEY, 'true');
           sessionStorage.setItem(USERNAME_KEY, member.name);
