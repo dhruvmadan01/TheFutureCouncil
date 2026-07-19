@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | The Future Council</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background: #000000;
+      color: #f7f3ee;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    ::selection {
+      background: rgba(255, 158, 89, 0.2);
+      color: #fff;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desktop-window">
+    <header class="window-bar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">The Future Council</div>
+    </header>
+    <nav class="window-tabs">
+      <a href="index.html" class="window-tab">Home Hub</a>
+      <a href="partners.html" class="window-tab">Our Partners</a>
+      <a href="startups.html" class="window-tab">Our Startups</a>
+      <a href="admin.html" class="window-tab active">Admin Panel</a>
+    </nav>
+
+    <section class="workspace">
+      <!-- Nav Header -->
+      <div class="partners-nav-header">
+        <a href="index.html" class="back-link-btn">
+          <span class="icon">←</span>
+          <span>Back to Home</span>
+        </a>
+        <div class="brand-row mini-brand">
+          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
+          <span class="mini-kicker">Administration</span>
+        </div>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="partners-hero">
+        <h1 class="hero-title">Admin Dashboard</h1>
+        <p class="hero-text">Manage ecosystem partners and student startups. Add or delete listings, and the changes will be dynamically visible in the respective directories.</p>
+      </div>
+
+      <div class="admin-grid">
+        <!-- Add Partner Form -->
+        <div class="admin-form-panel">
+          <h2>Add New Partner</h2>
+          <form id="partnerForm">
+            <div class="form-group">
+              <label for="partnerName">Partner Name</label>
+              <input type="text" id="partnerName" class="form-control" placeholder="e.g. AWS Activate" required />
+            </div>
+            <div class="form-group">
+              <label for="partnerCategory">Category</label>
+              <select id="partnerCategory" class="form-control" required>
+                <option value="academic">Academic & E-Cells</option>
+                <option value="venture">Venture & Incubators</option>
+                <option value="corporate">Corporate & Tech</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="partnerLogo">Logo Stamp Text</label>
+              <input type="text" id="partnerLogo" class="form-control" placeholder="e.g. AWS" required />
+            </div>
+            <div class="form-group">
+              <label for="partnerLocation">Location / Subtitle</label>
+              <input type="text" id="partnerLocation" class="form-control" placeholder="e.g. Cloud Infrastructure Partner" required />
+            </div>
+            <div class="form-group">
+              <label for="partnerDesc">Short Description</label>
+              <textarea id="partnerDesc" class="form-control" placeholder="What does this partnership entail?" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="partnerLink">Website Link</label>
+              <input type="url" id="partnerLink" class="form-control" placeholder="e.g. https://aws.amazon.com" required />
+            </div>
+            <button type="submit" class="admin-submit-btn">Add Partner</button>
+          </form>
+        </div>
+
+        <!-- Add Startup Form -->
+        <div class="admin-form-panel">
+          <h2>Add New Startup</h2>
+          <form id="startupForm">
+            <div class="form-group">
+              <label for="startupName">Startup Name</label>
+              <input type="text" id="startupName" class="form-control" placeholder="e.g. DormCart" required />
+            </div>
+            <div class="form-group">
+              <label for="startupCategory">Category</label>
+              <select id="startupCategory" class="form-control" required>
+                <option value="saas">SaaS & AI</option>
+                <option value="fintech">Fintech & Web3</option>
+                <option value="d2c">D2C & FoodTech</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="startupLogo">Logo Stamp Text</label>
+              <input type="text" id="startupLogo" class="form-control" placeholder="e.g. DORM" required />
+            </div>
+            <div class="form-group">
+              <label for="startupLocation">Founders & College</label>
+              <input type="text" id="startupLocation" class="form-control" placeholder="e.g. SRCC • Founded by Sneha Iyer" required />
+            </div>
+            <div class="form-group">
+              <label for="startupDesc">Short Description</label>
+              <textarea id="startupDesc" class="form-control" placeholder="What does the startup build?" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="startupLink">Website Link</label>
+              <input type="url" id="startupLink" class="form-control" placeholder="e.g. https://dormcart.co" required />
+            </div>
+            <button type="submit" class="admin-submit-btn">Add Startup</button>
+          </form>
+        </div>
+
+        <!-- Manage Partners Table -->
+        <div class="admin-table-panel">
+          <h2>Ecosystem Partners List</h2>
+          <div class="admin-table-wrapper">
+            <table class="admin-table" id="partnersTable">
+              <thead>
+                <tr>
+                  <th>Logo</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Location / Subtitle</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Manage Startups Table -->
+        <div class="admin-table-panel">
+          <h2>Student Startups List</h2>
+          <div class="admin-table-wrapper">
+            <table class="admin-table" id="startupsTable">
+              <thead>
+                <tr>
+                  <th>Logo</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Founders & College</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand-side">
+          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
+          <a href="index.html" class="footer-link">Back to Hub</a>
+        </div>
+        <div class="footer-meta">
+          <div class="apply-now">Join Our Ecosystem</div>
+          <div class="url-text">thefuturecouncil.in</div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM elements
+      const partnerForm = document.getElementById('partnerForm');
+      const startupForm = document.getElementById('startupForm');
+      const partnersTableBody = document.querySelector('#partnersTable tbody');
+      const startupsTableBody = document.querySelector('#startupsTable tbody');
+
+      // LocalStorage keys
+      const PARTNERS_KEY = 'tfc_partners';
+      const STARTUPS_KEY = 'tfc_startups';
+
+      // Load data from storage
+      const getStorageData = (key) => {
+        try {
+          return JSON.parse(localStorage.getItem(key)) || [];
+        } catch (e) {
+          console.error("Failed to load local storage key: " + key, e);
+          return [];
+        }
+      };
+
+      // Save data to storage
+      const saveStorageData = (key, data) => {
+        try {
+          localStorage.setItem(key, JSON.stringify(data));
+        } catch (e) {
+          console.error("Failed to save local storage key: " + key, e);
+        }
+      };
+
+      // Render Tables
+      const renderPartnersTable = () => {
+        const partners = getStorageData(PARTNERS_KEY);
+        partnersTableBody.innerHTML = '';
+
+        if (partners.length === 0) {
+          partnersTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">No partners added yet.</td></tr>';
+          return;
+        }
+
+        partners.forEach((partner, index) => {
+          const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
+          const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><div class="admin-badge ${badgeClass}">${partner.logoStamp || ''}</div></td>
+            <td><a href="${partner.link}" target="_blank" class="font-bold underline text-black">${partner.name}</a></td>
+            <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
+            <td>${partner.location || ''}</td>
+            <td>
+              <button class="admin-delete-btn" data-index="${index}">Delete</button>
+            </td>
+          `;
+          partnersTableBody.appendChild(row);
+        });
+
+        // Attach delete events
+        partnersTableBody.querySelectorAll('.admin-delete-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'), 10);
+            deletePartner(index);
+          });
+        });
+      };
+
+      const renderStartupsTable = () => {
+        const startups = getStorageData(STARTUPS_KEY);
+        startupsTableBody.innerHTML = '';
+
+        if (startups.length === 0) {
+          startupsTableBody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-6">No startups added yet.</td></tr>';
+          return;
+        }
+
+        startups.forEach((startup, index) => {
+          const badgeClass = startup.category === 'saas' ? 'badge-academic' : (startup.category === 'fintech' ? 'badge-corporate' : 'badge-venture');
+          const badgeLabel = startup.category === 'saas' ? 'SaaS & AI' : (startup.category === 'fintech' ? 'Fintech' : 'D2C');
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><div class="admin-badge ${badgeClass}">${startup.logoStamp || ''}</div></td>
+            <td><a href="${startup.link}" target="_blank" class="font-bold underline text-black">${startup.name}</a></td>
+            <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
+            <td>${startup.location || ''}</td>
+            <td>
+              <button class="admin-delete-btn" data-index="${index}">Delete</button>
+            </td>
+          `;
+          startupsTableBody.appendChild(row);
+        });
+
+        // Attach delete events
+        startupsTableBody.querySelectorAll('.admin-delete-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-index'), 10);
+            deleteStartup(index);
+          });
+        });
+      };
+
+      // Add Partner
+      partnerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const partners = getStorageData(PARTNERS_KEY);
+        const newPartner = {
+          name: document.getElementById('partnerName').value,
+          category: document.getElementById('partnerCategory').value,
+          logoStamp: document.getElementById('partnerLogo').value,
+          location: document.getElementById('partnerLocation').value,
+          description: document.getElementById('partnerDesc').value,
+          link: document.getElementById('partnerLink').value
+        };
+
+        partners.push(newPartner);
+        saveStorageData(PARTNERS_KEY, partners);
+        renderPartnersTable();
+        partnerForm.reset();
+      });
+
+      // Add Startup
+      startupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const startups = getStorageData(STARTUPS_KEY);
+        const newStartup = {
+          name: document.getElementById('startupName').value,
+          category: document.getElementById('startupCategory').value,
+          logoStamp: document.getElementById('startupLogo').value,
+          location: document.getElementById('startupLocation').value,
+          description: document.getElementById('startupDesc').value,
+          link: document.getElementById('startupLink').value
+        };
+
+        startups.push(newStartup);
+        saveStorageData(STARTUPS_KEY, startups);
+        renderStartupsTable();
+        startupForm.reset();
+      });
+
+      // Delete Partner
+      const deletePartner = (index) => {
+        const partners = getStorageData(PARTNERS_KEY);
+        partners.splice(index, 1);
+        saveStorageData(PARTNERS_KEY, partners);
+        renderPartnersTable();
+      };
+
+      // Delete Startup
+      const deleteStartup = (index) => {
+        const startups = getStorageData(STARTUPS_KEY);
+        startups.splice(index, 1);
+        saveStorageData(STARTUPS_KEY, startups);
+        renderStartupsTable();
+      };
+
+      // Initial render
+      renderPartnersTable();
+      renderStartupsTable();
+    });
+  </script>
+</body>
+</html>

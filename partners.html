@@ -41,6 +41,7 @@
       <a href="index.html" class="window-tab">Home Hub</a>
       <a href="partners.html" class="window-tab active">Our Partners</a>
       <a href="startups.html" class="window-tab">Our Startups</a>
+      <a href="admin.html" class="window-tab">Admin Panel</a>
     </nav>
 
     <section class="workspace">
@@ -62,13 +63,20 @@
         <p class="hero-text">We collaborate with top-tier venture funds, corporate tech enablers, and premier campus entrepreneurship cells to build the strongest startup launchpad at Delhi University.</p>
       </div>
 
-      <!-- Partners Empty State -->
-      <div class="mb-9">
-        <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
-          <span class="text-5xl">🤝</span>
-          <h2 class="text-2xl font-extrabold uppercase tracking-wide">Ecosystem Partners Coming Soon</h2>
-          <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">We are currently finalizing partnerships with top-tier venture funds, student E-Cells, and corporate tech enablers. Check back soon for updates!</p>
+      <!-- Filters Section (Hidden by default, shown if partners exist) -->
+      <div id="filterContainer" class="filter-container hidden">
+        <div class="mini-label">Filter Ecosystem</div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All Partners</button>
+          <button class="filter-btn" data-filter="academic">Academic & E-Cells</button>
+          <button class="filter-btn" data-filter="venture">Venture & Incubators</button>
+          <button class="filter-btn" data-filter="corporate">Corporate & Tech</button>
         </div>
+      </div>
+
+      <!-- Partners Grid / Empty State Render Target -->
+      <div id="partnersContent" class="mb-9">
+        <!-- Rendered dynamically by script -->
       </div>
 
       <!-- Partner CTA -->
@@ -97,5 +105,86 @@
       </footer>
     </section>
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const partnersContent = document.getElementById('partnersContent');
+      const filterContainer = document.getElementById('filterContainer');
+
+      // Load from localStorage
+      let partners = [];
+      try {
+        partners = JSON.parse(localStorage.getItem('tfc_partners')) || [];
+      } catch (e) {
+        console.error("Error reading partners from localStorage", e);
+      }
+
+      if (partners.length === 0) {
+        // Render Empty State
+        filterContainer.classList.add('hidden');
+        partnersContent.innerHTML = `
+          <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
+            <span class="text-5xl">🤝</span>
+            <h2 class="text-2xl font-extrabold uppercase tracking-wide">Ecosystem Partners Coming Soon</h2>
+            <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">We are currently finalizing partnerships with top-tier venture funds, student E-Cells, and corporate tech enablers. Check back soon for updates!</p>
+          </div>
+        `;
+      } else {
+        // Render Grid
+        filterContainer.classList.remove('hidden');
+        
+        let gridHtml = '<div class="partners-grid" id="partnersGrid">';
+        partners.forEach(partner => {
+          const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
+          const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
+          
+          gridHtml += `
+            <article class="partner-card panel" data-category="${partner.category}">
+              <div class="partner-card-header">
+                <div class="partner-logo-stamp">${partner.logoStamp || partner.name.slice(0,4)}</div>
+                <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
+              </div>
+              <div class="partner-card-body">
+                <h3>${partner.name}</h3>
+                <p class="partner-location">${partner.location || ''}</p>
+                <p class="partner-desc">${partner.description}</p>
+              </div>
+              <div class="partner-card-footer">
+                <a href="${partner.link || '#'}" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+                  <span>View Partner</span> <span class="arrow">↗</span>
+                </a>
+              </div>
+            </article>
+          `;
+        });
+        gridHtml += '</div>';
+        partnersContent.innerHTML = gridHtml;
+
+        // Set up filters
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const partnerCards = document.querySelectorAll('.partner-card');
+
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const category = btn.getAttribute('data-filter');
+
+            partnerCards.forEach(card => {
+              if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'flex';
+                card.style.animation = 'none';
+                card.offsetHeight; /* trigger reflow */
+                card.style.animation = null;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -41,6 +41,7 @@
       <a href="index.html" class="window-tab">Home Hub</a>
       <a href="partners.html" class="window-tab">Our Partners</a>
       <a href="startups.html" class="window-tab active">Our Startups</a>
+      <a href="admin.html" class="window-tab">Admin Panel</a>
     </nav>
 
     <section class="workspace">
@@ -62,13 +63,20 @@
         <p class="hero-text">Meet the student-led startups and bold ventures emerging from Delhi University. From cutting-edge SaaS to community-first D2C brands, our members are shipping real products.</p>
       </div>
 
-      <!-- Startups Empty State -->
-      <div class="mb-9">
-        <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
-          <span class="text-5xl">🚀</span>
-          <h2 class="text-2xl font-extrabold uppercase tracking-wide">Student Startups Coming Soon</h2>
-          <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">Our student startup showcase is launching soon. If you are building a venture at Delhi University, submit your startup to get featured in our directory!</p>
+      <!-- Filters Section (Hidden by default, shown if startups exist) -->
+      <div id="filterContainer" class="filter-container hidden">
+        <div class="mini-label">Filter Startups</div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All Startups</button>
+          <button class="filter-btn" data-filter="saas">SaaS & AI</button>
+          <button class="filter-btn" data-filter="fintech">Fintech & Web3</button>
+          <button class="filter-btn" data-filter="d2c">D2C & FoodTech</button>
         </div>
+      </div>
+
+      <!-- Startups Grid / Empty State Render Target -->
+      <div id="startupsContent" class="mb-9">
+        <!-- Rendered dynamically by script -->
       </div>
 
       <!-- Startup CTA -->
@@ -97,5 +105,86 @@
       </footer>
     </section>
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startupsContent = document.getElementById('startupsContent');
+      const filterContainer = document.getElementById('filterContainer');
+
+      // Load from localStorage
+      let startups = [];
+      try {
+        startups = JSON.parse(localStorage.getItem('tfc_startups')) || [];
+      } catch (e) {
+        console.error("Error reading startups from localStorage", e);
+      }
+
+      if (startups.length === 0) {
+        // Render Empty State
+        filterContainer.classList.add('hidden');
+        startupsContent.innerHTML = `
+          <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
+            <span class="text-5xl">🚀</span>
+            <h2 class="text-2xl font-extrabold uppercase tracking-wide">Student Startups Coming Soon</h2>
+            <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">Our student startup showcase is launching soon. If you are building a venture at Delhi University, submit your startup to get featured in our directory!</p>
+          </div>
+        `;
+      } else {
+        // Render Grid
+        filterContainer.classList.remove('hidden');
+        
+        let gridHtml = '<div class="partners-grid" id="startupsGrid">';
+        startups.forEach(startup => {
+          const badgeClass = startup.category === 'saas' ? 'badge-academic' : (startup.category === 'fintech' ? 'badge-corporate' : 'badge-venture');
+          const badgeLabel = startup.category === 'saas' ? 'SaaS & AI' : (startup.category === 'fintech' ? 'Fintech' : 'D2C');
+          
+          gridHtml += `
+            <article class="partner-card panel" data-category="${startup.category}">
+              <div class="partner-card-header">
+                <div class="partner-logo-stamp">${startup.logoStamp || startup.name.slice(0,4)}</div>
+                <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
+              </div>
+              <div class="partner-card-body">
+                <h3>${startup.name}</h3>
+                <p class="partner-location">${startup.location || ''}</p>
+                <p class="partner-desc">${startup.description}</p>
+              </div>
+              <div class="partner-card-footer">
+                <a href="${startup.link || '#'}" target="_blank" rel="noreferrer noopener" class="partner-action-link">
+                  <span>Visit Startup</span> <span class="arrow">↗</span>
+                </a>
+              </div>
+            </article>
+          `;
+        });
+        gridHtml += '</div>';
+        startupsContent.innerHTML = gridHtml;
+
+        // Set up filters
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const startupCards = document.querySelectorAll('.partner-card');
+
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const category = btn.getAttribute('data-filter');
+
+            startupCards.forEach(card => {
+              if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'flex';
+                card.style.animation = 'none';
+                card.offsetHeight; /* trigger reflow */
+                card.style.animation = null;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

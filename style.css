@@ -790,6 +790,175 @@ body {
   color: var(--orange);
 }
 
+/* ==========================================
+   Admin Panel Styles
+   ========================================== */
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-form-panel {
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 24px;
+}
+
+.admin-form-panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 8px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid var(--ink);
+  outline: none;
+  transition: box-shadow 150ms ease;
+}
+
+.form-control:focus {
+  box-shadow: 4px 4px 0 var(--orange);
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 30px;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.admin-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--orange);
+  color: #fff;
+  border: 3px solid var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.admin-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.admin-table-panel {
+  grid-column: span 2;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 24px;
+  margin-top: 12px;
+}
+
+.admin-table-panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 8px;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border: 3px solid var(--ink);
+  background: #fff;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.admin-table th {
+  background: #dbdbdb;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #fff7eb;
+}
+
+.admin-delete-btn {
+  padding: 6px 12px;
+  background: #ff5d5d;
+  color: #fff;
+  border: 2px solid var(--ink);
+  font-weight: 900;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 100ms ease, box-shadow 100ms ease;
+}
+
+.admin-delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.admin-badge {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border: 1px solid var(--ink);
+  color: #fff;
+  display: inline-block;
+}
+
 @media (max-width: 900px) {
   .hero-grid,
   .content-grid,
@@ -804,6 +973,14 @@ body {
 
   .partners-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table-panel {
+    grid-column: span 1;
   }
 }
 
