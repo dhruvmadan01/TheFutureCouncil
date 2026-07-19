@@ -33,6 +33,23 @@
         grid-column: span 3;
       }
     }
+    .admin-edit-btn {
+      padding: 6px 12px;
+      background: #f5c542;
+      color: #000;
+      border: 2px solid var(--ink);
+      font-weight: 900;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: transform 100ms ease, box-shadow 100ms ease;
+      margin-right: 4px;
+    }
+    .admin-edit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -111,6 +128,7 @@
               <input type="url" id="partnerLink" class="form-control" placeholder="e.g. https://aws.amazon.com" required />
             </div>
             <button type="submit" class="admin-submit-btn">Add Partner</button>
+            <button type="button" id="cancelPartnerEditBtn" class="admin-submit-btn bg-gray-500 border-2 border-black hover:bg-black hover:text-white mt-2 hidden" style="background:#8c8c8c; color:#000;">Cancel Edit</button>
           </form>
         </div>
 
@@ -151,6 +169,7 @@
               <input type="url" id="startupLink" class="form-control" placeholder="e.g. https://dormcart.co" required />
             </div>
             <button type="submit" class="admin-submit-btn">Add Startup</button>
+            <button type="button" id="cancelStartupEditBtn" class="admin-submit-btn bg-gray-500 border-2 border-black hover:bg-black hover:text-white mt-2 hidden" style="background:#8c8c8c; color:#000;">Cancel Edit</button>
           </form>
         </div>
 
@@ -193,6 +212,7 @@
               <input type="file" id="memberImageFile" class="form-control" accept="image/*" />
             </div>
             <button type="submit" class="admin-submit-btn">Add Member</button>
+            <button type="button" id="cancelMemberEditBtn" class="admin-submit-btn bg-gray-500 border-2 border-black hover:bg-black hover:text-white mt-2 hidden" style="background:#8c8c8c; color:#000;">Cancel Edit</button>
           </form>
         </div>
 
@@ -327,6 +347,63 @@
 
       const AUTH_KEY = 'tfc_auth';
 
+      // Edit Management Variables
+      let editingPartnerId = null;
+      let editingPartnerLogo = '';
+      let editingStartupId = null;
+      let editingStartupLogo = '';
+      let editingMemberId = null;
+      let editingMemberImage = '';
+
+      const cancelPartnerEditBtn = document.getElementById('cancelPartnerEditBtn');
+      const cancelStartupEditBtn = document.getElementById('cancelStartupEditBtn');
+      const cancelMemberEditBtn = document.getElementById('cancelMemberEditBtn');
+
+      const startEditPartner = (partner) => {
+        editingPartnerId = partner.id;
+        editingPartnerLogo = partner.logo_stamp;
+        document.getElementById('partnerName').value = partner.name;
+        document.getElementById('partnerCategory').value = partner.category;
+        document.getElementById('partnerLogo').value = partner.logo_stamp.startsWith('data:image/') ? '' : partner.logo_stamp;
+        document.getElementById('partnerLocation').value = partner.location;
+        document.getElementById('partnerDesc').value = partner.description;
+        document.getElementById('partnerLink').value = partner.link;
+        
+        partnerForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Partner: ${partner.name}`;
+        partnerForm.querySelector('button[type="submit"]').textContent = 'Update Partner';
+        cancelPartnerEditBtn.classList.remove('hidden');
+      };
+
+      const startEditStartup = (startup) => {
+        editingStartupId = startup.id;
+        editingStartupLogo = startup.logo_stamp;
+        document.getElementById('startupName').value = startup.name;
+        document.getElementById('startupCategory').value = startup.category;
+        document.getElementById('startupLogo').value = startup.logo_stamp.startsWith('data:image/') ? '' : startup.logo_stamp;
+        document.getElementById('startupLocation').value = startup.location;
+        document.getElementById('startupDesc').value = startup.description;
+        document.getElementById('startupLink').value = startup.link;
+        
+        startupForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Startup: ${startup.name}`;
+        startupForm.querySelector('button[type="submit"]').textContent = 'Update Startup';
+        cancelStartupEditBtn.classList.remove('hidden');
+      };
+
+      const startEditMember = (member) => {
+        editingMemberId = member.id;
+        editingMemberImage = member.image || '';
+        document.getElementById('memberName').value = member.name;
+        document.getElementById('memberEmail').value = member.email;
+        document.getElementById('memberCollege').value = member.college;
+        document.getElementById('memberTier').value = member.tier;
+        document.getElementById('memberIdVal').value = member.member_id || member.id;
+        document.getElementById('memberPassword').value = member.password;
+        
+        memberForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Member: ${member.name}`;
+        memberForm.querySelector('button[type="submit"]').textContent = 'Update Member';
+        cancelMemberEditBtn.classList.remove('hidden');
+      };
+
       // Initialize Supabase Client
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
@@ -443,6 +520,7 @@
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${partner.location || ''}</td>
             <td>
+              <button class="admin-edit-btn partner-edit-btn" data-id="${partner.id}">Edit</button>
               <button class="admin-delete-btn" data-id="${partner.id}">Delete</button>
             </td>
           `;
@@ -456,6 +534,15 @@
             e.target.disabled = true;
             e.target.textContent = 'Deleting...';
             await deletePartner(id);
+          });
+        });
+
+        // Attach edit events
+        partnersTableBody.querySelectorAll('.partner-edit-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const partner = partners.find(p => p.id == id);
+            if (partner) startEditPartner(partner);
           });
         });
       };
@@ -500,6 +587,7 @@
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${startup.location || ''}</td>
             <td>
+              <button class="admin-edit-btn startup-edit-btn" data-id="${startup.id}">Edit</button>
               <button class="admin-delete-btn" data-id="${startup.id}">Delete</button>
             </td>
           `;
@@ -515,6 +603,15 @@
             await deleteStartup(id);
           });
         });
+
+        // Attach edit events
+        startupsTableBody.querySelectorAll('.startup-edit-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const startup = startups.find(s => s.id == id);
+            if (startup) startEditStartup(startup);
+          });
+        });
       };
 
       // Add Partner
@@ -522,84 +619,116 @@
         e.preventDefault();
         const btn = partnerForm.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Adding...';
+        btn.textContent = editingPartnerId ? 'Updating...' : 'Adding...';
 
         const logoTextInput = document.getElementById('partnerLogo').value.trim();
         const logoFileInput = document.getElementById('partnerLogoFile');
 
-        if (!logoTextInput && !logoFileInput.files[0]) {
+        if (!logoTextInput && !logoFileInput.files[0] && !editingPartnerLogo) {
           alert("Please provide either a logo stamp text or an image file.");
           btn.disabled = false;
-          btn.textContent = 'Add Partner';
+          btn.textContent = editingPartnerId ? 'Update Partner' : 'Add Partner';
           return;
         }
 
         getBase64(logoFileInput, async (logoBase64) => {
-          const newPartner = {
+          const partnerData = {
             name: document.getElementById('partnerName').value,
             category: document.getElementById('partnerCategory').value,
-            logo_stamp: logoBase64 || logoTextInput,
+            logo_stamp: logoBase64 || logoTextInput || editingPartnerLogo,
             location: document.getElementById('partnerLocation').value,
             description: document.getElementById('partnerDesc').value,
             link: document.getElementById('partnerLink').value
           };
 
           try {
-            const { error } = await supabaseClient.from('partners').insert([newPartner]);
-            if (error) throw error;
+            if (editingPartnerId) {
+              const { error } = await supabaseClient.from('partners').update(partnerData).eq('id', editingPartnerId);
+              if (error) throw error;
+              resetPartnerEdit();
+            } else {
+              const { error } = await supabaseClient.from('partners').insert([partnerData]);
+              if (error) throw error;
+            }
             await renderPartnersTable();
             partnerForm.reset();
           } catch (err) {
-            console.error("Failed to add partner:", err);
-            alert("Failed to add partner: " + (err.message || err));
+            console.error("Failed to save partner:", err);
+            alert("Failed to save partner: " + (err.message || err));
           } finally {
             btn.disabled = false;
-            btn.textContent = 'Add Partner';
+            btn.textContent = editingPartnerId ? 'Update Partner' : 'Add Partner';
           }
         });
       });
+
+      const resetPartnerEdit = () => {
+        editingPartnerId = null;
+        editingPartnerLogo = '';
+        partnerForm.closest('.admin-form-panel').querySelector('h2').textContent = 'Add New Partner';
+        partnerForm.querySelector('button[type="submit"]').textContent = 'Add Partner';
+        cancelPartnerEditBtn.classList.add('hidden');
+        partnerForm.reset();
+      };
+      cancelPartnerEditBtn.addEventListener('click', resetPartnerEdit);
 
       // Add Startup
       startupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = startupForm.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Adding...';
+        btn.textContent = editingStartupId ? 'Updating...' : 'Adding...';
 
         const logoTextInput = document.getElementById('startupLogo').value.trim();
         const logoFileInput = document.getElementById('startupLogoFile');
 
-        if (!logoTextInput && !logoFileInput.files[0]) {
+        if (!logoTextInput && !logoFileInput.files[0] && !editingStartupLogo) {
           alert("Please provide either a logo stamp text or an image file.");
           btn.disabled = false;
-          btn.textContent = 'Add Startup';
+          btn.textContent = editingStartupId ? 'Update Startup' : 'Add Startup';
           return;
         }
 
         getBase64(logoFileInput, async (logoBase64) => {
-          const newStartup = {
+          const startupData = {
             name: document.getElementById('startupName').value,
             category: document.getElementById('startupCategory').value,
-            logo_stamp: logoBase64 || logoTextInput,
+            logo_stamp: logoBase64 || logoTextInput || editingStartupLogo,
             location: document.getElementById('startupLocation').value,
             description: document.getElementById('startupDesc').value,
             link: document.getElementById('startupLink').value
           };
 
           try {
-            const { error } = await supabaseClient.from('startups').insert([newStartup]);
-            if (error) throw error;
+            if (editingStartupId) {
+              const { error } = await supabaseClient.from('startups').update(startupData).eq('id', editingStartupId);
+              if (error) throw error;
+              resetStartupEdit();
+            } else {
+              const { error } = await supabaseClient.from('startups').insert([startupData]);
+              if (error) throw error;
+            }
             await renderStartupsTable();
             startupForm.reset();
           } catch (err) {
-            console.error("Failed to add startup:", err);
-            alert("Failed to add startup: " + (err.message || err));
+            console.error("Failed to save startup:", err);
+            alert("Failed to save startup: " + (err.message || err));
           } finally {
             btn.disabled = false;
-            btn.textContent = 'Add Startup';
+            btn.textContent = editingStartupId ? 'Update Startup' : 'Add Startup';
           }
         });
       });
+
+      const resetStartupEdit = () => {
+        editingStartupId = null;
+        editingStartupLogo = '';
+        startupForm.closest('.admin-form-panel').querySelector('h2').textContent = 'Add New Startup';
+        startupForm.querySelector('button[type="submit"]').textContent = 'Add Startup';
+        cancelStartupEditBtn.classList.add('hidden');
+        startupForm.reset();
+      };
+      cancelStartupEditBtn.addEventListener('click', resetStartupEdit);
 
       // Delete Partner
       const deletePartner = async (id) => {
@@ -607,6 +736,7 @@
           const { error } = await supabaseClient.from('partners').delete().eq('id', id);
           if (error) throw error;
           await renderPartnersTable();
+          if (editingPartnerId == id) resetPartnerEdit();
         } catch (e) {
           console.error("Failed to delete partner:", e);
           alert("Failed to delete partner.");
@@ -619,6 +749,7 @@
           const { error } = await supabaseClient.from('startups').delete().eq('id', id);
           if (error) throw error;
           await renderStartupsTable();
+          if (editingStartupId == id) resetStartupEdit();
         } catch (e) {
           console.error("Failed to delete startup:", e);
           alert("Failed to delete startup.");
@@ -697,6 +828,7 @@
             <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
             <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
             <td>
+              <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
               <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
             </td>
           `;
@@ -712,6 +844,15 @@
             await deleteMember(id);
           });
         });
+
+        // Attach edit events for members
+        membersTableBody.querySelectorAll('.member-edit-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            const member = customMembers.find(m => m.id == id);
+            if (member) startEditMember(member);
+          });
+        });
       };
 
       const deleteMember = async (id) => {
@@ -719,6 +860,7 @@
           const { error } = await supabaseClient.from('members').delete().eq('id', id);
           if (error) throw error;
           await renderMembersTable();
+          if (editingMemberId == id) resetMemberEdit();
         } catch (e) {
           console.error("Failed to delete member:", e);
           alert("Failed to delete member from database.");
@@ -730,7 +872,7 @@
         e.preventDefault();
         const btn = memberForm.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Adding...';
+        btn.textContent = editingMemberId ? 'Updating...' : 'Adding...';
 
         const email = document.getElementById('memberEmail').value.trim().toLowerCase();
         const imageFileInput = document.getElementById('memberImageFile');
@@ -739,33 +881,39 @@
           // Verify email uniqueness against custom members and static list
           let customMembers = [];
           try {
-            const { data } = await supabaseClient.from('members').select('email');
+            const { data } = await supabaseClient.from('members').select('id, email');
             customMembers = data || [];
           } catch (err) {
             console.error(err);
           }
 
-          const emailExists = SYSTEM_MEMBERS[email] || customMembers.some(m => m.email.toLowerCase() === email);
+          const emailExists = SYSTEM_MEMBERS[email] || customMembers.some(m => m.email.toLowerCase() === email && m.id != editingMemberId);
           if (emailExists) {
             alert("A member with this email already exists!");
             btn.disabled = false;
-            btn.textContent = 'Add Member';
+            btn.textContent = editingMemberId ? 'Update Member' : 'Add Member';
             return;
           }
 
-          const newMember = {
+          const memberData = {
             email: email,
             name: document.getElementById('memberName').value.trim(),
             college: document.getElementById('memberCollege').value.trim(),
             tier: document.getElementById('memberTier').value,
             member_id: document.getElementById('memberIdVal').value.trim(),
             password: document.getElementById('memberPassword').value.trim(),
-            image: imageBase64 || ''
+            image: imageBase64 || editingMemberImage || ''
           };
 
           try {
-            const { error } = await supabaseClient.from('members').insert([newMember]);
-            if (error) throw error;
+            if (editingMemberId) {
+              const { error } = await supabaseClient.from('members').update(memberData).eq('id', editingMemberId);
+              if (error) throw error;
+              resetMemberEdit();
+            } else {
+              const { error } = await supabaseClient.from('members').insert([memberData]);
+              if (error) throw error;
+            }
             await renderMembersTable();
             memberForm.reset();
           } catch (err) {
@@ -773,10 +921,20 @@
             alert("Failed to add member to database. Please make sure the 'members' table is set up in Supabase.");
           } finally {
             btn.disabled = false;
-            btn.textContent = 'Add Member';
+            btn.textContent = editingMemberId ? 'Update Member' : 'Add Member';
           }
         });
       });
+
+      const resetMemberEdit = () => {
+        editingMemberId = null;
+        editingMemberImage = '';
+        memberForm.closest('.admin-form-panel').querySelector('h2').textContent = 'Add New Member';
+        memberForm.querySelector('button[type="submit"]').textContent = 'Add Member';
+        cancelMemberEditBtn.classList.add('hidden');
+        memberForm.reset();
+      };
+      cancelMemberEditBtn.addEventListener('click', resetMemberEdit);
 
       // Initial check
       checkAuth();
