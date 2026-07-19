@@ -44,7 +44,7 @@
       <a href="admin.html" class="window-tab active">Admin Panel</a>
     </nav>
 
-    <section class="workspace">
+    <section class="workspace hidden" id="adminContent">
       <!-- Nav Header -->
       <div class="partners-nav-header">
         <a href="index.html" class="back-link-btn">
@@ -191,11 +191,50 @@
         </div>
       </footer>
     </section>
+
+    <!-- Login Form Section (shown by default) -->
+    <section class="workspace" id="loginContainer">
+      <div class="max-w-md mx-auto my-12 admin-form-panel">
+        <h2>Administrator Login</h2>
+        <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
+          Invalid username or password. Please try again.
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" class="form-control" placeholder="Enter username" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required />
+          </div>
+          <button type="submit" class="admin-submit-btn">Login</button>
+        </form>
+      </div>
+
+      <!-- Footer for Login View -->
+      <footer class="footer">
+        <div class="footer-brand-side">
+          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
+          <a href="index.html" class="footer-link">Back to Hub</a>
+        </div>
+        <div class="footer-meta">
+          <div class="apply-now">Join Our Ecosystem</div>
+          <div class="url-text">thefuturecouncil.in</div>
+        </div>
+      </footer>
+    </section>
   </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // DOM elements
+      // Auth DOM Elements
+      const loginContainer = document.getElementById('loginContainer');
+      const adminContent = document.getElementById('adminContent');
+      const loginForm = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
+
+      // Admin Management DOM elements
       const partnerForm = document.getElementById('partnerForm');
       const startupForm = document.getElementById('startupForm');
       const partnersTableBody = document.querySelector('#partnersTable tbody');
@@ -204,6 +243,37 @@
       // LocalStorage keys
       const PARTNERS_KEY = 'tfc_partners';
       const STARTUPS_KEY = 'tfc_startups';
+      const AUTH_KEY = 'tfc_auth';
+
+      // Check Authentication
+      const checkAuth = () => {
+        const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true';
+        if (isAuth) {
+          loginContainer.classList.add('hidden');
+          adminContent.classList.remove('hidden');
+          renderPartnersTable();
+          renderStartupsTable();
+        } else {
+          loginContainer.classList.remove('hidden');
+          adminContent.classList.add('hidden');
+        }
+      };
+
+      // Login handler
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const u = document.getElementById('loginUsername').value;
+        const p = document.getElementById('loginPassword').value;
+
+        if (u === 'admin' && p === 'Thefuturecouncil0101@#&') {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          loginError.classList.add('hidden');
+          loginForm.reset();
+          checkAuth();
+        } else {
+          loginError.classList.remove('hidden');
+        }
+      });
 
       // Load data from storage
       const getStorageData = (key) => {
@@ -349,9 +419,8 @@
         renderStartupsTable();
       };
 
-      // Initial render
-      renderPartnersTable();
-      renderStartupsTable();
+      // Initial check
+      checkAuth();
     });
   </script>
 </body>
