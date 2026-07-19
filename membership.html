@@ -66,45 +66,27 @@
 
       <!-- Auth Panels Wrapper -->
       <div class="max-w-md mx-auto my-6" id="authWrapper">
-        <!-- Scrolling Marquee Ticker -->
-        <div style="border: 3px solid var(--ink); background: #000; padding: 0.6rem 0.5rem; overflow: hidden; white-space: nowrap; margin-bottom: 1.5rem; box-shadow: 4px 4px 0 var(--ink); position: relative; display: flex; align-items: center;">
+        <!-- Timed Notification Banner -->
+        <div id="trustBanner" style="border: 3px solid var(--ink); background: #000; padding: 0.8rem 1rem; text-align: center; margin-bottom: 1.5rem; box-shadow: 4px 4px 0 var(--ink); display: flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; overflow: hidden;">
           <style>
-            .ticker-container {
-              overflow: hidden;
-              white-space: nowrap;
-              width: 100%;
-            }
-            .ticker-scroll {
-              display: inline-block;
-              white-space: nowrap;
-              animation: ticker-animation 35s linear infinite;
-            }
-            .ticker-scroll:hover {
-              animation-play-state: paused;
-            }
-            .ticker-item {
-              display: inline-block;
+            #trustBannerText {
               font-family: monospace;
               font-size: 0.85rem;
               color: #ff9e59;
               font-weight: 900;
               text-transform: uppercase;
-              margin-right: 3rem;
               letter-spacing: 0.05em;
+              line-height: 1.3;
+              transition: opacity 0.8s ease-in-out;
+              opacity: 0;
+              white-space: normal;
+              word-break: break-word;
             }
-            .ticker-item span {
+            #trustBannerText span {
               color: #fff;
             }
-            @keyframes ticker-animation {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
           </style>
-          <div class="ticker-container">
-            <div class="ticker-scroll" id="membersTickerWrapper">
-              <!-- Dynamic members notification scroll here -->
-            </div>
-          </div>
+          <div id="trustBannerText"></div>
         </div>
 
         <!-- Login Form Panel -->
@@ -310,8 +292,8 @@
       });
 
       const loadEcosystemMembers = () => {
-        const membersTickerWrapper = document.getElementById('membersTickerWrapper');
-        if (!membersTickerWrapper) return;
+        const trustBannerText = document.getElementById('trustBannerText');
+        if (!trustBannerText) return;
 
         // Static realistic members for instant social proof
         const FAKE_MEMBERS = [
@@ -352,13 +334,27 @@
           }
         ];
 
-        let tickerContent = '';
-        FAKE_MEMBERS.forEach(m => {
-          tickerContent += `<span class="ticker-item">⚡ [NEW MEMBER] <span>${m.name}</span> (${m.college}) joined TFC </span>`;
-        });
+        let index = 0;
+
+        const updateBanner = () => {
+          const m = FAKE_MEMBERS[index];
+          // 1. Fade out
+          trustBannerText.style.opacity = 0;
+          
+          // 2. Wait for fade out, swap text, and fade in
+          setTimeout(() => {
+            trustBannerText.innerHTML = `⚡ [NEW MEMBER] <span>${m.name}</span> (${m.college}) joined TFC`;
+            trustBannerText.style.opacity = 1;
+            // Advance index
+            index = (index + 1) % FAKE_MEMBERS.length;
+          }, 800); // matches the 0.8s CSS transition
+        };
+
+        // Run immediately
+        updateBanner();
         
-        // Double the content to create a seamless looping marquee effect
-        membersTickerWrapper.innerHTML = tickerContent + tickerContent;
+        // Cycle every 7 seconds
+        setInterval(updateBanner, 7000);
       };
 
       // Initial check & load
