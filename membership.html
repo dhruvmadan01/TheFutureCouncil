@@ -300,37 +300,44 @@
           {
             name: "Sanya Iyer",
             college: "SRCC",
-            tier: "Founder"
+            tier: "Founder",
+            timeAgo: "2 days ago"
           },
           {
             name: "Rohan Malhotra",
             college: "St. Stephen's",
-            tier: "Venture Lead"
+            tier: "Venture Lead",
+            timeAgo: "3 days ago"
           },
           {
             name: "Ishita Sharma",
             college: "Miranda House",
-            tier: "Operator"
+            tier: "Operator",
+            timeAgo: "5 days ago"
           },
           {
             name: "Kabir Verma",
             college: "Hansraj",
-            tier: "Tech Fellow"
+            tier: "Tech Fellow",
+            timeAgo: "1 week ago"
           },
           {
             name: "Karan Dev",
             college: "Faculty of Technology",
-            tier: "Founder"
+            tier: "Founder",
+            timeAgo: "1 week ago"
           },
           {
             name: "Ananya Sen",
             college: "Hindu College",
-            tier: "Design Lead"
+            tier: "Design Lead",
+            timeAgo: "2 weeks ago"
           },
           {
             name: "Priyanjali Das",
             college: "LSR",
-            tier: "Operator"
+            tier: "Operator",
+            timeAgo: "2 weeks ago"
           }
         ];
 
@@ -343,7 +350,7 @@
           
           // 2. Wait for fade out, swap text, and fade in
           setTimeout(() => {
-            trustBannerText.innerHTML = `⚡ [NEW MEMBER] <span>${m.name}</span> (${m.college}) joined TFC`;
+            trustBannerText.innerHTML = `⚡ [NEW MEMBER] <span>${m.name}</span> (${m.college}) joined TFC ${m.timeAgo}`;
             trustBannerText.style.opacity = 1;
             // Advance index
             index = (index + 1) % FAKE_MEMBERS.length;
