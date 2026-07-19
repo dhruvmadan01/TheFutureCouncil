@@ -101,23 +101,6 @@ body {
   text-transform: uppercase;
 }
 
-.window-credit {
-  margin-left: auto;
-  font-family: "Courier New", Courier, monospace;
-  font-size: clamp(0.55rem, 1.8vw, 0.68rem);
-  text-transform: uppercase;
-  color: #a0a0a0;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  padding-left: 10px;
-}
-
-@media (max-width: 520px) {
-  .window-credit {
-    display: none;
-  }
-}
-
 .workspace {
   padding: 34px 36px 28px;
 }
