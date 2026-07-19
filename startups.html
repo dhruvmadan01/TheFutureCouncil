@@ -62,126 +62,13 @@
         <p class="hero-text">Meet the student-led startups and bold ventures emerging from Delhi University. From cutting-edge SaaS to community-first D2C brands, our members are shipping real products.</p>
       </div>
 
-      <!-- Filters Section -->
-      <div class="filter-container">
-        <div class="mini-label">Filter Startups</div>
-        <div class="filter-row">
-          <button class="filter-btn active" data-filter="all">All Startups</button>
-          <button class="filter-btn" data-filter="saas">SaaS & AI</button>
-          <button class="filter-btn" data-filter="fintech">Fintech & Web3</button>
-          <button class="filter-btn" data-filter="d2c">D2C & FoodTech</button>
+      <!-- Startups Empty State -->
+      <div class="mb-9">
+        <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
+          <span class="text-5xl">🚀</span>
+          <h2 class="text-2xl font-extrabold uppercase tracking-wide">Student Startups Coming Soon</h2>
+          <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">Our student startup showcase is launching soon. If you are building a venture at Delhi University, submit your startup to get featured in our directory!</p>
         </div>
-      </div>
-
-      <!-- Startups Grid -->
-      <div class="partners-grid" id="startupsGrid">
-        <!-- Startup 1: OmniClass -->
-        <article class="partner-card panel" data-category="saas">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp text-orange">OMNI</div>
-            <span class="partner-badge badge-academic">SaaS & AI</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>OmniClass</h3>
-            <p class="partner-location">SSCBS • Founded by Rahul Sharma</p>
-            <p class="partner-desc">An AI study companion built specifically for college syllabus matching, custom flashcard generation, and lecture summaries.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://omniclass.ai" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Startup 2: DormCart -->
-        <article class="partner-card panel" data-category="d2c">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp">DORMCART</div>
-            <span class="partner-badge badge-venture">D2C</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>DormCart</h3>
-            <p class="partner-location">SRCC • Founded by Sneha Iyer & Aman Sen</p>
-            <p class="partner-desc">A campus delivery network providing midnight snacks, study supplies, and personal care essentials within 15 minutes.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://dormcart.co" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Startup 3: FinFlow -->
-        <article class="partner-card panel" data-category="fintech">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp">FINFLOW</div>
-            <span class="partner-badge badge-corporate">Fintech</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>FinFlow</h3>
-            <p class="partner-location">Hansraj College • Founded by Kartik Goel</p>
-            <p class="partner-desc">Split bills, track pocket money, and earn campus cashback rewards. The ultimate financial app designed for student groups.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://finflow.app" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Startup 4: Zesty -->
-        <article class="partner-card panel" data-category="d2c">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp text-orange">ZESTY</div>
-            <span class="partner-badge badge-venture">FoodTech</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>Zesty</h3>
-            <p class="partner-location">Hindu College • Founded by Divya Mehta</p>
-            <p class="partner-desc">A campus cafeteria pre-ordering app that lets students skip lines and order drinks and meals directly to classroom desks.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://zestyorder.in" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Startup 5: CollabLab -->
-        <article class="partner-card panel" data-category="saas">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp">COLLAB</div>
-            <span class="partner-badge badge-academic">SaaS & AI</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>CollabLab</h3>
-            <p class="partner-location">St. Stephen's • Founded by Aarav Joshi</p>
-            <p class="partner-desc">Matchmaking platform linking student developers, designers, and marketers with DU founders looking to build MVPs.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://collablab.space" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Startup 6: Aura Wearables -->
-        <article class="partner-card panel" data-category="d2c">
-          <div class="partner-card-header">
-            <div class="partner-logo-stamp">AURA</div>
-            <span class="partner-badge badge-venture">IoT / D2C</span>
-          </div>
-          <div class="partner-card-body">
-            <h3>Aura Wearables</h3>
-            <p class="partner-location">SGTB Khalsa • Founded by Aryaveer Chauhan</p>
-            <p class="partner-desc">Affordable smart rings tracking student stress, sleep levels, and exam-week focus metrics with a gamified dashboard.</p>
-          </div>
-          <div class="partner-card-footer">
-            <a href="https://aurarings.com" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-              <span>Visit Startup</span> <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
       </div>
 
       <!-- Startup CTA -->
@@ -210,34 +97,5 @@
       </footer>
     </section>
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const filterButtons = document.querySelectorAll('.filter-btn');
-      const startupCards = document.querySelectorAll('.partner-card');
-
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active button state
-          filterButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const category = btn.getAttribute('data-filter');
-
-          // Filter startup cards
-          startupCards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-              card.style.display = 'flex';
-              card.style.animation = 'none';
-              card.offsetHeight; /* trigger reflow */
-              card.style.animation = null;
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-    });
-  </script>
 </body>
 </html>
