@@ -406,7 +406,7 @@
           partnerForm.reset();
         } catch (err) {
           console.error("Failed to add partner:", err);
-          alert("Failed to add partner. Please make sure database tables are set up correctly.");
+          alert("Failed to add partner: " + (err.message || err));
         } finally {
           btn.disabled = false;
           btn.textContent = 'Add Partner';
@@ -436,7 +436,7 @@
           startupForm.reset();
         } catch (err) {
           console.error("Failed to add startup:", err);
-          alert("Failed to add startup. Please make sure database tables are set up correctly.");
+          alert("Failed to add startup: " + (err.message || err));
         } finally {
           btn.disabled = false;
           btn.textContent = 'Add Startup';
