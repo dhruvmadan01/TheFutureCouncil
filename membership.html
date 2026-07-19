@@ -65,50 +65,64 @@
       </div>
 
       <!-- Auth Panels Wrapper -->
-      <div class="max-w-4xl mx-auto my-6" id="authWrapper">
-        <style>
-          .auth-grid-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: start;
-          }
-          @media (min-width: 768px) {
-            .auth-grid-container {
-              grid-template-columns: 1.2fr 2fr;
+      <div class="max-w-md mx-auto my-6" id="authWrapper">
+        <!-- Scrolling Marquee Ticker -->
+        <div style="border: 2px solid var(--ink); background: #0c0a09; padding: 0.5rem; overflow: hidden; white-space: nowrap; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 var(--ink); position: relative; display: flex; align-items: center;">
+          <style>
+            .ticker-container {
+              overflow: hidden;
+              white-space: nowrap;
+              width: 100%;
             }
-          }
-        </style>
-        
-        <div class="auth-grid-container">
-          <!-- Login Form Panel -->
-          <div class="admin-form-panel" id="loginFormPanel" style="width: 100%; margin: 0;">
-            <h2>Member Login</h2>
-            <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
-              Invalid credentials. Make sure your email is pre-approved and password is correct.
+            .ticker-scroll {
+              display: inline-block;
+              white-space: nowrap;
+              padding-right: 50px;
+              animation: ticker-animation 30s linear infinite;
+            }
+            .ticker-scroll:hover {
+              animation-play-state: paused;
+            }
+            .ticker-item {
+              display: inline-block;
+              font-family: monospace;
+              font-size: 0.8rem;
+              color: #ff9e59;
+              font-weight: 700;
+              margin-right: 2rem;
+            }
+            .ticker-item span {
+              color: #fff;
+            }
+            @keyframes ticker-animation {
+              0% { transform: translate3d(0, 0, 0); }
+              100% { transform: translate3d(-50%, 0, 0); }
+            }
+          </style>
+          <div class="ticker-container">
+            <div class="ticker-scroll" id="membersTickerWrapper">
+              <!-- Dynamic members notification scroll here -->
             </div>
-            <form id="loginForm">
-              <div class="form-group">
-                <label for="loginEmail">Student Email</label>
-                <input type="email" id="loginEmail" class="form-control" placeholder="e.g. student@thefuturecouncil.in" required />
-              </div>
-              <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" class="form-control" placeholder="e.g. member2026" required />
-              </div>
-              <button type="submit" class="admin-submit-btn">Enter Portal</button>
-            </form>
           </div>
+        </div>
 
-          <!-- Recent Members Section -->
-          <div class="admin-form-panel" style="width: 100%; margin: 0; background: #0c0a09;">
-            <h2>Ecosystem Members</h2>
-            <p style="font-size: 0.85rem; color: #888; margin-top: -0.5rem; margin-bottom: 1.25rem;">Meet some of our cohort members building across Delhi University.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;" id="recentMembersGrid">
-              <!-- Dynamic cohort members render here -->
-            </div>
+        <!-- Login Form Panel -->
+        <div class="admin-form-panel" id="loginFormPanel" style="width: 100%; margin: 0;">
+          <h2>Member Login</h2>
+          <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
+            Invalid credentials. Make sure your email is pre-approved and password is correct.
           </div>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Student Email</label>
+              <input type="email" id="loginEmail" class="form-control" placeholder="e.g. student@thefuturecouncil.in" required />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" class="form-control" placeholder="e.g. member2026" required />
+            </div>
+            <button type="submit" class="admin-submit-btn">Enter Portal</button>
+          </form>
         </div>
       </div>
 
@@ -295,34 +309,30 @@
       });
 
       const loadEcosystemMembers = async () => {
-        const recentMembersGrid = document.getElementById('recentMembersGrid');
-        if (!recentMembersGrid) return;
+        const membersTickerWrapper = document.getElementById('membersTickerWrapper');
+        if (!membersTickerWrapper) return;
 
         // Static realistic members for instant social proof
         const FAKE_MEMBERS = [
           {
             name: "Sanya Iyer",
-            college: "SRCC • B.Com",
-            tier: "Founder",
-            image: ""
+            college: "SRCC",
+            tier: "Founder"
           },
           {
             name: "Rohan Malhotra",
-            college: "St. Stephen's • Physics",
-            tier: "Venture Lead",
-            image: ""
+            college: "St. Stephen's",
+            tier: "Venture Lead"
           },
           {
             name: "Ishita Sharma",
-            college: "Miranda House • Eco",
-            tier: "Operator",
-            image: ""
+            college: "Miranda House",
+            tier: "Operator"
           },
           {
             name: "Kabir Verma",
-            college: "Hansraj • CompSci",
-            tier: "Tech Fellow",
-            image: ""
+            college: "Hansraj",
+            tier: "Tech Fellow"
           }
         ];
 
@@ -331,8 +341,7 @@
         try {
           const { data } = await supabaseClient
             .from('members')
-            .select('name, college, tier, image')
-            .limit(6);
+            .select('name, college, tier');
 
           if (data) {
             customMembers = data;
@@ -342,28 +351,16 @@
         }
 
         // Combine static fake members and database members
-        const allDisplayMembers = [...customMembers, ...FAKE_MEMBERS].slice(0, 8); // Max 8 members
+        const allDisplayMembers = [...customMembers, ...FAKE_MEMBERS];
 
-        recentMembersGrid.innerHTML = '';
+        let tickerContent = '';
         allDisplayMembers.forEach(m => {
-          const card = document.createElement('div');
-          const isImage = m.image && m.image.startsWith('data:image/');
-          const avatarHtml = isImage 
-            ? `<img src="${m.image}" style="width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--ink); border-radius: 4px;" />` 
-            : `<div style="width: 40px; height: 40px; border: 2px solid var(--ink); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; background: #1a1a1a; color: #ff9e59;">🎓</div>`;
-
-          card.innerHTML = `
-            <div style="border: 2px solid var(--ink); background: #000; padding: 0.75rem; display: flex; gap: 0.75rem; align-items: center; box-shadow: 3px 3px 0 var(--ink); height: 100%;">
-              ${avatarHtml}
-              <div style="flex: 1; min-width: 0;">
-                <h4 style="margin: 0; font-size: 0.85rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${m.name}</h4>
-                <p style="margin: 2px 0 0; font-size: 0.65rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${m.college}</p>
-                <span style="font-size: 0.55rem; padding: 1px 4px; margin-top: 3px; display: inline-block; background: #ff9e5915; color: #ff9e59; border: 1px solid #ff9e5930; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em;">${m.tier}</span>
-              </div>
-            </div>
-          `;
-          recentMembersGrid.appendChild(card);
+          const collegeName = m.college.split('•')[0].trim();
+          tickerContent += `<span class="ticker-item">⚡ [NEW MEMBER] <span>${m.name}</span> (${collegeName}) joined TFC </span>`;
         });
+        
+        // Double the content to create a seamless looping marquee effect
+        membersTickerWrapper.innerHTML = tickerContent + tickerContent;
       };
 
       // Initial check & load
