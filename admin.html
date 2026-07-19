@@ -360,48 +360,66 @@
       const cancelMemberEditBtn = document.getElementById('cancelMemberEditBtn');
 
       const startEditPartner = (partner) => {
-        editingPartnerId = partner.id;
-        editingPartnerLogo = partner.logo_stamp;
-        document.getElementById('partnerName').value = partner.name;
-        document.getElementById('partnerCategory').value = partner.category;
-        document.getElementById('partnerLogo').value = partner.logo_stamp.startsWith('data:image/') ? '' : partner.logo_stamp;
-        document.getElementById('partnerLocation').value = partner.location;
-        document.getElementById('partnerDesc').value = partner.description;
-        document.getElementById('partnerLink').value = partner.link;
-        
-        partnerForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Partner: ${partner.name}`;
-        partnerForm.querySelector('button[type="submit"]').textContent = 'Update Partner';
-        cancelPartnerEditBtn.classList.remove('hidden');
+        try {
+          editingPartnerId = partner.id;
+          editingPartnerLogo = partner.logo_stamp || '';
+          document.getElementById('partnerName').value = partner.name || '';
+          document.getElementById('partnerCategory').value = partner.category || 'academic';
+          
+          const isImg = partner.logo_stamp && partner.logo_stamp.startsWith('data:image/');
+          document.getElementById('partnerLogo').value = isImg ? '' : (partner.logo_stamp || '');
+          
+          document.getElementById('partnerLocation').value = partner.location || '';
+          document.getElementById('partnerDesc').value = partner.description || '';
+          document.getElementById('partnerLink').value = partner.link || '';
+          
+          partnerForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Partner: ${partner.name}`;
+          partnerForm.querySelector('button[type="submit"]').textContent = 'Update Partner';
+          cancelPartnerEditBtn.classList.remove('hidden');
+        } catch (err) {
+          console.error("Error in startEditPartner:", err);
+        }
       };
 
       const startEditStartup = (startup) => {
-        editingStartupId = startup.id;
-        editingStartupLogo = startup.logo_stamp;
-        document.getElementById('startupName').value = startup.name;
-        document.getElementById('startupCategory').value = startup.category;
-        document.getElementById('startupLogo').value = startup.logo_stamp.startsWith('data:image/') ? '' : startup.logo_stamp;
-        document.getElementById('startupLocation').value = startup.location;
-        document.getElementById('startupDesc').value = startup.description;
-        document.getElementById('startupLink').value = startup.link;
-        
-        startupForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Startup: ${startup.name}`;
-        startupForm.querySelector('button[type="submit"]').textContent = 'Update Startup';
-        cancelStartupEditBtn.classList.remove('hidden');
+        try {
+          editingStartupId = startup.id;
+          editingStartupLogo = startup.logo_stamp || '';
+          document.getElementById('startupName').value = startup.name || '';
+          document.getElementById('startupCategory').value = startup.category || 'saas';
+          
+          const isImg = startup.logo_stamp && startup.logo_stamp.startsWith('data:image/');
+          document.getElementById('startupLogo').value = isImg ? '' : (startup.logo_stamp || '');
+          
+          document.getElementById('startupLocation').value = startup.location || '';
+          document.getElementById('startupDesc').value = startup.description || '';
+          document.getElementById('startupLink').value = startup.link || '';
+          
+          startupForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Startup: ${startup.name}`;
+          startupForm.querySelector('button[type="submit"]').textContent = 'Update Startup';
+          cancelStartupEditBtn.classList.remove('hidden');
+        } catch (err) {
+          console.error("Error in startEditStartup:", err);
+        }
       };
 
       const startEditMember = (member) => {
-        editingMemberId = member.id;
-        editingMemberImage = member.image || '';
-        document.getElementById('memberName').value = member.name;
-        document.getElementById('memberEmail').value = member.email;
-        document.getElementById('memberCollege').value = member.college;
-        document.getElementById('memberTier').value = member.tier;
-        document.getElementById('memberIdVal').value = member.member_id || member.id;
-        document.getElementById('memberPassword').value = member.password;
-        
-        memberForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Member: ${member.name}`;
-        memberForm.querySelector('button[type="submit"]').textContent = 'Update Member';
-        cancelMemberEditBtn.classList.remove('hidden');
+        try {
+          editingMemberId = member.id;
+          editingMemberImage = member.image || '';
+          document.getElementById('memberName').value = member.name || '';
+          document.getElementById('memberEmail').value = member.email || '';
+          document.getElementById('memberCollege').value = member.college || '';
+          document.getElementById('memberTier').value = member.tier || 'Student';
+          document.getElementById('memberIdVal').value = member.member_id || member.id || '';
+          document.getElementById('memberPassword').value = member.password || '';
+          
+          memberForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Member: ${member.name}`;
+          memberForm.querySelector('button[type="submit"]').textContent = 'Update Member';
+          cancelMemberEditBtn.classList.remove('hidden');
+        } catch (err) {
+          console.error("Error in startEditMember:", err);
+        }
       };
 
       // Initialize Supabase Client
