@@ -376,6 +376,9 @@
           partnerForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Partner: ${partner.name}`;
           partnerForm.querySelector('button[type="submit"]').textContent = 'Update Partner';
           cancelPartnerEditBtn.classList.remove('hidden');
+          
+          // Scroll the form into view smoothly
+          partnerForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } catch (err) {
           console.error("Error in startEditPartner:", err);
         }
@@ -398,6 +401,9 @@
           startupForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Startup: ${startup.name}`;
           startupForm.querySelector('button[type="submit"]').textContent = 'Update Startup';
           cancelStartupEditBtn.classList.remove('hidden');
+          
+          // Scroll the form into view smoothly
+          startupForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } catch (err) {
           console.error("Error in startEditStartup:", err);
         }
@@ -417,6 +423,9 @@
           memberForm.closest('.admin-form-panel').querySelector('h2').textContent = `Edit Member: ${member.name}`;
           memberForm.querySelector('button[type="submit"]').textContent = 'Update Member';
           cancelMemberEditBtn.classList.remove('hidden');
+          
+          // Scroll the form into view smoothly
+          memberForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } catch (err) {
           console.error("Error in startEditMember:", err);
         }
