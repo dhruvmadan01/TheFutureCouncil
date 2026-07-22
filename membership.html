@@ -12,6 +12,7 @@
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -115,32 +116,206 @@
 
       <!-- Dashboard View (hidden by default) -->
       <div class="hidden" id="dashboardWrapper">
-        <div class="max-w-md mx-auto my-6">
-          <div class="member-card-container">
-            <div class="member-card">
-              <div class="member-card-header-bar">
-                <span>The Future Council</span>
-                <span>ID Card</span>
-              </div>
-              <div class="member-card-body">
-                <div class="member-card-photo-box" id="cardMemberPhoto">🎓</div>
-                <div class="member-card-details">
-                  <h3 id="cardMemberName">Kartik Goel</h3>
-                  <div class="member-card-meta" id="cardMemberCollege">SSCBS • Delhi University</div>
-                  <div class="member-card-meta" id="cardMemberTier">Tier: Student Founder</div>
-                  <div class="member-card-meta" id="cardMemberId">ID: TFC-2026-0812</div>
-                  <div class="member-card-status-row">
-                    <span class="member-status-badge">
-                      <span class="pulsing-dot"></span>
-                      <span>Active Member</span>
-                    </span>
-                    <div class="member-card-qr-box" title="Verification QR"></div>
+        <div class="max-w-6xl mx-auto my-6 px-4">
+          <!-- Dashboard Grid -->
+          <div class="dashboard-grid">
+            
+            <!-- Left Column: ID Card & Profile Details Editor -->
+            <div class="flex flex-col gap-6 min-w-0">
+              <!-- ID Card Container -->
+              <div class="member-card-container">
+                <div class="member-card">
+                  <!-- Header -->
+                  <div class="member-card-header-bar">
+                    <img src="TFC.png" alt="TFC Logo" class="member-card-logo" />
+                    <span class="member-card-title">THE FUTURE COUNCIL</span>
                   </div>
+                  
+                  <!-- Body -->
+                  <div class="member-card-body">
+                    <!-- Photo -->
+                    <div class="member-card-photo-box" id="cardMemberPhoto">🎓</div>
+                    
+                    <!-- Details Wrapper -->
+                    <div class="member-card-details-wrap">
+                      <h3 id="cardMemberName">Kartik Goel</h3>
+                      
+                      <!-- Info Grid -->
+                      <div class="member-card-info-grid">
+                        <div class="member-card-field">
+                          <span class="member-card-label">TFC TIER</span>
+                          <span class="member-card-value" id="cardMemberTier">Student Founder</span>
+                        </div>
+                        <div class="member-card-field">
+                          <span class="member-card-label">COLLEGE</span>
+                          <span class="member-card-value" id="cardMemberCollege">SSCBS • Delhi University</span>
+                        </div>
+                        <div class="member-card-field">
+                          <span class="member-card-label">ID NUMBER</span>
+                          <span class="member-card-value font-mono" id="cardMemberId">TFC-2026-0812</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Footer Row -->
+                    <div class="member-card-footer-row">
+                      <span class="member-status-badge">
+                        <span class="pulsing-dot"></span>
+                        <span>Active Member</span>
+                      </span>
+                      <div class="member-card-qr-box" title="Verification QR">
+                        <img id="cardMemberQr" src="" alt="Verification QR" class="hidden" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-4 mt-4 w-full max-w-[340px]">
+                  <button id="downloadCardBtn" class="admin-submit-btn flex-1 flex items-center justify-center gap-2">
+                    <span>💾</span> Download
+                  </button>
+                  <button id="printCardBtn" class="admin-submit-btn bg-black border-2 border-white hover:bg-white hover:text-black flex-1 flex items-center justify-center gap-2">
+                    <span>🖨️</span> Print
+                  </button>
+                </div>
+              </div>
+
+              <!-- Profile Details Editor Panel -->
+              <div class="dashboard-panel p-6 bg-white rounded-xl border border-slate-200 shadow-sm mb-6 text-slate-800">
+                <h2 class="text-xl font-extrabold uppercase border-b pb-3 mb-6 text-slate-800 tracking-tight">Edit Profile Details</h2>
+                <form id="profileEditForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Change Profile Photo (full-width) -->
+                  <div class="md:col-span-2">
+                    <label for="profilePhotoInput" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Change Profile Photo</label>
+                    <input type="file" id="profilePhotoInput" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 p-2.5 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white" accept="image/*" />
+                  </div>
+                  <!-- College & Year -->
+                  <div class="col-span-1">
+                    <label for="profileCollegeInput" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">College & Year</label>
+                    <input type="text" id="profileCollegeInput" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. SSCBS, 3rd Year" required />
+                  </div>
+                  <!-- Phone Number -->
+                  <div class="col-span-1">
+                    <label for="profilePhoneInput" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Phone Number</label>
+                    <input type="tel" id="profilePhoneInput" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. +91 98765 43210" />
+                  </div>
+                  <!-- LinkedIn URL -->
+                  <div class="md:col-span-2">
+                    <label for="profileLinkedinInput" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">LinkedIn URL</label>
+                    <input type="url" id="profileLinkedinInput" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. https://linkedin.com/in/username" />
+                  </div>
+                  <!-- Bio / Marketing Focus -->
+                  <div class="md:col-span-2">
+                    <label for="profileBioInput" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Bio / Marketing Focus</label>
+                    <textarea id="profileBioInput" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="Tell us about yourself / your role..." rows="3"></textarea>
+                  </div>
+                  <!-- Action Buttons / Status -->
+                  <div class="md:col-span-2 flex flex-col md:flex-row md:justify-end md:items-center gap-4 mt-2">
+                    <div id="profileSaveStatus" class="hidden text-sm font-bold text-center text-green-600">
+                      Profile updated successfully!
+                    </div>
+                    <button type="submit" class="w-full md:w-auto px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition duration-200 uppercase tracking-wider text-sm shadow-md hover:shadow-lg">
+                      Save Profile Details
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <button id="logoutBtn" class="w-full py-3 bg-black hover:bg-slate-900 text-white font-bold rounded-lg transition duration-200 uppercase tracking-wider text-sm shadow-md hover:shadow-lg border-2 border-black mb-6">Log Out of Portal</button>
+            </div>
+
+            <!-- Right Column: Manage Marketing Members (only visible to Marketing Head) -->
+            <div id="marketingManagementPanel" class="hidden flex flex-col gap-6 min-w-0">
+              <!-- Marketing Member Add/Edit Form Panel -->
+              <div class="dashboard-panel p-6 bg-white rounded-xl border border-slate-200 shadow-sm mb-6 text-slate-800">
+                <h2 id="mktFormTitle" class="text-xl font-extrabold uppercase border-b pb-3 mb-6 text-slate-800 tracking-tight">Add Marketing Team Member</h2>
+                <form id="mktMemberForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="hidden" id="editingMktId" />
+                  <!-- Full Name -->
+                  <div class="col-span-1">
+                    <label for="mktMemberName" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Full Name</label>
+                    <input type="text" id="mktMemberName" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. Priyanjali Das" required />
+                  </div>
+                  <!-- Student Email -->
+                  <div class="col-span-1">
+                    <label for="mktMemberEmail" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Student Email</label>
+                    <input type="email" id="mktMemberEmail" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. priyanjali@gmail.com" required />
+                  </div>
+                  <!-- Password -->
+                  <div class="col-span-1">
+                    <label for="mktMemberPassword" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Password</label>
+                    <input type="text" id="mktMemberPassword" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. priyanjali2026" required />
+                  </div>
+                  <!-- College & Year -->
+                  <div class="col-span-1">
+                    <label for="mktMemberCollege" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">College & Year</label>
+                    <input type="text" id="mktMemberCollege" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. LSR, 2nd Year" required />
+                  </div>
+                  <!-- Marketing Role / Tier -->
+                  <div class="col-span-1">
+                    <label for="mktMemberRole" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Marketing Role / Tier</label>
+                    <div class="relative">
+                      <select id="mktMemberRole" class="w-full p-3 pr-10 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white appearance-none" required>
+                        <option value="Marketing Associate">Marketing Associate</option>
+                        <option value="Social Media Manager">Social Media Manager</option>
+                        <option value="Content Lead">Content Lead</option>
+                        <option value="Growth Marketer">Growth Marketer</option>
+                        <option value="Design Associate">Design Associate</option>
+                        <option value="Video Editor">Video Editor</option>
+                      </select>
+                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Member ID -->
+                  <div class="col-span-1">
+                    <label for="mktMemberIdVal" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Member ID</label>
+                    <input type="text" id="mktMemberIdVal" class="w-full p-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm font-medium text-slate-900 bg-white" placeholder="e.g. TFC-2026-MKT-001" required />
+                  </div>
+                  <!-- Profile Photo (Optional) -->
+                  <div class="md:col-span-2">
+                    <label for="mktMemberImageFile" class="block mb-1 text-sm font-semibold uppercase tracking-wider text-slate-700">Profile Photo (Optional)</label>
+                    <input type="file" id="mktMemberImageFile" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 p-2.5 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white" accept="image/*" />
+                  </div>
+                  <!-- Action Buttons -->
+                  <div class="md:col-span-2 flex flex-col sm:flex-row justify-end gap-3 mt-2">
+                    <button type="button" id="cancelMktEditBtn" class="w-full sm:w-auto px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg transition duration-200 uppercase tracking-wider text-sm hidden">
+                      Cancel Edit
+                    </button>
+                    <button type="submit" id="mktSubmitBtn" class="w-full sm:w-auto px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition duration-200 uppercase tracking-wider text-sm shadow-md hover:shadow-lg">
+                      Add Member
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Marketing Members List Panel -->
+              <div class="admin-table-panel !m-0">
+                <h2>Marketing Team Directory</h2>
+                <div class="admin-table-wrapper">
+                  <table class="admin-table" id="mktMembersTable">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>College</th>
+                        <th>Role</th>
+                        <th>Password</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Dynamic rows -->
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
+
           </div>
-          <button id="logoutBtn" class="admin-submit-btn bg-black border-2 border-white hover:bg-white hover:text-black">Log Out of Portal</button>
         </div>
       </div>
 
@@ -181,6 +356,8 @@
       const TIER_KEY = 'tfc_member_tier';
       const ID_KEY = 'tfc_member_id';
       const PHOTO_KEY = 'tfc_member_photo';
+      const EMAIL_KEY = 'tfc_member_email';
+      const PASSWORD_KEY = 'tfc_member_password';
 
       // Initialize Supabase Client
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
@@ -202,6 +379,183 @@
           tier: 'Founder',
           id: 'TFC-2026-0001',
           password: 'member2026'
+        },
+        'brahmleen1314@gmail.com': {
+          name: 'Brahmleen Kaur',
+          college: 'TFC',
+          tier: 'Marketing Head',
+          id: 'TFC-2026-MARKETING-HEAD',
+          password: 'brahmleen1314'
+        }
+      };
+
+      // Helper function to resize and read image files as Base64 Data URL
+      const getBase64 = (fileInput, callback) => {
+        const file = fileInput.files[0];
+        if (!file) {
+          callback(null);
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const max_size = 600; // 600px ensures high-quality Retina & physical print rendering
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+              if (width > max_size) {
+                height *= max_size / width;
+                width = max_size;
+              }
+            } else {
+              if (height > max_size) {
+                width *= max_size / height;
+                height = max_size;
+              }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.9); // High quality JPEG
+            callback(dataUrl);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      let mktEditingId = null;
+      let mktEditingImage = '';
+
+      const renderMktTable = async () => {
+        const mktMembersTableBody = document.querySelector('#mktMembersTable tbody');
+        if (!mktMembersTableBody) return;
+        mktMembersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">Loading...</td></tr>';
+        
+        try {
+          const { data, error } = await supabaseClient
+            .from('members')
+            .select('*')
+            .order('name', { ascending: true });
+            
+          if (error) throw error;
+          
+          const members = data || [];
+          
+          // Filter marketing members (where tier/role contains marketing or matches specific roles)
+          const mktTiers = [
+            'marketing', 'social media', 'content', 'growth', 'design', 'video editor'
+          ];
+          const mktMembers = members.filter(m => {
+            const t = (m.tier || '').toLowerCase();
+            return mktTiers.some(keyword => t.includes(keyword)) || m.email.toLowerCase() === 'brahmleen1314@gmail.com';
+          });
+          
+          mktMembersTableBody.innerHTML = '';
+          if (mktMembers.length === 0) {
+            mktMembersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">No marketing members found.</td></tr>';
+            return;
+          }
+          
+          mktMembers.forEach(m => {
+            const isImg = m.image && m.image.startsWith('data:image/');
+            const photoHtml = isImg 
+              ? `<img src="${m.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
+              : `<span style="font-size: 1.25rem; vertical-align: middle; margin-right: 8px;">🎓</span>`;
+              
+            let col = m.college || '';
+            if (col.includes(' | ')) col = col.split(' | ')[0];
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><span class="font-mono font-bold">${m.member_id || m.id}</span></td>
+              <td>${photoHtml}<strong>${m.name}</strong></td>
+              <td>${m.email}</td>
+              <td>${col}</td>
+              <td><span class="uppercase font-extrabold text-xs text-blue-500">${m.tier}</span></td>
+              <td><span class="font-mono text-sm">${m.password || 'member2026'}</span></td>
+              <td>
+                <button class="admin-edit-btn mkt-edit-btn" data-id="${m.id}">Edit</button>
+                <button class="admin-delete-btn mkt-delete-btn" data-id="${m.id}">Delete</button>
+              </td>
+            `;
+            mktMembersTableBody.appendChild(row);
+          });
+          
+          // Bind edit events
+          mktMembersTableBody.querySelectorAll('.mkt-edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const id = e.target.getAttribute('data-id');
+              const member = mktMembers.find(m => String(m.id) === String(id));
+              if (member) {
+                startMktEdit(member);
+              }
+            });
+          });
+          
+          // Bind delete events
+          mktMembersTableBody.querySelectorAll('.mkt-delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+              const id = e.target.getAttribute('data-id');
+              if (confirm("Are you sure you want to delete this marketing member?")) {
+                e.target.disabled = true;
+                e.target.textContent = 'Deleting...';
+                await deleteMktMember(id);
+              }
+            });
+          });
+          
+        } catch (err) {
+          console.error("Error loading marketing members:", err);
+          mktMembersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-red-500 py-6">Failed to load directory.</td></tr>';
+        }
+      };
+
+      const startMktEdit = (member) => {
+        mktEditingId = member.id;
+        mktEditingImage = member.image || '';
+        document.getElementById('mktFormTitle').textContent = `Edit Marketing Member: ${member.name}`;
+        document.getElementById('mktMemberName').value = member.name || '';
+        document.getElementById('mktMemberEmail').value = member.email || '';
+        document.getElementById('mktMemberPassword').value = member.password || '';
+        
+        let col = member.college || '';
+        if (col.includes(' | ')) col = col.split(' | ')[0];
+        document.getElementById('mktMemberCollege').value = col;
+        
+        document.getElementById('mktMemberRole').value = member.tier || 'Marketing Associate';
+        document.getElementById('mktMemberIdVal').value = member.member_id || member.id || '';
+        
+        document.getElementById('mktSubmitBtn').textContent = 'Update Member';
+        document.getElementById('cancelMktEditBtn').classList.remove('hidden');
+        document.getElementById('mktMemberForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+
+      const resetMktForm = () => {
+        mktEditingId = null;
+        mktEditingImage = '';
+        document.getElementById('mktFormTitle').textContent = 'Add Marketing Team Member';
+        document.getElementById('mktSubmitBtn').textContent = 'Add Member';
+        document.getElementById('cancelMktEditBtn').classList.add('hidden');
+        document.getElementById('mktMemberForm').reset();
+      };
+
+      const deleteMktMember = async (id) => {
+        try {
+          const { error } = await supabaseClient
+            .from('members')
+            .delete()
+            .eq('id', id);
+          if (error) throw error;
+          await renderMktTable();
+          if (mktEditingId === id) resetMktForm();
+        } catch (err) {
+          console.error("Delete error:", err);
+          alert("Failed to delete marketing member: " + err.message);
         }
       };
 
@@ -213,11 +567,111 @@
           dashboardWrapper.classList.remove('hidden');
           
           // Populate dynamic values in card
-          cardMemberName.textContent = sessionStorage.getItem(USERNAME_KEY) || 'Kartik Goel';
-          cardMemberCollege.textContent = sessionStorage.getItem(COLLEGE_KEY) || 'SSCBS • Delhi University';
-          cardMemberTier.textContent = `Tier: ${sessionStorage.getItem(TIER_KEY) || 'Student Founder'}`;
-          cardMemberId.textContent = `ID: ${sessionStorage.getItem(ID_KEY) || 'TFC-2026-0812'}`;
+          const loggedName = sessionStorage.getItem(USERNAME_KEY) || 'Kartik Goel';
+          const loggedCollege = sessionStorage.getItem(COLLEGE_KEY) || 'SSCBS • Delhi University';
+          let loggedTier = sessionStorage.getItem(TIER_KEY) || 'Student Founder';
+          let loggedId = sessionStorage.getItem(ID_KEY) || 'TFC-2026-0812';
+          const loggedEmail = sessionStorage.getItem(EMAIL_KEY) || '';
+
+          // Auto-correct Brahmleen's role to Marketing Head if her session is stale
+          if (loggedEmail.toLowerCase() === 'brahmleen1314@gmail.com') {
+            if (loggedTier !== 'Marketing Head' || loggedId !== 'TFC-2026-MARKETING-HEAD') {
+              loggedTier = 'Marketing Head';
+              loggedId = 'TFC-2026-MARKETING-HEAD';
+              sessionStorage.setItem(TIER_KEY, 'Marketing Head');
+              sessionStorage.setItem(ID_KEY, 'TFC-2026-MARKETING-HEAD');
+              
+              // Correct database record
+              (async () => {
+                try {
+                  await supabaseClient
+                    .from('members')
+                    .update({ tier: 'Marketing Head', member_id: 'TFC-2026-MARKETING-HEAD' })
+                    .eq('email', 'brahmleen1314@gmail.com');
+                } catch (e) {
+                  console.error("Auto-sync database update failed:", e);
+                }
+              })();
+            }
+          }
           
+          cardMemberName.textContent = loggedName;
+          
+          // Dynamically scale font size for long member names
+          if (loggedName.length > 20) {
+            cardMemberName.style.fontSize = '1.1rem';
+          } else if (loggedName.length > 15) {
+            cardMemberName.style.fontSize = '1.25rem';
+          } else {
+            cardMemberName.style.fontSize = '1.4rem';
+          }
+          
+          cardMemberTier.textContent = loggedTier;
+          cardMemberId.textContent = loggedId;
+          
+          // Parse college field
+          let collegeVal = loggedCollege;
+          let phoneVal = '';
+          let linkedinVal = '';
+          let bioVal = '';
+
+          if (loggedCollege.includes(' | ')) {
+            const parts = loggedCollege.split(' | ');
+            collegeVal = parts[0];
+            parts.forEach(part => {
+              if (part.startsWith('Phone: ')) phoneVal = part.replace('Phone: ', '');
+              else if (part.startsWith('LinkedIn: ')) linkedinVal = part.replace('LinkedIn: ', '');
+              else if (part.startsWith('Bio: ')) bioVal = part.replace('Bio: ', '');
+            });
+          }
+
+          cardMemberCollege.textContent = collegeVal;
+          
+          // Extra details on card inside the grid
+          const cardMemberExtra = document.getElementById('cardMemberExtra') || (() => {
+            const div = document.createElement('div');
+            div.id = 'cardMemberExtra';
+            div.className = 'member-card-extra-wrap';
+            const grid = document.querySelector('.member-card-info-grid');
+            if (grid) grid.appendChild(div);
+            return div;
+          })();
+          
+          let extraHtml = '';
+          if (phoneVal) {
+            extraHtml += `
+              <div class="member-card-field">
+                <span class="member-card-label">PHONE</span>
+                <span class="member-card-value">${phoneVal}</span>
+              </div>
+            `;
+          }
+          if (linkedinVal) {
+            const shortLi = linkedinVal.replace('https://', '').replace('www.', '').replace('linkedin.com/in/', '');
+            extraHtml += `
+              <div class="member-card-field">
+                <span class="member-card-label">LINKEDIN</span>
+                <span class="member-card-value">${shortLi}</span>
+              </div>
+            `;
+          }
+          if (bioVal) {
+            extraHtml += `
+              <div class="member-card-field" style="grid-column: span 1; border-top: 2px solid var(--ink); padding-top: 6px; margin-top: 4px;">
+                <span class="member-card-label">BIO</span>
+                <span class="member-card-value member-card-bio-val">"${bioVal}"</span>
+              </div>
+            `;
+          }
+          cardMemberExtra.innerHTML = extraHtml;
+          
+          // Populate profile editor inputs
+          document.getElementById('profileCollegeInput').value = collegeVal;
+          document.getElementById('profilePhoneInput').value = phoneVal;
+          document.getElementById('profileLinkedinInput').value = linkedinVal;
+          document.getElementById('profileBioInput').value = bioVal;
+          
+          // Render photo
           const photo = sessionStorage.getItem(PHOTO_KEY);
           if (photo && photo.startsWith('data:image/')) {
             cardMemberPhoto.innerHTML = `<img src="${photo}" style="width:100%; height:100%; object-fit:cover;" />`;
@@ -225,8 +679,26 @@
             cardMemberPhoto.textContent = '🎓';
           }
           
+          // QR Code
+          const qrImg = document.getElementById('cardMemberQr');
+          if (qrImg) {
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(loggedId)}`;
+            qrImg.classList.remove('hidden');
+          }
+          
           portalHero.querySelector('.hero-title').textContent = "Member Dashboard";
           portalHero.querySelector('.hero-text').textContent = "Access student cohort benefits, pitch feedback sessions, and verify your membership badge below.";
+          
+          // Check if Marketing Head or Admin is logged in to show marketing members list
+          const marketingManagementPanel = document.getElementById('marketingManagementPanel');
+          if (loggedEmail.toLowerCase() === 'brahmleen1314@gmail.com' || 
+              loggedTier.toLowerCase().includes('marketing head')) {
+            marketingManagementPanel.classList.remove('hidden');
+            renderMktTable();
+          } else {
+            marketingManagementPanel.classList.add('hidden');
+          }
+          
         } else {
           authWrapper.classList.remove('hidden');
           dashboardWrapper.classList.add('hidden');
@@ -238,49 +710,87 @@
       // Login form handler
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying...';
+        
         const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const pass = document.getElementById('loginPassword').value;
 
-        // Fetch custom members from Supabase
-        let customMembers = [];
         try {
-          const { data, error } = await supabaseClient
+          // 1. Direct query to Supabase members table
+          const { data: dbMember, error } = await supabaseClient
             .from('members')
-            .select('*');
+            .select('*')
+            .eq('email', email)
+            .maybeSingle();
 
-          if (!error && data) {
-            customMembers = data;
+          if (error) {
+            console.error("Supabase login error:", error);
+          }
+
+          let loggedIn = false;
+          let memberDetails = null;
+
+          if (dbMember) {
+            // Check password
+            if (pass === (dbMember.password || 'member2026')) {
+              loggedIn = true;
+              memberDetails = {
+                name: dbMember.name,
+                college: dbMember.college,
+                tier: dbMember.tier,
+                id: dbMember.member_id || dbMember.id,
+                image: dbMember.image || '',
+                password: dbMember.password || 'member2026'
+              };
+            }
+          } else {
+            // 2. Fallback to pre-approved static list
+            const staticMember = ALLOWED_MEMBERS[email];
+            if (staticMember && pass === staticMember.password) {
+              loggedIn = true;
+              memberDetails = staticMember;
+            }
+          }
+
+          if (loggedIn && memberDetails) {
+            sessionStorage.setItem(AUTH_KEY, 'true');
+            sessionStorage.setItem(USERNAME_KEY, memberDetails.name);
+            sessionStorage.setItem(COLLEGE_KEY, memberDetails.college);
+            sessionStorage.setItem(TIER_KEY, memberDetails.tier);
+            sessionStorage.setItem(ID_KEY, memberDetails.id);
+            sessionStorage.setItem(PHOTO_KEY, memberDetails.image || '');
+            sessionStorage.setItem(EMAIL_KEY, email);
+            sessionStorage.setItem(PASSWORD_KEY, pass);
+            loginError.classList.add('hidden');
+            loginForm.reset();
+            checkMemberAuth();
+          } else {
+            loginError.classList.remove('hidden');
           }
         } catch (err) {
-          console.error("Failed to fetch members from database:", err);
-        }
-
-        // Merge hardcoded members and custom members from database
-        const approvedMembers = { ...ALLOWED_MEMBERS };
-        customMembers.forEach(m => {
-          approvedMembers[m.email.toLowerCase()] = {
-            name: m.name,
-            college: m.college,
-            tier: m.tier,
-            id: m.member_id || m.id,
-            password: m.password || 'member2026',
-            image: m.image || ''
-          };
-        });
-
-        if (approvedMembers[email] && pass === approvedMembers[email].password) {
-          const member = approvedMembers[email];
-          sessionStorage.setItem(AUTH_KEY, 'true');
-          sessionStorage.setItem(USERNAME_KEY, member.name);
-          sessionStorage.setItem(COLLEGE_KEY, member.college);
-          sessionStorage.setItem(TIER_KEY, member.tier);
-          sessionStorage.setItem(ID_KEY, member.id);
-          sessionStorage.setItem(PHOTO_KEY, member.image || '');
-          loginError.classList.add('hidden');
-          loginForm.reset();
-          checkMemberAuth();
-        } else {
-          loginError.classList.remove('hidden');
+          console.error("Login verification system error:", err);
+          // Fallback static login in case of completely disconnected DB
+          const staticMember = ALLOWED_MEMBERS[email];
+          if (staticMember && pass === staticMember.password) {
+            sessionStorage.setItem(AUTH_KEY, 'true');
+            sessionStorage.setItem(USERNAME_KEY, staticMember.name);
+            sessionStorage.setItem(COLLEGE_KEY, staticMember.college);
+            sessionStorage.setItem(TIER_KEY, staticMember.tier);
+            sessionStorage.setItem(ID_KEY, staticMember.id);
+            sessionStorage.setItem(PHOTO_KEY, staticMember.image || '');
+            sessionStorage.setItem(EMAIL_KEY, email);
+            sessionStorage.setItem(PASSWORD_KEY, pass);
+            loginError.classList.add('hidden');
+            loginForm.reset();
+            checkMemberAuth();
+          } else {
+            loginError.classList.remove('hidden');
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enter Portal';
         }
       });
 
@@ -292,6 +802,8 @@
         sessionStorage.removeItem(TIER_KEY);
         sessionStorage.removeItem(ID_KEY);
         sessionStorage.removeItem(PHOTO_KEY);
+        sessionStorage.removeItem(EMAIL_KEY);
+        sessionStorage.removeItem(PASSWORD_KEY);
         checkMemberAuth();
       });
 
@@ -367,6 +879,189 @@
         // Cycle every 7 seconds
         setInterval(updateBanner, 7000);
       };
+
+      // Profile details save form handler
+      const profileEditForm = document.getElementById('profileEditForm');
+      const profileSaveStatus = document.getElementById('profileSaveStatus');
+      
+      profileEditForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const saveBtn = profileEditForm.querySelector('button[type="submit"]');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+        
+        const college = document.getElementById('profileCollegeInput').value.trim();
+        const phone = document.getElementById('profilePhoneInput').value.trim();
+        const linkedin = document.getElementById('profileLinkedinInput').value.trim();
+        const bio = document.getElementById('profileBioInput').value.trim();
+        const photoInput = document.getElementById('profilePhotoInput');
+        
+        getBase64(photoInput, async (photoBase64) => {
+          const email = sessionStorage.getItem(EMAIL_KEY);
+          const currentPhoto = sessionStorage.getItem(PHOTO_KEY) || '';
+          const finalPhoto = photoBase64 || currentPhoto;
+          
+          let combinedCollege = college;
+          if (phone || linkedin || bio) {
+            combinedCollege += ` | Phone: ${phone}`;
+            combinedCollege += ` | LinkedIn: ${linkedin}`;
+            combinedCollege += ` | Bio: ${bio}`;
+          }
+          
+          try {
+            // Upsert in database
+            const { data: existing } = await supabaseClient
+              .from('members')
+              .select('id')
+              .eq('email', email)
+              .maybeSingle();
+              
+            const memberData = {
+              email: email,
+              name: sessionStorage.getItem(USERNAME_KEY),
+              college: combinedCollege,
+              tier: sessionStorage.getItem(TIER_KEY),
+              member_id: sessionStorage.getItem(ID_KEY),
+              image: finalPhoto,
+              password: sessionStorage.getItem(PASSWORD_KEY) || 'member2026'
+            };
+            
+            if (existing) {
+              const { error: updateErr } = await supabaseClient
+                .from('members')
+                .update(memberData)
+                .eq('email', email);
+              if (updateErr) throw updateErr;
+            } else {
+              const { error: insertErr } = await supabaseClient
+                .from('members')
+                .insert([memberData]);
+              if (insertErr) throw insertErr;
+            }
+            
+            // Update session storage
+            sessionStorage.setItem(COLLEGE_KEY, combinedCollege);
+            sessionStorage.setItem(PHOTO_KEY, finalPhoto);
+            
+            // Update card and forms
+            checkMemberAuth();
+            
+            profileSaveStatus.classList.remove('hidden');
+            setTimeout(() => profileSaveStatus.classList.add('hidden'), 3000);
+            
+          } catch (err) {
+            console.error("Save profile error:", err);
+            alert("Failed to save profile: " + (err.message || err));
+          } finally {
+            saveBtn.disabled = false;
+            saveBtn.textContent = 'Save Profile Details';
+          }
+        });
+      });
+
+      // Marketing member save form handler
+      const mktMemberForm = document.getElementById('mktMemberForm');
+      document.getElementById('cancelMktEditBtn').addEventListener('click', resetMktForm);
+      mktMemberForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('mktSubmitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = mktEditingId ? 'Updating...' : 'Adding...';
+        
+        const email = document.getElementById('mktMemberEmail').value.trim().toLowerCase();
+        const imgInput = document.getElementById('mktMemberImageFile');
+        
+        getBase64(imgInput, async (imgBase64) => {
+          // Unique email check (custom members from db + ALLOWED_MEMBERS)
+          let customMembers = [];
+          try {
+            const { data } = await supabaseClient.from('members').select('id, email');
+            customMembers = data || [];
+          } catch (err) {}
+          
+          const emailExists = ALLOWED_MEMBERS[email] || customMembers.some(m => m.email.toLowerCase() === email && m.id != mktEditingId);
+          if (emailExists) {
+            alert("A member with this email already exists!");
+            submitBtn.disabled = false;
+            submitBtn.textContent = mktEditingId ? 'Update Member' : 'Add Member';
+            return;
+          }
+          
+          const memberData = {
+            email: email,
+            name: document.getElementById('mktMemberName').value.trim(),
+            college: document.getElementById('mktMemberCollege').value.trim(),
+            tier: document.getElementById('mktMemberRole').value,
+            member_id: document.getElementById('mktMemberIdVal').value.trim(),
+            password: document.getElementById('mktMemberPassword').value.trim(),
+            image: imgBase64 || mktEditingImage || ''
+          };
+          
+          try {
+            if (mktEditingId) {
+              const { error } = await supabaseClient
+                .from('members')
+                .update(memberData)
+                .eq('id', mktEditingId);
+              if (error) throw error;
+              resetMktForm();
+            } else {
+              const { error } = await supabaseClient
+                .from('members')
+                .insert([memberData]);
+              if (error) throw error;
+              mktMemberForm.reset();
+            }
+            await renderMktTable();
+          } catch (err) {
+            console.error("Save marketing member error:", err);
+            alert("Failed to save marketing member: " + err.message);
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = mktEditingId ? 'Update Member' : 'Add Member';
+          }
+        });
+      });
+
+      // Download and Print ID Card button handlers
+      const downloadCardBtn = document.getElementById('downloadCardBtn');
+      const printCardBtn = document.getElementById('printCardBtn');
+
+      if (downloadCardBtn) {
+        downloadCardBtn.addEventListener('click', () => {
+          const card = document.querySelector('.member-card');
+          if (!card) return;
+          
+          downloadCardBtn.disabled = true;
+          const originalText = downloadCardBtn.innerHTML;
+          downloadCardBtn.innerHTML = '<span>⏳</span> Processing...';
+
+          html2canvas(card, {
+            useCORS: true,
+            allowTaint: true,
+            scale: 3, // High quality resolution for print
+            backgroundColor: null
+          }).then(canvas => {
+            const link = document.createElement('a');
+            const name = sessionStorage.getItem(USERNAME_KEY) || 'member';
+            link.download = `${name.toLowerCase().replace(/\s+/g, '_')}_tfc_card.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+          }).catch(err => {
+            console.error("Failed to generate image download:", err);
+            alert("Failed to download card. Please try again.");
+          }).finally(() => {
+            downloadCardBtn.disabled = false;
+            downloadCardBtn.innerHTML = originalText;
+          });
+        });
+      }
+
+      if (printCardBtn) {
+        printCardBtn.addEventListener('click', () => {
+          window.print();
+        });
+      }
 
       // Initial check & load
       checkMemberAuth();

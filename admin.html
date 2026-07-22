@@ -818,6 +818,13 @@
           tier: 'Founder',
           id: 'TFC-2026-0001',
           password: 'member2026'
+        },
+        'brahmleen1314@gmail.com': {
+          name: 'Brahmleen Kaur',
+          college: 'TFC',
+          tier: 'Marketing Head',
+          id: 'TFC-2026-MARKETING-HEAD',
+          password: 'brahmleen1314'
         }
       };
 
@@ -866,12 +873,19 @@
             ? `<img src="${member.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
             : `<span style="font-size: 1.25rem; vertical-align: middle; margin-right: 8px;">🎓</span>`;
 
+          // Gracefully parse delimited college details
+          const rawCollege = member.college || '';
+          let displayCollege = rawCollege;
+          if (rawCollege.includes(' | ')) {
+            displayCollege = rawCollege.split(' | ').join(' • ');
+          }
+
           const row = document.createElement('tr');
           row.innerHTML = `
             <td><span class="font-mono font-bold">${member.member_id || member.id}</span></td>
             <td>${photoHtml}<strong>${member.name}</strong></td>
             <td>${member.email}</td>
-            <td>${member.college}</td>
+            <td>${displayCollege}</td>
             <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
             <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
             <td>

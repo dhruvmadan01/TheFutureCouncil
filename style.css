@@ -1055,3 +1055,356 @@ textarea.form-control {
     gap: 16px;
   }
 }
+
+/* ==========================================
+   Member Portal Dashboard & Card Styles
+   ========================================== */
+.member-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.member-card {
+  width: 340px;
+  height: 520px;
+  background-color: var(--offwhite); /* Brutalist off-white background */
+  border: 3px solid var(--ink); /* Solid 3px black border */
+  border-radius: 0px; /* Sharp brutalist corners */
+  color: var(--ink);
+  font-family: Inter, "Arial Black", Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 8px 8px 0px var(--ink); /* Solid black drop shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.member-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--orange); /* Bottom orange accent bar */
+}
+
+.member-card-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: var(--charcoal); /* Window-bar charcoal background */
+  border-bottom: 3px solid var(--ink);
+  box-sizing: border-box;
+}
+
+.member-card-logo {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ink);
+  object-fit: cover;
+  background: #fff;
+}
+
+.member-card-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--offwhite); /* Offwhite header text */
+}
+
+.member-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 24px;
+  flex-grow: 1;
+  justify-content: space-between;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.member-card-photo-box {
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--ink); /* Thick black border */
+  background: #ffffff;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 3px 3px 0 var(--ink); /* Sharp brutalist shadow */
+}
+
+.member-card-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-card-details-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.member-card-details h3 {
+  margin: 0;
+  font-size: 1.40rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  font-family: Inter, "Arial Black", Arial, sans-serif;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.member-card-info-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Uniform spacing */
+  text-align: left;
+  background: #ffffff; /* White background box */
+  border: 3px solid var(--ink); /* Brutalist border */
+  padding: 12px 14px 14px; /* Added extra bottom padding to prevent border clipping */
+  box-shadow: 3px 3px 0 var(--ink); /* Sharp shadow */
+}
+
+.member-card-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-card-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange); /* Brand Orange labels */
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.member-card-value {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: visible; /* Prevent vertical descender clipping */
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.member-card-value.font-mono {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  color: var(--ink);
+  line-height: 1.3;
+  padding-bottom: 1px; /* Extra spacing for descenders */
+}
+
+.member-card-extra-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.member-card-bio-val {
+  white-space: normal !important;
+  overflow: hidden;
+  font-size: 0.72rem;
+  color: var(--orange) !important;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+}
+
+.member-card-footer-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 3px solid var(--ink);
+  padding-top: 14px;
+}
+
+.member-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 11px;
+  border: 2px solid var(--ink);
+  background: var(--offwhite);
+  color: var(--ink);
+}
+
+.pulsing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981; /* TFC Brand green dot */
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10b981;
+  display: inline-block;
+  animation: pulseScale 2s infinite ease-in-out;
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+    box-shadow: 0 0 3px #10b981;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 8px #10b981;
+  }
+}
+
+.member-card-qr-box {
+  width: 54px;
+  height: 54px;
+  border: 2px solid var(--ink);
+  background: #ffffff;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.member-card-qr-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Print Specific Rules */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .member-card, .member-card * {
+    visibility: visible;
+  }
+  .member-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    box-shadow: none !important;
+    background-color: #f9f9f9 !important;
+    color: #000000 !important;
+    border: 3px solid #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .member-card-header-bar {
+    background-color: #2d2d2d !important;
+  }
+  .member-card-info-grid {
+    background-color: #ffffff !important;
+  }
+  .member-status-badge {
+    background-color: #f9f9f9 !important;
+    color: #000000 !important;
+  }
+}
+
+/* Dashboard Forms & Panels */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.dashboard-panel {
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 24px;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.dashboard-panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 8px;
+}
+
+/* Card scaling transforms for small mobile screens to keep ratio fixed and prevent overflow */
+@media (max-width: 380px) {
+  .member-card {
+    transform: scale(0.9);
+    transform-origin: center top;
+    margin-bottom: -50px; /* Offset spacing collapse from scaling */
+  }
+  .member-card-container {
+    height: 475px; /* Adjust wrapper height to scaled size */
+  }
+}
+
+@media (max-width: 340px) {
+  .member-card {
+    transform: scale(0.82);
+    transform-origin: center top;
+    margin-bottom: -95px;
+  }
+  .member-card-container {
+    height: 430px;
+  }
+}
+
+/* Page spacing adjustments for small viewports to maximize workspace content area */
+@media (max-width: 480px) {
+  body {
+    padding: 8px !important;
+  }
+  .workspace {
+    padding: 16px 12px 14px !important;
+  }
+  .dashboard-panel {
+    padding: 16px 12px !important;
+  }
+  .admin-table-panel {
+    padding: 16px 12px !important;
+  }
+}
