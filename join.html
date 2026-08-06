@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Ecosystem | The Future Council</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background: #000000;
+      color: #f7f3ee;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    ::selection {
+      background: rgba(255, 158, 89, 0.2);
+      color: #fff;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desktop-window">
+    <header class="window-bar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">The Future Council</div>
+    </header>
+    <nav class="window-tabs">
+      <a href="index.html" class="window-tab">Home Hub</a>
+      <a href="partners.html" class="window-tab">Our Partners</a>
+      <a href="startups.html" class="window-tab">Our Startups</a>
+      <a href="membership.html" class="window-tab">Member Portal</a>
+      <a href="join.html" class="window-tab active">Join Council</a>
+    </nav>
+
+    <section class="workspace">
+      <!-- Nav Header -->
+      <div class="partners-nav-header">
+        <a href="index.html" class="back-link-btn">
+          <span class="icon">←</span>
+          <span>Back to Home Hub</span>
+        </a>
+        <div class="brand-row mini-brand">
+          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
+          <span class="mini-kicker">Join Ecosystem</span>
+        </div>
+      </div>
+
+      <!-- Main Layout Grid -->
+      <div class="hero-grid">
+        <!-- Left Column: Copy & Checklist (Flyer Inspired) -->
+        <div class="hero-copy">
+          <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 0.95; margin-bottom: 1.5rem;">
+            WANT TO BECOME A MILLIONAIRE IN COLLEGE?
+          </h1>
+          <p class="hero-text" style="font-size: 1.15rem; color: var(--orange); font-weight: 800; text-transform: uppercase; margin-bottom: 1.25rem;">
+            Don't just dream about building a company. Build one. Or join one.
+          </p>
+          <p class="hero-text" style="margin-bottom: 1.5rem;">
+            The Future Council is a pan-Delhi University student-run ecosystem for founders, operators, designers, developers, and marketers. Fill the registration form to pre-approve your membership, generate your custom Member ID card, and access our network.
+          </p>
+
+          <!-- Checklist -->
+          <div class="panel" style="background: #fff7eb; padding: 24px; margin-top: 1.5rem; color: var(--ink);">
+            <h2 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 1rem; border-bottom: 2px solid var(--ink); padding-bottom: 8px;">What You Access When You Join</h2>
+            <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; text-align: left;">
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Find a co-founder and build your startup team
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect with developers, designers, and marketers across DU
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Access exclusive startup playbooks and builder playbooks
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Build with ambitious builders across 90+ Delhi University colleges
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect directly with corporate sponsors, mentors, and investors
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Land startup internships and operations roles
+              </li>
+              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Participate in pitch clinics, cohorts, and IRL founder mixers
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column: Signup Form & Success View -->
+        <div class="hero-side" style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Form Panel -->
+          <div class="admin-form-panel" id="signupFormPanel" style="width: 100%; margin: 0; box-sizing: border-box; color: var(--ink);">
+            <h2 style="border-bottom: 3px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Join The Council</h2>
+            
+            <div id="signupError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
+              Error occurred.
+            </div>
+            
+            <form id="signupForm">
+              <div class="form-group">
+                <label for="studentName">Full Name</label>
+                <input type="text" id="studentName" class="form-control" placeholder="e.g. Kartik Goel" required />
+              </div>
+              <div class="form-group">
+                <label for="studentCollege">College & Year</label>
+                <input type="text" id="studentCollege" class="form-control" placeholder="e.g. SSCBS, 2nd Year" required />
+              </div>
+              <div class="form-group">
+                <label for="studentEmail">Student Email</label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. kartik@sscbs.du.ac.in" required />
+              </div>
+              <div class="form-group">
+                <label for="studentPhone">Phone Number</label>
+                <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 93102 59143" required />
+              </div>
+              <div class="form-group">
+                <label for="studentPassword">Choose Password</label>
+                <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
+              </div>
+              
+              <button type="submit" class="admin-submit-btn" style="margin-top: 10px;">Apply & Get Badge</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 1.25rem; padding-top: 1rem; border-top: 2px dashed var(--ink);">
+              <p style="font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">Already a member?</p>
+              <a href="membership.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #000; border: 2px solid var(--ink); color: #ff9e59; font-size: 0.8rem; padding: 6px 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 100ms ease, box-shadow 100ms ease;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='2px 2px 0 var(--ink)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">Log in to Portal</a>
+            </div>
+          </div>
+
+          <!-- Success View (Hidden by default) -->
+          <div class="admin-form-panel hidden" id="successPanel" style="width: 100%; margin: 0; box-sizing: border-box; text-align: center; color: var(--ink);">
+            <h2 style="color: #10b981; border-color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Registration Successful!</h2>
+            <p style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.45;">
+              Congratulations! Your member profile is active. Here is your generated ID Card:
+            </p>
+
+            <!-- ID Card Container -->
+            <div class="member-card-container">
+              <div class="member-card" style="margin: 0 auto; box-shadow: 4px 4px 0 var(--ink);">
+                <!-- Header -->
+                <div class="member-card-header-bar">
+                  <img src="TFC.png" alt="TFC Logo" class="member-card-logo" />
+                  <span class="member-card-title">THE FUTURE COUNCIL</span>
+                </div>
+                
+                <!-- Body -->
+                <div class="member-card-body">
+                  <!-- Photo -->
+                  <div class="member-card-photo-box" style="font-size: 3rem; background: #fff;">🎓</div>
+                  
+                  <!-- Details -->
+                  <div class="member-card-details-wrap">
+                    <h3 id="cardMemberName" style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; margin: 0;">Kartik Goel</h3>
+                    
+                    <!-- Info Grid -->
+                    <div class="member-card-info-grid" style="padding: 10px; margin-top: 8px;">
+                      <div class="member-card-field">
+                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">TFC TIER</span>
+                        <span class="member-card-value" style="font-size: 0.72rem; line-height: 1.3;">Student</span>
+                      </div>
+                      <div class="member-card-field">
+                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">COLLEGE</span>
+                        <span class="member-card-value" id="cardMemberCollege" style="font-size: 0.72rem; line-height: 1.3;">SSCBS</span>
+                      </div>
+                      <div class="member-card-field">
+                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">ID NUMBER</span>
+                        <span class="member-card-value font-mono" id="cardMemberId" style="font-size: 0.72rem; line-height: 1.3;">TFC-2026-0812</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Footer -->
+                  <div class="member-card-footer-row" style="padding-top: 10px;">
+                    <span class="member-status-badge" style="padding: 3px 8px; font-size: 0.6rem; display: flex; align-items: center; gap: 4px;">
+                      <span class="pulsing-dot"></span>
+                      <span>Active Member</span>
+                    </span>
+                    <div class="member-card-qr-box" style="width: 44px; height: 44px; padding: 2px;">
+                      <img id="cardMemberQr" src="" alt="Verification QR" style="width: 100%; height: 100%; object-fit: contain;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 1.5rem; line-height: 1.45;">
+              Log in to the portal to add your profile picture, LinkedIn, biography, or print/download your digital ID badge.
+            </p>
+
+            <a href="membership.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center;">Enter Member Portal</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand-side">
+          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
+          <a href="index.html" class="footer-link">Back to Hub</a>
+        </div>
+        <div class="footer-meta">
+          <div class="apply-now">Join Our Ecosystem</div>
+          <div class="url-text">thefuturecouncil.in</div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Elements
+      const signupForm = document.getElementById('signupForm');
+      const signupFormPanel = document.getElementById('signupFormPanel');
+      const successPanel = document.getElementById('successPanel');
+      const signupError = document.getElementById('signupError');
+
+      // Initialize Supabase Client
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = signupForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering...';
+        signupError.classList.add('hidden');
+
+        const name = document.getElementById('studentName').value.trim();
+        const college = document.getElementById('studentCollege').value.trim();
+        const email = document.getElementById('studentEmail').value.trim().toLowerCase();
+        const phone = document.getElementById('studentPhone').value.trim();
+        const password = document.getElementById('studentPassword').value;
+
+        // Generate a random 4-digit number
+        const randomIdNum = Math.floor(1000 + Math.random() * 9000);
+        const memberId = `TFC-2026-${randomIdNum}`;
+
+        // Combine college and phone in backwards-compatible layout for profile parser
+        const combinedCollege = `${college} | Phone: ${phone}`;
+
+        try {
+          // Check if email exists in database
+          const { data: dbMember, error: queryError } = await supabaseClient
+            .from('members')
+            .select('id')
+            .eq('email', email)
+            .maybeSingle();
+
+          if (queryError) {
+            console.error("Database query warning:", queryError);
+          }
+
+          if (dbMember) {
+            signupError.textContent = "A member with this email already exists! Try logging in or contact support.";
+            signupError.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Apply & Get Badge';
+            return;
+          }
+
+          // Insert registration into database
+          const memberData = {
+            email: email,
+            name: name,
+            college: combinedCollege,
+            tier: 'Student',
+            member_id: memberId,
+            password: password,
+            image: '' // empty default image profile
+          };
+
+          const { error: insertError } = await supabaseClient
+            .from('members')
+            .insert([memberData]);
+
+          if (insertError) throw insertError;
+
+          // Populate and show success card preview
+          document.getElementById('cardMemberName').textContent = name;
+          document.getElementById('cardMemberCollege').textContent = college;
+          document.getElementById('cardMemberId').textContent = memberId;
+          document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(memberId)}`;
+
+          signupFormPanel.classList.add('hidden');
+          successPanel.classList.remove('hidden');
+
+          // Auto-login into session storage so they can easily enter the Member Portal
+          const AUTH_KEY = 'tfc_member_auth';
+          const USERNAME_KEY = 'tfc_member_name';
+          const COLLEGE_KEY = 'tfc_member_college';
+          const TIER_KEY = 'tfc_member_tier';
+          const ID_KEY = 'tfc_member_id';
+          const PHOTO_KEY = 'tfc_member_photo';
+          const EMAIL_KEY = 'tfc_member_email';
+          const PASSWORD_KEY = 'tfc_member_password';
+
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          sessionStorage.setItem(USERNAME_KEY, name);
+          sessionStorage.setItem(COLLEGE_KEY, combinedCollege);
+          sessionStorage.setItem(TIER_KEY, 'Student');
+          sessionStorage.setItem(ID_KEY, memberId);
+          sessionStorage.setItem(PHOTO_KEY, '');
+          sessionStorage.setItem(EMAIL_KEY, email);
+          sessionStorage.setItem(PASSWORD_KEY, password);
+
+        } catch (err) {
+          console.error("Signup submission failed:", err);
+          signupError.textContent = "Registration failed: " + (err.message || "Please check your network and try again.");
+          signupError.classList.remove('hidden');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Apply & Get Badge';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
