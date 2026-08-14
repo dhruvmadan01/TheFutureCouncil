@@ -1017,8 +1017,6 @@
       };
 
       const deleteMember = async (id) => {
-
-      const deleteMember = async (id) => {
         try {
           const { error } = await supabaseClient.from('members').delete().eq('id', id);
           if (error) throw error;
