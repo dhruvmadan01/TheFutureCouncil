@@ -262,6 +262,33 @@
         <!-- Manage Members Table -->
         <div class="admin-table-panel">
           <h2>Ecosystem Members List</h2>
+          <!-- Filter/Sort Toolbar -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 bg-[#fff7eb] p-3 border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] text-black">
+            <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+              <!-- Search Input -->
+              <div class="flex items-center gap-2 w-full sm:w-auto">
+                <span class="text-xs font-black uppercase tracking-wider">Search:</span>
+                <input type="text" id="memberSearchInput" placeholder="Name, email, college..." class="bg-white border-2 border-black px-2 py-1 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-amber-500 w-full sm:w-48 text-black font-sans" />
+              </div>
+              <!-- Sort Select -->
+              <div class="flex items-center gap-2 w-full sm:w-auto">
+                <span class="text-xs font-black uppercase tracking-wider">Sort By:</span>
+                <select id="memberSortSelect" class="bg-white border-2 border-black font-extrabold text-xs uppercase px-2 py-1 focus:outline-none cursor-pointer hover:bg-amber-50 transition-colors text-black w-full sm:w-auto font-sans">
+                  <option value="reg-desc">Registration (Newest)</option>
+                  <option value="reg-asc">Registration (Oldest)</option>
+                  <option value="name-asc">Name (A-Z)</option>
+                  <option value="name-desc">Name (Z-A)</option>
+                  <option value="college-asc">College (A-Z)</option>
+                  <option value="college-desc">College (Z-A)</option>
+                  <option value="tier-asc">Member Tier (A-Z)</option>
+                </select>
+              </div>
+            </div>
+            <!-- Member Count -->
+            <div class="text-xs font-extrabold uppercase bg-black text-[#f7f3ee] px-2 py-1 self-stretch sm:self-auto text-center font-sans">
+              Total: <span id="memberCountVal">0</span> members
+            </div>
+          </div>
           <div class="admin-table-wrapper">
             <table class="admin-table" id="membersTable">
               <thead>
@@ -829,75 +856,139 @@
         }
       };
 
-      const renderMembersTable = async () => {
-        membersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">Loading...</td></tr>';
-        
-        // Show System Members first
+      let cachedCustomMembers = [];
+
+      const sortMembers = (members, criterion) => {
+        const sorted = [...members];
+        if (criterion === 'reg-desc') {
+          sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        } else if (criterion === 'reg-asc') {
+          sorted.sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+        } else if (criterion === 'name-asc') {
+          sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+        } else if (criterion === 'name-desc') {
+          sorted.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+        } else if (criterion === 'college-asc') {
+          sorted.sort((a, b) => (a.college || '').localeCompare(b.college || ''));
+        } else if (criterion === 'college-desc') {
+          sorted.sort((a, b) => (b.college || '').localeCompare(a.college || ''));
+        } else if (criterion === 'tier-asc') {
+          sorted.sort((a, b) => (a.tier || '').localeCompare(b.tier || ''));
+        }
+        return sorted;
+      };
+
+      const renderMembersTable = async (fetchFromDb = true) => {
+        const membersTableBody = document.querySelector('#membersTable tbody');
+        if (!membersTableBody) return;
+
+        if (fetchFromDb) {
+          membersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">Loading...</td></tr>';
+          try {
+            const { data, error } = await supabaseClient
+              .from('members')
+              .select('*');
+            if (error) throw error;
+            cachedCustomMembers = data || [];
+          } catch (e) {
+            console.error("Error loading members from Supabase:", e);
+            membersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-red-500 py-6 font-semibold">Failed to load members from database. Please ensure the "members" table is created in Supabase.</td></tr>';
+            return;
+          }
+        }
+
+        // Build system members list
+        const systemList = Object.entries(SYSTEM_MEMBERS).map(([email, member]) => ({
+          id: member.id,
+          member_id: member.id,
+          name: member.name,
+          email: email,
+          college: member.college,
+          tier: member.tier,
+          password: member.password,
+          image: '',
+          isSystem: true,
+          created_at: '2026-08-12T00:00:00.000Z'
+        }));
+
+        const customListWithFlag = cachedCustomMembers.map(m => ({ ...m, isSystem: false }));
+        let allMembers = [...systemList, ...customListWithFlag];
+
+        // Apply Search Filter
+        const searchInput = document.getElementById('memberSearchInput');
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        if (query) {
+          allMembers = allMembers.filter(m => 
+            (m.name || '').toLowerCase().includes(query) ||
+            (m.email || '').toLowerCase().includes(query) ||
+            (m.college || '').toLowerCase().includes(query) ||
+            (m.member_id || '').toLowerCase().includes(query) ||
+            (m.tier || '').toLowerCase().includes(query)
+          );
+        }
+
+        // Apply Sorting
+        const sortSelect = document.getElementById('memberSortSelect');
+        const sortVal = sortSelect ? sortSelect.value : 'reg-desc';
+        allMembers = sortMembers(allMembers, sortVal);
+
+        // Update count badge
+        const countVal = document.getElementById('memberCountVal');
+        if (countVal) {
+          countVal.textContent = allMembers.length;
+        }
+
         membersTableBody.innerHTML = '';
-        Object.entries(SYSTEM_MEMBERS).forEach(([email, member]) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><span class="font-mono font-bold">${member.id}</span></td>
-            <td><strong>${member.name}</strong></td>
-            <td>${email}</td>
-            <td>${member.college}</td>
-            <td><span class="uppercase font-extrabold text-xs text-orange-500">${member.tier}</span></td>
-            <td><span class="font-mono text-sm">${member.password}</span></td>
-            <td>
-              <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">System</span>
-            </td>
-          `;
-          membersTableBody.appendChild(row);
-        });
-
-        // Show Custom Members from Supabase
-        let customMembers = [];
-        try {
-          const { data, error } = await supabaseClient
-            .from('members')
-            .select('*')
-            .order('name', { ascending: true });
-
-          if (error) throw error;
-          customMembers = data || [];
-        } catch (e) {
-          console.error("Error loading members from Supabase:", e);
-          const errorMsg = document.createElement('tr');
-          errorMsg.innerHTML = '<td colspan="7" class="text-center text-red-500 py-6 font-semibold">Failed to load members from database. Please ensure the "members" table is created in Supabase.</td>';
-          membersTableBody.appendChild(errorMsg);
+        if (allMembers.length === 0) {
+          membersTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-6">No members found matching the filters.</td></tr>';
           return;
         }
 
-        customMembers.forEach((member) => {
-          const isImage = member.image && member.image.startsWith('data:image/');
-          const photoHtml = isImage 
-            ? `<img src="${member.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
-            : `<span style="font-size: 1.25rem; vertical-align: middle; margin-right: 8px;">🎓</span>`;
+        allMembers.forEach((member) => {
+          if (member.isSystem) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><span class="font-mono font-bold">${member.id}</span></td>
+              <td><strong>${member.name}</strong></td>
+              <td>${member.email}</td>
+              <td>${member.college}</td>
+              <td><span class="uppercase font-extrabold text-xs text-orange-500">${member.tier}</span></td>
+              <td><span class="font-mono text-sm">${member.password}</span></td>
+              <td>
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">System</span>
+              </td>
+            `;
+            membersTableBody.appendChild(row);
+          } else {
+            const isImage = member.image && member.image.startsWith('data:image/');
+            const photoHtml = isImage 
+              ? `<img src="${member.image}" style="width: 32px; height: 32px; object-fit: cover; border: 2px solid var(--ink); display: inline-block; vertical-align: middle; margin-right: 8px;" />` 
+              : `<span style="font-size: 1.25rem; vertical-align: middle; margin-right: 8px;">🎓</span>`;
 
-          // Gracefully parse delimited college details
-          const rawCollege = member.college || '';
-          let displayCollege = rawCollege;
-          if (rawCollege.includes(' | ')) {
-            displayCollege = rawCollege.split(' | ').join(' • ');
+            const rawCollege = member.college || '';
+            let displayCollege = rawCollege;
+            if (rawCollege.includes(' | ')) {
+              displayCollege = rawCollege.split(' | ').join(' • ');
+            }
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><span class="font-mono font-bold">${member.member_id || member.id}</span></td>
+              <td>${photoHtml}<strong>${member.name}</strong></td>
+              <td>${member.email}</td>
+              <td>${displayCollege}</td>
+              <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
+              <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
+              <td>
+                <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
+                <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
+              </td>
+            `;
+            membersTableBody.appendChild(row);
           }
-
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><span class="font-mono font-bold">${member.member_id || member.id}</span></td>
-            <td>${photoHtml}<strong>${member.name}</strong></td>
-            <td>${member.email}</td>
-            <td>${displayCollege}</td>
-            <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
-            <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
-            <td>
-              <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
-              <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
-            </td>
-          `;
-          membersTableBody.appendChild(row);
         });
 
-        // Attach delete events for members
+        // Re-attach delete events
         membersTableBody.querySelectorAll('.delete-member-btn').forEach(btn => {
           btn.addEventListener('click', async (e) => {
             const id = e.target.getAttribute('data-id');
@@ -907,14 +998,12 @@
           });
         });
 
-        // Attach edit events for members
+        // Re-attach edit events
         membersTableBody.querySelectorAll('.member-edit-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
             try {
               const id = e.currentTarget.getAttribute('data-id');
-              console.log("Edit member clicked, id:", id);
-              const member = customMembers.find(m => String(m.id) === String(id));
-              console.log("Found member to edit:", member);
+              const member = cachedCustomMembers.find(m => String(m.id) === String(id));
               if (member) {
                 startEditMember(member);
               } else {
@@ -926,6 +1015,8 @@
           });
         });
       };
+
+      const deleteMember = async (id) => {
 
       const deleteMember = async (id) => {
         try {
@@ -1010,6 +1101,20 @@
 
       // Initial check
       checkAuth();
+
+      // Bind search and sort event listeners
+      const searchInput = document.getElementById('memberSearchInput');
+      const sortSelect = document.getElementById('memberSortSelect');
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          renderMembersTable(false);
+        });
+      }
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          renderMembersTable(false);
+        });
+      }
     });
   </script>
 </body>
