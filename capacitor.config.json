@@ -1,0 +1,9 @@
+{
+  "appId": "in.thefuturecouncil.app",
+  "appName": "The Future Council",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true
+  }
+}

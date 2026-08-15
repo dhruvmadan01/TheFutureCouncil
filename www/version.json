@@ -1,0 +1,14 @@
+{
+  "version": "1.1.0",
+  "build": 102,
+  "releaseDate": "2026-08-15",
+  "minSupportedVersion": "1.0.0",
+  "title": "Council OS v1.1.0",
+  "features": [
+    "Automatic Over-The-Air (OTA) live sync",
+    "Native phone notification bar & lock screen push",
+    "Dynamic 45-second campus activity pulse",
+    "Full-featured offline cache resilience"
+  ],
+  "apkUrl": "https://thefuturecouncil.in/TheFutureCouncil.apk"
+}

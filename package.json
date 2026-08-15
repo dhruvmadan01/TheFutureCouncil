@@ -1,0 +1,15 @@
+{
+  "name": "the-future-council-app",
+  "version": "1.0.0",
+  "description": "The Future Council Android Application",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build-mobile.js"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.1",
+    "@capacitor/cli": "^7.0.1",
+    "@capacitor/core": "^7.0.1",
+    "@capacitor/local-notifications": "^7.0.7"
+  }
+}
