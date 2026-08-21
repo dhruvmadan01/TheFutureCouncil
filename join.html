@@ -147,15 +147,6 @@
           <div class="admin-form-panel hidden" id="successPanel" style="width: 100%; margin: 0; box-sizing: border-box; text-align: center; color: var(--ink);">
             <h2 style="color: #10b981; border-color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Registration Successful!</h2>
             
-            <!-- Google Form Fallback Alert -->
-            <div style="background: #fff7eb; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 16px; margin-bottom: 24px; text-align: left;">
-              <p style="font-size: 0.85rem; font-weight: 800; color: var(--orange); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em;">⚡ Next Step: Membership Verification</p>
-              <p style="font-size: 0.88rem; font-weight: 600; line-height: 1.45; margin-bottom: 12px; color: var(--ink);">
-                We are opening the detailed TFC membership application form in a new tab. If it did not open automatically, please click the button below:
-              </p>
-              <a href="https://forms.gle/Wtq27jYEtqJEJrhn9" target="_blank" rel="noreferrer noopener" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; font-size: 0.88rem; padding: 10px 14px;">Fill Membership Form ↗</a>
-            </div>
-
             <p style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.45;">
               Congratulations! Your member profile is active. Here is your generated ID Card:
             </p>
@@ -310,9 +301,6 @@
 
           signupFormPanel.classList.add('hidden');
           successPanel.classList.remove('hidden');
-
-          // Open Google Form in a new tab
-          window.open('https://forms.gle/Wtq27jYEtqJEJrhn9', '_blank');
 
           // Auto-login into session storage so they can easily enter the Member Portal
           const AUTH_KEY = 'tfc_member_auth';

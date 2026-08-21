@@ -34,6 +34,11 @@
           🔊
         </button>
 
+        <!-- Pitch Clinic Button -->
+        <button class="action-icon-btn" onclick="switchView('clinic')" title="AI Pitch Clinic">
+          ⚡
+        </button>
+
         <!-- Notification Bell with Unread Badge -->
         <button class="action-icon-btn" onclick="openModal('notificationsDrawer')" title="Notifications">
           🔔
@@ -47,22 +52,7 @@
       </div>
     </header>
 
-    <!-- 2. LIVE MARQUEE TICKER BAR (NON-COLLIDING) -->
-    <div class="live-ticker-strip">
-      <div class="ticker-label-badge">
-        <span>🔥</span>
-        <span>LIVE SIGNALS</span>
-      </div>
-      <div class="ticker-marquee-track">
-        <div class="ticker-scroll-content">
-          🚀 North Campus Founder Mixer Aug 22 @ Hudson Lane &nbsp;•&nbsp; 
-          ⚡ ₹5k AWS Credits in Founder Vault &nbsp;•&nbsp; 
-          🤝 140+ student builders active across SSCBS, SRCC, FoT & Hansraj &nbsp;•&nbsp; 
-          🔥 AI Pitch Clinic is live for instant deck reviews &nbsp;•&nbsp; 
-          🚀 North Campus Founder Mixer Aug 22 @ Hudson Lane &nbsp;•&nbsp; 
-        </div>
-      </div>
-    </div>
+
 
     <!-- 3. ECOSYSTEM QUICK-NAV (SWIPEABLE CHIPS) -->
     <div class="quick-nav-container">
@@ -71,11 +61,6 @@
           <span>🤝</span>
           <span>Radar</span>
           <span class="chip-badge">14+</span>
-        </button>
-        <button class="nav-chip" data-view="clinic" onclick="switchView('clinic')">
-          <span>⚡</span>
-          <span>Pitch Clinic</span>
-          <span class="chip-badge">AI</span>
         </button>
         <button class="nav-chip" data-view="events" onclick="switchView('events')">
           <span>🎟️</span>
@@ -86,10 +71,6 @@
           <span>🧰</span>
           <span>Founder Vault</span>
           <span class="chip-badge">₹15L+</span>
-        </button>
-        <button class="nav-chip" data-view="feed" onclick="switchView('feed')">
-          <span>📢</span>
-          <span>Signals</span>
         </button>
         <button class="nav-chip" data-view="pass" onclick="switchView('pass')">
           <span>🪪</span>
@@ -184,37 +165,12 @@
 
               <div class="neo-form-group">
                 <label class="neo-form-label" for="regCollege">Delhi University College & Batch</label>
-                <input type="text" id="regCollege" list="duCollegesList" class="neo-form-input" placeholder="e.g. SSCBS • Batch 2026 or FoT DU • 2027" required />
-                <datalist id="duCollegesList">
-                  <option value="Shaheed Sukhdev College of Business Studies (SSCBS) • 2026">
-                  <option value="Faculty of Technology (FoT DU) • 2027">
-                  <option value="Faculty of Technology (FoT DU) • 2028">
-                  <option value="Faculty of Technology (FoT DU) • 2029">
-                  <option value="Shri Ram College of Commerce (SRCC) • 2026">
-                  <option value="Hansraj College • 2026">
-                  <option value="Hindu College • 2026">
-                  <option value="St. Stephen's College • 2026">
-                  <option value="Lady Shri Ram College (LSR) • 2026">
-                  <option value="Miranda House • 2026">
-                  <option value="Kirori Mal College (KMC) • 2026">
-                  <option value="Sri Venkateswara College (Venky) • 2026">
-                  <option value="Ramjas College • 2026">
-                  <option value="SGTB Khalsa College • 2026">
-                  <option value="Gargi College • 2026">
-                  <option value="Dyal Singh College • 2026">
-                  <option value="Keshav Mahavidyalaya • 2026">
-                  <option value="Deen Dayal Upadhyaya College (DDUC) • 2026">
-                </datalist>
+                <input type="text" id="regCollege" class="neo-form-input" placeholder="e.g. SSCBS • Batch 2026 or FoT DU • 2027" required />
               </div>
 
               <div class="neo-form-group">
                 <label class="neo-form-label" for="regSkills">Top Skills / Stack</label>
-                <input type="text" id="regSkills" class="neo-form-input" placeholder="e.g. Next.js, PyTorch, Figma, Growth" required />
-              </div>
-
-              <div class="neo-form-group">
-                <label class="neo-form-label" for="regLookingFor">What are you looking for?</label>
-                <input type="text" id="regLookingFor" class="neo-form-input" placeholder="e.g. Co-founder for B2B SaaS, Early users" required />
+                <input type="text" id="regSkills" class="neo-form-input" placeholder="e.g. Marketing, Tech, Operations, Design, Growth" required />
               </div>
 
               <div class="neo-form-group">
@@ -249,6 +205,34 @@
 
       <!-- SCREEN 1: HUB / OVERVIEW -->
       <section id="view-hub" class="screen-view">
+        
+        <!-- Campus Signals Section (on top of Hub) -->
+        <div class="section-header-block" style="margin-top: 10px;">
+          <div>
+            <h2 class="section-title">📢 Campus Signals</h2>
+            <p class="section-subtitle">Real-time founder bulletin & wins</p>
+          </div>
+        </div>
+
+        <!-- Compose Box -->
+        <div class="builder-card" style="margin-bottom:14px;">
+          <form id="newPostForm" onsubmit="createFeedPost(event)">
+            <textarea id="newPostContent" class="neo-form-textarea" rows="2" placeholder="Broadcast a signal (hiring, win, MVP launch)..." required></textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+              <select id="newPostCategory" class="neo-form-select" style="width:auto; padding:6px 10px; font-size:0.75rem;">
+                <option value="LAUNCH">🚀 Launch / MVP</option>
+                <option value="HIRING">🤝 Hiring / Co-founder</option>
+                <option value="QUERY">❓ Founder Query</option>
+                <option value="WIN">🏆 Milestone / Win</option>
+              </select>
+              <button type="submit" class="neo-btn sm">Broadcast 📢</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="feedList" class="builder-feed" style="margin-bottom: 20px;">
+          <!-- Rendered dynamically -->
+        </div>
         <!-- Ecosystem Pulse Stats Card -->
         <div class="ecosystem-pulse-card">
           <div class="pulse-header">
@@ -280,15 +264,15 @@
         <div class="builder-card" style="margin-bottom:16px; background:linear-gradient(135deg, #fff, #FFF7EB);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span class="role-tag-pill tag-growth">🚀 Featured Venture</span>
-            <span style="font-size:0.7rem; font-family:var(--font-mono); font-weight:800; color:#888;">DU BATCH 2026</span>
+            <span style="font-size:0.7rem; font-family:var(--font-mono); font-weight:800; color:#888;">GET FEATURED</span>
           </div>
-          <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:900;">DormCart</h3>
+          <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:900;">Spotlight Your Venture</h3>
           <p style="font-size:0.8rem; color:#444; margin:4px 0 10px; line-height:1.4;">
-            10-minute midnight essentials and hostel snacks delivery network for Delhi University campuses.
+            Are you building a startup at Delhi University? Get featured here to connect with student co-founders, corporate partners, and early users.
           </p>
           <div style="display:flex; gap:8px;">
-            <button class="neo-btn sm" onclick="switchView('radar')">Find Co-Founders →</button>
-            <button class="neo-btn sm alt" onclick="switchView('clinic')">Roast Pitch ⚡</button>
+            <button class="neo-btn sm" onclick="openModal('postTalentModal')">List Yourself 🚀</button>
+            <button class="neo-btn sm alt" onclick="showToast('Startup feature submissions will open soon!')">Apply for Feature ↗</button>
           </div>
         </div>
 
@@ -313,10 +297,10 @@
 
         <!-- Quick Access Shortcuts Grid -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;">
-          <div class="builder-card" style="padding:12px; cursor:pointer;" onclick="switchView('events')">
-            <span style="font-size:1.5rem;">🎟️</span>
-            <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; margin-top:4px;">Next Mixer</h4>
-            <p style="font-size:0.7rem; color:#666; font-weight:700;">Aug 22 • Hudson Lane</p>
+          <div class="builder-card" style="padding:12px; cursor:pointer;" onclick="switchView('pass')">
+            <span style="font-size:1.5rem;">🪪</span>
+            <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; margin-top:4px;">Digital Pass</h4>
+            <p style="font-size:0.7rem; color:#666; font-weight:700;">View Council Pass</p>
           </div>
           <div class="builder-card" style="padding:12px; cursor:pointer;" onclick="switchView('vault')">
             <span style="font-size:1.5rem;">☁️</span>
@@ -456,35 +440,6 @@
         </div>
       </section>
 
-      <!-- SCREEN 6: SIGNALS FEED -->
-      <section id="view-feed" class="screen-view">
-        <div class="section-header-block">
-          <div>
-            <h2 class="section-title">📢 Campus Signals</h2>
-            <p class="section-subtitle">Real-time founder bulletin & wins</p>
-          </div>
-        </div>
-
-        <!-- Compose Box -->
-        <div class="builder-card" style="margin-bottom:14px;">
-          <form onsubmit="submitNewPost(event)">
-            <textarea id="newPostContent" class="neo-form-textarea" rows="2" placeholder="Broadcast a signal (hiring, win, MVP launch)..." required></textarea>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-              <select id="newPostCategory" class="neo-form-select" style="width:auto; padding:6px 10px; font-size:0.75rem;">
-                <option value="LAUNCH">🚀 Launch / MVP</option>
-                <option value="HIRING">🤝 Hiring / Co-founder</option>
-                <option value="QUERY">❓ Founder Query</option>
-                <option value="WIN">🏆 Milestone / Win</option>
-              </select>
-              <button type="submit" class="neo-btn sm">Broadcast 📢</button>
-            </div>
-          </form>
-        </div>
-
-        <div id="feedPostsList">
-          <!-- Rendered dynamically -->
-        </div>
-      </section>
 
       <!-- SCREEN 7: DIGITAL PASS & PROFILE -->
       <section id="view-pass" class="screen-view">
@@ -492,6 +447,21 @@
           <div>
             <h2 class="section-title">🪪 Digital Member Pass</h2>
             <p class="section-subtitle">Official verified ecosystem credentials</p>
+          </div>
+        </div>
+
+        <!-- Verification Warning Banner -->
+        <div id="passVerificationBanner" class="builder-card" style="background:#fff7eb; border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink); padding:16px; margin-bottom:24px; display:none;">
+          <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; color:var(--orange); text-transform:uppercase; margin-bottom:6px; margin-top:0;">⚠️ Verification Action Required</h4>
+          <p style="font-size:0.8rem; line-height:1.4; color:var(--ink); margin-bottom:12px;">
+            Your account is currently <strong>unverified</strong>. Please upload a photo of your College ID Card to activate your digital pass and unlock all ecosystem benefits.
+          </p>
+          <div id="passVerificationUploadArea">
+            <input type="file" id="collegeIdUploadInput" class="neo-form-input" accept="image/*" style="margin-bottom:10px;" onchange="handleCollegeIdUpload(this)" />
+            <p style="font-size:0.7rem; color:#666; font-weight:600; margin:0;">Supported formats: JPG, PNG. Max size 2MB.</p>
+          </div>
+          <div id="passVerificationPendingArea" style="display:none; font-size:0.8rem; font-weight:800; color:#d97706; padding:4px 0;">
+            ⏳ College ID uploaded. Awaiting admin approval.
           </div>
         </div>
 
@@ -630,9 +600,9 @@
         <span class="dock-icon">🤝</span>
         <span class="dock-label">Radar</span>
       </button>
-      <button class="dock-item" data-tab="clinic" onclick="switchView('clinic')">
-        <span class="dock-icon">⚡</span>
-        <span class="dock-label">Pitch AI</span>
+      <button class="dock-item" data-tab="events" onclick="switchView('events')">
+        <span class="dock-icon">🎟️</span>
+        <span class="dock-label">Mixers</span>
       </button>
       <button class="dock-item" data-tab="vault" onclick="switchView('vault')">
         <span class="dock-icon">🧰</span>
@@ -800,6 +770,18 @@
         <!-- Rendered dynamically -->
       </div>
     </div>
+  </div>
+
+  <!-- Update Required Blocking Screen -->
+  <div id="updateRequiredScreen" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#000000; z-index:999999; flex-direction:column; justify-content:center; align-items:center; color:#f7f3ee; text-align:center; padding:24px; box-sizing:border-box;">
+    <span style="font-size:3rem; margin-bottom:16px;">⚡</span>
+    <h2 style="font-family:var(--font-heading); font-size:1.5rem; font-weight:900; margin-bottom:12px; color:var(--orange); text-transform:uppercase; letter-spacing:0.05em; margin-top:0;">New Update Available</h2>
+    <p id="updateMessage" style="font-size:0.9rem; line-height:1.5; color:#ccc; max-width:400px; margin-bottom:24px;">
+      A new version of Council OS is required to continue. Downloading latest files...
+    </p>
+    <button id="updateApkBtn" class="neo-btn" style="background:var(--terminal-green); color:#000; font-weight:900; display:none;" onclick="downloadApkUpdate()">
+      <span>Download Updated APK 📲</span>
+    </button>
   </div>
 
   <!-- Mobile Toast Container -->

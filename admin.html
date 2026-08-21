@@ -194,6 +194,8 @@
               <label for="memberTier">Member Tier</label>
               <select id="memberTier" class="form-control" required>
                 <option value="Student Founder">Student Founder</option>
+                <option value="Verified Builder">Verified Builder</option>
+                <option value="Unverified">Unverified</option>
                 <option value="Founder">Founder</option>
                 <option value="Student">Student</option>
                 <option value="Partner">Partner</option>
@@ -967,9 +969,39 @@
 
             const rawCollege = member.college || '';
             let displayCollege = rawCollege;
-            if (rawCollege.includes(' | ')) {
-              displayCollege = rawCollege.split(' | ').join(' • ');
+            let idCardBase64 = null;
+            if (rawCollege.includes(' | CollegeID: ')) {
+              const parts = rawCollege.split(' | CollegeID: ');
+              displayCollege = parts[0];
+              idCardBase64 = parts[1];
             }
+            if (displayCollege.includes(' | ')) {
+              displayCollege = displayCollege.split(' | ').join(' • ');
+            }
+
+            let tierColor = 'text-blue-500';
+            if (member.tier && member.tier.toLowerCase() === 'unverified') {
+              tierColor = 'text-red-500';
+            } else if (member.tier && member.tier.toLowerCase() === 'verified builder') {
+              tierColor = 'text-green-500';
+            }
+
+            let actionHtml = '';
+            if (member.tier && member.tier.toLowerCase() === 'unverified') {
+              if (idCardBase64) {
+                actionHtml += `
+                  <a href="#" onclick="viewIdCard('${member.id}'); return false;" class="text-yellow-400 font-extrabold underline block text-xs mb-2">👁️ View College ID</a>
+                  <button class="admin-edit-btn approve-member-btn" data-id="${member.id}" style="background:#10b981; color:#000; margin-right:4px;">Approve</button>
+                `;
+              } else {
+                actionHtml += `<span class="text-xs text-gray-400 italic block mb-2">No ID Uploaded</span>`;
+              }
+            }
+
+            actionHtml += `
+              <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
+              <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
+            `;
 
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -977,11 +1009,10 @@
               <td>${photoHtml}<strong>${member.name}</strong></td>
               <td>${member.email}</td>
               <td>${displayCollege}</td>
-              <td><span class="uppercase font-extrabold text-xs text-blue-500">${member.tier}</span></td>
+              <td><span class="uppercase font-extrabold text-xs ${tierColor}">${member.tier}</span></td>
               <td><span class="font-mono text-sm">${member.password || 'member2026'}</span></td>
               <td>
-                <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
-                <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
+                ${actionHtml}
               </td>
             `;
             membersTableBody.appendChild(row);
@@ -995,6 +1026,16 @@
             e.target.disabled = true;
             e.target.textContent = 'Deleting...';
             await deleteMember(id);
+          });
+        });
+
+        // Re-attach approve events
+        membersTableBody.querySelectorAll('.approve-member-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            e.target.disabled = true;
+            e.target.textContent = 'Approving...';
+            await approveMember(id);
           });
         });
 
@@ -1025,6 +1066,43 @@
         } catch (e) {
           console.error("Failed to delete member:", e);
           alert("Failed to delete member from database.");
+        }
+      };
+
+      const approveMember = async (id) => {
+        try {
+          const { error } = await supabaseClient
+            .from('members')
+            .update({ tier: 'Verified Builder' })
+            .eq('id', id);
+          if (error) throw error;
+          alert("Member approved successfully!");
+          await renderMembersTable();
+        } catch (e) {
+          console.error("Failed to approve member:", e);
+          alert("Failed to approve member in database.");
+        }
+      };
+
+      window.viewIdCard = (id) => {
+        const member = cachedCustomMembers.find(m => String(m.id) === String(id));
+        if (member && member.college) {
+          const parts = member.college.split(' | CollegeID: ');
+          if (parts.length > 1) {
+            const imgBase64 = parts[1];
+            const newTab = window.open();
+            newTab.document.write(`
+              <html>
+                <head><title>College ID Card - ${member.name}</title></head>
+                <body style="margin:0; background:#000; display:flex; justify-content:center; align-items:center; height:100vh;">
+                  <img src="${imgBase64}" style="max-width:90%; max-height:90%; border:4px solid #fff; box-shadow:0 0 20px rgba(0,0,0,0.5);" />
+                </body>
+              </html>
+            `);
+            newTab.document.close();
+          } else {
+            alert("No ID uploaded for this member.");
+          }
         }
       };
 

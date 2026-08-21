@@ -24,227 +24,32 @@ const TFC_APP = {
   activeView: 'auth',
   soundEnabled: true,
   currentPersona: {
-    name: 'Dhruv Madan',
-    email: 'dhruv@thefuturecouncil.in',
-    college: 'Faculty of Technology, DU',
-    tier: 'Founder & Council Core',
-    id: 'TFC-2026-0001',
-    role: 'Founder / Tech Lead',
-    avatar: 'dhruv.jpeg',
-    skills: ['Fullstack', 'System Architecture', 'Product', 'AI Agents'],
-    bio: 'Building the biggest student-run startup ecosystem at Delhi University.',
-    lookingFor: 'Ambitious student founders, corporate partners & tech leads',
-    linkedIn: 'https://linkedin.com/in/dhruv-madan-tfc',
-    phone: '+91 93150 95214'
+    name: 'Member',
+    email: '',
+    college: 'Delhi University',
+    tier: 'Member',
+    id: 'TFC-MEMBER',
+    role: 'Member',
+    avatar: 'https://ui-avatars.com/api/?name=Member&background=000&color=fff',
+    skills: [],
+    bio: '',
+    lookingFor: '',
+    phone: ''
   },
   
   // Audio Synth Engine
   audioCtx: null,
 
   // Real-time Notification Engine State
-  notifications: [
-    {
-      id: 'notif-1',
-      type: 'vault',
-      title: '⚡ AWS Cloud Credits Live',
-      body: 'Claim up to $5,000 USD in AWS cloud credits inside Founder Vault.',
-      time: 'Just now',
-      unread: true,
-      targetView: 'vault',
-      timestamp: Date.now() - 60000
-    },
-    {
-      id: 'notif-2',
-      type: 'mixer',
-      title: '🎟️ North Campus Mixer Confirmed',
-      body: 'Aug 22 @ Hudson Lane • 14 spots left. Reserve admission pass.',
-      time: '12m ago',
-      unread: true,
-      targetView: 'events',
-      timestamp: Date.now() - 720000
-    },
-    {
-      id: 'notif-3',
-      type: 'radar',
-      title: '🤝 Co-Founder Match Signal',
-      body: 'Aarav Sharma (Hansraj • AI Engineer) listed new project for tech co-founders.',
-      time: '45m ago',
-      unread: true,
-      targetView: 'radar',
-      timestamp: Date.now() - 2700000
-    }
-  ],
+  notifications: [],
 
   // Background Periodic Campus Signals Queue (Every now & then)
-  periodicSignalsQueue: [
-    {
-      type: 'radar',
-      title: '🚀 New Co-Founder Active',
-      body: 'Priya Verma (SSCBS • FinTech) is looking for a Next.js / Flutter engineer.',
-      targetView: 'radar'
-    },
-    {
-      type: 'mixer',
-      title: '🎟️ Mixer RSVP Surge',
-      body: 'Only 4 spots remaining for the North Campus Founder Coffee!',
-      targetView: 'events'
-    },
-    {
-      type: 'vault',
-      title: '💰 New Vault Micro-Grant',
-      body: 'DST NIDHI-EIR fellowship applications are now open for student prototypes.',
-      targetView: 'vault'
-    },
-    {
-      type: 'signal',
-      title: '📢 Campus Dispatch',
-      body: 'Faculty of Tech team won 1st place in Inter-University Hackathon!',
-      targetView: 'feed'
-    },
-    {
-      type: 'vault',
-      title: '⚡ OpenAI API Credits',
-      body: 'New batch of $2,500 OpenAI API credits unlocked in Founder Vault.',
-      targetView: 'vault'
-    },
-    {
-      type: 'radar',
-      title: '🤝 Founder Match Alert',
-      body: '3 student builders from SRCC & Hindu are seeking technical CTOs.',
-      targetView: 'radar'
-    }
-  ],
+  periodicSignalsQueue: [],
 
   // Initial Seed Data for Talent Radar
-  talents: [
-    {
-      id: 'tal-1',
-      name: 'Aryaveer Chauhan',
-      avatar: 'aryaveer.jpeg',
-      college: 'SGTB Khalsa College • Delhi University',
-      role: 'Growth / Venture Lead',
-      roleCategory: 'growth',
-      tier: 'Co-Founder',
-      skills: ['Operations', 'Growth Strategy', 'Fundraising', 'Ecosystem'],
-      bio: 'Leading strategic partnerships and cross-campus venture acceleration at Delhi University.',
-      lookingFor: 'Technical co-founders for AI & campus FinTech venture',
-      contact: 'aryaveer@thefuturecouncil.in',
-      phone: '+91 93102 59143'
-    },
-    {
-      id: 'tal-2',
-      name: 'Kartik Goel',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-      college: 'SSCBS • Delhi University',
-      role: 'Product & Financial Analyst',
-      roleCategory: 'product',
-      tier: 'Student Founder',
-      skills: ['Financial Modeling', 'Market Sizing', 'Pitch Decks', 'FinTech'],
-      bio: '3rd-year BBS student building a neo-banking layer for Indian college student clubs and societies.',
-      lookingFor: 'Full-stack Next.js / Flutter engineer to ship MVP in 4 weeks',
-      contact: 'student@thefuturecouncil.in',
-      phone: '+91 98765 43210'
-    },
-    {
-      id: 'tal-3',
-      name: 'Brahmleen Kaur',
-      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
-      college: 'TFC Core Team • Delhi University',
-      role: 'Marketing Head',
-      roleCategory: 'growth',
-      tier: 'Marketing Head',
-      skills: ['Viral Marketing', 'Campus Distribution', 'Copywriting', 'Brand Design'],
-      bio: 'Scaling TFC brand reach across 90+ DU colleges. Passionate about community-led growth and D2C.',
-      lookingFor: 'Video editors, motion designers & student campus leads',
-      contact: 'brahmleen1314@gmail.com',
-      phone: '+91 99887 76655'
-    },
-    {
-      id: 'tal-4',
-      name: 'Aarav Sharma',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-      college: 'Hansraj College • Delhi University',
-      role: 'Full-Stack AI Engineer',
-      roleCategory: 'tech',
-      tier: 'Active Builder',
-      skills: ['PyTorch', 'FastAPI', 'React', 'LangChain', 'Vector DBs'],
-      bio: 'CS student working on autonomous research agents for students. 2x Hackathon Winner.',
-      lookingFor: 'Co-founder with business / sales chops to handle B2B outreach',
-      contact: 'aarav.hansraj@gmail.com',
-      phone: '+91 98111 22334'
-    },
-    {
-      id: 'tal-5',
-      name: 'Rhea Sen',
-      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80',
-      college: 'Lady Shri Ram College (LSR) • DU',
-      role: 'Product Designer (UI/UX)',
-      roleCategory: 'design',
-      tier: 'Design Fellow',
-      skills: ['Figma', 'Design Systems', 'Micro-interactions', 'User Research'],
-      bio: 'Creating delightful, conversion-obsessed consumer interfaces. Ex-intern at a YC-backed startup.',
-      lookingFor: 'Ambitious SaaS or Consumer App teams preparing for Seed round',
-      contact: 'rhea.lsr@gmail.com',
-      phone: '+91 97123 45678'
-    },
-    {
-      id: 'tal-6',
-      name: 'Rohan Mehra',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
-      college: 'SRCC • Delhi University',
-      role: 'B2B GTM & Sales Lead',
-      roleCategory: 'growth',
-      tier: 'Student Founder',
-      skills: ['Cold Outreach', 'B2B SaaS', 'Sponsorship Deals', 'Pitching'],
-      bio: 'Scaled student-run merchandise company to ₹8L GMV in 6 months. Currently looking for next venture.',
-      lookingFor: 'Tech co-founder building workflow automation tools',
-      contact: 'rohan.srcc@gmail.com',
-      phone: '+91 99999 11223'
-    }
-  ],
+  talents: [],
 
-  // Events & Mixers Data
-  events: [
-    {
-      id: 'ev-1',
-      title: 'North Campus Founder & Builder Mixer',
-      category: 'IRL MIXER',
-      date: 'Aug 22, 2026 • 5:00 PM IST',
-      location: 'Hudson Lane, GTB Nagar (North Campus)',
-      spotsTotal: 40,
-      spotsClaimed: 26,
-      badge: '🔥 ALMOST FULL',
-      badgeColor: 'orange',
-      desc: 'Exclusive offline coffee mixer for active student founders, CTOs, and creators across North Campus colleges. Pass includes filter coffee + founder intro circle.',
-      agenda: ['5:00 PM: Check-in & Lightning Demos', '5:45 PM: Co-founder Speed Dating', '6:30 PM: Open Networking & Q&A']
-    },
-    {
-      id: 'ev-2',
-      title: 'SSCBS Pitch & VC Roast Clinic',
-      category: 'PITCH CLINIC',
-      date: 'Aug 29, 2026 • 4:00 PM IST',
-      location: 'SSCBS Auditorium, Rohini Sector 16',
-      spotsTotal: 60,
-      spotsClaimed: 38,
-      badge: '⚡ VC ATTENDING',
-      badgeColor: 'green',
-      desc: 'Live 3-minute deck roasts in front of early-stage angels and top DU alumni operators. Top 3 pitches receive ₹50k prototype grants.',
-      agenda: ['4:00 PM: Keynote on Student Fundraising', '4:30 PM: 10 Selected Live Pitches', '6:00 PM: Angel Feedback & Awards']
-    },
-    {
-      id: 'ev-3',
-      title: 'South Campus Tech Sprint & Hack Day',
-      category: 'HACKATHON',
-      date: 'Sep 05, 2026 • 10:00 AM IST',
-      location: 'Faculty of Technology / Benito Juarez Marg',
-      spotsTotal: 80,
-      spotsClaimed: 45,
-      badge: '🏆 ₹1L BOUNTIES',
-      badgeColor: 'yellow',
-      desc: '12-hour build sprint. Build an AI agent, DeFi tool, or campus utility. Mentored by engineers from top tier-1 startups.',
-      agenda: ['10:00 AM: Problem Statements Released', '10:30 AM: Hacking Commences', '8:00 PM: Demos & Winner Ceremony']
-    }
-  ],
+  events: [],
 
   // Founder Vault Perks
   vaultPerks: [
@@ -310,42 +115,7 @@ const TFC_APP = {
     }
   ],
 
-  // Community Feed Posts
-  posts: [
-    {
-      id: 'p-1',
-      author: 'Dhruv Madan',
-      avatar: 'dhruv.jpeg',
-      college: 'Faculty of Technology • DU',
-      timeAgo: '15m ago',
-      category: 'ANNOUNCEMENT',
-      content: '🚀 The Future Council Member App is officially LIVE across Delhi University!\n\nUse this portal to find co-founders across 90+ colleges, roast your pitch decks, and claim exclusive founder perks. Let us build the future together.',
-      boosts: 34,
-      isBoosted: false
-    },
-    {
-      id: 'p-2',
-      author: 'Kartik Goel',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
-      college: 'SSCBS • DU',
-      timeAgo: '1h ago',
-      category: 'HIRING',
-      content: 'Looking for a React Native / Flutter developer from North/South campus to build our campus payment splitter app. We already have 600+ student signups on waitlist! DM or reach out via Co-founder Radar.',
-      boosts: 19,
-      isBoosted: false
-    },
-    {
-      id: 'p-3',
-      author: 'Aryaveer Chauhan',
-      avatar: 'aryaveer.jpeg',
-      college: 'SGTB Khalsa College • DU',
-      timeAgo: '3h ago',
-      category: 'WIN',
-      content: 'Huge milestone: TFC has partnered with top incubation hubs and tech credits providers to give ₹15L+ in value directly to DU student builders. Check the Founder Vault tab!',
-      boosts: 48,
-      isBoosted: true
-    }
-  ]
+  posts: []
 };
 
 // Sound Synthesizer via Web Audio API
@@ -523,7 +293,7 @@ async function initNativeNotifications() {
 // ==========================================================================
 // AUTOMATIC OVER-THE-AIR (OTA) LIVE UPDATE ENGINE
 // ==========================================================================
-const CURRENT_APP_VERSION = '1.1.1';
+const CURRENT_APP_VERSION = '1.1.2';
 
 async function checkForLiveAutoUpdates() {
   try {
@@ -532,25 +302,50 @@ async function checkForLiveAutoUpdates() {
     if (!res.ok) return;
 
     const remoteManifest = await res.json();
-    const lastSeenVersion = localStorage.getItem('tfc_app_version') || '1.0.0';
+    const currentVersion = CURRENT_APP_VERSION;
 
-    if (remoteManifest && remoteManifest.version && remoteManifest.version !== lastSeenVersion) {
-      console.log(`[Auto-Update] Synchronized new build: ${remoteManifest.version}`);
-      localStorage.setItem('tfc_app_version', remoteManifest.version);
+    if (remoteManifest && remoteManifest.version && remoteManifest.version !== currentVersion) {
+      console.log(`[Auto-Update] Update required: ${remoteManifest.version} (current: ${currentVersion})`);
+      
+      const updateScreen = document.getElementById('updateRequiredScreen');
+      const updateMessage = document.getElementById('updateMessage');
+      const updateBtn = document.getElementById('updateApkBtn');
 
-      // Trigger notification of silent auto-update
-      sendAppNotification({
-        type: 'system',
-        title: `⚡ Updated to ${remoteManifest.title || 'Council OS v' + remoteManifest.version}`,
-        body: 'Fresh features and live ecosystem improvements synchronized automatically.',
-        targetView: 'radar'
-      });
+      if (updateScreen) {
+        updateScreen.style.display = 'flex';
+        window.apkDownloadUrl = remoteManifest.apkUrl || 'https://thefuturecouncil.in/TheFutureCouncil.apk';
 
-      showToast(`⚡ Auto-synced to ${remoteManifest.title || 'v' + remoteManifest.version}!`);
+        if (window.Capacitor && window.Capacitor.isNativePlatform()) {
+          // Native app (APK) - Needs to download and install new APK
+          if (updateMessage) {
+            updateMessage.textContent = `A critical update (v${remoteManifest.version}) is required for Council OS. Please download and install the new APK to continue.`;
+          }
+          if (updateBtn) {
+            updateBtn.style.display = 'flex';
+          }
+        } else {
+          // Web App - Clear cache version and reload page
+          if (updateMessage) {
+            updateMessage.textContent = `Ecosystem update v${remoteManifest.version} detected. Synchronizing latest files and restarting...`;
+          }
+          localStorage.setItem('tfc_app_version', remoteManifest.version);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 2500);
+        }
+      }
     }
   } catch (err) {
-    // Offline or network error - continue from local offline cache silently
     console.debug('[Auto-Update] Network check skipped (offline cache active)');
+  }
+}
+
+function downloadApkUpdate() {
+  const url = window.apkDownloadUrl || 'https://thefuturecouncil.in/TheFutureCouncil.apk';
+  if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Browser) {
+    window.Capacitor.Plugins.Browser.open({ url: url });
+  } else {
+    window.open(url, '_system');
   }
 }
 
@@ -643,6 +438,12 @@ function filterNotifications(filter) {
 
 // Navigation & Screen Switcher
 function switchView(viewName) {
+  if (viewName === 'feed') {
+    viewName = 'hub';
+  }
+  if (viewName !== 'auth' && (!TFC_APP.currentPersona || TFC_APP.currentPersona.id === 'TFC-MEMBER')) {
+    viewName = 'auth';
+  }
   playSound('tab');
   TFC_APP.activeView = viewName;
 
@@ -650,18 +451,15 @@ function switchView(viewName) {
   const quickNav = document.querySelector('.quick-nav-container');
   const bottomDock = document.querySelector('.fixed-bottom-dock');
   const topActions = document.querySelector('.top-bar-actions');
-  const ticker = document.querySelector('.ticker-strip');
 
   if (viewName === 'auth') {
     if (quickNav) quickNav.style.display = 'none';
     if (bottomDock) bottomDock.style.display = 'none';
     if (topActions) topActions.style.display = 'none';
-    if (ticker) ticker.style.display = 'none';
   } else {
     if (quickNav) quickNav.style.display = '';
     if (bottomDock) bottomDock.style.display = '';
     if (topActions) topActions.style.display = 'flex';
-    if (ticker) ticker.style.display = 'flex';
   }
 
   // Update Top Quick-Nav Chips
@@ -847,7 +645,7 @@ async function handleUserRegister(e) {
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const college = document.getElementById('regCollege').value.trim();
   const skillsStr = document.getElementById('regSkills').value.trim();
-  const lookingFor = document.getElementById('regLookingFor').value.trim();
+  const lookingFor = 'Ambitious builders and founders across Delhi University';
   const phone = document.getElementById('regPhone').value.trim();
   const password = document.getElementById('regPassword').value;
   const submitBtn = document.getElementById('regSubmitBtn');
@@ -892,7 +690,7 @@ async function handleUserRegister(e) {
     email: email,
     college: college,
     role: derivedRole,
-    tier: 'Verified Builder',
+    tier: 'Unverified',
     avatar: avatarUrl,
     image: avatarUrl,
     skills: skillsArray.length ? skillsArray : ['Student Founder', 'Delhi University'],
@@ -934,7 +732,7 @@ async function handleUserRegister(e) {
       college: `${college} • DU`,
       role: derivedRole,
       roleCategory: roleCat,
-      tier: 'Verified Builder',
+      tier: 'Unverified',
       skills: newMember.skills,
       bio: newMember.bio,
       lookingFor: newMember.lookingFor,
@@ -954,8 +752,8 @@ async function handleUserRegister(e) {
     // Send Registration Notification
     sendAppNotification({
       type: 'system',
-      title: '🪪 Verified Member Pass Activated',
-      body: `Welcome to The Future Council, ${name}! Your Pass ID is ${memberId}.`,
+      title: '🪪 Member Pass Registered',
+      body: `Welcome, ${name}! Please upload your College ID to complete verification.`,
       targetView: 'pass'
     });
 
@@ -1002,6 +800,7 @@ function renderTalentRadar(filterCategory = 'all', searchQuery = '') {
   if (!container) return;
 
   const filtered = TFC_APP.talents.filter(item => {
+    if (item.tier === 'Unverified') return false;
     const matchesCat = (filterCategory === 'all') || (item.roleCategory === filterCategory);
     const query = searchQuery.toLowerCase().trim();
     const matchesSearch = !query || 
@@ -1015,7 +814,15 @@ function renderTalentRadar(filterCategory = 'all', searchQuery = '') {
   });
 
   if (filtered.length === 0) {
-    container.innerHTML = `
+    const isEmptyEcosystem = TFC_APP.talents.length === 0;
+    container.innerHTML = isEmptyEcosystem ? `
+      <div class="builder-card" style="text-align:center; padding:32px 16px; border:var(--border-thick); box-shadow:var(--shadow-md);">
+        <span style="font-size:2rem;">🤝</span>
+        <h4 style="font-family:var(--font-heading); margin-top:8px; font-weight:900;">NO BUILDERS LISTED YET</h4>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:12px;">Be the first to list yourself on the Talent Radar and connect with student founders across Delhi University!</p>
+        <button class="neo-btn sm" style="margin:0 auto;" onclick="openModal('postTalentModal')">List Yourself 🚀</button>
+      </div>
+    ` : `
       <div class="builder-card" style="text-align:center; padding:32px 16px;">
         <span style="font-size:2rem;">🔍</span>
         <h4 style="font-family:var(--font-heading); margin-top:8px; font-weight:900;">NO MATCHING BUILDERS FOUND</h4>
@@ -1117,23 +924,21 @@ function evaluatePitch(e) {
   e.preventDefault();
   playSound('success');
 
-  const deckTitle = document.getElementById('pitchTitle').value.trim();
-  const oneLiner = document.getElementById('pitchOneLiner').value.trim();
+  const deckTitle = document.getElementById('pitchStartupName').value.trim();
+  const targetMarket = document.getElementById('pitchTargetMarket').value.trim();
   const problem = document.getElementById('pitchProblem').value.trim();
+  const solution = document.getElementById('pitchSolution').value.trim();
+  const moat = document.getElementById('pitchMoat').value.trim();
   const traction = document.getElementById('pitchTraction').value.trim();
-  const targetMarket = document.getElementById('pitchMarket').value;
 
-  const resultContainer = document.getElementById('pitchRoastResults');
-  resultContainer.style.display = 'block';
+  const resultContainer = document.getElementById('pitchResultPanel');
 
   // Calculate rubric score
   let score = 72;
   if (traction.length > 30) score += 12;
-  if (oneLiner.length > 20 && oneLiner.length < 80) score += 8;
+  if (solution.length > 20 && solution.length < 80) score += 8;
   if (problem.length > 40) score += 6;
   score = Math.min(score, 98);
-
-  document.getElementById('roastScore').textContent = `${score}/100`;
 
   let verdict = '⚡ STRONG SEED POTENTIAL';
   let badgeColor = 'var(--terminal-green)';
@@ -1142,14 +947,19 @@ function evaluatePitch(e) {
     badgeColor = 'var(--orange)';
   }
 
-  document.getElementById('roastVerdict').textContent = verdict;
-  document.getElementById('roastVerdict').style.color = badgeColor;
-
-  const feedbackList = document.getElementById('roastFeedbackList');
-  feedbackList.innerHTML = `
-    <li><strong>✨ Value Proposition:</strong> Clear positioning for ${targetMarket}. Strong clarity on the target DU audience.</li>
-    <li><strong>⚡ Defensibility:</strong> Ensure your customer acquisition cost is locked down before expanding beyond Delhi University.</li>
-    <li><strong>🚀 Traction Milestone:</strong> Highlight early waitlists or revenue metrics within the first 10 seconds of pitching.</li>
+  resultContainer.innerHTML = `
+    <div class="builder-card" style="margin-top:16px; background:#FFFBF0; border:var(--border-thick); box-shadow:var(--shadow-md);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:var(--border-sm); padding-bottom:8px; margin-bottom:12px;">
+        <span class="role-tag-pill tag-tech" style="font-family:var(--font-heading); font-weight:900;">ROAST VERDICT</span>
+        <span id="roastScore" style="font-family:var(--font-mono); font-size:1.2rem; font-weight:900; background:var(--ink); color:var(--cyber-yellow); padding:4px 10px; border-radius:6px; border:2px solid var(--ink);">${score}/100</span>
+      </div>
+      <h3 id="roastVerdict" style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:${badgeColor}; margin-bottom:10px;">${verdict}</h3>
+      <ul id="roastFeedbackList" style="font-size:0.8rem; padding-left:20px; line-height:1.5; display:flex; flex-direction:column; gap:8px;">
+        <li><strong>✨ Value Proposition:</strong> Clear positioning for ${targetMarket}. Strong clarity on the target DU audience.</li>
+        <li><strong>⚡ Defensibility:</strong> Ensure your customer acquisition cost is locked down before expanding beyond Delhi University.</li>
+        <li><strong>🚀 Traction Milestone:</strong> Highlight early waitlists or revenue metrics within the first 10 seconds of pitching.</li>
+      </ul>
+    </div>
   `;
 
   resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1167,8 +977,19 @@ function evaluatePitch(e) {
 // 3. EVENTS & IRL MIXER RSVP ENGINE
 // ==========================================================================
 function renderEvents() {
-  const container = document.getElementById('eventsList');
+  const container = document.getElementById('eventsGrid');
   if (!container) return;
+
+  if (TFC_APP.events.length === 0) {
+    container.innerHTML = `
+      <div class="builder-card" style="text-align:center; padding:32px 16px; border:var(--border-thick); box-shadow:var(--shadow-md);">
+        <span style="font-size:2rem;">🎟️</span>
+        <h4 style="font-family:var(--font-heading); margin-top:8px; font-weight:900;">NO UPCOMING MIXERS</h4>
+        <p style="font-size:0.8rem; color:#666;">Stay tuned! Offline student founder mixers, speed-dating, and hack sprints are announced regularly.</p>
+      </div>
+    `;
+    return;
+  }
 
   container.innerHTML = TFC_APP.events.map(ev => `
     <article class="builder-card">
@@ -1308,6 +1129,17 @@ function renderFeed() {
   const container = document.getElementById('feedList');
   if (!container) return;
 
+  if (TFC_APP.posts.length === 0) {
+    container.innerHTML = `
+      <div class="builder-card" style="text-align:center; padding:32px 16px; border:var(--border-thick); box-shadow:var(--shadow-md);">
+        <span style="font-size:2rem;">📢</span>
+        <h4 style="font-family:var(--font-heading); margin-top:8px; font-weight:900;">NO SIGNALS YET</h4>
+        <p style="font-size:0.8rem; color:#666;">Delhi University builders haven't broadcasted any updates yet. Share your win, co-founder query, or MVP launch first!</p>
+      </div>
+    `;
+    return;
+  }
+
   container.innerHTML = TFC_APP.posts.map(post => `
     <article class="builder-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1442,6 +1274,26 @@ function renderPassStudio() {
   
   const editPhone = document.getElementById('editPassPhone');
   if (editPhone) editPhone.value = p.phone || '';
+
+  // Handle Verification Banner visibility
+  const banner = document.getElementById('passVerificationBanner');
+  if (banner) {
+    if (p.tier === 'Unverified') {
+      banner.style.display = 'block';
+      const hasUploaded = p.college && p.college.includes('| CollegeID:');
+      const uploadArea = document.getElementById('passVerificationUploadArea');
+      const pendingArea = document.getElementById('passVerificationPendingArea');
+      if (hasUploaded) {
+        if (uploadArea) uploadArea.style.display = 'none';
+        if (pendingArea) pendingArea.style.display = 'block';
+      } else {
+        if (uploadArea) uploadArea.style.display = 'block';
+        if (pendingArea) pendingArea.style.display = 'none';
+      }
+    } else {
+      banner.style.display = 'none';
+    }
+  }
 }
 
 function flipPassCard() {
@@ -1474,6 +1326,62 @@ function savePassProfile(e) {
     body: 'Your profile bio, skills, and QR pass were updated successfully.',
     targetView: 'pass'
   });
+}
+
+function handleCollegeIdUpload(input) {
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    if (file.size > 2 * 1024 * 1024) {
+      showToast('File is too large! Maximum 2MB allowed.', 'error');
+      playSound('error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64Data = e.target.result;
+      const baseCollege = TFC_APP.currentPersona.college.split(' | CollegeID:')[0];
+      const newCollege = `${baseCollege} | CollegeID: ${base64Data}`;
+
+      // Update local state
+      TFC_APP.currentPersona.college = newCollege;
+      localStorage.setItem('tfc_session_user', JSON.stringify(TFC_APP.currentPersona));
+
+      // Update in Local Database tfc_registered_users if present
+      const localUsers = JSON.parse(localStorage.getItem('tfc_registered_users') || '[]');
+      const userIdx = localUsers.findIndex(u => u.email === TFC_APP.currentPersona.email);
+      if (userIdx !== -1) {
+        localUsers[userIdx].college = newCollege;
+        localStorage.setItem('tfc_registered_users', JSON.stringify(localUsers));
+      }
+
+      // Sync to Supabase
+      if (supabaseClient) {
+        try {
+          const { error } = await supabaseClient
+            .from('members')
+            .update({ college: newCollege })
+            .eq('email', TFC_APP.currentPersona.email);
+          if (error) throw error;
+        } catch (err) {
+          console.error("Supabase sync ID upload error:", err);
+        }
+      }
+
+      showToast('College ID uploaded successfully! Awaiting approval.');
+      playSound('success');
+      
+      sendAppNotification({
+        type: 'system',
+        title: '📤 College ID Uploaded',
+        body: 'Your college ID has been submitted for admin verification.',
+        targetView: 'pass'
+      });
+
+      renderPassStudio();
+    };
+    reader.readAsDataURL(file);
+  }
 }
 
 function handlePhotoUpload(input) {
@@ -1634,12 +1542,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Background Periodic Notification Dispatcher (Fires every 45 seconds for active users)
-  setInterval(() => {
-    if (TFC_APP.activeView !== 'auth') {
-      const randIndex = Math.floor(Math.random() * TFC_APP.periodicSignalsQueue.length);
-      const signal = TFC_APP.periodicSignalsQueue[randIndex];
-      sendAppNotification(signal);
-    }
-  }, 45000);
 });

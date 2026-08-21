@@ -1,10 +1,10 @@
 {
-  "version": "1.1.1",
-  "build": 103,
-  "releaseDate": "2026-08-15",
-  "updatedAt": "2026-08-15T13:23:00Z",
+  "version": "1.1.2",
+  "build": 104,
+  "releaseDate": "2026-08-22",
+  "updatedAt": "2026-08-22T01:59:00Z",
   "minSupportedVersion": "1.0.0",
-  "title": "Council OS v1.1.1",
+  "title": "Council OS v1.1.2",
   "features": [
     "Fixed logout header avatar glitch",
     "Automatic Over-The-Air (OTA) live sync",
