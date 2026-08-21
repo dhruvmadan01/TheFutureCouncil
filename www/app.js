@@ -199,6 +199,13 @@ function showToast(message, type = 'success') {
   }, 3200);
 }
 
+// Redirect user to WhatsApp with pre-filled ecosystem invite text
+function shareInviteToPeers() {
+  const shareText = encodeURIComponent("Hey! Check out The Future Council — Delhi University's biggest student startup ecosystem. Register here to get your Member Pass and unlock Council OS (Co-founder Radar, Live Campus Pulse, Pitch Clinics, and ₹15L+ Founder Perks): https://thefuturecouncil.in");
+  const waUrl = `https://wa.me/?text=${shareText}`;
+  window.open(waUrl, '_blank');
+}
+
 // ==========================================================================
 // REAL-TIME NOTIFICATION & ACTIVITY SIGNAL SYSTEM
 // ==========================================================================
