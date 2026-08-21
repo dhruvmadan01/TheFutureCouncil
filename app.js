@@ -293,7 +293,7 @@ async function initNativeNotifications() {
 // ==========================================================================
 // AUTOMATIC OVER-THE-AIR (OTA) LIVE UPDATE ENGINE
 // ==========================================================================
-const CURRENT_APP_VERSION = '1.1.4';
+const CURRENT_APP_VERSION = '1.1.5';
 
 async function checkForLiveAutoUpdates() {
   try {
@@ -795,6 +795,55 @@ function logoutUser() {
 // ==========================================================================
 // 1. BUILDER RADAR RENDERER & FILTER
 // ==========================================================================
+async function loadRadarTalents() {
+  if (!supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from('members')
+      .select('*');
+    
+    if (error) throw error;
+    if (data) {
+      TFC_APP.talents = data.map(member => {
+        const skillsStr = member.skills ? (Array.isArray(member.skills) ? member.skills.join(', ') : String(member.skills)) : '';
+        const lowerSkills = skillsStr.toLowerCase();
+        let roleCat = 'tech';
+        if (lowerSkills.includes('design') || lowerSkills.includes('figma') || lowerSkills.includes('ui') || lowerSkills.includes('ux')) {
+          roleCat = 'design';
+        } else if (lowerSkills.includes('growth') || lowerSkills.includes('marketing') || lowerSkills.includes('gtm') || lowerSkills.includes('sales') || lowerSkills.includes('operations')) {
+          roleCat = 'growth';
+        } else if (lowerSkills.includes('product') || lowerSkills.includes('finance') || lowerSkills.includes('fintech') || lowerSkills.includes('analyst')) {
+          roleCat = 'product';
+        }
+        
+        let displayCollege = member.college || 'Delhi University';
+        if (displayCollege.includes(' | CollegeID: ')) {
+          displayCollege = displayCollege.split(' | CollegeID: ')[0];
+        }
+
+        const skillsArray = Array.isArray(member.skills) ? member.skills : (skillsStr.split(',').map(s => s.trim()).filter(Boolean));
+
+        return {
+          id: member.member_id || member.id,
+          name: member.name,
+          avatar: member.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=FF5E1E&color=fff&bold=true`,
+          college: displayCollege,
+          role: member.role || member.tier || 'Student Builder',
+          roleCategory: roleCat,
+          tier: member.tier || 'Verified Builder',
+          skills: skillsArray.length ? skillsArray : ['Student Founder', 'Delhi University'],
+          bio: member.bio || `Student builder & founder from ${displayCollege.split(' | ')[0]}.`,
+          lookingFor: member.lookingFor || member.looking_for || 'Ambitious co-founders and early builders across Delhi University',
+          contact: member.email,
+          phone: member.phone || ''
+        };
+      });
+    }
+  } catch (err) {
+    console.error("Failed to load talents from database:", err);
+  }
+}
+
 function renderTalentRadar(filterCategory = 'all', searchQuery = '') {
   const container = document.getElementById('radarGrid');
   if (!container) return;
@@ -1453,7 +1502,8 @@ function toggleSound() {
 }
 
 // Global Initialization
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadRadarTalents();
   renderTalentRadar();
   renderEvents();
   renderFounderVault();
