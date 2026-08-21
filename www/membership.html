@@ -276,7 +276,7 @@
           </p>
           <div style="display:flex; gap:8px;">
             <button class="neo-btn sm" onclick="openModal('postTalentModal')">List Yourself 🚀</button>
-            <button class="neo-btn sm alt" onclick="showToast('Startup feature submissions will open soon!')">Apply for Feature ↗</button>
+            <button class="neo-btn sm alt" onclick="openModal('postTalentModal')">Apply for Feature ↗</button>
           </div>
         </div>
 
@@ -620,62 +620,25 @@
 
   </div>
 
-  <!-- MODAL DRAWER 1: LIST YOURSELF AS BUILDER -->
+  <!-- MODAL DRAWER 1: LIST YOURSELF & GET FEATURED VIA WHATSAPP -->
   <div class="modal-overlay" id="postTalentModal">
     <div class="modal-bottom-drawer">
       <div class="drawer-drag-handle"></div>
       <div class="drawer-header">
-        <h3 class="drawer-title">+ List Yourself on Radar</h3>
+        <h3 class="drawer-title">⚡ Ecosystem Spotlight & Radar</h3>
         <button class="drawer-close-btn" onclick="closeModal('postTalentModal')">×</button>
       </div>
-      <form id="newTalentForm" onsubmit="submitNewTalent(event)">
-        <div class="neo-form-group">
-          <label class="neo-form-label">Full Name</label>
-          <input type="text" id="newTalentName" class="neo-form-input" placeholder="e.g. Priyanjali Das" required />
+      <div style="padding:16px; text-align:center; box-sizing:border-box;">
+        <p style="font-size:0.85rem; line-height:1.5; color:var(--ink); margin-bottom:18px; font-weight:700;">
+          To get your student startup featured on the home showcase, or list yourself as a builder on the Live Talent Radar, please contact us directly via WhatsApp:
+        </p>
+        <div style="font-size:1.3rem; font-weight:900; color:var(--orange); font-family:var(--font-mono); margin-bottom:20px; border:2px dashed var(--ink); padding:12px; background:#fff7eb; border-radius:6px; letter-spacing:0.05em; display:inline-block; width:100%; box-sizing:border-box;">
+          📲 +91 93150 95214
         </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">College & Year</label>
-          <input type="text" id="newTalentCollege" class="neo-form-input" placeholder="e.g. SSCBS, 2nd Year" required />
-        </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">Role Title & Category</label>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <input type="text" id="newTalentRole" class="neo-form-input" placeholder="e.g. Lead Frontend Dev" required />
-            <select id="newTalentCategory" class="neo-form-select" required>
-              <option value="tech">Technical / CTO</option>
-              <option value="growth">Growth & Ops</option>
-              <option value="design">UI/UX & Design</option>
-              <option value="product">Product & FinTech</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">Skills (Comma separated)</label>
-          <input type="text" id="newTalentSkills" class="neo-form-input" placeholder="e.g. Next.js, PyTorch, Figma" required />
-        </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">What are you looking for?</label>
-          <input type="text" id="newTalentLooking" class="neo-form-input" placeholder="e.g. Seeking GTM co-founder for B2B AI tool" required />
-        </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">One-line Bio</label>
-          <textarea id="newTalentBio" class="neo-form-textarea" rows="2" placeholder="Briefly describe what you love building..." required></textarea>
-        </div>
-
-        <div class="neo-form-group">
-          <label class="neo-form-label">Contact Email / Handle</label>
-          <input type="text" id="newTalentContact" class="neo-form-input" placeholder="e.g. student@thefuturecouncil.in" required />
-        </div>
-
-        <button type="submit" class="neo-btn" style="margin-top:10px;">
-          <span>Publish to Radar 🚀</span>
-        </button>
-      </form>
+        <a href="https://wa.me/919315095214?text=Hi!%20Connecting%20from%20The%20Future%20Council.%20I%20would%20like%20to%20list%20myself%20on%20the%20radar%20/%20apply%20for%20a%20venture%20feature." target="_blank" class="neo-btn green" style="text-decoration:none; justify-content:center; width:100%; font-weight:900; background:#25D366; color:#fff; border-color:var(--ink);">
+          <span>💬 Contact on WhatsApp</span>
+        </a>
+      </div>
     </div>
   </div>
 

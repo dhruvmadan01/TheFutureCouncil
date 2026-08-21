@@ -293,7 +293,7 @@ async function initNativeNotifications() {
 // ==========================================================================
 // AUTOMATIC OVER-THE-AIR (OTA) LIVE UPDATE ENGINE
 // ==========================================================================
-const CURRENT_APP_VERSION = '1.1.3';
+const CURRENT_APP_VERSION = '1.1.4';
 
 async function checkForLiveAutoUpdates() {
   try {
