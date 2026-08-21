@@ -1,8 +1,13 @@
- :root {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap');
+
+:root {
   --orange: #ff6b00;
-  --offwhite: #f9f9f9;
-  --charcoal: #2d2d2d;
+  --offwhite: #FAF9F6;
+  --charcoal: #1E1E1E;
   --ink: #000000;
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 * {
@@ -21,9 +26,38 @@ body {
   justify-content: center;
   padding: 24px;
   background: var(--orange);
-  font-family: Inter, "Arial Black", Arial, sans-serif;
+  font-family: var(--font-body);
   color: var(--ink);
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .window-title, .kicker, .neo-btn, .pill-btn, .window-tab {
+  font-family: var(--font-heading);
+}
+
+/* Scrolling Marquee */
+.marquee-wrap {
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 3px solid var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes floatIn {
