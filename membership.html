@@ -458,14 +458,24 @@
         <div id="passVerificationBanner" class="builder-card" style="background:#fff7eb; border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink); padding:16px; margin-bottom:24px; display:none;">
           <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; color:var(--orange); text-transform:uppercase; margin-bottom:6px; margin-top:0;">⚠️ Verification Action Required</h4>
           <p style="font-size:0.8rem; line-height:1.4; color:var(--ink); margin-bottom:12px;">
-            Your account is currently <strong>unverified</strong>. Please upload a photo of your College ID Card to activate your digital pass and unlock all ecosystem benefits.
+            Your account is currently <strong>unverified</strong>. Please upload your profile photo and your college ID card to activate your digital pass and unlock all ecosystem benefits.
           </p>
           <div id="passVerificationUploadArea">
-            <input type="file" id="collegeIdUploadInput" class="neo-form-input" accept="image/*" style="margin-bottom:10px;" onchange="handleCollegeIdUpload(this)" />
-            <p style="font-size:0.7rem; color:#666; font-weight:600; margin:0;">Supported formats: JPG, PNG. Max size 2MB.</p>
+            <div class="neo-form-group" style="margin-bottom:10px;">
+              <label class="neo-form-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:700;">1. Profile Photo (For Radar Pass)</label>
+              <input type="file" id="profilePhotoUploadInput" class="neo-form-input" accept="image/*" />
+            </div>
+            <div class="neo-form-group" style="margin-bottom:12px;">
+              <label class="neo-form-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:700;">2. College ID Card (For Admin Review)</label>
+              <input type="file" id="collegeIdUploadInput" class="neo-form-input" accept="image/*" />
+            </div>
+            <button type="button" id="submitVerificationBtn" class="neo-btn" style="width:100%; justify-content:center; margin-top:4px;" onclick="submitVerificationDocuments()">
+              <span>Submit for Verification 🚀</span>
+            </button>
+            <p style="font-size:0.68rem; color:#666; font-weight:600; margin-top:8px; margin-bottom:0; text-align:center;">Max size 2MB per image. PNG or JPG supported.</p>
           </div>
-          <div id="passVerificationPendingArea" style="display:none; font-size:0.8rem; font-weight:800; color:#d97706; padding:4px 0;">
-            ⏳ College ID uploaded. Awaiting admin approval.
+          <div id="passVerificationPendingArea" style="display:none; font-size:0.8rem; font-weight:800; color:#d97706; padding:4px 0; text-align:center;">
+            ⏳ Documents submitted. Awaiting admin approval.
           </div>
         </div>
 

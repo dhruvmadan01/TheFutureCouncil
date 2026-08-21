@@ -293,7 +293,7 @@ async function initNativeNotifications() {
 // ==========================================================================
 // AUTOMATIC OVER-THE-AIR (OTA) LIVE UPDATE ENGINE
 // ==========================================================================
-const CURRENT_APP_VERSION = '1.1.5';
+const CURRENT_APP_VERSION = '1.1.6';
 
 async function checkForLiveAutoUpdates() {
   try {
@@ -665,22 +665,40 @@ async function handleUserRegister(e) {
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=FF5E1E&color=fff&bold=true`;
   const skillsArray = skillsStr.split(',').map(s => s.trim()).filter(Boolean);
 
-  // Derive role category from skills
+  // Derive role category from name (core team) or skills (other builders)
   let derivedRole = 'Student Builder';
   let roleCat = 'tech';
-  const lowerSkills = skillsStr.toLowerCase();
-  if (lowerSkills.includes('design') || lowerSkills.includes('figma') || lowerSkills.includes('ui') || lowerSkills.includes('ux')) {
-    derivedRole = 'UI/UX Designer';
-    roleCat = 'design';
-  } else if (lowerSkills.includes('growth') || lowerSkills.includes('marketing') || lowerSkills.includes('gtm') || lowerSkills.includes('sales')) {
-    derivedRole = 'Growth & Marketing';
-    roleCat = 'growth';
-  } else if (lowerSkills.includes('product') || lowerSkills.includes('finance') || lowerSkills.includes('fintech') || lowerSkills.includes('analyst')) {
-    derivedRole = 'Product & FinTech';
-    roleCat = 'product';
-  } else if (lowerSkills.includes('next') || lowerSkills.includes('react') || lowerSkills.includes('python') || lowerSkills.includes('pytorch') || lowerSkills.includes('fullstack') || lowerSkills.includes('ai')) {
-    derivedRole = 'Full-Stack / AI Builder';
+  const nameLower = name.toLowerCase();
+  if (nameLower.includes('dhruv') && nameLower.includes('madan')) {
+    derivedRole = 'Founder';
     roleCat = 'tech';
+  } else if (nameLower.includes('aryaveer')) {
+    derivedRole = 'Co-Founder';
+    roleCat = 'tech';
+  } else if (nameLower.includes('brahmleen')) {
+    derivedRole = 'Marketing Head';
+    roleCat = 'growth';
+  } else {
+    const lowerSkills = skillsStr.toLowerCase();
+    if (lowerSkills.includes('design') || lowerSkills.includes('figma') || lowerSkills.includes('ui') || lowerSkills.includes('ux')) {
+      derivedRole = 'UI/UX & Design';
+      roleCat = 'design';
+    } else if (lowerSkills.includes('growth') || lowerSkills.includes('marketing') || lowerSkills.includes('gtm') || lowerSkills.includes('sales')) {
+      derivedRole = 'Marketing & Growth';
+      roleCat = 'growth';
+    } else if (lowerSkills.includes('product') || lowerSkills.includes('finance') || lowerSkills.includes('fintech') || lowerSkills.includes('analyst') || lowerSkills.includes('management')) {
+      derivedRole = 'Product & Management';
+      roleCat = 'product';
+    } else if (lowerSkills.includes('ops') || lowerSkills.includes('operations') || lowerSkills.includes('hr')) {
+      derivedRole = 'Operations & Ops';
+      roleCat = 'growth';
+    } else if (lowerSkills.includes('tech') || lowerSkills.includes('development') || lowerSkills.includes('code') || lowerSkills.includes('python') || lowerSkills.includes('web') || lowerSkills.includes('ai') || lowerSkills.includes('fullstack') || lowerSkills.includes('developer')) {
+      derivedRole = 'Technical Development';
+      roleCat = 'tech';
+    } else {
+      derivedRole = 'Student Builder';
+      roleCat = 'tech';
+    }
   }
 
   const newMember = {
@@ -807,13 +825,42 @@ async function loadRadarTalents() {
       TFC_APP.talents = data.map(member => {
         const skillsStr = member.skills ? (Array.isArray(member.skills) ? member.skills.join(', ') : String(member.skills)) : '';
         const lowerSkills = skillsStr.toLowerCase();
+        
+        let role = member.role || 'Student Builder';
         let roleCat = 'tech';
-        if (lowerSkills.includes('design') || lowerSkills.includes('figma') || lowerSkills.includes('ui') || lowerSkills.includes('ux')) {
-          roleCat = 'design';
-        } else if (lowerSkills.includes('growth') || lowerSkills.includes('marketing') || lowerSkills.includes('gtm') || lowerSkills.includes('sales') || lowerSkills.includes('operations')) {
+        
+        // Map Core Team roles
+        const nameLower = member.name.toLowerCase();
+        if (nameLower.includes('dhruv') && nameLower.includes('madan')) {
+          role = 'Founder';
+          roleCat = 'tech';
+        } else if (nameLower.includes('aryaveer')) {
+          role = 'Co-Founder';
+          roleCat = 'tech';
+        } else if (nameLower.includes('brahmleen')) {
+          role = 'Marketing Head';
           roleCat = 'growth';
-        } else if (lowerSkills.includes('product') || lowerSkills.includes('finance') || lowerSkills.includes('fintech') || lowerSkills.includes('analyst')) {
-          roleCat = 'product';
+        } else {
+          // Map rest of members based on essential skills
+          if (lowerSkills.includes('design') || lowerSkills.includes('figma') || lowerSkills.includes('ui') || lowerSkills.includes('ux')) {
+            role = 'UI/UX & Design';
+            roleCat = 'design';
+          } else if (lowerSkills.includes('growth') || lowerSkills.includes('marketing') || lowerSkills.includes('gtm') || lowerSkills.includes('sales')) {
+            role = 'Marketing & Growth';
+            roleCat = 'growth';
+          } else if (lowerSkills.includes('product') || lowerSkills.includes('finance') || lowerSkills.includes('fintech') || lowerSkills.includes('analyst') || lowerSkills.includes('management')) {
+            role = 'Product & Management';
+            roleCat = 'product';
+          } else if (lowerSkills.includes('ops') || lowerSkills.includes('operations') || lowerSkills.includes('hr')) {
+            role = 'Operations & Ops';
+            roleCat = 'growth';
+          } else if (lowerSkills.includes('tech') || lowerSkills.includes('development') || lowerSkills.includes('code') || lowerSkills.includes('python') || lowerSkills.includes('web') || lowerSkills.includes('ai') || lowerSkills.includes('fullstack') || lowerSkills.includes('developer')) {
+            role = 'Technical Development';
+            roleCat = 'tech';
+          } else {
+            role = 'Student Builder';
+            roleCat = 'tech';
+          }
         }
         
         let displayCollege = member.college || 'Delhi University';
@@ -828,7 +875,7 @@ async function loadRadarTalents() {
           name: member.name,
           avatar: member.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=FF5E1E&color=fff&bold=true`,
           college: displayCollege,
-          role: member.role || member.tier || 'Student Builder',
+          role: role,
           roleCategory: roleCat,
           tier: member.tier || 'Verified Builder',
           skills: skillsArray.length ? skillsArray : ['Student Founder', 'Delhi University'],
@@ -941,15 +988,21 @@ function openConnectModal(talentId) {
           <p style="font-size:0.75rem; color:#666; font-weight:700;">${talent.college}</p>
         </div>
       </div>
-      <p style="font-size:0.8rem; margin-bottom:14px; line-height:1.4;">
-        Send a direct 1-click founder pitch or reach out via official Delhi University contact channel.
+      <p style="font-size:0.8rem; margin-bottom:12px; line-height:1.4;">
+        Connect directly with the builder via WhatsApp or Email:
       </p>
+      
+      <!-- Direct Contact Number Display -->
+      <div style="font-size:1.15rem; font-weight:900; color:var(--orange); font-family:var(--font-mono); margin-bottom:16px; border:2px dashed var(--ink); padding:10px; background:#fff7eb; border-radius:6px; text-align:center;">
+        📞 ${talent.phone || 'No number listed'}
+      </div>
+
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <a href="mailto:${talent.contact}?subject=The%20Future%20Council%20Co-founder%20Connection&body=Hi%20${talent.name},%20saw%20your%20profile%20on%20TFC%20Radar!" class="neo-btn" style="text-decoration:none; justify-content:center;" onclick="recordConnectActivity('${talent.name}', '${talent.college}')">
-          <span>✉️ Send Email Reachout</span>
-        </a>
         <a href="https://wa.me/${(talent.phone || '').replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(talent.name)},%20connecting%20from%20The%20Future%20Council!" target="_blank" class="neo-btn green" style="text-decoration:none; justify-content:center;" onclick="recordConnectActivity('${talent.name}', '${talent.college}')">
           <span>💬 WhatsApp Founder Message</span>
+        </a>
+        <a href="mailto:${talent.contact}?subject=The%20Future%20Council%20Co-founder%20Connection&body=Hi%20${talent.name},%20saw%20your%20profile%20on%20TFC%20Radar!" class="neo-btn" style="text-decoration:none; justify-content:center;" onclick="recordConnectActivity('${talent.name}', '${talent.college}')">
+          <span>✉️ Send Email Reachout</span>
         </a>
       </div>
     `;
@@ -1450,6 +1503,103 @@ function handlePhotoUpload(input) {
       });
     };
     reader.readAsDataURL(input.files[0]);
+  }
+}
+
+async function submitVerificationDocuments() {
+  const profilePhotoInput = document.getElementById('profilePhotoUploadInput');
+  const collegeIdInput = document.getElementById('collegeIdUploadInput');
+  const submitBtn = document.getElementById('submitVerificationBtn');
+
+  if (!profilePhotoInput || !profilePhotoInput.files || !profilePhotoInput.files[0]) {
+    showToast('Please select a profile photo.', 'error');
+    playSound('error');
+    return;
+  }
+  if (!collegeIdInput || !collegeIdInput.files || !collegeIdInput.files[0]) {
+    showToast('Please select your college ID card.', 'error');
+    playSound('error');
+    return;
+  }
+
+  const profileFile = profilePhotoInput.files[0];
+  const idFile = collegeIdInput.files[0];
+
+  if (profileFile.size > 2 * 1024 * 1024 || idFile.size > 2 * 1024 * 1024) {
+    showToast('Files must be under 2MB each.', 'error');
+    playSound('error');
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.innerHTML = '<span>Uploading Documents... ⏳</span>';
+    submitBtn.disabled = true;
+  }
+
+  try {
+    const profileBase64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(profileFile);
+    });
+
+    const idBase64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(idFile);
+    });
+
+    const baseCollege = TFC_APP.currentPersona.college.split(' | CollegeID:')[0];
+    const newCollege = `${baseCollege} | CollegeID: ${idBase64}`;
+
+    TFC_APP.currentPersona.college = newCollege;
+    TFC_APP.currentPersona.image = profileBase64;
+    TFC_APP.currentPersona.avatar = profileBase64;
+    localStorage.setItem('tfc_session_user', JSON.stringify(TFC_APP.currentPersona));
+
+    const localUsers = JSON.parse(localStorage.getItem('tfc_registered_users') || '[]');
+    const userIdx = localUsers.findIndex(u => u.email === TFC_APP.currentPersona.email);
+    if (userIdx !== -1) {
+      localUsers[userIdx].college = newCollege;
+      localUsers[userIdx].image = profileBase64;
+      localUsers[userIdx].avatar = profileBase64;
+      localStorage.setItem('tfc_registered_users', JSON.stringify(localUsers));
+    }
+
+    if (supabaseClient) {
+      const { error } = await supabaseClient
+        .from('members')
+        .update({
+          college: newCollege,
+          image: profileBase64
+        })
+        .eq('email', TFC_APP.currentPersona.email);
+      if (error) throw error;
+    }
+
+    const passAvatar = document.getElementById('passAvatar');
+    if (passAvatar) passAvatar.src = profileBase64;
+    const headerAvatar = document.getElementById('headerPersonaAvatar');
+    if (headerAvatar) headerAvatar.src = profileBase64;
+
+    showToast('Verification documents uploaded! Pending approval. 🚀');
+    playSound('success');
+
+    const uploadArea = document.getElementById('passVerificationUploadArea');
+    const pendingArea = document.getElementById('passVerificationPendingArea');
+    if (uploadArea) uploadArea.style.display = 'none';
+    if (pendingArea) pendingArea.style.display = 'block';
+
+  } catch (err) {
+    console.error('Upload failed:', err);
+    showToast('Failed to upload documents. Please try again.', 'error');
+    playSound('error');
+    if (submitBtn) {
+      submitBtn.innerHTML = '<span>Submit for Verification 🚀</span>';
+      submitBtn.disabled = false;
+    }
   }
 }
 
