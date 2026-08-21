@@ -26,7 +26,8 @@ const filesToCopy = [
   'partners.html',
   'admin.html',
   'version.json',
-  'TheFutureCouncil.apk'
+  'TheFutureCouncil.apk',
+  'download.html'
 ];
 
 for (const file of filesToCopy) {
