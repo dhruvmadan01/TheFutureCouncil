@@ -26,6 +26,7 @@ const filesToCopy = [
   'partners.html',
   'admin.html',
   'marketing.html',
+  'ambassador.html',
   'sales.html',
   'version.json',
   'TheFutureCouncil.apk',

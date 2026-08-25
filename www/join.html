@@ -240,6 +240,16 @@
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
+      // Auto-populate referral code from URL parameter '?ref=XYZ'
+      const urlParams = new URLSearchParams(window.location.search);
+      const refParam = urlParams.get('ref');
+      if (refParam) {
+        const refField = document.getElementById('referralCode');
+        if (refField) {
+          refField.value = refParam.toUpperCase().trim();
+        }
+      }
+
       signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = signupForm.querySelector('button[type="submit"]');
