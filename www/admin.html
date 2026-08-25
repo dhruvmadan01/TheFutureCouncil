@@ -91,6 +91,54 @@
         <p class="hero-text">Manage ecosystem partners and student startups. Add or delete listings, and the changes will be dynamically visible in the respective directories.</p>
       </div>
 
+      <!-- ECOSYSTEM ANALYTICS DASHBOARD -->
+      <section class="admin-table-panel mb-6" style="grid-column: 1 / -1; margin-bottom: 24px;">
+        <h2>📊 App Conversion & Login Analytics</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: #FFF9E6; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); margin-bottom: 16px;">
+          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
+            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2;" id="dashTotalMembers">0</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #555;">Total Members</span>
+          </div>
+          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
+            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #ff5d5d;" id="dashNeverLoggedIn">0</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #ff5d5d;">Registered (Never Logged In)</span>
+          </div>
+          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
+            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #10b981;" id="dashAppActive">0</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #10b981;">App Active Users</span>
+          </div>
+          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
+            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #f59e0b;" id="dashPendingVerification">0</span>
+            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #f59e0b;">Pending Verification</span>
+          </div>
+        </div>
+
+        <!-- Never Logged In Members Accordion -->
+        <details style="background: #fff; border: 2px solid var(--ink); padding: 12px; cursor: pointer; outline: none;" id="neverLoggedInDetails">
+          <summary style="font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: #000; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+            <span>🔍 View Website Registrants Who Never Logged In</span>
+            <span style="font-size: 0.75rem; color: #ff5d5d;" id="dashNeverLoggedInCountLabel">(0 users)</span>
+          </summary>
+          <div class="admin-table-wrapper" style="max-height: 320px; overflow-y: auto; margin-top: 12px; cursor: default;">
+            <table class="admin-table" id="neverLoggedInTable" style="margin-top: 0;">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>College</th>
+                  <th>Password</th>
+                  <th>Reg Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="6" class="text-center py-4 text-gray-500">Loading analytic records...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
       <div class="admin-grid">
         <!-- Add Partner Form -->
         <div class="admin-form-panel">
@@ -938,6 +986,69 @@
         const countVal = document.getElementById('memberCountVal');
         if (countVal) {
           countVal.textContent = allMembers.length;
+        }
+
+        // Calculate Dashboard Analytics (on full unfiltered list)
+        const totalMembersList = [...systemList, ...customListWithFlag];
+        const totalCount = totalMembersList.length;
+        const neverLoggedInList = totalMembersList.filter(m => 
+          !m.isSystem && (!m.image || m.image === '')
+        );
+        const appActiveList = totalMembersList.filter(m => 
+          m.isSystem || (m.image && m.image !== '')
+        );
+        const pendingVerifList = totalMembersList.filter(m => 
+          !m.isSystem && m.tier && m.tier.toLowerCase() === 'unverified' && m.college && m.college.includes('| CollegeID:')
+        );
+
+        // Update dashboard values in DOM
+        const dashTotalMembers = document.getElementById('dashTotalMembers');
+        if (dashTotalMembers) dashTotalMembers.textContent = totalCount;
+
+        const dashNeverLoggedIn = document.getElementById('dashNeverLoggedIn');
+        if (dashNeverLoggedIn) dashNeverLoggedIn.textContent = neverLoggedInList.length;
+
+        const dashNeverLoggedInCountLabel = document.getElementById('dashNeverLoggedInCountLabel');
+        if (dashNeverLoggedInCountLabel) dashNeverLoggedInCountLabel.textContent = `(${neverLoggedInList.length} users)`;
+
+        const dashAppActive = document.getElementById('dashAppActive');
+        if (dashAppActive) dashAppActive.textContent = appActiveList.length;
+
+        const dashPendingVerification = document.getElementById('dashPendingVerification');
+        if (dashPendingVerification) dashPendingVerification.textContent = pendingVerifList.length;
+
+        // Render Never Logged In Drawer Table
+        const neverLoggedInTableBody = document.querySelector('#neverLoggedInTable tbody');
+        if (neverLoggedInTableBody) {
+          neverLoggedInTableBody.innerHTML = '';
+          if (neverLoggedInList.length === 0) {
+            neverLoggedInTableBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500 font-semibold">All registered users have logged in! 🎉</td></tr>';
+          } else {
+            // Sort by creation date desc
+            const sortedNeverLoggedIn = [...neverLoggedInList].sort((a, b) => 
+              new Date(b.created_at || 0) - new Date(a.created_at || 0)
+            );
+            
+            sortedNeverLoggedIn.forEach(m => {
+              const regDate = m.created_at ? new Date(m.created_at).toLocaleDateString('en-IN', {
+                day: '2-digit', month: 'short', year: 'numeric'
+              }) : 'N/A';
+              
+              const rawCollege = m.college || '';
+              const displayCollege = rawCollege.split(' | CollegeID: ')[0].split(' | ').join(' • ');
+
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td><span class="font-mono font-bold">${m.member_id || m.id}</span></td>
+                <td><strong>${m.name}</strong></td>
+                <td>${m.email}</td>
+                <td>${displayCollege}</td>
+                <td><span class="font-mono text-sm">${m.password || 'member2026'}</span></td>
+                <td><span class="text-xs text-gray-500 font-bold">${regDate}</span></td>
+              `;
+              neverLoggedInTableBody.appendChild(row);
+            });
+          }
         }
 
         membersTableBody.innerHTML = '';

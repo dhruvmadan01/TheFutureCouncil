@@ -535,6 +535,32 @@ function togglePasswordVisibility(inputId) {
   playSound('click');
 }
 
+async function trackAppLogin(user) {
+  if (!supabaseClient || !user || !user.email) return;
+  const isSystemUser = user.id === 'TFC-2026-0001' || user.email === 'dhruv@thefuturecouncil.in' || user.email === 'dhruvmadan235@gmail.com';
+  if (isSystemUser) return;
+
+  if (!user.image || user.image === '') {
+    const defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=FF5E1E&color=fff&bold=true`;
+    
+    TFC_APP.currentPersona.image = defaultAvatar;
+    TFC_APP.currentPersona.avatar = defaultAvatar;
+    localStorage.setItem('tfc_session_user', JSON.stringify(TFC_APP.currentPersona));
+    
+    try {
+      const { error } = await supabaseClient
+        .from('members')
+        .update({ image: defaultAvatar })
+        .eq('email', user.email);
+        
+      if (error) throw error;
+      console.log(`[Login Tracker] User ${user.email} marked as logged-in to App.`);
+    } catch (err) {
+      console.error("[Login Tracker] Failed to update login flag in Supabase:", err);
+    }
+  }
+}
+
 async function handleUserLogin(e) {
   if (e && e.preventDefault) e.preventDefault();
   
@@ -616,6 +642,9 @@ async function handleUserLogin(e) {
       
       // Save persistent session
       localStorage.setItem('tfc_session_user', JSON.stringify(matchedUser));
+      
+      // Track login in Supabase
+      trackAppLogin(matchedUser);
       
       // Update UI elements
       document.getElementById('headerPersonaAvatar').src = matchedUser.avatar;
@@ -1689,6 +1718,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         avatarEl.src = TFC_APP.currentPersona.avatar;
       }
       renderPassStudio();
+      
+      // Track session login in Supabase
+      trackAppLogin(TFC_APP.currentPersona);
+      
       switchView('radar');
     } catch (e) {
       switchView('auth');
