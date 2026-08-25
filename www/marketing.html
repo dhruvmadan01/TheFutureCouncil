@@ -260,8 +260,19 @@
         <p class="hero-text">Analyze conversion funnels, coordinate campus leads, and trigger direct reactivation nudges to website registrants who haven't logged in to Council OS yet.</p>
       </div>
 
-      <!-- ANALYTICS CARDS -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+      <!-- Tab Navigation -->
+      <div class="flex border-b-3 border-black mb-6 gap-2">
+        <button id="tabGrowth" onclick="switchMarketingTab('growth')" class="px-6 py-2.5 font-black uppercase text-xs tracking-wider border-t-3 border-x-3 border-black bg-white -mb-[3px] z-10 transition-all">
+          📈 Growth & Outreach
+        </button>
+        <button id="tabAmbassadors" onclick="switchMarketingTab('ambassadors')" class="px-6 py-2.5 font-black uppercase text-xs tracking-wider border-t-3 border-x-3 border-black bg-[#EFE9DE] opacity-60 hover:opacity-100 -mb-[3px] transition-all">
+          🎓 Campus Ambassadors
+        </button>
+      </div>
+
+      <div id="growthSection">
+        <!-- ANALYTICS CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
         <div class="metric-card">
           <span class="metric-val" id="totalMembers">0</span>
           <span class="metric-label">Total Signups</span>
@@ -366,6 +377,98 @@
               <tr><td colspan="7" class="text-center py-6 text-gray-500">Loading registrations...</td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      </div> <!-- End of growthSection -->
+
+      <!-- Campus Ambassadors Section -->
+      <div id="ambassadorsSection" class="hidden">
+        <!-- AMBASSADOR METRICS CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+          <div class="metric-card" style="border-color: #3b82f6;">
+            <span class="metric-val text-blue-600" id="totalAmbassadors">0</span>
+            <span class="metric-label text-blue-600">Total Ambassadors</span>
+          </div>
+          <div class="metric-card" style="border-color: #a855f7;">
+            <span class="metric-val text-purple-600" id="activeCampuses">0</span>
+            <span class="metric-label text-purple-600">Active Campuses</span>
+          </div>
+          <div class="metric-card" style="border-color: #10b981;">
+            <span class="metric-val text-green-600" id="totalAmbassadorReferrals">0</span>
+            <span class="metric-label text-green-600">Total Referrals</span>
+          </div>
+          <div class="metric-card" style="border-color: #f59e0b;">
+            <span class="metric-val text-amber-600" id="topAmbassador">N/A</span>
+            <span class="metric-label text-amber-600">Top Ambassador</span>
+          </div>
+        </div>
+
+        <!-- AMBASSADOR MANAGEMENT PANEL -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          
+          <!-- Add/Edit Ambassador Form -->
+          <div class="analytics-panel lg:col-span-1" id="ambassadorFormPanel">
+            <h2 id="ambassadorFormTitle">📢 Recruit Campus Ambassador</h2>
+            <form id="ambassadorForm" class="space-y-4 pt-2">
+              <input type="hidden" id="editingAmbassadorId" />
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Ambassador Name</label>
+                <input type="text" id="ambName" required placeholder="e.g. Priyanshu Gupta" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">College / Campus</label>
+                <input type="text" id="ambCollege" required placeholder="e.g. Hansraj College" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Student Email</label>
+                <input type="email" id="ambEmail" required placeholder="e.g. priyanshu@hansraj.du.ac.in" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Phone Number</label>
+                <input type="tel" id="ambPhone" required placeholder="e.g. 9812345678" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Referral Code (Optional)</label>
+                <input type="text" id="ambRefCode" placeholder="Leave empty for auto-generated" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Portal Password</label>
+                <input type="password" id="ambPassword" placeholder="Defaults to ambassador2026" class="w-full border-2 border-black p-2 font-bold focus:outline-none text-xs" />
+              </div>
+              
+              <button type="submit" id="ambSubmitBtn" class="w-full bg-black text-[#ff9e59] border-2 border-black p-2.5 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+                Add Ambassador ⚡
+              </button>
+              <button type="button" id="cancelAmbEditBtn" onclick="resetAmbassadorEdit()" class="hidden w-full bg-white text-black border-2 border-black p-2 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[2px_2px_0_rgba(0,0,0,1)] transition-all mt-1">
+                Cancel Edit
+              </button>
+            </form>
+          </div>
+
+          <!-- Ambassadors Directory Table -->
+          <div class="analytics-panel lg:col-span-2">
+            <h2>🎓 Campus Ambassadors Directory</h2>
+            <p class="text-xs text-gray-500 font-semibold uppercase mt-0.5 mb-4">View and track active ambassador referrals</p>
+            
+            <div class="admin-table-wrapper" style="overflow-x: auto;">
+              <table class="admin-table" id="ambassadorsTable">
+                <thead>
+                  <tr>
+                    <th>Ref Code</th>
+                    <th>Name</th>
+                    <th>College</th>
+                    <th>Contact</th>
+                    <th>Referrals</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="6" class="text-center py-6 text-gray-500">Loading ambassadors...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -532,6 +635,7 @@
         // Store inactive list globally for filters and search triggers
         window.inactiveUsersList = inactiveList;
         renderInactiveTable(inactiveList);
+        renderAmbassadors(members);
       }
 
       function renderInactiveTable(list) {
@@ -652,6 +756,273 @@
           console.error("Failed to copy emails:", err);
           alert("Clipboard write blocked. Please select and copy manually.");
         });
+      };
+
+      // Ambassador Functions and Event Handlers
+      
+      // Tab switcher
+      window.switchMarketingTab = (tab) => {
+        const tabGrowth = document.getElementById('tabGrowth');
+        const tabAmbassadors = document.getElementById('tabAmbassadors');
+        const growthSection = document.getElementById('growthSection');
+        const ambassadorsSection = document.getElementById('ambassadorsSection');
+
+        if (tab === 'growth') {
+          tabGrowth.classList.remove('bg-[#EFE9DE]', 'opacity-60');
+          tabGrowth.classList.add('bg-white', 'opacity-100');
+          tabGrowth.style.zIndex = '10';
+
+          tabAmbassadors.classList.remove('bg-white', 'opacity-100');
+          tabAmbassadors.classList.add('bg-[#EFE9DE]', 'opacity-60');
+          tabAmbassadors.style.zIndex = '1';
+
+          growthSection.classList.remove('hidden');
+          ambassadorsSection.classList.add('hidden');
+        } else {
+          tabAmbassadors.classList.remove('bg-[#EFE9DE]', 'opacity-60');
+          tabAmbassadors.classList.add('bg-white', 'opacity-100');
+          tabAmbassadors.style.zIndex = '10';
+
+          tabGrowth.classList.remove('bg-white', 'opacity-100');
+          tabGrowth.classList.add('bg-[#EFE9DE]', 'opacity-60');
+          tabGrowth.style.zIndex = '1';
+
+          growthSection.classList.add('hidden');
+          ambassadorsSection.classList.remove('hidden');
+        }
+      };
+
+      // Helper to parse college field format: collegeName | Phone: phone | RefBy: referralCode
+      function parseCollegeField(collegeStr) {
+        let college = collegeStr || '';
+        let phone = '';
+        let refCode = '';
+        let refBy = '';
+
+        if (college.includes(' | CollegeID: ')) {
+          college = college.split(' | CollegeID: ')[0];
+        }
+
+        const parts = college.split(' | ');
+        let displayName = parts[0];
+
+        parts.forEach(part => {
+          if (part.startsWith('Phone: ')) {
+            phone = part.replace('Phone: ', '').trim();
+          } else if (part.startsWith('RefCode: ')) {
+            refCode = part.replace('RefCode: ', '').trim();
+          } else if (part.startsWith('RefBy: ')) {
+            refBy = part.replace('RefBy: ', '').trim();
+          }
+        });
+
+        return { displayName, phone, refCode, refBy };
+      }
+
+      function renderAmbassadors(members) {
+        const ambassadors = members.filter(m => m.tier === 'Campus Ambassador');
+
+        // Count referrals for each ambassador
+        const referralCounts = {};
+        members.forEach(m => {
+          const parsed = parseCollegeField(m.college);
+          if (parsed.refBy) {
+            referralCounts[parsed.refBy.toUpperCase()] = (referralCounts[parsed.refBy.toUpperCase()] || 0) + 1;
+          }
+        });
+
+        // Compute metrics
+        const totalAmbs = ambassadors.length;
+        const uniqueColleges = new Set();
+        let totalRefs = 0;
+        let topAmbName = 'N/A';
+        let maxRefs = -1;
+
+        ambassadors.forEach(amb => {
+          const parsed = parseCollegeField(amb.college);
+          uniqueColleges.add(parsed.displayName.trim().toLowerCase());
+          
+          const code = (parsed.refCode || amb.member_id || amb.id || '').toUpperCase();
+          const refs = referralCounts[code] || 0;
+          totalRefs += refs;
+
+          if (refs > maxRefs) {
+            maxRefs = refs;
+            topAmbName = `${amb.name} (${refs} refs)`;
+          }
+        });
+
+        document.getElementById('totalAmbassadors').textContent = totalAmbs;
+        document.getElementById('activeCampuses').textContent = uniqueColleges.size;
+        document.getElementById('totalAmbassadorReferrals').textContent = totalRefs;
+        document.getElementById('topAmbassador').textContent = totalAmbs > 0 ? topAmbName : 'N/A';
+
+        // Render Ambassadors table
+        const tableBody = document.querySelector('#ambassadorsTable tbody');
+        if (!tableBody) return;
+
+        tableBody.innerHTML = '';
+        if (ambassadors.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">No Campus Ambassadors recruited yet. 🎓</td></tr>';
+          return;
+        }
+
+        ambassadors.forEach(amb => {
+          const parsed = parseCollegeField(amb.college);
+          const code = (parsed.refCode || amb.member_id || amb.id || '').toUpperCase();
+          const refs = referralCounts[code] || 0;
+          
+          let waUrl = '';
+          const phone = parsed.phone || '';
+          if (phone) {
+            let cleanPhoneDigits = phone.replace(/[^0-9]/g, '');
+            if (cleanPhoneDigits.length === 10) cleanPhoneDigits = '91' + cleanPhoneDigits;
+            const firstName = amb.name.split(' ')[0];
+            const msg = `Hey ${firstName}! Great work representing The Future Council. You have driven ${refs} signups so far! Let's keep building the ecosystem 🚀`;
+            waUrl = `https://wa.me/${cleanPhoneDigits}?text=${encodeURIComponent(msg)}`;
+          }
+
+          const waActionHtml = waUrl 
+            ? `<a href="${waUrl}" target="_blank" class="bg-[#10b981] border-2 border-black px-2 py-1 text-black font-extrabold uppercase text-[0.68rem] tracking-wider inline-block hover:shadow-[1px_1px_0_#000] hover:translate-y-[-1px] transition-all" style="text-decoration:none;">💬 Nudge</a>`
+            : `<span class="text-xs text-gray-400 italic">No Phone</span>`;
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><span class="font-mono font-black bg-amber-100 border border-amber-400 px-2 py-0.5 text-xs">${code}</span></td>
+            <td><strong>${amb.name}</strong></td>
+            <td>${parsed.displayName}</td>
+            <td>
+              <div class="text-xs">${amb.email}</div>
+              <div class="text-xs text-gray-500 font-bold">${parsed.phone || 'No Phone'}</div>
+            </td>
+            <td><span class="font-black text-sm text-green-600">${refs}</span></td>
+            <td>
+              <div class="flex gap-2">
+                ${waActionHtml}
+                <button onclick="startEditAmbassador('${amb.id}')" class="bg-amber-400 border-2 border-black px-2 py-1 text-black font-extrabold uppercase text-[0.68rem] tracking-wider hover:shadow-[1px_1px_0_#000] hover:translate-y-[-1px] transition-all">Edit</button>
+                <button onclick="deleteAmbassador('${amb.id}')" class="bg-red-500 border-2 border-black px-2 py-1 text-white font-extrabold uppercase text-[0.68rem] tracking-wider hover:shadow-[1px_1px_0_#000] hover:translate-y-[-1px] transition-all">Delete</button>
+              </div>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Add/Edit Form submission logic
+      const ambForm = document.getElementById('ambassadorForm');
+      ambForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('ambSubmitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
+
+        const id = document.getElementById('editingAmbassadorId').value;
+        const name = document.getElementById('ambName').value.trim();
+        const college = document.getElementById('ambCollege').value.trim();
+        const email = document.getElementById('ambEmail').value.trim().toLowerCase();
+        const phone = document.getElementById('ambPhone').value.trim();
+        const refCodeInput = document.getElementById('ambRefCode').value.trim().toUpperCase();
+        const passwordInput = document.getElementById('ambPassword').value.trim();
+
+        let refCode = refCodeInput;
+        if (!refCode) {
+          const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+          const randomNum = Math.floor(100 + Math.random() * 900);
+          refCode = `TFC-AMB-${initials}${randomNum}`;
+        }
+
+        const combinedCollege = `${college} | Phone: ${phone} | RefCode: ${refCode}`;
+        const password = passwordInput || 'ambassador2026';
+
+        const ambassadorData = {
+          name: name,
+          college: combinedCollege,
+          email: email,
+          password: password,
+          member_id: refCode,
+          tier: 'Campus Ambassador',
+          image: ''
+        };
+
+        try {
+          if (id) {
+            const { error } = await supabaseClient
+              .from('members')
+              .update(ambassadorData)
+              .eq('id', id);
+            if (error) throw error;
+            alert("Ambassador details updated!");
+          } else {
+            // Verify email uniqueness before insert
+            const emailExists = cachedMembers.some(m => m.email.toLowerCase() === email);
+            if (emailExists) {
+              alert("A member/ambassador with this email already exists!");
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Add Ambassador ⚡';
+              return;
+            }
+
+            const { error } = await supabaseClient
+              .from('members')
+              .insert([ambassadorData]);
+            if (error) throw error;
+            alert("Campus Ambassador recruited!");
+          }
+          resetAmbassadorEdit();
+          await loadMarketingData();
+        } catch (err) {
+          console.error("Save ambassador error:", err);
+          alert("Error saving: " + err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = id ? 'Update Ambassador ⚡' : 'Add Ambassador ⚡';
+        }
+      });
+
+      window.startEditAmbassador = (id) => {
+        const amb = cachedMembers.find(m => String(m.id) === String(id));
+        if (!amb) return;
+
+        const parsed = parseCollegeField(amb.college);
+        const code = parsed.refCode || amb.member_id || '';
+
+        document.getElementById('editingAmbassadorId').value = amb.id;
+        document.getElementById('ambName').value = amb.name;
+        document.getElementById('ambCollege').value = parsed.displayName;
+        document.getElementById('ambEmail').value = amb.email;
+        document.getElementById('ambPhone').value = parsed.phone;
+        document.getElementById('ambRefCode').value = code;
+        document.getElementById('ambPassword').value = amb.password || '';
+
+        document.getElementById('ambassadorFormTitle').textContent = '📝 Edit Campus Ambassador';
+        document.getElementById('ambSubmitBtn').textContent = 'Update Ambassador ⚡';
+        document.getElementById('cancelAmbEditBtn').classList.remove('hidden');
+
+        document.getElementById('ambassadorFormPanel').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.resetAmbassadorEdit = () => {
+        document.getElementById('editingAmbassadorId').value = '';
+        document.getElementById('ambassadorForm').reset();
+        document.getElementById('ambassadorFormTitle').textContent = '📢 Recruit Campus Ambassador';
+        document.getElementById('ambSubmitBtn').textContent = 'Add Ambassador ⚡';
+        document.getElementById('cancelAmbEditBtn').classList.add('hidden');
+      };
+
+      window.deleteAmbassador = async (id) => {
+        if (!confirm("Are you sure you want to remove this Campus Ambassador?")) return;
+        try {
+          const { error } = await supabaseClient
+            .from('members')
+            .delete()
+            .eq('id', id);
+          if (error) throw error;
+          alert("Ambassador removed successfully!");
+          await loadMarketingData();
+        } catch (err) {
+          console.error("Delete ambassador error:", err);
+          alert("Error deleting: " + err.message);
+        }
       };
 
       checkAuth();

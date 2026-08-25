@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Future Council | Sales & Sponsorships Dashboard</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --green: #00E599;
+      --green-dark: #059669;
+      --offwhite: #FAF9F6;
+      --charcoal: #1E1E1E;
+      --ink: #000000;
+      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      background: var(--green);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      padding: 24px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .desktop-window {
+      width: min(1100px, 100%);
+      background: var(--offwhite);
+      border: 3px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
+      animation: floatIn 0.6s ease-out both;
+    }
+    .window-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      background: var(--charcoal);
+      border-bottom: 3px solid var(--ink);
+    }
+    .window-controls {
+      position: absolute;
+      left: 16px;
+      display: flex;
+      gap: 8px;
+    }
+    .window-controls span {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border: 3px solid var(--ink);
+    }
+    .window-controls .red { background: #ff5d5d; }
+    .window-controls .yellow { background: #f5c542; }
+    .window-controls .gray { background: #bdbdbd; }
+    
+    .window-title {
+      font-size: 0.76rem;
+      letter-spacing: 0.32em;
+      font-weight: 800;
+      color: var(--offwhite);
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+    }
+    .workspace {
+      padding: 28px 24px;
+    }
+    .partners-hero {
+      border: 3px solid var(--ink);
+      background: #EBFDF7;
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+    }
+    .hero-text {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .analytics-panel {
+      border: 3px solid var(--ink);
+      background: #fff;
+      box-shadow: 6px 6px 0 var(--ink);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .analytics-panel h2 {
+      margin: 0 0 16px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+    }
+    .metric-card {
+      background: #fff;
+      border: 2px solid var(--ink);
+      padding: 16px;
+      text-align: center;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .metric-val {
+      font-size: 2rem;
+      font-weight: 900;
+      display: block;
+      line-height: 1.1;
+      font-family: var(--font-heading);
+    }
+    .metric-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #555;
+      display: block;
+      margin-top: 4px;
+    }
+    .admin-submit-btn {
+      background: var(--ink);
+      border: 2px solid var(--ink);
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+      transition: transform 100ms ease, box-shadow 100ms ease;
+    }
+    .admin-submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .back-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ink);
+      text-decoration: underline;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .stage-card {
+      border: 2px solid var(--ink);
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 100ms ease;
+    }
+    .stage-card:hover {
+      transform: translateY(-1px);
+    }
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH PORTAL GATE -->
+  <div class="bg-white border-3 border-black p-8 shadow-[8px_8px_0_rgba(0,0,0,1)] w-full max-w-sm" id="loginContainer">
+    <div class="text-center mb-6">
+      <img src="TFC.png" alt="TFC Logo" class="w-16 h-16 border-3 border-black mx-auto mb-3" />
+      <h2 class="font-black text-xl uppercase tracking-tight">Sales Portal Gate</h2>
+      <p class="text-xs text-gray-500 font-bold uppercase mt-1">Ecosystem Sponsorship CRM</p>
+    </div>
+
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block text-xs font-black uppercase mb-1">Username</label>
+        <input type="text" id="loginUsername" required class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
+      </div>
+      <div>
+        <label class="block text-xs font-black uppercase mb-1">Password</label>
+        <input type="password" id="loginPassword" required class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
+      </div>
+      <div id="loginError" class="hidden text-xs text-red-500 font-bold">
+        ⚠️ Invalid credentials! Please check admin password.
+      </div>
+      <button type="submit" class="w-full bg-black text-emerald-400 border-2 border-black p-2.5 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+        Unlock Sales OS ⚡
+      </button>
+    </form>
+  </div>
+
+  <!-- MAIN SALES WINDOW -->
+  <main class="desktop-window hidden" id="adminContent">
+    <header class="window-bar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">The Future Council • Sales CRM</div>
+    </header>
+
+    <div class="workspace">
+      <!-- Back Btn -->
+      <a href="index.html" class="back-link-btn">
+        <span>← Back to Home Hub</span>
+      </a>
+
+      <!-- Hero Banner -->
+      <div class="partners-hero">
+        <h1 class="hero-title">💼 Sales & Sponsorship Pipeline</h1>
+        <p class="hero-text">Manage corporate sponsorship accounts, cash grants, and resource perks. Track deal pipelines from initial contact to closed-won agreements.</p>
+      </div>
+
+      <!-- SALES KPI CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+        <div class="metric-card" style="border-color: var(--green-dark);">
+          <span class="metric-val text-emerald-600" id="statCashRaised">₹0</span>
+          <span class="metric-label">Cash Raised</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-val text-blue-600" id="statPerkValue">₹0</span>
+          <span class="metric-label">Perk Perks Distributed</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-val text-amber-500" id="statPipeline">₹0</span>
+          <span class="metric-label">Weighted Pipeline</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-val" id="statWinRate">0%</span>
+          <span class="metric-label">Deal Win Rate</span>
+        </div>
+      </div>
+
+      <!-- CRM BOARD & DEAL CREATOR -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        
+        <!-- Deal Creator Panel -->
+        <div class="analytics-panel lg:col-span-1">
+          <h2>➕ Add New Deal</h2>
+          <form id="dealForm" class="space-y-4">
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">Company / Sponsor</label>
+              <input type="text" id="dealCompany" required class="w-full border-2 border-black p-2 text-xs font-bold focus:outline-none" placeholder="e.g. Accel Partners" />
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Deal Value (₹)</label>
+                <input type="number" id="dealValue" required class="w-full border-2 border-black p-2 text-xs font-bold focus:outline-none" placeholder="e.g. 150000" />
+              </div>
+              <div>
+                <label class="block text-xs font-black uppercase mb-1">Category</label>
+                <select id="dealCategory" class="w-full border-2 border-black p-2 text-xs font-black focus:outline-none">
+                  <option value="Cash">Cash Sponsorship</option>
+                  <option value="Perk">Developer Perk</option>
+                  <option value="Venue">Venue & F&B</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">Pipeline Stage</label>
+              <select id="dealStage" class="w-full border-2 border-black p-2 text-xs font-black focus:outline-none">
+                <option value="Prospecting">Prospecting (20%)</option>
+                <option value="Pitching">Pitching (50%)</option>
+                <option value="Negotiation">Negotiation (75%)</option>
+                <option value="Closed Won">Closed Won (100%)</option>
+                <option value="Closed Lost">Closed Lost (0%)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="w-full bg-black text-[#00E599] border-2 border-black p-2 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+              Log Sponsorship Opportunity 💼
+            </button>
+          </form>
+        </div>
+
+        <!-- CRM Funnel Board -->
+        <div class="analytics-panel lg:col-span-2">
+          <h2>📊 Sponsorship Pipeline Board</h2>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-2">
+            
+            <!-- Stage: Prospecting -->
+            <div class="bg-gray-50 border-2 border-dashed border-gray-400 p-2 min-h-[300px]">
+              <div class="text-[0.68rem] font-black uppercase border-b-2 border-black pb-1 mb-2 flex justify-between">
+                <span>Prospecting</span>
+                <span class="text-gray-500" id="countProspecting">(0)</span>
+              </div>
+              <div id="stage-Prospecting" class="space-y-2"></div>
+            </div>
+
+            <!-- Stage: Pitching / Negotiation -->
+            <div class="bg-amber-50/50 border-2 border-dashed border-amber-400 p-2 min-h-[300px]">
+              <div class="text-[0.68rem] font-black uppercase border-b-2 border-black pb-1 mb-2 flex justify-between">
+                <span>Pitching</span>
+                <span class="text-amber-600" id="countPitching">(0)</span>
+              </div>
+              <div id="stage-Pitching" class="space-y-2"></div>
+            </div>
+
+            <!-- Stage: Negotiation -->
+            <div class="bg-blue-50/50 border-2 border-dashed border-blue-400 p-2 min-h-[300px]">
+              <div class="text-[0.68rem] font-black uppercase border-b-2 border-black pb-1 mb-2 flex justify-between">
+                <span>Negotiating</span>
+                <span class="text-blue-600" id="countNegotiation">(0)</span>
+              </div>
+              <div id="stage-Negotiation" class="space-y-2"></div>
+            </div>
+
+            <!-- Stage: Closed Won -->
+            <div class="bg-emerald-50/50 border-2 border-dashed border-emerald-400 p-2 min-h-[300px]">
+              <div class="text-[0.68rem] font-black uppercase border-b-2 border-black pb-1 mb-2 flex justify-between">
+                <span>Closed Won</span>
+                <span class="text-emerald-700" id="countClosedWon">(0)</span>
+              </div>
+              <div id="stage-Closed-Won" class="space-y-2"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ALL DEALS TABULAR LEDGER -->
+      <div class="analytics-panel">
+        <h2>📑 All Sponsorship Transactions & Deals</h2>
+        <div class="overflow-x-auto">
+          <table class="admin-table text-left w-full" id="dealsTable">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Category</th>
+                <th>Value (INR)</th>
+                <th>Current Stage</th>
+                <th>Status Control</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginContainer = document.getElementById('loginContainer');
+      const adminContent = document.getElementById('adminContent');
+      const loginForm = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
+      const dealForm = document.getElementById('dealForm');
+
+      const AUTH_KEY = 'tfc_sales_auth';
+
+      const checkAuth = () => {
+        const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true';
+        if (isAuth) {
+          loginContainer.classList.add('hidden');
+          adminContent.classList.remove('hidden');
+          initCRM();
+        } else {
+          loginContainer.classList.remove('hidden');
+          adminContent.classList.add('hidden');
+        }
+      };
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const u = document.getElementById('loginUsername').value;
+        const p = document.getElementById('loginPassword').value;
+
+        if (u === 'admin' && p === 'Thefuturecouncil0101@#&') {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          loginError.classList.add('hidden');
+          loginForm.reset();
+          checkAuth();
+        } else {
+          loginError.classList.remove('hidden');
+        }
+      });
+
+      // CRM DATABASE ENGINE (localStorage)
+      const DEFAULT_DEALS = [
+        { id: 'deal-1', company: 'AWS Activate Partner', category: 'Perk', value: 415000, stage: 'Closed Won' },
+        { id: 'deal-2', company: 'Google Cloud Program', category: 'Perk', value: 207000, stage: 'Closed Won' },
+        { id: 'deal-3', company: 'Supabase Pro Plans', category: 'Perk', value: 250000, stage: 'Closed Won' },
+        { id: 'deal-4', company: 'Hero Vired', category: 'Cash', value: 150000, stage: 'Closed Won' },
+        { id: 'deal-5', company: 'Sequoia Spark Spark', category: 'Cash', value: 300000, stage: 'Pitching' },
+        { id: 'deal-6', company: 'Stanza Living Space', category: 'Venue', value: 75000, stage: 'Negotiation' },
+        { id: 'deal-7', company: 'Accredian Inc', category: 'Cash', value: 100000, stage: 'Prospecting' }
+      ];
+
+      function initCRM() {
+        if (!localStorage.getItem('tfc_crm_deals')) {
+          localStorage.setItem('tfc_crm_deals', JSON.stringify(DEFAULT_DEALS));
+        }
+        renderCRM();
+      }
+
+      function renderCRM() {
+        const deals = JSON.parse(localStorage.getItem('tfc_crm_deals')) || [];
+        
+        let cashRaised = 0;
+        let perkValue = 0;
+        let weightedPipeline = 0;
+        let wonCount = 0;
+        let lostCount = 0;
+
+        let stages = { Prospecting: 0, Pitching: 0, Negotiation: 0, 'Closed Won': 0, 'Closed Lost': 0 };
+
+        // Clear boards
+        document.getElementById('stage-Prospecting').innerHTML = '';
+        document.getElementById('stage-Pitching').innerHTML = '';
+        document.getElementById('stage-Negotiation').innerHTML = '';
+        document.getElementById('stage-Closed-Won').innerHTML = '';
+
+        deals.forEach(deal => {
+          stages[deal.stage] = (stages[deal.stage] || 0) + 1;
+          const val = Number(deal.value) || 0;
+
+          // KPIs
+          if (deal.stage === 'Closed Won') {
+            wonCount++;
+            if (deal.category === 'Cash') cashRaised += val;
+            else perkValue += val;
+          } else if (deal.stage === 'Closed Lost') {
+            lostCount++;
+          }
+
+          // Weighted calculations
+          let weight = 0;
+          if (deal.stage === 'Prospecting') weight = 0.20;
+          else if (deal.stage === 'Pitching') weight = 0.50;
+          else if (deal.stage === 'Negotiation') weight = 0.75;
+          else if (deal.stage === 'Closed Won') weight = 1.00;
+
+          weightedPipeline += (val * weight);
+
+          // Add card to board stage
+          if (deal.stage !== 'Closed Lost') {
+            const card = document.createElement('div');
+            card.className = 'stage-card';
+            
+            let badgeColor = 'bg-amber-100 text-amber-800';
+            if (deal.category === 'Cash') badgeColor = 'bg-emerald-100 text-emerald-800';
+            else if (deal.category === 'Perk') badgeColor = 'bg-blue-100 text-blue-800';
+
+            card.innerHTML = `
+              <div class="flex justify-between items-start">
+                <strong class="text-[0.78rem] block truncate font-black w-32" title="${deal.company}">${deal.company}</strong>
+                <span class="text-[0.55rem] font-bold px-1.5 py-0.5 border border-black rounded ${badgeColor}">${deal.category}</span>
+              </div>
+              <div class="flex justify-between items-center mt-2">
+                <span class="font-mono font-extrabold text-xs">₹${val.toLocaleString('en-IN')}</span>
+                <div class="flex gap-1">
+                  <button onclick="changeDealStage('${deal.id}', 'next')" class="text-[0.62rem] border border-black px-1 font-extrabold bg-[#eee]">➔</button>
+                </div>
+              </div>
+            `;
+
+            const stageId = deal.stage === 'Closed Won' ? 'stage-Closed-Won' : `stage-${deal.stage}`;
+            const container = document.getElementById(stageId);
+            if (container) container.appendChild(card);
+          }
+        });
+
+        // Set counts labels
+        document.getElementById('countProspecting').textContent = `(${stages['Prospecting']})`;
+        document.getElementById('countPitching').textContent = `(${stages['Pitching']})`;
+        document.getElementById('countNegotiation').textContent = `(${stages['Negotiation']})`;
+        document.getElementById('countClosedWon').textContent = `(${stages['Closed Won']})`;
+
+        // KPIs rendering
+        document.getElementById('statCashRaised').textContent = `₹${(cashRaised/100000).toFixed(2)}L`;
+        document.getElementById('statPerkValue').textContent = `₹${(perkValue/100000).toFixed(2)}L`;
+        document.getElementById('statPipeline').textContent = `₹${(weightedPipeline/100000).toFixed(2)}L`;
+        
+        const totalClosed = wonCount + lostCount;
+        const winRate = totalClosed > 0 ? Math.round((wonCount / totalClosed) * 100) : 100;
+        document.getElementById('statWinRate').textContent = `${winRate}%`;
+
+        // Render Ledger Table
+        const ledgerBody = document.querySelector('#dealsTable tbody');
+        if (ledgerBody) {
+          ledgerBody.innerHTML = '';
+          if (deals.length === 0) {
+            ledgerBody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">No sponsorship opportunities recorded yet.</td></tr>';
+          } else {
+            deals.forEach(deal => {
+              const val = Number(deal.value) || 0;
+              const row = document.createElement('tr');
+              
+              let stageBadge = 'bg-gray-100 text-gray-800';
+              if (deal.stage === 'Closed Won') stageBadge = 'bg-green-100 text-green-800';
+              else if (deal.stage === 'Closed Lost') stageBadge = 'bg-red-100 text-red-800';
+              else if (deal.stage === 'Negotiation') stageBadge = 'bg-blue-100 text-blue-800';
+
+              row.innerHTML = `
+                <td><strong>${deal.company}</strong></td>
+                <td><span class="text-xs uppercase font-extrabold">${deal.category}</span></td>
+                <td><span class="font-mono font-bold">₹${val.toLocaleString('en-IN')}</span></td>
+                <td><span class="px-2 py-0.5 border border-black rounded text-[0.68rem] font-bold ${stageBadge}">${deal.stage}</span></td>
+                <td>
+                  <select onchange="updateDealStageDirect('${deal.id}', this.value)" class="border border-black text-xs font-bold p-1">
+                    <option value="Prospecting" ${deal.stage==='Prospecting'?'selected':''}>Prospecting</option>
+                    <option value="Pitching" ${deal.stage==='Pitching'?'selected':''}>Pitching</option>
+                    <option value="Negotiation" ${deal.stage==='Negotiation'?'selected':''}>Negotiation</option>
+                    <option value="Closed Won" ${deal.stage==='Closed Won'?'selected':''}>Closed Won</option>
+                    <option value="Closed Lost" ${deal.stage==='Closed Lost'?'selected':''}>Closed Lost</option>
+                  </select>
+                </td>
+                <td>
+                  <button onclick="deleteDeal('${deal.id}')" class="text-xs font-bold text-red-500 underline">Delete</button>
+                </td>
+              `;
+              ledgerBody.appendChild(row);
+            });
+          }
+        }
+      }
+
+      // Add Opportunity Submission
+      dealForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const company = document.getElementById('dealCompany').value.trim();
+        const value = Number(document.getElementById('dealValue').value) || 0;
+        const category = document.getElementById('dealCategory').value;
+        const stage = document.getElementById('dealStage').value;
+
+        const deals = JSON.parse(localStorage.getItem('tfc_crm_deals')) || [];
+        const newDeal = {
+          id: 'deal-' + Date.now(),
+          company,
+          value,
+          category,
+          stage
+        };
+
+        deals.push(newDeal);
+        localStorage.setItem('tfc_crm_deals', JSON.stringify(deals));
+        dealForm.reset();
+        renderCRM();
+      });
+
+      // Change Stage on Board
+      window.changeDealStage = (id, action) => {
+        const deals = JSON.parse(localStorage.getItem('tfc_crm_deals')) || [];
+        const deal = deals.find(d => String(d.id) === String(id));
+        if (deal) {
+          const pipelineStages = ['Prospecting', 'Pitching', 'Negotiation', 'Closed Won'];
+          const idx = pipelineStages.indexOf(deal.stage);
+          if (idx !== -1 && idx < pipelineStages.length - 1) {
+            deal.stage = pipelineStages[idx + 1];
+          } else if (deal.stage === 'Closed Won') {
+            deal.stage = 'Closed Lost'; // loop or close lost
+          }
+          localStorage.setItem('tfc_crm_deals', JSON.stringify(deals));
+          renderCRM();
+        }
+      };
+
+      // Update Stage from Table Dropdown
+      window.updateDealStageDirect = (id, newStage) => {
+        const deals = JSON.parse(localStorage.getItem('tfc_crm_deals')) || [];
+        const deal = deals.find(d => String(d.id) === String(id));
+        if (deal) {
+          deal.stage = newStage;
+          localStorage.setItem('tfc_crm_deals', JSON.stringify(deals));
+          renderCRM();
+        }
+      };
+
+      // Delete Deal opportunity
+      window.deleteDeal = (id) => {
+        let deals = JSON.parse(localStorage.getItem('tfc_crm_deals')) || [];
+        deals = deals.filter(d => String(d.id) !== String(id));
+        localStorage.setItem('tfc_crm_deals', JSON.stringify(deals));
+        renderCRM();
+      };
+
+      checkAuth();
+    });
+  </script>
+
+</body>
+</html>

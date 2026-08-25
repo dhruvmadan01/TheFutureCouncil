@@ -685,6 +685,8 @@ async function handleUserRegister(e) {
   const phone = document.getElementById('regPhone').value.trim();
   const password = document.getElementById('regPassword').value;
   const submitBtn = document.getElementById('regSubmitBtn');
+  const refCodeEl = document.getElementById('regReferralCode');
+  const refCode = refCodeEl ? refCodeEl.value.trim() : '';
 
   if (!name || !email || !college || !password) {
     showToast('Please fill in all required fields.', 'error');
@@ -737,12 +739,20 @@ async function handleUserRegister(e) {
     }
   }
 
+  let combinedCollege = college;
+  if (phone) {
+    combinedCollege += ` | Phone: ${phone}`;
+  }
+  if (refCode) {
+    combinedCollege += ` | RefBy: ${refCode}`;
+  }
+
   const newMember = {
     id: memberId,
     member_id: memberId,
     name: name,
     email: email,
-    college: college,
+    college: combinedCollege,
     role: derivedRole,
     tier: 'Unverified',
     avatar: avatarUrl,
@@ -900,8 +910,8 @@ async function loadRadarTalents() {
         }
         
         let displayCollege = member.college || 'Delhi University';
-        if (displayCollege.includes(' | CollegeID: ')) {
-          displayCollege = displayCollege.split(' | CollegeID: ')[0];
+        if (displayCollege.includes(' | ')) {
+          displayCollege = displayCollege.split(' | ')[0];
         }
 
         const skillsArray = Array.isArray(member.skills) ? member.skills : (skillsStr.split(',').map(s => s.trim()).filter(Boolean));

@@ -133,6 +133,10 @@
                 <label for="studentPassword">Choose Password</label>
                 <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
               </div>
+              <div class="form-group">
+                <label for="referralCode">Referral Code / Ambassador Code (Optional)</label>
+                <input type="text" id="referralCode" class="form-control" placeholder="e.g. TFC-AMB-HANSRAJ" />
+              </div>
               
               <button type="submit" class="admin-submit-btn" style="margin-top: 10px;">Apply & Get Badge</button>
             </form>
@@ -248,13 +252,17 @@
         const email = document.getElementById('studentEmail').value.trim().toLowerCase();
         const phone = document.getElementById('studentPhone').value.trim();
         const password = document.getElementById('studentPassword').value;
+        const refCode = document.getElementById('referralCode').value.trim();
 
         // Generate a random 4-digit number
         const randomIdNum = Math.floor(1000 + Math.random() * 9000);
         const memberId = `TFC-2026-${randomIdNum}`;
 
         // Combine college and phone in backwards-compatible layout for profile parser
-        const combinedCollege = `${college} | Phone: ${phone}`;
+        let combinedCollege = `${college} | Phone: ${phone}`;
+        if (refCode) {
+          combinedCollege += ` | RefBy: ${refCode}`;
+        }
 
         try {
           // Check if email exists in database

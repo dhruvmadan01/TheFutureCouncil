@@ -178,12 +178,17 @@
                 <input type="tel" id="regPhone" class="neo-form-input" placeholder="+91 98765 43210" required />
               </div>
 
-              <div class="neo-form-group">
+               <div class="neo-form-group">
                 <label class="neo-form-label" for="regPassword">Create Passkey / Password</label>
                 <div class="password-input-wrap">
                   <input type="password" id="regPassword" class="neo-form-input" placeholder="Minimum 6 characters" minlength="6" required />
                   <button type="button" class="password-toggle-eye" onclick="togglePasswordVisibility('regPassword')">👁️</button>
                 </div>
+              </div>
+
+              <div class="neo-form-group">
+                <label class="neo-form-label" for="regReferralCode">Referral Code / Ambassador Code (Optional)</label>
+                <input type="text" id="regReferralCode" class="neo-form-input" placeholder="e.g. TFC-AMB-HANSRAJ" />
               </div>
 
               <button type="submit" class="neo-btn green" id="regSubmitBtn">
