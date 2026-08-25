@@ -46,6 +46,162 @@
       backdrop-filter: blur(14px);
       background: rgba(0, 0, 0, 0.92);
     }
+    
+    /* Simulator Scoped CSS */
+    .sim-panel {
+      background: #FFF9E6;
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      margin-bottom: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 14px;
+    }
+    .sim-header-status {
+      font-size: 0.75rem;
+      color: #555;
+      margin: 2px 0 0;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sim-tab-btn {
+      background: #eee;
+      border: 2px solid var(--ink);
+      border-bottom: none;
+      padding: 8px 14px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: all 120ms ease;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+    .sim-tab-btn:hover {
+      background: #ddd;
+    }
+    .sim-tab-btn.active-tab {
+      background: var(--ink);
+      color: #fff;
+      padding-bottom: 10px;
+      transform: translateY(2px);
+    }
+    .sim-tabs {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .sim-tabs::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+    }
+    .sim-pill-filter {
+      background: #FAF9F6;
+      border: 2px solid var(--ink);
+      padding: 3px 10px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      color: var(--ink);
+    }
+    .sim-pill-filter:hover {
+      background: #eee;
+    }
+    .sim-pill-filter.active-filter {
+      background: var(--orange);
+      color: #fff;
+    }
+    .sim-radar-subheader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .sim-roast-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 16px;
+      border-radius: 6px;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    
+    @media (max-width: 760px) {
+      .sim-panel {
+        padding: 16px 12px;
+        gap: 12px;
+      }
+      .sim-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 10px;
+      }
+      .sim-header-status {
+        justify-content: center;
+      }
+      .sim-header a {
+        width: 100%;
+        justify-content: center;
+      }
+      .sim-tab-btn {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+      }
+      .sim-pill-filter {
+        padding: 2px 8px;
+        font-size: 0.65rem;
+      }
+      .sim-radar-subheader {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      .sim-radar-subheader div {
+        display: flex;
+        justify-content: center;
+      }
+      .sim-roast-box {
+        padding: 12px;
+        gap: 10px;
+      }
+      .sim-card {
+        padding: 10px !important;
+      }
+      .sim-radar-card {
+        padding: 10px !important;
+      }
+    }
+
+    @keyframes tfc-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.1); }
+    }
+    @keyframes tfc-spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -123,22 +279,256 @@
         </div>
       </div>
 
-      <!-- Exclusive Ecosystem Software Showcase Banner (FOMO) -->
-      <div class="panel" style="background:#FFF9E6; border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); margin-bottom:24px; padding:20px 24px;">
-        <div style="display:flex; align-items:center; gap:16px;">
-          <div style="width:58px; height:58px; flex-shrink:0; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); background:#fff;">
-            <img src="TFC.png" alt="TFC logo" style="width:100%; height:100%; object-fit:cover;" />
-          </div>
-          <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <h3 style="font-size:1.25rem; font-weight:900; text-transform:uppercase; margin:0;">Council OS Mobile Client</h3>
-              <span style="background:var(--ink); color:#FF5E1E; font-size:0.68rem; font-family:monospace; font-weight:900; padding:2px 6px;">Members Only</span>
+      <!-- Interactive Council OS Member Portal Preview (FOMO) -->
+      <div class="panel sim-panel">
+        
+        <!-- Preview Header -->
+        <div class="sim-header">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:48px; height:48px; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); background:#fff; flex-shrink:0;">
+              <img src="TFC.png" alt="TFC logo" style="width:100%; height:100%; object-fit:cover;" />
             </div>
-            <p style="font-size:0.85rem; color:#333; margin:4px 0 0; font-weight:600;">
-              Our custom-built network client is available for approved members. Features the Live Talent Radar, instant co-founder messaging, mixer passes, and direct member directory access.
-            </p>
+            <div>
+              <h3 style="font-size:1.4rem; font-weight:900; text-transform:uppercase; margin:0; line-height:1.1; color: var(--ink);">Council OS Simulator</h3>
+              <p class="sim-header-status">
+                <span style="width:8px; height:8px; background:#00E599; border-radius:50%; display:inline-block; animation: tfc-pulse 1.5s infinite;"></span>
+                <span style="color: var(--ink);">LIVE PREVIEW CLIENT (MEMBERS ONLY)</span>
+              </p>
+            </div>
           </div>
+          <a href="join.html" class="pill-btn alt" style="min-width:auto; padding:8px 16px; font-size:0.8rem; box-shadow:3px 3px 0 var(--ink); margin:0;">
+            <span>Apply for Access ↗</span>
+          </a>
         </div>
+
+        <!-- Simulator Container -->
+        <div class="simulator-container" style="display:flex; flex-direction:column; gap:16px;">
+          
+          <!-- Tab Navigation -->
+          <div class="sim-tabs" style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; border-bottom:2px solid var(--ink);">
+            <button onclick="switchSimTab('sim-radar')" id="tab-sim-radar" class="sim-tab-btn active-tab">🤝 Talent Radar</button>
+            <button onclick="switchSimTab('sim-mixers')" id="tab-sim-mixers" class="sim-tab-btn">🎟️ Mixers</button>
+            <button onclick="switchSimTab('sim-vault')" id="tab-sim-vault" class="sim-tab-btn">🧰 Founder Vault</button>
+            <button onclick="switchSimTab('sim-roast')" id="tab-sim-roast" class="sim-tab-btn">🔥 AI Pitch Roast</button>
+          </div>
+
+          <!-- Active Tab Content Area -->
+          <div id="sim-content-area" style="min-height:280px; color: var(--ink);">
+            
+            <!-- Radar Tab -->
+            <div id="view-sim-radar" class="sim-view">
+              <div class="sim-radar-subheader">
+                <p style="font-size:0.8rem; font-weight:700; color:#555; margin:0;">Spotting 1,580+ verified student founders in Delhi University</p>
+                <div style="display:flex; gap:6px;">
+                  <button onclick="filterSimRadar('all')" class="sim-pill-filter active-filter" id="filter-radar-all">All</button>
+                  <button onclick="filterSimRadar('tech')" class="sim-pill-filter" id="filter-radar-tech">💻 Tech</button>
+                  <button onclick="filterSimRadar('design')" class="sim-pill-filter" id="filter-radar-design">🎨 Design</button>
+                  <button onclick="filterSimRadar('growth')" class="sim-pill-filter" id="filter-radar-growth">📈 Growth</button>
+                </div>
+              </div>
+
+              <!-- Radar Grid of Cards -->
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;" id="sim-radar-grid">
+                
+                <!-- Card 1 -->
+                <div class="sim-card sim-radar-card" data-category="tech" style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; display:flex; flex-direction:column; gap:8px; border-radius:6px;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <img src="dhruv.jpeg" style="width:36px; height:36px; border:2.5px solid var(--ink); border-radius:50%; object-fit:cover;" onerror="this.src='https://ui-avatars.com/api/?name=Dhruv+Madan&background=FF5E1E&color=fff&bold=true'" />
+                    <div>
+                      <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; margin:0;">Dhruv Madan</h4>
+                      <p style="font-size:0.7rem; color:#666; font-weight:700; margin:0;">Faculty of Technology • 2029</p>
+                    </div>
+                  </div>
+                  <div style="background:#E6FBF3; border:1.5px solid var(--ink); color:#064E3B; font-size:0.65rem; font-family:var(--font-mono); font-weight:900; padding:2px 6px; align-self:start; border-radius:4px;">
+                    💻 Tech Lead / Founder
+                  </div>
+                  <p style="font-size:0.75rem; color:#222; font-weight:600; margin:0; line-height:1.3;">
+                    <strong>Building:</strong> Council OS platform. Custom database listeners and mobile frameworks.
+                  </p>
+                  <div style="background:#f4f4f4; border:1px solid #ddd; padding:6px; font-size:0.7rem; line-height:1.25; border-radius:4px; filter:blur(3.5px); -webkit-filter:blur(3.5px); select-none:none; pointer-events:none; position:relative; overflow:hidden;">
+                    <span>📞 +91 93150 XXXXX</span><br>
+                    <span>✉ contact@thefuturecouncil.in</span>
+                  </div>
+                  <div style="font-size:0.65rem; color:var(--orange); font-weight:800; text-align:center;">
+                    🔒 Apply to Council to view contact channels
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="sim-card sim-radar-card" data-category="design" style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; display:flex; flex-direction:column; gap:8px; border-radius:6px;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <img src="https://ui-avatars.com/api/?name=Aanya+Sen&background=D8B4FE&color=000&bold=true" style="width:36px; height:36px; border:2.5px solid var(--ink); border-radius:50%; object-fit:cover;" />
+                    <div>
+                      <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; margin:0;">Aanya Sen</h4>
+                      <p style="font-size:0.7rem; color:#666; font-weight:700; margin:0;">SSCBS • Batch 2027</p>
+                    </div>
+                  </div>
+                  <div style="background:#FFF9E6; border:1.5px solid var(--ink); color:#78350F; font-size:0.65rem; font-family:var(--font-mono); font-weight:900; padding:2px 6px; align-self:start; border-radius:4px;">
+                    🎨 UI/UX & Figma
+                  </div>
+                  <p style="font-size:0.75rem; color:#222; font-weight:600; margin:0; line-height:1.3;">
+                    <strong>Building:</strong> Design system for a DU foodtech startup. Looking for a technical co-founder.
+                  </p>
+                  <div style="background:#f4f4f4; border:1px solid #ddd; padding:6px; font-size:0.7rem; line-height:1.25; border-radius:4px; filter:blur(3.5px); -webkit-filter:blur(3.5px); select-none:none; pointer-events:none; position:relative; overflow:hidden;">
+                    <span>📞 +91 98765 XXXXX</span><br>
+                    <span>✉ aanya@sscb.du.ac.in</span>
+                  </div>
+                  <div style="font-size:0.65rem; color:var(--orange); font-weight:800; text-align:center;">
+                    🔒 Apply to Council to view contact channels
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="sim-card sim-radar-card" data-category="growth" style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; display:flex; flex-direction:column; gap:8px; border-radius:6px;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <img src="https://ui-avatars.com/api/?name=Kabir+Malhotra&background=38BDF8&color=000&bold=true" style="width:36px; height:36px; border:2.5px solid var(--ink); border-radius:50%; object-fit:cover;" />
+                    <div>
+                      <h4 style="font-family:var(--font-heading); font-size:0.9rem; font-weight:900; margin:0;">Kabir Malhotra</h4>
+                      <p style="font-size:0.7rem; color:#666; font-weight:700; margin:0;">SRCC • Batch 2026</p>
+                    </div>
+                  </div>
+                  <div style="background:#EFF6FF; border:1.5px solid var(--ink); color:#1E40AF; font-size:0.65rem; font-family:var(--font-mono); font-weight:900; padding:2px 6px; align-self:start; border-radius:4px;">
+                    📈 Growth & Operations
+                  </div>
+                  <p style="font-size:0.75rem; color:#222; font-weight:600; margin:0; line-height:1.3;">
+                    <strong>Building:</strong> GTM campaigns for student edtech tools. Scaled first project to 4K users.
+                  </p>
+                  <div style="background:#f4f4f4; border:1px solid #ddd; padding:6px; font-size:0.7rem; line-height:1.25; border-radius:4px; filter:blur(3.5px); -webkit-filter:blur(3.5px); select-none:none; pointer-events:none; position:relative; overflow:hidden;">
+                    <span>📞 +91 93245 XXXXX</span><br>
+                    <span>✉ kabir@srcc.du.ac.in</span>
+                  </div>
+                  <div style="font-size:0.65rem; color:var(--orange); font-weight:800; text-align:center;">
+                    🔒 Apply to Council to view contact channels
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Mixers Tab -->
+            <div id="view-sim-mixers" class="sim-view" style="display:none;">
+              <p style="font-size:0.8rem; font-weight:700; color:#555; margin-bottom:12px;">Exclusive offline gatherings for approved founders and operators</p>
+              
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">
+                <!-- Event 1 -->
+                <div style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:16px; border-radius:6px; display:flex; flex-direction:column; gap:8px; position:relative;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="background:var(--ink); color:#FFF; font-size:0.65rem; font-family:var(--font-mono); font-weight:900; padding:2px 6px; border-radius:4px;">IRL MIXER</span>
+                    <span style="font-family:var(--font-mono); font-size:0.68rem; font-weight:900; color:var(--orange);">84/100 RSVP'd</span>
+                  </div>
+                  <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:900; margin:0; text-transform:uppercase; color: var(--ink);">Founder Speed-Dating Mixer</h4>
+                  <p style="font-size:0.75rem; color:#555; margin:0; font-weight:700;">📅 Sept 12, 5:30 PM • 📍 North Campus Hub</p>
+                  <p style="font-size:0.78rem; color:#333; margin:0; line-height:1.4;">Find developers, marketers, and co-founders in 3-minute rapid pitch matches. Finger food & drinks on the house.</p>
+                  <button disabled style="background:#ccc; border:2px solid var(--ink); cursor:not-allowed; color:#555; font-family:var(--font-heading); font-weight:900; font-size:0.8rem; padding:8px; width:100%; border-radius:4px; text-transform:uppercase; margin-top:8px;">
+                    🔒 RSVP (Members Only Pass Required)
+                  </button>
+                </div>
+
+                <!-- Event 2 -->
+                <div style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:16px; border-radius:6px; display:flex; flex-direction:column; gap:8px; position:relative;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="background:var(--ink); color:#FFF; font-size:0.65rem; font-family:var(--font-mono); font-weight:900; padding:2px 6px; border-radius:4px;">AI PITCH ROOM</span>
+                    <span style="font-family:var(--font-mono); font-size:0.68rem; font-weight:900; color:var(--orange);">92/100 RSVP'd</span>
+                  </div>
+                  <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:900; margin:0; text-transform:uppercase; color: var(--ink);">AI Pitch Roast Live & Angels</h4>
+                  <p style="font-size:0.75rem; color:#555; margin:0; font-weight:700;">📅 Sept 19, 4:00 PM • 📍 SSCBS Seminar Hall</p>
+                  <p style="font-size:0.78rem; color:#333; margin:0; line-height:1.4;">Pitch your product to student angel operators and get scored live by our custom AI Pitch roasting algorithm.</p>
+                  <button disabled style="background:#ccc; border:2px solid var(--ink); cursor:not-allowed; color:#555; font-family:var(--font-heading); font-weight:900; font-size:0.8rem; padding:8px; width:100%; border-radius:4px; text-transform:uppercase; margin-top:8px;">
+                    🔒 RSVP (Members Only Pass Required)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vault Tab -->
+            <div id="view-sim-vault" class="sim-view" style="display:none;">
+              <p style="font-size:0.8rem; font-weight:700; color:#555; margin-bottom:12px;">₹15,00,000+ in verified tech credits, tool perks, and micro-grants for student startups</p>
+              
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+                <!-- Perk 1 -->
+                <div style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; border-radius:6px; display:flex; flex-direction:column; justify-content:space-between; gap:8px;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <span style="background:#E6FBF3; border:1px solid var(--ink); color:#064E3B; font-size:0.6rem; font-family:var(--font-mono); font-weight:900; padding:1px 4px; border-radius:4px;">☁️ INFRASTRUCTURE</span>
+                    </div>
+                    <h4 style="font-family:var(--font-heading); font-size:0.95rem; font-weight:900; margin:4px 0 2px; color: var(--ink);">AWS Activate Credits</h4>
+                    <p style="font-size:0.7rem; color:#666; margin:0; font-weight:700; font-family:var(--font-mono); color:var(--orange);">VALUE: $5,000 (₹4.15L)</p>
+                    <p style="font-size:0.72rem; color:#333; line-height:1.3; margin-top:4px;">Full access to AWS cloud credits, premium business support, and architecture consultations.</p>
+                  </div>
+                  <button disabled style="background:#ccc; border:2px solid var(--ink); cursor:not-allowed; color:#555; font-family:var(--font-heading); font-weight:900; font-size:0.75rem; padding:6px; width:100%; border-radius:4px; text-transform:uppercase;">
+                    🔒 Claim Perk
+                  </button>
+                </div>
+
+                <!-- Perk 2 -->
+                <div style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; border-radius:6px; display:flex; flex-direction:column; justify-content:space-between; gap:8px;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <span style="background:#EFF6FF; border:1px solid var(--ink); color:#1E40AF; font-size:0.6rem; font-family:var(--font-mono); font-weight:900; padding:1px 4px; border-radius:4px;">🤖 AI MODEL CREDITS</span>
+                    </div>
+                    <h4 style="font-family:var(--font-heading); font-size:0.95rem; font-weight:900; margin:4px 0 2px; color: var(--ink);">OpenAI Developer API</h4>
+                    <p style="font-size:0.7rem; color:#666; margin:0; font-weight:700; font-family:var(--font-mono); color:var(--orange);">VALUE: $2,500 (₹2.07L)</p>
+                    <p style="font-size:0.72rem; color:#333; line-height:1.3; margin-top:4px;">Direct developer credits for GPT-4o, Whisper, and Embeddings models to ship your AI MVP.</p>
+                  </div>
+                  <button disabled style="background:#ccc; border:2px solid var(--ink); cursor:not-allowed; color:#555; font-family:var(--font-heading); font-weight:900; font-size:0.75rem; padding:6px; width:100%; border-radius:4px; text-transform:uppercase;">
+                    🔒 Claim Perk
+                  </button>
+                </div>
+
+                <!-- Perk 3 -->
+                <div style="background:#fff; border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); padding:12px; border-radius:6px; display:flex; flex-direction:column; justify-content:space-between; gap:8px;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <span style="background:#FFF9E6; border:1px solid var(--ink); color:#78350F; font-size:0.6rem; font-family:var(--font-mono); font-weight:900; padding:1px 4px; border-radius:4px;">⚡ DEVELOPER STACK</span>
+                    </div>
+                    <h4 style="font-family:var(--font-heading); font-size:0.95rem; font-weight:900; margin:4px 0 2px; color: var(--ink);">Supabase Pro</h4>
+                    <p style="font-size:0.7rem; color:#666; margin:0; font-weight:700; font-family:var(--font-mono); color:var(--orange);">VALUE: 1 Year Free Pro</p>
+                    <p style="font-size:0.72rem; color:#333; line-height:1.3; margin-top:4px;">Dedicated Postgres database, authentication, real-time database listeners, and storage.</p>
+                  </div>
+                  <button disabled style="background:#ccc; border:2px solid var(--ink); cursor:not-allowed; color:#555; font-family:var(--font-heading); font-weight:900; font-size:0.75rem; padding:6px; width:100%; border-radius:4px; text-transform:uppercase;">
+                    🔒 Claim Perk
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Pitch Roast Tab (Fully Interactive!) -->
+            <div id="view-sim-roast" class="sim-view" style="display:none;">
+              <p style="font-size:0.8rem; font-weight:700; color:#555; margin-bottom:12px;">Test our AI evaluator. Type in your startup name and market hook to receive a custom roast score.</p>
+              
+              <div class="sim-roast-box">
+                
+                <div style="display:flex; flex-direction:column; gap:4px; text-align: left;">
+                  <label style="font-family:var(--font-heading); font-size:0.75rem; font-weight:900; text-transform:uppercase; color: var(--ink);">Startup / Project Name</label>
+                  <input type="text" id="sim-roast-name" style="border:2px solid var(--ink); padding:8px; font-family:inherit; font-size:0.82rem; border-radius:4px; color: var(--ink); background: #fff;" placeholder="e.g. SamosaAI LSR" />
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:4px; text-align: left;">
+                  <label style="font-family:var(--font-heading); font-size:0.75rem; font-weight:900; text-transform:uppercase; color: var(--ink);">Your 1-Sentence Pitch & Distribution Edge</label>
+                  <textarea id="sim-roast-pitch" rows="2" style="border:2px solid var(--ink); padding:8px; font-family:inherit; font-size:0.82rem; border-radius:4px; color: var(--ink); background: #fff;" placeholder="e.g. We deliver fresh samosas to classrooms during lectures via student riders on campus cycles."></textarea>
+                </div>
+
+                <button onclick="runSimRoast()" style="background:var(--orange); color:#fff; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); font-family:var(--font-heading); font-weight:900; font-size:0.85rem; padding:10px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:all 100ms ease;" id="sim-roast-btn">
+                  ⚡ Get AI Evaluation Roast
+                </button>
+
+                <!-- Loading State (hidden initially) -->
+                <div id="sim-roast-loading" style="display:none; text-align:center; padding:16px; font-family:var(--font-mono); font-size:0.8rem; font-weight:800; color:var(--orange);">
+                  <span class="sim-spinner" style="display:inline-block; width:16px; height:16px; border:2.5px solid var(--orange); border-top-color:transparent; border-radius:50%; animation: tfc-spin 0.6s linear infinite; margin-right:8px; vertical-align:middle;"></span>
+                  <span>Scrutinizing campus TAM... Roasting defensibility barrier...</span>
+                </div>
+
+                <!-- Result Card (hidden initially) -->
+                <div id="sim-roast-result" style="display:none; margin-top:10px; border-top:2px dashed var(--ink); padding-top:12px; color: var(--ink);">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
       <div class="stats-row">
@@ -252,5 +642,134 @@
       </footer>
     </section>
   </main>
+  <script>
+    function switchSimTab(tabId) {
+      // Hide all views
+      document.querySelectorAll('.sim-view').forEach(function(view) {
+        view.style.display = 'none';
+      });
+      // Remove active class from all buttons
+      document.querySelectorAll('.sim-tab-btn').forEach(function(btn) {
+        btn.classList.remove('active-tab');
+      });
+      // Show current view
+      var activeView = document.getElementById('view-' + tabId);
+      if (activeView) {
+        activeView.style.display = 'block';
+      }
+      // Add active class to button
+      var activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('active-tab');
+      }
+    }
+
+    function filterSimRadar(category) {
+      // Remove active class from all filter pills
+      document.querySelectorAll('.sim-pill-filter').forEach(function(pill) {
+        pill.classList.remove('active-filter');
+      });
+      // Add active class to current pill
+      var activePill = document.getElementById('filter-radar-' + category);
+      if (activePill) {
+        activePill.classList.add('active-filter');
+      }
+
+      // Filter cards
+      document.querySelectorAll('.sim-radar-card').forEach(function(card) {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function runSimRoast() {
+      var nameInput = document.getElementById('sim-roast-name');
+      var pitchInput = document.getElementById('sim-roast-pitch');
+      var name = nameInput ? nameInput.value.trim() : '';
+      var pitch = pitchInput ? pitchInput.value.trim() : '';
+
+      if (!name || !pitch) {
+        alert("Please fill in both the project name and your elevator pitch!");
+        return;
+      }
+
+      // Show loading, hide previous result & disable button
+      var btn = document.getElementById('sim-roast-btn');
+      var loader = document.getElementById('sim-roast-loading');
+      var result = document.getElementById('sim-roast-result');
+      
+      if (btn) btn.style.display = 'none';
+      if (loader) loader.style.display = 'block';
+      if (result) result.style.display = 'none';
+
+      setTimeout(function() {
+        // Hide loader, show button & show result
+        if (loader) loader.style.display = 'none';
+        if (btn) btn.style.display = 'block';
+        
+        // Calculate a funny score based on input length or contents
+        var hash = 0;
+        for (var i = 0; i < (name + pitch).length; i++) {
+          hash += (name + pitch).charCodeAt(i);
+        }
+        var score = 60 + (hash % 33); // score between 60 and 92
+        
+        // Select some fun roast bullets
+        var valueProp = "Interesting idea for DU, but will students pay actual money or just ask to borrow it for free?";
+        var defensibility = "Defensibility is paper-thin. A tech student at FoT or SSCBS could copy this over a weekend for the cost of a caffeine high.";
+        var traction = "Traction proof is currently pending. Expand beyond your immediate friend circle before raising campus VC interest.";
+
+        var lowerPitch = pitch.toLowerCase();
+        if (lowerPitch.includes('delivery') || lowerPitch.includes('food') || lowerPitch.includes('samosa') || lowerPitch.includes('chai')) {
+          valueProp = "Food delivery on campus? DU students will walk 50 meters to the canteen to save a ₹10 delivery fee every single time.";
+          defensibility = "Your competitive moat is basically a WhatsApp group that sophomore students will mutiny from next semester.";
+          traction = "Generating ₹500 in weekly revenue from hostel orders isn't scaling. Show how you reach all 90 colleges!";
+        } else if (lowerPitch.includes('ai') || lowerPitch.includes('gpt') || lowerPitch.includes('llm') || lowerPitch.includes('agent') || lowerPitch.includes('assistant')) {
+          valueProp = "Yet another wrapper over OpenAI. Using custom system prompts doesn't make you a system architect.";
+          defensibility = "OpenAI's next system update will deprecate your entire feature set as a native ChatGPT feature.";
+          traction = "Having 20 developers on your Discord waitlist is not product-market fit. Ship the MVP first!";
+        } else if (lowerPitch.includes('crypto') || lowerPitch.includes('web3') || lowerPitch.includes('nft') || lowerPitch.includes('blockchain') || lowerPitch.includes('solidity')) {
+          valueProp = "Web3 for students? Most college students are trying to afford canteen chai, not buy digital tokens.";
+          defensibility = "One smart contract exploit away from student union complaints and campus-wide refunds.";
+          traction = "Zero real-world transactions. Testing on Sepolia testnet does not equal national market validation.";
+        }
+
+        var verdict = "🛠️ NEEDS DISTRIBUTION CLARITY";
+        var verdictColor = "var(--orange)";
+        if (score >= 80) {
+          verdict = "⚡ STRONG SEED POTENTIAL";
+          verdictColor = "#00E599";
+        } else if (score < 70) {
+          verdict = "💀 CRITICAL ABANDONMENT RISK";
+          verdictColor = "#FF5D5D";
+        }
+
+        if (result) {
+          result.innerHTML = '<div style="background:#FFF9E6; border:2px solid var(--ink); border-radius:6px; padding:12px; margin-top:8px; text-align:left;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid var(--ink); padding-bottom:6px; margin-bottom:8px;">' +
+              '<span style="font-family:var(--font-heading); font-weight:900; font-size:0.75rem; background:var(--ink); color:#fff; padding:2px 6px;">ROAST REPORT</span>' +
+              '<span style="font-family:var(--font-mono); font-size:1.1rem; font-weight:900; background:var(--ink); color:#FFE600; padding:2px 8px; border-radius:4px;">' + score + '/100</span>' +
+            '</div>' +
+            '<h4 style="font-family:var(--font-heading); font-size:0.95rem; font-weight:900; color:' + verdictColor + '; margin:0 0 8px;">' + verdict + '</h4>' +
+            '<ul style="font-size:0.72rem; padding-left:14px; margin:0; line-height:1.45; display:flex; flex-direction:column; gap:6px; font-weight:600;">' +
+              '<li><strong>✨ Value Prop:</strong> ' + valueProp + '</li>' +
+              '<li><strong>🛡️ Defensibility:</strong> ' + defensibility + '</li>' +
+              '<li><strong>🚀 Traction:</strong> ' + traction + '</li>' +
+            '</ul>' +
+            '<div style="margin-top:12px; text-align:center;">' +
+              '<a href="join.html" style="display:inline-block; font-size:0.72rem; font-weight:800; color:#fff; background:var(--ink); padding:6px 12px; border:2px solid var(--ink); text-transform:uppercase; text-decoration:none; box-shadow:2px 2px 0 var(--orange); border-radius:4px;">' +
+                '🔓 Unlock Full AI Advisory Board Access →' +
+              '</a>' +
+            '</div>' +
+          '</div>';
+          result.style.display = 'block';
+        }
+
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
