@@ -151,7 +151,7 @@
 
       <div class="admin-grid">
         <!-- Add Partner Form -->
-        <div class="admin-form-panel">
+        <div class="admin-form-panel" style="display: none;">
           <h2>Add New Partner</h2>
           <form id="partnerForm">
             <div class="form-group">
@@ -192,7 +192,7 @@
         </div>
 
         <!-- Add Startup Form -->
-        <div class="admin-form-panel">
+        <div class="admin-form-panel" style="display: none;">
           <h2>Add New Startup</h2>
           <form id="startupForm">
             <div class="form-group">
@@ -233,7 +233,7 @@
         </div>
 
         <!-- Add Member Form -->
-        <div class="admin-form-panel">
+        <div class="admin-form-panel" style="display: none;">
           <h2>Add New Member</h2>
           <form id="memberForm">
             <div class="form-group">
@@ -753,7 +753,6 @@
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${partner.location || ''}</td>
             <td>
-              <button class="admin-edit-btn partner-edit-btn" data-id="${partner.id}">Edit</button>
               <button class="admin-delete-btn" data-id="${partner.id}">Delete</button>
             </td>
           `;
@@ -830,7 +829,6 @@
             <td><span class="uppercase font-extrabold text-xs">${badgeLabel}</span></td>
             <td>${startup.location || ''}</td>
             <td>
-              <button class="admin-edit-btn startup-edit-btn" data-id="${startup.id}">Edit</button>
               <button class="admin-delete-btn" data-id="${startup.id}">Delete</button>
             </td>
           `;
@@ -1247,7 +1245,6 @@
             }
 
             actionHtml += `
-              <button class="admin-edit-btn member-edit-btn" data-id="${member.id}">Edit</button>
               <button class="admin-delete-btn delete-member-btn" data-id="${member.id}">Delete</button>
             `;
 
