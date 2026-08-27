@@ -41,10 +41,12 @@
 
     <nav class="window-tabs">
       <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="startups.html" class="window-tab">Our Startups</a>
-      <a href="membership.html" class="window-tab">Member Portal</a>
+      <a href="fellowship.html" class="window-tab">Fellowship '26</a>
+      <a href="branches.html" class="window-tab">Our Branches</a>
       <a href="join.html" class="window-tab active">Join Council</a>
     </nav>
+
+
 
     <section class="workspace">
       <!-- Nav Header -->
@@ -70,7 +72,7 @@
             Don't just dream about building a company. Build one. Or join one.
           </p>
           <p class="hero-text" style="margin-bottom: 1.5rem;">
-            The Future Council is a pan-Delhi University student-run ecosystem for founders, operators, designers, developers, and marketers. Fill the registration form to pre-approve your membership, generate your custom Member ID card, and access our network.
+            The Future Council is a global student-run ecosystem for founders, operators, designers, developers, and marketers. Fill the registration form to pre-approve your membership, generate your custom Member ID card, and access our network.
           </p>
 
           <!-- Checklist -->
@@ -81,13 +83,13 @@
                 <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Find a co-founder and build your startup team
               </li>
               <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect with developers, designers, and marketers across DU
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect with developers, designers, and marketers globally
               </li>
               <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
                 <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Access exclusive startup playbooks and builder playbooks
               </li>
               <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Build with ambitious builders across 90+ Delhi University colleges
+                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Build with ambitious builders across top colleges and campuses worldwide
               </li>
               <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
                 <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect directly with corporate sponsors, mentors, and investors
@@ -113,46 +115,111 @@
             </div>
             
             <form id="signupForm">
-              <div class="form-group">
-                <label for="studentName">Full Name</label>
-                <input type="text" id="studentName" class="form-control" placeholder="e.g. Kartik Goel" required />
+              <!-- STEP 1 CONTAINER -->
+              <div id="step1Container">
+                <div class="form-group">
+                  <label for="studentName">Full Name</label>
+                  <input type="text" id="studentName" class="form-control" placeholder="e.g. Kartik Goel" required />
+                </div>
+                <div class="form-group">
+                  <label for="studentCollegeSelect">Select Your College</label>
+                  <select id="studentCollegeSelect" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;" required>
+                    <option value="" disabled selected>-- Choose College --</option>
+                    <option value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</option>
+                    <option value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</option>
+                    <option value="Hansraj College">Hansraj College</option>
+                    <option value="Hindu College">Hindu College</option>
+                    <option value="St. Stephen's College">St. Stephen's College</option>
+                    <option value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</option>
+                    <option value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</option>
+                    <option value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</option>
+                    <option value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</option>
+                    <option value="Miranda House">Miranda House</option>
+                    <option value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</option>
+                    <option value="SGTB Khalsa College">SGTB Khalsa College</option>
+                    <option value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</option>
+                    <option value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</option>
+                    <option value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</option>
+                    <option value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</option>
+                    <option value="IIT Delhi">IIT Delhi</option>
+                    <option value="other">Other (Write in below...)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="customCollegeGroup" style="display: none;">
+                  <label for="studentCollegeCustom">Write Your College Name</label>
+                  <input type="text" id="studentCollegeCustom" class="form-control" placeholder="Enter your college / university name" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+                </div>
+                <div class="form-group">
+                  <label for="studentYear">Current Year of Study</label>
+                  <select id="studentYear" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;" required>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                    <option value="Postgraduate">Postgraduate</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="studentEmail">Student Email</label>
+                  <input type="email" id="studentEmail" class="form-control" placeholder="e.g. kartik@sscbs.du.ac.in" required />
+                </div>
+                <div class="form-group">
+                  <label for="studentPhone">Phone Number</label>
+                  <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 93102 59143" required />
+                </div>
+                <div class="form-group">
+                  <label for="studentPassword">Choose Password</label>
+                  <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
+                </div>
+                <div class="form-group">
+                  <label for="fellowshipApply">Are you applying for Fellowship '26?</label>
+                  <select id="fellowshipApply" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;">
+                    <option value="no">No, just joining the general network</option>
+                    <option value="yes">Yes, registering my startup team for Fellowship '26 🚀</option>
+                  </select>
+                </div>
+                <div class="form-group" id="societyGroup" style="display:none;">
+                  <label for="societyName">Member College Society / Chapter Name (If applicable)</label>
+                  <input type="text" id="societyName" class="form-control" placeholder="e.g. Finance Club SSCBS or E-Cell Hansraj" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+                </div>
+                <div class="form-group">
+                  <label for="referralCode">Referral Code / Ambassador Code (Optional)</label>
+                  <input type="text" id="referralCode" class="form-control" placeholder="e.g. TFC-AMB-HANSRAJ" />
+                </div>
+                
+                <button type="button" id="nextStepBtn" class="admin-submit-btn" style="margin-top: 10px;">Next: Onboarding Questionnaire →</button>
               </div>
-              <div class="form-group">
-                <label for="studentCollege">College & Year</label>
-                <input type="text" id="studentCollege" class="form-control" placeholder="e.g. SSCBS, 2nd Year" required />
+
+              <!-- STEP 2 CONTAINER -->
+              <div id="step2Container" style="display: none;">
+                <p style="font-size: 0.82rem; font-weight: bold; background: #FFF9E6; border: 2px solid var(--ink); padding: 10px; margin-bottom: 18px; line-height: 1.4; color: var(--ink);">
+                  ✨ Step 1 credentials validated. Please answer these quick onboarding questions to complete your application.
+                </p>
+                <div class="form-group">
+                  <label for="question1">Q1: Why are you interested in entrepreneurship?</label>
+                  <textarea id="question1" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="Tell us what draws you to building or startup culture..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="question2">Q2: Are you building anything right now or thinking of building something? If yes, on which stage are you, tell us more.</label>
+                  <textarea id="question2" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="Describe your idea, project, or startup (even if it is just a concept)..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="question3">Q3: What's your motivation to join The Future Council?</label>
+                  <textarea id="question3" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="What do you hope to learn or contribute..." required></textarea>
+                </div>
+
+                <button type="submit" class="admin-submit-btn" style="margin-top: 10px;">Complete Registration & Get Badge</button>
               </div>
-              <div class="form-group">
-                <label for="studentEmail">Student Email</label>
-                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. kartik@sscbs.du.ac.in" required />
-              </div>
-              <div class="form-group">
-                <label for="studentPhone">Phone Number</label>
-                <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 93102 59143" required />
-              </div>
-              <div class="form-group">
-                <label for="studentPassword">Choose Password</label>
-                <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
-              </div>
-              <div class="form-group">
-                <label for="referralCode">Referral Code / Ambassador Code (Optional)</label>
-                <input type="text" id="referralCode" class="form-control" placeholder="e.g. TFC-AMB-HANSRAJ" />
-              </div>
-              
-              <button type="submit" class="admin-submit-btn" style="margin-top: 10px;">Apply & Get Badge</button>
             </form>
 
-            <div style="text-align: center; margin-top: 1.25rem; padding-top: 1rem; border-top: 2px dashed var(--ink);">
-              <p style="font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">Already a member?</p>
-              <a href="membership.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #000; border: 2px solid var(--ink); color: #ff9e59; font-size: 0.8rem; padding: 6px 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 100ms ease, box-shadow 100ms ease;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='2px 2px 0 var(--ink)'" onmouseout="this.style.transform='none'; this.style.boxShadow='none'">Log in to Portal</a>
-            </div>
           </div>
 
           <!-- Success View (Hidden by default) -->
           <div class="admin-form-panel hidden" id="successPanel" style="width: 100%; margin: 0; box-sizing: border-box; text-align: center; color: var(--ink);">
-            <h2 style="color: #10b981; border-color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Registration Successful!</h2>
+            <h2 style="color: #10b981; border-color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Thank You!</h2>
             
             <p style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.45;">
-              Congratulations! Your member profile is active. Here is your generated ID Card:
+              We have received your application. We will reach out to you for further shortlisting within a week! Here is your digital ecosystem member card:
             </p>
 
             <!-- ID Card Container -->
@@ -205,10 +272,10 @@
             </div>
 
             <p style="font-size: 0.8rem; color: #666; margin-bottom: 1.5rem; line-height: 1.45;">
-              Log in to the portal to add your profile picture, LinkedIn, biography, or print/download your digital ID badge.
+              Our campus society chapter leaders will reach out to you via WhatsApp/Email to onboard your team and activate your local branch.
             </p>
 
-            <a href="membership.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center;">Enter Member Portal</a>
+            <a href="index.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center;">Return to Home Hub</a>
           </div>
         </div>
       </div>
@@ -234,13 +301,47 @@
       const signupFormPanel = document.getElementById('signupFormPanel');
       const successPanel = document.getElementById('successPanel');
       const signupError = document.getElementById('signupError');
+      const nextStepBtn = document.getElementById('nextStepBtn');
+      const step1Container = document.getElementById('step1Container');
+      const step2Container = document.getElementById('step2Container');
 
       // Initialize Supabase Client
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-      // Auto-populate referral code from URL parameter '?ref=XYZ'
+      // Handle custom college dropdown change
+      const collegeSelect = document.getElementById('studentCollegeSelect');
+      const customCollegeGroup = document.getElementById('customCollegeGroup');
+      const customCollegeInput = document.getElementById('studentCollegeCustom');
+      if (collegeSelect && customCollegeGroup && customCollegeInput) {
+        collegeSelect.addEventListener('change', () => {
+          if (collegeSelect.value === 'other') {
+            customCollegeGroup.style.display = 'block';
+            customCollegeInput.required = true;
+          } else {
+            customCollegeGroup.style.display = 'none';
+            customCollegeInput.required = false;
+          }
+        });
+      }
+
+      // Toggle society name input based on fellowship selection
+      const fellowshipSelect = document.getElementById('fellowshipApply');
+      const societyGroup = document.getElementById('societyGroup');
+      if (fellowshipSelect && societyGroup) {
+        fellowshipSelect.addEventListener('change', () => {
+          if (fellowshipSelect.value === 'yes') {
+            societyGroup.style.display = 'block';
+            document.getElementById('societyName').required = true;
+          } else {
+            societyGroup.style.display = 'none';
+            document.getElementById('societyName').required = false;
+          }
+        });
+      }
+
+      // Auto-populate referral code or fellowship selection from URL parameter '?ref=XYZ'
       const urlParams = new URLSearchParams(window.location.search);
       const refParam = urlParams.get('ref');
       if (refParam) {
@@ -248,34 +349,65 @@
         if (refField) {
           refField.value = refParam.toUpperCase().trim();
         }
+        if (refParam.toLowerCase() === 'fellowship') {
+          if (fellowshipSelect) {
+            fellowshipSelect.value = 'yes';
+            fellowshipSelect.dispatchEvent(new Event('change'));
+          }
+        }
       }
 
-      signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = signupForm.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Registering...';
+      // State tracking variables
+      let currentEmail = '';
+      let currentName = '';
+      let currentCollegeText = '';
+      let currentCombinedCollegeBase = '';
+      let currentMemberId = '';
+      let currentPassword = '';
+
+      // STEP 1 Checkpoint Handler
+      nextStepBtn.addEventListener('click', async () => {
         signupError.classList.add('hidden');
 
+        // Form fields
         const name = document.getElementById('studentName').value.trim();
-        const college = document.getElementById('studentCollege').value.trim();
+        const collegeSelectVal = document.getElementById('studentCollegeSelect').value;
+        const collegeCustomVal = document.getElementById('studentCollegeCustom').value.trim();
+        const studentYearVal = document.getElementById('studentYear').value;
         const email = document.getElementById('studentEmail').value.trim().toLowerCase();
         const phone = document.getElementById('studentPhone').value.trim();
         const password = document.getElementById('studentPassword').value;
         const refCode = document.getElementById('referralCode').value.trim();
+        const fellowshipApply = document.getElementById('fellowshipApply').value;
+        const societyName = document.getElementById('societyName') ? document.getElementById('societyName').value.trim() : '';
 
-        // Generate a random 4-digit number
-        const randomIdNum = Math.floor(1000 + Math.random() * 9000);
-        const memberId = `TFC-2026-${randomIdNum}`;
+        // Validate Step 1 fields
+        if (!name || !collegeSelectVal || (collegeSelectVal === 'other' && !collegeCustomVal) || !email || !phone || !password) {
+          signupForm.reportValidity();
+          return;
+        }
+
+        nextStepBtn.disabled = true;
+        nextStepBtn.textContent = 'Saving details...';
+
+        const finalCollege = collegeSelectVal === 'other' ? collegeCustomVal : collegeSelectVal;
+        const cleanCollegeDisplay = `${finalCollege}, ${studentYearVal}`;
 
         // Combine college and phone in backwards-compatible layout for profile parser
-        let combinedCollege = `${college} | Phone: ${phone}`;
+        let combinedCollege = `${cleanCollegeDisplay} | Phone: ${phone}`;
+        if (fellowshipApply === 'yes') {
+          combinedCollege += ` | Fellowship: Yes | Society: ${societyName}`;
+        }
         if (refCode) {
           combinedCollege += ` | RefBy: ${refCode}`;
         }
 
+        // Generate a random 4-digit number for TFC ID
+        const randomIdNum = Math.floor(1000 + Math.random() * 9000);
+        const memberId = `TFC-2026-${randomIdNum}`;
+
         try {
-          // Check if email exists in database
+          // Check if email already exists
           const { data: dbMember, error: queryError } = await supabaseClient
             .from('members')
             .select('id')
@@ -289,12 +421,12 @@
           if (dbMember) {
             signupError.textContent = "A member with this email already exists! Try logging in or contact support.";
             signupError.classList.remove('hidden');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Apply & Get Badge';
+            nextStepBtn.disabled = false;
+            nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
             return;
           }
 
-          // Insert registration into database
+          // Insert registration checkpoint into database (Unverified/Student tier)
           const memberData = {
             email: email,
             name: name,
@@ -302,7 +434,7 @@
             tier: 'Student',
             member_id: memberId,
             password: password,
-            image: '' // empty default image profile
+            image: ''
           };
 
           const { error: insertError } = await supabaseClient
@@ -311,41 +443,84 @@
 
           if (insertError) throw insertError;
 
-          // Populate and show success card preview
-          document.getElementById('cardMemberName').textContent = name;
-          document.getElementById('cardMemberCollege').textContent = college;
-          document.getElementById('cardMemberId').textContent = memberId;
-          document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(memberId)}`;
+          // Cache Step 1 state
+          currentEmail = email;
+          currentName = name;
+          currentCollegeText = cleanCollegeDisplay;
+          currentCombinedCollegeBase = combinedCollege;
+          currentMemberId = memberId;
+          currentPassword = password;
+
+          // Transition to Step 2
+          step1Container.style.display = 'none';
+          step2Container.style.display = 'block';
+          signupFormPanel.scrollIntoView({ behavior: 'smooth' });
+
+        } catch (err) {
+          console.error("Step 1 saving failed:", err);
+          signupError.textContent = "Saving details failed: " + (err.message || "Please check your network and try again.");
+          signupError.classList.remove('hidden');
+        } finally {
+          nextStepBtn.disabled = false;
+          nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
+        }
+      });
+
+      // STEP 2 Form Submit Handler
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = signupForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting answers...';
+        signupError.classList.add('hidden');
+
+        const q1 = document.getElementById('question1').value.trim();
+        const q2 = document.getElementById('question2').value.trim();
+        const q3 = document.getElementById('question3').value.trim();
+
+        // Safe replace delimiters
+        const safeQ1 = q1.replace(/\|/g, '/');
+        const safeQ2 = q2.replace(/\|/g, '/');
+        const safeQ3 = q3.replace(/\|/g, '/');
+
+        // Append Q1, Q2, Q3 to metadata college string
+        const finalCollegeData = `${currentCombinedCollegeBase} | Q1: ${safeQ1} | Q2: ${safeQ2} | Q3: ${safeQ3}`;
+
+        try {
+          // Update details with onboarding answers
+          const { error: updateError } = await supabaseClient
+            .from('members')
+            .update({ college: finalCollegeData })
+            .eq('email', currentEmail);
+
+          if (updateError) throw updateError;
+
+          // Populate ID badge
+          document.getElementById('cardMemberName').textContent = currentName;
+          document.getElementById('cardMemberCollege').textContent = currentCollegeText;
+          document.getElementById('cardMemberId').textContent = currentMemberId;
+          document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
 
           signupFormPanel.classList.add('hidden');
           successPanel.classList.remove('hidden');
 
-          // Auto-login into session storage so they can easily enter the Member Portal
-          const AUTH_KEY = 'tfc_member_auth';
-          const USERNAME_KEY = 'tfc_member_name';
-          const COLLEGE_KEY = 'tfc_member_college';
-          const TIER_KEY = 'tfc_member_tier';
-          const ID_KEY = 'tfc_member_id';
-          const PHOTO_KEY = 'tfc_member_photo';
-          const EMAIL_KEY = 'tfc_member_email';
-          const PASSWORD_KEY = 'tfc_member_password';
-
-          sessionStorage.setItem(AUTH_KEY, 'true');
-          sessionStorage.setItem(USERNAME_KEY, name);
-          sessionStorage.setItem(COLLEGE_KEY, combinedCollege);
-          sessionStorage.setItem(TIER_KEY, 'Student');
-          sessionStorage.setItem(ID_KEY, memberId);
-          sessionStorage.setItem(PHOTO_KEY, '');
-          sessionStorage.setItem(EMAIL_KEY, email);
-          sessionStorage.setItem(PASSWORD_KEY, password);
+          // Set SessionStorage active state
+          sessionStorage.setItem('tfc_member_auth', 'true');
+          sessionStorage.setItem('tfc_member_name', currentName);
+          sessionStorage.setItem('tfc_member_college', finalCollegeData);
+          sessionStorage.setItem('tfc_member_tier', 'Student');
+          sessionStorage.setItem('tfc_member_id', currentMemberId);
+          sessionStorage.setItem('tfc_member_photo', '');
+          sessionStorage.setItem('tfc_member_email', currentEmail);
+          sessionStorage.setItem('tfc_member_password', currentPassword);
 
         } catch (err) {
-          console.error("Signup submission failed:", err);
-          signupError.textContent = "Registration failed: " + (err.message || "Please check your network and try again.");
+          console.error("Step 2 updating failed:", err);
+          signupError.textContent = "Submitting answers failed: " + (err.message || "Failed to update response database.");
           signupError.classList.remove('hidden');
         } finally {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Apply & Get Badge';
+          submitBtn.textContent = 'Complete Registration & Get Badge';
         }
       });
     });

@@ -65,8 +65,8 @@
     </header>
     <nav class="window-tabs">
       <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="startups.html" class="window-tab">Our Startups</a>
-      <a href="membership.html" class="window-tab">Member Portal</a>
+      <a href="fellowship.html" class="window-tab">Fellowship '26</a>
+      <a href="branches.html" class="window-tab">Our Branches</a>
       <!-- <a href="TheFutureCouncil.apk" download="TheFutureCouncil.apk" class="window-tab" style="background:#00E599; color:#000; font-weight:900;">📲 Download APK</a> -->
       <a href="join.html" class="window-tab">Join Council</a>
       <a href="admin.html" class="window-tab active">Admin Panel</a>
@@ -1088,7 +1088,7 @@
               idCardBase64 = parts[1];
             }
             if (displayCollege.includes(' | ')) {
-              displayCollege = displayCollege.split(' | ').join(' • ');
+              displayCollege = displayCollege.split(' | ')[0];
             }
 
             let tierColor = 'text-blue-500';
@@ -1099,13 +1099,22 @@
             }
 
             let actionHtml = '';
+            
+            // Check if there are onboarding questionnaire answers
+            const hasAnswers = rawCollege.includes(' | Q1: ') || rawCollege.includes(' | Q2: ') || rawCollege.includes(' | Q3: ');
+            if (hasAnswers) {
+              actionHtml += `
+                <button onclick="viewApplication('${member.id}'); return false;" class="admin-edit-btn" style="background:#ff9e59; color:#000; margin-bottom:8px; display:block; width:100%; text-align:center; box-shadow: 2px 2px 0 var(--ink);">📋 View Application</button>
+              `;
+            }
+
             if (member.tier && member.tier.toLowerCase() === 'unverified') {
               if (idCardBase64) {
                 actionHtml += `
                   <a href="#" onclick="viewIdCard('${member.id}'); return false;" class="text-yellow-400 font-extrabold underline block text-xs mb-2">👁️ View College ID</a>
                   <button class="admin-edit-btn approve-member-btn" data-id="${member.id}" style="background:#10b981; color:#000; margin-right:4px;">Approve</button>
                 `;
-              } else {
+              } else if (!hasAnswers) {
                 actionHtml += `<span class="text-xs text-gray-400 italic block mb-2">No ID Uploaded</span>`;
               }
             }
@@ -1216,6 +1225,134 @@
             alert("No ID uploaded for this member.");
           }
         }
+      };
+
+      window.viewApplication = (id) => {
+        const member = cachedCustomMembers.find(m => String(m.id) === String(id));
+        if (!member) {
+          alert("Member not found!");
+          return;
+        }
+
+        const collegeStr = member.college || '';
+        let cleanCollege = collegeStr;
+        let q1 = 'Not answered';
+        let q2 = 'Not answered';
+        let q3 = 'Not answered';
+
+        // Parse Q1, Q2, Q3 from college metadata string
+        const parts = collegeStr.split(' | ');
+        const meta = {};
+        parts.forEach(part => {
+          if (part.startsWith('Phone: ')) {
+            meta.phone = part.replace('Phone: ', '');
+          } else if (part.startsWith('Fellowship: ')) {
+            meta.fellowship = part.replace('Fellowship: ', '');
+          } else if (part.startsWith('Society: ')) {
+            meta.society = part.replace('Society: ', '');
+          } else if (part.startsWith('RefBy: ')) {
+            meta.refBy = part.replace('RefBy: ', '');
+          } else if (part.startsWith('Q1: ')) {
+            q1 = part.replace('Q1: ', '');
+          } else if (part.startsWith('Q2: ')) {
+            q2 = part.replace('Q2: ', '');
+          } else if (part.startsWith('Q3: ')) {
+            q3 = part.replace('Q3: ', '');
+          }
+        });
+
+        cleanCollege = parts[0] ? parts[0].split(' | CollegeID: ')[0] : 'N/A';
+
+        // Create or get modal element
+        let modal = document.getElementById('applicationModal');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'applicationModal';
+          modal.style = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            color: #000;
+          `;
+          document.body.appendChild(modal);
+        }
+
+        modal.innerHTML = `
+          <div style="
+            background: #fff7eb;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            padding: 24px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+          ">
+            <button onclick="document.getElementById('applicationModal').style.display='none'" style="
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              background: #ff5d5d;
+              color: #fff;
+              border: 2px solid #000;
+              font-weight: bold;
+              padding: 4px 8px;
+              cursor: pointer;
+              box-shadow: 2px 2px 0 #000;
+            ">✕ CLOSE</button>
+            <h2 style="font-weight:900; font-size:1.5rem; text-transform:uppercase; margin-top:0; border-bottom:3.5px solid #000; padding-bottom:8px; margin-bottom:16px;">
+              📋 Application Details
+            </h2>
+            <div style="margin-bottom: 16px; font-size: 0.9rem; line-height: 1.5; font-weight:700;">
+              <p style="margin: 4px 0;"><strong>Name:</strong> ${member.name}</p>
+              <p style="margin: 4px 0;"><strong>Email:</strong> ${member.email}</p>
+              <p style="margin: 4px 0;"><strong>College:</strong> ${cleanCollege}</p>
+              <p style="margin: 4px 0;"><strong>Phone:</strong> ${meta.phone || 'N/A'}</p>
+              <p style="margin: 4px 0;"><strong>Fellowship Applied:</strong> ${meta.fellowship || 'No'}</p>
+              \${meta.society ? \`<p style="margin: 4px 0;"><strong>Society:</strong> \${meta.society}</p>\` : ''}
+              \${meta.refBy ? \`<p style="margin: 4px 0;"><strong>Referral Code:</strong> \${meta.refBy}</p>\` : ''}
+            </div>
+            
+            <div style="border-top:2px dashed #000; padding-top:12px; display:flex; flex-direction:column; gap:16px;">
+              <div>
+                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                  Q1: Why are you interested in entrepreneurship?
+                </h4>
+                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                  \${q1}
+                </p>
+              </div>
+              <div>
+                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                  Q2: Are you building anything right now?
+                </h4>
+                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                  \${q2}
+                </p>
+              </div>
+              <div>
+                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                  Q3: Motivation to join The Future Council?
+                </h4>
+                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                  \${q3}
+                </p>
+              </div>
+            </div>
+          </div>
+        `;
+        modal.style.display = 'flex';
       };
 
       // Add Member Form

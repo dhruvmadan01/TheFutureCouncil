@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Branches | The Future Council</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background: #000000;
+      color: #f7f3ee;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    ::selection {
+      background: rgba(255, 158, 89, 0.2);
+      color: #fff;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="desktop-window">
+    <header class="window-bar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">The Future Council</div>
+    </header>
+
+    <nav class="window-tabs">
+      <a href="index.html" class="window-tab">Home Hub</a>
+      <a href="fellowship.html" class="window-tab">Fellowship '26</a>
+      <a href="branches.html" class="window-tab active">Our Branches</a>
+      <a href="join.html" class="window-tab">Join Council</a>
+    </nav>
+
+
+
+    <section class="workspace">
+      <!-- Nav Header / Back Button -->
+      <div class="partners-nav-header">
+        <a href="index.html" class="back-link-btn">
+          <span class="icon">←</span>
+          <span>Back to Home</span>
+        </a>
+        <div class="brand-row mini-brand">
+          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
+          <span class="mini-kicker">Global Campus Chapters</span>
+        </div>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="partners-hero">
+        <h1 class="hero-title">Our Branches</h1>
+        <p class="hero-text">The Future Council is the world's biggest student-run startup ecosystem. We operate through local campus branches. We are active across all premier institutions of Delhi University and are expanding globally to build regional hubs of builder talent.</p>
+      </div>
+
+      <!-- Filters Section -->
+      <div class="filter-container">
+        <div class="mini-label">Filter Branches</div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All Branches</button>
+          <button class="filter-btn" data-filter="du">Delhi University</button>
+          <button class="filter-btn" data-filter="national">National (IITs/Tech)</button>
+        </div>
+      </div>
+
+      <!-- Branches Grid -->
+      <div class="partners-grid" id="branchesGrid" style="margin-bottom: 36px;">
+        
+        <!-- FoT DU -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">FOT</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Faculty of Technology (FoT)</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Primary technical builder chapter. Hosts system architecture camps, hackathons, and software engineering cohorts.</p>
+          </div>
+        </article>
+
+        <!-- SRCC -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">SRCC</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Shri Ram College of Commerce (SRCC)</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Leading branch for commerce-tech, fintech, corporate relations, and early business development.</p>
+          </div>
+        </article>
+
+        <!-- Hansraj -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">HRC</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Hansraj College</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Focuses on student incubation support, startup mixers, and early product validation workshops.</p>
+          </div>
+        </article>
+
+        <!-- Hindu -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">HIN</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Hindu College</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Centering on social tech ventures, policy integration, and product design sprints.</p>
+          </div>
+        </article>
+
+        <!-- St. Stephen's -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">STE</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>St. Stephen's College</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Focuses on liberal arts integrations in tech, creator economy projects, and research labs.</p>
+          </div>
+        </article>
+
+        <!-- KMC -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">KMC</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Kirori Mal College (KMC)</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Runs venture building workshops, operations cohorts, and peer mentoring networks.</p>
+          </div>
+        </article>
+
+        <!-- IPCW -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">IPCW</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Indraprastha College for Women (IPCW)</h3>
+            <p class="partner-location">Delhi University • North Delhi</p>
+            <p class="partner-desc">Focusing on media-tech, female entrepreneurship events, and consumer internet products.</p>
+          </div>
+        </article>
+
+        <!-- LSR -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">LSR</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Lady Shri Ram College (LSR)</h3>
+            <p class="partner-location">Delhi University • South Delhi</p>
+            <p class="partner-desc">Dedicated to women in tech, UI/UX design, growth operations, and social impact ventures.</p>
+          </div>
+        </article>
+
+        <!-- Venky -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">SVC</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Sri Venkateswara College (Venky)</h3>
+            <p class="partner-location">Delhi University • South Delhi</p>
+            <p class="partner-desc">Fostering bio-tech, logistics, and retail-tech initiatives across South Campus.</p>
+          </div>
+        </article>
+
+        <!-- Miranda House -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">MH</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Miranda House</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Chapter for science-tech, deep-tech research translation, and health-tech solutions.</p>
+          </div>
+        </article>
+
+        <!-- Daulat Ram College -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">DRC</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Daulat Ram College (DRC)</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Hosts marketing masterclasses, creative design sprints, and brand management cohorts.</p>
+          </div>
+        </article>
+
+        <!-- SGTB Khalsa -->
+        <article class="partner-card panel bg-white" data-category="du" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">KHAL</div>
+            <span class="partner-badge badge-academic">DU Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>SGTB Khalsa College</h3>
+            <p class="partner-location">Delhi University • North Campus</p>
+            <p class="partner-desc">Fostering web3 dev squads, fintech analytics, and local campus startup pilots.</p>
+          </div>
+        </article>
+
+        <!-- DTU -->
+        <article class="partner-card panel bg-white" data-category="national" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">DTU</div>
+            <span class="partner-badge badge-venture">National Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Delhi Technological University (DTU)</h3>
+            <p class="partner-location">DTU • Bawana Road</p>
+            <p class="partner-desc">Highly engineering-centric branch focusing on cloud infrastructure, SaaS, and robotics ventures.</p>
+          </div>
+        </article>
+
+        <!-- NSUT -->
+        <article class="partner-card panel bg-white" data-category="national" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">NSUT</div>
+            <span class="partner-badge badge-venture">National Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>Netaji Subhas University of Technology (NSUT)</h3>
+            <p class="partner-location">NSUT • Dwarka</p>
+            <p class="partner-desc">Focusing on mobile applications, AI/ML models, algorithmic trading bots, and developer tooling.</p>
+          </div>
+        </article>
+
+        <!-- IGDTUW -->
+        <article class="partner-card panel bg-white" data-category="national" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">IGD</div>
+            <span class="partner-badge badge-venture">National Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>IGDTUW</h3>
+            <p class="partner-location">IGDTUW • Kashmiri Gate</p>
+            <p class="partner-desc">Connecting engineering minds. Hosts women-led hackathons, cybersecurity projects, and web development clinics.</p>
+          </div>
+        </article>
+
+        <!-- IIITD -->
+        <article class="partner-card panel bg-white" data-category="national" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp">IIITD</div>
+            <span class="partner-badge badge-venture">National Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>IIIT Delhi (IIITD)</h3>
+            <p class="partner-location">IIITD • Okhla Phase III</p>
+            <p class="partner-desc">Pioneering computational design, data analytics, ML engineering research, and product design cohorts.</p>
+          </div>
+        </article>
+
+        <!-- IIT Delhi -->
+        <article class="partner-card panel bg-white" data-category="national" style="color: var(--ink);">
+          <div class="partner-card-header">
+            <div class="partner-logo-stamp text-orange">IITD</div>
+            <span class="partner-badge badge-venture">National Chapter</span>
+          </div>
+          <div class="partner-card-body">
+            <h3>IIT Delhi</h3>
+            <p class="partner-location">IIT Delhi • Hauz Khas</p>
+            <p class="partner-desc">Pioneering deep-tech, robotics, clean-tech, AI agent systems, and venture scale models.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Launch a Branch CTA -->
+      <section class="cta-band branches-cta">
+        <div>
+          <p class="mini-label">Expand the Network</p>
+          <h2>Want to launch a Future Council branch in your college or university?</h2>
+        </div>
+        <a href="mailto:contact@thefuturecouncil.in?subject=Application%20to%20Launch%20a%20Branch" class="pill-btn alt">
+          <span class="icon">🏛️</span>
+          <span class="divider"></span>
+          <span>Apply to Launch Branch</span>
+        </a>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand-side">
+          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
+          <a href="index.html" class="footer-link">Back to Hub</a>
+        </div>
+        <div class="footer-meta">
+          <div class="apply-now">Join Our Global Network</div>
+          <div class="url-text">thefuturecouncil.in</div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const branchCards = document.querySelectorAll('.partner-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.getAttribute('data-filter');
+
+          branchCards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+              card.style.display = 'flex';
+              card.style.animation = 'none';
+              card.offsetHeight; /* trigger reflow */
+              card.style.animation = null;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

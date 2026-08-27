@@ -8,9 +8,6 @@ if (!fs.existsSync(wwwDir)) {
 
 // List of files to copy into www
 const filesToCopy = [
-  'app.html',
-  'app.css',
-  'app.js',
   'style.css',
   'script.js',
   'TFC.png',
@@ -20,10 +17,10 @@ const filesToCopy = [
   'office.jpg',
   'join now.png',
   'tfc-logo.svg',
-  'membership.html',
-  'startups.html',
   'join.html',
   'partners.html',
+  'fellowship.html',
+  'branches.html',
   'admin.html',
   'marketing.html',
   'ambassador.html',
@@ -42,16 +39,9 @@ for (const file of filesToCopy) {
   }
 }
 
-// Copy app.html as index.html so the Android app boots directly to the Member App!
-const appHtmlSrc = path.join(__dirname, 'app.html');
+// Copy index.html as the primary Capacitor app entrypoint
+const indexHtmlSrc = path.join(__dirname, 'index.html');
 const indexHtmlDest = path.join(wwwDir, 'index.html');
-fs.copyFileSync(appHtmlSrc, indexHtmlDest);
-console.log('Set app.html as www/index.html (app entrypoint)');
-
-// Also preserve original index.html as hub.html
-const origIndexSrc = path.join(__dirname, 'index.html');
-const hubHtmlDest = path.join(wwwDir, 'hub.html');
-if (fs.existsSync(origIndexSrc)) {
-  fs.copyFileSync(origIndexSrc, hubHtmlDest);
-}
+fs.copyFileSync(indexHtmlSrc, indexHtmlDest);
+console.log('Set index.html as www/index.html (app entrypoint)');
 console.log('Mobile assets preparation complete!');
