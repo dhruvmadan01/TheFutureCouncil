@@ -25,6 +25,10 @@
       background: rgba(255, 158, 89, 0.2);
       color: #fff;
     }
+    .dropdown-item:hover {
+      background-color: #fff7eb !important;
+      color: #ff9e59 !important;
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -121,33 +125,30 @@
                   <label for="studentName">Full Name</label>
                   <input type="text" id="studentName" class="form-control" placeholder="e.g. Kartik Goel" required />
                 </div>
-                <div class="form-group">
-                  <label for="studentCollegeSelect">Select Your College</label>
-                  <select id="studentCollegeSelect" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;" required>
-                    <option value="" disabled selected>-- Choose College --</option>
-                    <option value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</option>
-                    <option value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</option>
-                    <option value="Hansraj College">Hansraj College</option>
-                    <option value="Hindu College">Hindu College</option>
-                    <option value="St. Stephen's College">St. Stephen's College</option>
-                    <option value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</option>
-                    <option value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</option>
-                    <option value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</option>
-                    <option value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</option>
-                    <option value="Miranda House">Miranda House</option>
-                    <option value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</option>
-                    <option value="SGTB Khalsa College">SGTB Khalsa College</option>
-                    <option value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</option>
-                    <option value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</option>
-                    <option value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</option>
-                    <option value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</option>
-                    <option value="IIT Delhi">IIT Delhi</option>
-                    <option value="other">Other (Write in below...)</option>
-                  </select>
-                </div>
-                <div class="form-group" id="customCollegeGroup" style="display: none;">
-                  <label for="studentCollegeCustom">Write Your College Name</label>
-                  <input type="text" id="studentCollegeCustom" class="form-control" placeholder="Enter your college / university name" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+                <div class="form-group" style="position: relative;">
+                  <label for="studentCollegeInput">Select or Search Your College</label>
+                  <div class="custom-select-wrapper" style="position: relative; width: 100%;">
+                    <input type="text" id="studentCollegeInput" class="form-control" placeholder="Search or type your college..." autocomplete="off" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box;" required />
+                    <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); z-index: 1000; max-height: 200px; overflow-y: auto; margin-top: 4px; color: #000;">
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hansraj College">Hansraj College</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hindu College">Hindu College</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="St. Stephen's College">St. Stephen's College</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Miranda House">Miranda House</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
+                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="studentYear">Current Year of Study</label>
@@ -161,7 +162,7 @@
                 </div>
                 <div class="form-group">
                   <label for="studentEmail">Student Email</label>
-                  <input type="email" id="studentEmail" class="form-control" placeholder="e.g. kartik@sscbs.du.ac.in" required />
+                  <input type="email" id="studentEmail" class="form-control" placeholder="e.g. kartik@srcc.du.ac.in" required />
                 </div>
                 <div class="form-group">
                   <label for="studentPhone">Phone Number</label>
@@ -172,15 +173,11 @@
                   <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
                 </div>
                 <div class="form-group">
-                  <label for="fellowshipApply">Are you applying for Fellowship '26?</label>
+                  <label for="fellowshipApply">Are you interested in the Fellowship Program?</label>
                   <select id="fellowshipApply" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;">
                     <option value="no">No, just joining the general network</option>
-                    <option value="yes">Yes, registering my startup team for Fellowship '26 🚀</option>
+                    <option value="yes">Yes, I am interested 🚀</option>
                   </select>
-                </div>
-                <div class="form-group" id="societyGroup" style="display:none;">
-                  <label for="societyName">Member College Society / Chapter Name (If applicable)</label>
-                  <input type="text" id="societyName" class="form-control" placeholder="e.g. Finance Club SSCBS or E-Cell Hansraj" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
                 </div>
                 <div class="form-group">
                   <label for="referralCode">Referral Code / Ambassador Code (Optional)</label>
@@ -248,7 +245,7 @@
                       </div>
                       <div class="member-card-field">
                         <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">COLLEGE</span>
-                        <span class="member-card-value" id="cardMemberCollege" style="font-size: 0.72rem; line-height: 1.3;">SSCBS</span>
+                        <span class="member-card-value" id="cardMemberCollege" style="font-size: 0.72rem; line-height: 1.3;">SRCC</span>
                       </div>
                       <div class="member-card-field">
                         <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">ID NUMBER</span>
@@ -310,40 +307,54 @@
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-      // Handle custom college dropdown change
-      const collegeSelect = document.getElementById('studentCollegeSelect');
-      const customCollegeGroup = document.getElementById('customCollegeGroup');
-      const customCollegeInput = document.getElementById('studentCollegeCustom');
-      if (collegeSelect && customCollegeGroup && customCollegeInput) {
-        collegeSelect.addEventListener('change', () => {
-          if (collegeSelect.value === 'other') {
-            customCollegeGroup.style.display = 'block';
-            customCollegeInput.required = true;
-          } else {
-            customCollegeGroup.style.display = 'none';
-            customCollegeInput.required = false;
+      // Custom search-select dropdown logic
+      const collegeInput = document.getElementById('studentCollegeInput');
+      const collegeDropdown = document.getElementById('collegeDropdown');
+      const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+      if (collegeInput && collegeDropdown) {
+        // Show dropdown on focus
+        collegeInput.addEventListener('focus', () => {
+          collegeDropdown.style.display = 'block';
+        });
+
+        // Filter dropdown items as the user types
+        collegeInput.addEventListener('input', () => {
+          collegeDropdown.style.display = 'block';
+          const filter = collegeInput.value.toLowerCase();
+          dropdownItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(filter)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+
+        // Select an item
+        dropdownItems.forEach(item => {
+          item.addEventListener('click', (e) => {
+            collegeInput.value = item.getAttribute('data-value');
+            collegeDropdown.style.display = 'none';
+            e.stopPropagation();
+          });
+        });
+
+        // Hide dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.custom-select-wrapper')) {
+            collegeDropdown.style.display = 'none';
           }
         });
       }
 
-      // Toggle society name input based on fellowship selection
-      const fellowshipSelect = document.getElementById('fellowshipApply');
-      const societyGroup = document.getElementById('societyGroup');
-      if (fellowshipSelect && societyGroup) {
-        fellowshipSelect.addEventListener('change', () => {
-          if (fellowshipSelect.value === 'yes') {
-            societyGroup.style.display = 'block';
-            document.getElementById('societyName').required = true;
-          } else {
-            societyGroup.style.display = 'none';
-            document.getElementById('societyName').required = false;
-          }
-        });
-      }
+
 
       // Auto-populate referral code or fellowship selection from URL parameter '?ref=XYZ'
       const urlParams = new URLSearchParams(window.location.search);
       const refParam = urlParams.get('ref');
+      const fellowshipSelect = document.getElementById('fellowshipApply');
       if (refParam) {
         const refField = document.getElementById('referralCode');
         if (refField) {
@@ -352,7 +363,6 @@
         if (refParam.toLowerCase() === 'fellowship') {
           if (fellowshipSelect) {
             fellowshipSelect.value = 'yes';
-            fellowshipSelect.dispatchEvent(new Event('change'));
           }
         }
       }
@@ -371,8 +381,7 @@
 
         // Form fields
         const name = document.getElementById('studentName').value.trim();
-        const collegeSelectVal = document.getElementById('studentCollegeSelect').value;
-        const collegeCustomVal = document.getElementById('studentCollegeCustom').value.trim();
+        const collegeInputVal = document.getElementById('studentCollegeInput').value.trim();
         const studentYearVal = document.getElementById('studentYear').value;
         const email = document.getElementById('studentEmail').value.trim().toLowerCase();
         const phone = document.getElementById('studentPhone').value.trim();
@@ -382,7 +391,7 @@
         const societyName = document.getElementById('societyName') ? document.getElementById('societyName').value.trim() : '';
 
         // Validate Step 1 fields
-        if (!name || !collegeSelectVal || (collegeSelectVal === 'other' && !collegeCustomVal) || !email || !phone || !password) {
+        if (!name || !collegeInputVal || !email || !phone || !password) {
           signupForm.reportValidity();
           return;
         }
@@ -390,7 +399,7 @@
         nextStepBtn.disabled = true;
         nextStepBtn.textContent = 'Saving details...';
 
-        const finalCollege = collegeSelectVal === 'other' ? collegeCustomVal : collegeSelectVal;
+        const finalCollege = collegeInputVal;
         const cleanCollegeDisplay = `${finalCollege}, ${studentYearVal}`;
 
         // Combine college and phone in backwards-compatible layout for profile parser
