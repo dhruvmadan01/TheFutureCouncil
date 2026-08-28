@@ -12,6 +12,7 @@
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -299,6 +300,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Elements
       const signupForm = document.getElementById('signupForm');
+
+      // EmailJS Configurations
+      const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"; // Replace with your EmailJS Public Key
+      const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // Replace with your EmailJS Service ID
+      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Replace with your EmailJS Template ID
+
+      if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+      }
       const signupFormPanel = document.getElementById('signupFormPanel');
       const successPanel = document.getElementById('successPanel');
       const signupError = document.getElementById('signupError');
@@ -544,6 +554,27 @@
             document.getElementById('cardMemberCollege').textContent = currentCollegeText;
             document.getElementById('cardMemberId').textContent = currentMemberId;
             document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
+
+            // Send welcome email via EmailJS (asynchronously in the background)
+            if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY" && EMAILJS_SERVICE_ID !== "YOUR_SERVICE_ID" && EMAILJS_TEMPLATE_ID !== "YOUR_TEMPLATE_ID") {
+              const templateParams = {
+                to_name: currentName,
+                to_email: currentEmail,
+                member_id: currentMemberId,
+                college: currentCollegeText,
+                dashboard_url: "https://thefuturecouncil.in/download"
+              };
+
+              emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(response => {
+                  console.log("Welcome email sent successfully via EmailJS!", response.status, response.text);
+                })
+                .catch(err => {
+                  console.error("Failed to send welcome email via EmailJS:", err);
+                });
+            } else {
+              console.log("EmailJS keys not configured yet. Skipping welcome email dispatch.");
+            }
 
             signupFormPanel.classList.add('hidden');
             successPanel.classList.remove('hidden');
