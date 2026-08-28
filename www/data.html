@@ -627,18 +627,47 @@
             ${meta.country ? `<div><strong>Country:</strong> ${meta.country}</div>` : ''}
             
             <div style="background:#FFF9E6; border:2px solid #000; padding:12px; margin-top:14px;" class="space-y-3">
-              <div>
-                <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q1: Why are you interested in entrepreneurship?</p>
-                <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
-              </div>
-              <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: Are you building anything right now?</p>
-                <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
-              </div>
-              <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q3: What's your motivation to join The Future Council?</p>
-                <p style="margin:0; font-weight:700; color:#222;">${meta.q3 || 'Not Answered'}</p>
-              </div>
+              ${(() => {
+                if (meta.source === 'FellowshipPage') {
+                  return `
+                    <div>
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q1: What startup idea are you building/validating?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
+                    </div>
+                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: What is your motivation to join Fellowship Residency in Delhi NCR?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
+                    </div>
+                  `;
+                } else if (meta.source === 'FinancialAid') {
+                  let aidCase = '';
+                  const caseParts = member.college.split(' | ');
+                  caseParts.forEach(p => {
+                    if (p.startsWith('Case: ')) aidCase = p.replace('Case: ', '').trim();
+                  });
+                  return `
+                    <div>
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Financial Aid Case justification</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${aidCase || 'Not Answered'}</p>
+                    </div>
+                  `;
+                } else {
+                  return `
+                    <div>
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q1: Why are you interested in entrepreneurship?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
+                    </div>
+                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: Are you building anything right now?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
+                    </div>
+                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q3: What's your motivation to join The Future Council?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q3 || 'Not Answered'}</p>
+                    </div>
+                  `;
+                }
+              })()}
             </div>
           </div>
         </div>

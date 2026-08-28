@@ -25,6 +25,9 @@
       background: rgba(255, 158, 89, 0.2);
       color: #fff;
     }
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -349,14 +352,14 @@
           <div class="step" style="background: #000; color: #fff; border-color: #000; display: flex; align-items: center; justify-content: center; text-align: center;">
             <div>
               <h4 style="font-weight: 900; font-size: 1.1rem; text-transform: uppercase;">Are you ready?</h4>
-              <a href="join.html?ref=fellowship" style="color: #ff9e59; font-weight: 800; text-decoration: underline; margin-top: 4px; display: inline-block;">Apply Today →</a>
+              <a href="#fellowshipFormSection" style="color: #ff9e59; font-weight: 800; text-decoration: underline; margin-top: 4px; display: inline-block;">Apply Today →</a>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Fellowship Application Form Panel -->
-      <section class="panel wide" style="background: #fff; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); margin-bottom: 32px; padding: 24px; color: var(--ink);">
+      <section id="fellowshipFormSection" class="panel wide" style="background: #fff; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); margin-bottom: 32px; padding: 24px; color: var(--ink);">
         <p class="mini-label" style="color: var(--orange); margin-bottom: 8px;">FELLOWSHIP '26 REGISTRATION</p>
         <h2 style="font-size: 1.6rem; font-weight: 900; text-transform: uppercase; border-bottom: 2.5px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px;">
           Apply for Fellowship Cohort
@@ -433,7 +436,7 @@
           <p class="mini-label">Fellowship Cohort 01</p>
           <h2 style="font-size: 1.3rem;">Get your student startup funded, backed, and scaled.</h2>
         </div>
-        <a href="join.html?ref=fellowship" class="pill-btn alt" style="background: var(--orange); color: #fff;">
+        <a href="#fellowshipFormSection" class="pill-btn alt" style="background: var(--orange); color: #fff;">
           <span class="icon">✨</span>
           <span class="divider"></span>
           <span>Apply for Fellowship</span>
