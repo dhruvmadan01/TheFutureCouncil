@@ -169,6 +169,10 @@
                   <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 93102 59143" required />
                 </div>
                 <div class="form-group">
+                  <label for="studentCountry">Country</label>
+                  <input type="text" id="studentCountry" class="form-control" placeholder="e.g. India" required />
+                </div>
+                <div class="form-group">
                   <label for="studentPassword">Choose Password</label>
                   <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
                 </div>
@@ -385,13 +389,14 @@
         const studentYearVal = document.getElementById('studentYear').value;
         const email = document.getElementById('studentEmail').value.trim().toLowerCase();
         const phone = document.getElementById('studentPhone').value.trim();
+        const country = document.getElementById('studentCountry').value.trim();
         const password = document.getElementById('studentPassword').value;
         const refCode = document.getElementById('referralCode').value.trim();
         const fellowshipApply = document.getElementById('fellowshipApply').value;
         const societyName = document.getElementById('societyName') ? document.getElementById('societyName').value.trim() : '';
 
         // Validate Step 1 fields
-        if (!name || !collegeInputVal || !email || !phone || !password) {
+        if (!name || !collegeInputVal || !email || !phone || !country || !password) {
           signupForm.reportValidity();
           return;
         }
@@ -403,7 +408,7 @@
         const cleanCollegeDisplay = `${finalCollege}, ${studentYearVal}`;
 
         // Combine college and phone in backwards-compatible layout for profile parser
-        let combinedCollege = `${cleanCollegeDisplay} | Phone: ${phone}`;
+        let combinedCollege = `${cleanCollegeDisplay} | Phone: ${phone} | Country: ${country}`;
         if (fellowshipApply === 'yes') {
           combinedCollege += ` | Fellowship: Yes | Society: ${societyName}`;
         }
