@@ -9,6 +9,7 @@ if (!fs.existsSync(wwwDir)) {
 // List of files to copy into www
 const filesToCopy = [
   'style.css',
+  'fellowship.css',
   'script.js',
   'TFC.png',
   'dhruv.jpeg',
