@@ -205,7 +205,7 @@
                   <textarea id="question3" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="What do you hope to learn or contribute..." required></textarea>
                 </div>
 
-                <button type="submit" class="admin-submit-btn" style="margin-top: 10px;">Complete Registration & Get Badge</button>
+                <button type="button" id="completeSignupBtn" class="admin-submit-btn" style="margin-top: 10px;">Complete Registration & Get Badge</button>
               </div>
             </form>
 
@@ -419,7 +419,7 @@
           // Check if email already exists
           const { data: dbMember, error: queryError } = await supabaseClient
             .from('members')
-            .select('id')
+            .select('*')
             .eq('email', email)
             .maybeSingle();
 
@@ -428,11 +428,30 @@
           }
 
           if (dbMember) {
-            signupError.textContent = "A member with this email already exists! Try logging in or contact support.";
-            signupError.classList.remove('hidden');
-            nextStepBtn.disabled = false;
-            nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
-            return;
+            const hasAnswers = dbMember.college && dbMember.college.includes(' | Q1: ');
+            if (hasAnswers) {
+              signupError.textContent = "A member with this email already exists! Try logging in or contact support.";
+              signupError.classList.remove('hidden');
+              nextStepBtn.disabled = false;
+              nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
+              return;
+            } else {
+              // Proceed directly to Step 2 using existing member data
+              currentEmail = dbMember.email;
+              currentName = dbMember.name;
+              currentCollegeText = cleanCollegeDisplay;
+              currentCombinedCollegeBase = dbMember.college;
+              currentMemberId = dbMember.member_id || memberId;
+              currentPassword = dbMember.password || password;
+
+              // Transition to Step 2
+              step1Container.style.display = 'none';
+              step2Container.style.display = 'block';
+              signupFormPanel.scrollIntoView({ behavior: 'smooth' });
+              nextStepBtn.disabled = false;
+              nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
+              return;
+            }
           }
 
           // Insert registration checkpoint into database (Unverified/Student tier)
@@ -475,63 +494,75 @@
         }
       });
 
-      // STEP 2 Form Submit Handler
-      signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = signupForm.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting answers...';
-        signupError.classList.add('hidden');
+      // STEP 2 Form Complete Handler
+      const completeSignupBtn = document.getElementById('completeSignupBtn');
+      if (completeSignupBtn) {
+        completeSignupBtn.addEventListener('click', async () => {
+          const q1Input = document.getElementById('question1');
+          const q2Input = document.getElementById('question2');
+          const q3Input = document.getElementById('question3');
 
-        const q1 = document.getElementById('question1').value.trim();
-        const q2 = document.getElementById('question2').value.trim();
-        const q3 = document.getElementById('question3').value.trim();
+          if (!q1Input.value.trim() || !q2Input.value.trim() || !q3Input.value.trim()) {
+            q1Input.reportValidity();
+            q2Input.reportValidity();
+            q3Input.reportValidity();
+            return;
+          }
 
-        // Safe replace delimiters
-        const safeQ1 = q1.replace(/\|/g, '/');
-        const safeQ2 = q2.replace(/\|/g, '/');
-        const safeQ3 = q3.replace(/\|/g, '/');
+          completeSignupBtn.disabled = true;
+          completeSignupBtn.textContent = 'Submitting answers...';
+          signupError.classList.add('hidden');
 
-        // Append Q1, Q2, Q3 to metadata college string
-        const finalCollegeData = `${currentCombinedCollegeBase} | Q1: ${safeQ1} | Q2: ${safeQ2} | Q3: ${safeQ3}`;
+          const q1 = q1Input.value.trim();
+          const q2 = q2Input.value.trim();
+          const q3 = q3Input.value.trim();
 
-        try {
-          // Update details with onboarding answers
-          const { error: updateError } = await supabaseClient
-            .from('members')
-            .update({ college: finalCollegeData })
-            .eq('email', currentEmail);
+          // Safe replace delimiters
+          const safeQ1 = q1.replace(/\|/g, '/');
+          const safeQ2 = q2.replace(/\|/g, '/');
+          const safeQ3 = q3.replace(/\|/g, '/');
 
-          if (updateError) throw updateError;
+          // Append Q1, Q2, Q3 to metadata college string
+          const finalCollegeData = `${currentCombinedCollegeBase} | Q1: ${safeQ1} | Q2: ${safeQ2} | Q3: ${safeQ3}`;
 
-          // Populate ID badge
-          document.getElementById('cardMemberName').textContent = currentName;
-          document.getElementById('cardMemberCollege').textContent = currentCollegeText;
-          document.getElementById('cardMemberId').textContent = currentMemberId;
-          document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
+          try {
+            // Update details with onboarding answers
+            const { error: updateError } = await supabaseClient
+              .from('members')
+              .update({ college: finalCollegeData })
+              .eq('email', currentEmail);
 
-          signupFormPanel.classList.add('hidden');
-          successPanel.classList.remove('hidden');
+            if (updateError) throw updateError;
 
-          // Set SessionStorage active state
-          sessionStorage.setItem('tfc_member_auth', 'true');
-          sessionStorage.setItem('tfc_member_name', currentName);
-          sessionStorage.setItem('tfc_member_college', finalCollegeData);
-          sessionStorage.setItem('tfc_member_tier', 'Student');
-          sessionStorage.setItem('tfc_member_id', currentMemberId);
-          sessionStorage.setItem('tfc_member_photo', '');
-          sessionStorage.setItem('tfc_member_email', currentEmail);
-          sessionStorage.setItem('tfc_member_password', currentPassword);
+            // Populate ID badge
+            document.getElementById('cardMemberName').textContent = currentName;
+            document.getElementById('cardMemberCollege').textContent = currentCollegeText;
+            document.getElementById('cardMemberId').textContent = currentMemberId;
+            document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
 
-        } catch (err) {
-          console.error("Step 2 updating failed:", err);
-          signupError.textContent = "Submitting answers failed: " + (err.message || "Failed to update response database.");
-          signupError.classList.remove('hidden');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Complete Registration & Get Badge';
-        }
-      });
+            signupFormPanel.classList.add('hidden');
+            successPanel.classList.remove('hidden');
+
+            // Set SessionStorage active state
+            sessionStorage.setItem('tfc_member_auth', 'true');
+            sessionStorage.setItem('tfc_member_name', currentName);
+            sessionStorage.setItem('tfc_member_college', finalCollegeData);
+            sessionStorage.setItem('tfc_member_tier', 'Student');
+            sessionStorage.setItem('tfc_member_id', currentMemberId);
+            sessionStorage.setItem('tfc_member_photo', '');
+            sessionStorage.setItem('tfc_member_email', currentEmail);
+            sessionStorage.setItem('tfc_member_password', currentPassword);
+
+          } catch (err) {
+            console.error("Step 2 updating failed:", err);
+            signupError.textContent = "Submitting answers failed: " + (err.message || "Failed to update response database.");
+            signupError.classList.remove('hidden');
+          } finally {
+            completeSignupBtn.disabled = false;
+            completeSignupBtn.textContent = 'Complete Registration & Get Badge';
+          }
+        });
+      }
     });
   </script>
 </body>
