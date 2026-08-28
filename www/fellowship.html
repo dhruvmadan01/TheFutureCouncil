@@ -11,6 +11,7 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -70,6 +71,28 @@
           We operate through local campus branches in different colleges, connecting elite student builders. Fellowship '26 brings together 20 high-potential startup squads from our member societies across Delhi University and beyond to build, validate, and scale.
         </p>
       </div>
+
+      <!-- Fellowship Fee & Location Notice Card -->
+      <section class="panel wide" style="background: #fff; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); margin-bottom: 32px; padding: 24px; color: var(--ink);">
+        <p class="mini-label" style="color: var(--orange); margin-bottom: 8px;">FELLOWSHIP FEE & LOCATION REQUIREMENTS</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: center;">
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; color: var(--ink);">📍 Delhi NCR Residency</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5; font-weight: 600; color: #333;">
+              Fellowship '26 is an offline residency. You must be present in Delhi NCR or ready to travel. We provide support for accommodation.
+            </p>
+          </div>
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; color: var(--ink);">💰 Fee: ₹1.5 Lakhs</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5; font-weight: 600; color: #333; margin-bottom: 12px;">
+              Need-blind admissions. We offer extensive scholarship packages and accommodation assistance for deserving squads.
+            </p>
+            <button type="button" onclick="openFinancialAidModal()" class="admin-submit-btn" style="width: auto; padding: 8px 16px; background: var(--orange); color: #fff; border: 2.5px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; display: inline-block;">
+              Apply for Financial Assistance ↘
+            </button>
+          </div>
+        </div>
+      </section>
 
       <!-- Program Pillars Grid -->
       <div class="mini-label" style="margin-top: 32px;">Cohort Benefits & Offerings</div>
@@ -332,6 +355,46 @@
         </div>
       </section>
 
+      <!-- Fellowship Application Form Panel -->
+      <section class="panel wide" style="background: #fff; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); margin-bottom: 32px; padding: 24px; color: var(--ink);">
+        <p class="mini-label" style="color: var(--orange); margin-bottom: 8px;">FELLOWSHIP '26 REGISTRATION</p>
+        <h2 style="font-size: 1.6rem; font-weight: 900; text-transform: uppercase; border-bottom: 2.5px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px;">
+          Apply for Fellowship Cohort
+        </h2>
+        
+        <form id="fellowshipDirectForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          <div class="form-group">
+            <label for="fName" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">Full Name</label>
+            <input type="text" id="fName" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box; background:#fff; color:#000;" placeholder="e.g. Zarif Latif" />
+          </div>
+          <div class="form-group">
+            <label for="fEmail" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">Email Address</label>
+            <input type="email" id="fEmail" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box; background:#fff; color:#000;" placeholder="e.g. zarif@bracu.ac.bd" />
+          </div>
+          <div class="form-group">
+            <label for="fPhone" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">Phone Number</label>
+            <input type="tel" id="fPhone" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box; background:#fff; color:#000;" placeholder="e.g. +91 93102 59143" />
+          </div>
+          <div class="form-group">
+            <label for="fCollege" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">College & Year</label>
+            <input type="text" id="fCollege" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box; background:#fff; color:#000;" placeholder="e.g. BRAC University, 4th Year" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1; margin-bottom: 8px;">
+            <label for="fQ1" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">Q1: What startup idea are you building/validating?</label>
+            <textarea id="fQ1" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; min-height: 80px; box-sizing: border-box; background:#fff; color:#000;" placeholder="Describe your product vertical, target users, and current progress..."></textarea>
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1; margin-bottom: 12px;">
+            <label for="fQ2" style="font-weight: 800; font-size: 0.72rem; text-transform: uppercase; display: block; margin-bottom: 4px;">Q2: What is your motivation to join Fellowship Residency in Delhi NCR?</label>
+            <textarea id="fQ2" required class="form-control" style="border: 2px solid var(--ink); padding: 8px; width: 100%; min-height: 80px; box-sizing: border-box; background:#fff; color:#000;" placeholder="Why do you want to participate in this offline residency program?"></textarea>
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1; margin-bottom: 0;">
+            <button type="submit" class="admin-submit-btn" style="background: var(--orange); color: #fff; width: 100%;">
+              Submit Fellowship Application 🚀
+            </button>
+          </div>
+        </form>
+      </section>
+
       <!-- FAQs -->
       <div class="mini-label">Frequently Asked Questions</div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
@@ -343,9 +406,9 @@
         </div>
 
         <div class="panel bg-white p-5" style="color: var(--ink);">
-          <h4 style="font-family: var(--font-heading); font-weight: 900; font-size: 1rem; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">Is there a cost or equity requirement?</h4>
+          <h4 style="font-family: var(--font-heading); font-weight: 900; font-size: 1rem; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">What is the fee and is financial aid available?</h4>
           <p style="font-size: 0.85rem; color: #444; margin-top: 8px; line-height: 1.5; font-weight: 600;">
-            No. The Future Council is 100% student-run and equity-free. Our mission is to democratize entrepreneurship for university students. The ₹50,000 cash grant and all infrastructure credits are fully equity-free.
+            The program fee for Fellowship '26 is ₹1.5 Lakhs. However, we offer 100% need-blind admissions and extensive scholarships. Accommodation assistance is provided for founders traveling to Delhi NCR.
           </p>
         </div>
 
@@ -390,5 +453,129 @@
       </footer>
     </section>
   </main>
+  <script>
+    // Initialize Supabase Client
+    const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Financial Aid Request modal popup
+    function openFinancialAidModal() {
+      const modal = document.createElement('div');
+      modal.id = 'financialAidOverlay';
+      modal.style.cssText = `
+        position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+        display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 20px;
+      `;
+      modal.innerHTML = `
+        <div style="background:#FAF9F6; border:4px solid #000; box-shadow:8px 8px 0 #000; padding:28px; max-width:500px; width:100%; position:relative; color:#000;">
+          <button onclick="document.getElementById('financialAidOverlay').remove()" style="position:absolute; top:12px; right:12px; background:#ff5d5d; color:#fff; border:2px solid #000; font-weight:bold; padding:4px 10px; cursor:pointer;">✕ CLOSE</button>
+          
+          <h2 style="font-size:1.3rem; font-weight:900; border-bottom:3.5px solid #000; padding-bottom:6px; margin-bottom:16px; text-transform:uppercase; font-family:'Space Grotesk', sans-serif;">
+            💸 Financial Assistance Application
+          </h2>
+          <p style="font-size:0.85rem; line-height:1.5; font-weight:600; margin-bottom:16px;">
+            The Future Council guarantees need-blind enrollment. Deserving student founders will receive partial or full sponsorship.
+          </p>
+          <form id="financialAidForm" class="space-y-4">
+            <div>
+              <label style="display:block; font-size:0.7rem; font-weight:900; text-transform:uppercase; margin-bottom:4px;">Full Name</label>
+              <input type="text" id="aidName" required class="w-full border-2 border-black p-2 text-xs font-bold focus:outline-none" style="background:#fff; color:#000;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.7rem; font-weight:900; text-transform:uppercase; margin-bottom:4px;">Email Address</label>
+              <input type="email" id="aidEmail" required class="w-full border-2 border-black p-2 text-xs font-bold focus:outline-none" style="background:#fff; color:#000;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.7rem; font-weight:900; text-transform:uppercase; margin-bottom:4px;">State your Financial Aid Case (Brief)</label>
+              <textarea id="aidCase" required class="w-full border-2 border-black p-2 text-xs font-bold focus:outline-none" style="min-height:80px; background:#fff; color:#000;" placeholder="Why do you need financial assistance? Describe your financial context..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-black text-[#ff9e59] border-2 border-black p-2.5 font-extrabold uppercase text-xs hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+              Submit Assistance Request ⚡
+            </button>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      document.getElementById('financialAidForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        const name = document.getElementById('aidName').value.trim();
+        const email = document.getElementById('aidEmail').value.trim();
+        const aidCase = document.getElementById('aidCase').value.trim();
+
+        // Save inside Supabase database
+        const combinedDetails = `Financial Aid Application | Case: ${aidCase.replace(/\|/g, '/')} | Source: FinancialAid`;
+        try {
+          const { error } = await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combinedDetails,
+            tier: 'Student',
+            member_id: `TFC-AID-${Math.floor(1000 + Math.random() * 9000)}`,
+            password: 'aidguest2026',
+            image: ''
+          }]);
+
+          if (error) throw error;
+          alert("Your financial aid application has been logged. Our admissions board will reach out to you!");
+          document.getElementById('financialAidOverlay').remove();
+        } catch (err) {
+          alert("Submission failed: " + err.message);
+          btn.disabled = false;
+          btn.textContent = 'Submit Assistance Request ⚡';
+        }
+      });
+    }
+
+    // Direct Fellowship Application Form submit
+    const fForm = document.getElementById('fellowshipDirectForm');
+    if (fForm) {
+      fForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = fForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Submitting Application...';
+
+        const name = document.getElementById('fName').value.trim();
+        const email = document.getElementById('fEmail').value.trim();
+        const phone = document.getElementById('fPhone').value.trim();
+        const college = document.getElementById('fCollege').value.trim();
+        const q1 = document.getElementById('fQ1').value.trim().replace(/\|/g, '/');
+        const q2 = document.getElementById('fQ2').value.trim().replace(/\|/g, '/');
+
+        // Compile combined metadata layout with Source: FellowshipPage
+        const combinedCollege = `${college} | Phone: ${phone} | Source: FellowshipPage | Q1: ${q1} | Q2: ${q2}`;
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        const memberId = `TFC-FEL-${randomNum}`;
+
+        try {
+          const { error } = await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combinedCollege,
+            tier: 'Student',
+            member_id: memberId,
+            password: 'fellow2026',
+            image: ''
+          }]);
+
+          if (error) throw error;
+
+          alert("Application submitted successfully! Check your inbox or WhatsApp for updates.");
+          fForm.reset();
+        } catch (err) {
+          alert("Submission failed: " + err.message);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Submit Fellowship Application 🚀';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

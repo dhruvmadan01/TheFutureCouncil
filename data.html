@@ -270,10 +270,9 @@
         </div>
       </div>
 
-      <!-- FILTERS PANEL -->
       <div class="analytics-panel">
         <h2>🔍 Search & Advanced Filtering</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-2">
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-2">
           <div class="flex flex-col gap-1">
             <label class="text-xs font-black uppercase text-gray-500">Query Search</label>
             <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
@@ -296,6 +295,16 @@
               <option value="yes">Fellowship Interested Only</option>
               <option value="no">General Network Only</option>
               <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs font-black uppercase text-gray-500">Filter Lead Source</label>
+            <select id="crmSourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+              <option value="all">All Sources</option>
+              <option value="joinpage">General Join Page</option>
+              <option value="fellowshippage">Fellowship Form</option>
+              <option value="ambassadorpage">Ambassador Form</option>
+              <option value="financialaid">Financial Aid Request</option>
             </select>
           </div>
           <div class="flex flex-col gap-1 justify-end">
@@ -389,7 +398,7 @@
     };
 
     // Metadata Parser
-    function parseCollegeField(collegeStr) {
+    function parseCollegeField(collegeStr, memberObj = null) {
       let college = collegeStr || '';
       let phone = '';
       let country = '';
@@ -397,6 +406,7 @@
       let refBy = '';
       let fellowship = 'No';
       let societyName = '';
+      let source = '';
       let q1 = '';
       let q2 = '';
       let q3 = '';
@@ -417,6 +427,8 @@
           fellowship = part.replace('Fellowship: ', '').trim();
         } else if (part.startsWith('Society: ')) {
           societyName = part.replace('Society: ', '').trim();
+        } else if (part.startsWith('Source: ')) {
+          source = part.replace('Source: ', '').trim();
         } else if (part.startsWith('Q1: ')) {
           q1 = part.replace('Q1: ', '').trim();
         } else if (part.startsWith('Q2: ')) {
@@ -426,7 +438,22 @@
         }
       });
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, q1, q2, q3 };
+      // Deduce source dynamically if missing
+      if (!source && memberObj) {
+        const memId = memberObj.member_id || '';
+        const memTier = memberObj.tier || '';
+        if (memId.startsWith('TFC-AMB-') || memTier === 'Campus Ambassador') {
+          source = 'AmbassadorPage';
+        } else if (memId.startsWith('TFC-FEL-')) {
+          source = 'FellowshipPage';
+        } else if (memId.startsWith('TFC-AID-')) {
+          source = 'FinancialAid';
+        } else {
+          source = 'JoinPage';
+        }
+      }
+
+      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3 };
     }
 
     // Fetch leads
@@ -453,7 +480,7 @@
       let dropoffCount = 0;
 
       cachedMembers.forEach(m => {
-        const meta = parseCollegeField(m.college);
+        const meta = parseCollegeField(m.college, m);
         if (meta.fellowship === 'Yes') fsCount++;
         if (m.tier === 'Campus Ambassador') ambCount++;
         if (!(meta.q1 || meta.q2 || meta.q3)) dropoffCount++;
@@ -472,13 +499,14 @@
       const query = document.getElementById('crmSearchInput').value.toLowerCase().trim();
       const tierVal = document.getElementById('crmTierFilter').value.toLowerCase();
       const fellowshipVal = document.getElementById('crmFellowshipFilter').value;
+      const sourceVal = document.getElementById('crmSourceFilter').value.toLowerCase();
 
       let filtered = [...cachedMembers];
 
       // Filters
       if (query) {
         filtered = filtered.filter(m => {
-          const meta = parseCollegeField(m.college);
+          const meta = parseCollegeField(m.college, m);
           return m.name.toLowerCase().includes(query) ||
                  m.email.toLowerCase().includes(query) ||
                  meta.phone.includes(query) ||
@@ -492,11 +520,18 @@
 
       if (fellowshipVal !== 'all') {
         filtered = filtered.filter(m => {
-          const meta = parseCollegeField(m.college);
+          const meta = parseCollegeField(m.college, m);
           if (fellowshipVal === 'yes') return meta.fellowship === 'Yes';
           if (fellowshipVal === 'no') return meta.fellowship !== 'Yes';
           if (fellowshipVal === 'dropoff') return !(meta.q1 || meta.q2 || meta.q3);
           return true;
+        });
+      }
+
+      if (sourceVal !== 'all') {
+        filtered = filtered.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (meta.source || '').toLowerCase() === sourceVal;
         });
       }
 
@@ -509,7 +544,7 @@
       }
 
       filtered.forEach(m => {
-        const meta = parseCollegeField(m.college);
+        const meta = parseCollegeField(m.college, m);
         const hasAnswers = meta.q1 || meta.q2 || meta.q3;
 
         let waUrl = '';
@@ -527,13 +562,27 @@
           </div>
         `;
 
+        let sourceBadge = '';
+        if (meta.source === 'JoinPage') {
+          sourceBadge = `<span class="bg-green-100 text-green-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-green-300 ml-1">Join Portal</span>`;
+        } else if (meta.source === 'FellowshipPage') {
+          sourceBadge = `<span class="bg-orange-100 text-orange-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-orange-300 ml-1">Fellowship Form</span>`;
+        } else if (meta.source === 'AmbassadorPage') {
+          sourceBadge = `<span class="bg-purple-100 text-purple-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-purple-300 ml-1">Ambassador Form</span>`;
+        } else if (meta.source === 'FinancialAid') {
+          sourceBadge = `<span class="bg-yellow-100 text-yellow-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-yellow-300 ml-1">Financial Aid</span>`;
+        }
+
         const row = document.createElement('tr');
         if (!hasAnswers) {
           row.style.background = '#fff8f8'; // Subtle red background for dropoffs
         }
         row.innerHTML = `
           <td>
-            <div class="font-extrabold text-black text-sm">${m.name}</div>
+            <div class="flex items-center gap-1">
+              <div class="font-extrabold text-black text-sm">${m.name}</div>
+              ${sourceBadge}
+            </div>
             <div class="text-xs text-gray-500 font-semibold font-mono">${m.email}</div>
             ${meta.country ? `<div class="text-[0.68rem] text-orange-600 font-extrabold mt-0.5">🌐 ${meta.country.toUpperCase()}</div>` : ''}
           </td>
@@ -541,7 +590,7 @@
           <td><span class="font-mono text-xs font-bold">${meta.phone || 'No Phone'}</span></td>
           <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded bg-gray-100">${m.tier}</span></td>
           <td>
-            ${meta.fellowship === 'Yes' ? '<span class="font-extrabold text-xs uppercase text-green-600 bg-green-50 px-2 block mb-1">Interested 🚀</span>' : '<span class="text-gray-400 text-xs font-bold block mb-1">No</span>'}
+            ${meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' ? '<span class="font-extrabold text-xs uppercase text-green-600 bg-green-50 px-2 block mb-1">Interested 🚀</span>' : '<span class="text-gray-400 text-xs font-bold block mb-1">No</span>'}
             ${!hasAnswers ? '<span class="bg-red-100 text-red-700 border border-red-400 text-[0.62rem] font-bold px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">⚠️ Dropoff</span>' : ''}
           </td>
           <td>${actionsHtml}</td>
@@ -554,7 +603,7 @@
     window.openModal = (id) => {
       const member = cachedMembers.find(m => m.id === id);
       if (!member) return;
-      const meta = parseCollegeField(member.college);
+      const meta = parseCollegeField(member.college, member);
 
       const modalDiv = document.createElement('div');
       modalDiv.id = 'crmDetailOverlay';
@@ -606,16 +655,18 @@
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Tier,Fellowship,Motivation Q1,Building Q2,Motivation Q3\n";
+      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Motivation Q1,Building Q2,Motivation Q3\n";
 
       cachedMembers.forEach(m => {
-        const meta = parseCollegeField(m.college);
+        const meta = parseCollegeField(m.college, m);
         const row = [
           m.member_id || m.id,
           `"${m.name.replace(/"/g, '""')}"`,
           m.email,
           `"${meta.displayName.replace(/"/g, '""')}"`,
           meta.phone || '',
+          meta.country || '',
+          meta.source || '',
           m.tier,
           meta.fellowship,
           `"${(meta.q1 || '').replace(/"/g, '""')}"`,
@@ -652,6 +703,7 @@
     document.getElementById('crmSearchInput').addEventListener('input', renderCrmTable);
     document.getElementById('crmTierFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmFellowshipFilter').addEventListener('change', renderCrmTable);
+    document.getElementById('crmSourceFilter').addEventListener('change', renderCrmTable);
 
     // Run auth checker
     checkAuth();
