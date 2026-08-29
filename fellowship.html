@@ -388,8 +388,12 @@
           <textarea id="fQ2" required class="form-input" placeholder="Why do you want to join the fellowship?"></textarea>
         </div>
         <div class="form-field-wrap form-group-full">
-          <label for="fQ3" class="form-label">Q3: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</label>
-          <select id="fQ3" required class="form-input" style="background: rgba(20,20,20,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.08); font-weight: 700;">
+          <label for="fQ3" class="form-label">Q3: Where are you based (your city/state)?</label>
+          <input type="text" id="fQ3" required class="form-input" placeholder="e.g. New Delhi, Delhi or Noida, UP" />
+        </div>
+        <div class="form-field-wrap form-group-full">
+          <label for="fQ4" class="form-label">Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</label>
+          <select id="fQ4" required class="form-input" style="background: rgba(20,20,20,0.85); color: #fff; border: 1px solid rgba(255,255,255,0.08); font-weight: 700;">
             <option value="" disabled selected style="background: #111; color: #555;">Select Yes or No</option>
             <option value="Yes" style="background: #111; color: #fff;">Yes</option>
             <option value="No" style="background: #111; color: #fff;">No</option>
@@ -596,9 +600,10 @@
         const college = document.getElementById('fCollege').value.trim();
         const q1 = document.getElementById('fQ1').value.trim().replace(/\|/g, '/');
         const q2 = document.getElementById('fQ2').value.trim().replace(/\|/g, '/');
-        const q3 = document.getElementById('fQ3').value;
+        const q3 = document.getElementById('fQ3').value.trim().replace(/\|/g, '/');
+        const q4 = document.getElementById('fQ4').value;
 
-        const combinedCollege = `${college} | Phone: ${phone} | Source: FellowshipPage | Q1: ${q1} | Q2: ${q2} | Q3: ${q3}`;
+        const combinedCollege = `${college} | Phone: ${phone} | Source: FellowshipPage | Q1: ${q1} | Q2: ${q2} | Q3: ${q3} | Q4: ${q4}`;
         const randomNum = Math.floor(1000 + Math.random() * 9000);
         const memberId = `TFC-FEL-${randomNum}`;
 

@@ -410,6 +410,7 @@
       let q1 = '';
       let q2 = '';
       let q3 = '';
+      let q4 = '';
 
       const parts = college.split(' | ');
       let displayName = parts[0];
@@ -435,6 +436,8 @@
           q2 = part.replace('Q2: ', '').trim();
         } else if (part.startsWith('Q3: ')) {
           q3 = part.replace('Q3: ', '').trim();
+        } else if (part.startsWith('Q4: ')) {
+          q4 = part.replace('Q4: ', '').trim();
         }
       });
 
@@ -453,7 +456,7 @@
         }
       }
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3 };
+      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4 };
     }
 
     // Fetch leads
@@ -483,7 +486,7 @@
         const meta = parseCollegeField(m.college, m);
         if (meta.fellowship === 'Yes') fsCount++;
         if (m.tier === 'Campus Ambassador') ambCount++;
-        if (!(meta.q1 || meta.q2 || meta.q3)) dropoffCount++;
+        if (!(meta.q1 || meta.q2 || meta.q3 || meta.q4)) dropoffCount++;
       });
 
       document.getElementById('fellowshipCount').textContent = fsCount;
@@ -523,7 +526,7 @@
           const meta = parseCollegeField(m.college, m);
           if (fellowshipVal === 'yes') return meta.fellowship === 'Yes';
           if (fellowshipVal === 'no') return meta.fellowship !== 'Yes';
-          if (fellowshipVal === 'dropoff') return !(meta.q1 || meta.q2 || meta.q3);
+          if (fellowshipVal === 'dropoff') return !(meta.q1 || meta.q2 || meta.q3 || meta.q4);
           return true;
         });
       }
@@ -545,7 +548,7 @@
 
       filtered.forEach(m => {
         const meta = parseCollegeField(m.college, m);
-        const hasAnswers = meta.q1 || meta.q2 || meta.q3;
+        const hasAnswers = meta.q1 || meta.q2 || meta.q3 || meta.q4;
 
         let waUrl = '';
         if (meta.phone) {
@@ -635,8 +638,16 @@
                       <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
                     </div>
                     <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: What is your motivation to join Fellowship Residency in Delhi NCR?</p>
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: What is your motivation to join the fellowship?</p>
                       <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
+                    </div>
+                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q3: Where are you based (your city/state)?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q3 || 'Not Answered'}</p>
+                    </div>
+                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
+                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</p>
+                      <p style="margin:0; font-weight:700; color:#222;">${meta.q4 || 'Not Answered'}</p>
                     </div>
                   `;
                 } else if (meta.source === 'FinancialAid') {
@@ -684,7 +695,7 @@
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Motivation Q1,Building Q2,Motivation Q3\n";
+      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Q1,Q2,Q3,Q4\n";
 
       cachedMembers.forEach(m => {
         const meta = parseCollegeField(m.college, m);
@@ -700,7 +711,8 @@
           meta.fellowship,
           `"${(meta.q1 || '').replace(/"/g, '""')}"`,
           `"${(meta.q2 || '').replace(/"/g, '""')}"`,
-          `"${(meta.q3 || '').replace(/"/g, '""')}"`
+          `"${(meta.q3 || '').replace(/"/g, '""')}"`,
+          `"${(meta.q4 || '').replace(/"/g, '""')}"`
         ];
         csvContent += row.join(",") + "\n";
       });

@@ -1225,7 +1225,7 @@
             let actionHtml = '';
             
             // Check if there are onboarding questionnaire answers
-            const hasAnswers = rawCollege.includes(' | Q1: ') || rawCollege.includes(' | Q2: ') || rawCollege.includes(' | Q3: ');
+            const hasAnswers = rawCollege.includes(' | Q1: ') || rawCollege.includes(' | Q2: ') || rawCollege.includes(' | Q3: ') || rawCollege.includes(' | Q4: ');
             if (hasAnswers) {
               actionHtml += `
                 <button onclick="viewApplication('${member.id}'); return false;" class="admin-edit-btn" style="background:#ff9e59; color:#000; margin-bottom:8px; display:block; width:100%; text-align:center; box-shadow: 2px 2px 0 var(--ink);">📋 View Application</button>
@@ -1362,8 +1362,9 @@
         let q1 = 'Not answered';
         let q2 = 'Not answered';
         let q3 = 'Not answered';
+        let q4 = 'Not answered';
 
-        // Parse Q1, Q2, Q3 from college metadata string
+        // Parse Q1, Q2, Q3, Q4 from college metadata string
         const parts = collegeStr.split(' | ');
         const meta = {};
         parts.forEach(part => {
@@ -1375,12 +1376,16 @@
             meta.society = part.replace('Society: ', '');
           } else if (part.startsWith('RefBy: ')) {
             meta.refBy = part.replace('RefBy: ', '');
+          } else if (part.startsWith('Source: ')) {
+            meta.source = part.replace('Source: ', '');
           } else if (part.startsWith('Q1: ')) {
             q1 = part.replace('Q1: ', '');
           } else if (part.startsWith('Q2: ')) {
             q2 = part.replace('Q2: ', '');
           } else if (part.startsWith('Q3: ')) {
             q3 = part.replace('Q3: ', '');
+          } else if (part.startsWith('Q4: ')) {
+            q4 = part.replace('Q4: ', '');
           }
         });
 
@@ -1443,35 +1448,92 @@
               <p style="margin: 4px 0;"><strong>College:</strong> ${cleanCollege}</p>
               <p style="margin: 4px 0;"><strong>Phone:</strong> ${meta.phone || 'N/A'}</p>
               <p style="margin: 4px 0;"><strong>Fellowship Applied:</strong> ${meta.fellowship || 'No'}</p>
-              \${meta.society ? \`<p style="margin: 4px 0;"><strong>Society:</strong> \${meta.society}</p>\` : ''}
-              \${meta.refBy ? \`<p style="margin: 4px 0;"><strong>Referral Code:</strong> \${meta.refBy}</p>\` : ''}
+              ${meta.society ? `<p style="margin: 4px 0;"><strong>Society:</strong> ${meta.society}</p>` : ''}
+              ${meta.refBy ? `<p style="margin: 4px 0;"><strong>Referral Code:</strong> ${meta.refBy}</p>` : ''}
             </div>
             
             <div style="border-top:2px dashed #000; padding-top:12px; display:flex; flex-direction:column; gap:16px;">
-              <div>
-                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                  Q1: Why are you interested in entrepreneurship?
-                </h4>
-                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                  \${q1}
-                </p>
-              </div>
-              <div>
-                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                  Q2: Are you building anything right now?
-                </h4>
-                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                  \${q2}
-                </p>
-              </div>
-              <div>
-                <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                  Q3: Motivation to join The Future Council?
-                </h4>
-                <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                  \${q3}
-                </p>
-              </div>
+              ${(() => {
+                if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
+                  return `
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q1: What startup idea are you building/validating?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q1}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q2: What is your motivation to join the fellowship?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q2}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q3: Where are you based (your city/state)?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q3}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q4}
+                      </p>
+                    </div>
+                  `;
+                } else if (meta.source === 'FinancialAid' || (member.member_id && member.member_id.startsWith('TFC-AID-'))) {
+                  let aidCase = 'Not answered';
+                  const caseParts = (member.college || '').split(' | ');
+                  caseParts.forEach(p => {
+                    if (p.startsWith('Case: ')) aidCase = p.replace('Case: ', '').trim();
+                  });
+                  return `
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Financial Aid Case Justification
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${aidCase}
+                      </p>
+                    </div>
+                  `;
+                } else {
+                  return `
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q1: Why are you interested in entrepreneurship?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q1}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q2: Are you building anything right now?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q2}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Q3: Motivation to join The Future Council?
+                      </h4>
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
+                        ${q3}
+                      </p>
+                    </div>
+                  `;
+                }
+              })()}
             </div>
           </div>
         `;
