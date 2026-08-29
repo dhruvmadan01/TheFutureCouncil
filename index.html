@@ -47,160 +47,161 @@
       background: rgba(0, 0, 0, 0.92);
     }
     
-    /* Simulator Scoped CSS */
-    .sim-panel {
-      background: #FFF9E6;
-      border: 3px solid var(--ink);
-      box-shadow: 6px 6px 0 var(--ink);
-      margin-bottom: 24px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .sim-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      border-bottom: 3px solid var(--ink);
-      padding-bottom: 14px;
-    }
-    .sim-header-status {
-      font-size: 0.75rem;
-      color: #555;
-      margin: 2px 0 0;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .sim-tab-btn {
-      background: #eee;
-      border: 2px solid var(--ink);
-      border-bottom: none;
-      padding: 8px 14px;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 4px 4px 0 0;
-      transition: all 120ms ease;
-      white-space: nowrap;
-      color: var(--ink);
-    }
-    .sim-tab-btn:hover {
-      background: #ddd;
-    }
-    .sim-tab-btn.active-tab {
-      background: var(--ink);
-      color: #fff;
-      padding-bottom: 10px;
-      transform: translateY(2px);
-    }
-    .sim-tabs {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-    .sim-tabs::-webkit-scrollbar {
-      display: none; /* Hide scrollbar for Chrome, Safari and Opera */
-    }
-    .sim-pill-filter {
-      background: #FAF9F6;
-      border: 2px solid var(--ink);
-      padding: 3px 10px;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      border-radius: 9999px;
-      cursor: pointer;
-      transition: all 120ms ease;
-      color: var(--ink);
-    }
-    .sim-pill-filter:hover {
-      background: #eee;
-    }
-    .sim-pill-filter.active-filter {
-      background: var(--orange);
-      color: #fff;
-    }
-    .sim-radar-subheader {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .sim-roast-box {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: #fff;
-      border: 2px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-      padding: 16px;
-      border-radius: 6px;
-      max-width: 580px;
-      margin: 0 auto;
-    }
-    
-    @media (max-width: 760px) {
-      .sim-panel {
-        padding: 16px 12px;
-        gap: 12px;
-      }
-      .sim-header {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-        gap: 10px;
-      }
-      .sim-header-status {
-        justify-content: center;
-      }
-      .sim-header a {
-        width: 100%;
-        justify-content: center;
-      }
-      .sim-tab-btn {
-        padding: 6px 10px;
-        font-size: 0.72rem;
-      }
-      .sim-pill-filter {
-        padding: 2px 8px;
-        font-size: 0.65rem;
-      }
-      .sim-radar-subheader {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-      .sim-radar-subheader div {
-        display: flex;
-        justify-content: center;
-      }
-      .sim-roast-box {
-        padding: 12px;
-        gap: 10px;
-      }
-      .sim-card {
-        padding: 10px !important;
-      }
-      .sim-radar-card {
-        padding: 10px !important;
-      }
+    /* Morphing CSS Variables & Retro Overrides */
+    :root {
+      --body-bg: #000000;
+      --win-border-width: 3px;
+      --win-border-color: var(--ink);
+      --win-shadow: 8px 8px 0 var(--ink);
+      --win-bg: var(--offwhite);
+      
+      --panel-bg: #ffffff;
+      --panel-border-width: 3px;
+      --panel-border-color: var(--ink);
+      --panel-shadow: 6px 6px 0 var(--ink);
+      --panel-text-color: var(--ink);
+      --panel-desc-color: #555555;
+      
+      --btn-border-width: 3px;
+      --btn-border-color: var(--ink);
+      --btn-shadow: 6px 6px 0 var(--ink);
+      
+      --win-header-opacity: 1;
+      --win-bar-height: 43px;
+      --win-tabs-height: 37px;
+      --glow-opacity: 0;
     }
 
-    @keyframes tfc-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.1); }
+    body {
+      background: var(--body-bg) !important;
+      transition: background 0.1s ease-out;
     }
-    @keyframes tfc-spin {
-      to { transform: rotate(360deg); }
+    
+    .desktop-window {
+      border-width: var(--win-border-width) !important;
+      border-color: var(--win-border-color) !important;
+      box-shadow: var(--win-shadow) !important;
+      background: var(--win-bg) !important;
+      border-radius: calc((3px - var(--win-border-width)) * 6) !important;
+      transition: border-radius 0.3s ease-out;
+      position: relative;
+    }
+    
+    .window-bar {
+      opacity: var(--win-header-opacity) !important;
+      height: var(--win-bar-height) !important;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.1s ease-out, height 0.1s ease-out;
+    }
+    
+    .window-tabs {
+      opacity: var(--win-header-opacity) !important;
+      height: var(--win-tabs-height) !important;
+      overflow: hidden;
+      display: flex;
+      transition: opacity 0.1s ease-out, height 0.1s ease-out;
+    }
+
+    .workspace .panel, 
+    .workspace .stat-block,
+    .workspace .founder-card,
+    .workspace .step {
+      background: var(--panel-bg) !important;
+      border-width: var(--panel-border-width) !important;
+      border-color: var(--panel-border-color) !important;
+      box-shadow: var(--panel-shadow) !important;
+      color: var(--panel-text-color) !important;
+      border-radius: calc((3px - var(--panel-border-width)) * 4) !important;
+      transition: border-radius 0.3s ease-out;
+    }
+
+    .workspace .panel p,
+    .workspace .panel li,
+    .workspace .panel h2,
+    .workspace .panel h3,
+    .workspace .panel h4,
+    .workspace .founder-card h3,
+    .workspace .founder-card p,
+    .workspace .founder-card a,
+    .workspace .step h3,
+    .workspace .step p {
+      color: var(--panel-text-color) !important;
+    }
+    
+    .workspace .panel p.partner-desc,
+    .workspace .panel p.hero-text,
+    .workspace .panel ul p,
+    .workspace .panel li p {
+      color: var(--panel-desc-color) !important;
+    }
+
+    .workspace .mini-label, 
+    .workspace .founder-role, 
+    .workspace .step span {
+      color: var(--orange) !important;
+    }
+
+    .brand-mark, .side-image, .founder-photo {
+      border-width: var(--panel-border-width) !important;
+      border-color: var(--panel-border-color) !important;
+      box-shadow: var(--panel-shadow) !important;
+      border-radius: calc((3px - var(--panel-border-width)) * 4) !important;
+      transition: all 0.3s ease-out;
+    }
+
+    .pill-btn {
+      border-width: var(--btn-border-width) !important;
+      border-color: var(--btn-border-color) !important;
+      box-shadow: var(--btn-shadow) !important;
+      border-radius: calc((3px - var(--btn-border-width)) * 4) !important;
+      transition: all 0.3s ease-out;
+    }
+    
+    .pill-btn.alt {
+      background: var(--orange) !important;
+      color: #fff !important;
+    }
+
+    .back-link-btn {
+      border-width: var(--panel-border-width) !important;
+      border-color: var(--panel-border-color) !important;
+      box-shadow: var(--panel-shadow) !important;
+      color: var(--panel-text-color) !important;
+      border-radius: calc((3px - var(--panel-border-width)) * 4) !important;
+      transition: all 0.3s ease-out;
+    }
+
+    .brand-mark-mini {
+      border-width: var(--panel-border-width) !important;
+      border-color: var(--panel-border-color) !important;
+      border-radius: calc((3px - var(--panel-border-width)) * 3) !important;
+    }
+
+    .bg-grid-modern {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 107, 0, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 107, 0, 0.04) 0%, transparent 45%),
+        linear-gradient(rgba(255, 107, 0, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 0, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 45px 45px, 45px 45px;
+      pointer-events: none;
+      opacity: var(--glow-opacity);
+      transition: opacity 0.3s ease-out;
+    }
+
+    #bg-particle-canvas-modern {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: var(--glow-opacity);
+      transition: opacity 0.3s ease-out;
     }
   </style>
   <link rel="stylesheet" href="style.css" />
@@ -540,5 +541,215 @@
     </section>
   </main>
 
+  <!-- Modern Grid Overlay & Ambient Particles (Visible on Morph) -->
+  <div class="bg-grid-modern" aria-hidden="true"></div>
+  <canvas id="bg-particle-canvas-modern" aria-hidden="true"></canvas>
+
+  <!-- Interaction Animation Engines -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    // -------------------------------------------------------------
+    // 1. Particle Matrix Physics & Interaction
+    // -------------------------------------------------------------
+    const canvas = document.getElementById('bg-particle-canvas-modern');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const maxParticles = 40;
+    const connectionDist = 120;
+    let mouse = { x: null, y: null, radius: 150 };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.size = Math.random() * 2 + 0.8;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = this.x - mouse.x;
+          const dy = this.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x += (dx / dist) * force * 1.5;
+            this.y += (dy / dist) * force * 1.5;
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 107, 0, 0.32)';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < maxParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < connectionDist) {
+            const alpha = (1 - dist / connectionDist) * 0.14;
+            ctx.strokeStyle = `rgba(255, 107, 0, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      drawConnections();
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // -------------------------------------------------------------
+    // 2. GSAP Scroll Trigger Timeline Orchestration
+    // -------------------------------------------------------------
+    if (typeof gsap !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Scroll-scrub style morph mapping
+      const morphTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: '+=450',
+          scrub: 0.6,
+        }
+      });
+
+      morphTimeline.to(':root', {
+        '--body-bg': '#050505',
+        '--win-border-width': '0px',
+        '--win-border-color': 'rgba(255, 107, 0, 0.12)',
+        '--win-shadow': '0px 20px 50px rgba(0, 0, 0, 0.65)',
+        '--win-bg': 'rgba(10, 10, 10, 0.96)',
+        
+        '--panel-bg': 'rgba(20, 20, 20, 0.62)',
+        '--panel-border-width': '1px',
+        '--panel-border-color': 'rgba(255, 107, 0, 0.16)',
+        '--panel-shadow': '0px 10px 30px rgba(0, 0, 0, 0.45)',
+        '--panel-text-color': '#ffffff',
+        '--panel-desc-color': '#a8a8a8',
+        
+        '--btn-border-width': '1px',
+        '--btn-border-color': 'rgba(255, 107, 0, 0.38)',
+        '--btn-shadow': '0px 4px 18px rgba(255, 107, 0, 0.18)',
+        
+        '--win-header-opacity': 0,
+        '--win-bar-height': '0px',
+        '--win-tabs-height': '0px',
+        
+        '--glow-opacity': 0.85,
+        duration: 1,
+        ease: 'none'
+      });
+
+      // Panel entrances on scroll down
+      gsap.utils.toArray('.workspace .panel, .workspace .founder-card, .workspace .step').forEach((el) => {
+        gsap.fromTo(el, 
+          { opacity: 0.3, y: 15 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 92%',
+              toggleActions: 'play none none none',
+            }
+          }
+        );
+      });
+
+      // Stats Count-up odometer animation
+      gsap.utils.toArray('.stat-block').forEach((block) => {
+        const strongEl = block.querySelector('strong');
+        if (!strongEl) return;
+        const originalText = strongEl.textContent.trim();
+        const numMatch = originalText.match(/\d+/);
+        if (!numMatch) return;
+        
+        const num = parseInt(numMatch[0]);
+        const suffix = originalText.replace(num.toString(), '');
+
+        const obj = { val: 0 };
+        gsap.fromTo(block, 
+          { opacity: 0.3 },
+          {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: block,
+              start: 'top 92%',
+              toggleActions: 'play none none none'
+            },
+            onStart: () => {
+              gsap.to(obj, {
+                val: num,
+                duration: 1.5,
+                ease: 'power2.out',
+                onUpdate: () => {
+                  strongEl.textContent = Math.floor(obj.val) + suffix;
+                },
+                onComplete: () => {
+                  strongEl.textContent = originalText;
+                }
+              });
+            }
+          }
+        );
+      });
+    }
+  </script>
 </body>
 </html>
