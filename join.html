@@ -148,7 +148,12 @@
                       <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
                       <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
                       <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
+                      <div id="dropdownItemManual" style="padding: 10px 8px; cursor: pointer; border-top: 2px dashed var(--ink); background: #fff0e6; font-weight: 900; color: var(--orange); text-align: center;">✨ College not listed? Type manually</div>
                     </div>
+                  </div>
+                  <div id="manualCollegeToggleRow" style="margin-top: 6px; font-size: 0.78rem; font-weight: 700; color: #555; display: flex; justify-content: space-between; align-items: center; font-family: inherit;">
+                    <span>College not listed?</span>
+                    <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--orange); text-decoration: underline; font-weight: 800;">Type Manually ✎</a>
                   </div>
                 </div>
                 <div class="form-group">
@@ -325,18 +330,59 @@
       const collegeInput = document.getElementById('studentCollegeInput');
       const collegeDropdown = document.getElementById('collegeDropdown');
       const dropdownItems = document.querySelectorAll('.dropdown-item');
+      const btnManualCollege = document.getElementById('btnManualCollege');
+      const dropdownItemManual = document.getElementById('dropdownItemManual');
+      let isManualCollege = false;
+
+      function enableManualMode() {
+        isManualCollege = true;
+        collegeDropdown.style.display = 'none';
+        collegeInput.value = '';
+        collegeInput.placeholder = 'Type your college name manually...';
+        if (btnManualCollege) btnManualCollege.innerHTML = '← Select from list';
+        collegeInput.focus();
+      }
+
+      function disableManualMode() {
+        isManualCollege = false;
+        collegeInput.value = '';
+        collegeInput.placeholder = 'Search or type your college...';
+        if (btnManualCollege) btnManualCollege.innerHTML = 'Type Manually ✎';
+        collegeDropdown.style.display = 'block';
+        collegeInput.focus();
+      }
+
+      if (btnManualCollege) {
+        btnManualCollege.addEventListener('click', () => {
+          if (!isManualCollege) {
+            enableManualMode();
+          } else {
+            disableManualMode();
+          }
+        });
+      }
+
+      if (dropdownItemManual) {
+        dropdownItemManual.addEventListener('click', (e) => {
+          enableManualMode();
+          e.stopPropagation();
+        });
+      }
 
       if (collegeInput && collegeDropdown) {
         // Show dropdown on focus
         collegeInput.addEventListener('focus', () => {
+          if (isManualCollege) return;
           collegeDropdown.style.display = 'block';
         });
 
         // Filter dropdown items as the user types
         collegeInput.addEventListener('input', () => {
+          if (isManualCollege) return;
           collegeDropdown.style.display = 'block';
           const filter = collegeInput.value.toLowerCase();
           dropdownItems.forEach(item => {
+            if (item === dropdownItemManual) return;
             const text = item.textContent.toLowerCase();
             if (text.includes(filter)) {
               item.style.display = 'block';
@@ -348,6 +394,7 @@
 
         // Select an item
         dropdownItems.forEach(item => {
+          if (item === dropdownItemManual) return;
           item.addEventListener('click', (e) => {
             collegeInput.value = item.getAttribute('data-value');
             collegeDropdown.style.display = 'none';
