@@ -66,9 +66,12 @@
           </p>
         </div>
         <div class="residency-col" style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
-          <h3>💰 Fee: ₹1.5 Lakhs</h3>
+          <h3>💰 Program Fee: ₹1.5 Lakhs</h3>
           <p style="margin: 0;">
             Need-blind admissions. We offer extensive scholarship packages for deserving builder squads.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; font-weight: 600;">
+            📝 <strong style="color: #fff;">Application Fee:</strong> ₹2,000 (Non-refundable registration fee required to apply).
           </p>
           <a href="#fellowshipFormSection" class="premium-btn" style="width: 100%; text-align: center;">
             Apply for Fellowship 🚀
@@ -384,6 +387,9 @@
           <label for="fQ2" class="form-label">Q2: What is your motivation to join Fellowship Residency in Delhi NCR?</label>
           <textarea id="fQ2" required class="form-input" placeholder="Why do you want to participate in this offline residency program?"></textarea>
         </div>
+        <div class="form-group-full" style="text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; line-height: 1.4;">
+          ⚠️ *Note: A non-refundable registration application fee of ₹2,000 is required. Upon clicking submit, your application details will be saved, and you will be redirected to Razorpay to complete your payment.*
+        </div>
         <div class="form-group-full">
           <button type="submit" class="premium-btn form-submit-btn">
             Submit Fellowship Application 🚀
@@ -459,7 +465,13 @@
     <footer class="footer">
       <div class="footer-brand-side">
         <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
-        <a href="https://thefuturecouncil.in" class="footer-link">Back to Hub</a>
+        <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+          <a href="https://thefuturecouncil.in" class="footer-link">Back to Hub</a>
+          <div style="display: flex; gap: 12px; margin-top: 2px;">
+            <a href="https://thefuturecouncil.in/terms" class="footer-link" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Terms</a>
+            <a href="https://thefuturecouncil.in/privacy" class="footer-link" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Privacy</a>
+          </div>
+        </div>
       </div>
       <div class="footer-meta">
         <div class="apply-now">Fellowship '26 Applications Open</div>
@@ -594,8 +606,8 @@
 
           if (error) throw error;
 
-          alert("Application submitted successfully! Check your inbox or WhatsApp for updates.");
           fForm.reset();
+          showPaymentRedirectModal();
         } catch (err) {
           alert("Submission failed: " + err.message);
         } finally {
@@ -603,6 +615,46 @@
           btn.textContent = 'Submit Fellowship Application 🚀';
         }
       });
+    }
+
+    function showPaymentRedirectModal() {
+      const modal = document.createElement('div');
+      modal.id = 'paymentRedirectModal';
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 32px 24px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
+          <div style="font-size: 3rem; animation: bounceGlow 2.5s ease-in-out infinite;">🚀</div>
+          <p class="mini-label" style="color: var(--orange); font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 800; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">APPLICATION SAVED</p>
+          <h2 class="panel-title" style="font-size: 1.4rem; margin: 0; text-transform: uppercase;">Complete Registration</h2>
+          <p style="font-size: 0.82rem; line-height: 1.5; color: var(--text-secondary); margin: 0; font-weight: 500;">
+            Your details are saved in our database. To activate your application for cohort evaluation, please complete the ₹2,000 registration fee payment.
+          </p>
+          
+          <div style="background: rgba(255,107,0,0.08); border: 2px solid var(--orange); border-radius: 4px; padding: 12px; width: 100%; box-sizing: border-box; text-align: center; margin: 6px 0; box-shadow: 3px 3px 0 var(--ink);">
+            <span style="font-size: 0.65rem; font-family: var(--font-mono); text-transform: uppercase; font-weight: 900; color: var(--orange); display: block;">AMOUNT PAYABLE</span>
+            <span style="font-size: 1.6rem; font-weight: 900; color: #fff; margin-top: 4px; display: block;">₹2,000.00</span>
+          </div>
+
+          <a href="https://rzp.io/rzp/s4orvHLl" target="_blank" onclick="closePaymentRedirectModal()" class="premium-btn" style="width: 100%; text-align: center; font-size: 0.85rem; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; justify-content: center;">
+            <span>Pay Registration Fee</span>
+            <span>↗</span>
+          </a>
+          
+          <p style="font-size: 0.7rem; color: var(--text-secondary); margin: 0; font-weight: 600;">
+            (Opens payment portal in a new tab. UPI, Cards, NetBanking supported.)
+          </p>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      setTimeout(() => modal.classList.add('open'), 15);
+    }
+
+    function closePaymentRedirectModal() {
+      const modal = document.getElementById('paymentRedirectModal');
+      if (modal) {
+        modal.classList.remove('open');
+        setTimeout(() => modal.remove(), 300);
+      }
     }
 
     // FAQ Accordion logic
