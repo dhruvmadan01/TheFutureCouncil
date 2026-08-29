@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "fellowship.thefuturecouncil.in"
+        }
+      ],
+      "destination": "/fellowship"
+    }
+  ]
 }
