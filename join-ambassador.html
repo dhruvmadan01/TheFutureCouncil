@@ -25,11 +25,18 @@
       background-color: #fff7eb !important;
       color: #ff9e59 !important;
     }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .fomo-pulse {
+      animation: pulse 2s infinite ease-in-out;
+    }
   </style>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="desktop-window" style="max-width: 600px; margin: 40px auto; box-shadow: 8px 8px 0 var(--ink);">
+  <main class="desktop-window" style="max-width: 1000px; margin: 40px auto; box-shadow: 8px 8px 0 var(--ink);">
     <header class="window-bar">
       <div class="window-controls" aria-hidden="true">
         <span class="red"></span>
@@ -55,97 +62,169 @@
         </p>
       </div>
 
-      <div id="signupFormPanel" class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
-        <h2 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px;">
-          Leader Application Form
-        </h2>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start text-black">
+        
+        <!-- Left: Form & Success panel (col-span-7) -->
+        <div class="md:col-span-7 space-y-6">
+          <div id="signupFormPanel" class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 0;">
+            <h2 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px;">
+              Leader Application Form
+            </h2>
 
-        <form id="ambassadorSignupForm" class="space-y-4">
-          
-          <div class="form-group">
-            <label for="studentName">Full Name</label>
-            <input type="text" id="studentName" class="form-control" placeholder="e.g. John Doe" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+            <form id="ambassadorSignupForm" class="space-y-4">
+              
+              <div class="form-group">
+                <label for="studentName">Full Name</label>
+                <input type="text" id="studentName" class="form-control" placeholder="e.g. John Doe" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+              </div>
+
+              <div class="form-group" style="position: relative;">
+                <label for="studentCollegeInput">Select or Search Your College</label>
+                <div class="custom-select-wrapper" style="position: relative; width: 100%;">
+                  <input type="text" id="studentCollegeInput" class="form-control" placeholder="Search or type your college..." autocomplete="off" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box;" required />
+                  <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); z-index: 1000; max-height: 180px; overflow-y: auto; margin-top: 4px; color: #000;">
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hansraj College">Hansraj College</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hindu College">Hindu College</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="St. Stephen's College">St. Stephen's College</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Miranda House">Miranda House</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
+                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="studentEmail">Email Address</label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. johndoe@example.com" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+              </div>
+
+              <div class="form-group">
+                <label for="studentPhone">Phone Number</label>
+                <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 98765 43210" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+              </div>
+
+              <div class="form-group">
+                <label for="motivation">Why do you want to represent TFC on your campus?</label>
+                <textarea id="motivation" class="form-control" placeholder="Tell us about your campus reach & active circles..." required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; height: 80px;"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="studentPassword">Choose Portal Password</label>
+                <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+              </div>
+
+              <div id="signupError" class="hidden text-xs font-bold text-red-500 bg-red-50 p-2.5 border-2 border-red-500"></div>
+
+              <button type="submit" id="submitBtn" class="pill-btn" style="width: 100%; font-weight: 900; background: var(--orange); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px; margin-top: 12px;">
+                Submit Application 🚀
+              </button>
+            </form>
           </div>
 
-          <div class="form-group" style="position: relative;">
-            <label for="studentCollegeInput">Select or Search Your College</label>
-            <div class="custom-select-wrapper" style="position: relative; width: 100%;">
-              <input type="text" id="studentCollegeInput" class="form-control" placeholder="Search or type your college..." autocomplete="off" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box;" required />
-              <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); z-index: 1000; max-height: 180px; overflow-y: auto; margin-top: 4px; color: #000;">
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hansraj College">Hansraj College</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hindu College">Hindu College</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="St. Stephen's College">St. Stephen's College</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Miranda House">Miranda House</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
-                <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
+          <!-- SUCCESS PANEL -->
+          <div id="successPanel" class="panel hidden" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; text-align: center;">
+            <span style="font-size: 3rem;">🎉</span>
+            <h2 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: var(--orange); margin-top: 8px;">
+              Welcome to the Council!
+            </h2>
+            <p style="font-size: 0.95rem; font-weight: 700; margin-top: 10px; color: #333;">
+              Your Campus Ambassador account has been created successfully.
+            </p>
+
+            <!-- Credentials Card -->
+            <div style="background: #fff7eb; border: 2.5px solid var(--ink); border-radius: 4px; padding: 16px; margin: 20px 0; text-align: left;">
+              <h3 style="font-size: 0.85rem; font-weight: 900; text-transform: uppercase; border-bottom: 1.5px dashed var(--ink); padding-bottom: 6px; margin-bottom: 10px;">
+                🔑 Ambassador Access Keys
+              </h3>
+              <div class="space-y-2 text-xs font-bold">
+                <div>Ambassador Code: <span id="successCode" style="font-family: monospace; background: #fff; border: 1.5px solid var(--ink); padding: 2px 6px; font-size: 0.85rem;">TFC-AMB-XX</span></div>
+                <div>Login Username: <span id="successEmail" style="font-family: monospace;">email@gmail.com</span></div>
+                <div>Password: <span id="successPassword" style="font-family: monospace;">••••••••</span></div>
+              </div>
+            </div>
+
+            <a href="ambassador.html" class="pill-btn" style="display: block; width: 100%; font-weight: 900; background: #000; color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px;">
+              Enter Ambassador Workspace 🚪
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Milestones & FOMO (col-span-5) -->
+        <div class="md:col-span-5 space-y-6">
+          <!-- Milestones reward panel -->
+          <div class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
+            <h2 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              🎯 Milestone Rewards
+            </h2>
+            <div class="space-y-4">
+              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
+                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥉 10 Signups</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Ambassador Certificate</div>
+                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
+                  Official representative certificate from The Future Council with a verified credential ID.
+                </p>
+              </div>
+              
+              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
+                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥈 50 Signups</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">TFC T-Shirt & Goodies</div>
+                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
+                  Official premium developer/founder merchandise pack including custom-printed t-shirts, stickers, and swag.
+                </p>
+              </div>
+              
+              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
+                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥇 100 Signups</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Direct Internship in TFC</div>
+                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
+                  Fast-track your application to work directly with the core engineering and design team at TFC HQ.
+                </p>
               </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="studentEmail">Email Address</label>
-            <input type="email" id="studentEmail" class="form-control" placeholder="e.g. johndoe@example.com" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-          </div>
-
-          <div class="form-group">
-            <label for="studentPhone">Phone Number</label>
-            <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 98765 43210" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-          </div>
-
-          <div class="form-group">
-            <label for="motivation">Why do you want to represent TFC on your campus?</label>
-            <textarea id="motivation" class="form-control" placeholder="Tell us about your campus reach & active circles..." required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; height: 80px;"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="studentPassword">Choose Portal Password</label>
-            <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-          </div>
-
-          <div id="signupError" class="hidden text-xs font-bold text-red-500 bg-red-50 p-2.5 border-2 border-red-500"></div>
-
-          <button type="submit" id="submitBtn" class="pill-btn" style="width: 100%; font-weight: 900; background: var(--orange); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px; margin-top: 12px;">
-            Submit Application 🚀
-          </button>
-        </form>
-      </div>
-
-      <!-- SUCCESS PANEL -->
-      <div id="successPanel" class="panel hidden" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; text-align: center;">
-        <span style="font-size: 3rem;">🎉</span>
-        <h2 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: var(--orange); margin-top: 8px;">
-          Welcome to the Council!
-        </h2>
-        <p style="font-size: 0.95rem; font-weight: 700; margin-top: 10px; color: #333;">
-          Your Campus Ambassador account has been created successfully.
-        </p>
-
-        <!-- Credentials Card -->
-        <div style="background: #fff7eb; border: 2.5px solid var(--ink); border-radius: 4px; padding: 16px; margin: 20px 0; text-align: left;">
-          <h3 style="font-size: 0.85rem; font-weight: 900; text-transform: uppercase; border-bottom: 1.5px dashed var(--ink); padding-bottom: 6px; margin-bottom: 10px;">
-            🔑 Ambassador Access Keys
-          </h3>
-          <div class="space-y-2 text-xs font-bold">
-            <div>Ambassador Code: <span id="successCode" style="font-family: monospace; background: #fff; border: 1.5px solid var(--ink); padding: 2px 6px; font-size: 0.85rem;">TFC-AMB-XX</span></div>
-            <div>Login Username: <span id="successEmail" style="font-family: monospace;">email@gmail.com</span></div>
-            <div>Password: <span id="successPassword" style="font-family: monospace;">••••••••</span></div>
+          <!-- FOMO Alert panel -->
+          <div class="panel" style="background: #ffe600; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+              <span style="font-size: 1.4rem;" class="fomo-pulse">⏳</span>
+              <h2 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; margin: 0; color: #000;">
+                Limited Spots Available
+              </h2>
+            </div>
+            <p style="font-size: 0.8rem; font-weight: 800; line-height: 1.4; color: #000; margin-bottom: 14px;">
+              To maintain high-quality operations and trust, we select exactly <span style="background: #000; color: #fff; padding: 2px 6px; font-weight: 900; font-size: 0.78rem;">2-3 Ambassadors per campus</span>. Applications are reviewed on a rolling basis.
+            </p>
+            <div style="background: rgba(255, 255, 255, 0.75); border: 2px solid var(--ink); padding: 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; color: #000;" class="space-y-1.5">
+              <div style="display: flex; justify-content: space-between;">
+                <span>👥 Active Ambassadors:</span>
+                <span style="color: var(--orange); font-weight: 900;">142 Registered</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>🏢 Campuses Active:</span>
+                <span style="color: var(--orange); font-weight: 900;">35+ Colleges</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>🚨 Application Deadline:</span>
+                <span style="color: #dc2626; font-weight: 900;">September 15, 2026</span>
+              </div>
+            </div>
+            <p style="font-size: 0.72rem; font-weight: 800; color: #222; margin-top: 12px; font-style: italic; text-align: center; line-height: 1.3;">
+              "Don't miss the chance to represent the next generation of founders at your college."
+            </p>
           </div>
         </div>
 
-        <a href="ambassador.html" class="pill-btn" style="display: block; width: 100%; font-weight: 900; background: #000; color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px;">
-          Enter Ambassador Workspace 🚪
-        </a>
       </div>
     </section>
   </main>
