@@ -71,7 +71,7 @@
             Need-blind admissions. We offer extensive scholarship packages for deserving builder squads.
           </p>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; font-weight: 600;">
-            📝 <strong style="color: #fff;">Application Fee:</strong> ₹2,000 (Non-refundable registration fee required to apply).
+            📝 <strong style="color: #fff;">Application Fee:</strong> ₹2,000 (Payable after our team contacts you to verify details).
           </p>
           <a href="#fellowshipFormSection" class="premium-btn" style="width: 100%; text-align: center;">
             Apply for Fellowship 🚀
@@ -388,7 +388,7 @@
           <textarea id="fQ2" required class="form-input" placeholder="Why do you want to join the fellowship?"></textarea>
         </div>
         <div class="form-group-full" style="text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; line-height: 1.4;">
-          ⚠️ *Note: A non-refundable registration application fee of ₹2,000 is required. Upon clicking submit, your application details will be saved, and you will be redirected to Razorpay to complete your payment.*
+          ⚠️ *Note: An application fee of ₹2,000 is required. Upon submitting, our team will review your application and contact you to process the payment.*
         </div>
         <div class="form-group-full">
           <button type="submit" class="premium-btn form-submit-btn">
@@ -607,7 +607,7 @@
           if (error) throw error;
 
           fForm.reset();
-          showPaymentRedirectModal();
+          showApplicationSuccessModal();
         } catch (err) {
           alert("Submission failed: " + err.message);
         } finally {
@@ -617,40 +617,36 @@
       });
     }
 
-    function showPaymentRedirectModal() {
+    function showApplicationSuccessModal() {
       const modal = document.createElement('div');
-      modal.id = 'paymentRedirectModal';
+      modal.id = 'appSuccessModal';
       modal.className = 'modal-overlay';
       modal.innerHTML = `
-        <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 32px 24px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
-          <div style="font-size: 3rem; animation: bounceGlow 2.5s ease-in-out infinite;">🚀</div>
-          <p class="mini-label" style="color: var(--orange); font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 800; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">APPLICATION SAVED</p>
-          <h2 class="panel-title" style="font-size: 1.4rem; margin: 0; text-transform: uppercase;">Complete Registration</h2>
-          <p style="font-size: 0.82rem; line-height: 1.5; color: var(--text-secondary); margin: 0; font-weight: 500;">
-            Your details are saved in our database. To activate your application for cohort evaluation, please complete the ₹2,000 registration fee payment.
-          </p>
+        <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 36px 28px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
+          <div style="font-size: 3.5rem; animation: pulseGlow 2.5s ease-in-out infinite;">✨</div>
+          <p class="mini-label" style="color: var(--orange); font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 800; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">APPLICATION RECEIVED</p>
+          <h2 class="panel-title" style="font-size: 1.45rem; margin: 0; text-transform: uppercase;">Details Logged Successfully</h2>
           
-          <div style="background: rgba(255,107,0,0.08); border: 2px solid var(--orange); border-radius: 4px; padding: 12px; width: 100%; box-sizing: border-box; text-align: center; margin: 6px 0; box-shadow: 3px 3px 0 var(--ink);">
-            <span style="font-size: 0.65rem; font-family: var(--font-mono); text-transform: uppercase; font-weight: 900; color: var(--orange); display: block;">AMOUNT PAYABLE</span>
-            <span style="font-size: 1.6rem; font-weight: 900; color: #fff; margin-top: 4px; display: block;">₹2,000.00</span>
+          <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); margin: 0; font-weight: 500; display: flex; flex-direction: column; gap: 12px; text-align: left;">
+            <p style="text-align: center; color: #222; font-weight: 600;">
+              Your application details have been saved in our cohort database.
+            </p>
+            <p style="background: rgba(255,107,0,0.08); border-left: 4px solid var(--orange); padding: 12px 16px; margin: 6px 0; color: #fff; font-weight: 700; border-radius: 4px; box-shadow: 3px 3px 0 var(--ink); border-top: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);">
+              👉 <strong>Next Step:</strong> Someone from our team will contact you via WhatsApp/Email within the next <strong>24 hours</strong>. The ₹2,000 application registration fee will be processed after this onboarding callback to finalize your screening.
+            </p>
           </div>
 
-          <a href="https://rzp.io/rzp/s4orvHLl" target="_blank" onclick="closePaymentRedirectModal()" class="premium-btn" style="width: 100%; text-align: center; font-size: 0.85rem; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; justify-content: center;">
-            <span>Pay Registration Fee</span>
-            <span>↗</span>
-          </a>
-          
-          <p style="font-size: 0.7rem; color: var(--text-secondary); margin: 0; font-weight: 600;">
-            (Opens payment portal in a new tab. UPI, Cards, NetBanking supported.)
-          </p>
+          <button onclick="closeAppSuccessModal()" class="premium-btn" style="width: 100%; text-align: center; font-size: 0.85rem; cursor: pointer;">
+            Got it, thanks! 👍
+          </button>
         </div>
       `;
       document.body.appendChild(modal);
       setTimeout(() => modal.classList.add('open'), 15);
     }
 
-    function closePaymentRedirectModal() {
-      const modal = document.getElementById('paymentRedirectModal');
+    function closeAppSuccessModal() {
+      const modal = document.getElementById('appSuccessModal');
       if (modal) {
         modal.classList.remove('open');
         setTimeout(() => modal.remove(), 300);
