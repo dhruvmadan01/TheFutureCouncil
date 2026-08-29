@@ -308,17 +308,17 @@
         <h2>🎯 Milestone & Reward Tracker</h2>
         <div class="space-y-4 pt-2">
           <div class="flex justify-between text-xs font-bold uppercase mb-1">
-            <span id="milestoneLabel">Next Milestone: Campus Leader (5 Signups)</span>
-            <span id="milestoneProgress">0 / 5 signups</span>
+            <span id="milestoneLabel">Next Milestone: Campus Leader (10 Signups)</span>
+            <span id="milestoneProgress">0 / 10 signups</span>
           </div>
           <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="milestoneBar" style="width: 0%;"></div>
             <div class="progress-bar-text" id="milestoneBarText">0% Complete</div>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 text-xs font-bold text-gray-700">
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk1">🥉 5 Signups: Ambassador Certificate</div>
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk2">🥈 15 Signups: TFC T-Shirt & Goodies</div>
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk3">🥇 30 Signups: Exclusive Founders Mixer VIP Pass</div>
+            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk1">🥉 10 Signups: Ambassador Certificate</div>
+            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk2">🥈 50 Signups: TFC T-Shirt & Goodies</div>
+            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk3">🥇 100 Signups: Direct Internship in TFC</div>
           </div>
         </div>
       </div>
@@ -606,20 +606,20 @@
         document.getElementById('referralRank').textContent = myRank;
 
         // Render Milestones progress
-        let targetVal = 5;
-        let milestoneTitle = '🥉 Next Milestone: Campus Leader (5 Signups)';
+        let targetVal = 10;
+        let milestoneTitle = '🥉 Next Milestone: Campus Leader (10 Signups)';
         let reachedAll = false;
 
-        if (referralsCount >= 30) {
-          targetVal = 30;
+        if (referralsCount >= 100) {
+          targetVal = 100;
           milestoneTitle = '🎉 All Perks Unlocked! Elite Representative';
           reachedAll = true;
-        } else if (referralsCount >= 15) {
-          targetVal = 30;
-          milestoneTitle = '🥇 Next Milestone: Elite Ambassador (30 Signups)';
-        } else if (referralsCount >= 5) {
-          targetVal = 15;
-          milestoneTitle = '🥈 Next Milestone: Super Ambassador (15 Signups)';
+        } else if (referralsCount >= 50) {
+          targetVal = 100;
+          milestoneTitle = '🥇 Next Milestone: Elite Ambassador (100 Signups)';
+        } else if (referralsCount >= 10) {
+          targetVal = 50;
+          milestoneTitle = '🥈 Next Milestone: Super Ambassador (50 Signups)';
         }
 
         const progressPct = reachedAll ? 100 : Math.min(Math.round((referralsCount / targetVal) * 100), 100);
@@ -633,20 +633,20 @@
         const perk2 = document.getElementById('perk2');
         const perk3 = document.getElementById('perk3');
 
-        if (referralsCount >= 5) {
+        if (referralsCount >= 10) {
           perk1.style.background = '#e6fffa';
           perk1.style.borderColor = '#319795';
-          perk1.innerHTML = '✅ 5 Signups: Ambassador Certificate (UNLOCKED)';
+          perk1.innerHTML = '✅ 10 Signups: Ambassador Certificate (UNLOCKED)';
         }
-        if (referralsCount >= 15) {
+        if (referralsCount >= 50) {
           perk2.style.background = '#e6fffa';
           perk2.style.borderColor = '#319795';
-          perk2.innerHTML = '✅ 15 Signups: TFC T-Shirt & Goodies (UNLOCKED)';
+          perk2.innerHTML = '✅ 50 Signups: TFC T-Shirt & Goodies (UNLOCKED)';
         }
-        if (referralsCount >= 30) {
+        if (referralsCount >= 100) {
           perk3.style.background = '#e6fffa';
           perk3.style.borderColor = '#319795';
-          perk3.innerHTML = '✅ 30 Signups: Exclusive Founders Mixer VIP Pass (UNLOCKED)';
+          perk3.innerHTML = '✅ 100 Signups: Direct Internship in TFC (UNLOCKED)';
         }
 
         // Render My Referrals Table
