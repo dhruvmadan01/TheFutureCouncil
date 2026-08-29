@@ -392,10 +392,15 @@
 
       loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const u = document.getElementById('loginUsername').value;
-        const p = document.getElementById('loginPassword').value;
+        const u = document.getElementById('loginUsername').value.trim().toLowerCase();
+        const p = document.getElementById('loginPassword').value.trim();
 
         if (u === 'admin' && p === 'Thefuturecouncil0101@#&') {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          loginError.classList.add('hidden');
+          loginForm.reset();
+          checkAuth();
+        } else if ((u === 'brahmleen' || u === 'brahmleen1314@gmail.com') && p === 'Brahmleen@TFC2026') {
           sessionStorage.setItem(AUTH_KEY, 'true');
           loginError.classList.add('hidden');
           loginForm.reset();
