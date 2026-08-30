@@ -69,7 +69,7 @@
 
     <section class="workspace">
       <!-- Welcome Title (FOMO Upgraded & Animated) -->
-      <div class="partners-hero reveal-on-scroll reveal-pop" style="background: #fff7eb; color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden;">
+      <div class="partners-hero" style="background: #fff7eb; color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden; transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
         <!-- FOMO Corner Badge -->
         <div style="position: absolute; top: 0; right: 0; background: var(--orange); color: #fff; font-family: var(--font-heading); font-weight: 900; font-size: 0.65rem; padding: 4px 12px; border-bottom: 3px solid var(--ink); border-left: 3px solid var(--ink); text-transform: uppercase; letter-spacing: 0.1em;" class="fomo-pulse">
           🔥 Cohort 1 Applications Open
@@ -85,7 +85,7 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start text-black">
         
         <!-- Left: Form & Success panel (col-span-7) -->
-        <div class="md:col-span-7 space-y-6 reveal-on-scroll reveal-left">
+        <div id="leftColumn" class="md:col-span-7 space-y-6" style="transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
           <!-- Already an Ambassador Link Banner -->
           <div class="panel" style="background: #fff; color: var(--ink); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 14px 20px; margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <span style="font-size: 0.85rem; font-weight: 800; color: var(--ink);">🔑 Registered Ambassador? Access your portal:</span>
@@ -189,7 +189,7 @@
         </div>
 
         <!-- Right: Milestones & FOMO (col-span-5) -->
-        <div class="md:col-span-5 space-y-6 reveal-on-scroll reveal-right">
+        <div id="rightColumn" class="md:col-span-5 space-y-6" style="transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
           <!-- Active Scarcity & Countdown Alert Banner -->
           <div class="panel" style="background: #ff5d5d; color: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 18px; position: relative;">
             <div style="font-weight: 900; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: #000; display: inline-block; padding: 2px 8px; margin-bottom: 6px;">
@@ -272,7 +272,7 @@
       </div>
 
       <!-- The Ambassador Dream Section (More Dreams & Perks) -->
-      <section class="panel wide reveal-on-scroll reveal-pop" style="margin-top: 24px; background: #fff7eb;">
+      <section id="perksSection" class="panel wide perks-section" style="margin-top: 24px; background: #fff7eb; transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
         <div class="panel-heading">
           <p class="mini-label" style="color: var(--orange);">YOUR ECOSYSTEM LAUNCHPAD</p>
           <h2 class="reveal-type" style="margin: 0 0 10px; font-size: 1.7rem; font-weight: 900;">WHAT YOU ARE ACTUALLY UNLOCKING: THE DREAM</h2>
@@ -457,6 +457,71 @@
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
+
+    // Scroll-Linked Assemblies and Animations (Wow scrolling)
+    function initScrollLinkedTransforms() {
+      const hero = document.querySelector('.partners-hero');
+      const leftCol = document.getElementById('leftColumn');
+      const rightCol = document.getElementById('rightColumn');
+      const perks = document.getElementById('perksSection');
+      
+      function updateTransforms() {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        
+        // 1. Hero fades and slides up slightly on scroll
+        if (hero) {
+          const heroOpacity = Math.max(0, 1 - scrollY / 320);
+          const heroY = -scrollY * 0.28;
+          const heroScale = Math.max(0.94, 1 - scrollY / 1800);
+          hero.style.transform = `translate3d(0, ${heroY}px, 0) scale(${heroScale})`;
+          hero.style.opacity = heroOpacity;
+        }
+        
+        // 2. Left & Right Columns slide inward to assemble as you scroll
+        if (leftCol && rightCol) {
+          const progress = Math.min(1, scrollY / 240);
+          const leftX = -100 * (1 - progress);
+          const rightX = 100 * (1 - progress);
+          const rot = 3 * (1 - progress);
+          const colOpacity = 0.4 + 0.6 * progress;
+          
+          leftCol.style.transform = `translate3d(${leftX}px, 0, 0) rotate(${-rot}deg)`;
+          leftCol.style.opacity = colOpacity;
+          
+          rightCol.style.transform = `translate3d(${rightX}px, 0, 0) rotate(${rot}deg)`;
+          rightCol.style.opacity = colOpacity;
+        }
+        
+        // 3. Bottom Perks Section scales, fades, and rotates into place
+        if (perks) {
+          const rect = perks.getBoundingClientRect();
+          const perksTriggerTop = rect.top + scrollY;
+          const triggerStart = perksTriggerTop - viewportHeight;
+          const triggerEnd = perksTriggerTop - viewportHeight + 400;
+          
+          let progress = 0;
+          if (scrollY > triggerStart) {
+            progress = Math.min(1, (scrollY - triggerStart) / 400);
+          }
+          
+          const perksScale = 0.92 + 0.08 * progress;
+          const perksY = 60 * (1 - progress);
+          const perksRot = 2.5 * (1 - progress);
+          const perksOpacity = 0.2 + 0.8 * progress;
+          
+          perks.style.transform = `translate3d(0, ${perksY}px, 0) scale(${perksScale}) rotate(${-perksRot}deg)`;
+          perks.style.opacity = perksOpacity;
+        }
+      }
+      
+      window.addEventListener('scroll', updateTransforms, { passive: true });
+      window.addEventListener('resize', updateTransforms, { passive: true });
+      updateTransforms(); // Initial run
+    }
+    
+    // Call after DOM is ready
+    initScrollLinkedTransforms();
   </script>
 </body>
 </html>
