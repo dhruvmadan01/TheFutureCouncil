@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {},
   "dependencies": {
+    "dotenv": "^17.4.2",
     "razorpay": "^2.9.8"
   }
 }
