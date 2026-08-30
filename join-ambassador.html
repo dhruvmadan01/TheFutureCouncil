@@ -37,6 +37,19 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- Interactive Floating Stickers (Desktop Margin Parallax + Magnetic Follow) -->
+  <div class="floating-sticker star" style="top: 15%; left: 3%; --rotation: 12deg;" data-parallax-speed="0.2">★</div>
+  <div class="floating-sticker orange" style="top: 32%; left: 4%; --rotation: -8deg;" data-parallax-speed="0.35">🔥 LEAD</div>
+  <div class="floating-sticker" style="top: 50%; left: 2%; --rotation: 6deg;" data-parallax-speed="0.18">✦ EXECUTE</div>
+  <div class="floating-sticker yellow" style="top: 72%; left: 5%; --rotation: -15deg;" data-parallax-speed="0.25">💡 NETWORK</div>
+  <div class="floating-sticker star" style="top: 88%; left: 3%; --rotation: -5deg;" data-parallax-speed="0.15">★</div>
+
+  <div class="floating-sticker yellow" style="top: 12%; right: 4%; --rotation: -10deg;" data-parallax-speed="0.28">🚀 COHORT 1</div>
+  <div class="floating-sticker star" style="top: 30%; right: 5%; --rotation: 15deg;" data-parallax-speed="0.15">★</div>
+  <div class="floating-sticker orange" style="top: 48%; right: 3%; --rotation: -6deg;" data-parallax-speed="0.3">★ GRASSROOTS</div>
+  <div class="floating-sticker" style="top: 68%; right: 4%; --rotation: 8deg;" data-parallax-speed="0.22">✦ DREAMS</div>
+  <div class="floating-sticker yellow" style="top: 84%; right: 3%; --rotation: -12deg;" data-parallax-speed="0.32">💎 INFLUENCE</div>
+
   <main class="desktop-window" style="max-width: 1000px; margin: 40px auto; box-shadow: 8px 8px 0 var(--ink);">
     <header class="window-bar">
       <div class="window-controls" aria-hidden="true">
@@ -53,6 +66,13 @@
       <a href="branches.html" class="window-tab">Our Branches</a>
       <a href="join-ambassador.html" class="window-tab active">Apply Ambassador</a>
     </nav>
+
+    <!-- Horizontal Scrolling Ticker Marquee -->
+    <div class="marquee-wrap" style="background: var(--ink); color: #fff; border-bottom: 3px solid var(--ink); overflow: hidden;">
+      <div class="marquee-content" style="padding: 2px 0;">
+        ★ LEAD THE GRASSROOTS MOVEMENTS ★ FAST-TRACK TO PRE-SEED FUNDING ★ VIP IRL MIXER ACCESS ★ EXCLUSIVE DEVELOPER GUILDS ★ GET THE PREMIUM TFC HOODIE ★ RECRUIT FOR CORE SQUADS ★ DIRECT HQ INTERNSHIP PIPELINES ★ LEAD THE GRASSROOTS MOVEMENTS ★ FAST-TRACK TO PRE-SEED FUNDING ★ VIP IRL MIXER ACCESS ★ EXCLUSIVE DEVELOPER GUILDS ★ GET THE PREMIUM TFC HOODIE ★ RECRUIT FOR CORE SQUADS ★ DIRECT HQ INTERNSHIP PIPELINES ★
+      </div>
+    </div>
 
     <section class="workspace">
       <!-- Welcome Title (FOMO Upgraded & Animated) -->
@@ -237,6 +257,14 @@
                 <span style="color: #dc2626; font-weight: 900;">September 15, 2026</span>
               </div>
             </div>
+            
+            <!-- Real-time Countdown Timer (Cool Interaction) -->
+            <div style="background: #fff; border: 2px solid var(--ink); padding: 10px; margin-top: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 4px 4px 0 var(--ink); text-align: center; color: var(--ink);">
+              <span style="font-size: 0.68rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); display: flex; align-items: center; gap: 4px;">
+                ⚡ TIME TO CLAIM YOUR SEAT
+              </span>
+              <span id="countdownClock" style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 900; color: var(--ink); margin-top: 4px; letter-spacing: 0.05em;">00d : 00h : 00m : 00s</span>
+            </div>
           </div>
         </div>
 
@@ -399,6 +427,35 @@
         submitBtn.textContent = 'Submit Application 🚀';
       }
     });
+
+    // Countdown clock real-time logic
+    function updateCountdown() {
+      const deadline = new Date("September 15, 2026 23:59:59").getTime();
+      const now = new Date().getTime();
+      const diff = deadline - now;
+      
+      const clockEl = document.getElementById('countdownClock');
+      if (!clockEl) return;
+      
+      if (diff <= 0) {
+        clockEl.textContent = "COHORT 1 CLOSED";
+        return;
+      }
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      const dStr = days.toString().padStart(2, '0');
+      const hStr = hours.toString().padStart(2, '0');
+      const mStr = minutes.toString().padStart(2, '0');
+      const sStr = seconds.toString().padStart(2, '0');
+      
+      clockEl.textContent = `${dStr}d : ${hStr}h : ${mStr}m : ${sStr}s`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>

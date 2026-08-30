@@ -71,36 +71,56 @@ function initIntersectionObserver() {
 
 /**
  * Translates sticker margins relative to scroll height for 3D parallax effects
+ * and sways them slightly on cursor move for magnetic depth.
  */
 function initParallaxStickers() {
     const stickers = document.querySelectorAll('.floating-sticker');
     if (stickers.length === 0) return;
 
     let lastScrollY = window.scrollY;
+    let mouseX = 0;
+    let mouseY = 0;
     let ticking = false;
 
-    function updateStickerPositions() {
-        stickers.forEach(sticker => {
-            const speed = parseFloat(sticker.getAttribute('data-parallax-speed')) || 0.25;
-            const yOffset = lastScrollY * speed;
-            
-            // Fetch rotation value defined in CSS variables or fallback
-            const rotation = sticker.style.getPropertyValue('--rotation') || '-4deg';
-            
-            // Apply translation offset along Y axis
-            sticker.style.transform = `translate3d(0, ${-yOffset}px, 0) rotate(${rotation})`;
-        });
-        ticking = false;
-    }
+    // Track cursor coordinates relative to screen center
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2);
+        mouseY = (e.clientY - window.innerHeight / 2);
+        requestUpdate();
+    }, { passive: true });
 
-    // Scroll listener with requestAnimationFrame throttling for optimal performance
     window.addEventListener('scroll', () => {
         lastScrollY = window.scrollY;
+        requestUpdate();
+    }, { passive: true });
+
+    function requestUpdate() {
         if (!ticking) {
             window.requestAnimationFrame(updateStickerPositions);
             ticking = true;
         }
-    }, { passive: true });
+    }
+
+    function updateStickerPositions() {
+        stickers.forEach((sticker, index) => {
+            const speed = parseFloat(sticker.getAttribute('data-parallax-speed')) || 0.25;
+            
+            // Scroll parallax offset
+            const scrollOffset = lastScrollY * speed;
+            
+            // Mouse drift: vary factors slightly based on element index for organic motion
+            const mouseFactor = 0.015 + (index * 0.004);
+            const mouseOffsetX = mouseX * mouseFactor;
+            const mouseOffsetY = mouseY * mouseFactor;
+            
+            // Rotate
+            const rotation = sticker.style.getPropertyValue('--rotation') || '-4deg';
+            
+            // Apply compound transforms (both Y-scroll and cursor drift offset)
+            sticker.style.transform = `translate3d(${mouseOffsetX}px, ${-scrollOffset + mouseOffsetY}px, 0) rotate(${rotation})`;
+        });
+        ticking = false;
+    }
 
     // Align initial positions
     updateStickerPositions();
