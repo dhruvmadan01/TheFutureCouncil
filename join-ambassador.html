@@ -34,6 +34,7 @@
     }
   </style>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
   <main class="desktop-window" style="max-width: 1000px; margin: 40px auto; box-shadow: 8px 8px 0 var(--ink);">
@@ -54,18 +55,24 @@
     </nav>
 
     <section class="workspace">
-      <!-- Welcome Title -->
-      <div class="partners-hero" style="background: #fff7eb; color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 18px; margin-bottom: 24px;">
-        <h1 class="hero-title" style="font-size: 1.6rem; color: var(--ink);">Join Campus Ambassador Program</h1>
-        <p class="hero-text" style="color: #444;">
-          Represent TFC, drive builder signups on your campus, track milestones, and unlock exclusive startup rewards.
+      <!-- Welcome Title (FOMO Upgraded & Animated) -->
+      <div class="partners-hero reveal-on-scroll reveal-pop" style="background: #fff7eb; color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden;">
+        <!-- FOMO Corner Badge -->
+        <div style="position: absolute; top: 0; right: 0; background: var(--orange); color: #fff; font-family: var(--font-heading); font-weight: 900; font-size: 0.65rem; padding: 4px 12px; border-bottom: 3px solid var(--ink); border-left: 3px solid var(--ink); text-transform: uppercase; letter-spacing: 0.1em;" class="fomo-pulse">
+          ⚠️ 1 Representative Per Campus
+        </div>
+        <h1 class="reveal-type" style="font-size: 2.2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 4px 0 10px; color: var(--ink);">
+          Shape the Future of Startups on Your Campus
+        </h1>
+        <p class="hero-text" style="color: #222; font-weight: 700; max-width: 720px; line-height: 1.5; font-size: 0.95rem;">
+          Represent TFC, lead grassroots student founder networks, run active startup mixers, and hook your campus builders directly into top-tier capital and global mentorship networks.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start text-black">
         
         <!-- Left: Form & Success panel (col-span-7) -->
-        <div class="md:col-span-7 space-y-6">
+        <div class="md:col-span-7 space-y-6 reveal-on-scroll reveal-left">
           <div id="signupFormPanel" class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 0;">
             <h2 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px;">
               Leader Application Form
@@ -161,11 +168,52 @@
         </div>
 
         <!-- Right: Milestones & FOMO (col-span-5) -->
-        <div class="md:col-span-5 space-y-6">
+        <div class="md:col-span-5 space-y-6 reveal-on-scroll reveal-right">
+          <!-- Active Scarcity & Countdown Alert Banner -->
+          <div class="panel" style="background: #ff5d5d; color: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 18px; position: relative;">
+            <div style="font-weight: 900; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: #000; display: inline-block; padding: 2px 8px; margin-bottom: 6px;">
+              ⚡ TIME SENSITIVE ALERT
+            </div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; text-transform: uppercase; line-height: 1.15; margin: 0 0 4px;">APPLICATION STAGE 01</h3>
+            <p style="font-size: 0.75rem; font-weight: 700; line-height: 1.35; color: #fff;">
+              Once a slot for your college is claimed, no further applications from that college will be processed. Applications close strictly on September 15.
+            </p>
+          </div>
+
+          <!-- Live Campus Slot Tracker (FOMO Engine) -->
+          <div class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 20px;">
+            <h2 class="reveal-type" style="font-size: 1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              📍 LIVE CAMPUS SLOT TRACKER
+            </h2>
+            <div class="space-y-2 text-xs font-bold">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>IIT Delhi</span> <span style="background: #ffebeb; color: #ff5d5d; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">❌ CLAIMED</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>SRCC DU</span> <span style="background: #ffebeb; color: #ff5d5d; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">❌ CLAIMED</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>Hansraj College</span> <span style="background: #ffebeb; color: #ff5d5d; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">❌ CLAIMED</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>DTU Delhi</span> <span style="background: #ffebeb; color: #ff5d5d; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">❌ CLAIMED</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>St. Stephen's</span> <span style="background: #e6fdf2; color: #10b981; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">🟢 1 SLOT OPEN</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+                <span>LSR Delhi</span> <span style="background: #e6fdf2; color: #10b981; border: 1.5px solid var(--ink); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;">🟢 1 SLOT OPEN</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom: 4px;">
+                <span style="color: var(--orange);">Your College?</span> <span style="background: #fff9e6; color: var(--orange); border: 1.5px dashed var(--orange); padding: 1px 6px; font-size: 0.65rem; text-transform: uppercase;" class="fomo-pulse">⚠️ CLAIM SPOT</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Milestones reward panel -->
           <div class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
-            <h2 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-              🎯 Milestone Rewards
+            <h2 class="reveal-type" style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              🎯 Milestone Rewards & Swag
             </h2>
             <div class="space-y-4">
               <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
@@ -178,7 +226,7 @@
               
               <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
                 <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥈 50 Signups</div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">TFC T-Shirt & Goodies</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">TFC T-Shirt & Swag Pack</div>
                 <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
                   Official premium developer/founder merchandise pack including custom-printed t-shirts, stickers, and swag.
                 </p>
@@ -186,9 +234,9 @@
               
               <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
                 <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥇 100 Signups</div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Direct Internship in TFC</div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Direct TFC Internship & Perks</div>
                 <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
-                  Fast-track your application to work directly with the core team at TFC HQ.
+                  Fast-track your application to work directly with the core team at TFC HQ and VCs.
                 </p>
               </div>
             </div>
@@ -198,12 +246,12 @@
           <div class="panel" style="background: #ffe600; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
               <span style="font-size: 1.4rem;">📢</span>
-              <h2 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; margin: 0; color: #000;">
-                Campus Ambassador Network
+              <h2 class="reveal-type" style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; margin: 0; color: #000;">
+                CAMPUS LEADER NETWORK
               </h2>
             </div>
             <p style="font-size: 0.8rem; font-weight: 800; line-height: 1.4; color: #000; margin-bottom: 14px;">
-              Represent The Future Council on your campus. Run grassroots startup mixers, coordinate cohort applications, and connect active builders at your college to early-stage capital and mentorship.
+              Join a high-octane community of student builders. Coordinate launch sprints, host campus meetups, and bridge your college directly with active startup capital.
             </p>
             <div style="background: rgba(255, 255, 255, 0.75); border: 2px solid var(--ink); padding: 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; color: #000;" class="space-y-1.5">
               <div style="display: flex; justify-content: space-between;">
@@ -219,13 +267,43 @@
                 <span style="color: #dc2626; font-weight: 900;">September 15, 2026</span>
               </div>
             </div>
-            <p style="font-size: 0.72rem; font-weight: 800; color: #222; margin-top: 12px; font-style: italic; text-align: center; line-height: 1.3;">
-              "Lead the biggest student builder network at your college."
-            </p>
           </div>
         </div>
 
       </div>
+
+      <!-- The Ambassador Dream Section (More Dreams & Perks) -->
+      <section class="panel wide reveal-on-scroll reveal-pop" style="margin-top: 24px; background: #fff7eb;">
+        <div class="panel-heading">
+          <p class="mini-label" style="color: var(--orange);">YOUR ECOSYSTEM LAUNCHPAD</p>
+          <h2 class="reveal-type" style="margin: 0 0 10px; font-size: 1.7rem; font-weight: 900;">WHAT YOU ARE ACTUALLY UNLOCKING: THE DREAM</h2>
+          <p style="font-size: 0.95rem; margin-top: 4px; font-weight: 600; color: #333;">
+            Being a Campus Ambassador is not just about promotions—it is a fast-track into high-tier venture capital, core developer guilds, and founder circles.
+          </p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 18px;">
+          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
+            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">💼 Direct VC Connections</h4>
+            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Interface directly with institutional investors and active angels. Learn what VCs look for and pitch your own ideas to them.</p>
+          </div>
+          
+          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
+            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">🎟️ VIP Mixer invites</h4>
+            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Access closed-door networking dinners, ecosystem meetups, and TFC Demo Days. Shake hands with high-impact founders.</p>
+          </div>
+          
+          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
+            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">📦 Elite TFC Swag Pack</h4>
+            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Unlock limited-edition developer hoodies, metal membership cards, branded laptop overlays, and elite representative badges.</p>
+          </div>
+          
+          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
+            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">🚀 Pre-Seed Fast Track</h4>
+            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">If you start your own company, skip the initial screens and get warm-introductions directly into the ₹15L+ TFC Fellowship cohort.</p>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
