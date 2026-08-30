@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "The Future Council Startup Ecosystem",
   "main": "index.html",
-  "scripts": {}
+  "scripts": {},
+  "dependencies": {
+    "razorpay": "^2.9.8"
+  }
 }
