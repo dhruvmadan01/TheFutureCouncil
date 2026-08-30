@@ -295,6 +295,8 @@
               <option value="yes">Fellowship Interested Only</option>
               <option value="no">General Network Only</option>
               <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
+              <option value="paid">💳 Fellowship Paid Only</option>
+              <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
             </select>
           </div>
           <div class="flex flex-col gap-1">
@@ -411,6 +413,7 @@
       let q2 = '';
       let q3 = '';
       let q4 = '';
+      let payment = 'Pending';
 
       const parts = college.split(' | ');
       let displayName = parts[0];
@@ -438,6 +441,8 @@
           q3 = part.replace('Q3: ', '').trim();
         } else if (part.startsWith('Q4: ')) {
           q4 = part.replace('Q4: ', '').trim();
+        } else if (part.startsWith('Payment: ')) {
+          payment = part.replace('Payment: ', '').trim();
         }
       });
 
@@ -456,7 +461,7 @@
         }
       }
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4 };
+      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment };
     }
 
     // Fetch leads
@@ -527,6 +532,8 @@
           if (fellowshipVal === 'yes') return meta.fellowship === 'Yes';
           if (fellowshipVal === 'no') return meta.fellowship !== 'Yes';
           if (fellowshipVal === 'dropoff') return !(meta.q1 || meta.q2 || meta.q3 || meta.q4);
+          if (fellowshipVal === 'paid') return meta.source === 'FellowshipPage' && meta.payment === 'Paid';
+          if (fellowshipVal === 'unpaid') return meta.source === 'FellowshipPage' && meta.payment !== 'Paid';
           return true;
         });
       }
@@ -594,7 +601,12 @@
           <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded bg-gray-100">${m.tier}</span></td>
           <td>
             ${meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' ? '<span class="font-extrabold text-xs uppercase text-green-600 bg-green-50 px-2 block mb-1">Interested 🚀</span>' : '<span class="text-gray-400 text-xs font-bold block mb-1">No</span>'}
-            ${!hasAnswers ? '<span class="bg-red-100 text-red-700 border border-red-400 text-[0.62rem] font-bold px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">⚠️ Dropoff</span>' : ''}
+            ${meta.source === 'FellowshipPage' ? (
+              meta.payment === 'Paid' 
+                ? '<span class="bg-green-600 text-white text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">💳 Paid</span>' 
+                : '<span class="bg-red-600 text-white text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">⚠️ Unpaid</span>'
+            ) : ''}
+            ${!hasAnswers ? '<span class="bg-red-100 text-red-700 border border-red-400 text-[0.62rem] font-bold px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">⚠️ Dropoff</span>' : ''}
           </td>
           <td>${actionsHtml}</td>
         `;
