@@ -586,6 +586,19 @@
       }
     }
 
+    // Helper to parse payment status from Supabase college string
+    function parsePaymentStatus(collegeStr) {
+      if (!collegeStr) return 'Pending';
+      const parts = collegeStr.split(' | ');
+      let status = 'Pending';
+      parts.forEach(part => {
+        if (part.startsWith('Payment: ')) {
+          status = part.replace('Payment: ', '').trim();
+        }
+      });
+      return status;
+    }
+
     // Direct Fellowship Application Form submit
     const fForm = document.getElementById('fellowshipDirectForm');
     if (fForm) {
@@ -593,10 +606,10 @@
         e.preventDefault();
         const btn = fForm.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Submitting Application...';
+        btn.textContent = 'Checking Application Status...';
 
         const name = document.getElementById('fName').value.trim();
-        const email = document.getElementById('fEmail').value.trim();
+        const email = document.getElementById('fEmail').value.trim().toLowerCase();
         const phone = document.getElementById('fPhone').value.trim();
         const college = document.getElementById('fCollege').value.trim();
         const q1 = document.getElementById('fQ1').value.trim().replace(/\|/g, '/');
@@ -604,12 +617,29 @@
         const q3 = document.getElementById('fQ3').value.trim().replace(/\|/g, '/');
         const q4 = document.getElementById('fQ4').value;
 
-        const combinedCollege = `${college} | Phone: ${phone} | Source: FellowshipPage | Q1: ${q1} | Q2: ${q2} | Q3: ${q3} | Q4: ${q4} | Payment: Pending`;
-        const randomNum = Math.floor(1000 + Math.random() * 9000);
-        const memberId = `TFC-FEL-${randomNum}`;
-
         try {
-          const { error } = await supabaseClient.from('members').insert([{
+          // 1. Query if application with this email already exists
+          const { data: dbMember, error: queryError } = await supabaseClient
+            .from('members')
+            .select('id, name, college, member_id')
+            .eq('email', email)
+            .maybeSingle();
+
+          if (queryError) throw queryError;
+
+          if (dbMember) {
+            // Already registered before! Auto-resume their application success dialog
+            fForm.reset();
+            showApplicationSuccessModal(dbMember.name, email, dbMember.member_id, dbMember.college);
+            return;
+          }
+
+          // 2. New registration flow: record data as Pending by default
+          const combinedCollege = `${college} | Phone: ${phone} | Source: FellowshipPage | Q1: ${q1} | Q2: ${q2} | Q3: ${q3} | Q4: ${q4} | Payment: Pending`;
+          const randomNum = Math.floor(1000 + Math.random() * 9000);
+          const memberId = `TFC-FEL-${randomNum}`;
+
+          const { error: insertError } = await supabaseClient.from('members').insert([{
             name: name,
             email: email,
             college: combinedCollege,
@@ -619,7 +649,7 @@
             image: ''
           }]);
 
-          if (error) throw error;
+          if (insertError) throw insertError;
 
           fForm.reset();
           showApplicationSuccessModal(name, email, memberId, combinedCollege);
@@ -636,6 +666,10 @@
       const modal = document.createElement('div');
       modal.id = 'appSuccessModal';
       modal.className = 'modal-overlay';
+      
+      const paymentStatus = parsePaymentStatus(combinedCollege);
+      const isPaid = (paymentStatus === 'Paid');
+
       modal.innerHTML = `
         <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 36px 28px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
           <div style="font-size: 3.5rem; animation: pulseGlow 2.5s ease-in-out infinite;">✨</div>
@@ -649,9 +683,20 @@
             
             <!-- Razorpay Payment Container -->
             <div id="razorpayPaymentSection" style="margin-top: 10px; width: 100%;">
-              <div style="background: rgba(255,107,0,0.06); border: 2px dashed var(--orange); padding: 16px; border-radius: 4px; text-align: center; color: #fff;">
-                ⏳ Launching secure Razorpay Standard Checkout...
-              </div>
+              ${isPaid ? `
+                <div style="background: rgba(16,185,129,0.08); border: 2.5px solid #10b981; border-radius: 4px; padding: 16px; margin: 12px 0; text-align: left; color: #fff; box-shadow: 3px 3px 0 var(--ink);">
+                  <h3 style="color: #10b981; font-weight: 900; font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase;">
+                    ✅ Payment Verified & Active!
+                  </h3>
+                  <p style="font-size: 0.78rem; font-weight: 600; line-height: 1.4; color: #eee; margin: 0;">
+                    Your ₹2,000 application fee is paid. Your application is officially active.
+                  </p>
+                </div>
+              ` : `
+                <div style="background: rgba(255,107,0,0.06); border: 2px dashed var(--orange); padding: 16px; border-radius: 4px; text-align: center; color: #fff;">
+                  ⏳ Launching secure Razorpay Standard Checkout...
+                </div>
+              `}
             </div>
           </div>
 
@@ -663,9 +708,11 @@
       document.body.appendChild(modal);
       setTimeout(() => {
         modal.classList.add('open');
-        // Automatically launch Razorpay checkout immediately!
-        const container = document.getElementById('razorpayPaymentSection');
-        startRazorpayCheckout(name, email, memberId, container, combinedCollege);
+        // Only launch checkout if payment is not already complete!
+        if (!isPaid) {
+          const container = document.getElementById('razorpayPaymentSection');
+          startRazorpayCheckout(name, email, memberId, container, combinedCollege);
+        }
       }, 15);
     }
 
