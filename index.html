@@ -204,8 +204,22 @@
     }
   </style>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- Floating Stickers in Margins for Parallax (Desktop Only) -->
+  <div class="floating-sticker star" style="top: 15%; left: 3%; --rotation: 12deg;" data-parallax-speed="0.25">★</div>
+  <div class="floating-sticker orange" style="top: 30%; left: 4%; --rotation: -8deg;" data-parallax-speed="0.4">BUILD</div>
+  <div class="floating-sticker" style="top: 50%; left: 2%; --rotation: 6deg;" data-parallax-speed="0.15">FOUNDERS</div>
+  <div class="floating-sticker yellow" style="top: 70%; left: 5%; --rotation: -15deg;" data-parallax-speed="0.3">COUNCIL</div>
+  <div class="floating-sticker star" style="top: 85%; left: 3%; --rotation: -5deg;" data-parallax-speed="0.2">★</div>
+
+  <div class="floating-sticker yellow" style="top: 12%; right: 4%; --rotation: -10deg;" data-parallax-speed="0.3">SCALE</div>
+  <div class="floating-sticker star" style="top: 28%; right: 5%; --rotation: 15deg;" data-parallax-speed="0.2">★</div>
+  <div class="floating-sticker orange" style="top: 45%; right: 3%; --rotation: -6deg;" data-parallax-speed="0.35">GRASSROOTS</div>
+  <div class="floating-sticker" style="top: 65%; right: 4%; --rotation: 8deg;" data-parallax-speed="0.18">FELLOWSHIP</div>
+  <div class="floating-sticker yellow" style="top: 82%; right: 3%; --rotation: -12deg;" data-parallax-speed="0.4">LAUNCHPAD</div>
+
   <main class="desktop-window">
     <header class="window-bar">
       <div class="window-controls" aria-hidden="true">
@@ -292,31 +306,31 @@
 
 
       <div class="stats-row">
-        <div class="stat-block">
+        <div class="stat-block reveal-on-scroll reveal-pop" style="transition-delay: 0.05s;">
           <strong>90+</strong>
           <span>Active Campus Societies</span>
         </div>
-        <div class="stat-block">
+        <div class="stat-block reveal-on-scroll reveal-pop" style="transition-delay: 0.15s;">
           <strong>20 Select</strong>
           <span>Fellowship Teams</span>
         </div>
-        <div class="stat-block">
+        <div class="stat-block reveal-on-scroll reveal-pop" style="transition-delay: 0.25s;">
           <strong>Open to All</strong>
           <span>Builders & Founders</span>
         </div>
-        <div class="stat-block">
+        <div class="stat-block reveal-on-scroll reveal-pop" style="transition-delay: 0.35s;">
           <strong>₹15L+</strong>
           <span>Founder Perks & Grants</span>
         </div>
       </div>
 
       <div class="content-grid">
-        <article class="panel">
-          <h2 style="text-transform: uppercase;">FROM GRASSROOTS DISCOVERY TO GLOBAL VENTURES</h2>
+        <article class="panel reveal-on-scroll reveal-left">
+          <h2 class="reveal-type" style="text-transform: uppercase;">FROM GRASSROOTS DISCOVERY TO GLOBAL VENTURES</h2>
           <p>High-conviction builders are everywhere, but early-stage support remains fragmented and siloed. We bridge that gap by embedding officially incorporated societies directly into university infrastructure while keeping the entire global ecosystem open to all founders, builders, and operators ready to execute.</p>
         </article>
-        <article class="panel">
-          <h2>Key Offerings</h2>
+        <article class="panel reveal-on-scroll reveal-right">
+          <h2 class="reveal-type">Key Offerings</h2>
           <ul>
             <li>Find co-founders, engineers, and key early hires</li>
             <li>Learn directly from venture-backed founders and industry leaders</li>
@@ -327,7 +341,7 @@
       </div>
 
       <!-- Fellowship Spotlight Banner -->
-      <section class="panel wide" style="background: #fff7eb; color: var(--ink); margin-bottom: 12px;">
+      <section class="panel wide reveal-on-scroll reveal-pop" style="background: #fff7eb; color: var(--ink); margin-bottom: 12px;">
         <div style="display: flex; flex-direction: column; gap: 24px; padding: 8px;">
           <!-- Top Row: Details & Actions -->
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; border-bottom: 2px dashed var(--ink); padding-bottom: 20px;">
@@ -335,7 +349,7 @@
               <p class="mini-label" style="color: var(--orange); font-weight: 900; letter-spacing: 0.05em; margin-bottom: 6px;">
                 APPLICATIONS CLOSE SEPTEMBER 15 • COHORT STARTS OCTOBER 1
               </p>
-              <h2 style="font-size: 2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 8px 0 10px; color: var(--ink);">
+              <h2 class="reveal-type" style="font-size: 2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 8px 0 10px; color: var(--ink);">
                 THE FUTURE COUNCIL FELLOWSHIP '26 (COHORT 01)
               </h2>
               <p style="font-size: 1.05rem; margin-top: 10px; line-height: 1.5; font-weight: 700; color: #333;">
@@ -404,10 +418,10 @@
       </section>
 
       <!-- Campus Chapters / Branches Summary Panel -->
-      <section class="panel wide" style="margin-bottom: 12px;">
+      <section class="panel wide reveal-on-scroll reveal-pop" style="margin-bottom: 12px;">
         <div class="panel-heading">
           <p class="mini-label" style="color: var(--orange);">GLOBAL NETWORK CHAPTERS</p>
-          <h2 style="margin: 0 0 10px;">OUR ACTIVE CAMPUS BRANCHES</h2>
+          <h2 class="reveal-type" style="margin: 0 0 10px;">OUR ACTIVE CAMPUS BRANCHES</h2>
           <p style="font-size: 0.95rem; margin-top: 4px; font-weight: 600;">
             Operating local chapters across top university colleges, national engineering institutes, and global campuses.
           </p>
@@ -436,11 +450,11 @@
       </section>
 
       <!-- Campus Ambassador Teaser Panel -->
-      <section class="panel wide" style="background: #000; color: #fff; margin-bottom: 12px; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);">
+      <section class="panel wide reveal-on-scroll reveal-right" style="background: #000; color: #fff; margin-bottom: 12px; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);">
         <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 16px;">
           <div style="flex: 2;">
             <p class="mini-label" style="color: var(--orange); font-weight: 900; letter-spacing: 0.05em; margin-bottom: 6px;">REPRESENT THE COUNCIL • LEADER OPPORTUNITY</p>
-            <h2 style="font-size: 2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 8px 0 10px; color: #fff;">BECOME THE FACE OF TFC ON YOUR CAMPUS</h2>
+            <h2 class="reveal-type" style="font-size: 2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 8px 0 10px; color: #fff;">BECOME THE FACE OF TFC ON YOUR CAMPUS</h2>
             <p style="font-size: 1rem; color: #ccc; font-weight: 600; line-height: 1.5; margin-bottom: 8px;">
               Join the Campus Ambassador Program '26. Build grassroots startup groups, run mixers, drive member registrations, and unlock exclusive rewards like official representative certificates, TFC merchandise, VIP founder mixer invites, and LinkedIn badges.
             </p>
@@ -456,23 +470,23 @@
         </div>
       </section>
 
-      <section class="panel wide">
+      <section class="panel wide reveal-on-scroll reveal-pop">
         <div class="panel-heading">
           <p class="mini-label">How we work</p>
-          <h2>From grassroots discovery to execution.</h2>
+          <h2 class="reveal-type">From grassroots discovery to execution.</h2>
         </div>
         <div class="steps">
-          <div class="step">
+          <div class="step reveal-on-scroll reveal-pop" style="transition-delay: 0.05s;">
             <span>01</span>
             <h3>CONNECT</h3>
             <p>Mobilize across incorporated campus societies and open channels to discover co-founders and early talent.</p>
           </div>
-          <div class="step">
+          <div class="step reveal-on-scroll reveal-pop" style="transition-delay: 0.15s;">
             <span>02</span>
             <h3>BUILD</h3>
             <p>Turn raw ideas into validated MVPs through structured 2-month execution sprints and leader-led playbooks.</p>
           </div>
-          <div class="step">
+          <div class="step reveal-on-scroll reveal-pop" style="transition-delay: 0.25s;">
             <span>03</span>
             <h3>SCALE</h3>
             <p>Unlock institutional distribution, equity-free grants, and investor networks to launch into the market.</p>
@@ -480,9 +494,9 @@
         </div>
       </section>
 
-      <section class="cta-band" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 32px 16px;">
+      <section class="cta-band reveal-on-scroll reveal-pop" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 32px 16px;">
         <div>
-          <h2 style="font-size: 1.8rem; font-weight: 900; text-transform: uppercase; margin: 0 0 8px; color: var(--ink);">JOIN THE PEOPLE BUILDING THE FUTURE OF STARTUPS</h2>
+          <h2 class="reveal-type" style="font-size: 1.8rem; font-weight: 900; text-transform: uppercase; margin: 0 0 8px; color: var(--ink);">JOIN THE PEOPLE BUILDING THE FUTURE OF STARTUPS</h2>
           <p style="font-size: 0.95rem; font-weight: 700; color: #555; margin: 0;">Cohort 01 applications close September 15. Fellowship kicks off October 1.</p>
         </div>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 520px; margin-top: 10px;">
