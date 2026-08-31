@@ -355,6 +355,49 @@
       const branchCards = document.querySelectorAll('.partner-card');
       const searchInput = document.getElementById('branchSearch');
 
+      // Dynamically append View Chapter Hub button to each card
+      branchCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.trim();
+        let id = '';
+        
+        if (title.includes('Faculty of Technology')) id = 'fot';
+        else if (title.includes('Shri Ram College of Commerce')) id = 'srcc';
+        else if (title.includes('Hansraj College')) id = 'hansraj';
+        else if (title.includes('Hindu College')) id = 'hindu';
+        else if (title.includes("St. Stephen's College")) id = 'stephens';
+        else if (title.includes('Kirori Mal College')) id = 'kmc';
+        else if (title.includes('Indraprastha College for Women')) id = 'ipcw';
+        else if (title.includes('Lady Shri Ram College')) id = 'lsr';
+        else if (title.includes('Sri Venkateswara College')) id = 'venky';
+        else if (title.includes('Miranda House')) id = 'miranda';
+        else if (title.includes('Daulat Ram College')) id = 'drc';
+        else if (title.includes('SGTB Khalsa College')) id = 'khalsa';
+        else if (title.includes('Delhi Technological University')) id = 'dtu';
+        else if (title.includes('Netaji Subhas University of Technology')) id = 'nsut';
+        else if (title.includes('IGDTUW')) id = 'igdtuw';
+        else if (title.includes('IIIT Delhi')) id = 'iiitd';
+        else if (title.includes('IIT Delhi')) id = 'iitd';
+        else if (title.includes('IIT Patna')) id = 'iitp';
+        
+        if (id) {
+          const body = card.querySelector('.partner-card-body');
+          const link = document.createElement('a');
+          link.href = `branch-${id}.html`;
+          link.className = 'premium-btn';
+          link.style.display = 'inline-block';
+          link.style.marginTop = '16px';
+          link.style.fontSize = '0.78rem';
+          link.style.padding = '6px 12px';
+          link.style.background = 'var(--orange)';
+          link.style.color = '#fff';
+          link.style.borderColor = 'var(--ink)';
+          link.style.fontWeight = '800';
+          link.style.cursor = 'pointer';
+          link.textContent = 'View Chapter Hub →';
+          body.appendChild(link);
+        }
+      });
+
       let activeFilter = 'all';
       let searchQuery = '';
 

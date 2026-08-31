@@ -335,6 +335,13 @@
       const dropdownItemManual = document.getElementById('dropdownItemManual');
       let isManualCollege = false;
 
+      // Pre-fill college search dropdown if passed in URL query
+      const urlParams = new URLSearchParams(window.location.search);
+      const prefillCollege = urlParams.get('college');
+      if (prefillCollege && collegeInput) {
+        collegeInput.value = prefillCollege;
+      }
+
       function enableManualMode() {
         isManualCollege = true;
         collegeDropdown.style.display = 'none';
