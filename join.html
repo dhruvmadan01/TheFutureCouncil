@@ -335,11 +335,29 @@
       const dropdownItemManual = document.getElementById('dropdownItemManual');
       let isManualCollege = false;
 
-      // Pre-fill college search dropdown if passed in URL query
+      // URL Query params handling
       const urlParams = new URLSearchParams(window.location.search);
       const prefillCollege = urlParams.get('college');
       if (prefillCollege && collegeInput) {
         collegeInput.value = prefillCollege;
+      }
+
+      function openCollegeDropdown() {
+        if (isManualCollege) return;
+        collegeDropdown.style.display = 'block';
+        const filter = (collegeInput.value || '').toLowerCase().trim();
+        dropdownItems.forEach(item => {
+          if (item === dropdownItemManual) {
+            item.style.display = 'block';
+            return;
+          }
+          const text = item.textContent.toLowerCase();
+          if (!filter || text.includes(filter)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
       }
 
       function enableManualMode() {
@@ -356,7 +374,7 @@
         collegeInput.value = '';
         collegeInput.placeholder = 'Search or type your college...';
         if (btnManualCollege) btnManualCollege.innerHTML = 'Type Manually ✎';
-        collegeDropdown.style.display = 'block';
+        openCollegeDropdown();
         collegeInput.focus();
       }
 
@@ -378,19 +396,24 @@
       }
 
       if (collegeInput && collegeDropdown) {
-        // Show dropdown on focus
+        // Show dropdown on focus & click
         collegeInput.addEventListener('focus', () => {
-          if (isManualCollege) return;
-          collegeDropdown.style.display = 'block';
+          openCollegeDropdown();
+        });
+        collegeInput.addEventListener('click', () => {
+          openCollegeDropdown();
         });
 
         // Filter dropdown items as the user types
         collegeInput.addEventListener('input', () => {
           if (isManualCollege) return;
           collegeDropdown.style.display = 'block';
-          const filter = collegeInput.value.toLowerCase();
+          const filter = collegeInput.value.toLowerCase().trim();
           dropdownItems.forEach(item => {
-            if (item === dropdownItemManual) return;
+            if (item === dropdownItemManual) {
+              item.style.display = 'block';
+              return;
+            }
             const text = item.textContent.toLowerCase();
             if (text.includes(filter)) {
               item.style.display = 'block';
@@ -404,7 +427,7 @@
         dropdownItems.forEach(item => {
           if (item === dropdownItemManual) return;
           item.addEventListener('click', (e) => {
-            collegeInput.value = item.getAttribute('data-value');
+            collegeInput.value = item.getAttribute('data-value') || item.textContent.trim();
             collegeDropdown.style.display = 'none';
             e.stopPropagation();
           });
@@ -418,10 +441,7 @@
         });
       }
 
-
-
       // Auto-populate referral code or fellowship selection from URL parameter '?ref=XYZ'
-      const urlParams = new URLSearchParams(window.location.search);
       const refParam = urlParams.get('ref');
       const fellowshipSelect = document.getElementById('fellowshipApply');
       if (refParam) {
