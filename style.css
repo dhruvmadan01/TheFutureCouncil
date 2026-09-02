@@ -581,6 +581,24 @@ h1, h2, h3, h4, h5, h6, .window-title, .kicker, .neo-btn, .pill-btn, .window-tab
   font-weight: 600;
 }
 
+.footer-credit {
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-top: 6px;
+  color: #555;
+}
+
+.footer-credit a {
+  color: var(--ink);
+  text-decoration: underline;
+  font-weight: 800;
+  transition: color 0.2s ease;
+}
+
+.footer-credit a:hover {
+  color: var(--orange);
+}
+
 /* ==========================================
    Window Tabs Navigation
    ========================================== */

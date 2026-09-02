@@ -850,3 +850,21 @@ textarea.form-input {
     text-align: center;
   }
 }
+
+.footer-credit {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 6px;
+  color: var(--text-secondary);
+}
+
+.footer-credit a {
+  color: var(--orange);
+  text-decoration: underline;
+  font-weight: 800;
+  transition: color 0.2s ease;
+}
+
+.footer-credit a:hover {
+  color: var(--orange-light);
+}
