@@ -76,9 +76,6 @@
           <a href="#fellowshipFormSection" class="premium-btn" style="width: 100%; text-align: center;">
             Apply for Fellowship 🚀
           </a>
-          <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; font-weight: 500;">
-            Need application fee assistance? <a href="javascript:void(0)" onclick="openFinancialAidModal()" style="color: var(--orange); text-decoration: underline; font-weight: 700;">Apply for Aid</a>
-          </p>
         </div>
       </div>
     </section>
@@ -507,89 +504,6 @@
     const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
     const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-    // Dynamic Financial Aid Modal overlay
-    function openFinancialAidModal() {
-      // Prevent duplicating the overlay
-      if (document.getElementById('financialAidOverlay')) return;
-
-      const modal = document.createElement('div');
-      modal.id = 'financialAidOverlay';
-      modal.className = 'modal-overlay';
-      modal.innerHTML = `
-        <div class="modal-content">
-          <button onclick="closeFinancialAidModal()" class="modal-close" type="button" aria-label="Close modal">✕</button>
-          
-          <p class="mini-label">Financial Assistance Application</p>
-          <h2 class="panel-title" style="font-size: 1.35rem; margin-bottom: 8px;">Application Fee Assistance</h2>
-          <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px;">
-            The Fellowship program itself is 100% free (₹0 tuition). If you face financial constraints regarding the ₹2,000 application fee, share your case below and our team will review it.
-          </p>
-          <form id="financialAidForm" style="display: flex; flex-direction: column; gap: 14px;">
-            <div class="form-field-wrap">
-              <label class="form-label" for="aidName">Full Name</label>
-              <input type="text" id="aidName" required class="form-input" placeholder="e.g. John Doe" />
-            </div>
-            <div class="form-field-wrap">
-              <label class="form-label" for="aidEmail">Email Address</label>
-              <input type="email" id="aidEmail" required class="form-input" placeholder="e.g. johndoe@example.com" />
-            </div>
-            <div class="form-field-wrap">
-              <label class="form-label" for="aidCase">State your Financial Aid Case (Brief)</label>
-              <textarea id="aidCase" required class="form-input" placeholder="Why do you need financial assistance? Describe your financial context..."></textarea>
-            </div>
-            <button type="submit" class="premium-btn" style="width: 100%; margin-top: 6px;">
-              Submit Assistance Request ⚡
-            </button>
-          </form>
-        </div>
-      `;
-      document.body.appendChild(modal);
-
-      // Trigger scale/fade-in transitions
-      setTimeout(() => modal.classList.add('open'), 15);
-
-      document.getElementById('financialAidForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = e.target.querySelector('button[type="submit"]');
-        btn.disabled = true;
-        btn.textContent = 'Submitting...';
-
-        const name = document.getElementById('aidName').value.trim();
-        const email = document.getElementById('aidEmail').value.trim();
-        const aidCase = document.getElementById('aidCase').value.trim();
-
-        const combinedDetails = `Financial Aid Application | Case: ${aidCase.replace(/\|/g, '/')} | Source: FinancialAid`;
-        try {
-          const { error } = await supabaseClient.from('members').insert([{
-            name: name,
-            email: email,
-            college: combinedDetails,
-            tier: 'Student',
-            member_id: `TFC-AID-${Math.floor(1000 + Math.random() * 9000)}`,
-            password: 'aidguest2026',
-            image: ''
-          }]);
-
-          if (error) throw error;
-          alert("Your financial aid application has been logged. Our admissions board will reach out to you!");
-          closeFinancialAidModal();
-        } catch (err) {
-          alert("Submission failed: " + err.message);
-          btn.disabled = false;
-          btn.textContent = 'Submit Assistance Request ⚡';
-        }
-      });
-    }
-
-    function closeFinancialAidModal() {
-      const modal = document.getElementById('financialAidOverlay');
-      if (modal) {
-        modal.classList.remove('open');
-        // Wait for transitions to finish before cleanup
-        setTimeout(() => modal.remove(), 300);
-      }
-    }
 
     // Helper to parse payment status from Supabase college string
     function parsePaymentStatus(collegeStr) {
