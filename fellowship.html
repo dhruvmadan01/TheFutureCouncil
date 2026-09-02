@@ -63,22 +63,22 @@
         <div class="residency-col">
           <h3>📍 Delhi NCR Presence</h3>
           <p>
-            Fellowship '26 is not a residential program, but you'll have to visit offline sometimes in Delhi NCR, so you need to be available for that. If you are planning to travel to Delhi NCR for this, we will help you find accommodation free of cost (though you will be responsible for the accommodation fees).
+            Fellowship '26 is not a residential program, but you will have to visit offline sometimes in Delhi NCR, so you need to be available for that. If you are traveling to Delhi NCR for the fellowship, you will have to pay for your accommodation yourself, although we will actively help you find it.
           </p>
         </div>
         <div class="residency-col" style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
-          <h3>💰 Program Fee: ₹1.5 Lakhs</h3>
+          <h3>💰 Program Fee: ₹0 (100% Free)</h3>
           <p style="margin: 0;">
-            Need-blind admissions. We offer extensive scholarship packages for deserving early-stage founders.
+            Zero tuition. You don't have to pay anything for the 2-month fellowship program.
           </p>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; font-weight: 600;">
-            📝 <strong style="color: #fff;">Application Fee:</strong> ₹2,000 (Payable immediately upon submission).
+            📝 <strong style="color: #fff;">Application Fee:</strong> ₹2,000 (We charge this so we attract serious, high-intent builders rather than random applicants, making shortlisting efficient).
           </p>
           <a href="#fellowshipFormSection" class="premium-btn" style="width: 100%; text-align: center;">
             Apply for Fellowship 🚀
           </a>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; font-weight: 500;">
-            Need financial aid? <a href="javascript:void(0)" onclick="openFinancialAidModal()" style="color: var(--orange); text-decoration: underline; font-weight: 700;">Apply for Assistance</a>
+            Need application fee assistance? <a href="javascript:void(0)" onclick="openFinancialAidModal()" style="color: var(--orange); text-decoration: underline; font-weight: 700;">Apply for Aid</a>
           </p>
         </div>
       </div>
@@ -405,8 +405,9 @@
             <option value="No" style="background: #111; color: #fff;">No</option>
           </select>
         </div>
-        <div class="form-group-full" style="text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; line-height: 1.4;">
-          ⚠️ *Note: An application fee of ₹2,000 is required. Upon submitting, you will be redirected to process the secure payment immediately.*
+        <div class="form-group-full" style="text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: #fff; background: rgba(255, 107, 0, 0.08); border: 1.5px dashed var(--orange); padding: 12px 16px; border-radius: 6px; font-weight: 600; line-height: 1.45;">
+          📢 <strong>Program Fee: ₹0 (100% Free)</strong> • <strong>Application Fee: ₹2,000</strong> (Charged so we attract serious builders, making shortlisting efficient).<br/>
+          <em>*Note: We are currently setting up our automated payment infrastructure (expected in ~2 weeks). To avoid delaying the fellowship, please submit your application below — a representative from our team will reach out to you within 24 hours to collect the application fee and confirm your slot. Thank you for your cooperation!*</em>
         </div>
         <div class="form-group-full">
           <button type="submit" class="premium-btn form-submit-btn">
@@ -433,12 +434,12 @@
 
       <div class="faq-item">
         <button class="faq-trigger" type="button">
-          <span class="faq-question">What is the fee and is financial aid available?</span>
+          <span class="faq-question">What is the fee and accommodation policy?</span>
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-content">
           <p class="faq-text">
-            The program fee for Fellowship '26 is ₹1.5 Lakhs. However, we offer 100% need-blind admissions and extensive scholarships. Accommodation assistance is provided for founders traveling to Delhi NCR.
+            The program fee for Fellowship '26 is <strong>₹0 (100% Free / Equity-Free)</strong> — you do not pay any tuition. We only charge a nominal ₹2,000 application fee so that we attract serious, high-intent builders and avoid spam. If you travel to Delhi NCR for offline sessions, you will need to pay for your accommodation yourself, though our team will happily help you find accommodation.
           </p>
         </div>
       </div>
@@ -521,9 +522,9 @@
           <button onclick="closeFinancialAidModal()" class="modal-close" type="button" aria-label="Close modal">✕</button>
           
           <p class="mini-label">Financial Assistance Application</p>
-          <h2 class="panel-title" style="font-size: 1.35rem; margin-bottom: 8px;">Request Aid Support</h2>
+          <h2 class="panel-title" style="font-size: 1.35rem; margin-bottom: 8px;">Application Fee Assistance</h2>
           <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px;">
-            The Future Council guarantees need-blind enrollment. Deserving student founders will receive partial or full sponsorship.
+            The Fellowship program itself is 100% free (₹0 tuition). If you face financial constraints regarding the ₹2,000 application fee, share your case below and our team will review it.
           </p>
           <form id="financialAidForm" style="display: flex; flex-direction: column; gap: 14px;">
             <div class="form-field-wrap">
@@ -676,48 +677,51 @@
       const isPaid = (paymentStatus === 'Paid');
 
       modal.innerHTML = `
-        <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 36px 28px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
-          <div style="font-size: 3.5rem; animation: pulseGlow 2.5s ease-in-out infinite;">✨</div>
+        <div class="modal-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 36px 28px; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); max-width: 540px;">
+          <div style="font-size: 3.5rem; animation: pulseGlow 2.5s ease-in-out infinite;">🎉</div>
           <p class="mini-label" style="color: var(--orange); font-size: 0.72rem; letter-spacing: 0.1em; font-weight: 800; border-bottom: 2px solid var(--ink); padding-bottom: 4px;">APPLICATION RECEIVED</p>
-          <h2 class="panel-title" style="font-size: 1.45rem; margin: 0; text-transform: uppercase;">Details Logged Successfully</h2>
+          <h2 class="panel-title" style="font-size: 1.45rem; margin: 0; text-transform: uppercase;">Application Submitted!</h2>
           
-          <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); margin: 0; font-weight: 500; display: flex; flex-direction: column; gap: 12px; text-align: left; width: 100%;">
-            <p style="text-align: center; color: #222; font-weight: 600;">
-              Your application details have been saved in our cohort database.
-            </p>
-            
-            <!-- Razorpay Payment Container -->
-            <div id="razorpayPaymentSection" style="margin-top: 10px; width: 100%;">
-              ${isPaid ? `
-                <div style="background: rgba(16,185,129,0.08); border: 2.5px solid #10b981; border-radius: 4px; padding: 16px; margin: 12px 0; text-align: left; color: #fff; box-shadow: 3px 3px 0 var(--ink);">
-                  <h3 style="color: #10b981; font-weight: 900; font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase;">
-                    ✅ Payment Verified & Active!
-                  </h3>
-                  <p style="font-size: 0.78rem; font-weight: 600; line-height: 1.4; color: #eee; margin: 0;">
-                    Your ₹2,000 application fee is paid. Your application is officially active.
-                  </p>
-                </div>
-              ` : `
-                <div style="background: rgba(255,107,0,0.06); border: 2px dashed var(--orange); padding: 16px; border-radius: 4px; text-align: center; color: #fff;">
-                  ⏳ Launching secure Razorpay Standard Checkout...
-                </div>
-              `}
+          <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); margin: 0; font-weight: 500; display: flex; flex-direction: column; gap: 14px; text-align: left; width: 100%;">
+            <div style="background: rgba(255, 255, 255, 0.04); border: 1.5px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 12px 16px; color: #fff;">
+              <div style="margin-bottom: 4px;"><strong>Applicant:</strong> ${name}</div>
+              <div style="margin-bottom: 4px;"><strong>Application ID:</strong> <span style="font-family: monospace; color: var(--orange); font-weight: 800;">${memberId}</span></div>
+              <div style="margin-bottom: 4px;"><strong>Program Fee:</strong> <span style="color: #10b981; font-weight: 800;">₹0 (100% Free / Equity-Free)</span></div>
+              <div><strong>Application Fee:</strong> ₹2,000</div>
             </div>
+
+            ${isPaid ? `
+              <div style="background: rgba(16,185,129,0.08); border: 2.5px solid #10b981; border-radius: 6px; padding: 16px; text-align: left; color: #fff; box-shadow: 3px 3px 0 var(--ink);">
+                <h3 style="color: #10b981; font-weight: 900; font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase;">
+                  ✅ Application Fee Confirmed & Active!
+                </h3>
+                <p style="font-size: 0.78rem; font-weight: 600; line-height: 1.4; color: #eee; margin: 0;">
+                  Your ₹2,000 application fee is recorded. Your fellowship profile is active for review.
+                </p>
+              </div>
+            ` : `
+              <div style="background: rgba(255, 107, 0, 0.08); border: 2px dashed var(--orange); border-radius: 6px; padding: 16px; color: #eee; font-size: 0.84rem; line-height: 1.55;">
+                <h3 style="color: var(--orange); font-weight: 900; font-size: 0.92rem; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                  <span>⏳</span> Next Steps: Fee Collection & Verification
+                </h3>
+                <p style="margin: 0 0 10px 0; color: #eee; font-weight: 500;">
+                  We are currently setting up our automated payment infrastructure (which may take ~2 weeks). To ensure we don't delay the fellowship kickoff, <strong>someone from our team will reach out to you within 24 hours</strong> (via WhatsApp / phone / email) to collect the ₹2,000 application fee and confirm your application slot.
+                </p>
+                <p style="margin: 0; font-weight: 700; color: #fff; font-size: 0.82rem;">
+                  🤝 Thank you for your cooperation!
+                </p>
+              </div>
+            `}
           </div>
 
-          <button onclick="closeAppSuccessModal()" class="premium-btn" style="width: 100%; text-align: center; font-size: 0.85rem; cursor: pointer; background: #333; border-color: var(--ink);">
-            Close & Review Later 👍
+          <button onclick="closeAppSuccessModal()" class="premium-btn" style="width: 100%; text-align: center; font-size: 0.85rem; cursor: pointer; background: #222; border-color: var(--ink);">
+            Got it, Thank You! 👍
           </button>
         </div>
       `;
       document.body.appendChild(modal);
       setTimeout(() => {
         modal.classList.add('open');
-        // Only launch checkout if payment is not already complete!
-        if (!isPaid) {
-          const container = document.getElementById('razorpayPaymentSection');
-          startRazorpayCheckout(name, email, memberId, container, combinedCollege);
-        }
       }, 15);
     }
 
