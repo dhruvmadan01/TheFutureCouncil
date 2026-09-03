@@ -1063,15 +1063,19 @@
     }
 
     async function showSocietyCrmView(society) {
+      if (!society) {
+        console.error("showSocietyCrmView called without valid society");
+        return;
+      }
       unlockedSociety = society;
       loginSection.classList.add('hidden');
       directorySection.classList.add('hidden');
       societyCrmSection.classList.remove('hidden');
 
-      document.getElementById('crmSocietyBadge').textContent = society.badge;
-      document.getElementById('crmSocietyTitle').textContent = society.name;
-      document.getElementById('crmSocietyLocation').textContent = '📍 ' + society.location;
-      document.getElementById('crmPresidentName').textContent = authenticatedPresident.name;
+      document.getElementById('crmSocietyBadge').textContent = society.badge || 'Chapter';
+      document.getElementById('crmSocietyTitle').textContent = society.name || 'Society Registry';
+      document.getElementById('crmSocietyLocation').textContent = '📍 ' + (society.location || 'Campus');
+      document.getElementById('crmPresidentName').textContent = (authenticatedPresident && authenticatedPresident.name) ? authenticatedPresident.name : 'Executive Officer';
 
       if (allCachedMembers.length === 0) {
         await fetchAllMembers();
@@ -1448,8 +1452,9 @@
       }
 
       // 3. Success: Unlock CRM!
+      const targetSociety = selectedSocietyForUnlock;
       closeReAuthModal();
-      showSocietyCrmView(selectedSocietyForUnlock);
+      showSocietyCrmView(targetSociety);
     });
 
     // --- 12. Filter & Render Unlocked Society CRM Data ---
