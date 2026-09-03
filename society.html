@@ -393,7 +393,7 @@
         <!-- Security Rule Notice -->
         <div class="p-3 mb-6 bg-orange-50 border-2 border-black flex items-center gap-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
           <span class="text-xl">🔒</span>
-          <p class="text-xs font-bold text-gray-800 leading-snug">
+          <p id="securityNoticeText" class="text-xs font-bold text-gray-800 leading-snug">
             <strong>Security Notice:</strong> All society chapters are listed below. To access private student data, click a society and re-enter your President password. You are strictly authorized to view only your designated society chapter.
           </p>
         </div>
@@ -906,6 +906,26 @@
       document.getElementById('presidentNameDisplay').textContent = authenticatedPresident.name;
       document.getElementById('presidentSocietyDisplay').textContent = authenticatedPresident.societyName;
 
+      const badge = document.getElementById('activePresidentBadge');
+      const noticeText = document.getElementById('securityNoticeText');
+      if (authenticatedPresident.isAdmin) {
+        if (badge) {
+          badge.className = 'neo-badge badge-yellow font-black';
+          badge.textContent = '👑 MASTER ADMIN OVERRIDE';
+        }
+        if (noticeText) {
+          noticeText.innerHTML = '<strong>👑 Master Admin Mode Active:</strong> You have global authorization across all 18 campus chapters. Click any society below and enter your admin password to view and export its member registry.';
+        }
+      } else {
+        if (badge) {
+          badge.className = 'neo-badge badge-green font-black';
+          badge.textContent = 'AUTHENTICATED';
+        }
+        if (noticeText) {
+          noticeText.innerHTML = '<strong>Security Notice:</strong> All society chapters are listed below. To access private student data, click a society and re-enter your President password. You are strictly authorized to view only your designated society chapter.';
+        }
+      }
+
       renderSocietiesGrid();
     }
 
@@ -948,7 +968,50 @@
       submitBtn.textContent = 'Verifying credentials...';
 
       try {
-        // 1. Check local pre-seeded roster first
+        // 0. Master Admin Access Check
+        if ((emailInput === 'admin' || emailInput === 'admin@thefuturecouncil.in') && passwordInput === 'Thefuturecouncil0101@#&') {
+          authenticatedPresident = {
+            email: 'admin@thefuturecouncil.in',
+            name: 'Council Administrator',
+            societyId: 'all',
+            societyName: 'All Societies (Master Admin)',
+            password: passwordInput,
+            isAdmin: true
+          };
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+          showDirectoryView();
+          return;
+        }
+
+        if ((emailInput === 'brahmleen' || emailInput === 'brahmleen1314@gmail.com') && passwordInput === 'Brahmleen@TFC2026') {
+          authenticatedPresident = {
+            email: 'brahmleen1314@gmail.com',
+            name: 'Brahmleen Kaur (Council Admin)',
+            societyId: 'all',
+            societyName: 'All Societies (Master Admin)',
+            password: passwordInput,
+            isAdmin: true
+          };
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+          showDirectoryView();
+          return;
+        }
+
+        if (emailInput === 'dhruv@thefuturecouncil.in' && (passwordInput === 'Thefuturecouncil0101@#&' || passwordInput === 'Dhruv@TFC2026' || passwordInput === 'society2026')) {
+          authenticatedPresident = {
+            email: 'dhruv@thefuturecouncil.in',
+            name: 'Dhruv Madan (Founder / Admin)',
+            societyId: 'all',
+            societyName: 'All Societies (Master Admin)',
+            password: passwordInput,
+            isAdmin: true
+          };
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+          showDirectoryView();
+          return;
+        }
+
+        // 1. Check local pre-seeded roster
         let matchedPresident = allSocieties.find(s => 
           s.presidentEmail.toLowerCase() === emailInput
         );
@@ -960,7 +1023,8 @@
               name: matchedPresident.presidentName,
               societyId: matchedPresident.id,
               societyName: matchedPresident.name,
-              password: passwordInput
+              password: passwordInput,
+              isAdmin: false
             };
             sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
             showDirectoryView();
@@ -972,7 +1036,7 @@
           }
         }
 
-        // 2. Query Supabase members table for dynamic society president registrations
+        // 2. Query Supabase members table for dynamic registrations
         const { data: dbMembers, error: dbError } = await supabaseClient
           .from('members')
           .select('*')
@@ -983,10 +1047,11 @@
 
         if (dbMembers && dbMembers.length > 0) {
           const user = dbMembers[0];
-          const isPresidentTier = user.tier === 'Society President' || user.tier === 'President' || user.tier === 'Founder' || user.tier === 'Co-founder';
+          const isMasterAdminTier = user.tier === 'Admin' || user.tier === 'Founder' || user.tier === 'Co-founder';
+          const isPresidentTier = user.tier === 'Society President' || user.tier === 'President';
           
-          if (!isPresidentTier) {
-            loginError.textContent = '⚠️ Access Denied: This account is not authorized as a Society President.';
+          if (!isMasterAdminTier && !isPresidentTier) {
+            loginError.textContent = '⚠️ Access Denied: This account is not authorized for executive CRM access.';
             loginError.classList.remove('hidden');
             return;
           }
@@ -997,23 +1062,34 @@
             return;
           }
 
-          // Deduce society ID from college field
-          const userCollege = (user.college || '').toLowerCase();
-          let matchedSoc = allSocieties.find(s => 
-            userCollege.includes(s.id) || userCollege.includes(s.name.toLowerCase()) || userCollege.includes(s.logo.toLowerCase())
-          );
+          if (isMasterAdminTier) {
+            authenticatedPresident = {
+              email: user.email,
+              name: `${user.name} (${user.tier})`,
+              societyId: 'all',
+              societyName: 'All Societies (Master Admin)',
+              password: passwordInput,
+              isAdmin: true
+            };
+          } else {
+            // Deduce society ID from college field
+            const userCollege = (user.college || '').toLowerCase();
+            let matchedSoc = allSocieties.find(s => 
+              userCollege.includes(s.id) || userCollege.includes(s.name.toLowerCase()) || userCollege.includes(s.logo.toLowerCase())
+            );
 
-          // If no specific match, default to first branch or master access
-          const assignedId = matchedSoc ? matchedSoc.id : 'fot';
-          const assignedName = matchedSoc ? matchedSoc.name : (user.college || 'General Chapter');
+            const assignedId = matchedSoc ? matchedSoc.id : 'fot';
+            const assignedName = matchedSoc ? matchedSoc.name : (user.college || 'General Chapter');
 
-          authenticatedPresident = {
-            email: user.email,
-            name: user.name,
-            societyId: assignedId,
-            societyName: assignedName,
-            password: passwordInput
-          };
+            authenticatedPresident = {
+              email: user.email,
+              name: user.name,
+              societyId: assignedId,
+              societyName: assignedName,
+              password: passwordInput,
+              isAdmin: false
+            };
+          }
 
           sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
           showDirectoryView();
@@ -1021,7 +1097,7 @@
         }
 
         // 3. Fallback if not found
-        loginError.textContent = '⚠️ No Society President record found for this email address.';
+        loginError.textContent = '⚠️ No executive record found for this email address.';
         loginError.classList.remove('hidden');
 
       } catch (err) {
@@ -1135,12 +1211,13 @@
 
       filteredSocieties.forEach(soc => {
         const isAssigned = authenticatedPresident && (authenticatedPresident.societyId === soc.id);
+        const isAdmin = authenticatedPresident && authenticatedPresident.isAdmin;
         
         // Count registrations for this chapter
         const memberCount = allCachedMembers.filter(m => isMemberBelongToSociety(m, soc)).length;
 
         const card = document.createElement('div');
-        card.className = `society-card ${isAssigned ? 'assigned-card' : ''}`;
+        card.className = `society-card ${isAssigned || isAdmin ? 'assigned-card' : ''}`;
         
         card.innerHTML = `
           <div>
@@ -1148,7 +1225,11 @@
               <span class="neo-badge ${soc.badge === 'DU Chapter' ? 'badge-primary' : soc.badge === 'National Chapter' ? 'badge-purple' : 'badge-green'}">
                 ${soc.badge}
               </span>
-              ${isAssigned ? `
+              ${isAdmin ? `
+                <span class="neo-badge badge-yellow font-black flex items-center gap-1">
+                  👑 ADMIN ACCESS
+                </span>
+              ` : (isAssigned ? `
                 <span class="neo-badge badge-green font-black flex items-center gap-1">
                   ⭐ YOUR CHAPTER
                 </span>
@@ -1156,7 +1237,7 @@
                 <span class="text-[0.68rem] font-black text-gray-400 uppercase tracking-wider font-mono">
                   ${soc.logo}
                 </span>
-              `}
+              `)}
             </div>
 
             <h3 class="text-lg font-black uppercase font-['Space_Grotesk'] leading-tight mb-1 text-black">
@@ -1178,8 +1259,8 @@
               <span class="font-black text-black bg-gray-100 px-2 py-0.5 rounded border border-black">${memberCount} members</span>
             </div>
 
-            <button onclick="promptUnlockSociety('${soc.id}')" class="neo-btn w-full text-center ${isAssigned ? '' : 'secondary'}">
-              ${isAssigned ? 'Unlock Chapter CRM 🔓' : 'Select & Unlock CRM 🔒'}
+            <button onclick="promptUnlockSociety('${soc.id}')" class="neo-btn w-full text-center ${isAssigned || isAdmin ? '' : 'secondary'}">
+              ${isAdmin ? 'Unlock Society CRM (Admin) 🔓' : (isAssigned ? 'Unlock Chapter CRM 🔓' : 'Select & Unlock CRM 🔒')}
             </button>
           </div>
         `;
@@ -1226,14 +1307,14 @@
 
       // 1. Verify Password against active president credentials
       if (enteredPassword !== authenticatedPresident.password) {
-        reAuthError.textContent = '⚠️ Incorrect password. Verification failed. Please enter your valid President password.';
+        reAuthError.textContent = '⚠️ Incorrect password. Verification failed. Please enter your valid credentials.';
         reAuthError.classList.remove('hidden');
         return;
       }
 
       // 2. CRITICAL ACCESS CONTROL ENFORCEMENT:
-      // Check if the authenticated president belongs to this selected society
-      const isAuthorized = (authenticatedPresident.societyId === selectedSocietyForUnlock.id);
+      // Check if user has Master Admin access OR is the assigned President for this society
+      const isAuthorized = authenticatedPresident.isAdmin || (authenticatedPresident.societyId === selectedSocietyForUnlock.id);
 
       if (!isAuthorized) {
         reAuthError.innerHTML = `
