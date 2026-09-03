@@ -180,10 +180,6 @@
                   <input type="text" id="studentCountry" class="form-control" placeholder="e.g. India" required />
                 </div>
                 <div class="form-group">
-                  <label for="studentPassword">Choose Password</label>
-                  <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required />
-                </div>
-                <div class="form-group">
                   <label for="fellowshipApply">Are you interested in the Fellowship Program?</label>
                   <select id="fellowshipApply" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;">
                     <option value="no">No, just joining the general network</option>
@@ -478,13 +474,13 @@
         const email = document.getElementById('studentEmail').value.trim().toLowerCase();
         const phone = document.getElementById('studentPhone').value.trim();
         const country = document.getElementById('studentCountry').value.trim();
-        const password = document.getElementById('studentPassword').value;
+        const defaultPassword = 'member2026';
         const refCode = document.getElementById('referralCode').value.trim();
         const fellowshipApply = document.getElementById('fellowshipApply').value;
         const societyName = document.getElementById('societyName') ? document.getElementById('societyName').value.trim() : '';
 
         // Validate Step 1 fields
-        if (!name || !collegeInputVal || !email || !phone || !country || !password) {
+        if (!name || !collegeInputVal || !email || !phone || !country) {
           signupForm.reportValidity();
           return;
         }
@@ -535,7 +531,7 @@
               currentCollegeText = cleanCollegeDisplay;
               currentCombinedCollegeBase = dbMember.college;
               currentMemberId = dbMember.member_id || memberId;
-              currentPassword = dbMember.password || password;
+              currentPassword = dbMember.password || defaultPassword;
 
               // Transition to Step 2
               step1Container.style.display = 'none';
@@ -554,7 +550,7 @@
             college: combinedCollege,
             tier: 'Student',
             member_id: memberId,
-            password: password,
+            password: defaultPassword,
             image: ''
           };
 
@@ -570,7 +566,7 @@
           currentCollegeText = cleanCollegeDisplay;
           currentCombinedCollegeBase = combinedCollege;
           currentMemberId = memberId;
-          currentPassword = password;
+          currentPassword = defaultPassword;
 
           // Transition to Step 2
           step1Container.style.display = 'none';
