@@ -870,8 +870,8 @@
         logo: 'IITP',
         badge: 'Hybrid Chapter',
         desc: 'Connecting regional builders via hybrid sprint cohorts. Focusing on distributed systems, AI applications, and hardware-software co-design.',
-        presidentEmail: 'vaibhav@thefuturecouncil.in',
-        presidentName: 'Vaibhav Jamge (Interim President)',
+        presidentEmail: 'jamgev0@gmail.com',
+        presidentName: 'Vaibhav Jamge (IIT Patna Chapter Lead)',
         defaultPassword: 'society2026'
       }
     ];
@@ -1150,6 +1150,22 @@
             societyName: 'All Societies (Master Admin)',
             password: passwordInput,
             isAdmin: true
+          };
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+          showDirectoryView();
+          await fetchAllMembers();
+          return;
+        }
+
+        // 0.5 IIT Patna Lead Direct Authentication
+        if ((emailInput === 'jamgev0@gmail.com' || emailInput === 'vaibhav@thefuturecouncil.in' || emailInput === 'jamgev0' || emailInput === 'iitp.president@thefuturecouncil.in') && passwordInput === 'society2026') {
+          authenticatedPresident = {
+            email: 'jamgev0@gmail.com',
+            name: 'Vaibhav Jamge (IIT Patna Chapter Lead)',
+            societyId: 'iitp',
+            societyName: 'IIT Patna (Hybrid)',
+            password: passwordInput,
+            isAdmin: false
           };
           sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
           showDirectoryView();
