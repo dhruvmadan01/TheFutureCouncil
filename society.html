@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Society Presidents CRM | The Future Council</title>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800;900&display=swap');
+
+    :root {
+      --orange: #ff6b00;
+      --orange-light: #ff8533;
+      --offwhite: #FAF9F6;
+      --charcoal: #1E1E1E;
+      --ink: #000000;
+      --emerald: #10b981;
+      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--orange);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .desktop-window {
+      width: min(1320px, 100%);
+      background: var(--offwhite);
+      border: 3px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
+      position: relative;
+    }
+
+    .window-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      background: var(--charcoal);
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .window-controls {
+      position: absolute;
+      left: 16px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .window-controls span {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--ink);
+    }
+
+    .window-controls .red { background: #ff5d5d; }
+    .window-controls .yellow { background: #f5c542; }
+    .window-controls .gray { background: #bdbdbd; }
+
+    .window-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      font-weight: 800;
+      color: var(--offwhite);
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+    }
+
+    .workspace {
+      padding: 28px 24px;
+    }
+
+    .neo-panel {
+      border: 3px solid var(--ink);
+      background: #fff;
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .neo-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      border: 2.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: var(--font-heading);
+      text-decoration: none;
+    }
+
+    .neo-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+      background: #ff7a1a;
+    }
+
+    .neo-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .neo-btn.dark {
+      background: var(--ink);
+      color: #fff;
+    }
+    .neo-btn.dark:hover {
+      background: #222;
+    }
+
+    .neo-btn.yellow {
+      background: #ffe600;
+      color: #000;
+    }
+    .neo-btn.yellow:hover {
+      background: #fff033;
+    }
+
+    .neo-btn.secondary {
+      background: #fff;
+      color: #000;
+    }
+    .neo-btn.secondary:hover {
+      background: #f4f4f5;
+    }
+
+    .neo-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      font-family: var(--font-heading);
+    }
+
+    .badge-primary { background: #ffebd6; color: #b43403; border-color: #b43403; }
+    .badge-green { background: #d1fae5; color: #065f46; border-color: #065f46; }
+    .badge-yellow { background: #fef3c7; color: #92400e; border-color: #92400e; }
+    .badge-purple { background: #ede9fe; color: #5b21b6; border-color: #5b21b6; }
+    .badge-gray { background: #f3f4f6; color: #374151; border-color: #374151; }
+
+    /* Custom Table Styling */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: var(--charcoal);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px 14px;
+      border-bottom: 3px solid var(--ink);
+      border-right: 1px solid #333;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 2px solid #e5e7eb;
+      border-right: 1px solid #f3f4f6;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #111;
+    }
+
+    tr:hover td {
+      background: #fffaf5;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #fff;
+      border: 3.5px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
+      width: min(560px, 100%);
+      padding: 28px;
+      transform: scale(0.95);
+      transition: transform 0.2s ease-in-out;
+      position: relative;
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .form-input {
+      width: 100%;
+      border: 2px solid var(--ink);
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: #fff;
+      color: #000;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+    }
+
+    .society-card {
+      background: #fff;
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .society-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0 var(--ink);
+      border-color: var(--orange);
+    }
+
+    .society-card.assigned-card {
+      background: #fffdf7;
+      border-color: var(--orange);
+    }
+
+    .metric-card {
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 16px;
+    }
+
+    .footer-credit {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-top: 6px;
+      color: #555;
+    }
+
+    .footer-credit a {
+      color: var(--ink);
+      text-decoration: underline;
+      font-weight: 800;
+      transition: color 0.2s ease;
+    }
+
+    .footer-credit a:hover {
+      color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="desktop-window">
+    
+    <!-- Window Bar -->
+    <header class="window-bar">
+      <div class="window-controls">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="gray"></span>
+      </div>
+      <div class="window-title">THE FUTURE COUNCIL // SOCIETY PRESIDENTS CRM PORTAL</div>
+    </header>
+
+    <div class="workspace">
+
+      <!-- ==========================================
+           SECTION 1: PRESIDENT LOGIN PANEL
+           ========================================== -->
+      <section id="loginSection" class="neo-panel max-w-lg mx-auto my-8">
+        <div class="text-center mb-6">
+          <div class="inline-block p-3 bg-orange-100 border-2 border-black rounded-full mb-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <span class="text-3xl">🏛️</span>
+          </div>
+          <p class="text-xs font-black tracking-widest text-orange-600 uppercase">Executive Access Gate</p>
+          <h1 class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-1">Society Presidents Portal</h1>
+          <p class="text-xs font-semibold text-gray-600 mt-1">
+            Sign in with your verified President credentials to view and manage your society's private member registry.
+          </p>
+        </div>
+
+        <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-600 text-red-900 text-xs font-bold leading-relaxed"></div>
+
+        <form id="presidentLoginForm" class="flex flex-col gap-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginEmail">President Email</label>
+            <input type="email" id="loginEmail" required placeholder="e.g. fot.president@thefuturecouncil.in" class="form-input" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginPassword">Portal Password</label>
+            <input type="password" id="loginPassword" required placeholder="••••••••" class="form-input" />
+          </div>
+          <button type="submit" class="neo-btn w-full mt-2 text-center">
+            Sign In to Presidents Portal 🚀
+          </button>
+        </form>
+
+        <div class="mt-6 pt-4 border-t-2 border-gray-200 text-center">
+          <p class="text-[0.72rem] font-bold text-gray-500">
+            Need help accessing your society registry? Contact <a href="mailto:support@thefuturecouncil.in" class="underline text-black font-black">support@thefuturecouncil.in</a>
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 2: ALL SOCIETIES DIRECTORY VIEW
+           ========================================== -->
+      <section id="directorySection" class="hidden">
+        
+        <!-- Top Executive Banner -->
+        <div class="neo-panel bg-[#FFF9E6] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="neo-badge badge-primary">PRESIDENTS CONSOLE</span>
+              <span id="activePresidentBadge" class="neo-badge badge-green">AUTHENTICATED</span>
+            </div>
+            <h2 class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-2">All Societies & Chapters Directory</h2>
+            <p class="text-xs font-bold text-gray-700 mt-1">
+              Logged in as: <span id="presidentNameDisplay" class="font-black text-black">--</span> • Assigned Chapter: <span id="presidentSocietyDisplay" class="font-black text-orange-600">--</span>
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="handlePresidentLogout()" class="neo-btn secondary text-xs">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Security Rule Notice -->
+        <div class="p-3 mb-6 bg-orange-50 border-2 border-black flex items-center gap-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <span class="text-xl">🔒</span>
+          <p class="text-xs font-bold text-gray-800 leading-snug">
+            <strong>Security Notice:</strong> All society chapters are listed below. To access private student data, click a society and re-enter your President password. You are strictly authorized to view only your designated society chapter.
+          </p>
+        </div>
+
+        <!-- Search / Filter Societies -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+          <div class="w-full sm:w-80">
+            <input type="text" id="societySearchInput" placeholder="Search societies by college or name..." class="form-input text-xs" />
+          </div>
+          <div class="flex items-center gap-2 self-start sm:self-auto">
+            <span class="text-xs font-black uppercase text-gray-600">Filter:</span>
+            <select id="chapterTypeFilter" class="form-input text-xs py-1.5 px-3 font-bold cursor-pointer w-auto">
+              <option value="all">All Chapters (18)</option>
+              <option value="DU Chapter">Delhi University</option>
+              <option value="National Chapter">National Chapters</option>
+              <option value="Hybrid Chapter">Hybrid Chapters</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Societies Grid -->
+        <div id="societiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 3: UNLOCKED SOCIETY CRM DASHBOARD
+           ========================================== -->
+      <section id="societyCrmSection" class="hidden">
+        
+        <!-- Back Navigation & Quick Header -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <button onclick="lockAndReturnToDirectory()" class="neo-btn secondary text-xs">
+            ← Back to Societies Directory (Lock Chapter)
+          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="exportSocietyCsv()" class="neo-btn yellow text-xs">
+              📥 Export Chapter Leads (CSV)
+            </button>
+            <button onclick="handlePresidentLogout()" class="neo-btn secondary text-xs">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Chapter Spotlight Banner -->
+        <div class="neo-panel bg-white mb-6">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b-2 border-gray-200 pb-4 mb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="crmSocietyBadge" class="neo-badge badge-primary">DU Chapter</span>
+                <span class="neo-badge badge-green">🔐 CRM UNLOCKED</span>
+              </div>
+              <h2 id="crmSocietyTitle" class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-2">
+                Faculty of Technology (FoT), DU
+              </h2>
+              <p id="crmSocietyLocation" class="text-xs font-bold text-gray-600 mt-1">
+                📍 Delhi University • North Campus
+              </p>
+            </div>
+            <div class="bg-orange-50 border-2 border-black p-3 rounded shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-right">
+              <p class="text-[0.65rem] font-black uppercase tracking-wider text-orange-600">Presiding Officer</p>
+              <p id="crmPresidentName" class="text-sm font-black text-black">--</p>
+              <p id="crmPresidentStatus" class="text-[0.7rem] font-bold text-green-700">● Active Authorization</p>
+            </div>
+          </div>
+
+          <!-- Metrics Row -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="metric-card bg-orange-50/60">
+              <p class="text-[0.65rem] font-black uppercase text-gray-600">Total Chapter Leads</p>
+              <p id="statTotalLeads" class="text-2xl font-black font-['Space_Grotesk'] mt-1 text-black">0</p>
+              <p class="text-[0.7rem] font-semibold text-gray-500 mt-0.5">Students registered</p>
+            </div>
+            <div class="metric-card bg-green-50/60">
+              <p class="text-[0.65rem] font-black uppercase text-green-700">Fellowship Applicants</p>
+              <p id="statFellowshipLeads" class="text-2xl font-black font-['Space_Grotesk'] mt-1 text-green-800">0</p>
+              <p class="text-[0.7rem] font-semibold text-gray-500 mt-0.5">Interested founders</p>
+            </div>
+            <div class="metric-card bg-yellow-50/60">
+              <p class="text-[0.65rem] font-black uppercase text-yellow-800">General Network</p>
+              <p id="statGeneralLeads" class="text-2xl font-black font-['Space_Grotesk'] mt-1 text-yellow-900">0</p>
+              <p class="text-[0.7rem] font-semibold text-gray-500 mt-0.5">Campus guild</p>
+            </div>
+            <div class="metric-card bg-purple-50/60">
+              <p class="text-[0.65rem] font-black uppercase text-purple-800">Q&A Responses</p>
+              <p id="statAnsweredLeads" class="text-2xl font-black font-['Space_Grotesk'] mt-1 text-purple-900">0</p>
+              <p class="text-[0.7rem] font-semibold text-gray-500 mt-0.5">Onboarded profiles</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Panel -->
+        <div class="neo-panel p-4 mb-6 bg-[#FAF9F6]">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-[0.7rem] font-black uppercase text-gray-600 mb-1">Search Students</label>
+              <input type="text" id="crmMemberSearch" placeholder="Search by name, email, or phone..." class="form-input text-xs" />
+            </div>
+            <div>
+              <label class="block text-[0.7rem] font-black uppercase text-gray-600 mb-1">Track Filter</label>
+              <select id="crmTrackFilter" class="form-input text-xs font-bold cursor-pointer">
+                <option value="all">All Registrations</option>
+                <option value="fellowship">Fellowship Applicants Only 🚀</option>
+                <option value="general">General Network Only</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[0.7rem] font-black uppercase text-gray-600 mb-1">Year of Study</label>
+              <select id="crmYearFilter" class="form-input text-xs font-bold cursor-pointer">
+                <option value="all">All Years</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+                <option value="Postgraduate">Postgraduate</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container mb-6">
+          <table id="societyMemberTable">
+            <thead>
+              <tr>
+                <th>Applicant / Student</th>
+                <th>Contact Info</th>
+                <th>Year / Course</th>
+                <th>Track</th>
+                <th>Onboarding Answers</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="societyMemberTableBody">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer mt-10 pt-6 border-t-2 border-black flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold">
+        <div class="flex items-center gap-3">
+          <img src="TFC.png" alt="TFC logo" class="w-8 h-8 border-2 border-black bg-white" />
+          <span>The Future Council Executive Society Portal</span>
+        </div>
+        <div class="footer-credit">
+          This website was built by <a href="https://dhruvmadan.in" target="_blank" rel="noopener noreferrer">Dhruv Madan</a>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+
+  <!-- ==========================================
+       MODAL 1: PASSWORD RE-VERIFICATION SECURITY GATE
+       ========================================== -->
+  <div id="reAuthModal" class="modal-overlay">
+    <div class="modal-card">
+      <button onclick="closeReAuthModal()" class="absolute top-4 right-4 text-xl font-black text-gray-600 hover:text-black" type="button">✕</button>
+      
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-2xl">🔐</span>
+        <span class="neo-badge badge-primary">CONFIDENTIAL ACCESS GATE</span>
+      </div>
+
+      <h3 class="text-xl font-black uppercase font-['Space_Grotesk']" id="reAuthSocietyTitle">
+        Unlock Society CRM
+      </h3>
+      <p class="text-xs font-bold text-gray-600 mt-1 mb-4 leading-relaxed">
+        To protect student privacy and verify your executive authorization, please re-enter your President password to access the member registry for <strong id="reAuthSocietyName" class="text-black">--</strong>.
+      </p>
+
+      <div id="reAuthError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-600 text-red-900 text-xs font-bold leading-relaxed"></div>
+
+      <form id="reAuthForm" class="flex flex-col gap-4">
+        <div>
+          <label class="block text-xs font-black uppercase mb-1" for="reAuthPassword">Confirm President Password</label>
+          <input type="password" id="reAuthPassword" required placeholder="Enter your password..." class="form-input" />
+        </div>
+        <div class="flex items-center gap-3 mt-2">
+          <button type="submit" class="neo-btn flex-1 text-center">
+            Unlock Chapter CRM 🔓
+          </button>
+          <button type="button" onclick="closeReAuthModal()" class="neo-btn secondary">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MODAL 2: STUDENT DOSSIER DETAIL MODAL
+       ========================================== -->
+  <div id="detailModal" class="modal-overlay">
+    <div class="modal-card max-w-xl">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-xl font-black text-gray-600 hover:text-black" type="button">✕</button>
+      
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-2xl">👤</span>
+        <span class="neo-badge badge-green">STUDENT DOSSIER</span>
+      </div>
+
+      <h3 id="modalStudentName" class="text-xl font-black uppercase font-['Space_Grotesk']">--</h3>
+      <p id="modalStudentMeta" class="text-xs font-bold text-gray-600 mt-0.5 mb-4">--</p>
+
+      <div class="flex flex-col gap-3 text-xs font-bold text-gray-800">
+        <div class="p-3 bg-gray-50 border-2 border-black grid grid-cols-2 gap-2">
+          <div><span class="text-gray-500 font-semibold">TFC Member ID:</span> <span id="modalStudentId" class="font-mono font-black text-orange-600">--</span></div>
+          <div><span class="text-gray-500 font-semibold">Track:</span> <span id="modalStudentTrack" class="font-black">--</span></div>
+          <div><span class="text-gray-500 font-semibold">Email:</span> <span id="modalStudentEmail" class="font-black">--</span></div>
+          <div><span class="text-gray-500 font-semibold">Phone:</span> <span id="modalStudentPhone" class="font-black">--</span></div>
+        </div>
+
+        <div class="p-3 bg-orange-50 border-2 border-black flex flex-col gap-2">
+          <div>
+            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q1: Entrepreneurship Interest & Motivation</p>
+            <p id="modalStudentQ1" class="font-medium text-gray-800 mt-1 leading-relaxed">--</p>
+          </div>
+          <div class="pt-2 border-t border-orange-200">
+            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q2: Current Skills, Projects, or Startup Idea</p>
+            <p id="modalStudentQ2" class="font-medium text-gray-800 mt-1 leading-relaxed">--</p>
+          </div>
+          <div class="pt-2 border-t border-orange-200">
+            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q3: Hometown / Current Location</p>
+            <p id="modalStudentQ3" class="font-medium text-gray-800 mt-1 leading-relaxed">--</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 pt-3 border-t-2 border-gray-200 text-right">
+        <button type="button" onclick="closeDetailModal()" class="neo-btn secondary text-xs">
+          Close Dossier
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Application Scripts -->
+  <script>
+    // --- 1. Supabase Initialization ---
+    const supabaseUrl = 'https://sbrnupffawcgbidqchxv.supabase.co';
+    const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // --- 2. Master Societies Roster (18 Campus Chapters) ---
+    const allSocieties = [
+      {
+        id: 'fot',
+        name: 'Faculty of Technology (FoT), DU',
+        location: 'Delhi University • North Campus',
+        logo: 'FOT',
+        badge: 'DU Chapter',
+        desc: 'Primary technical builder chapter. Hosts system architecture camps, hackathons, and software engineering cohorts.',
+        presidentEmail: 'fot.president@thefuturecouncil.in',
+        presidentName: 'FoT Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'srcc',
+        name: 'Shri Ram College of Commerce (SRCC)',
+        location: 'Delhi University • North Campus',
+        logo: 'SRCC',
+        badge: 'DU Chapter',
+        desc: 'Leading branch for commerce-tech, fintech, corporate relations, and early business development.',
+        presidentEmail: 'srcc.president@thefuturecouncil.in',
+        presidentName: 'SRCC Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'hansraj',
+        name: 'Hansraj College',
+        location: 'Delhi University • North Campus',
+        logo: 'HRC',
+        badge: 'DU Chapter',
+        desc: 'Focuses on student incubation support, startup mixers, and early product validation workshops.',
+        presidentEmail: 'hansraj.president@thefuturecouncil.in',
+        presidentName: 'Hansraj Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'hindu',
+        name: 'Hindu College',
+        location: 'Delhi University • North Campus',
+        logo: 'HIN',
+        badge: 'DU Chapter',
+        desc: 'Centering on social tech ventures, policy integration, and product design sprints.',
+        presidentEmail: 'hindu.president@thefuturecouncil.in',
+        presidentName: 'Hindu Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'stephens',
+        name: "St. Stephen's College",
+        location: 'Delhi University • North Campus',
+        logo: 'STE',
+        badge: 'DU Chapter',
+        desc: 'Focuses on liberal arts integrations in tech, creator economy projects, and research labs.',
+        presidentEmail: 'stephens.president@thefuturecouncil.in',
+        presidentName: "Stephen's Chapter President",
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'kmc',
+        name: 'Kirori Mal College (KMC)',
+        location: 'Delhi University • North Campus',
+        logo: 'KMC',
+        badge: 'DU Chapter',
+        desc: 'Runs venture building workshops, operations cohorts, and peer mentoring networks.',
+        presidentEmail: 'kmc.president@thefuturecouncil.in',
+        presidentName: 'KMC Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'ipcw',
+        name: 'Indraprastha College for Women (IPCW)',
+        location: 'Delhi University • North Delhi',
+        logo: 'IPCW',
+        badge: 'DU Chapter',
+        desc: 'Focusing on media-tech, female entrepreneurship events, and consumer internet products.',
+        presidentEmail: 'ipcw.president@thefuturecouncil.in',
+        presidentName: 'IPCW Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'lsr',
+        name: 'Lady Shri Ram College (LSR)',
+        location: 'Delhi University • South Delhi',
+        logo: 'LSR',
+        badge: 'DU Chapter',
+        desc: 'Focusing on women-led venture networks, consulting masterclasses, and social startup incubators.',
+        presidentEmail: 'lsr.president@thefuturecouncil.in',
+        presidentName: 'LSR Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'venky',
+        name: 'Sri Venkateswara College (Venky)',
+        location: 'Delhi University • South Delhi',
+        logo: 'VEN',
+        badge: 'DU Chapter',
+        desc: 'Fostering bio-tech, logistics, and retail-tech initiatives across South Campus.',
+        presidentEmail: 'venky.president@thefuturecouncil.in',
+        presidentName: 'Venky Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'miranda',
+        name: 'Miranda House',
+        location: 'Delhi University • North Campus',
+        logo: 'MH',
+        badge: 'DU Chapter',
+        desc: 'Chapter for science-tech, deep-tech research translation, and health-tech solutions.',
+        presidentEmail: 'miranda.president@thefuturecouncil.in',
+        presidentName: 'Miranda Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'drc',
+        name: 'Daulat Ram College (DRC)',
+        location: 'Delhi University • North Campus',
+        logo: 'DRC',
+        badge: 'DU Chapter',
+        desc: 'Hosts marketing masterclasses, creative design sprints, and brand management cohorts.',
+        presidentEmail: 'drc.president@thefuturecouncil.in',
+        presidentName: 'DRC Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'khalsa',
+        name: 'SGTB Khalsa College',
+        location: 'Delhi University • North Campus',
+        logo: 'KHAL',
+        badge: 'DU Chapter',
+        desc: 'Fostering web3 dev squads, fintech analytics, and local campus startup pilots.',
+        presidentEmail: 'khalsa.president@thefuturecouncil.in',
+        presidentName: 'Khalsa Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'dtu',
+        name: 'Delhi Technological University (DTU)',
+        location: 'DTU • Bawana Road',
+        logo: 'DTU',
+        badge: 'National Chapter',
+        desc: 'Highly engineering-centric branch focusing on cloud infrastructure, SaaS, and robotics ventures.',
+        presidentEmail: 'dtu.president@thefuturecouncil.in',
+        presidentName: 'DTU Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'nsut',
+        name: 'Netaji Subhas University of Technology (NSUT)',
+        location: 'NSUT • Dwarka',
+        logo: 'NSUT',
+        badge: 'National Chapter',
+        desc: 'Focusing on mobile applications, AI/ML models, algorithmic trading bots, and developer tooling.',
+        presidentEmail: 'nsut.president@thefuturecouncil.in',
+        presidentName: 'NSUT Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'igdtuw',
+        name: 'IGDTUW',
+        location: 'IGDTUW • Kashmiri Gate',
+        logo: 'IGD',
+        badge: 'National Chapter',
+        desc: 'Connecting engineering minds. Hosts women-led hackathons, cybersecurity projects, and web development clinics.',
+        presidentEmail: 'igdtuw.president@thefuturecouncil.in',
+        presidentName: 'IGDTUW Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'iiitd',
+        name: 'IIIT Delhi (IIITD)',
+        location: 'IIITD • Okhla Phase III',
+        logo: 'IIITD',
+        badge: 'National Chapter',
+        desc: 'Pioneering computational design, data analytics, ML engineering research, and product design cohorts.',
+        presidentEmail: 'iiitd.president@thefuturecouncil.in',
+        presidentName: 'IIITD Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'iitd',
+        name: 'IIT Delhi',
+        location: 'IIT Delhi • Hauz Khas',
+        logo: 'IITD',
+        badge: 'National Chapter',
+        desc: 'Pioneering deep-tech, robotics, clean-tech, AI agent systems, and venture scale models.',
+        presidentEmail: 'iitd.president@thefuturecouncil.in',
+        presidentName: 'IIT Delhi Chapter President',
+        defaultPassword: 'society2026'
+      },
+      {
+        id: 'iitp',
+        name: 'IIT Patna (Hybrid)',
+        location: 'IIT Patna • Bihta',
+        logo: 'IITP',
+        badge: 'Hybrid Chapter',
+        desc: 'Connecting regional builders via hybrid sprint cohorts. Focusing on distributed systems, AI applications, and hardware-software co-design.',
+        presidentEmail: 'vaibhav@thefuturecouncil.in',
+        presidentName: 'Vaibhav Jamge (Interim President)',
+        defaultPassword: 'society2026'
+      }
+    ];
+
+    // --- 3. App State Variables ---
+    const SESSION_KEY = 'tfc_society_president_session';
+    let authenticatedPresident = null; // { email, name, societyId, societyName, password }
+    let selectedSocietyForUnlock = null;
+    let unlockedSociety = null;
+    let allCachedMembers = [];
+    let societyFilteredMembers = [];
+
+    // --- 4. DOM Elements ---
+    const loginSection = document.getElementById('loginSection');
+    const directorySection = document.getElementById('directorySection');
+    const societyCrmSection = document.getElementById('societyCrmSection');
+    const presidentLoginForm = document.getElementById('presidentLoginForm');
+    const loginError = document.getElementById('loginError');
+
+    const reAuthModal = document.getElementById('reAuthModal');
+    const reAuthForm = document.getElementById('reAuthForm');
+    const reAuthError = document.getElementById('reAuthError');
+
+    const detailModal = document.getElementById('detailModal');
+
+    // --- 5. Session & Auth Functions ---
+    async function initApp() {
+      const stored = sessionStorage.getItem(SESSION_KEY);
+      if (stored) {
+        try {
+          authenticatedPresident = JSON.parse(stored);
+          showDirectoryView();
+        } catch (e) {
+          sessionStorage.removeItem(SESSION_KEY);
+          showLoginView();
+        }
+      } else {
+        showLoginView();
+      }
+
+      // Fetch latest member records in background
+      await fetchAllMembers();
+    }
+
+    function showLoginView() {
+      loginSection.classList.remove('hidden');
+      directorySection.classList.add('hidden');
+      societyCrmSection.classList.add('hidden');
+      presidentLoginForm.reset();
+    }
+
+    function showDirectoryView() {
+      loginSection.classList.add('hidden');
+      directorySection.classList.remove('hidden');
+      societyCrmSection.classList.add('hidden');
+
+      document.getElementById('presidentNameDisplay').textContent = authenticatedPresident.name;
+      document.getElementById('presidentSocietyDisplay').textContent = authenticatedPresident.societyName;
+
+      renderSocietiesGrid();
+    }
+
+    function showSocietyCrmView(society) {
+      unlockedSociety = society;
+      loginSection.classList.add('hidden');
+      directorySection.classList.add('hidden');
+      societyCrmSection.classList.remove('hidden');
+
+      document.getElementById('crmSocietyBadge').textContent = society.badge;
+      document.getElementById('crmSocietyTitle').textContent = society.name;
+      document.getElementById('crmSocietyLocation').textContent = '📍 ' + society.location;
+      document.getElementById('crmPresidentName').textContent = authenticatedPresident.name;
+
+      filterAndRenderCrmData();
+    }
+
+    window.handlePresidentLogout = function() {
+      sessionStorage.removeItem(SESSION_KEY);
+      authenticatedPresident = null;
+      unlockedSociety = null;
+      showLoginView();
+    };
+
+    window.lockAndReturnToDirectory = function() {
+      unlockedSociety = null;
+      showDirectoryView();
+    };
+
+    // --- 6. Login Form Submission ---
+    presidentLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginError.classList.add('hidden');
+
+      const emailInput = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const passwordInput = document.getElementById('loginPassword').value.trim();
+      const submitBtn = presidentLoginForm.querySelector('button[type="submit"]');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Verifying credentials...';
+
+      try {
+        // 1. Check local pre-seeded roster first
+        let matchedPresident = allSocieties.find(s => 
+          s.presidentEmail.toLowerCase() === emailInput
+        );
+
+        if (matchedPresident) {
+          if (matchedPresident.defaultPassword === passwordInput) {
+            authenticatedPresident = {
+              email: matchedPresident.presidentEmail,
+              name: matchedPresident.presidentName,
+              societyId: matchedPresident.id,
+              societyName: matchedPresident.name,
+              password: passwordInput
+            };
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+            showDirectoryView();
+            return;
+          } else {
+            loginError.textContent = '⚠️ Incorrect password. Please try again.';
+            loginError.classList.remove('hidden');
+            return;
+          }
+        }
+
+        // 2. Query Supabase members table for dynamic society president registrations
+        const { data: dbMembers, error: dbError } = await supabaseClient
+          .from('members')
+          .select('*')
+          .eq('email', emailInput)
+          .limit(1);
+
+        if (dbError) throw dbError;
+
+        if (dbMembers && dbMembers.length > 0) {
+          const user = dbMembers[0];
+          const isPresidentTier = user.tier === 'Society President' || user.tier === 'President' || user.tier === 'Founder' || user.tier === 'Co-founder';
+          
+          if (!isPresidentTier) {
+            loginError.textContent = '⚠️ Access Denied: This account is not authorized as a Society President.';
+            loginError.classList.remove('hidden');
+            return;
+          }
+
+          if (user.password !== passwordInput) {
+            loginError.textContent = '⚠️ Incorrect password. Please try again.';
+            loginError.classList.remove('hidden');
+            return;
+          }
+
+          // Deduce society ID from college field
+          const userCollege = (user.college || '').toLowerCase();
+          let matchedSoc = allSocieties.find(s => 
+            userCollege.includes(s.id) || userCollege.includes(s.name.toLowerCase()) || userCollege.includes(s.logo.toLowerCase())
+          );
+
+          // If no specific match, default to first branch or master access
+          const assignedId = matchedSoc ? matchedSoc.id : 'fot';
+          const assignedName = matchedSoc ? matchedSoc.name : (user.college || 'General Chapter');
+
+          authenticatedPresident = {
+            email: user.email,
+            name: user.name,
+            societyId: assignedId,
+            societyName: assignedName,
+            password: passwordInput
+          };
+
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(authenticatedPresident));
+          showDirectoryView();
+          return;
+        }
+
+        // 3. Fallback if not found
+        loginError.textContent = '⚠️ No Society President record found for this email address.';
+        loginError.classList.remove('hidden');
+
+      } catch (err) {
+        console.error("Login verification error:", err);
+        loginError.textContent = '⚠️ Authentication service error: ' + (err.message || 'Please check connection.');
+        loginError.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In to Presidents Portal 🚀';
+      }
+    });
+
+    // --- 7. Fetch Members Data & Parsing ---
+    async function fetchAllMembers() {
+      try {
+        const { data, error } = await supabaseClient.from('members').select('*');
+        if (error) throw error;
+        allCachedMembers = data || [];
+        if (directorySection.classList.contains('hidden') === false) {
+          renderSocietiesGrid();
+        }
+      } catch (err) {
+        console.error("Failed to load members from Supabase:", err);
+      }
+    }
+
+    function parseMemberMetadata(collegeStr) {
+      let displayName = collegeStr || '';
+      let phone = '—';
+      let year = '—';
+      let country = 'India';
+      let fellowship = 'No';
+      let q1 = '—', q2 = '—', q3 = '—';
+
+      if (!collegeStr) return { displayName, phone, year, country, fellowship, q1, q2, q3 };
+
+      const parts = collegeStr.split(' | ');
+      displayName = parts[0] || '';
+
+      if (displayName.includes(',')) {
+        const sub = displayName.split(',');
+        displayName = sub[0].trim();
+        year = sub[1] ? sub[1].trim() : '—';
+      }
+
+      parts.forEach(p => {
+        if (p.startsWith('Phone: ')) phone = p.replace('Phone: ', '').trim();
+        else if (p.startsWith('Country: ')) country = p.replace('Country: ', '').trim();
+        else if (p.startsWith('Fellowship: ')) fellowship = p.replace('Fellowship: ', '').trim();
+        else if (p.startsWith('Q1: ')) q1 = p.replace('Q1: ', '').trim();
+        else if (p.startsWith('Q2: ')) q2 = p.replace('Q2: ', '').trim();
+        else if (p.startsWith('Q3: ')) q3 = p.replace('Q3: ', '').trim();
+      });
+
+      return { displayName, phone, year, country, fellowship, q1, q2, q3 };
+    }
+
+    function isMemberBelongToSociety(member, society) {
+      const collegeStr = (member.college || '').toLowerCase();
+      const sId = society.id.toLowerCase();
+      const sName = society.name.toLowerCase();
+      const sLogo = society.logo.toLowerCase();
+
+      // Normalize common names
+      if (sId === 'fot' && (collegeStr.includes('faculty of technology') || collegeStr.includes('fot'))) return true;
+      if (sId === 'srcc' && (collegeStr.includes('shri ram') || collegeStr.includes('srcc'))) return true;
+      if (sId === 'hansraj' && (collegeStr.includes('hansraj') || collegeStr.includes('hrc'))) return true;
+      if (sId === 'hindu' && collegeStr.includes('hindu')) return true;
+      if (sId === 'stephens' && (collegeStr.includes('stephen') || collegeStr.includes('ste'))) return true;
+      if (sId === 'kmc' && (collegeStr.includes('kirori') || collegeStr.includes('kmc'))) return true;
+      if (sId === 'ipcw' && (collegeStr.includes('indraprastha') || collegeStr.includes('ipcw'))) return true;
+      if (sId === 'lsr' && (collegeStr.includes('lady shri ram') || collegeStr.includes('lsr'))) return true;
+      if (sId === 'venky' && (collegeStr.includes('venkateswara') || collegeStr.includes('venky'))) return true;
+      if (sId === 'miranda' && (collegeStr.includes('miranda') || collegeStr.includes('mh'))) return true;
+      if (sId === 'drc' && (collegeStr.includes('daulat ram') || collegeStr.includes('drc'))) return true;
+      if (sId === 'khalsa' && (collegeStr.includes('khalsa') || collegeStr.includes('sgtb'))) return true;
+      if (sId === 'dtu' && (collegeStr.includes('dtu') || collegeStr.includes('delhi technological'))) return true;
+      if (sId === 'nsut' && (collegeStr.includes('nsut') || collegeStr.includes('netaji subhas'))) return true;
+      if (sId === 'igdtuw' && collegeStr.includes('igdtuw')) return true;
+      if (sId === 'iiitd' && (collegeStr.includes('iiitd') || collegeStr.includes('iiit delhi'))) return true;
+      if (sId === 'iitd' && (collegeStr.includes('iit delhi') || collegeStr.includes('iitd'))) return true;
+      if (sId === 'iitp' && (collegeStr.includes('iit patna') || collegeStr.includes('iitp'))) return true;
+
+      return collegeStr.includes(sId) || collegeStr.includes(sLogo);
+    }
+
+    // --- 8. Render Societies Directory Grid ---
+    function renderSocietiesGrid() {
+      const grid = document.getElementById('societiesGrid');
+      const searchQuery = (document.getElementById('societySearchInput').value || '').toLowerCase().trim();
+      const typeFilter = document.getElementById('chapterTypeFilter').value;
+
+      grid.innerHTML = '';
+
+      const filteredSocieties = allSocieties.filter(soc => {
+        const matchesSearch = soc.name.toLowerCase().includes(searchQuery) || soc.location.toLowerCase().includes(searchQuery) || soc.logo.toLowerCase().includes(searchQuery);
+        const matchesType = (typeFilter === 'all') || (soc.badge === typeFilter);
+        return matchesSearch && matchesType;
+      });
+
+      if (filteredSocieties.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center neo-panel bg-white">
+            <p class="text-3xl mb-2">🔍</p>
+            <h3 class="text-lg font-black uppercase font-['Space_Grotesk']">No Societies Found</h3>
+            <p class="text-xs font-semibold text-gray-500 mt-1">Try adjusting your search query or chapter filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredSocieties.forEach(soc => {
+        const isAssigned = authenticatedPresident && (authenticatedPresident.societyId === soc.id);
+        
+        // Count registrations for this chapter
+        const memberCount = allCachedMembers.filter(m => isMemberBelongToSociety(m, soc)).length;
+
+        const card = document.createElement('div');
+        card.className = `society-card ${isAssigned ? 'assigned-card' : ''}`;
+        
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="neo-badge ${soc.badge === 'DU Chapter' ? 'badge-primary' : soc.badge === 'National Chapter' ? 'badge-purple' : 'badge-green'}">
+                ${soc.badge}
+              </span>
+              ${isAssigned ? `
+                <span class="neo-badge badge-green font-black flex items-center gap-1">
+                  ⭐ YOUR CHAPTER
+                </span>
+              ` : `
+                <span class="text-[0.68rem] font-black text-gray-400 uppercase tracking-wider font-mono">
+                  ${soc.logo}
+                </span>
+              `}
+            </div>
+
+            <h3 class="text-lg font-black uppercase font-['Space_Grotesk'] leading-tight mb-1 text-black">
+              ${soc.name}
+            </h3>
+            
+            <p class="text-[0.75rem] font-bold text-gray-500 mb-3">
+              📍 ${soc.location}
+            </p>
+
+            <p class="text-xs font-semibold text-gray-700 leading-relaxed mb-4">
+              ${soc.desc}
+            </p>
+          </div>
+
+          <div class="pt-4 border-t-2 border-gray-100 mt-auto">
+            <div class="flex items-center justify-between text-xs font-bold text-gray-600 mb-3">
+              <span>Chapter Leads:</span>
+              <span class="font-black text-black bg-gray-100 px-2 py-0.5 rounded border border-black">${memberCount} members</span>
+            </div>
+
+            <button onclick="promptUnlockSociety('${soc.id}')" class="neo-btn w-full text-center ${isAssigned ? '' : 'secondary'}">
+              ${isAssigned ? 'Unlock Chapter CRM 🔓' : 'Select & Unlock CRM 🔒'}
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('societySearchInput').addEventListener('input', renderSocietiesGrid);
+    document.getElementById('chapterTypeFilter').addEventListener('change', renderSocietiesGrid);
+
+    // --- 9. Re-Verification Gate & Access Control ---
+    window.promptUnlockSociety = function(societyId) {
+      const society = allSocieties.find(s => s.id === societyId);
+      if (!society) return;
+
+      selectedSocietyForUnlock = society;
+      reAuthError.classList.add('hidden');
+      reAuthForm.reset();
+
+      document.getElementById('reAuthSocietyTitle').textContent = `Unlock ${society.logo} CRM`;
+      document.getElementById('reAuthSocietyName').textContent = society.name;
+
+      reAuthModal.classList.add('open');
+      document.getElementById('reAuthPassword').focus();
+    };
+
+    window.closeReAuthModal = function() {
+      reAuthModal.classList.remove('open');
+      selectedSocietyForUnlock = null;
+    };
+
+    reAuthForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      reAuthError.classList.add('hidden');
+
+      const enteredPassword = document.getElementById('reAuthPassword').value.trim();
+
+      if (!authenticatedPresident || !selectedSocietyForUnlock) {
+        reAuthError.textContent = 'Session lost. Please refresh the page and log in again.';
+        reAuthError.classList.remove('hidden');
+        return;
+      }
+
+      // 1. Verify Password against active president credentials
+      if (enteredPassword !== authenticatedPresident.password) {
+        reAuthError.textContent = '⚠️ Incorrect password. Verification failed. Please enter your valid President password.';
+        reAuthError.classList.remove('hidden');
+        return;
+      }
+
+      // 2. CRITICAL ACCESS CONTROL ENFORCEMENT:
+      // Check if the authenticated president belongs to this selected society
+      const isAuthorized = (authenticatedPresident.societyId === selectedSocietyForUnlock.id);
+
+      if (!isAuthorized) {
+        reAuthError.innerHTML = `
+          <div class="flex items-start gap-2">
+            <span class="text-xl">⛔</span>
+            <div>
+              <strong class="uppercase text-red-950 block mb-1">Access Restricted to Verified President</strong>
+              You are authenticated as the President of <strong>${authenticatedPresident.societyName}</strong>. You do not have authorization to view confidential student records for <strong>${selectedSocietyForUnlock.name}</strong>.
+            </div>
+          </div>
+        `;
+        reAuthError.classList.remove('hidden');
+        return;
+      }
+
+      // 3. Success: Unlock CRM!
+      closeReAuthModal();
+      showSocietyCrmView(selectedSocietyForUnlock);
+    });
+
+    // --- 10. Filter & Render Unlocked Society CRM Data ---
+    function filterAndRenderCrmData() {
+      if (!unlockedSociety) return;
+
+      const searchTerm = (document.getElementById('crmMemberSearch').value || '').toLowerCase().trim();
+      const trackFilter = document.getElementById('crmTrackFilter').value;
+      const yearFilter = document.getElementById('crmYearFilter').value;
+
+      // Filter all members belonging to this society
+      const allSocietyMembers = allCachedMembers.filter(m => isMemberBelongToSociety(m, unlockedSociety));
+
+      // Calculate Stats
+      const totalLeads = allSocietyMembers.length;
+      let fellowshipCount = 0;
+      let answeredCount = 0;
+
+      allSocietyMembers.forEach(m => {
+        const meta = parseMemberMetadata(m.college);
+        if (meta.fellowship === 'Yes' || (m.member_id && m.member_id.startsWith('TFC-FEL-'))) fellowshipCount++;
+        if (meta.q1 !== '—' || meta.q2 !== '—') answeredCount++;
+      });
+
+      document.getElementById('statTotalLeads').textContent = totalLeads;
+      document.getElementById('statFellowshipLeads').textContent = fellowshipCount;
+      document.getElementById('statGeneralLeads').textContent = (totalLeads - fellowshipCount);
+      document.getElementById('statAnsweredLeads').textContent = answeredCount;
+
+      // Filter based on UI search/dropdowns
+      societyFilteredMembers = allSocietyMembers.filter(m => {
+        const meta = parseMemberMetadata(m.college);
+        const name = (m.name || '').toLowerCase();
+        const email = (m.email || '').toLowerCase();
+        const phone = (meta.phone || '').toLowerCase();
+        const memId = (m.member_id || '').toLowerCase();
+
+        const matchesSearch = !searchTerm || name.includes(searchTerm) || email.includes(searchTerm) || phone.includes(searchTerm) || memId.includes(searchTerm);
+        
+        const isFellowship = meta.fellowship === 'Yes' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
+        const matchesTrack = (trackFilter === 'all') || 
+                             (trackFilter === 'fellowship' && isFellowship) || 
+                             (trackFilter === 'general' && !isFellowship);
+
+        const matchesYear = (yearFilter === 'all') || meta.year.toLowerCase().includes(yearFilter.toLowerCase());
+
+        return matchesSearch && matchesTrack && matchesYear;
+      });
+
+      renderCrmTableRows();
+    }
+
+    function renderCrmTableRows() {
+      const tbody = document.getElementById('societyMemberTableBody');
+      tbody.innerHTML = '';
+
+      if (societyFilteredMembers.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-10 text-gray-500 font-bold">
+              No student records found matching the active filter criteria.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      societyFilteredMembers.forEach((m, idx) => {
+        const meta = parseMemberMetadata(m.college);
+        const isFellowship = meta.fellowship === 'Yes' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
+        const createdDate = m.created_at ? new Date(m.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div class="font-black text-black">${m.name || 'Unnamed Applicant'}</div>
+            <div class="font-mono text-[0.7rem] text-orange-600 font-bold">${m.member_id || 'TFC-MEM'}</div>
+          </td>
+          <td>
+            <div class="font-bold text-gray-800">${m.email}</div>
+            <div class="text-[0.75rem] text-gray-500 font-semibold">${meta.phone}</div>
+          </td>
+          <td>
+            <span class="font-bold text-gray-800">${meta.year}</span>
+          </td>
+          <td>
+            ${isFellowship ? `
+              <span class="neo-badge badge-green font-black">🚀 FELLOWSHIP</span>
+            ` : `
+              <span class="neo-badge badge-gray">COMMUNITY</span>
+            `}
+          </td>
+          <td>
+            <div class="max-w-xs truncate text-xs text-gray-600 font-medium">
+              ${meta.q1 !== '—' ? meta.q1 : (meta.q2 !== '—' ? meta.q2 : 'No answers logged')}
+            </div>
+          </td>
+          <td>
+            <span class="text-xs text-gray-600 font-semibold">${createdDate}</span>
+          </td>
+          <td>
+            <button onclick="viewStudentDossier(${idx})" class="neo-btn secondary text-[0.7rem] py-1 px-2.5">
+              View Dossier
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('crmMemberSearch').addEventListener('input', filterAndRenderCrmData);
+    document.getElementById('crmTrackFilter').addEventListener('change', filterAndRenderCrmData);
+    document.getElementById('crmYearFilter').addEventListener('change', filterAndRenderCrmData);
+
+    // --- 11. Student Dossier Detail Modal ---
+    window.viewStudentDossier = function(index) {
+      const member = societyFilteredMembers[index];
+      if (!member) return;
+
+      const meta = parseMemberMetadata(member.college);
+      const isFellowship = meta.fellowship === 'Yes' || (member.member_id && member.member_id.startsWith('TFC-FEL-'));
+
+      document.getElementById('modalStudentName').textContent = member.name || 'Applicant Dossier';
+      document.getElementById('modalStudentMeta').textContent = `${unlockedSociety.name} • ${meta.year}`;
+      document.getElementById('modalStudentId').textContent = member.member_id || '—';
+      document.getElementById('modalStudentTrack').textContent = isFellowship ? 'Fellowship Applicant 🚀' : 'Community Member';
+      document.getElementById('modalStudentEmail').textContent = member.email || '—';
+      document.getElementById('modalStudentPhone').textContent = meta.phone || '—';
+
+      document.getElementById('modalStudentQ1').textContent = meta.q1 !== '—' ? meta.q1 : 'No answer provided.';
+      document.getElementById('modalStudentQ2').textContent = meta.q2 !== '—' ? meta.q2 : 'No answer provided.';
+      document.getElementById('modalStudentQ3').textContent = meta.q3 !== '—' ? meta.q3 : (meta.country || 'India');
+
+      detailModal.classList.add('open');
+    };
+
+    window.closeDetailModal = function() {
+      detailModal.classList.remove('open');
+    };
+
+    // --- 12. CSV Export for Society ---
+    window.exportSocietyCsv = function() {
+      if (!unlockedSociety || societyFilteredMembers.length === 0) {
+        alert("No records to export.");
+        return;
+      }
+
+      let csv = "Member ID,Full Name,Email,Phone,Year,Track,Q1 Entrepreneurship,Q2 Skills Projects,Q3 Location,Registration Date\n";
+
+      societyFilteredMembers.forEach(m => {
+        const meta = parseMemberMetadata(m.college);
+        const isFellowship = meta.fellowship === 'Yes' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
+        const cleanName = `"${(m.name || '').replace(/"/g, '""')}"`;
+        const cleanEmail = `"${(m.email || '').replace(/"/g, '""')}"`;
+        const cleanPhone = `"${(meta.phone || '').replace(/"/g, '""')}"`;
+        const cleanYear = `"${(meta.year || '').replace(/"/g, '""')}"`;
+        const cleanTrack = isFellowship ? '"Fellowship"' : '"General"';
+        const cleanQ1 = `"${(meta.q1 || '').replace(/"/g, '""')}"`;
+        const cleanQ2 = `"${(meta.q2 || '').replace(/"/g, '""')}"`;
+        const cleanQ3 = `"${(meta.q3 || '').replace(/"/g, '""')}"`;
+        const cleanDate = `"${m.created_at || ''}"`;
+
+        csv += `${m.member_id || ''},${cleanName},${cleanEmail},${cleanPhone},${cleanYear},${cleanTrack},${cleanQ1},${cleanQ2},${cleanQ3},${cleanDate}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `${unlockedSociety.id}_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    // --- 13. Initialize on DOM Load ---
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
