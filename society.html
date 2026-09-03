@@ -340,7 +340,7 @@
           <p class="text-xs font-black tracking-widest text-orange-600 uppercase">Executive Access Gate</p>
           <h1 class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-1">Society Presidents Portal</h1>
           <p class="text-xs font-semibold text-gray-600 mt-1">
-            Sign in with your verified President credentials to view and manage your society's private member registry.
+            Sign in with your verified President credentials to access your chapter's private member registry.
           </p>
         </div>
 
@@ -349,7 +349,7 @@
         <form id="presidentLoginForm" class="flex flex-col gap-4">
           <div>
             <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginEmail">Email / Username</label>
-            <input type="text" id="loginEmail" required placeholder="e.g. admin or fot.president@thefuturecouncil.in" class="form-input" autocomplete="username" />
+            <input type="text" id="loginEmail" required placeholder="e.g. jamgev0@gmail.com or admin" class="form-input" autocomplete="username" />
           </div>
           <div>
             <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginPassword">Portal Password</label>
@@ -362,7 +362,7 @@
 
         <div class="mt-6 pt-4 border-t-2 border-gray-200 text-center">
           <p class="text-[0.72rem] font-bold text-gray-500">
-            Need help accessing your society registry? Contact <a href="mailto:support@thefuturecouncil.in" class="underline text-black font-black">support@thefuturecouncil.in</a>
+            Need help accessing your chapter registry? Contact <a href="mailto:support@thefuturecouncil.in" class="underline text-black font-black">support@thefuturecouncil.in</a>
           </p>
         </div>
       </section>
@@ -399,7 +399,7 @@
         <div class="p-3 mb-6 bg-orange-50 border-2 border-black flex items-center gap-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
           <span class="text-xl">🔒</span>
           <p id="securityNoticeText" class="text-xs font-bold text-gray-800 leading-snug">
-            <strong>Security Notice:</strong> All society chapters are listed below. To access private student data, click a society and re-enter your President password. You are strictly authorized to view only your designated society chapter.
+            <strong>Security Notice:</strong> All society chapters are listed below. Click on your assigned chapter and re-enter your password to authenticate and unlock its private student data.
           </p>
         </div>
 
@@ -460,10 +460,10 @@
                 <span class="neo-badge badge-green">🔐 CRM UNLOCKED</span>
               </div>
               <h2 id="crmSocietyTitle" class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-2">
-                Faculty of Technology (FoT), DU
+                Society Registry
               </h2>
               <p id="crmSocietyLocation" class="text-xs font-bold text-gray-600 mt-1">
-                📍 Delhi University • North Campus
+                📍 Campus Location
               </p>
             </div>
             <div class="bg-orange-50 border-2 border-black p-3 rounded shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-right">
@@ -579,7 +579,7 @@
       <h3 class="text-xl font-black uppercase font-['Space_Grotesk']" id="reAuthSocietyTitle">
         Unlock Society CRM
       </h3>
-      <p class="text-xs font-bold text-gray-600 mt-1 mb-4 leading-relaxed">
+      <p class="text-xs font-bold text-gray-600 mt-1 mb-4 leading-relaxed" id="reAuthModalPrompt">
         To protect student privacy and verify your executive authorization, please re-enter your password to access the member registry for <strong id="reAuthSocietyName" class="text-black">--</strong>.
       </p>
 
@@ -969,41 +969,86 @@
       return { displayName, year, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment };
     }
 
-    // --- 6. Robust Society Lead Matcher ---
+    // --- 6. Precise Society Lead Matcher (Matches ONLY on college/society name) ---
     function isMemberBelongToSociety(member, society) {
       if (!society) return true;
       if (society.id === 'all') return true;
 
-      const rawCollege = (member.college || '').toLowerCase();
       const meta = parseCollegeField(member.college, member);
-      const targetText = `${rawCollege} ${meta.displayName.toLowerCase()} ${(meta.societyName || '').toLowerCase()}`;
+      const collegeName = (meta.displayName || '').toLowerCase().trim();
+      const societyName = (meta.societyName || '').toLowerCase().trim();
+      const combined = `${collegeName} ${societyName}`;
 
       const sId = society.id.toLowerCase();
 
-      // Keyword Aliases Dictionary
-      const aliases = {
-        fot: ['faculty of technology', 'fot', 'cluster innovation', 'cic', 'technology du', 'technology, du', 'engineering du'],
-        srcc: ['shri ram', 'srcc', 'shriram', 'commerce'],
-        hansraj: ['hansraj', 'hans raj', 'hrc'],
-        hindu: ['hindu'],
-        stephens: ['stephen', 'st. stephen', 'st stephen', 'ste'],
-        kmc: ['kirori', 'kmc', 'kirorimal'],
-        ipcw: ['indraprastha', 'ipcw', 'ip college'],
-        lsr: ['lady shri ram', 'lsr'],
-        venky: ['venkateswara', 'venkateshwara', 'venky', 'svc'],
-        miranda: ['miranda', 'miranda house', 'mh'],
-        drc: ['daulat ram', 'drc'],
-        khalsa: ['khalsa', 'sgtb', 'sgtb khalsa'],
-        dtu: ['dtu', 'delhi technological', 'dce'],
-        nsut: ['nsut', 'nsit', 'netaji subhas', 'netaji subhash'],
-        igdtuw: ['igdtuw', 'indira gandhi', 'igit'],
-        iiitd: ['iiitd', 'iiit delhi', 'indraprastha institute of information'],
-        iitd: ['iit delhi', 'iitd', 'indian institute of technology delhi'],
-        iitp: ['iit patna', 'iitp', 'indian institute of technology patna']
-      };
-
-      const matchKeywords = aliases[sId] || [sId, society.name.toLowerCase(), society.logo.toLowerCase()];
-      return matchKeywords.some(keyword => targetText.includes(keyword));
+      switch (sId) {
+        case 'fot':
+          return combined.includes('faculty of technology') || 
+                 combined.includes('fot') || 
+                 combined.includes('cluster innovation') ||
+                 combined.includes('cic');
+        case 'srcc':
+          return combined.includes('shri ram') || 
+                 combined.includes('srcc') || 
+                 combined.includes('shriram');
+        case 'hansraj':
+          return combined.includes('hansraj') || 
+                 combined.includes('hans raj') || 
+                 combined.includes('hrc');
+        case 'hindu':
+          return combined.includes('hindu');
+        case 'stephens':
+          return combined.includes('stephen');
+        case 'kmc':
+          return combined.includes('kirori') || 
+                 combined.includes('kmc');
+        case 'ipcw':
+          return combined.includes('indraprastha') || 
+                 combined.includes('ipcw') || 
+                 combined.includes('ip college');
+        case 'lsr':
+          return combined.includes('lady shri ram') || 
+                 combined.includes('lsr');
+        case 'venky':
+          return combined.includes('venkateswara') || 
+                 combined.includes('venkateshwara') || 
+                 combined.includes('venky') ||
+                 combined.includes('sri venk');
+        case 'miranda':
+          return combined.includes('miranda');
+        case 'drc':
+          return combined.includes('daulat ram') || 
+                 combined.includes('drc');
+        case 'khalsa':
+          return combined.includes('khalsa') || 
+                 combined.includes('sgtb');
+        case 'dtu':
+          return combined.includes('dtu') || 
+                 combined.includes('delhi technological') || 
+                 combined.includes('dce');
+        case 'nsut':
+          return combined.includes('nsut') || 
+                 combined.includes('nsit') || 
+                 combined.includes('netaji subhas') || 
+                 combined.includes('netaji subhash');
+        case 'igdtuw':
+          return combined.includes('igdtuw') || 
+                 combined.includes('indira gandhi delhi technical');
+        case 'iiitd':
+          return combined.includes('iiitd') || 
+                 combined.includes('iiit delhi') || 
+                 combined.includes('iiit-d');
+        case 'iitd':
+          return (combined.includes('iit delhi') || 
+                  combined.includes('iitd') || 
+                  (combined.includes('iit') && combined.includes('delhi')));
+        case 'iitp':
+          return combined.includes('patna') || 
+                 combined.includes('iitp') || 
+                 combined.includes('iit-p');
+        default:
+          return combined.includes(sId) || combined.includes(society.logo.toLowerCase());
+      }
     }
 
     // --- 7. Session & Auth Functions ---
@@ -1047,7 +1092,7 @@
           badge.textContent = '👑 MASTER ADMIN OVERRIDE';
         }
         if (noticeText) {
-          noticeText.innerHTML = `<strong>👑 Master Admin Mode Active:</strong> You have global authorization across all 18 campus chapters. Currently <strong>${allCachedMembers.length} total registrations</strong> are active across the ecosystem.`;
+          noticeText.innerHTML = `<strong>👑 Master Admin Mode Active:</strong> You have global authorization across all chapters. Select any society below and enter your password to unlock its CRM registry.`;
         }
       } else {
         if (badge) {
@@ -1055,7 +1100,7 @@
           badge.textContent = 'AUTHENTICATED';
         }
         if (noticeText) {
-          noticeText.innerHTML = '<strong>Security Notice:</strong> All society chapters are listed below. To access private student data, click a society and re-enter your President password. You are strictly authorized to view only your designated society chapter.';
+          noticeText.innerHTML = '<strong>Security Notice:</strong> All society chapters are listed below. Click your assigned chapter and enter your password to unlock your confidential student registry.';
         }
       }
 
@@ -1333,10 +1378,6 @@
 
       displaySocieties.forEach(soc => {
         const isAssigned = authenticatedPresident && (authenticatedPresident.societyId === soc.id);
-        
-        // Count registrations for this chapter
-        const matchingMembers = allCachedMembers.filter(m => isMemberBelongToSociety(m, soc));
-        const memberCount = matchingMembers.length;
 
         const card = document.createElement('div');
         card.className = `society-card ${isAssigned || (isAdmin && soc.id === 'all') ? 'assigned-card' : ''}`;
@@ -1376,13 +1417,8 @@
           </div>
 
           <div class="pt-4 border-t-2 border-gray-100 mt-auto">
-            <div class="flex items-center justify-between text-xs font-bold text-gray-600 mb-3">
-              <span>Chapter Leads:</span>
-              <span class="font-black text-black bg-gray-100 px-2.5 py-0.5 rounded border border-black">${memberCount} members</span>
-            </div>
-
             <button onclick="promptUnlockSociety('${soc.id}')" class="neo-btn w-full text-center ${isAssigned || isAdmin ? '' : 'secondary'}">
-              ${isAdmin ? (soc.id === 'all' ? 'Open Master CRM 🚀' : 'Unlock Society CRM 🔓') : (isAssigned ? 'Unlock Chapter CRM 🔓' : 'Select & Unlock CRM 🔒')}
+              ${isAdmin ? (soc.id === 'all' ? 'Open Master CRM 🚀' : 'Unlock Society CRM 🔓') : (isAssigned ? 'Unlock Your Chapter CRM 🔓' : 'Select & Unlock CRM 🔒')}
             </button>
           </div>
         `;
@@ -1529,7 +1565,7 @@
               <p class="text-2xl mb-2">📋</p>
               <p class="text-base text-black font-black uppercase font-['Space_Grotesk']">No student leads found for ${unlockedSociety.name}</p>
               <p class="text-xs font-semibold text-gray-500 mt-1">
-                ${allCachedMembers.length} total registrations exist across the ecosystem. When students select or register from this college, their records will automatically appear here.
+                When students select or register from this college, their records will automatically appear here.
               </p>
               ${isAdmin && unlockedSociety.id !== 'all' ? `
                 <div class="mt-4">
