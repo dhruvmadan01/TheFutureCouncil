@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fellowship '26 Brochure — The Future Council</title>
+<link rel="icon" href="TFC.png" type="image/png">
+<link rel="apple-touch-icon" href="TFC.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --paper:#fdfdf8;
+    --yellow:#ffd93d;
+    --pink:#ff5c7c;
+    --blue:#4d7fff;
+    --green:#8dff7a;
+    --shadow: 6px 6px 0 var(--ink);
+    --shadow-lg: 10px 10px 0 var(--ink);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    line-height:1.5;
+  }
+  .display{
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    line-height:0.95;
+  }
+  a{color:var(--ink);}
+  .wrap{max-width:960px;margin:0 auto;border-left:4px solid var(--ink);border-right:4px solid var(--ink);background:var(--paper);}
+
+  /* ---- top utility bar ---- */
+  .brochure-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--ink);
+    color: #ffffff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--ink);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .bar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bar-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    transition: all 0.15s ease;
+  }
+  .bar-btn-back {
+    background: transparent;
+    color: #ffffff;
+  }
+  .bar-btn-back:hover {
+    background: #222;
+  }
+  .bar-btn-print {
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 #ffffff;
+  }
+  .bar-btn-print:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #ffffff;
+  }
+
+  /* ---- marquee ticker ---- */
+  .ticker{
+    background:var(--ink);
+    color:var(--yellow);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:4px solid var(--ink);
+    padding:10px 0;
+  }
+  .ticker-track{
+    display:inline-block;
+    font-family:'Archivo Black', sans-serif;
+    font-size:0.95rem;
+    letter-spacing:0.04em;
+    animation: scroll 26s linear infinite;
+  }
+  .ticker-track span{margin:0 22px;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+
+  /* ---- hero ---- */
+  .hero{
+    background:var(--yellow);
+    padding:56px 40px 44px;
+    border-bottom:4px solid var(--ink);
+    position:relative;
+  }
+  .badge{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Archivo Black', sans-serif;
+    font-size:0.72rem;
+    padding:8px 14px;
+    border:3px solid var(--ink);
+    transform:rotate(-3deg);
+    margin-bottom:22px;
+  }
+  h1.hero-title{
+    font-size:clamp(3rem, 10vw, 5.6rem);
+    margin:0 0 18px;
+    -webkit-text-stroke: 0;
+  }
+  h1.hero-title .line2{color:var(--paper); -webkit-text-stroke:2.5px var(--ink); paint-order:stroke fill;}
+  .hero-sub{
+    max-width:540px;
+    font-size:1.15rem;
+    font-weight:500;
+    margin:0 0 30px;
+  }
+  .hero-facts{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .fact-box{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding:14px 12px;
+  }
+  .fact-box .num{font-family:'Archivo Black', sans-serif; font-size:1.8rem;}
+  .fact-box .lbl{font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; margin-top:4px;}
+
+  /* ---- section shells, alternating flat colors ---- */
+  section{
+    padding:50px 40px;
+    border-bottom:4px solid var(--ink);
+  }
+  .bg-paper{background:var(--paper);}
+  .bg-pink{background:var(--pink);}
+  .bg-blue{background:var(--blue); color:var(--paper);}
+  .bg-green{background:var(--green);}
+  .bg-yellow{background:var(--yellow);}
+
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+  .section-num{
+    font-family:'Archivo Black', sans-serif;
+    background:var(--ink);
+    color:var(--paper);
+    font-size:0.85rem;
+    padding:6px 12px;
+    border:3px solid var(--ink);
+  }
+  h2{font-size:2.1rem;margin:0;}
+  p.lead{max-width:620px;font-size:1.05rem;font-weight:500;}
+
+  /* ---- fee cards ---- */
+  .fee-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .fee-card{
+    background:var(--paper);
+    border:4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    padding:26px;
+  }
+  .fee-card h3{font-family:'Archivo Black', sans-serif;font-size:0.85rem;text-transform:uppercase;margin:0 0 12px;}
+  .strike{text-decoration:line-through;opacity:0.45;font-weight:500;}
+  .price{font-family:'Archivo Black', sans-serif;font-size:2.6rem;}
+  .price.zero{color:var(--pink);-webkit-text-stroke:1.5px var(--ink);}
+  .fee-note{font-size:0.92rem;margin-top:10px;font-weight:500;}
+
+  /* ---- rhythm ---- */
+  .rhythm{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .rhythm-card{
+    background:var(--paper);
+    border:4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    padding:22px 24px;
+  }
+  .rhythm-card .day{font-family:'Archivo Black', sans-serif;font-size:1.4rem;}
+  .rhythm-card .time{
+    display:inline-block;
+    background:var(--ink);color:var(--paper);
+    font-weight:700;font-size:0.82rem;
+    padding:3px 9px;margin:8px 0 12px;
+  }
+  .rhythm-card p{margin:0;font-weight:500;font-size:0.94rem;}
+
+  /* ---- benefits grid (stickers) ---- */
+  .benefits{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .b-card{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding:18px 20px;
+  }
+  .b-card .emo{font-size:1.5rem;}
+  .b-card h4{font-family:'Archivo Black', sans-serif;font-size:1rem;margin:8px 0 6px;text-transform:uppercase;}
+  .b-card p{margin:0;font-size:0.9rem;font-weight:500;}
+
+  /* ---- curriculum weeks ---- */
+  .week{
+    background:var(--paper);
+    border:4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    margin-bottom:22px;
+  }
+  .week-head{
+    display:flex;justify-content:space-between;align-items:center;
+    background:var(--ink);color:var(--yellow);
+    padding:12px 18px;
+    font-family:'Archivo Black', sans-serif;
+    font-size:1.05rem;
+    text-transform:uppercase;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .week-head .dates{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;font-size:0.78rem;color:var(--paper);
+  }
+  .week-body{padding:16px 20px;}
+  .week-body ul{margin:0;padding:0;list-style:none;}
+  .week-body li{
+    padding:10px 0;
+    border-bottom:3px dashed var(--ink);
+    display:grid;grid-template-columns:78px 1fr;gap:14px;
+    font-size:0.94rem;font-weight:500;
+  }
+  .week-body li:last-child{border-bottom:none;}
+  .week-body li .day-mono{
+    font-family:'Archivo Black', sans-serif;
+    font-size:0.7rem;
+  }
+  .week-body li span.who{color:var(--pink);font-weight:700;}
+
+  /* ---- chapters ---- */
+  .chapters{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    font-weight:700;font-size:0.85rem;
+    background:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    padding:8px 14px;
+  }
+
+  /* ---- steps ---- */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .step{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding:16px 14px;
+  }
+  .step .n{font-family:'Archivo Black', sans-serif;font-size:2.2rem;color:var(--pink);-webkit-text-stroke:1px var(--ink);line-height:1;}
+  .step h4{font-family:'Archivo Black', sans-serif;font-size:0.9rem;margin:8px 0 4px;text-transform:uppercase;}
+  .step p{margin:0;font-size:0.82rem;font-weight:500;}
+
+  /* ---- cta ---- */
+  .cta{background:var(--ink);color:var(--paper);padding:60px 40px;border-bottom:none;}
+  .cta h2{color:var(--paper);}
+  .cta p.lead{color:#e7e7e7;}
+  .cta-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:26px;}
+  .btn{
+    display:inline-block;
+    background:var(--yellow);
+    color:var(--ink);
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    font-size:1.1rem;
+    padding:16px 30px;
+    border:4px solid var(--paper);
+    box-shadow: 6px 6px 0 var(--yellow);
+    text-decoration:none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover{transform:translate(3px,3px); box-shadow:3px 3px 0 var(--yellow);}
+  .cta .url{font-weight:700;color:#b7b7b7;font-size:0.9rem;}
+
+  footer{
+    padding:22px 40px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-weight:700;font-size:0.78rem;
+    background:var(--paper);
+  }
+
+  /* ---- Print media styles ---- */
+  @media print {
+    .no-print, .brochure-bar {
+      display: none !important;
+    }
+    body {
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .wrap {
+      border: none;
+      max-width: 100%;
+    }
+    .hero, section, .cta {
+      page-break-inside: avoid;
+    }
+  }
+
+  @media(max-width:640px){
+    .hero{padding:40px 20px 32px;}
+    section{padding:36px 20px;}
+    .hero-facts{grid-template-columns:1fr 1fr;}
+    .fee-grid{grid-template-columns:1fr;}
+    .rhythm{grid-template-columns:1fr;}
+    .benefits{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .cta{padding:44px 20px;}
+    .brochure-bar{flex-direction:column;align-items:stretch;}
+    .bar-left{justify-content:center;}
+    .bar-btn-print{text-align:center;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+<!-- Top Action Bar -->
+<div class="brochure-bar no-print">
+  <div class="bar-left">
+    <a href="fellowship.html" class="bar-btn bar-btn-back">← Back to Fellowship Page</a>
+    <span style="font-size: 0.85rem; font-weight: 700; color: #aaa;">Fellowship '26 Official Brochure</span>
+  </div>
+  <button onclick="window.print()" class="bar-btn bar-btn-print">
+    🖨️ Save as PDF / Print Brochure
+  </button>
+</div>
+
+<div class="wrap">
+
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>★ BUILD</span><span>FOUNDERS</span><span>COUNCIL</span><span>★ SCALE</span><span>★ GRASSROOTS</span><span>FELLOWSHIP</span><span>LAUNCHPAD</span>
+      <span>★ BUILD</span><span>FOUNDERS</span><span>COUNCIL</span><span>★ SCALE</span><span>★ GRASSROOTS</span><span>FELLOWSHIP</span><span>LAUNCHPAD</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="badge">COHORT 01 · DELHI NCR</span>
+    <h1 class="hero-title display">FELLOWSHIP<br><span class="line2">'26</span></h1>
+    <p class="hero-sub">A 100% in-person, 8-week builder program for 20 early-stage founders. Bring an idea — we'll help you build it from zero to one, find your team, and get it in front of investors.</p>
+    <div class="hero-facts">
+      <div class="fact-box"><div class="num display">20</div><div class="lbl">Founder Seats</div></div>
+      <div class="fact-box"><div class="num display">8</div><div class="lbl">Weeks, Oct 19–Dec 19</div></div>
+      <div class="fact-box"><div class="num display">₹0</div><div class="lbl">Tuition, Grant-Funded</div></div>
+      <div class="fact-box"><div class="num display">17</div><div class="lbl">Campus Chapters</div></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="bg-paper">
+    <div class="section-head"><span class="section-num">00</span><h2 class="display">GOT AN IDEA? BRING IT.</h2></div>
+    <p class="lead">Fellowship '26 is built for early-stage founders ready to turn a vision into a real product. Over eight weeks in Delhi NCR, you'll get hands-on mentorship, equity-free grants, and advisory from operators who've done it — plus active help finding the co-founders, developers, and designers you need. No team required to apply. No traction required either.</p>
+  </section>
+
+  <!-- FEE -->
+  <section class="bg-yellow">
+    <div class="section-head"><span class="section-num">01</span><h2 class="display">FEE &amp; LOCATION</h2></div>
+    <div class="fee-grid">
+      <div class="fee-card">
+        <h3>Program Fee</h3>
+        <div class="price"><span class="strike">₹1,50,000</span> <span class="zero">₹0</span></div>
+        <p class="fee-note">100% grant-funded, equity-free, for all 20 selected founders. The full ₹1.5L program valuation is sponsored — zero tuition.</p>
+      </div>
+      <div class="fee-card">
+        <h3>Application Fee</h3>
+        <div class="price">₹2,000</div>
+        <p class="fee-note">Charged to attract serious, high-intent builders and keep shortlisting efficient — not a program cost.</p>
+      </div>
+    </div>
+    <p class="fee-note" style="margin-top:20px;max-width:640px;">Not a residential program: you'll need to be available for offline sessions in Delhi NCR throughout the eight weeks. Accommodation is on you if you're travelling in — but the Council will actively help you find it.</p>
+  </section>
+
+  <!-- FORMAT -->
+  <section class="bg-paper">
+    <div class="section-head"><span class="section-num">02</span><h2 class="display">WEEKLY RHYTHM</h2></div>
+    <p class="lead">Every session runs offline, twice a week for build work and once for the wider cohort.</p>
+    <div class="rhythm">
+      <div class="rhythm-card">
+        <div class="day display">Tue &amp; Fri</div>
+        <div class="time">5:00 PM – 7:30 PM</div>
+        <p>Masterclass, live build lab, and standup at the 25-seater Workshop Hub in Delhi.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="day display">Saturdays</div>
+        <div class="time">2:30 PM – 6:30 PM</div>
+        <p>Leader masterclass, closed-door AMA, and a full-cohort teardown, audit, or launch event at WeWork, Delhi NCR.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="bg-pink">
+    <div class="section-head"><span class="section-num">03</span><h2 class="display">WHAT YOU GET</h2></div>
+    <div class="benefits">
+      <div class="b-card"><div class="emo">🤝</div><h4>Matched Mentorship</h4><p>Seasoned mentors and domain-specialist advisors matched to your product vertical and goals.</p></div>
+      <div class="b-card"><div class="emo">📈</div><h4>Weekly Strategy Audits</h4><p>Structured reports, execution sprints, and progress check-ins toward product-market fit.</p></div>
+      <div class="b-card"><div class="emo">🎙️</div><h4>Leader Masterclasses</h4><p>Closed-door sessions and AMAs with top-tier founders, operators, and industry leaders.</p></div>
+      <div class="b-card"><div class="emo">🚀</div><h4>Launch Support</h4><p>Leverage the Council's channels for launch campaigns, announcements, and ecosystem PR.</p></div>
+      <div class="b-card"><div class="emo">🎟️</div><h4>IRL Mixers</h4><p>High-trust networking events and offline meetups with active peer builders.</p></div>
+      <div class="b-card"><div class="emo">📖</div><h4>Masterclass Playbooks</h4><p>Step-by-step guidance on entity structure, user testing, distribution, and growth.</p></div>
+      <div class="b-card"><div class="emo">🎓</div><h4>Lifetime Alumni Access</h4><p>Join a lifelong alumni network with priority access to future demo days and events.</p></div>
+      <div class="b-card"><div class="emo">🌱</div><h4>Grassroots Talent</h4><p>Recruit developers, designers, and growth marketers directly from 17 campus chapters.</p></div>
+      <div class="b-card"><div class="emo">💰</div><h4>Grants &amp; Investor Intros</h4><p>Fast-tracked eligibility for equity-free micro-grants, dev cloud credits, and investor intros.</p></div>
+      <div class="b-card"><div class="emo">🌐</div><h4>Industry Connections</h4><p>Direct intros to vertical leaders, technology suppliers, and service partners.</p></div>
+      <div class="b-card"><div class="emo">👥</div><h4>Co-founder Matchmaking</h4><p>No team, no problem — direct matchmaking through the Council's talent radar.</p></div>
+      <div class="b-card"><div class="emo">🛡️</div><h4>Verified Badge</h4><p>A verified digital badge and alumni credential for LinkedIn and directories.</p></div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM -->
+  <section class="bg-paper">
+    <div class="section-head"><span class="section-num">04</span><h2 class="display">THE 8-WEEK BUILD</h2></div>
+    <p class="lead">Kicks off Monday, Oct 19 with orientation and cohort introductions. Every week runs the same shape: two build-focused weekday sessions, then a Saturday leader masterclass, AMA, and teardown.</p>
+
+    <div class="week">
+      <div class="week-head"><span>Week 1 · Problem Validation &amp; Customer Discovery</span><span class="dates">Oct 20–25</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Customer discovery &amp; hypothesis formulation</strong> — falsifiable assumptions, non-leading questions; live 40-target outreach build; interviewing users for hard truths.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Validating real market demand before writing code</strong> <span class="who">— seed-funded founder</span>; hypothesis canvas teardowns.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 2 · Grassroots Talent &amp; Value Proposition</span><span class="dates">Oct 26–Nov 1</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Synthesizing discovery into a value proposition canvas</strong>; pitching builders and sourcing co-founders; role &amp; equity clinic.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Co-founder equity splits, vesting &amp; avoiding team breakups</strong> <span class="who">— serial founder</span>; grassroots talent matchmaking mixer.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 3 · Rapid Prototyping &amp; Flow Elimination</span><span class="dates">Nov 2–8</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>The 1-flow PRD</strong> — scoping an MVP to one core action; Figma wireframing for non-designers; peer usability testing.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Building addictive zero-to-one UX without bloat</strong> <span class="who">— head of product</span>; on-screen prototype teardown.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 4 · The 7-Day MVP Build Sprint</span><span class="dates">Nov 9–15</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Rapid full-stack architecture</strong> &amp; database schema review; product analytics from day zero (PostHog/Mixpanel).</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Deploying resilient MVPs &amp; avoiding cloud billing traps</strong> <span class="who">— lead systems architect</span>; live staging deployment audit.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 5 · Launch &amp; Distribution Engine</span><span class="dates">Nov 16–22</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Organic launch copywriting</strong> for LinkedIn, X, Reddit and campus groups; concierge onboarding for your first 25 users.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Zero-CAC growth: community seeding &amp; viral campus loops</strong> <span class="who">— growth operator</span>; co-launch sprint, all 20 founders live.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 6 · Retention, Churn &amp; Micro-Grant Audit</span><span class="dates">Nov 23–29</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Analyzing cohort retention</strong> &amp; churn triage; early monetization and willingness-to-pay experiments.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Unit economics, real burn &amp; startup fundability</strong> <span class="who">— seed angel operator</span>; micro-grant milestone audit.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 7 · Pitch Storytelling &amp; Slide Deck</span><span class="dates">Nov 30–Dec 6</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>The 10-slide seed deck formula</strong>; visual storytelling &amp; data presentation; peer slide review.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>What angel investors evaluate in the first 90 seconds</strong> <span class="who">— active angel investor</span>; rapid pitch teardowns.</span></li>
+      </ul></div>
+    </div>
+
+    <div class="week">
+      <div class="week-head"><span>Week 8 · Dress Rehearsal &amp; Demo Day</span><span class="dates">Dec 7–19</span></div>
+      <div class="week-body"><ul>
+        <li><span class="day-mono">TUE/FRI</span><span><strong>Handling hostile investor Q&amp;A</strong> with simulated cross-examination; stage logistics &amp; final deck lock.</span></li>
+        <li><span class="day-mono">SAT</span><span><strong>Demo Day</strong> — 3-minute pitches with live investor Q&amp;A in front of angels, micro-VCs, and ecosystem operators, then the alumnus credential ceremony.</span></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- CAMPUS -->
+  <section class="bg-green">
+    <div class="section-head"><span class="section-num">05</span><h2 class="display">CAMPUS NETWORK</h2></div>
+    <p class="lead">The Council is powered by student-run branches across Delhi University's premier campuses — a built-in talent pool for hiring your team.</p>
+    <div class="chapters">
+      <span class="chip">FoT — Faculty of Technology, DU</span>
+      <span class="chip">SRCC — Shri Ram College of Commerce</span>
+      <span class="chip">Hansraj College E-Cell</span>
+      <span class="chip">LSR — Lady Shri Ram College</span>
+      <span class="chip">SGTB Khalsa College</span>
+      <span class="chip">IIT Patna (Hybrid)</span>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="bg-paper">
+    <div class="section-head"><span class="section-num">06</span><h2 class="display">GET SELECTED</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n display">01</div><h4>Apply</h4><p>Sept 1–30. Submit your idea, background, and vision. No team required.</p></div>
+      <div class="step"><div class="n display">02</div><h4>AI Pitch Clinic</h4><p>Oct 1–5. Initial screening against pitch and validation benchmarks.</p></div>
+      <div class="step"><div class="n display">03</div><h4>Interviews</h4><p>Oct 6–12. 1-on-1 feedback and panel interviews with student angel operators.</p></div>
+      <div class="step"><div class="n display">04</div><h4>Selection</h4><p>Oct 15. The 20 chosen founders are announced.</p></div>
+      <div class="step"><div class="n display">05</div><h4>Kick-off</h4><p>Oct 19. Cohort begins — disbursements, cloud credits, and mixers.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="section-head"><span class="section-num" style="background:var(--yellow);color:var(--ink);">07</span><h2 class="display">APPLY FOR COHORT 01</h2></div>
+    <p class="lead">20 seats. Applications open Sept 1–30. Bring an idea — we'll help you build it from zero to one and find your team.</p>
+    <div class="cta-row">
+      <a class="btn" href="fellowship.html#fellowshipFormSection">Apply for Fellowship 🚀</a>
+      <span class="url">thefuturecouncil.in/fellowship</span>
+    </div>
+  </div>
+
+  <footer>
+    <span>The Future Council — Fellowship '26 — Cohort 01</span>
+    <span>Delhi NCR · Oct 19 – Dec 19, 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
