@@ -48,6 +48,7 @@
       <a href="index.html" class="window-tab">Home Hub</a>
       <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
       <a href="branches.html" class="window-tab">Our Branches</a>
+      <a href="resources.html" class="window-tab">Resources</a>
       <a href="join.html" class="window-tab active">Join Council</a>
     </nav>
 
@@ -279,7 +280,12 @@
               Our campus society chapter leaders will reach out to you via WhatsApp/Email to onboard your team and activate your local branch.
             </p>
 
-            <a href="index.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center;">Return to Home Hub</a>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a href="resources.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #ffd93d; color: #000; border: 3px solid #000; font-weight: 900;">
+                🎁 Access Member Swipe File & Resources →
+              </a>
+              <a href="index.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #f0f0f0; color: #000;">Return to Home Hub</a>
+            </div>
           </div>
         </div>
       </div>
@@ -339,6 +345,11 @@
       const prefillCollege = urlParams.get('college');
       if (prefillCollege && collegeInput) {
         collegeInput.value = prefillCollege;
+      }
+      const prefillEmail = urlParams.get('email');
+      const emailInputEl = document.getElementById('studentEmail');
+      if (prefillEmail && emailInputEl) {
+        emailInputEl.value = prefillEmail;
       }
 
       function openCollegeDropdown() {

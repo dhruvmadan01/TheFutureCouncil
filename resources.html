@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Builder Vault & Resources — The Future Council</title>
+<link rel="icon" href="TFC.png" type="image/png">
+<link rel="apple-touch-icon" href="TFC.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Supabase JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --paper:#fdfdf8;
+    --yellow:#ffd93d;
+    --pink:#ff5c7c;
+    --blue:#4d7fff;
+    --green:#8dff7a;
+    --orange:#ff9e59;
+    --shadow: 6px 6px 0 var(--ink);
+    --shadow-lg: 10px 10px 0 var(--ink);
+    --shadow-sm: 4px 4px 0 var(--ink);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Space Grotesk', sans-serif;font-size:17px;line-height:1.5;}
+  .display{font-family:'Archivo Black', sans-serif;text-transform:uppercase;line-height:0.95;}
+  
+  /* Top Ticker */
+  .ticker{background:var(--ink);color:var(--yellow);overflow:hidden;white-space:nowrap;border-bottom:4px solid var(--ink);padding:10px 0;}
+  .ticker-track{display:inline-block;font-family:'Archivo Black', sans-serif;font-size:0.95rem;letter-spacing:0.04em;animation: scroll 26s linear infinite;}
+  .ticker-track span{margin:0 22px;}
+  @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+
+  /* Navigation Bar */
+  .site-nav {
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: 4px solid var(--ink);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .site-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--paper);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+  }
+  .site-nav-brand img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 7px 14px;
+    border: 2px solid var(--paper);
+    text-decoration: none;
+    transition: transform 0.1s ease;
+  }
+  .nav-btn:hover {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .nav-btn.primary {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+
+  /* Member Status Header Bar */
+  .member-status-bar {
+    background: #181818;
+    color: #fff;
+    padding: 10px 24px;
+    border-bottom: 3px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .member-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pulse-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--green);
+  }
+  .btn-member-login {
+    background: var(--yellow);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-member-login:hover {
+    background: #ffea79;
+    transform: translateY(-1px);
+  }
+  .btn-switch-user {
+    background: transparent;
+    color: #bbb;
+    border: 1px solid #444;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .btn-switch-user:hover {
+    color: #fff;
+    border-color: #fff;
+    background: #333;
+  }
+
+  /* Main Container */
+  .wrap{max-width:1120px;margin:0 auto;border-left:4px solid var(--ink);border-right:4px solid var(--ink);background:var(--paper);min-height: 100vh;}
+
+  /* Hero Section */
+  .vault-hero {
+    background: var(--yellow);
+    padding: 56px 40px 44px;
+    border-bottom: 4px solid var(--ink);
+  }
+  .badge{display:inline-block;background:var(--ink);color:var(--paper);font-family:'Archivo Black', sans-serif;font-size:0.75rem;padding:8px 14px;border:3px solid var(--ink);transform:rotate(-2deg);margin-bottom:18px;}
+  h1.vault-title {
+    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+    margin: 0 0 16px;
+  }
+  .vault-sub {
+    max-width: 720px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 24px;
+    line-height: 1.45;
+  }
+
+  /* Search & Filter Toolbar */
+  .filter-toolbar {
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .search-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .search-input-wrap {
+    flex: 1;
+    min-width: 260px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 3px solid var(--ink);
+    background: #fff;
+    outline: none;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .search-input:focus {
+    background: #fffef5;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    pointer-events: none;
+  }
+
+  .pill-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-pill {
+    background: #fff;
+    color: var(--ink);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.75rem;
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.12s ease;
+  }
+  .filter-pill:hover {
+    background: #eee;
+  }
+  .filter-pill.active {
+    background: var(--ink);
+    color: var(--yellow);
+    border-color: var(--ink);
+    box-shadow: 3px 3px 0 var(--yellow);
+  }
+
+  /* Grid Layout */
+  .resources-section {
+    padding: 44px 40px;
+    border-bottom: 4px solid var(--ink);
+  }
+  .section-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  .results-count {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 26px;
+  }
+
+  /* Resource Card */
+  .res-card {
+    background: #fff;
+    border: 4px solid var(--ink);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+  }
+  .res-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 12px 12px 0 var(--ink);
+  }
+
+  .res-card-top {
+    padding: 22px 22px 16px;
+  }
+  .res-badges-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .access-badge {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 2px solid var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .badge-locked {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .badge-open {
+    background: var(--green);
+    color: var(--ink);
+  }
+  .badge-soon {
+    background: #eee;
+    color: #666;
+    border-color: #888;
+  }
+  .category-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .res-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .res-desc {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444;
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  .res-meta-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .meta-chip {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #f4f4ec;
+    border: 1px solid var(--ink);
+    padding: 3px 8px;
+  }
+
+  .res-card-bottom {
+    padding: 16px 22px;
+    background: #fafaf5;
+    border-top: 3px solid var(--ink);
+  }
+  .card-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 18px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 3px solid var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .card-btn-primary {
+    background: var(--yellow);
+    color: var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .card-btn-primary:hover {
+    background: #ffe359;
+    transform: translateY(-1px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .card-btn-green {
+    background: var(--green);
+    color: var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .card-btn-green:hover {
+    background: #a6ff98;
+    transform: translateY(-1px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .card-btn-disabled {
+    background: #e2e2dc;
+    color: #777;
+    border-color: #aaa;
+    cursor: not-allowed;
+  }
+
+  /* Zero to One Free Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-box {
+    background: var(--paper);
+    border: 5px solid var(--ink);
+    box-shadow: 14px 14px 0 var(--green), 14px 14px 0 4px var(--ink);
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: authPopIn 0.25s ease-out;
+  }
+  .modal-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .modal-header h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.3rem;
+    margin: 0;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .modal-close-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--paper);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.1rem;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .modal-close-btn:hover {
+    background: var(--pink);
+    color: #fff;
+  }
+  .modal-body {
+    padding: 28px;
+  }
+
+  /* Quick Auth Modal on Directory */
+  .auth-modal-box {
+    background: var(--paper);
+    border: 5px solid var(--ink);
+    box-shadow: 14px 14px 0 var(--yellow), 14px 14px 0 4px var(--ink);
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+  }
+
+  /* CTA Band */
+  .cta-section{background:var(--ink);color:var(--paper);padding:50px 40px;border-bottom:none;}
+  .cta-section h2{color:var(--paper);font-size: 2rem; margin: 0 0 12px;}
+  .cta-section p.lead{color:#e7e7e7; max-width: 640px; margin: 0 0 24px;}
+  .cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .btn-cta{display:inline-block;background:var(--yellow);color:var(--ink);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1rem;padding:14px 26px;border:3px solid var(--paper);box-shadow:5px 5px 0 var(--yellow);text-decoration:none;cursor: pointer;}
+  .btn-cta:hover{transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--yellow);}
+  .btn-cta-outline{display:inline-block;background:transparent;color:var(--paper);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1rem;padding:14px 26px;border:3px solid var(--paper);box-shadow:5px 5px 0 #fff;text-decoration:none;cursor: pointer;}
+  .btn-cta-outline:hover{background: #222; transform: translate(-2px, -2px);}
+
+  footer{padding:22px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-weight:700;font-size:0.78rem;background:var(--paper);}
+
+  @keyframes authPopIn {
+    0% { transform: scale(0.92) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  @media(max-width:680px){
+    .vault-hero {padding: 36px 20px 28px;}
+    .resources-section {padding: 32px 20px;}
+    .cta-section {padding: 36px 20px;}
+    footer {padding: 20px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Marquee -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>★ BUILDER VAULT</span><span>STARTUP PLAYBOOKS</span><span>COUNCIL RESOURCES</span><span>★ SWIPE FILES</span><span>VALIDATION TOOLS</span><span>EXCLUSIVES</span>
+      <span>★ BUILDER VAULT</span><span>STARTUP PLAYBOOKS</span><span>COUNCIL RESOURCES</span><span>★ SWIPE FILES</span><span>VALIDATION TOOLS</span><span>EXCLUSIVES</span>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="site-nav">
+    <a href="index.html" class="site-nav-brand">
+      <img src="TFC.png" alt="TFC Logo" />
+      <span>The Future Council</span>
+    </a>
+    <nav class="site-nav-links">
+      <a href="index.html" class="nav-btn">Home Hub</a>
+      <a href="fellowship.html" target="_blank" class="nav-btn">Fellowship '26</a>
+      <a href="branches.html" class="nav-btn">Our Branches</a>
+      <a href="resources.html" class="nav-btn primary">Resources</a>
+      <a href="join.html" class="nav-btn">Join Council</a>
+    </nav>
+  </header>
+
+  <!-- Member Quick Login / Status Bar -->
+  <div id="memberStatusBar" class="member-status-bar">
+    <div class="member-tag">
+      <span id="memberStatusIcon" class="pulse-dot"></span>
+      <span id="memberStatusText">Checking council membership status...</span>
+    </div>
+    <div id="memberAuthActions">
+      <button id="btnQuickAuth" class="btn-member-login">🔑 Member Unlock</button>
+      <button id="btnLogOut" class="btn-switch-user" style="display: none;">Log Out</button>
+    </div>
+  </div>
+
+  <!-- Main Wrap -->
+  <div class="wrap">
+
+    <!-- Hero Section -->
+    <div class="vault-hero">
+      <span class="badge">TFC RESOURCE DIRECTORY</span>
+      <h1 class="vault-title display">The Builder Vault</h1>
+      <p class="vault-sub">Battle-tested outreach swipe files, idea validation frameworks, and founder playbooks built for ambitious student builders. Access open resources or unlock full member exclusives.</p>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="filter-toolbar">
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="resourceSearchInput" class="search-input" placeholder="Search templates, swipe files, guides, playbooks..." />
+          </div>
+        </div>
+
+        <div class="pill-filters">
+          <button class="filter-pill active" data-filter="all">All Resources</button>
+          <button class="filter-pill" data-filter="members">🔒 Member Exclusives</button>
+          <button class="filter-pill" data-filter="open">🔓 Open Access (Free)</button>
+          <button class="filter-pill" data-filter="outreach">Outreach & Sales</button>
+          <button class="filter-pill" data-filter="validation">Ideation & MVP</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listing Section -->
+    <section class="resources-section">
+      <div class="section-intro">
+        <h2 class="section-title display">Available Playbooks & Guides</h2>
+        <span id="resultsCount" class="results-count">Showing 5 resources</span>
+      </div>
+
+      <div class="resources-grid" id="resourcesGrid">
+
+        <!-- 1. The Cold-to-Warm Networking Swipe File (Members Only - ACTIVE) -->
+        <article class="res-card" data-category="members outreach" data-keywords="networking outreach swipe cold email linkedin mentor dm intro templates">
+          <div class="res-card-top">
+            <div class="res-badges-row">
+              <span class="access-badge badge-locked">🔒 MEMBERS EXCLUSIVE</span>
+              <span class="category-tag">Outreach & Growth</span>
+            </div>
+            <h3 class="res-title">The Cold-to-Warm Networking Swipe File</h3>
+            <p class="res-desc">
+              7 plug-and-play outreach scripts for ambitious builders to reach senior founders, mentors, and peers — without sounding needy, robotic, or transactional. Includes psychology breakdowns and 1-click copying.
+            </p>
+            <div class="res-meta-chips">
+              <span class="meta-chip">7 Templates</span>
+              <span class="meta-chip">Copy & Send</span>
+              <span class="meta-chip">⚡ Instant Unlock</span>
+            </div>
+          </div>
+          <div class="res-card-bottom">
+            <a href="resource-networking-swipe-file.html" class="card-btn card-btn-primary">
+              <span>Open Swipe File</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- 2. Zero-to-One Idea Validation Checklist (Open Access - ACTIVE) -->
+        <article class="res-card" data-category="open validation" data-keywords="idea validation checklist problem interviews early traction mvp customers">
+          <div class="res-card-top">
+            <div class="res-badges-row">
+              <span class="access-badge badge-open">🔓 OPEN ACCESS (FREE)</span>
+              <span class="category-tag">Ideation & MVP</span>
+            </div>
+            <h3 class="res-title">Zero-to-One Idea Validation Framework</h3>
+            <p class="res-desc">
+              The 5-question customer interview framework and 48-hour demand test to validate problem urgency and willingness to pay before building a single line of code. Free and open to everyone.
+            </p>
+            <div class="res-meta-chips">
+              <span class="meta-chip">Public Guide</span>
+              <span class="meta-chip">Step-by-Step</span>
+              <span class="meta-chip">3 Min Read</span>
+            </div>
+          </div>
+          <div class="res-card-bottom">
+            <button type="button" class="card-btn card-btn-green" id="btnOpenValidationGuide">
+              <span>Read Framework (Open)</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 3. Pitch Deck Teardowns (Coming Soon) -->
+        <article class="res-card" data-category="members" data-keywords="pitch deck fundraising vc angel seed pre-seed slides teardown">
+          <div class="res-card-top">
+            <div class="res-badges-row">
+              <span class="access-badge badge-locked">🔒 MEMBERS ONLY</span>
+              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
+            </div>
+            <h3 class="res-title">YC & Student Founder Pitch Deck Teardowns</h3>
+            <p class="res-desc">
+              Slide-by-slide breakdowns of real pre-seed and seed pitch decks that raised funding from top accelerators and angels, analyzing structure, metrics framing, and storytelling.
+            </p>
+            <div class="res-meta-chips">
+              <span class="meta-chip">Fundraising</span>
+              <span class="meta-chip">Real Decks</span>
+            </div>
+          </div>
+          <div class="res-card-bottom">
+            <button type="button" class="card-btn card-btn-disabled" disabled>
+              <span>🔒 Member Release Soon</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 4. Co-Founder Equity Matrix (Open Access - Coming Soon) -->
+        <article class="res-card" data-category="open" data-keywords="cofounder equity vesting legal split roles matrix agreement">
+          <div class="res-card-top">
+            <div class="res-badges-row">
+              <span class="access-badge badge-open">🔓 OPEN ACCESS</span>
+              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
+            </div>
+            <h3 class="res-title">The Co-Founder Split & Alignment Canvas</h3>
+            <p class="res-desc">
+              Standard 4-year vesting calculators, role-splitting frameworks, and decision rights matrix designed specifically for college founding teams.
+            </p>
+            <div class="res-meta-chips">
+              <span class="meta-chip">Team & Legal</span>
+              <span class="meta-chip">Calculators</span>
+            </div>
+          </div>
+          <div class="res-card-bottom">
+            <button type="button" class="card-btn card-btn-disabled" disabled>
+              <span>⏳ Dropping Soon</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- 5. Campus Chapter Playbook (Members Only - Coming Soon) -->
+        <article class="res-card" data-category="members" data-keywords="campus society chapter university growth events community">
+          <div class="res-card-top">
+            <div class="res-badges-row">
+              <span class="access-badge badge-locked">🔒 MEMBERS ONLY</span>
+              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
+            </div>
+            <h3 class="res-title">Campus Society Chapter Playbook</h3>
+            <p class="res-desc">
+              How to incorporate, recruit, and operate a high-impact student startup community on your university campus, partnering directly with TFC Central.
+            </p>
+            <div class="res-meta-chips">
+              <span class="meta-chip">Chapter Leaders</span>
+              <span class="meta-chip">Operations</span>
+            </div>
+          </div>
+          <div class="res-card-bottom">
+            <button type="button" class="card-btn card-btn-disabled" disabled>
+              <span>🔒 Member Release Soon</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Bottom CTA Band -->
+    <div class="cta-section">
+      <div class="section-head"><span class="section-num" style="background:var(--yellow);color:var(--ink);">★</span><h2 class="display">Unlock Every Playbook</h2></div>
+      <p class="lead">All members of The Future Council gain instant access to our private swipe files, founder playbooks, mentor directories, and fellowship cohort sessions.</p>
+      <div class="cta-row">
+        <a class="btn-cta" href="join.html">Join Council (Free Membership) ➔</a>
+        <a class="btn-cta-outline" href="fellowship.html" target="_blank">Apply For Fellowship '26</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <span>The Future Council — Builder Vault & Resource Directory</span>
+      <span>thefuturecouncil.in</span>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================================
+       MODAL: ZERO-TO-ONE VALIDATION FRAMEWORK (OPEN ACCESS)
+       ========================================================================= -->
+  <div id="validationModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Zero-to-One Validation Framework</h3>
+        <button id="btnCloseValidationModal" class="modal-close-btn" title="Close">✕</button>
+      </div>
+      <div class="modal-body" style="line-height: 1.6;">
+        <div style="background: #eaffea; border: 3px solid var(--ink); padding: 14px 18px; margin-bottom: 20px; font-weight: 600;">
+          🔓 <strong>Open Resource:</strong> This framework is available to all founders in the TFC ecosystem.
+        </div>
+
+        <h4 style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:1.1rem; margin:16px 0 8px;">1. The 5-Question Customer Litmus Test</h4>
+        <p>Never ask <em>"Would you buy this?"</em> (they will lie to be nice). Instead, ask about past behavior:</p>
+        <ul style="padding-left: 20px; font-weight: 500;">
+          <li><strong>"What's the hardest part about [doing X] today?"</strong> (Reveals if pain is top of mind)</li>
+          <li><strong>"When was the last time you encountered that problem?"</strong> (If not within 14 days, not urgent)</li>
+          <li><strong>"What have you tried to solve it so far?"</strong> (If they haven't tried DIY solutions, they won't pay)</li>
+          <li><strong>"How much time or money does this problem currently cost you?"</strong> (Quantifies value)</li>
+          <li><strong>"Who else should I talk to who deals with this?"</strong> (Viral discovery loop)</li>
+        </ul>
+
+        <h4 style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:1.1rem; margin:22px 0 8px;">2. The 48-Hour Demand Test</h4>
+        <p>Before coding, set up a simple one-page Notion/Framer site with an explicit "Join Private Beta" or "Pre-Order" deposit button. If you cannot get 15 strangers to sign up from direct conversations, building product will not solve distribution.</p>
+
+        <div style="background: #fff9d6; border: 3px solid var(--ink); padding: 14px 18px; margin-top: 24px;">
+          <h5 style="font-family:'Archivo Black',sans-serif; margin:0 0 6px; text-transform:uppercase;">Want More Tactical Scripts?</h5>
+          <p style="margin:0 0 10px; font-size: 0.92rem; font-weight: 500;">Check out our Member Exclusive: <strong>The Cold-to-Warm Networking Swipe File</strong> for verbatim outreach scripts.</p>
+          <a href="resource-networking-swipe-file.html" class="btn-member-login" style="font-size:0.8rem; text-decoration:none;">Open Swipe File →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: QUICK MEMBER VERIFICATION DIALOG
+       ========================================================================= -->
+  <div id="quickAuthModal" class="modal-overlay">
+    <div class="auth-modal-box">
+      <div class="modal-header">
+        <h3 style="color: var(--yellow);">Member Vault Unlock</h3>
+        <button id="btnCloseQuickAuth" class="modal-close-btn" title="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.95rem; font-weight: 500; margin: 0 0 18px; color: #333;">
+          Enter the email address you registered with on The Future Council to unlock all member-exclusive playbooks across the site.
+        </p>
+
+        <form id="quickAuthForm" onsubmit="return false;">
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom: 16px;">
+            <label for="quickEmailInput" style="font-family:'Archivo Black',sans-serif; font-size:0.8rem; text-transform:uppercase;">Registered Email</label>
+            <input type="email" id="quickEmailInput" class="search-input" style="padding-left:14px;" placeholder="e.g. founder@college.edu" required />
+          </div>
+
+          <button type="submit" id="btnSubmitQuickAuth" class="card-btn card-btn-primary" style="margin-bottom:12px;">
+            <span>Verify & Unlock</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <!-- Error / Not Registered Box -->
+        <div id="quickRestrictedBox" style="display:none; background:#fff0f3; border:3px solid var(--pink); padding:16px; margin-top:14px;">
+          <strong style="color:var(--pink); font-family:'Archivo Black',sans-serif; font-size:0.82rem; text-transform:uppercase; display:block; margin-bottom:6px;">⚠️ Member Not Found</strong>
+          <p style="font-size:0.88rem; margin:0 0 12px; font-weight:500;">
+            This email is not registered in our member directory yet. Membership in The Future Council is free for university builders.
+          </p>
+          <a id="btnQuickRegisterRedirect" href="join.html" class="card-btn" style="background:var(--ink); color:var(--yellow); font-size:0.85rem;">
+            Register as a Member on Join Council →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic for Filtering, Search & Member State -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Supabase Configuration
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      const STORAGE_KEY_AUTH = 'tfc_resource_auth_email';
+      const STORAGE_KEY_NAME = 'tfc_resource_auth_name';
+
+      // Elements
+      const memberStatusBar = document.getElementById('memberStatusBar');
+      const memberStatusIcon = document.getElementById('memberStatusIcon');
+      const memberStatusText = document.getElementById('memberStatusText');
+      const btnQuickAuth = document.getElementById('btnQuickAuth');
+      const btnLogOut = document.getElementById('btnLogOut');
+      const quickAuthModal = document.getElementById('quickAuthModal');
+      const btnCloseQuickAuth = document.getElementById('btnCloseQuickAuth');
+      const quickAuthForm = document.getElementById('quickAuthForm');
+      const quickEmailInput = document.getElementById('quickEmailInput');
+      const btnSubmitQuickAuth = document.getElementById('btnSubmitQuickAuth');
+      const quickRestrictedBox = document.getElementById('quickRestrictedBox');
+      const btnQuickRegisterRedirect = document.getElementById('btnQuickRegisterRedirect');
+
+      const validationModal = document.getElementById('validationModal');
+      const btnOpenValidationGuide = document.getElementById('btnOpenValidationGuide');
+      const btnCloseValidationModal = document.getElementById('btnCloseValidationModal');
+
+      const resourceSearchInput = document.getElementById('resourceSearchInput');
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const resCards = document.querySelectorAll('.res-card');
+      const resultsCount = document.getElementById('resultsCount');
+
+      // 1. Initial Member Auth Check
+      initMemberStatus();
+
+      async function initMemberStatus() {
+        let cachedEmail = localStorage.getItem(STORAGE_KEY_AUTH);
+        if (!cachedEmail && sessionStorage.getItem('tfc_member_auth') === 'true') {
+          cachedEmail = sessionStorage.getItem('tfc_member_email');
+        }
+
+        if (cachedEmail) {
+          const cachedName = localStorage.getItem(STORAGE_KEY_NAME) || '';
+          updateMemberUI(true, cachedEmail, cachedName);
+        } else {
+          updateMemberUI(false);
+        }
+      }
+
+      function updateMemberUI(isAuth, email = '', name = '') {
+        if (isAuth) {
+          memberStatusIcon.style.background = 'var(--green)';
+          memberStatusIcon.style.boxShadow = '0 0 8px var(--green)';
+          memberStatusText.innerHTML = `🟢 <strong>Verified Council Member:</strong> ${name ? name + ' (' + email + ')' : email}`;
+          btnQuickAuth.style.display = 'none';
+          btnLogOut.style.display = 'inline-block';
+        } else {
+          memberStatusIcon.style.background = '#888';
+          memberStatusIcon.style.boxShadow = 'none';
+          memberStatusText.textContent = 'Guest Visitor • Free resources open below. Sign in to unlock full member playbooks.';
+          btnQuickAuth.style.display = 'inline-flex';
+          btnLogOut.style.display = 'none';
+        }
+      }
+
+      // Logout handler
+      btnLogOut.addEventListener('click', () => {
+        localStorage.removeItem(STORAGE_KEY_AUTH);
+        localStorage.removeItem(STORAGE_KEY_NAME);
+        updateMemberUI(false);
+      });
+
+      // Quick Auth Dialog
+      btnQuickAuth.addEventListener('click', () => {
+        quickAuthModal.classList.add('active');
+        quickRestrictedBox.style.display = 'none';
+        quickEmailInput.focus();
+      });
+
+      btnCloseQuickAuth.addEventListener('click', () => {
+        quickAuthModal.classList.remove('active');
+      });
+
+      // Submit Quick Auth
+      quickAuthForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = quickEmailInput.value.trim().toLowerCase();
+        if (!email) return;
+
+        btnSubmitQuickAuth.disabled = true;
+        btnSubmitQuickAuth.innerHTML = '<span>Verifying... ⏳</span>';
+        quickRestrictedBox.style.display = 'none';
+
+        try {
+          const { data: member, error } = await supabaseClient
+            .from('members')
+            .select('email, name, tier')
+            .ilike('email', email)
+            .maybeSingle();
+
+          if (error) throw error;
+
+          if (member && member.email) {
+            localStorage.setItem(STORAGE_KEY_AUTH, member.email);
+            if (member.name) localStorage.setItem(STORAGE_KEY_NAME, member.name);
+            updateMemberUI(true, member.email, member.name);
+            quickAuthModal.classList.remove('active');
+            alert(`✓ Welcome back, ${member.name || member.email}! All member playbooks unlocked.`);
+          } else {
+            quickRestrictedBox.style.display = 'block';
+            btnQuickRegisterRedirect.href = `join.html?email=${encodeURIComponent(email)}`;
+          }
+        } catch (err) {
+          console.error("Verification error:", err);
+          alert("Network verification error. Please try again.");
+        } finally {
+          btnSubmitQuickAuth.disabled = false;
+          btnSubmitQuickAuth.innerHTML = '<span>Verify & Unlock</span><span aria-hidden="true">→</span>';
+        }
+      });
+
+      // 2. Open Access Modal (Free Guide)
+      btnOpenValidationGuide.addEventListener('click', () => {
+        validationModal.classList.add('active');
+      });
+      btnCloseValidationModal.addEventListener('click', () => {
+        validationModal.classList.remove('active');
+      });
+
+      // Close modal on background click
+      [validationModal, quickAuthModal].forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.remove('active');
+          }
+        });
+      });
+
+      // 3. Search & Filter System
+      let currentFilter = 'all';
+
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentFilter = pill.getAttribute('data-filter');
+          applyFilters();
+        });
+      });
+
+      resourceSearchInput.addEventListener('input', () => {
+        applyFilters();
+      });
+
+      function applyFilters() {
+        const query = (resourceSearchInput.value || '').toLowerCase().trim();
+        let visibleCount = 0;
+
+        resCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+          const title = card.querySelector('.res-title').textContent.toLowerCase();
+          const desc = card.querySelector('.res-desc').textContent.toLowerCase();
+
+          // Category match
+          let matchesCategory = true;
+          if (currentFilter === 'members') {
+            matchesCategory = category.includes('members');
+          } else if (currentFilter === 'open') {
+            matchesCategory = category.includes('open');
+          } else if (currentFilter === 'outreach') {
+            matchesCategory = category.includes('outreach');
+          } else if (currentFilter === 'validation') {
+            matchesCategory = category.includes('validation');
+          }
+
+          // Search query match
+          let matchesQuery = true;
+          if (query) {
+            matchesQuery = title.includes(query) || desc.includes(query) || keywords.includes(query);
+          }
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        resultsCount.textContent = `Showing ${visibleCount} resource${visibleCount === 1 ? '' : 's'}`;
+      }
+
+    });
+  </script>
+</body>
+</html>

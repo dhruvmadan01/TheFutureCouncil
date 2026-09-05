@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cold-to-Warm Networking Swipe File — The Future Council</title>
+<link rel="icon" href="TFC.png" type="image/png">
+<link rel="apple-touch-icon" href="TFC.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Supabase JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --paper:#fdfdf8;
+    --yellow:#ffd93d;
+    --pink:#ff5c7c;
+    --blue:#4d7fff;
+    --green:#8dff7a;
+    --orange:#ff9e59;
+    --shadow: 6px 6px 0 var(--ink);
+    --shadow-lg: 10px 10px 0 var(--ink);
+    --shadow-sm: 4px 4px 0 var(--ink);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Space Grotesk', sans-serif;font-size:17px;line-height:1.5;}
+  .display{font-family:'Archivo Black', sans-serif;text-transform:uppercase;line-height:0.95;}
+  
+  /* Navigation Bar */
+  .site-nav {
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: 4px solid var(--ink);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .site-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--paper);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+  }
+  .site-nav-brand img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border: 2px solid var(--paper);
+    text-decoration: none;
+    transition: transform 0.1s ease;
+  }
+  .nav-btn:hover {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .nav-btn.primary {
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .nav-btn.back-vault {
+    background: transparent;
+    color: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .nav-btn.back-vault:hover {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  /* Member Status Bar */
+  .member-status-bar {
+    background: #111;
+    color: #fff;
+    padding: 8px 20px;
+    border-bottom: 3px solid var(--ink);
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .member-status-bar.active {
+    display: flex;
+  }
+  .member-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pulse-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--green);
+  }
+  .btn-switch-user {
+    background: transparent;
+    color: #bbb;
+    border: 1px solid #444;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .btn-switch-user:hover {
+    color: #fff;
+    border-color: #fff;
+    background: #222;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;border-left:4px solid var(--ink);border-right:4px solid var(--ink);background:var(--paper);position: relative;}
+
+  /* Main Gated Content Container */
+  #gatedContent {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+  #gatedContent.locked {
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.25;
+  }
+
+  .ticker{background:var(--ink);color:var(--yellow);overflow:hidden;white-space:nowrap;border-bottom:4px solid var(--ink);padding:10px 0;}
+  .ticker-track{display:inline-block;font-family:'Archivo Black', sans-serif;font-size:0.95rem;letter-spacing:0.04em;animation: scroll 26s linear infinite;}
+  .ticker-track span{margin:0 22px;}
+  @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+
+  .hero{background:var(--yellow);padding:52px 40px 40px;border-bottom:4px solid var(--ink);}
+  .badge{display:inline-block;background:var(--ink);color:var(--paper);font-family:'Archivo Black', sans-serif;font-size:0.72rem;padding:8px 14px;border:3px solid var(--ink);transform:rotate(-3deg);margin-bottom:22px;}
+  h1.hero-title{font-size:clamp(2.2rem, 7vw, 3.8rem);margin:0 0 16px;}
+  .hero-sub{max-width:600px;font-size:1.1rem;font-weight:500;margin:0;}
+
+  section{padding:44px 40px;border-bottom:4px solid var(--ink);}
+  .bg-paper{background:var(--paper);}
+  .bg-pink{background:var(--pink);}
+  .bg-blue{background:var(--blue);color:var(--paper);}
+  .bg-green{background:var(--green);}
+  .bg-yellow{background:var(--yellow);}
+
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .section-num{font-family:'Archivo Black', sans-serif;background:var(--ink);color:var(--paper);font-size:0.85rem;padding:6px 12px;border:3px solid var(--ink);}
+  h2{font-size:1.9rem;margin:0;}
+  p.lead{max-width:640px;font-size:1.02rem;font-weight:500;}
+
+  /* golden rules */
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .rule-card{background:var(--paper);border:4px solid var(--ink);box-shadow:var(--shadow-lg);padding:22px;}
+  .rule-card .n{font-family:'Archivo Black', sans-serif;font-size:2rem;color:var(--pink);-webkit-text-stroke:1px var(--ink);}
+  .rule-card h4{font-family:'Archivo Black', sans-serif;font-size:1rem;margin:8px 0 6px;text-transform:uppercase;}
+  .rule-card p{margin:0;font-size:0.9rem;font-weight:500;}
+
+  /* template cards */
+  .tpl{background:var(--paper);border:4px solid var(--ink);box-shadow:var(--shadow-lg);margin-bottom:26px;}
+  .tpl-head{display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:var(--yellow);padding:12px 18px;flex-wrap:wrap;gap:8px;}
+  .tpl-head .ttl{font-family:'Archivo Black', sans-serif;font-size:1rem;text-transform:uppercase;}
+  .tpl-head-right{display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
+  .tpl-head .chan{font-weight:700;font-size:0.72rem;background:var(--yellow);color:var(--ink);padding:5px 10px;border:2px solid var(--yellow);}
+  
+  .copy-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--paper);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+  }
+  .copy-btn:hover {
+    background: var(--green);
+    border-color: var(--green);
+    transform: translateY(-1px);
+  }
+  .copy-btn.copied {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--ink);
+  }
+
+  .tpl-body{padding:20px 22px;}
+  .tpl-goal{font-size:0.95rem;font-weight:500;margin:0 0 16px;}
+  .tpl-goal strong{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.03em;display:block;margin-bottom:4px;color:var(--pink);}
+  .script-box{
+    background:#f5f5ef;
+    border:3px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    padding:16px 18px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:0.95rem;
+    font-weight:500;
+    margin-bottom:16px;
+    white-space:pre-wrap;
+    position: relative;
+    line-height: 1.6;
+  }
+  .script-box b{background:var(--yellow);padding:0 3px;}
+  .psych{
+    background:var(--green);
+    border:3px solid var(--ink);
+    padding:12px 16px;
+    font-size:0.88rem;
+    font-weight:500;
+  }
+  .psych strong{font-family:'Archivo Black', sans-serif;font-size:0.7rem;text-transform:uppercase;display:block;margin-bottom:4px;}
+
+  .cta{background:var(--ink);color:var(--paper);padding:50px 40px;border-bottom:none;}
+  .cta h2{color:var(--paper);}
+  .cta p.lead{color:#e7e7e7;}
+  .cta-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:22px;}
+  .btn{display:inline-block;background:var(--yellow);color:var(--ink);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1.05rem;padding:16px 28px;border:4px solid var(--paper);box-shadow:6px 6px 0 var(--yellow);text-decoration:none;cursor: pointer;transition: transform 0.1s ease;}
+  .btn:hover{transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--yellow);}
+  .btn-outline{display:inline-block;background:transparent;color:var(--paper);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1.05rem;padding:16px 28px;border:4px solid var(--paper);box-shadow:6px 6px 0 #fff;text-decoration:none;cursor: pointer;}
+  .btn-outline:hover{background: #222; transform: translate(-2px, -2px);}
+  .cta .url{font-weight:700;color:#b7b7b7;font-size:0.88rem;}
+
+  footer{padding:22px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-weight:700;font-size:0.78rem;background:var(--paper);}
+
+  /* ==========================================================================
+     GATED ACCESS MODAL / LOCK OVERLAY
+     ========================================================================== */
+  .auth-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .auth-overlay.hidden {
+    display: none !important;
+  }
+
+  .auth-card {
+    background: var(--paper);
+    border: 5px solid var(--ink);
+    box-shadow: 14px 14px 0 var(--yellow), 14px 14px 0 4px var(--ink);
+    max-width: 540px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    animation: authPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes authPopIn {
+    0% { transform: scale(0.92) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .auth-header {
+    background: var(--ink);
+    color: var(--yellow);
+    padding: 24px 28px 20px;
+    border-bottom: 4px solid var(--ink);
+  }
+  .auth-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border: 2px solid var(--yellow);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .auth-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.85rem;
+    margin: 0 0 8px;
+    line-height: 1.05;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .auth-sub {
+    font-size: 0.95rem;
+    color: #ddd;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .auth-body {
+    padding: 28px;
+  }
+
+  .auth-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .auth-label {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+  }
+  .auth-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    outline: none;
+    transition: all 0.15s ease;
+  }
+  .auth-input:focus {
+    background: #fffdf5;
+    border-color: var(--ink);
+    box-shadow: 6px 6px 0 var(--yellow);
+  }
+
+  .auth-submit-btn {
+    width: 100%;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  .auth-submit-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+    background: #ffe359;
+  }
+  .auth-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  /* Unregistered Member Alert State */
+  .auth-restricted-panel {
+    display: none;
+    background: #fff1f3;
+    border: 3px solid var(--pink);
+    box-shadow: 4px 4px 0 var(--ink);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .auth-restricted-panel.active {
+    display: block;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  .auth-restricted-tag {
+    background: var(--pink);
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.72rem;
+    padding: 4px 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .auth-restricted-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .auth-restricted-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #444;
+    line-height: 1.45;
+    margin: 0 0 16px;
+  }
+  .auth-restricted-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-register-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--ink);
+    color: var(--yellow);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    border: 3px solid var(--ink);
+    text-decoration: none;
+    box-shadow: 4px 4px 0 var(--yellow);
+    transition: transform 0.15s ease;
+  }
+  .btn-register-action:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--yellow);
+    color: #fff;
+  }
+  .btn-try-again {
+    background: transparent;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 6px;
+  }
+
+  /* Success State Toast */
+  .auth-success-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--green);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 14px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    animation: slideInRight 0.3s ease;
+  }
+  .auth-success-toast.active {
+    display: flex;
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media(max-width:640px){
+    .hero{padding:36px 20px 28px;}
+    section{padding:32px 20px;}
+    .rules{grid-template-columns:1fr;}
+    .tpl-head{flex-direction:column;align-items:flex-start;}
+    .tpl-head-right{width: 100%; justify-content: space-between; margin-top: 6px;}
+    .cta{padding:40px 20px;}
+    .auth-card {margin: 10px;}
+    .auth-header {padding: 20px;}
+    .auth-body {padding: 20px;}
+  }
+  @media print{
+    .ticker, .site-nav, .member-status-bar, .auth-overlay, .copy-btn {display:none !important;}
+    #gatedContent.locked {filter: none !important; opacity: 1 !important; pointer-events: auto !important;}
+    section, .tpl{box-shadow:none;}
+    body{background:white;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-nav">
+    <a href="resources.html" class="site-nav-brand">
+      <img src="TFC.png" alt="TFC Logo" />
+      <span>The Future Council</span>
+    </a>
+    <nav class="site-nav-links">
+      <a href="resources.html" class="nav-btn back-vault">← All Resources</a>
+      <a href="index.html" class="nav-btn">Home Hub</a>
+      <a href="fellowship.html" target="_blank" class="nav-btn">Fellowship '26</a>
+      <a href="join.html" class="nav-btn">Join Council</a>
+    </nav>
+  </header>
+
+  <!-- Member Status Bar (Shows when unlocked) -->
+  <div id="memberStatusBar" class="member-status-bar">
+    <div class="member-tag">
+      <span class="pulse-dot"></span>
+      <span>Verified Member Access: <strong id="activeMemberEmail">loading...</strong></span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <a href="resources.html" class="btn-switch-user" style="text-decoration: none;">View Other Resources</a>
+      <button id="btnSwitchAccount" class="btn-switch-user" title="Switch or lock access">Lock / Switch</button>
+    </div>
+  </div>
+
+  <!-- Success Notification Toast -->
+  <div id="authSuccessToast" class="auth-success-toast">
+    <span>✓</span>
+    <span id="authSuccessMsg">Membership verified! Access granted.</span>
+  </div>
+
+  <!-- =========================================================================
+       GATED ACCESS MODAL / LOCK OVERLAY
+       ========================================================================= -->
+  <div id="authModalOverlay" class="auth-overlay">
+    <div class="auth-card" id="authCard">
+      <div class="auth-header">
+        <span class="auth-badge">🔒 MEMBERS EXCLUSIVE RESOURCE</span>
+        <h2 class="auth-title">The Networking Swipe File</h2>
+        <p class="auth-sub">Enter the email you registered with on The Future Council to unlock all 7 cold-to-warm outreach playbooks and templates.</p>
+      </div>
+      
+      <div class="auth-body">
+        <form id="resourceAuthForm" onsubmit="return false;">
+          <div class="auth-input-group">
+            <label for="memberEmailInput" class="auth-label">
+              <span>Your Registered Member Email</span>
+              <a href="resources.html" style="color: #666; font-size: 0.75rem; text-decoration: underline;">Browse Free Resources</a>
+            </label>
+            <input 
+              type="email" 
+              id="memberEmailInput" 
+              class="auth-input" 
+              placeholder="e.g. founder@university.edu" 
+              required 
+              autocomplete="email"
+              autofocus
+            />
+          </div>
+          
+          <button type="submit" id="btnVerifyAccess" class="auth-submit-btn">
+            <span>Unlock Swipe File</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <!-- Access Denied / Not Registered Alert -->
+        <div id="authRestrictedBox" class="auth-restricted-panel">
+          <span class="auth-restricted-tag">⚠️ ACCESS RESTRICTED</span>
+          <h3 class="auth-restricted-title">Only For Registered Members</h3>
+          <p class="auth-restricted-text">
+            We couldn't find a member account registered with <strong id="attemptedEmailDisplay" style="color:var(--ink);">this email</strong>. This swipe file is reserved exclusively for registered members of The Future Council ecosystem.
+          </p>
+          <div class="auth-restricted-actions">
+            <a id="btnRegisterRedirect" href="join.html" class="btn-register-action">
+              <span>Register as a Member on Join Council →</span>
+            </a>
+            <button type="button" id="btnRetryInput" class="btn-try-again">
+              Try a different email address
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SWIPE FILE MAIN CONTENT (Gated behind verification)
+       ========================================================================= -->
+  <div id="gatedContent" class="locked">
+    <div class="wrap">
+
+      <div class="ticker">
+        <div class="ticker-track">
+          <span>★ BUILD</span><span>NETWORK</span><span>COUNCIL</span><span>★ WARM UP</span><span>★ GRASSROOTS</span><span>SWIPE FILE</span><span>NO COLD DMS</span>
+          <span>★ BUILD</span><span>NETWORK</span><span>COUNCIL</span><span>★ WARM UP</span><span>★ GRASSROOTS</span><span>SWIPE FILE</span><span>NO COLD DMS</span>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="hero">
+        <span class="badge">TFC WELCOME GIFT</span>
+        <h1 class="hero-title display">The Cold-to-Warm<br>Networking Swipe File</h1>
+        <p class="hero-sub">7 plug-and-play outreach templates for ambitious builders who want to reach high-leverage peers, mentors, and founders — without sounding needy, robotic, or awkward. Copy, fill the brackets, send.</p>
+      </div>
+
+      <!-- GOLDEN RULES -->
+      <section class="bg-yellow">
+        <div class="section-head"><span class="section-num">00</span><h2 class="display">Golden Rules of Modern Outreach</h2></div>
+        <div class="rules">
+          <div class="rule-card">
+            <div class="n display">01</div>
+            <h4>Zero-Friction Ask</h4>
+            <p>Make the ask a one-tap yes. Narrow, specific, and bounded beats open-ended every time — "60 seconds" gets replies, "pick your brain sometime" gets ignored.</p>
+          </div>
+          <div class="rule-card">
+            <div class="n display">02</div>
+            <h4>The 2-Sentence Context Rule</h4>
+            <p>Say who you are and why you're reaching out in two sentences, max. If it takes a paragraph to explain yourself, the message dies unread.</p>
+          </div>
+          <div class="rule-card">
+            <div class="n display">03</div>
+            <h4>Give Before You Get</h4>
+            <p>Lead with something useful — an insight, a resource, a genuine compliment on specifics — before you ask for anything. Reciprocity does the rest.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 1 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">01</span><h2 class="display">Tactical Advice From a Mentor</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Specific, Not a Brain-Pick"</span>
+            <div class="tpl-head-right">
+              <span class="chan">LinkedIn / Cold Email</span>
+              <button class="copy-btn" data-target="script1">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Reaching out to a senior founder or mentor you admire for tactical advice — without the dreaded "pick your brain" ask.</p>
+            <div class="script-box" id="script1">Hi <b>[Name]</b> — I've been <b>[Specific Insight, e.g. "following how you scaled X to Y"]</b>. I'm building <b>[what you're building]</b> and hit a specific wall around <b>[narrow problem]</b>. Not asking for a call — would love a one-line take if you have 60 seconds this week. No worries if not!</div>
+            <div class="psych"><strong>The Psychology</strong>A narrow, specific ask signals you've already done the thinking and respect their time; capping the cost at "one line, 60 seconds" makes yes the path of least resistance.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 2 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">02</span><h2 class="display">Post-Event Follow-Up</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "24-Hour Callback"</span>
+            <div class="tpl-head-right">
+              <span class="chan">LinkedIn / WhatsApp</span>
+              <button class="copy-btn" data-target="script2">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Following up within 24 hours of meeting someone at an event to turn a brief chat into a recurring connection.</p>
+            <div class="script-box" id="script2">Hey <b>[Name]</b>, great chatting about <b>[Shared Interest]</b> at <b>[Event]</b> yesterday. Really liked your take on <b>[specific point they made]</b>. I'm going to <b>[specific next step, e.g. "try the framework you mentioned"]</b> — will report back. Let's stay in touch!</div>
+            <div class="psych"><strong>The Psychology</strong>Quoting the exact detail proves you were listening, not networking on autopilot. Naming a concrete next step gives you a natural, non-awkward reason to message again later.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 3 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">03</span><h2 class="display">Peer Collaboration</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Fellow Builder" DM</span>
+            <div class="tpl-head-right">
+              <span class="chan">Twitter/X DM / LinkedIn</span>
+              <button class="copy-btn" data-target="script3">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Connecting with an impressive peer in the same niche to collaborate or trade notes — as an equal, not a fan.</p>
+            <div class="script-box" id="script3">Hey <b>[Name]</b> — saw <b>[Recent Win]</b>, congrats on that. We're both deep in <b>[Shared Interest]</b> so figured I'd say hi. Would be fun to trade notes sometime — no agenda, just comparing what's working. Down?</div>
+            <div class="psych"><strong>The Psychology</strong>"No agenda" kills the fear of being sold to. Peer-to-peer framing (not asking up) makes reciprocity feel natural instead of extractive.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 4 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">04</span><h2 class="display">The Intro Call Ask</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Bounded 15"</span>
+            <div class="tpl-head-right">
+              <span class="chan">Cold Email / LinkedIn</span>
+              <button class="copy-btn" data-target="script4">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Asking for an intro call or coffee chat with zero awkwardness, without an open-ended time commitment.</p>
+            <div class="script-box" id="script4">Hi <b>[Name]</b>, <b>[2-sentence context: who you are + specific reason]</b>. Would a 15-min call work anytime in the next two weeks? Happy to work around your schedule — here's a link if easier: <b>[Calendly link]</b>. If timing's off, totally understand.</div>
+            <div class="psych"><strong>The Psychology</strong>A bounded ask (15 minutes, a two-week window) plus a scheduling link removes the back-and-forth that kills most "let's grab coffee" asks. Explicit permission to decline removes social pressure, which paradoxically raises the yes rate.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 5 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">05</span><h2 class="display">Re-Igniting a Dead Thread</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Specific Ghost Revival"</span>
+            <div class="tpl-head-right">
+              <span class="chan">Any Channel</span>
+              <button class="copy-btn" data-target="script5">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Reconnecting with someone after months of silence, without a generic "long time no see."</p>
+            <div class="script-box" id="script5">Hey <b>[Name]</b> — it's been a minute since we talked about <b>[last topic discussed]</b>! Been thinking about it because <b>[Specific Insight / trigger]</b>. Curious where things landed with <b>[their project or goal]</b> — how's it going?</div>
+            <div class="psych"><strong>The Psychology</strong>Anchoring on a specific past conversation proves the relationship was memorable, not transactional. Asking about their world first — not pitching yours — reopens the door safely.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 6 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">06</span><h2 class="display">Give Value First</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Thought of You"</span>
+            <div class="tpl-head-right">
+              <span class="chan">Any Channel</span>
+              <button class="copy-btn" data-target="script6">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Sharing a resource, lead, or idea that genuinely helps them — no ask attached.</p>
+            <div class="script-box" id="script6">Hey <b>[Name]</b>, came across <b>[resource / lead / bug]</b> and thought of you given <b>[Shared Interest / their project]</b>. Thought this might help with <b>[specific problem they have]</b> — no need to reply, just wanted to pass it along.</div>
+            <div class="psych"><strong>The Psychology</strong>"No need to reply" removes obligation entirely — which paradoxically increases response rate, because gratitude prompts a reply anyway. Leading with a gift activates reciprocity without ever asking for anything.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMPLATE 7 -->
+      <section class="bg-paper">
+        <div class="section-head"><span class="section-num">07</span><h2 class="display">Low-Friction Community Intro</h2></div>
+        <div class="tpl">
+          <div class="tpl-head">
+            <span class="ttl">The "Saw Your Intro"</span>
+            <div class="tpl-head-right">
+              <span class="chan">Slack / Discord</span>
+              <button class="copy-btn" data-target="script7">📋 Copy</button>
+            </div>
+          </div>
+          <div class="tpl-body">
+            <p class="tpl-goal"><strong>Scenario / Goal</strong>Introducing yourself to someone inside an internal community, Slack, or Discord — low stakes, already shared trust.</p>
+            <div class="script-box" id="script7">Hey <b>[Name]</b> 👋 saw your intro/post about <b>[Specific Insight]</b> — I'm working on something similar in <b>[Shared Interest]</b>. Would love to compare notes if you're up for it, no pressure either way!</div>
+            <div class="psych"><strong>The Psychology</strong>Referencing a public post lowers the stakes since you're both already in a shared, trusted space. "No pressure either way" keeps the tone casual so it never reads as cold outreach.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div class="cta">
+        <div class="section-head"><span class="section-num" style="background:var(--yellow);color:var(--ink);">★</span><h2 class="display">Now Go Warm Someone Up</h2></div>
+        <p class="lead">Pick one template, fill the brackets with something real and specific, and send it today. The founders who build the strongest networks aren't the ones who send the most messages — they're the ones who send the right one.</p>
+        <div class="cta-row">
+          <a class="btn" href="fellowship.html" target="_blank" rel="noopener">Apply for Fellowship 🚀</a>
+          <a class="btn-outline" href="resources.html">Browse All Resources 📚</a>
+          <span class="url">thefuturecouncil.in</span>
+        </div>
+      </div>
+
+      <footer>
+        <span>The Future Council — Cold-to-Warm Networking Swipe File</span>
+        <span>A TFC Member Welcome Gift</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Authentication & Page Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Supabase Configuration
+      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // DOM Elements
+      const authModalOverlay = document.getElementById('authModalOverlay');
+      const gatedContent = document.getElementById('gatedContent');
+      const resourceAuthForm = document.getElementById('resourceAuthForm');
+      const memberEmailInput = document.getElementById('memberEmailInput');
+      const btnVerifyAccess = document.getElementById('btnVerifyAccess');
+      const authRestrictedBox = document.getElementById('authRestrictedBox');
+      const attemptedEmailDisplay = document.getElementById('attemptedEmailDisplay');
+      const btnRegisterRedirect = document.getElementById('btnRegisterRedirect');
+      const btnRetryInput = document.getElementById('btnRetryInput');
+      const memberStatusBar = document.getElementById('memberStatusBar');
+      const activeMemberEmail = document.getElementById('activeMemberEmail');
+      const btnSwitchAccount = document.getElementById('btnSwitchAccount');
+      const authSuccessToast = document.getElementById('authSuccessToast');
+      const authSuccessMsg = document.getElementById('authSuccessMsg');
+
+      // Local storage keys
+      const STORAGE_KEY_AUTH = 'tfc_resource_auth_email';
+      const STORAGE_KEY_NAME = 'tfc_resource_auth_name';
+
+      // 1. Check if user is already authenticated
+      checkExistingSession();
+
+      async function checkExistingSession() {
+        // Check local storage or session storage from join.html
+        let cachedEmail = localStorage.getItem(STORAGE_KEY_AUTH);
+        
+        if (!cachedEmail && sessionStorage.getItem('tfc_member_auth') === 'true') {
+          cachedEmail = sessionStorage.getItem('tfc_member_email');
+        }
+
+        if (cachedEmail) {
+          memberEmailInput.value = cachedEmail;
+          // Silent verification in background
+          verifyEmailAndUnlock(cachedEmail, true);
+        } else {
+          // Check if email is passed in URL query param
+          const urlParams = new URLSearchParams(window.location.search);
+          const paramEmail = urlParams.get('email');
+          if (paramEmail) {
+            memberEmailInput.value = paramEmail;
+            verifyEmailAndUnlock(paramEmail, false);
+          }
+        }
+      }
+
+      // Unlock UI Helper
+      function grantAccess(email, memberName) {
+        // Save auth state
+        localStorage.setItem(STORAGE_KEY_AUTH, email);
+        if (memberName) localStorage.setItem(STORAGE_KEY_NAME, memberName);
+
+        // Update UI
+        activeMemberEmail.textContent = memberName ? `${memberName} (${email})` : email;
+        memberStatusBar.classList.add('active');
+
+        // Hide overlay and unlock blur
+        authModalOverlay.classList.add('hidden');
+        gatedContent.classList.remove('locked');
+
+        // Toast feedback
+        showToast(`Welcome! Membership verified for ${email}`);
+      }
+
+      // Lock UI Helper
+      function lockAccess() {
+        localStorage.removeItem(STORAGE_KEY_AUTH);
+        localStorage.removeItem(STORAGE_KEY_NAME);
+        memberStatusBar.classList.remove('active');
+        gatedContent.classList.add('locked');
+        authRestrictedBox.classList.remove('active');
+        authModalOverlay.classList.remove('hidden');
+        memberEmailInput.focus();
+      }
+
+      // Toast feedback
+      function showToast(msg) {
+        authSuccessMsg.textContent = msg;
+        authSuccessToast.classList.add('active');
+        setTimeout(() => {
+          authSuccessToast.classList.remove('active');
+        }, 3500);
+      }
+
+      // 2. Email Verification Logic
+      async function verifyEmailAndUnlock(rawEmail, isSilent = false) {
+        const cleanEmail = (rawEmail || '').trim().toLowerCase();
+        if (!cleanEmail) {
+          if (!isSilent) memberEmailInput.focus();
+          return;
+        }
+
+        // Basic format check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(cleanEmail)) {
+          if (!isSilent) {
+            alert("Please enter a valid email address.");
+            memberEmailInput.focus();
+          }
+          return;
+        }
+
+        btnVerifyAccess.disabled = true;
+        btnVerifyAccess.innerHTML = '<span>Verifying Membership... ⏳</span>';
+        authRestrictedBox.classList.remove('active');
+
+        try {
+          // Query Supabase members table
+          const { data: member, error } = await supabaseClient
+            .from('members')
+            .select('email, name, tier, college')
+            .ilike('email', cleanEmail)
+            .maybeSingle();
+
+          if (error) {
+            console.error("Supabase verification error:", error);
+            throw error;
+          }
+
+          if (member && member.email) {
+            // Member exists! Grant access
+            grantAccess(member.email, member.name);
+          } else {
+            // Member not found -> Show restriction panel
+            if (isSilent) {
+              lockAccess();
+            }
+            attemptedEmailDisplay.textContent = cleanEmail;
+            btnRegisterRedirect.href = `join.html?email=${encodeURIComponent(cleanEmail)}`;
+            authRestrictedBox.classList.add('active');
+          }
+        } catch (err) {
+          console.error("Verification failed:", err);
+          if (!isSilent) {
+            alert("Unable to verify membership due to a network issue. Please check your connection and try again.");
+          }
+        } finally {
+          btnVerifyAccess.disabled = false;
+          btnVerifyAccess.innerHTML = '<span>Unlock Swipe File</span><span aria-hidden="true">→</span>';
+        }
+      }
+
+      // Submit Form
+      resourceAuthForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        verifyEmailAndUnlock(memberEmailInput.value, false);
+      });
+
+      // Try again / Switch email
+      btnRetryInput.addEventListener('click', () => {
+        authRestrictedBox.classList.remove('active');
+        memberEmailInput.value = '';
+        memberEmailInput.focus();
+      });
+
+      btnSwitchAccount.addEventListener('click', () => {
+        lockAccess();
+      });
+
+      // 3. Copy To Clipboard Handler for Template Scripts
+      const copyButtons = document.querySelectorAll('.copy-btn');
+      copyButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const targetId = btn.getAttribute('data-target');
+          const scriptElement = document.getElementById(targetId);
+          if (scriptElement) {
+            const rawText = scriptElement.innerText || scriptElement.textContent;
+            try {
+              await navigator.clipboard.writeText(rawText);
+              const originalText = btn.innerHTML;
+              btn.innerHTML = '✓ Copied!';
+              btn.classList.add('copied');
+              setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+              }, 2000);
+            } catch (err) {
+              console.error("Failed to copy text:", err);
+            }
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
