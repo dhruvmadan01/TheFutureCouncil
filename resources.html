@@ -924,13 +924,119 @@
         }
       });
 
+      // =========================================================================
+      // RESOURCE ENGAGEMENT TELEMETRY (Open Resources)
+      // =========================================================================
+      let validationTimer = null;
+      let validationSeconds = 0;
+
+      function logVaultResourceEvent(resId, resTitle, eventType) {
+        const email = localStorage.getItem(STORAGE_KEY_AUTH) || 'guest_reader';
+        const name = localStorage.getItem(STORAGE_KEY_NAME) || (email === 'guest_reader' ? 'Guest Visitor' : '');
+        const STORAGE_KEY_GLOBAL = 'tfc_global_resource_tracking';
+
+        let globalData = {};
+        try {
+          globalData = JSON.parse(localStorage.getItem(STORAGE_KEY_GLOBAL) || '{}');
+        } catch (e) {
+          globalData = {};
+        }
+
+        if (!globalData[email]) {
+          globalData[email] = {
+            email: email,
+            name: name,
+            college: '',
+            resources: {}
+          };
+        }
+
+        if (!globalData[email].resources[resId]) {
+          globalData[email].resources[resId] = {
+            id: resId,
+            title: resTitle,
+            opens: 0,
+            totalSeconds: 0,
+            lastOpened: new Date().toISOString(),
+            firstOpened: new Date().toISOString()
+          };
+        }
+
+        const resEntry = globalData[email].resources[resId];
+        if (eventType === 'open') {
+          resEntry.opens = (resEntry.opens || 0) + 1;
+          resEntry.lastOpened = new Date().toISOString();
+        } else if (eventType === 'heartbeat' || eventType === 'close') {
+          resEntry.totalSeconds = (resEntry.totalSeconds || 0) + 5;
+          resEntry.lastOpened = new Date().toISOString();
+        }
+
+        try {
+          localStorage.setItem(STORAGE_KEY_GLOBAL, JSON.stringify(globalData));
+        } catch (e) {}
+
+        // If registered member, sync to Supabase
+        if (email !== 'guest_reader' && (eventType === 'open' || eventType === 'close')) {
+          syncMemberResData(email, resId, resEntry);
+        }
+      }
+
+      async function syncMemberResData(email, resId, resEntry) {
+        try {
+          const { data: member } = await supabaseClient
+            .from('members')
+            .select('college')
+            .ilike('email', email)
+            .maybeSingle();
+
+          if (member) {
+            let currentCollege = member.college || '';
+            const resDataJson = JSON.stringify({
+              [resId]: {
+                opens: resEntry.opens,
+                totalSeconds: resEntry.totalSeconds,
+                lastOpened: resEntry.lastOpened
+              }
+            });
+
+            let updatedCollege = '';
+            if (currentCollege.includes(' | ResData: ')) {
+              updatedCollege = currentCollege.replace(/\s*\|\s*ResData:\s*\{.*?\}/g, ` | ResData: ${resDataJson}`);
+            } else {
+              updatedCollege = `${currentCollege} | ResData: ${resDataJson}`;
+            }
+
+            await supabaseClient
+              .from('members')
+              .update({ college: updatedCollege })
+              .eq('email', email);
+          }
+        } catch (err) {}
+      }
+
       // 2. Open Access Modal (Free Guide)
       btnOpenValidationGuide.addEventListener('click', () => {
         validationModal.classList.add('active');
+        validationSeconds = 0;
+        logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'open');
+
+        if (validationTimer) clearInterval(validationTimer);
+        validationTimer = setInterval(() => {
+          validationSeconds += 5;
+          logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'heartbeat');
+        }, 5000);
       });
-      btnCloseValidationModal.addEventListener('click', () => {
+
+      function closeValidation() {
         validationModal.classList.remove('active');
-      });
+        if (validationTimer) {
+          clearInterval(validationTimer);
+          validationTimer = null;
+          logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'close');
+        }
+      }
+
+      btnCloseValidationModal.addEventListener('click', closeValidation);
 
       // Close modal on background click
       [validationModal, quickAuthModal].forEach(modal => {

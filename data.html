@@ -3,46 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Growth CRM | The Future Council</title>
+  <title>Growth & Resources CRM | The Future Council</title>
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
-      --orange: #ff6b00;
-      --offwhite: #FAF9F6;
-      --charcoal: #1E1E1E;
       --ink: #000000;
-      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --paper: #FAF9F6;
+      --yellow: #ffd93d;
+      --orange: #ff9e59;
+      --green: #10b981;
+      --pink: #ff5c7c;
+      --blue: #3b82f6;
+      --font-heading: 'Archivo Black', system-ui, -apple-system, sans-serif;
     }
     body {
-      background: var(--orange);
-      color: var(--ink);
-      font-family: var(--font-body);
+      background: #000000;
+      color: #000000;
+      font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
-      padding: 24px;
-      margin: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-sizing: border-box;
     }
     .desktop-window {
-      width: min(1200px, 100%);
-      background: var(--offwhite);
+      background: #FAF9F6;
       border: 3px solid var(--ink);
       box-shadow: 8px 8px 0 var(--ink);
-      animation: floatIn 0.6s ease-out both;
+      width: 100%;
+      max-width: 1280px;
+      margin: 20px;
+      position: relative;
     }
     .window-bar {
-      position: relative;
+      background: var(--ink);
+      color: #FAF9F6;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 16px;
-      background: var(--charcoal);
+      position: relative;
       border-bottom: 3px solid var(--ink);
     }
     .window-controls {
@@ -65,7 +68,7 @@
       font-size: 0.76rem;
       letter-spacing: 0.32em;
       font-weight: 800;
-      color: var(--offwhite);
+      color: #FAF9F6;
       text-transform: uppercase;
       font-family: var(--font-heading);
     }
@@ -77,7 +80,7 @@
       background: #FFF9E6;
       box-shadow: 4px 4px 0 var(--ink);
       padding: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .hero-title {
       margin: 0 0 8px;
@@ -92,6 +95,56 @@
       font-weight: 600;
       line-height: 1.5;
     }
+
+    /* Top Sub-Navigation Tabs */
+    .crm-subnav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 3px solid var(--ink);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 2px;
+    }
+    .crm-subtab-btn {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+      border: 3px solid var(--ink);
+      border-bottom: none;
+      background: #e5e5dc;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 3px 0 0 rgba(0,0,0,0.1);
+      transition: all 0.12s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .crm-subtab-btn:hover {
+      background: #f0f0e8;
+    }
+    .crm-subtab-btn.active {
+      background: var(--yellow);
+      color: var(--ink);
+      border-bottom: 3px solid var(--yellow);
+      margin-bottom: -3px;
+      box-shadow: 4px -2px 0 var(--ink);
+    }
+    .subtab-badge {
+      background: var(--ink);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .crm-subtab-btn.active .subtab-badge {
+      background: var(--ink);
+      color: var(--yellow);
+    }
+
     .analytics-panel {
       border: 3px solid var(--ink);
       background: #fff;
@@ -116,7 +169,7 @@
       box-shadow: 3px 3px 0 var(--ink);
     }
     .metric-val {
-      font-size: 2.25rem;
+      font-size: 2.1rem;
       font-weight: 900;
       display: block;
       line-height: 1.1;
@@ -146,22 +199,6 @@
       text-transform: uppercase;
       font-family: var(--font-heading);
     }
-    .admin-submit-btn {
-      background: var(--ink);
-      border: 2px solid var(--ink);
-      color: #ff9e59;
-      font-size: 0.75rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
-      transition: transform 100ms ease, box-shadow 100ms ease;
-    }
-    .admin-submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
     .back-link-btn {
       display: inline-flex;
       align-items: center;
@@ -173,20 +210,29 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+
+    /* Catalog Cards */
+    .res-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
     }
+    .res-overview-card {
+      background: #fff;
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     @media (max-width: 640px) {
       body { padding: 12px; }
       .workspace { padding: 16px 12px; }
       .hero-title { font-size: 1.4rem; }
+      .crm-subtab-btn { padding: 8px 12px; font-size: 0.75rem; }
     }
   </style>
   <link rel="stylesheet" href="style.css" />
@@ -227,15 +273,20 @@
         <span class="yellow"></span>
         <span class="gray"></span>
       </div>
-      <div class="window-title">The Future Council • Growth CRM & Operations</div>
+      <div class="window-title">The Future Council • Growth CRM & Telemetry</div>
     </header>
 
     <div class="workspace">
       <!-- Top Actions Row -->
-      <div class="flex justify-between items-center mb-4">
-        <a href="index.html" class="back-link-btn" style="margin-bottom:0;">
-          <span>← Back to Home</span>
-        </a>
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <div class="flex gap-2 items-center">
+          <a href="index.html" class="back-link-btn" style="margin-bottom:0;">
+            <span>← Back to Home</span>
+          </a>
+          <a href="resources.html" target="_blank" class="back-link-btn" style="margin-bottom:0; color: #ff6b00;">
+            <span>📚 Open Resource Vault ↗</span>
+          </a>
+        </div>
         <div class="flex gap-2">
           <span class="text-xs font-extrabold bg-[#FFF9E6] border-2 border-black px-3 py-1 uppercase" id="currentUserLabel">User: Admin</span>
           <button onclick="handleLogout()" class="text-xs font-black bg-red-100 hover:bg-red-200 border-2 border-black px-3 py-1 uppercase tracking-wider hover:shadow-[2px_2px_0_#000] transition-all">
@@ -246,101 +297,259 @@
 
       <!-- Welcome Banner -->
       <div class="partners-hero">
-        <h1 class="hero-title">Growth CRM Dashboard</h1>
-        <p class="hero-text">Manage, filter, and export student startup profiles, candidate fellowship answers, and growth leads from the Supabase ecosystem.</p>
+        <h1 class="hero-title">Growth CRM & Resource Telemetry</h1>
+        <p class="hero-text">Manage ecosystem leads, applicant questionnaires, resource reader engagement, view counts, and reader time telemetry from Supabase.</p>
       </div>
 
-      <!-- METRICS CARDS -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="metric-card" style="border-color: #ff6b00;">
-          <span class="metric-val text-[#ff6b00]" id="totalRegistrants">0</span>
-          <span class="metric-label">Total Leads</span>
+      <!-- SUB-NAVIGATION TABS -->
+      <div class="crm-subnav">
+        <button id="tabBtnLeads" class="crm-subtab-btn active" onclick="switchCrmSubTab('leads')">
+          <span>📋 CRM Contacts & Leads</span>
+          <span class="subtab-badge" id="tabBadgeLeads">0</span>
+        </button>
+        <button id="tabBtnResources" class="crm-subtab-btn" onclick="switchCrmSubTab('resources')">
+          <span>📚 Resource Readers & Engagement</span>
+          <span class="subtab-badge" id="tabBadgeResources">0</span>
+        </button>
+      </div>
+
+      <!-- =====================================================================
+           TAB 1: GROWTH LEADS & ONBOARDING CRM
+           ===================================================================== -->
+      <div id="subTabContentLeads">
+        <!-- METRICS CARDS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="metric-card" style="border-color: #ff6b00;">
+            <span class="metric-val text-[#ff6b00]" id="totalRegistrants">0</span>
+            <span class="metric-label">Total Leads</span>
+          </div>
+          <div class="metric-card" style="border-color: #3b82f6;">
+            <span class="metric-val text-blue-600" id="fellowshipCount">0</span>
+            <span class="metric-label">Fellowship Interested</span>
+          </div>
+          <div class="metric-card" style="border-color: #10b981;">
+            <span class="metric-val text-green-600" id="ambassadorCount">0</span>
+            <span class="metric-label">Ambassadors</span>
+          </div>
+          <div class="metric-card" style="border-color: #a855f7;">
+            <span class="metric-val text-purple-600" id="activeReferrals">0</span>
+            <span class="metric-label">Step 1 Dropoffs ⚠️</span>
+          </div>
         </div>
-        <div class="metric-card" style="border-color: #3b82f6;">
-          <span class="metric-val text-blue-600" id="fellowshipCount">0</span>
-          <span class="metric-label">Fellowship Interested</span>
+
+        <div class="analytics-panel">
+          <h2>🔍 Search & Advanced Filtering</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-2">
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Query Search</label>
+              <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Filter Tier</label>
+              <select id="crmTierFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+                <option value="all">All Tiers</option>
+                <option value="student">Student</option>
+                <option value="student founder">Student Founder</option>
+                <option value="verified builder">Verified Builder</option>
+                <option value="campus ambassador">Campus Ambassador</option>
+                <option value="unverified">Unverified</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Fellowship / Onboarding</label>
+              <select id="crmFellowshipFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+                <option value="all">All Applications</option>
+                <option value="yes">Fellowship Interested Only</option>
+                <option value="no">General Network Only</option>
+                <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
+                <option value="paid">💳 Fellowship Paid Only</option>
+                <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Filter Lead Source</label>
+              <select id="crmSourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+                <option value="all">All Sources</option>
+                <option value="joinpage">General Join Page</option>
+                <option value="fellowshippage">Fellowship Form</option>
+                <option value="ambassadorpage">Ambassador Form</option>
+                <option value="financialaid">Financial Aid Request</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1 justify-end">
+              <button onclick="exportToCSV()" class="w-full bg-[#10b981] hover:bg-[#0ea5e9] border-2 border-black p-2 font-black text-xs text-black uppercase tracking-wider hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+                📊 Export to CSV
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="metric-card" style="border-color: #10b981;">
-          <span class="metric-val text-green-600" id="ambassadorCount">0</span>
-          <span class="metric-label">Ambassadors</span>
-        </div>
-        <div class="metric-card" style="border-color: #a855f7;">
-          <span class="metric-val text-purple-600" id="activeReferrals">0</span>
-          <span class="metric-label">Step 1 Dropoffs ⚠️</span>
+
+        <!-- MAIN CRM TABLE -->
+        <div class="analytics-panel">
+          <div class="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
+            <h2 style="border:none; margin:0; padding:0;">📋 CRM Contact Entries</h2>
+            <span class="text-xs font-black bg-amber-100 border border-amber-400 px-2 py-0.5" id="filteredCount">0 shown</span>
+          </div>
+
+          <div class="admin-table-wrapper" style="overflow-x: auto;">
+            <table class="admin-table" id="crmTable">
+              <thead>
+                <tr>
+                  <th>Lead Info</th>
+                  <th>College / Campuses</th>
+                  <th>Phone</th>
+                  <th>Network Tier</th>
+                  <th>Fellowship?</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">Loading data pipelines...</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      <div class="analytics-panel">
-        <h2>🔍 Search & Advanced Filtering</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-2">
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-black uppercase text-gray-500">Query Search</label>
-            <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
+      <!-- =====================================================================
+           TAB 2: RESOURCE READERS & TELEMETRY CRM
+           ===================================================================== -->
+      <div id="subTabContentResources" class="hidden">
+        <!-- RESOURCE METRICS CARDS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="metric-card" style="border-color: #ffd93d; background: #fffdf5;">
+            <span class="metric-val text-black" id="resMetricTotalOpens">0</span>
+            <span class="metric-label">Total Resource Opens 📖</span>
           </div>
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-black uppercase text-gray-500">Filter Tier</label>
-            <select id="crmTierFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
-              <option value="all">All Tiers</option>
-              <option value="student">Student</option>
-              <option value="student founder">Student Founder</option>
-              <option value="verified builder">Verified Builder</option>
-              <option value="campus ambassador">Campus Ambassador</option>
-              <option value="unverified">Unverified</option>
-            </select>
+          <div class="metric-card" style="border-color: #10b981; background: #f6fff9;">
+            <span class="metric-val text-green-700" id="resMetricUniqueReaders">0</span>
+            <span class="metric-label">Unique Readers 👥</span>
           </div>
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-black uppercase text-gray-500">Fellowship / Onboarding</label>
-            <select id="crmFellowshipFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
-              <option value="all">All Applications</option>
-              <option value="yes">Fellowship Interested Only</option>
-              <option value="no">General Network Only</option>
-              <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
-              <option value="paid">💳 Fellowship Paid Only</option>
-              <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
-            </select>
+          <div class="metric-card" style="border-color: #3b82f6; background: #f5f9ff;">
+            <span class="metric-val text-blue-700" id="resMetricTotalTime">0m</span>
+            <span class="metric-label">Total Read Time ⏱️</span>
           </div>
-          <div class="flex flex-col gap-1">
-            <label class="text-xs font-black uppercase text-gray-500">Filter Lead Source</label>
-            <select id="crmSourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
-              <option value="all">All Sources</option>
-              <option value="joinpage">General Join Page</option>
-              <option value="fellowshippage">Fellowship Form</option>
-              <option value="ambassadorpage">Ambassador Form</option>
-              <option value="financialaid">Financial Aid Request</option>
-            </select>
+          <div class="metric-card" style="border-color: #ff5c7c; background: #fff5f7;">
+            <span class="metric-val text-pink-700" id="resMetricAvgTime">0s</span>
+            <span class="metric-label">Avg Time / Reader ⏳</span>
           </div>
-          <div class="flex flex-col gap-1 justify-end">
-            <button onclick="exportToCSV()" class="w-full bg-[#10b981] hover:bg-[#0ea5e9] border-2 border-black p-2 font-black text-xs text-black uppercase tracking-wider hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
-              📊 Export to CSV
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- MAIN CRM TABLE -->
-      <div class="analytics-panel">
-        <div class="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
-          <h2 style="border:none; margin:0; padding:0;">📋 CRM Contact Entries</h2>
-          <span class="text-xs font-black bg-amber-100 border border-amber-400 px-2 py-0.5" id="filteredCount">0 shown</span>
         </div>
 
-        <div class="admin-table-wrapper" style="overflow-x: auto;">
-          <table class="admin-table" id="crmTable">
-            <thead>
-              <tr>
-                <th>Lead Info</th>
-                <th>College / Campuses</th>
-                <th>Phone</th>
-                <th>Network Tier</th>
-                <th>Fellowship?</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">Loading data pipelines...</td></tr>
-            </tbody>
-          </table>
+        <!-- RESOURCE CATALOG BREAKDOWN CARDS -->
+        <div class="res-overview-grid">
+          <!-- Card 1 -->
+          <div class="res-overview-card" style="border-top: 6px solid var(--yellow);">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-[0.68rem] font-black uppercase bg-black text-yellow-300 px-2 py-0.5 border border-black">🔒 Member Exclusive</span>
+                <span class="text-xs font-bold text-gray-500" id="swipeStatsSummary">0 Opens</span>
+              </div>
+              <h3 class="font-extrabold text-base uppercase mb-1">Cold-to-Warm Networking Swipe File</h3>
+              <p class="text-xs text-gray-600 font-medium mb-3">7 outreach templates, mentor asks, and psychology breakdown.</p>
+            </div>
+            <div class="bg-[#FFF9E6] border-2 border-black p-2.5 flex justify-between text-xs font-bold">
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Readers</span>
+                <strong id="swipeUniqueReaders" class="text-sm">0</strong>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Time</span>
+                <strong id="swipeTotalTime" class="text-sm">0m</strong>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Avg Time</span>
+                <strong id="swipeAvgTime" class="text-sm">0s</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="res-overview-card" style="border-top: 6px solid var(--green);">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-[0.68rem] font-black uppercase bg-green-600 text-white px-2 py-0.5 border border-black">🔓 Open Access</span>
+                <span class="text-xs font-bold text-gray-500" id="valStatsSummary">0 Opens</span>
+              </div>
+              <h3 class="font-extrabold text-base uppercase mb-1">Zero-to-One Idea Validation Framework</h3>
+              <p class="text-xs text-gray-600 font-medium mb-3">5-question customer litmus test and 48-hour demand checklist.</p>
+            </div>
+            <div class="bg-[#f0fff4] border-2 border-black p-2.5 flex justify-between text-xs font-bold">
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Readers</span>
+                <strong id="valUniqueReaders" class="text-sm">0</strong>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Time</span>
+                <strong id="valTotalTime" class="text-sm">0m</strong>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[0.65rem] uppercase">Avg Time</span>
+                <strong id="valAvgTime" class="text-sm">0s</strong>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- SEARCH & FILTER FOR RESOURCES -->
+        <div class="analytics-panel">
+          <h2>🔍 Filter Resource Readers & Telemetry</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-2">
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Search Reader</label>
+              <input type="text" id="resSearchInput" placeholder="Name, email, college, resource..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Filter Resource</label>
+              <select id="resResourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+                <option value="all">All Resources</option>
+                <option value="swipe_file">Cold-to-Warm Swipe File</option>
+                <option value="zero_to_one_validation">Idea Validation Framework</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs font-black uppercase text-gray-500">Filter Engagement / Time</label>
+              <select id="resEngagementFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+                <option value="all">All Engagement Levels</option>
+                <option value="high">🔥 High Intent (> 2 mins)</option>
+                <option value="moderate">📖 Moderate (30s - 2m)</option>
+                <option value="quick">⚡ Quick Glance (< 30s)</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1 justify-end">
+              <button onclick="exportResourceAnalyticsCSV()" class="w-full bg-[#ffd93d] hover:bg-[#ffe359] border-2 border-black p-2 font-black text-xs text-black uppercase tracking-wider hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+                📊 Export Resources CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESOURCE READER ACTIVITY TABLE -->
+        <div class="analytics-panel">
+          <div class="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
+            <h2 style="border:none; margin:0; padding:0;">👥 Reader Activity & Telemetry Stream</h2>
+            <span class="text-xs font-black bg-yellow-100 border border-yellow-400 px-2 py-0.5" id="resFilteredCount">0 shown</span>
+          </div>
+
+          <div class="admin-table-wrapper" style="overflow-x: auto;">
+            <table class="admin-table" id="resourceTable">
+              <thead>
+                <tr>
+                  <th>Reader Profile</th>
+                  <th>College / Campus</th>
+                  <th>Resource Accessed</th>
+                  <th>Times Opened</th>
+                  <th>Time Spent</th>
+                  <th>Last Opened</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="7" class="text-center py-6 text-gray-500 font-semibold">Loading resource engagement telemetry...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -355,6 +564,7 @@
     const AUTH_KEY = 'tfc_crm_auth';
     const USER_ROLE_KEY = 'tfc_crm_user';
     let cachedMembers = [];
+    let aggregatedResourceLogs = [];
 
     // Session Management
     const checkAuth = () => {
@@ -399,6 +609,27 @@
       checkAuth();
     };
 
+    // Sub-Tab Switcher
+    window.switchCrmSubTab = (tab) => {
+      const tabBtnLeads = document.getElementById('tabBtnLeads');
+      const tabBtnResources = document.getElementById('tabBtnResources');
+      const subTabContentLeads = document.getElementById('subTabContentLeads');
+      const subTabContentResources = document.getElementById('subTabContentResources');
+
+      if (tab === 'leads') {
+        tabBtnLeads.classList.add('active');
+        tabBtnResources.classList.remove('active');
+        subTabContentLeads.classList.remove('hidden');
+        subTabContentResources.classList.add('hidden');
+      } else {
+        tabBtnLeads.classList.remove('active');
+        tabBtnResources.classList.add('active');
+        subTabContentLeads.classList.add('hidden');
+        subTabContentResources.classList.remove('hidden');
+        renderResourceTable();
+      }
+    };
+
     // Metadata Parser
     function parseCollegeField(collegeStr, memberObj = null) {
       let college = collegeStr || '';
@@ -414,6 +645,7 @@
       let q3 = '';
       let q4 = '';
       let payment = 'Pending';
+      let resData = null;
 
       const parts = college.split(' | ');
       let displayName = parts[0];
@@ -443,10 +675,13 @@
           q4 = part.replace('Q4: ', '').trim();
         } else if (part.startsWith('Payment: ')) {
           payment = part.replace('Payment: ', '').trim();
+        } else if (part.startsWith('ResData: ')) {
+          try {
+            resData = JSON.parse(part.replace('ResData: ', '').trim());
+          } catch(e) {}
         }
       });
 
-      // Deduce source dynamically if missing
       if (!source && memberObj) {
         const memId = memberObj.member_id || '';
         const memTier = memberObj.tier || '';
@@ -461,10 +696,37 @@
         }
       }
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment };
+      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment, resData };
     }
 
-    // Fetch leads
+    // Helper: format seconds to '1m 24s' or '45s' or '1h 12m'
+    function formatDuration(totalSec) {
+      const s = Math.max(0, Math.round(totalSec || 0));
+      if (s < 60) return `${s}s`;
+      const m = Math.floor(s / 60);
+      const remainingSec = s % 60;
+      if (m < 60) {
+        return remainingSec > 0 ? `${m}m ${remainingSec}s` : `${m}m`;
+      }
+      const h = Math.floor(m / 60);
+      const remainingMin = m % 60;
+      return `${h}h ${remainingMin}m`;
+    }
+
+    // Helper: relative time formatter
+    function timeAgo(dateStr) {
+      if (!dateStr) return 'Recently';
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diffSec = Math.round((now - date) / 1000);
+      if (isNaN(diffSec)) return 'Recently';
+      if (diffSec < 60) return 'Just now';
+      if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
+      if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}h ago`;
+      return `${Math.floor(diffSec / 86400)}d ago`;
+    }
+
+    // Fetch leads & aggregate resource data
     async function loadCrmData() {
       const tableBody = document.querySelector('#crmTable tbody');
       try {
@@ -473,15 +735,17 @@
         cachedMembers = data || [];
         calculateMetrics();
         renderCrmTable();
+        processResourceAnalytics();
       } catch (err) {
         console.error("CRM loading failed:", err);
         tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-red-500 font-bold">Failed to connect database pipeline: ${err.message}</td></tr>`;
       }
     }
 
-    // Calculate core metrics
+    // Calculate core metrics for Leads Tab
     function calculateMetrics() {
       document.getElementById('totalRegistrants').textContent = cachedMembers.length;
+      document.getElementById('tabBadgeLeads').textContent = cachedMembers.length;
 
       let fsCount = 0;
       let ambCount = 0;
@@ -499,7 +763,351 @@
       document.getElementById('activeReferrals').textContent = dropoffCount;
     }
 
-    // Render data row list
+    // Process Resource Analytics (from Supabase members + local storage telemetry)
+    function processResourceAnalytics() {
+      let localData = {};
+      try {
+        localData = JSON.parse(localStorage.getItem('tfc_global_resource_tracking') || '{}');
+      } catch(e) {}
+
+      // Map member profiles
+      const memberMap = {};
+      cachedMembers.forEach(m => {
+        const meta = parseCollegeField(m.college, m);
+        memberMap[m.email.toLowerCase().trim()] = {
+          name: m.name,
+          email: m.email,
+          college: meta.displayName,
+          phone: meta.phone,
+          tier: m.tier,
+          member_id: m.member_id || m.id,
+          resData: meta.resData
+        };
+      });
+
+      aggregatedResourceLogs = [];
+
+      // 1. Process from Supabase member metadata
+      Object.values(memberMap).forEach(mem => {
+        if (mem.resData) {
+          Object.entries(mem.resData).forEach(([resKey, stats]) => {
+            let resTitle = resKey === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : 'Zero-to-One Idea Validation Framework';
+            aggregatedResourceLogs.push({
+              key: `${mem.email}_${resKey}`,
+              email: mem.email,
+              name: mem.name,
+              college: mem.college,
+              phone: mem.phone,
+              tier: mem.tier,
+              member_id: mem.member_id,
+              resourceId: resKey,
+              resourceTitle: resTitle,
+              isMemberOnly: resKey === 'swipe_file',
+              opens: stats.opens || 1,
+              totalSeconds: stats.totalSeconds || stats.seconds || 45,
+              lastOpened: stats.lastOpened || stats.last || new Date().toISOString()
+            });
+          });
+        }
+      });
+
+      // 2. Merge / add from localStorage telemetry
+      Object.entries(localData).forEach(([email, data]) => {
+        const cleanEmail = email.toLowerCase().trim();
+        const memProfile = memberMap[cleanEmail] || {
+          name: data.name || (cleanEmail === 'guest_reader' ? 'Guest Visitor' : cleanEmail.split('@')[0]),
+          email: cleanEmail,
+          college: 'University Campus',
+          phone: '',
+          tier: cleanEmail === 'guest_reader' ? 'Guest' : 'Student',
+          member_id: 'TFC-GUEST'
+        };
+
+        if (data.resources) {
+          Object.entries(data.resources).forEach(([resId, r]) => {
+            const existingIdx = aggregatedResourceLogs.findIndex(item => item.email === cleanEmail && item.resourceId === resId);
+            if (existingIdx >= 0) {
+              // Merge with larger values
+              aggregatedResourceLogs[existingIdx].opens = Math.max(aggregatedResourceLogs[existingIdx].opens, r.opens || 1);
+              aggregatedResourceLogs[existingIdx].totalSeconds = Math.max(aggregatedResourceLogs[existingIdx].totalSeconds, r.totalSeconds || 10);
+              aggregatedResourceLogs[existingIdx].lastOpened = r.lastOpened || aggregatedResourceLogs[existingIdx].lastOpened;
+            } else {
+              aggregatedResourceLogs.push({
+                key: `${cleanEmail}_${resId}`,
+                email: cleanEmail,
+                name: memProfile.name,
+                college: memProfile.college,
+                phone: memProfile.phone,
+                tier: memProfile.tier,
+                member_id: memProfile.member_id,
+                resourceId: resId,
+                resourceTitle: r.title || (resId === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : 'Zero-to-One Idea Validation Framework'),
+                isMemberOnly: resId === 'swipe_file',
+                opens: r.opens || 1,
+                totalSeconds: r.totalSeconds || 25,
+                lastOpened: r.lastOpened || new Date().toISOString()
+              });
+            }
+          });
+        }
+      });
+
+      // Update badge
+      document.getElementById('tabBadgeResources').textContent = aggregatedResourceLogs.length;
+
+      // Calculate Metrics for Resources Tab
+      let totalOpens = 0;
+      let totalTimeSec = 0;
+      const uniqueEmails = new Set();
+
+      let swipeOpens = 0, swipeTime = 0, swipeReaders = new Set();
+      let valOpens = 0, valTime = 0, valReaders = new Set();
+
+      aggregatedResourceLogs.forEach(log => {
+        totalOpens += log.opens;
+        totalTimeSec += log.totalSeconds;
+        uniqueEmails.add(log.email);
+
+        if (log.resourceId === 'swipe_file') {
+          swipeOpens += log.opens;
+          swipeTime += log.totalSeconds;
+          swipeReaders.add(log.email);
+        } else {
+          valOpens += log.opens;
+          valTime += log.totalSeconds;
+          valReaders.add(log.email);
+        }
+      });
+
+      const uniqueCount = uniqueEmails.size;
+      const avgSec = uniqueCount > 0 ? totalTimeSec / uniqueCount : 0;
+
+      document.getElementById('resMetricTotalOpens').textContent = totalOpens;
+      document.getElementById('resMetricUniqueReaders').textContent = uniqueCount;
+      document.getElementById('resMetricTotalTime').textContent = formatDuration(totalTimeSec);
+      document.getElementById('resMetricAvgTime').textContent = formatDuration(avgSec);
+
+      // Card 1: Swipe file stats
+      document.getElementById('swipeStatsSummary').textContent = `${swipeOpens} Opens • ${swipeReaders.size} Readers`;
+      document.getElementById('swipeUniqueReaders').textContent = swipeReaders.size;
+      document.getElementById('swipeTotalTime').textContent = formatDuration(swipeTime);
+      document.getElementById('swipeAvgTime').textContent = swipeReaders.size > 0 ? formatDuration(swipeTime / swipeReaders.size) : '0s';
+
+      // Card 2: Validation stats
+      document.getElementById('valStatsSummary').textContent = `${valOpens} Opens • ${valReaders.size} Readers`;
+      document.getElementById('valUniqueReaders').textContent = valReaders.size;
+      document.getElementById('valTotalTime').textContent = formatDuration(valTime);
+      document.getElementById('valAvgTime').textContent = valReaders.size > 0 ? formatDuration(valTime / valReaders.size) : '0s';
+
+      renderResourceTable();
+    }
+
+    // Render Resource Reader Activity Table
+    function renderResourceTable() {
+      const tableBody = document.querySelector('#resourceTable tbody');
+      if (!tableBody) return;
+
+      const query = (document.getElementById('resSearchInput')?.value || '').toLowerCase().trim();
+      const resFilter = document.getElementById('resResourceFilter')?.value || 'all';
+      const engFilter = document.getElementById('resEngagementFilter')?.value || 'all';
+
+      let filtered = [...aggregatedResourceLogs];
+
+      // Query search
+      if (query) {
+        filtered = filtered.filter(item => 
+          item.name.toLowerCase().includes(query) ||
+          item.email.toLowerCase().includes(query) ||
+          item.college.toLowerCase().includes(query) ||
+          item.resourceTitle.toLowerCase().includes(query)
+        );
+      }
+
+      // Filter by resource
+      if (resFilter !== 'all') {
+        filtered = filtered.filter(item => item.resourceId === resFilter);
+      }
+
+      // Filter by engagement duration
+      if (engFilter !== 'all') {
+        if (engFilter === 'high') filtered = filtered.filter(item => item.totalSeconds >= 120);
+        else if (engFilter === 'moderate') filtered = filtered.filter(item => item.totalSeconds >= 30 && item.totalSeconds < 120);
+        else if (engFilter === 'quick') filtered = filtered.filter(item => item.totalSeconds < 30);
+      }
+
+      // Sort by last opened desc
+      filtered.sort((a, b) => new Date(b.lastOpened) - new Date(a.lastOpened));
+
+      document.getElementById('resFilteredCount').textContent = `${filtered.length} shown`;
+
+      tableBody.innerHTML = '';
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-8 text-gray-500 font-semibold">
+              <span class="text-2xl block mb-2">📚</span>
+              No resource reading telemetry matching your filter criteria.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach(log => {
+        let engagementBadge = '';
+        if (log.totalSeconds >= 120) {
+          engagementBadge = `<span class="bg-orange-100 text-orange-800 border border-orange-400 font-black text-[0.62rem] px-1.5 py-0.5 rounded uppercase">🔥 High Intent</span>`;
+        } else if (log.totalSeconds >= 30) {
+          engagementBadge = `<span class="bg-blue-100 text-blue-800 border border-blue-400 font-black text-[0.62rem] px-1.5 py-0.5 rounded uppercase">📖 Active Read</span>`;
+        } else {
+          engagementBadge = `<span class="bg-gray-100 text-gray-700 border border-gray-400 font-bold text-[0.62rem] px-1.5 py-0.5 rounded uppercase">⚡ Quick Scan</span>`;
+        }
+
+        let resourceBadge = log.isMemberOnly
+          ? `<span class="bg-yellow-200 text-black border border-black font-extrabold text-[0.65rem] px-1.5 py-0.5 rounded uppercase mr-1">🔒 Member Only</span>`
+          : `<span class="bg-green-100 text-green-800 border border-green-500 font-extrabold text-[0.65rem] px-1.5 py-0.5 rounded uppercase mr-1">🔓 Open</span>`;
+
+        let waUrl = '';
+        if (log.phone) {
+          let cleanPhone = log.phone.replace(/[^0-9]/g, '');
+          if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+          const msg = `Hey ${log.name.split(' ')[0]}! Saw you were checking out the ${log.resourceTitle} on The Future Council. Would love to share more founder playbooks with your team!`;
+          waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+        }
+
+        const actionsHtml = `
+          <div class="flex flex-col gap-1">
+            <button onclick="openResourceDetailModal('${log.email}', '${log.resourceId}')" class="bg-amber-100 border border-black px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">🔍 Logs</button>
+            ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+          </div>
+        `;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="font-extrabold text-black text-sm">${log.name}</div>
+            <div class="text-xs text-gray-500 font-mono">${log.email}</div>
+            <div class="text-[0.65rem] text-gray-400 font-black uppercase mt-0.5">${log.tier} • ${log.member_id}</div>
+          </td>
+          <td><span class="font-bold text-xs">${log.college}</span></td>
+          <td>
+            <div class="flex items-center gap-1 flex-wrap">
+              ${resourceBadge}
+              <strong class="text-xs">${log.resourceTitle}</strong>
+            </div>
+          </td>
+          <td>
+            <span class="bg-yellow-100 border border-black text-black font-black text-xs px-2 py-0.5 rounded inline-block font-mono">
+              ${log.opens}x Open${log.opens > 1 ? 's' : ''}
+            </span>
+          </td>
+          <td>
+            <div class="flex flex-col gap-0.5">
+              <span class="font-extrabold text-sm text-blue-700 font-mono">${formatDuration(log.totalSeconds)}</span>
+              ${engagementBadge}
+            </div>
+          </td>
+          <td>
+            <div class="text-xs font-bold text-gray-800">${timeAgo(log.lastOpened)}</div>
+            <div class="text-[0.65rem] text-gray-500 font-mono">${new Date(log.lastOpened).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+          </td>
+          <td>${actionsHtml}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Modal: Resource Reader Session Details
+    window.openResourceDetailModal = (email, resId) => {
+      const log = aggregatedResourceLogs.find(l => l.email === email && l.resourceId === resId);
+      if (!log) return;
+
+      const modalDiv = document.createElement('div');
+      modalDiv.id = 'resDetailOverlay';
+      modalDiv.style.cssText = `
+        position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+        display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+      `;
+
+      modalDiv.innerHTML = `
+        <div style="background:#FAF9F6; border:4px solid #000; box-shadow:8px 8px 0 #ffd93d, 8px 8px 0 3px #000; padding:24px; max-width:580px; width:100%; max-height:85vh; overflow-y:auto; position:relative; color:#000;">
+          <button onclick="document.getElementById('resDetailOverlay').remove()" style="position:absolute; top:12px; right:12px; background:#ff5d5d; color:#fff; border:2px solid #000; font-weight:900; padding:4px 10px; cursor:pointer;">✕ CLOSE</button>
+          
+          <div style="margin-bottom:16px; border-bottom:3px solid #000; padding-bottom:10px;">
+            <span style="background:#ffd93d; border:2px solid #000; font-size:0.7rem; font-weight:900; text-transform:uppercase; padding:3px 8px;">📊 Reader Engagement Telemetry</span>
+            <h2 style="font-size:1.35rem; font-weight:900; margin:8px 0 0; text-transform:uppercase;">
+              ${log.name}
+            </h2>
+            <div style="font-size:0.8rem; font-family:monospace; color:#555;">${log.email} • ${log.college}</div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+            <div style="background:#fff; border:2px solid #000; padding:12px; text-align:center;">
+              <span style="font-size:1.8rem; font-weight:900; display:block;">${log.opens}x</span>
+              <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:#666;">Total Times Opened</span>
+            </div>
+            <div style="background:#fff; border:2px solid #000; padding:12px; text-align:center;">
+              <span style="font-size:1.8rem; font-weight:900; color:#3b82f6; display:block;">${formatDuration(log.totalSeconds)}</span>
+              <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:#666;">Active Reading Duration</span>
+            </div>
+          </div>
+
+          <div style="background:#FFF9E6; border:2px solid #000; padding:14px; margin-bottom:16px; font-size:0.85rem; line-height:1.5;">
+            <div><strong>Resource:</strong> ${log.resourceTitle}</div>
+            <div><strong>Access Type:</strong> ${log.isMemberOnly ? '🔒 Member Exclusive' : '🔓 Open Access'}</div>
+            <div><strong>Last Activity:</strong> ${new Date(log.lastOpened).toLocaleString()} (${timeAgo(log.lastOpened)})</div>
+            ${log.phone ? `<div><strong>Phone Number:</strong> ${log.phone}</div>` : ''}
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <a href="mailto:${log.email}?subject=${encodeURIComponent('The Future Council — Founder Playbook Follow-up')}" class="card-btn card-btn-primary" style="flex:1; text-align:center; padding:10px; font-size:0.85rem; text-decoration:none;">
+              ✉️ Send Email Outreach
+            </a>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modalDiv);
+    };
+
+    // CSV Export for Resources
+    window.exportResourceAnalyticsCSV = () => {
+      if (aggregatedResourceLogs.length === 0) {
+        alert("No resource telemetry to export!");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Reader_Name,Email,College,Phone,Tier,Member_ID,Resource_Title,Resource_ID,Times_Opened,Total_Time_Seconds,Total_Time_Formatted,Last_Opened\n";
+
+      aggregatedResourceLogs.forEach(r => {
+        const row = [
+          `"${(r.name || '').replace(/"/g, '""')}"`,
+          r.email,
+          `"${(r.college || '').replace(/"/g, '""')}"`,
+          r.phone || '',
+          r.tier || '',
+          r.member_id || '',
+          `"${(r.resourceTitle || '').replace(/"/g, '""')}"`,
+          r.resourceId,
+          r.opens,
+          r.totalSeconds,
+          `"${formatDuration(r.totalSeconds)}"`,
+          r.lastOpened
+        ];
+        csvContent += row.join(",") + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `TFC_Resource_Engagement_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    // Render Leads Table
     function renderCrmTable() {
       const tableBody = document.querySelector('#crmTable tbody');
       if (!tableBody) return;
@@ -585,7 +1193,7 @@
 
         const row = document.createElement('tr');
         if (!hasAnswers) {
-          row.style.background = '#fff8f8'; // Subtle red background for dropoffs
+          row.style.background = '#fff8f8';
         }
         row.innerHTML = `
           <td>
@@ -614,7 +1222,7 @@
       });
     }
 
-    // Modal view
+    // Modal view for Leads Questionnaire
     window.openModal = (id) => {
       const member = cachedMembers.find(m => m.id === id);
       if (!member) return;
@@ -699,7 +1307,7 @@
       document.body.appendChild(modalDiv);
     };
 
-    // CSV Export tool
+    // CSV Export for Leads
     window.exportToCSV = () => {
       if (cachedMembers.length === 0) {
         alert("No entries to export!");
@@ -738,25 +1346,15 @@
       document.body.removeChild(link);
     };
 
-    // Delete lead from Supabase
-    window.deleteLead = async (id, name) => {
-      if (!confirm(`Are you absolutely sure you want to delete ${name} from CRM? This cannot be undone.`)) return;
-
-      try {
-        const { error } = await supabaseClient.from('members').delete().eq('id', id);
-        if (error) throw error;
-        alert(`${name} removed successfully.`);
-        loadCrmData();
-      } catch (err) {
-        alert("Delete failed: " + err.message);
-      }
-    };
-
     // Event listeners
     document.getElementById('crmSearchInput').addEventListener('input', renderCrmTable);
     document.getElementById('crmTierFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmFellowshipFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmSourceFilter').addEventListener('change', renderCrmTable);
+
+    document.getElementById('resSearchInput')?.addEventListener('input', renderResourceTable);
+    document.getElementById('resResourceFilter')?.addEventListener('change', renderResourceTable);
+    document.getElementById('resEngagementFilter')?.addEventListener('change', renderResourceTable);
 
     // Run auth checker
     checkAuth();

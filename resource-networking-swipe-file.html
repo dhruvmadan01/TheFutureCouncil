@@ -865,10 +865,17 @@
 
         // Toast feedback
         showToast(`Welcome! Membership verified for ${email}`);
+
+        // Start active duration & open tracking
+        startResourceTracking(email, memberName);
       }
 
       // Lock UI Helper
       function lockAccess() {
+        const email = localStorage.getItem(STORAGE_KEY_AUTH);
+        const name = localStorage.getItem(STORAGE_KEY_NAME);
+        stopResourceTracking(email, name);
+
         localStorage.removeItem(STORAGE_KEY_AUTH);
         localStorage.removeItem(STORAGE_KEY_NAME);
         memberStatusBar.classList.remove('active');
@@ -886,6 +893,151 @@
           authSuccessToast.classList.remove('active');
         }, 3500);
       }
+
+      // =========================================================================
+      // RESOURCE ENGAGEMENT TELEMETRY TRACKER
+      // =========================================================================
+      const RESOURCE_ID = 'swipe_file';
+      const RESOURCE_TITLE = 'The Cold-to-Warm Networking Swipe File';
+      let activeTrackingTimer = null;
+      let sessionSeconds = 0;
+      let isSessionRecorded = false;
+
+      function startResourceTracking(userEmail, userName) {
+        const cleanEmail = (userEmail || '').trim().toLowerCase();
+        if (!cleanEmail) return;
+
+        // Record initial open event
+        if (!isSessionRecorded) {
+          isSessionRecorded = true;
+          logResourceEvent(cleanEmail, userName, RESOURCE_ID, RESOURCE_TITLE, 'open', 0);
+        }
+
+        if (activeTrackingTimer) clearInterval(activeTrackingTimer);
+
+        // Active duration incrementer (counts when tab is active and visible)
+        activeTrackingTimer = setInterval(() => {
+          if (document.visibilityState === 'visible') {
+            sessionSeconds += 1;
+            // Sync heartbeat every 10 seconds
+            if (sessionSeconds % 10 === 0) {
+              logResourceEvent(cleanEmail, userName, RESOURCE_ID, RESOURCE_TITLE, 'heartbeat', sessionSeconds);
+            }
+          }
+        }, 1000);
+      }
+
+      function stopResourceTracking(userEmail, userName) {
+        if (activeTrackingTimer) {
+          clearInterval(activeTrackingTimer);
+          activeTrackingTimer = null;
+        }
+        const cleanEmail = (userEmail || '').trim().toLowerCase();
+        if (cleanEmail && sessionSeconds > 0) {
+          logResourceEvent(cleanEmail, userName, RESOURCE_ID, RESOURCE_TITLE, 'close', sessionSeconds);
+        }
+      }
+
+      async function logResourceEvent(email, name, resId, resTitle, eventType, currentSessionSec) {
+        const STORAGE_KEY_GLOBAL = 'tfc_global_resource_tracking';
+        let globalData = {};
+        try {
+          globalData = JSON.parse(localStorage.getItem(STORAGE_KEY_GLOBAL) || '{}');
+        } catch (e) {
+          globalData = {};
+        }
+
+        if (!globalData[email]) {
+          globalData[email] = {
+            email: email,
+            name: name || '',
+            college: '',
+            resources: {}
+          };
+        }
+
+        if (!globalData[email].resources[resId]) {
+          globalData[email].resources[resId] = {
+            id: resId,
+            title: resTitle,
+            opens: 0,
+            totalSeconds: 0,
+            lastOpened: new Date().toISOString(),
+            firstOpened: new Date().toISOString(),
+            sessions: []
+          };
+        }
+
+        const resEntry = globalData[email].resources[resId];
+        if (eventType === 'open') {
+          resEntry.opens = (resEntry.opens || 0) + 1;
+          resEntry.lastOpened = new Date().toISOString();
+        }
+
+        if (eventType === 'heartbeat' || eventType === 'close') {
+          // Increment delta
+          resEntry.totalSeconds = (resEntry.totalSeconds || 0) + 10;
+          resEntry.lastOpened = new Date().toISOString();
+        }
+
+        try {
+          localStorage.setItem(STORAGE_KEY_GLOBAL, JSON.stringify(globalData));
+        } catch (e) {}
+
+        // Async sync to Supabase member profile if registered
+        if (eventType === 'open' || eventType === 'close') {
+          try {
+            const { data: member } = await supabaseClient
+              .from('members')
+              .select('college')
+              .ilike('email', email)
+              .maybeSingle();
+
+            if (member) {
+              let currentCollege = member.college || '';
+              // Format telemetry chunk
+              const resDataJson = JSON.stringify({
+                [resId]: {
+                  opens: resEntry.opens,
+                  totalSeconds: resEntry.totalSeconds,
+                  lastOpened: resEntry.lastOpened
+                }
+              });
+
+              let updatedCollege = '';
+              if (currentCollege.includes(' | ResData: ')) {
+                updatedCollege = currentCollege.replace(/\s*\|\s*ResData:\s*\{.*?\}/g, ` | ResData: ${resDataJson}`);
+              } else {
+                updatedCollege = `${currentCollege} | ResData: ${resDataJson}`;
+              }
+
+              await supabaseClient
+                .from('members')
+                .update({ college: updatedCollege })
+                .eq('email', email);
+            }
+          } catch (err) {
+            console.warn("Supabase telemetry sync skipped:", err.message);
+          }
+        }
+      }
+
+      // Flush tracking on window unload / visibility change
+      window.addEventListener('beforeunload', () => {
+        const email = localStorage.getItem(STORAGE_KEY_AUTH);
+        const name = localStorage.getItem(STORAGE_KEY_NAME);
+        stopResourceTracking(email, name);
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        const email = localStorage.getItem(STORAGE_KEY_AUTH);
+        const name = localStorage.getItem(STORAGE_KEY_NAME);
+        if (document.visibilityState === 'hidden') {
+          stopResourceTracking(email, name);
+        } else if (document.visibilityState === 'visible' && email && !gatedContent.classList.contains('locked')) {
+          startResourceTracking(email, name);
+        }
+      });
 
       // 2. Email Verification Logic
       async function verifyEmailAndUnlock(rawEmail, isSilent = false) {
