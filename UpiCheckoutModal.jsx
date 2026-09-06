@@ -405,7 +405,7 @@ export default function UpiCheckoutModal({
                 <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-[0.75rem] text-amber-300 leading-relaxed font-medium flex items-start gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
                   <span>
-                    <strong>Important:</strong> After completing the ₹{order.amount} transfer in your UPI app, click below and enter the <strong>12-digit UTR / Reference Number</strong> to activate your application.
+                    <strong>Important:</strong> After completing the ₹{order.amount} transfer in your UPI app, click below and enter the <strong>12-digit UPI Transaction ID / UTR</strong> to activate your application.
                   </span>
                 </div>
 
@@ -435,7 +435,7 @@ export default function UpiCheckoutModal({
                   onClick={() => setStep('verification')}
                   className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-black font-black uppercase text-xs tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all flex items-center justify-center gap-2"
                 >
-                  <span>I Have Paid ₹{order.amount} → Enter 12-Digit UTR</span>
+                  <span>I Have Paid ₹{order.amount} → Enter UPI Transaction ID</span>
                 </button>
               </>
             )}
@@ -459,7 +459,7 @@ export default function UpiCheckoutModal({
                 Confirm & Verify Transaction
               </h3>
               <p className="text-xs text-zinc-400 font-medium leading-relaxed">
-                Enter the 12-digit UPI Reference / UTR Number from your payment receipt to link with application <strong>{order.orderId}</strong>.
+                Enter the 12-digit UPI Transaction ID / UTR Number from your payment receipt (Google Pay, PhonePe, Paytm, CRED, etc.) to link with application <strong>{order.orderId}</strong>.
               </p>
             </div>
 
@@ -467,7 +467,7 @@ export default function UpiCheckoutModal({
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <label htmlFor="utrInput" className="font-bold text-zinc-300 uppercase text-[0.72rem]">
-                  12-Digit UPI Ref / UTR Number <span className="text-rose-400">*</span>
+                  12-Digit UPI Transaction ID / UTR <span className="text-rose-400">*</span>
                 </label>
                 <span className={`font-mono text-[0.7rem] ${utr.length === 12 ? 'text-emerald-400 font-bold' : 'text-zinc-500'}`}>
                   {utr.length}/12 digits
@@ -482,7 +482,7 @@ export default function UpiCheckoutModal({
                 maxLength={12}
                 value={utr}
                 onChange={handleUtrChange}
-                placeholder="e.g. 423589104523"
+                placeholder="e.g. 423589104523 (UPI Transaction ID)"
                 className="w-full px-4 py-3 bg-zinc-900 border-2 border-zinc-700 rounded-xl font-mono text-base font-bold text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 transition tracking-widest text-center"
                 autoFocus
                 required
@@ -558,7 +558,7 @@ export default function UpiCheckoutModal({
 
             {/* Instructions */}
             <p className="text-[0.7rem] text-zinc-500 text-center font-medium pt-0.5">
-              Do not close or reload this window until submission completes.
+              ⚠️ Do not close or reload this window until submission completes.
             </p>
 
             {/* Submit UTR Button */}
@@ -622,7 +622,7 @@ export default function UpiCheckoutModal({
                 <span className="font-mono font-bold text-orange-400">{order.orderId}</span>
               </div>
               <div className="flex justify-between border-b border-zinc-800 pb-2">
-                <span className="text-zinc-400">UPI Ref / UTR No.</span>
+                <span className="text-zinc-400">UPI Transaction ID / UTR</span>
                 <span className="font-mono font-bold text-zinc-200">{utr}</span>
               </div>
               <div className="flex justify-between border-b border-zinc-800 pb-2">
