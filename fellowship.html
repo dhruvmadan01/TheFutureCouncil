@@ -615,29 +615,15 @@
             </button>
           </div>
 
-          <!-- TAB: QR CODE VIEW (Google Pay Style Card) -->
+          <!-- TAB: QR CODE VIEW (Google Pay Authentic Card) -->
           <div id="tabContentQr" class="flex flex-col items-center justify-center py-2 space-y-3">
-            <div class="p-4 bg-white rounded-2xl shadow-xl border-4 border-zinc-800 relative flex flex-col items-center max-w-[280px] w-full">
-              <!-- Payee Header with GPay Badge -->
-              <div class="flex items-center gap-2 pb-2">
-                <div class="w-6 h-6 rounded-full bg-zinc-600 text-white flex items-center justify-center text-[10px] font-black">D</div>
-                <span class="text-sm font-bold text-zinc-900">
-                  Dhruv Madan
-                </span>
-              </div>
-
-              <!-- Dynamic QR Code Container -->
-              <div id="dynamicUpiQrCode" class="bg-white p-1 rounded-xl flex items-center justify-center"></div>
-
-              <!-- UPI ID Footer in QR Card -->
-              <div class="pt-2 text-center border-t border-zinc-100 w-full mt-2">
-                <span class="text-[0.72rem] font-bold text-zinc-800 block select-all font-mono">
-                  UPI ID: dhruvmadan235@okhdfcbank
-                </span>
-                <span class="text-[0.65rem] font-medium text-zinc-500 block mt-0.5">
-                  Scan to pay with any UPI app
-                </span>
-              </div>
+            <div class="bg-white rounded-2xl shadow-2xl border-2 border-zinc-700/60 overflow-hidden max-w-[270px] w-full flex flex-col items-center p-3 relative group">
+              <img 
+                src="payment-qr.jpg" 
+                alt="Dhruv Madan UPI Payment QR Code" 
+                id="upiOfficialQrImg"
+                class="w-full h-auto object-contain rounded-xl select-none"
+              />
             </div>
 
             <p class="text-[0.75rem] text-zinc-400 text-center font-medium">
@@ -954,22 +940,24 @@
       document.getElementById('upiBtnPaytm').href = paytmUri;
       document.getElementById('upiBtnUniversal').href = genericUpiUri;
 
-      // Render Dynamic QR Code
+      // QR Code Image / Dynamic Fallback
       const qrTarget = document.getElementById('dynamicUpiQrCode');
-      qrTarget.innerHTML = '';
-      try {
-        if (window.QRCode) {
-          currentQrInstance = new QRCode(qrTarget, {
-            text: genericUpiUri,
-            width: 190,
-            height: 190,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-          });
+      if (qrTarget) {
+        qrTarget.innerHTML = '';
+        try {
+          if (window.QRCode) {
+            currentQrInstance = new QRCode(qrTarget, {
+              text: genericUpiUri,
+              width: 190,
+              height: 190,
+              colorDark: "#000000",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H
+            });
+          }
+        } catch (err) {
+          console.error("QR Code rendering error:", err);
         }
-      } catch (err) {
-        console.error("QR Code rendering error:", err);
       }
 
       // Reset Step & Form

@@ -29,7 +29,7 @@ import { QRCodeSVG } from 'qrcode.react';
  * @param {string} props.order.orderId - Application / Order reference ID (e.g. TFC-FEL-1024)
  * @param {number} props.order.amount - Exact amount in INR (default: 2000)
  * @param {string} [props.upiId] - Receiver UPI ID (default: dhruvmadan235@okhdfcbank)
- * @param {string} [props.payeeName] - Receiver display name (default: Dhruv Madan)
+ * @param {string} [props.qrImageUrl] - Path or URL to official UPI QR image (default: 'payment-qr.jpg')
  * @param {Function} [props.onSuccess] - Callback when UTR is verified
  */
 export default function UpiCheckoutModal({
@@ -43,6 +43,7 @@ export default function UpiCheckoutModal({
   },
   upiId = 'dhruvmadan235@okhdfcbank',
   payeeName = 'Dhruv Madan',
+  qrImageUrl = 'payment-qr.jpg',
   onSuccess
 }) {
   // Step Management: 'payment' | 'verification' | 'success'
@@ -281,33 +282,43 @@ export default function UpiCheckoutModal({
                 {/* TAB: QR CODE VIEW */}
                 {activeTab === 'qr' && (
                   <div className="flex flex-col items-center justify-center py-2 space-y-4">
-                    {/* QR Code Frame with GPay Accent */}
-                    <div className="p-4 bg-white rounded-2xl shadow-xl border-4 border-zinc-800 relative group flex flex-col items-center">
-                      <div className="text-center pb-2">
-                        <span className="text-[0.72rem] font-black uppercase text-zinc-900 tracking-wider">
-                          {payeeName}
-                        </span>
-                      </div>
-
-                      {/* Dynamic QR SVG */}
-                      <div className="bg-white p-2 rounded-xl">
-                        <QRCodeSVG 
-                          value={upiUri} 
-                          size={190} 
-                          level="H" 
-                          includeMargin={false}
+                    {/* QR Code Card */}
+                    <div className="p-3 bg-white rounded-2xl shadow-2xl border-2 border-zinc-700/60 relative group flex flex-col items-center max-w-[270px] w-full overflow-hidden">
+                      {qrImageUrl ? (
+                        <img 
+                          src={qrImageUrl} 
+                          alt={`${payeeName} UPI Payment QR`} 
+                          className="w-full h-auto object-contain rounded-xl select-none"
                         />
-                      </div>
+                      ) : (
+                        <>
+                          <div className="text-center pb-2">
+                            <span className="text-[0.72rem] font-black uppercase text-zinc-900 tracking-wider">
+                              {payeeName}
+                            </span>
+                          </div>
 
-                      <div className="pt-2 text-center">
-                        <span className="text-[0.65rem] font-semibold text-zinc-600 block">
-                          Scan with any UPI App
-                        </span>
-                      </div>
+                          {/* Dynamic QR SVG */}
+                          <div className="bg-white p-2 rounded-xl">
+                            <QRCodeSVG 
+                              value={upiUri} 
+                              size={190} 
+                              level="H" 
+                              includeMargin={false}
+                            />
+                          </div>
+
+                          <div className="pt-2 text-center">
+                            <span className="text-[0.65rem] font-semibold text-zinc-600 block">
+                              Scan with any UPI App
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <p className="text-[0.75rem] text-zinc-400 text-center font-medium">
-                      Open <strong className="text-zinc-200">GPay, PhonePe, Paytm, CRED, or BHIM</strong> on your phone and scan the QR code above.
+                      Open <strong className="text-zinc-200">Google Pay, PhonePe, Paytm, CRED, or BHIM</strong> on your phone and scan the QR code above.
                     </p>
                   </div>
                 )}
