@@ -13,7 +13,9 @@ import {
   Smartphone, 
   X,
   FileText,
-  Lock
+  Lock,
+  PhoneCall,
+  HelpCircle
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 
@@ -407,6 +409,27 @@ export default function UpiCheckoutModal({
                   </span>
                 </div>
 
+                {/* Trouble / Failed Transaction Helpline */}
+                <div className="p-3 bg-zinc-900/95 border border-zinc-800 rounded-xl text-xs flex items-center justify-between gap-3 shadow-inner">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                      <PhoneCall className="w-3.5 h-3.5 text-orange-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[0.72rem] text-zinc-300 font-medium block leading-snug">
+                        If you face trouble or transaction is failing:
+                      </span>
+                      <span className="text-[0.68rem] text-zinc-500 block">Instant Payment Support Desk</span>
+                    </div>
+                  </div>
+                  <a 
+                    href="tel:9315095214" 
+                    className="px-3 py-1.5 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-lg text-xs font-mono font-bold transition flex items-center gap-1.5 shrink-0"
+                  >
+                    <span>9315095214</span>
+                  </a>
+                </div>
+
                 {/* Primary Proceed to Step 2 Button */}
                 <button
                   onClick={() => setStep('verification')}
@@ -525,8 +548,16 @@ export default function UpiCheckoutModal({
               )}
             </div>
 
+            {/* Trouble / Failed Transaction Helpline in Step 2 */}
+            <div className="p-2.5 bg-zinc-900/70 border border-zinc-800 rounded-xl text-[0.72rem] text-zinc-400 flex items-center justify-between gap-2">
+              <span>Facing trouble or transaction failing?</span>
+              <a href="tel:9315095214" className="text-orange-400 hover:text-orange-300 font-bold underline shrink-0 flex items-center gap-1">
+                <span>Contact 9315095214</span>
+              </a>
+            </div>
+
             {/* Instructions */}
-            <p className="text-[0.7rem] text-zinc-500 text-center font-medium pt-1">
+            <p className="text-[0.7rem] text-zinc-500 text-center font-medium pt-0.5">
               Do not close or reload this window until submission completes.
             </p>
 
@@ -548,7 +579,7 @@ export default function UpiCheckoutModal({
               ) : (
                 <>
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>Verify & Activate Application 🚀</span>
+                  <span>Verify & Complete Payment ✓</span>
                 </>
               )}
             </button>
@@ -562,16 +593,22 @@ export default function UpiCheckoutModal({
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <div className="space-y-1">
-              <span className="text-[0.7rem] font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-                Payment Recorded
+            <div className="space-y-3">
+              <span className="text-[0.7rem] font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 inline-block">
+                Payment Complete ✓
               </span>
-              <h3 className="text-xl font-black uppercase text-white pt-2">
-                Application Fee Verified!
+              <h3 className="text-2xl font-black uppercase text-white tracking-wide">
+                Payment Complete
               </h3>
-              <p className="text-xs text-zinc-400 max-w-sm mx-auto">
-                Your ₹{order.amount} application fee with UTR <strong className="text-zinc-200 font-mono">{utr}</strong> has been linked with your fellowship file.
-              </p>
+              
+              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-1.5 max-w-md mx-auto">
+                <p className="text-sm sm:text-base font-bold text-emerald-300 leading-snug">
+                  Someone will reach you for further application within 24 hrs.
+                </p>
+                <p className="text-xs text-emerald-400 font-black uppercase tracking-wider">
+                  Thank You!
+                </p>
+              </div>
             </div>
 
             {/* Receipt Details Box */}
@@ -585,14 +622,23 @@ export default function UpiCheckoutModal({
                 <span className="font-mono font-bold text-orange-400">{order.orderId}</span>
               </div>
               <div className="flex justify-between border-b border-zinc-800 pb-2">
-                <span className="text-zinc-400">UTR / Ref No.</span>
+                <span className="text-zinc-400">UPI Ref / UTR No.</span>
                 <span className="font-mono font-bold text-zinc-200">{utr}</span>
               </div>
+              <div className="flex justify-between border-b border-zinc-800 pb-2">
+                <span className="text-zinc-400">Amount Paid</span>
+                <span className="font-bold text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '2,000'}</span>
+              </div>
               <div className="flex justify-between pt-1">
-                <span className="text-zinc-400">Status</span>
-                <span className="font-bold text-emerald-400 uppercase text-[0.7rem]">Active for Review ✓</span>
+                <span className="text-zinc-400">Next Step</span>
+                <span className="font-bold text-emerald-400 text-[0.72rem]">Team will contact within 24 hours</span>
               </div>
             </div>
+
+            {/* Direct Helpline reminder in Success */}
+            <p className="text-[0.75rem] text-zinc-500 font-medium">
+              Have questions or need immediate assistance? Contact <a href="tel:9315095214" className="text-orange-400 font-bold hover:underline">9315095214</a>
+            </p>
 
             <button
               onClick={onClose}

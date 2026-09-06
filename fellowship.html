@@ -710,6 +710,27 @@
             </span>
           </div>
 
+          <!-- Trouble / Failed Transaction Helpline -->
+          <div class="p-3 bg-zinc-900/95 border border-zinc-800 rounded-xl text-xs flex items-center justify-between gap-3 shadow-inner">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5 text-orange-400"></i>
+              </div>
+              <div class="min-w-0">
+                <span class="text-[0.72rem] text-zinc-300 font-medium block leading-snug">
+                  If you face trouble or transaction is failing:
+                </span>
+                <span class="text-[0.68rem] text-zinc-500 block">Instant Payment Support Desk</span>
+              </div>
+            </div>
+            <a 
+              href="tel:9315095214" 
+              class="px-3 py-1.5 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-lg text-xs font-mono font-bold transition flex items-center gap-1.5 shrink-0"
+            >
+              <span>9315095214</span>
+            </a>
+          </div>
+
           <!-- Proceed to Verification -->
           <button
             type="button"
@@ -811,7 +832,16 @@
               </button>
             </div>
 
-            <p class="text-[0.7rem] text-zinc-500 text-center font-medium pt-1">
+            <!-- Support Notice in Step 2 -->
+            <div class="p-2.5 bg-zinc-900/70 border border-zinc-800 rounded-xl text-[0.72rem] text-zinc-400 flex items-center justify-between gap-2">
+              <span>Facing trouble or transaction failing?</span>
+              <a href="tel:9315095214" class="text-orange-400 hover:text-orange-300 font-bold underline shrink-0 flex items-center gap-1">
+                <i data-lucide="phone" class="w-3 h-3"></i>
+                <span>Contact 9315095214</span>
+              </a>
+            </div>
+
+            <p class="text-[0.7rem] text-zinc-500 text-center font-medium pt-0.5">
               ⚠️ Do not refresh this window until you enter the 12-digit UTR number.
             </p>
 
@@ -822,7 +852,7 @@
               class="w-full py-3.5 px-4 rounded-xl font-black uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
               <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-              <span>Verify & Activate Application 🚀</span>
+              <span>Verify & Complete Payment ✓</span>
             </button>
           </form>
         </div>
@@ -833,16 +863,22 @@
             <i data-lucide="check-circle-2" class="w-8 h-8"></i>
           </div>
 
-          <div class="space-y-1">
-            <span class="text-[0.7rem] font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-              Payment Verified ✓
+          <div class="space-y-3">
+            <span class="text-[0.7rem] font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 inline-block">
+              Payment Complete ✓
             </span>
-            <h3 class="text-xl font-black uppercase text-white pt-2">
-              Application Fee Confirmed!
+            <h3 class="text-2xl font-black uppercase text-white tracking-wide">
+              Payment Complete
             </h3>
-            <p class="text-xs text-zinc-400 max-w-sm mx-auto">
-              Your ₹2,000 application fee has been recorded. Your fellowship profile is now active for Cohort 01 shortlisting!
-            </p>
+            
+            <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-1.5 max-w-md mx-auto">
+              <p class="text-sm sm:text-base font-bold text-emerald-300 leading-snug">
+                Someone will reach you for further application within 24 hrs.
+              </p>
+              <p class="text-xs text-emerald-400 font-black uppercase tracking-wider">
+                Thank You!
+              </p>
+            </div>
           </div>
 
           <!-- Receipt Details Box -->
@@ -856,7 +892,7 @@
               <span id="successOrderId" class="font-mono font-bold text-orange-400">TFC-FEL-2026</span>
             </div>
             <div class="flex justify-between border-b border-zinc-800 pb-2">
-              <span class="text-zinc-400">UTR / Ref No.</span>
+              <span class="text-zinc-400">UPI Ref / UTR No.</span>
               <span id="successUtr" class="font-mono font-bold text-zinc-200">123456789012</span>
             </div>
             <div class="flex justify-between border-b border-zinc-800 pb-2">
@@ -864,10 +900,15 @@
               <span id="successAmount" class="font-bold text-emerald-400">₹2,000</span>
             </div>
             <div class="flex justify-between pt-1">
-              <span class="text-zinc-400">Status</span>
-              <span class="font-bold text-emerald-400 uppercase text-[0.7rem]">Active for Review ✓</span>
+              <span class="text-zinc-400">Next Step</span>
+              <span class="font-bold text-emerald-400 text-[0.72rem]">Team will contact within 24 hours</span>
             </div>
           </div>
+
+          <!-- Direct Helpline reminder in Success -->
+          <p class="text-[0.75rem] text-zinc-500 font-medium">
+            Have questions or need immediate assistance? Contact <a href="tel:9315095214" class="text-orange-400 font-bold hover:underline">9315095214</a>
+          </p>
 
           <button
             type="button"
@@ -1160,8 +1201,8 @@
         document.getElementById('successApplicantName').textContent = activeCheckoutOrder.name || 'Applicant';
         document.getElementById('successOrderId').textContent = activeCheckoutOrder.orderId || 'TFC-FEL-2026';
         document.getElementById('successUtr').textContent = utrVal;
-        document.getElementById('successAmount').textContent = '₹' + (activeCheckoutOrder.amount || 2000).toLocaleString('en-IN');
-        document.getElementById('successTimestamp').textContent = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        const tsEl = document.getElementById('successTimestamp');
+        if (tsEl) tsEl.textContent = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
 
         setCheckoutStep('success');
       } catch (err) {
@@ -1169,7 +1210,7 @@
         alert("Verification update failed: " + err.message);
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<span>Verify & Activate Application 🚀</span>`;
+        submitBtn.innerHTML = `<span>Verify & Complete Payment ✓</span>`;
       }
     };
 
