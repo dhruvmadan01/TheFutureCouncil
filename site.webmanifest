@@ -1,0 +1,21 @@
+{
+  "name": "The Future Council",
+  "short_name": "TFC",
+  "description": "World's biggest grassroots student startup ecosystem & accelerator.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff9e59",
+  "icons": [
+    {
+      "src": "TFC.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "TFC.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

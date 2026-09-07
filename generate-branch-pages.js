@@ -211,6 +211,82 @@ function generateHtml(branch) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${branch.name} Chapter | The Future Council</title>
+  <meta name="description" content="Explore The Future Council ${branch.name} Chapter (${branch.location}). Join the campus startup ecosystem, attend founder mixers, and access ₹15L+ in fellowship perks." />
+  <meta name="keywords" content="${branch.name}, TFC ${branch.id}, ${branch.location}, student startup cell, college founder society, The Future Council chapter" />
+  <meta name="author" content="The Future Council" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://thefuturecouncil.in/branch-${branch.id}" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#ff9e59" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Future Council" />
+  <meta property="og:url" content="https://thefuturecouncil.in/branch-${branch.id}" />
+  <meta property="og:title" content="${branch.name} Chapter | The Future Council" />
+  <meta property="og:description" content="Official campus startup chapter at ${branch.name}. Connecting student builders with early grants and operator networks." />
+  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="${branch.name} - The Future Council" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://thefuturecouncil.in/branch-${branch.id}" />
+  <meta name="twitter:title" content="${branch.name} Chapter | The Future Council" />
+  <meta name="twitter:description" content="Official student startup chapter at ${branch.name}. ${branch.desc}" />
+  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "${branch.name} - The Future Council Chapter",
+        "alternateName": "TFC ${branch.logo}",
+        "url": "https://thefuturecouncil.in/branch-${branch.id}",
+        "logo": "https://thefuturecouncil.in/TFC.png",
+        "description": "${branch.desc.replace(/"/g, '\\"')}",
+        "location": {
+          "@type": "Place",
+          "name": "${branch.location}"
+        },
+        "parentOrganization": {
+          "@type": "EducationalOrganization",
+          "name": "The Future Council",
+          "url": "https://thefuturecouncil.in"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://thefuturecouncil.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Branches",
+            "item": "https://thefuturecouncil.in/branches"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${branch.name}",
+            "item": "https://thefuturecouncil.in/branch-${branch.id}"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.tailwindcss.com"></script>
