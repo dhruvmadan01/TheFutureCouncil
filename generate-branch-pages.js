@@ -211,7 +211,7 @@ function generateHtml(branch) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${branch.name} Chapter | Future Council</title>
-  <meta name="description" content="Explore Future Council ${branch.name} Chapter (${branch.location}). Join the campus startup ecosystem, attend founder mixers, and access ₹15L+ in fellowship perks." />
+  <meta name="description" content="Explore Future Council ${branch.name} Chapter (${branch.location}). Join the campus startup ecosystem, attend founder mixers, and access founder fellowships." />
   <meta name="keywords" content="${branch.name}, Future Council ${branch.name}, Future Council chapter, The Future Council, TFC ${branch.id}, ${branch.location}, student startup cell, college founder society, Future Council" />
   <meta name="author" content="Future Council" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -224,7 +224,7 @@ function generateHtml(branch) {
   <meta property="og:site_name" content="Future Council | The Future Council" />
   <meta property="og:url" content="https://thefuturecouncil.in/branch-${branch.id}" />
   <meta property="og:title" content="${branch.name} Chapter | Future Council" />
-  <meta property="og:description" content="Official campus startup chapter at ${branch.name} by Future Council. Connecting student builders with early grants and operator networks." />
+  <meta property="og:description" content="Official campus startup chapter at ${branch.name} by Future Council. Connecting student builders with early founder networks and launchpads." />
   <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
