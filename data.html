@@ -504,6 +504,7 @@
               <select id="resResourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
                 <option value="all">All Resources</option>
                 <option value="swipe_file">Cold-to-Warm Swipe File</option>
+                <option value="how_to_find_startup_idea">How to Find a Startup Idea</option>
                 <option value="zero_to_one_validation">Idea Validation Framework</option>
               </select>
             </div>
@@ -792,7 +793,7 @@
       Object.values(memberMap).forEach(mem => {
         if (mem.resData) {
           Object.entries(mem.resData).forEach(([resKey, stats]) => {
-            let resTitle = resKey === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : 'Zero-to-One Idea Validation Framework';
+            let resTitle = stats.title || (resKey === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : (resKey === 'how_to_find_startup_idea' ? 'How to Find a Startup Idea' : 'Zero-to-One Idea Validation Framework'));
             aggregatedResourceLogs.push({
               key: `${mem.email}_${resKey}`,
               email: mem.email,
@@ -842,7 +843,7 @@
                 tier: memProfile.tier,
                 member_id: memProfile.member_id,
                 resourceId: resId,
-                resourceTitle: r.title || (resId === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : 'Zero-to-One Idea Validation Framework'),
+                resourceTitle: r.title || (resId === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : (resId === 'how_to_find_startup_idea' ? 'How to Find a Startup Idea' : 'Zero-to-One Idea Validation Framework')),
                 isMemberOnly: resId === 'swipe_file',
                 opens: r.opens || 1,
                 totalSeconds: r.totalSeconds || 25,
