@@ -12,7 +12,7 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 **Before you ship this:** paste me the actual current text of Resources, Partners, and the branch pages (branch-fot.html, branch-srcc.html, branch-iitd.html, branch-dtu.html) if you want those rewritten against what's really there instead of rebuilt from scratch. Everything below is safe to use as-is for Fellowship, Branches, Join, and Ambassador since those are fully specified in your own FAQ copy — just sanity-check every number against reality before publishing.
 
 **The rules I held constant across every page below**, so nothing contradicts anything else:
-- "90+ chapters," "20 founders," "100% equity-free," "Fellowship '26 · Cohort 01," "Applications close Sep 15," "Starts October 1" — identical everywhere they appear.
+- "90+ chapters," "20 founders," "100% equity-free," "Fellowship '26 · Cohort 01," "Applications close Sep 30," "Starts October 1" — identical everywhere they appear.
 - Founders named the same way every time: Dhruv Madan (Founder), Aryaveer Chauhan (Co-founder).
 - One CTA hierarchy per page: one primary action, one secondary. Never three competing buttons.
 - Same three-act structure underneath everything: **Connect → Build → Scale.**
@@ -45,7 +45,7 @@ Weekly sessions with people who've actually built and sold companies. Not generi
 Warm intros to angel syndicates when you're ready to raise, and first access to the sharpest student engineers and co-founders across 90+ campuses when you're ready to hire.
 
 ### FELLOWSHIP BANNER
-**Cohort 01 · Applications close Sep 15**
+**Cohort 01 · Applications close Sep 30**
 ## Fellowship '26 is open. 20 seats. Zero equity. Two months to prove it.
 Starts October 1. If you've got an idea worth two months of your life, this is where you find out.
 `Apply Now →`   `See What's Included`
@@ -77,7 +77,7 @@ Lead the mixers. Launch the builder circles. Be the reason your college has a st
 
 ## 2. FELLOWSHIP '26 (`fellowship.html`)
 
-**Eyebrow:** Cohort 01 · Applications close September 15
+**Eyebrow:** Cohort 01 · Applications close September 30
 
 # Two months. Zero equity. Twenty founders.
 
@@ -85,7 +85,7 @@ Fellowship '26 is the Council's flagship launchpad — a structured 2-month spri
 
 `Apply Now →`   `Download the Fellowship One-Pager`
 
-**Key facts strip:** Cohort 01 · 20 seats · Equity-free · Starts Oct 1 · Applications close Sep 15
+**Key facts strip:** Cohort 01 · 20 seats · Equity-free · Starts Oct 1 · Applications close Sep 30
 
 ### WHO THIS IS FOR
 This is for founders who already have a real idea — not a pitch deck, an idea — and are ready to spend two months testing whether it's actually worth building. You don't need a company registered, a team hired, or a product built. You need conviction and the willingness to be audited on your progress every single week.
@@ -107,7 +107,7 @@ This is for founders who already have a real idea — not a pitch deck, an idea 
 **Weeks 7–8 · Prove It** — Investor pitch prep, masterclasses, and demo day — the point where "student project" stops being an accurate description.
 
 ### TIMELINE
-- **Applications close:** September 15
+- **Applications close:** September 30
 - **Cohort starts:** October 1
 - **Format:** 2 months, hybrid (Delhi NCR + remote)
 
@@ -221,4 +221,4 @@ To finish this properly rather than leave gaps, paste in:
 1. Current text from `resources.html` — I don't know what's actually on it yet.
 2. Current text from `partners.html` — the section above is a placeholder structure until I see your real partner list.
 3. The four branch pages (`branch-fot.html`, `branch-srcc.html`, `branch-iitd.html`, `branch-dtu.html`) — likely near-identical templates, but I want to match them exactly and just swap the campus-specific details.
-4. Confirm the numbers are still accurate as of today (90+ chapters, 20 seats, Sep 15 / Oct 1 dates) — these are load-bearing across every page above, so if any have changed, everything downstream needs updating too.
+4. Confirm the numbers are still accurate as of today (90+ chapters, 20 seats, Sep 30 / Oct 1 dates) — these are load-bearing across every page above, so if any have changed, everything downstream needs updating too.
