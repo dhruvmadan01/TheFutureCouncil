@@ -2,7 +2,7 @@
  * The Future Council - Scroll Animation Engine
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize typographic word reveal ("arranging types")
+    // 1. Initialize typographic word reveal
     initTypewriterReveal();
 
     // 2. Initialize scroll viewport monitoring (IntersectionObserver)
@@ -11,7 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Initialize floating parallax sticker offsets
     initParallaxStickers();
 
-    console.log("TFC Scroll Animation Engine loaded.");
+    // 4. Initialize Mobile Fullscreen Drawer Menu
+    initMobileMenu();
+
+    // 5. Initialize Accordion Collapsible Panels
+    initAccordions();
+
+    // 6. Highlight active navigation state
+    initActiveNav();
+
+    console.log("TFC Design System & UI Engine loaded.");
 });
 
 /**
@@ -124,4 +133,88 @@ function initParallaxStickers() {
 
     // Align initial positions
     updateStickerPositions();
+}
+
+/**
+ * Mobile Navigation Drawer Menu Toggle
+ */
+function initMobileMenu() {
+    const toggleBtn = document.querySelector('.tfc-mobile-toggle');
+    const mobileMenu = document.querySelector('.tfc-mobile-menu');
+    const closeBtn = document.querySelector('.tfc-mobile-menu-close');
+    const links = document.querySelectorAll('.tfc-mobile-nav-link');
+
+    if (!toggleBtn || !mobileMenu) return;
+
+    function openMenu() {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    toggleBtn.addEventListener('click', openMenu);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeMenu);
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+}
+
+/**
+ * Collapsible Accordions (FAQ, etc.)
+ */
+function initAccordions() {
+    const items = document.querySelectorAll('.tfc-accordion-item');
+    items.forEach(item => {
+        const header = item.querySelector('.tfc-accordion-header');
+        if (!header) return;
+
+        header.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active');
+            
+            // Optional: close other open items in the same accordion group
+            const parent = item.closest('.tfc-accordion');
+            if (parent && !parent.hasAttribute('data-multi-expand')) {
+                parent.querySelectorAll('.tfc-accordion-item').forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+            }
+
+            if (isOpen) {
+                item.classList.remove('active');
+            } else {
+                item.classList.add('active');
+            }
+        });
+    });
+}
+
+/**
+ * Highlights the current active navigation item based on path
+ */
+function initActiveNav() {
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.tfc-nav-link, .tfc-mobile-nav-link');
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const linkPath = href.split('/').pop();
+
+        if (
+            (currentPath === '' && (linkPath === 'index.html' || linkPath === '')) ||
+            (currentPath === 'index.html' && (linkPath === 'index.html' || href === '/')) ||
+            (currentPath !== '' && currentPath !== 'index.html' && linkPath === currentPath)
+        ) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
 }

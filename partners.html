@@ -3,33 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partners & Collaborators | Future Council</title>
+  <title>Partners & Collaborators | The Future Council</title>
   <meta name="description" content="Discover Future Council ecosystem partners, corporate sponsors, tech collaborators, and student venture incubators empowering student founders across India." />
   <meta name="keywords" content="Future Council partners, The Future Council, startup partners, venture sponsors, incubator network, university tech partners, TFC partners" />
   <meta name="author" content="Future Council" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/partners" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff9e59" />
+  <meta name="theme-color" content="#ff7a3d" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Future Council | The Future Council" />
   <meta property="og:url" content="https://thefuturecouncil.in/partners" />
-  <meta property="og:title" content="Partners & Collaborators | Future Council" />
+  <meta property="og:title" content="Partners & Collaborators | The Future Council" />
   <meta property="og:description" content="Ecosystem partners, venture sponsors, and student startup accelerators collaborating with Future Council." />
   <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Future Council Partners" />
   <meta property="og:locale" content="en_IN" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thefuturecouncil.in/partners" />
-  <meta name="twitter:title" content="Partners & Collaborators | Future Council" />
-  <meta name="twitter:description" content="Our network of venture partners, incubators, and student startup collaborators at Future Council." />
-  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -38,33 +30,15 @@
     "@graph": [
       {
         "@type": "WebPage",
-        "name": "Future Council Partners & Directory",
-        "description": "Directory of official university societies, tech sponsors, corporate accelerators, and incubator partners collaborating with Future Council.",
+        "name": "The Future Council Partners Directory",
+        "description": "Directory of official university societies, tech sponsors, corporate accelerators, and incubator partners.",
         "url": "https://thefuturecouncil.in/partners",
         "publisher": {
           "@type": ["Organization", "EducationalOrganization"],
           "name": "Future Council",
           "legalName": "The Future Council",
-          "alternateName": ["The Future Council", "TFC", "Future Council India"],
           "url": "https://thefuturecouncil.in"
         }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://thefuturecouncil.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Partners",
-            "item": "https://thefuturecouncil.in/partners"
-          }
-        ]
       }
     ]
   }
@@ -72,208 +46,301 @@
 
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      background: #000000;
-      color: #f7f3ee;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    ::selection {
-      background: rgba(255, 158, 89, 0.2);
-      color: #fff;
-    }
-  </style>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="desktop-window">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
-      <div class="window-title">The Future Council</div>
-    </header>
+    </div>
+  </header>
 
-    <nav class="window-tabs">
-      <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
-      <a href="branches.html" class="window-tab">Our Branches</a>
-      <a href="resources.html" class="window-tab">Resources</a>
-      <a href="join.html" class="window-tab">Join Council</a>
-    </nav>
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
+    </div>
 
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link active">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+    </ul>
 
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
+    </div>
+  </div>
 
-    <section class="workspace">
-      <!-- Nav Header / Back Button -->
-      <div class="partners-nav-header">
-        <a href="index.html" class="back-link-btn">
-          <span class="icon">←</span>
-          <span>Back to Home</span>
-        </a>
-        <div class="brand-row mini-brand">
-          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
-          <span class="mini-kicker">Ecosystem Partners</span>
+  <main>
+    <!-- Hero Section (Ref Page 11 Wireframe) -->
+    <section class="tfc-section" style="padding-top: 48px; padding-bottom: 32px;">
+      <div class="tfc-container" style="text-align: center; max-width: 860px;">
+        <div class="tfc-badge tfc-badge-orange" style="margin-bottom: 16px;">
+          ECOSYSTEM COLLABORATION
+        </div>
+        <h1 style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 18px; letter-spacing: -1.5px;">
+          Our Partners & Collaborators
+        </h1>
+        <p style="font-size: 1.12rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
+          We collaborate with top-tier venture funds, tech infrastructure providers, and premier campus entrepreneurship cells to build India's strongest startup launchpad for student founders.
+        </p>
+
+        <!-- Filter Chips (Ref Page 11: Strategic | Tech | University Partners) -->
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+          <span class="tfc-chip active" data-filter="all">All Partners</span>
+          <span class="tfc-chip" data-filter="strategic">Strategic & VC</span>
+          <span class="tfc-chip" data-filter="tech">Tech & Cloud</span>
+          <span class="tfc-chip" data-filter="academic">University E-Cells</span>
         </div>
       </div>
+    </section>
 
-      <!-- Hero Header -->
-      <div class="partners-hero">
-        <h1 class="hero-title">Our Partners</h1>
-        <p class="hero-text">We collaborate with top-tier venture funds, corporate tech enablers, and premier campus entrepreneurship cells to build the strongest startup launchpad for universities.</p>
-      </div>
+    <!-- Partners Grid Section -->
+    <section class="tfc-section" style="padding-top: 0; padding-bottom: 60px;">
+      <div class="tfc-container">
+        
+        <!-- Dynamic Partners Container -->
+        <div id="partnersContent" class="tfc-grid tfc-grid-3">
+          
+          <!-- Featured Curated Partners -->
+          <div class="tfc-card partner-card" data-category="strategic" style="padding: 28px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">
+                  VC
+                </div>
+                <span class="tfc-badge tfc-badge-orange">STRATEGIC & VC</span>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Venture Seed Guild</h3>
+              <p style="font-size: 0.82rem; color: var(--primary-orange); font-weight: 700; margin-bottom: 10px;">National & Global</p>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 20px;">
+                Consortium of active angel syndicates and pre-seed micro-funds offering direct Demo Day review and term-sheet fast-tracking for Fellowship founders.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="fellowship.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+                Explore Syndicate Fast-Track →
+              </a>
+            </div>
+          </div>
 
-      <!-- Filters Section (Hidden by default, shown if partners exist) -->
-      <div id="filterContainer" class="filter-container hidden">
-        <div class="mini-label">Filter Ecosystem</div>
-        <div class="filter-row">
-          <button class="filter-btn active" data-filter="all">All Partners</button>
-          <button class="filter-btn" data-filter="academic">Academic & E-Cells</button>
-          <button class="filter-btn" data-filter="venture">Venture & Incubators</button>
-          <button class="filter-btn" data-filter="corporate">Corporate & Tech</button>
+          <div class="tfc-card partner-card" data-category="tech" style="padding: 28px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">
+                  ⚡
+                </div>
+                <span class="tfc-badge tfc-badge-lime">TECH & CLOUD</span>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Cloud & Dev Guild</h3>
+              <p style="font-size: 0.82rem; color: #2563eb; font-weight: 700; margin-bottom: 10px;">Developer Ecosystem</p>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 20px;">
+                Providing member founders with free cloud credits, database hosting tiers, and AI API credits to deploy MVPs without burning capital.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="join.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+                Claim Builder Credits →
+              </a>
+            </div>
+          </div>
+
+          <div class="tfc-card partner-card" data-category="academic" style="padding: 28px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--accent-lime); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">
+                  🎓
+                </div>
+                <span class="tfc-badge tfc-badge-lime">UNIVERSITY E-CELLS</span>
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Pan-India E-Cell Alliance</h3>
+              <p style="font-size: 0.82rem; color: var(--ink-soft); font-weight: 700; margin-bottom: 10px;">90+ Campus Chapters</p>
+              <p style="font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 20px;">
+                Collaborating with entrepreneurship cells across IITs, Delhi University, NITs, and premier state universities to host hackathons, pitch fests, and local mixers.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="branches.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+                View Campus Branches →
+              </a>
+            </div>
+          </div>
+
         </div>
+
       </div>
+    </section>
 
-      <!-- Partners Grid / Empty State Render Target -->
-      <div id="partnersContent" class="mb-9">
-        <!-- Rendered dynamically by script -->
-      </div>
-
-      <!-- Partner CTA -->
-      <section class="cta-band partners-cta">
-        <div>
-          <p class="mini-label">Become a Partner</p>
-          <h2>Help us power the next generation of builders and founders.</h2>
-        </div>
-        <a href="mailto:contact@thefuturecouncil.in" class="pill-btn alt">
-          <span class="icon">✉</span>
-          <span class="divider"></span>
-          <span>Contact Us</span>
-        </a>
-      </section>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand-side">
-          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
-          <a href="index.html" class="footer-link">Back to Hub</a>
-        </div>
-        <div class="footer-meta">
-          <div class="apply-now">Join Our Ecosystem</div>
-          <div class="url-text">thefuturecouncil.in</div>
-          <div class="footer-credit">
-            This website was built by <a href="https://dhruvmadan.in" target="_blank" rel="noopener noreferrer">Dhruv Madan</a>
+    <!-- Closing Dark CTA Banner (Ref Page 11 Wireframe) -->
+    <section style="padding: 20px 0 60px;">
+      <div class="tfc-container">
+        <div class="tfc-dark-banner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; padding: 44px 48px;">
+          <div style="max-width: 600px;">
+            <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 14px;">BECOME A PARTNER</div>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.2;">
+              Want to partner with the Council?
+            </h2>
+            <p style="font-size: 1.05rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0;">
+              Help us power the next generation of student builders and founders across 90+ university chapters.
+            </p>
+          </div>
+          <div>
+            <a href="mailto:contact@thefuturecouncil.in" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="white-space: nowrap;">
+              Get in touch →
+            </a>
           </div>
         </div>
-      </footer>
+      </div>
     </section>
   </main>
 
+  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <aside class="tfc-mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 15</div>
+    </div>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+  </aside>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      const filterChips = document.querySelectorAll('.tfc-chip');
+      const partnerCards = document.querySelectorAll('.partner-card');
       const partnersContent = document.getElementById('partnersContent');
-      const filterContainer = document.getElementById('filterContainer');
 
       // Initialize Supabase Client
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-      // Load from Supabase
-      let partners = [];
+      // Load additional partners from Supabase if present
       try {
         const { data, error } = await supabaseClient
           .from('partners')
           .select('*')
           .order('name', { ascending: true });
 
-        if (error) throw error;
-        partners = data || [];
-      } catch (e) {
-        console.error("Error reading partners from Supabase", e);
-      }
+        if (!error && data && data.length > 0) {
+          data.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'tfc-card partner-card';
+            card.setAttribute('data-category', p.category || 'strategic');
+            card.style.padding = '28px';
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+            card.style.justifyContent = 'space-between';
 
-      if (partners.length === 0) {
-        // Render Empty State
-        filterContainer.classList.add('hidden');
-        partnersContent.innerHTML = `
-          <div class="panel py-16 px-6 text-center flex flex-col items-center justify-center gap-4 bg-white">
-            <span class="text-5xl">🤝</span>
-            <h2 class="text-2xl font-extrabold uppercase tracking-wide">Ecosystem Partners Coming Soon</h2>
-            <p class="max-w-xl text-base font-semibold leading-relaxed text-gray-700">We are currently finalizing partnerships with top-tier venture funds, student E-Cells, and corporate tech enablers. Check back soon for updates!</p>
-          </div>
-        `;
-      } else {
-        // Render Grid
-        filterContainer.classList.remove('hidden');
-        
-        let gridHtml = '<div class="partners-grid" id="partnersGrid">';
-        partners.forEach(partner => {
-          const badgeClass = partner.category === 'academic' ? 'badge-academic' : (partner.category === 'venture' ? 'badge-venture' : 'badge-corporate');
-          const badgeLabel = partner.category === 'academic' ? 'Academic' : (partner.category === 'venture' ? 'Venture' : 'Corporate');
-          
-          const isImage = partner.logo_stamp && partner.logo_stamp.startsWith('data:image/');
-          const stampHtml = isImage 
-            ? `<img src="${partner.logo_stamp}" style="width: 48px; height: 48px; object-fit: cover; border: 3px solid var(--ink); background: #fff;" />` 
-            : `<div class="partner-logo-stamp">${partner.logo_stamp || partner.name.slice(0,4)}</div>`;
-
-          gridHtml += `
-            <article class="partner-card panel" data-category="${partner.category}">
-              <div class="partner-card-header">
-                ${stampHtml}
-                <span class="partner-badge ${badgeClass}">${badgeLabel}</span>
+            card.innerHTML = `
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;">
+                    ${p.name.slice(0, 2).toUpperCase()}
+                  </div>
+                  <span class="tfc-badge tfc-badge-orange">${(p.category || 'Strategic').toUpperCase()}</span>
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">${p.name}</h3>
+                <p style="font-size: 0.82rem; color: var(--primary-orange); font-weight: 700; margin-bottom: 10px;">${p.location || 'Ecosystem Partner'}</p>
+                <p style="font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 20px;">
+                  ${p.description || ''}
+                </p>
               </div>
-              <div class="partner-card-body">
-                <h3>${partner.name}</h3>
-                <p class="partner-location">${partner.location || ''}</p>
-                <p class="partner-desc">${partner.description}</p>
-              </div>
-              <div class="partner-card-footer">
-                <a href="${partner.link || '#'}" target="_blank" rel="noreferrer noopener" class="partner-action-link">
-                  <span>View Partner</span> <span class="arrow">↗</span>
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+                <a href="${p.link || '#'}" target="_blank" rel="noreferrer noopener" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+                  View Partner ↗
                 </a>
               </div>
-            </article>
-          `;
-        });
-        gridHtml += '</div>';
-        partnersContent.innerHTML = gridHtml;
+            `;
+            partnersContent.appendChild(card);
+          });
+        }
+      } catch (e) {
+        console.warn("Supabase partners sync notice:", e);
+      }
 
-        // Set up filters
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const partnerCards = document.querySelectorAll('.partner-card');
+      // Filter handling
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
 
-        filterButtons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+          const filter = chip.getAttribute('data-filter');
+          const allCards = document.querySelectorAll('.partner-card');
 
-            const category = btn.getAttribute('data-filter');
-
-            partnerCards.forEach(card => {
-              if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.style.display = 'flex';
-                card.style.animation = 'none';
-                card.offsetHeight; /* trigger reflow */
-                card.style.animation = null;
-              } else {
-                card.style.display = 'none';
-              }
-            });
+          allCards.forEach(card => {
+            const cat = card.getAttribute('data-category') || '';
+            if (filter === 'all' || cat.includes(filter)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
           });
         });
-      }
+      });
     });
   </script>
 </body>

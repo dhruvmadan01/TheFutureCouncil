@@ -3,365 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Future Council | Campus Ambassador Console</title>
+  <title>Ambassador Portal & Console | Future Council</title>
+  <meta name="description" content="Official Ambassador workspace and dashboard for Future Council campus leaders." />
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
   <style>
-    :root {
-      --orange: #ff6b00;
-      --offwhite: #FAF9F6;
-      --charcoal: #1E1E1E;
-      --ink: #000000;
-      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    }
-    body {
-      background: var(--orange);
-      color: var(--ink);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      padding: 24px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-    .desktop-window {
-      width: min(1100px, 100%);
-      background: var(--offwhite);
-      border: 3px solid var(--ink);
-      box-shadow: 8px 8px 0 var(--ink);
-      animation: floatIn 0.6s ease-out both;
-    }
-    .window-bar {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 16px;
-      background: var(--charcoal);
-      border-bottom: 3px solid var(--ink);
-    }
-    .window-controls {
-      position: absolute;
-      left: 16px;
-      display: flex;
-      gap: 8px;
-    }
-    .window-controls span {
-      display: block;
-      width: 12px;
-      height: 12px;
-      border: 3px solid var(--ink);
-    }
-    .window-controls .red { background: #ff5d5d; }
-    .window-controls .yellow { background: #f5c542; }
-    .window-controls .gray { background: #bdbdbd; }
-    
-    .window-title {
-      font-size: 0.76rem;
-      letter-spacing: 0.32em;
-      font-weight: 800;
-      color: var(--offwhite);
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .workspace {
-      padding: 28px 24px;
-    }
-    .partners-hero {
-      border: 3px solid var(--ink);
-      background: #FFF9E6;
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .hero-text {
-      margin: 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-    .analytics-panel {
-      border: 3px solid var(--ink);
-      background: #fff;
-      box-shadow: 6px 6px 0 var(--ink);
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-    .analytics-panel h2 {
-      margin: 0 0 16px;
-      font-size: 1.15rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-      border-bottom: 2.5px solid var(--ink);
-      padding-bottom: 8px;
-    }
-    .metric-card {
-      background: #fff;
-      border: 2.5px solid var(--ink);
-      padding: 16px;
-      text-align: center;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .metric-val {
-      font-size: 2.25rem;
-      font-weight: 900;
-      display: block;
-      line-height: 1.1;
-      font-family: var(--font-heading);
-    }
-    .metric-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #666;
-      display: block;
-      margin-top: 4px;
-    }
-    .admin-table {
+    .tfc-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      font-size: 0.88rem;
     }
-    .admin-table th, .admin-table td {
-      border: 2px solid var(--ink);
-      padding: 8px 10px;
-      font-size: 0.8rem;
+    .tfc-table th, .tfc-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
     }
-    .admin-table th {
-      background: #eee;
-      font-weight: 800;
+    .tfc-table th {
+      background: rgba(20, 17, 15, 0.03);
+      font-weight: 700;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
       text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .admin-submit-btn {
-      background: var(--ink);
-      border: 2px solid var(--ink);
-      color: #ff9e59;
-      font-size: 0.75rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
-      transition: transform 100ms ease, box-shadow 100ms ease;
-    }
-    .admin-submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-    .admin-submit-btn.alt {
-      background: var(--offwhite);
-      color: var(--ink);
-    }
-    .back-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--ink);
-      text-decoration: underline;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .progress-bar-bg {
-      background: #eee;
-      border: 2.5px solid var(--ink);
-      height: 24px;
-      position: relative;
-    }
-    .progress-bar-fill {
-      background: var(--orange);
-      height: 100%;
-      transition: width 0.5s ease;
-    }
-    .progress-bar-text {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--ink);
-    }
-    .toolkit-card {
-      background: #fafafa;
-      border: 2px solid var(--ink);
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-    .copy-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      background: #fffbdf;
-      padding: 4px 8px;
-      border: 1.5px solid var(--ink);
-      display: inline-block;
-    }
-    @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- AMBASSADOR AUTH GATE -->
-  <div class="bg-white border-3 border-black p-8 shadow-[8px_8px_0_rgba(0,0,0,1)] w-full max-w-sm" id="loginContainer">
-    <div class="text-center mb-6">
-      <img src="TFC.png" alt="TFC Logo" class="w-16 h-16 border-3 border-black mx-auto mb-3" />
-      <h2 class="font-black text-xl uppercase tracking-tight">Ambassador Portal</h2>
-      <p class="text-xs text-gray-500 font-bold uppercase mt-1">Ecosystem Representative Gate</p>
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="join-ambassador.html" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Become Ambassador</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
     </div>
 
-    <form id="loginForm" class="space-y-4">
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Email / Ambassador Code</label>
-        <input type="text" id="loginEmail" required placeholder="e.g. TFC-AMB-HP590" class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Portal Password</label>
-        <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div id="loginError" class="hidden text-xs text-red-500 font-bold">
-        ⚠️ Invalid credentials! Please check ambassador login details.
-      </div>
-      <button type="submit" class="w-full bg-black text-[#ff9e59] border-2 border-black p-2.5 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
-        Access Dashboard 🚀
-      </button>
-    </form>
-    <div class="text-center mt-4">
-      <a href="index.html" class="text-xs text-gray-500 underline font-bold uppercase">Back to Home Hub</a>
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
+      <li><a href="join-ambassador.html" class="tfc-mobile-nav-link">Ambassador Program</a></li>
+      <li><a href="ambassador.html" class="tfc-mobile-nav-link active">Ambassador Portal</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="join-ambassador.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Apply as Ambassador →</a>
     </div>
   </div>
 
-  <!-- MAIN PORTAL CONSOLE -->
-  <main class="desktop-window hidden" id="portalContent">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
-      </div>
-      <div class="window-title">The Future Council • Campus Ambassador Workspace</div>
-    </header>
+  <main style="min-height: calc(100vh - 240px); padding: 40px 0;">
+    
+    <!-- AMBASSADOR AUTH GATE (Page 10 Login Wireframe) -->
+    <div class="tfc-container" id="loginContainer" style="max-width: 440px; margin: 40px auto;">
+      <div class="tfc-card" style="padding: 40px; box-shadow: var(--shadow-md); border: 1.5px solid var(--border-subtle); text-align: center;">
+        
+        <img src="TFC.png" alt="The Future Council Logo" style="width: 56px; height: 56px; border-radius: 14px; object-fit: contain; margin: 0 auto 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.1); background: #ffffff; padding: 4px; border: 1px solid var(--border-subtle); display: block;" />
+        
+        <h1 style="font-size: 1.7rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
+          Ambassador Portal
+        </h1>
+        <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 24px;">
+          Sign in to access your dashboard, referral metrics, and promotion toolkit.
+        </p>
 
-    <div class="workspace">
+        <form id="loginForm" style="text-align: left;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <label for="loginEmail" style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                Email / Ambassador Code
+              </label>
+              <input type="text" id="loginEmail" required placeholder="e.g. TFC-AMB-HP590 or email" class="tfc-input" />
+            </div>
+
+            <div>
+              <label for="loginPassword" style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                Portal Password
+              </label>
+              <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" />
+            </div>
+
+            <div id="loginError" class="hidden p-3 bg-red-100 border border-red-400 text-red-700 font-bold text-xs rounded-lg">
+              ⚠️ Invalid credentials! Please check ambassador login details.
+            </div>
+
+            <!-- Page 10 Wireframe: Submit button -->
+            <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 4px;">
+              Access Dashboard →
+            </button>
+          </div>
+        </form>
+
+        <!-- Page 10 Wireframe Subtext -->
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-subtle); font-size: 0.85rem; color: var(--ink-soft);">
+          <span style="color: var(--ink-soft);">Forgot password?</span>
+          <span style="margin: 0 6px;">·</span>
+          <span>Not an ambassador yet? <a href="join-ambassador.html" style="color: var(--primary-orange); font-weight: 700;">Apply</a></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN PORTAL CONSOLE (Visible when authenticated) -->
+    <div class="tfc-container hidden" id="portalContent">
+      
       <!-- Top Action Bar -->
-      <div class="flex justify-between items-center mb-4">
-        <a href="index.html" class="back-link-btn" style="margin-bottom: 0;">
-          <span>← Back to Home Hub</span>
-        </a>
-        <button onclick="handleLogout()" class="text-xs font-black bg-red-100 hover:bg-red-200 border-2 border-black px-3 py-1 uppercase tracking-wider hover:shadow-[2px_2px_0_#000] transition-all">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <a href="index.html" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px;">
+            ← Back to Home Hub
+          </a>
+        </div>
+        <button onclick="handleLogout()" class="tfc-btn tfc-btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
           Logout 🚪
         </button>
       </div>
 
       <!-- Welcome Banner -->
-      <div class="partners-hero">
-        <h1 class="hero-title" id="welcomeAmbassador">🎓 Welcome, Ecosystem Leader!</h1>
-        <p class="hero-text" id="ambassadorSubtitle">Representing your campus, driving student builder signups, and guiding builders to unlock Verified Member cards.</p>
+      <div class="tfc-dark-banner" style="padding: 32px; margin-bottom: 28px;">
+        <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 10px;">AMBASSADOR CONSOLE</div>
+        <h1 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 8px;" id="welcomeAmbassador">
+          🎓 Welcome, Ecosystem Leader!
+        </h1>
+        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.7); margin: 0; max-width: 680px;" id="ambassadorSubtitle">
+          Representing your campus, driving student builder signups, and guiding founders to unlock verified passes.
+        </p>
       </div>
 
-      <!-- AMBASSADOR METRICS -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-        <div class="metric-card" style="border-color: #ff6b00;">
-          <span class="metric-val text-[#ff6b00]" id="myReferralsCount">0</span>
-          <span class="metric-label">My Referrals</span>
+      <!-- Metrics 4-Card Strip -->
+      <div class="tfc-grid tfc-grid-4" style="margin-bottom: 28px;">
+        <div class="tfc-card" style="padding: 20px; text-align: center;">
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary-orange); line-height: 1.1;" id="myReferralsCount">0</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 6px;">My Referrals</div>
         </div>
-        <div class="metric-card" style="border-color: #3b82f6;">
-          <span class="metric-val text-blue-600" id="campusesOutreach">0</span>
-          <span class="metric-label">Campuses Reached</span>
-        </div>
-        <div class="metric-card" style="border-color: #10b981;">
-          <span class="metric-val text-green-600" id="referralRank">N/A</span>
-          <span class="metric-label">Leaderboard Rank</span>
-        </div>
-        <div class="metric-card" style="border-color: #a855f7;">
-          <span class="metric-val text-purple-600" id="activeStatus">Active</span>
-          <span class="metric-label">Account Status</span>
-        </div>
-      </div>
 
-      <!-- TARGET PROGRESS -->
-      <div class="analytics-panel mb-6">
-        <h2>🎯 Milestone & Reward Tracker</h2>
-        <div class="space-y-4 pt-2">
-          <div class="flex justify-between text-xs font-bold uppercase mb-1">
-            <span id="milestoneLabel">Next Milestone: Campus Leader (10 Signups)</span>
-            <span id="milestoneProgress">0 / 10 signups</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="milestoneBar" style="width: 0%;"></div>
-            <div class="progress-bar-text" id="milestoneBarText">0% Complete</div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 text-xs font-bold text-gray-700">
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk1">🥉 10 Signups: Ambassador Certificate</div>
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk2">🥈 50 Signups: TFC T-Shirt & Goodies</div>
-            <div class="p-2 border border-dashed border-gray-400 bg-gray-50 rounded" id="perk3">🥇 100 Signups: Direct Internship in TFC</div>
-          </div>
+        <div class="tfc-card" style="padding: 20px; text-align: center;">
+          <div style="font-size: 2.2rem; font-weight: 800; color: #3b82f6; line-height: 1.1;" id="campusesOutreach">0</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 6px;">Campuses Reached</div>
+        </div>
+
+        <div class="tfc-card" style="padding: 20px; text-align: center;">
+          <div style="font-size: 2.2rem; font-weight: 800; color: #10b981; line-height: 1.1;" id="referralRank">N/A</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 6px;">Leaderboard Rank</div>
+        </div>
+
+        <div class="tfc-card" style="padding: 20px; text-align: center;">
+          <div style="font-size: 2.2rem; font-weight: 800; color: #8b5cf6; line-height: 1.1;" id="activeStatus">Active</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 6px;">Account Status</div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <!-- Milestone Tracker -->
+      <div class="tfc-card" style="padding: 28px; margin-bottom: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 4px;" id="milestoneLabel">🎯 Milestone Tracker</h3>
+            <span style="font-size: 0.85rem; color: var(--ink-soft);" id="milestoneProgress">0 / 10 signups</span>
+          </div>
+          <span class="tfc-badge tfc-badge-orange" id="milestoneBarText">0% Complete</span>
+        </div>
+
+        <div style="width: 100%; height: 10px; background: rgba(20,17,15,0.08); border-radius: 9999px; overflow: hidden; margin-bottom: 20px;">
+          <div id="milestoneBar" style="width: 0%; height: 100%; background: var(--primary-orange); border-radius: 9999px; transition: width 0.4s ease;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.82rem; font-weight: 700;">
+          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk1">
+            🥉 10 Signups: Ambassador Certificate
+          </div>
+          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk2">
+            🥈 50 Signups: TFC T-Shirt & Goodies
+          </div>
+          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk3">
+            🥇 100 Signups: Direct Internship in TFC
+          </div>
+        </div>
+      </div>
+
+      <!-- Workspace 2-Column: Link & Referrals (Left) + Marketing & Leaderboard (Right) -->
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;" class="ambassador-grid">
         
-        <!-- Left: Copy Link & referred signups -->
-        <div class="lg:col-span-2 space-y-6">
+        <!-- Left: Link Sharing & Referrals Table -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
           
-          <!-- Copy link panel -->
-          <div class="analytics-panel">
-            <h2>🔗 Share Your Referral Link</h2>
-            <div class="space-y-3 pt-2">
-              <p class="text-xs text-gray-600 font-bold uppercase">Your Unique Ambassador Code:</p>
-              <div class="copy-badge font-black uppercase text-sm tracking-wider" id="displayRefCode">CODE</div>
-              
-              <p class="text-xs text-gray-600 font-bold uppercase mt-2">Ambassador Referral URL:</p>
-              <div class="flex gap-2">
-                <input type="text" readonly id="referralUrl" class="w-full bg-[#f4f4f4] border-2 border-black px-2 py-2 font-mono text-xs focus:outline-none" value="" />
-                <button onclick="copyReferralLink()" class="admin-submit-btn font-extrabold text-xs whitespace-nowrap">
-                  📋 Copy URL
-                </button>
-              </div>
+          <!-- Share Link Card -->
+          <div class="tfc-card" style="padding: 24px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px;">🔗 Share Your Referral Link</h3>
+            <p style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 6px;">
+              Your Unique Ambassador Code:
+            </p>
+            <div style="font-family: monospace; font-size: 1.1rem; font-weight: 800; background: rgba(255,122,61,0.1); color: var(--primary-orange); padding: 8px 14px; border-radius: 8px; display: inline-block; margin-bottom: 16px;" id="displayRefCode">
+              CODE
+            </div>
+
+            <p style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 6px;">
+              Ambassador Referral URL:
+            </p>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" readonly id="referralUrl" class="tfc-input" style="font-family: monospace; font-size: 0.85rem;" value="" />
+              <button onclick="copyReferralLink()" class="tfc-btn tfc-btn-primary" style="white-space: nowrap; padding: 10px 18px;">
+                📋 Copy
+              </button>
             </div>
           </div>
 
-          <!-- Referrals Table -->
-          <div class="analytics-panel">
-            <h2>📋 My Referred Registrants</h2>
-            <div class="admin-table-wrapper" style="overflow-x: auto;">
-              <table class="admin-table" id="myReferralsTable">
+          <!-- Referrals Table Card -->
+          <div class="tfc-card" style="padding: 24px; overflow: hidden;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">📋 My Referred Registrants</h3>
+            <div style="overflow-x: auto;">
+              <table class="tfc-table" id="myReferralsTable">
                 <thead>
                   <tr>
                     <th>Member ID</th>
                     <th>Name</th>
                     <th>College</th>
-                    <th>Reg Date</th>
-                    <th>App Status</th>
+                    <th>Date</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="5" class="text-center py-6 text-gray-500">Loading signups...</td></tr>
+                  <tr><td colspan="5" style="text-align: center; color: var(--ink-soft); padding: 24px;">Loading signups...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -369,49 +259,49 @@
 
         </div>
 
-        <!-- Right: Perks & Marketing Templates -->
-        <div class="lg:col-span-1 space-y-6">
+        <!-- Right: Marketing Toolkit & Leaderboard -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
           
-          <!-- Marketing Toolkit -->
-          <div class="analytics-panel">
-            <h2>📢 Marketing Templates</h2>
-            <p class="text-xs text-gray-500 font-bold uppercase mb-4 mt-0.5">Quick copy templates for promotion</p>
-            
-            <div class="space-y-4">
-              <!-- WhatsApp Template -->
-              <div class="toolkit-card">
-                <div class="flex justify-between items-center border-b border-black pb-2 mb-2">
-                  <span class="text-xs font-black uppercase text-green-600">💬 WhatsApp Broadcast</span>
-                  <button onclick="copyToolkit('waText')" class="text-[0.68rem] bg-black text-[#ff9e59] border border-black px-2 py-0.5 uppercase font-bold">Copy</button>
+          <!-- Marketing Toolkit Card -->
+          <div class="tfc-card" style="padding: 24px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">📢 Promotion Toolkit</h3>
+            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 16px;">Pre-written copy templates ready to share</p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <!-- WhatsApp -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #10b981;">💬 WhatsApp Broadcast</span>
+                  <button onclick="copyToolkit('waText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
                 </div>
-                <textarea id="waText" readonly class="w-full h-24 bg-white border border-gray-300 p-2 text-xs font-semibold focus:outline-none resize-none">Hey guys! If you're building products, startups, or interested in tech, marketing, or design, check out The Future Council. Use my ambassador link to apply, get your digital member badge, and connect with fellow builders: </textarea>
+                <textarea id="waText" readonly style="width: 100%; height: 75px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">Hey guys! If you're building products, startups, or interested in tech, marketing, or design, check out The Future Council. Use my ambassador link to apply, get your digital member badge, and connect with fellow builders: </textarea>
               </div>
 
-              <!-- IG Story Idea -->
-              <div class="toolkit-card">
-                <div class="flex justify-between items-center border-b border-black pb-2 mb-2">
-                  <span class="text-xs font-black uppercase text-pink-600">📸 Instagram Story Copy</span>
-                  <button onclick="copyToolkit('igText')" class="text-[0.68rem] bg-black text-[#ff9e59] border border-black px-2 py-0.5 uppercase font-bold">Copy</button>
+              <!-- Instagram Story -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #ec4899;">📸 Instagram Story</span>
+                  <button onclick="copyToolkit('igText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
                 </div>
-                <textarea id="igText" readonly class="w-full h-20 bg-white border border-gray-300 p-2 text-xs font-semibold focus:outline-none resize-none">Ambitious student builders across DU! TFC membership applications are live. Hit the link below and use my code to claim your Verified pass: </textarea>
+                <textarea id="igText" readonly style="width: 100%; height: 65px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">Ambitious student builders! TFC membership applications are live. Hit the link below and use my code to claim your Verified pass: </textarea>
               </div>
 
-              <!-- LinkedIn Template -->
-              <div class="toolkit-card">
-                <div class="flex justify-between items-center border-b border-black pb-2 mb-2">
-                  <span class="text-xs font-black uppercase text-blue-600">💼 LinkedIn Share</span>
-                  <button onclick="copyToolkit('liText')" class="text-[0.68rem] bg-black text-[#ff9e59] border border-black px-2 py-0.5 uppercase font-bold">Copy</button>
+              <!-- LinkedIn -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #3b82f6;">💼 LinkedIn Post</span>
+                  <button onclick="copyToolkit('liText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
                 </div>
-                <textarea id="liText" readonly class="w-full h-28 bg-white border border-gray-300 p-2 text-xs font-semibold focus:outline-none resize-none">I am excited to announce that I have joined The Future Council as a Campus Ambassador! We are building a pan-DU student startup ecosystem supporting developers, founders, designers, and operators. Apply to claim your member pass and tap into mentorship, mixers, and founder community: </textarea>
+                <textarea id="liText" readonly style="width: 100%; height: 85px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">I am excited to announce that I have joined The Future Council as a Campus Ambassador! We are building a premier student startup ecosystem supporting developers, founders, designers, and operators. Apply to claim your member pass: </textarea>
               </div>
             </div>
           </div>
 
-          <!-- Ambassador Leaderboard -->
-          <div class="analytics-panel">
-            <h2>🏆 Leaderboard Standings</h2>
-            <div class="space-y-3" id="leaderboardContainer">
-              <p class="text-xs text-gray-500 italic">Aggregating ranks...</p>
+          <!-- Leaderboard Card -->
+          <div class="tfc-card" style="padding: 24px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 14px;">🏆 Top Ambassadors</h3>
+            <div id="leaderboardContainer" style="display: flex; flex-direction: column; gap: 10px;">
+              <p style="font-size: 0.85rem; color: var(--ink-soft); font-style: italic;">Aggregating ranks...</p>
             </div>
           </div>
 
@@ -420,7 +310,45 @@
       </div>
 
     </div>
+
   </main>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -491,11 +419,11 @@
           }
         } catch (err) {
           console.error("Login authentication failure:", err);
-          loginError.textContent = '⚠️ Connection failed: supabase client authentication warning.';
+          loginError.textContent = '⚠️ Connection failed: ' + (err.message || 'Authentication error.');
           loginError.classList.remove('hidden');
         } finally {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Access Dashboard 🚀';
+          submitBtn.textContent = 'Access Dashboard →';
         }
       });
 
@@ -505,7 +433,6 @@
         checkSession();
       };
 
-      // Helper to parse college string format
       function parseCollegeField(collegeStr) {
         let college = collegeStr || '';
         let phone = '';
@@ -535,7 +462,6 @@
       async function loadAmbassadorData() {
         if (!activeAmbassador) return;
 
-        // Parse active ambassador fields
         const parsedAmb = parseCollegeField(activeAmbassador.college);
         const ambassadorCode = (parsedAmb.refCode || activeAmbassador.member_id || '').toUpperCase();
 
@@ -543,11 +469,9 @@
         document.getElementById('ambassadorSubtitle').textContent = `Representing ${parsedAmb.displayName}. Share your referral link below to drive ecosystem growth.`;
         document.getElementById('displayRefCode').textContent = ambassadorCode;
 
-        // Set share link
         const refUrl = `${window.location.origin}/join.html?ref=${ambassadorCode}`;
         document.getElementById('referralUrl').value = refUrl;
 
-        // Customize Marketing templates
         document.getElementById('waText').value += refUrl;
         document.getElementById('igText').value += ` (Code: ${ambassadorCode}) Link in bio!`;
         document.getElementById('liText').value += `\nApply here: ${refUrl}`;
@@ -567,9 +491,8 @@
       }
 
       function renderAmbassadorStats(ambassadorCode) {
-        // Find referred signups
         const myReferrals = [];
-        const ambassadorReferrals = {}; // Count referrals for each ambassador for leaderboard
+        const ambassadorReferrals = {};
         const campusSet = new Set();
 
         cachedMembers.forEach(m => {
@@ -589,7 +512,6 @@
         document.getElementById('myReferralsCount').textContent = referralsCount;
         document.getElementById('campusesOutreach').textContent = campusSet.size;
 
-        // Calculate Leaderboard Rank
         const ambassadors = cachedMembers.filter(m => m.tier === 'Campus Ambassador');
         const sortedRanks = ambassadors.map(amb => {
           const parsed = parseCollegeField(amb.college);
@@ -601,12 +523,10 @@
           };
         }).sort((a, b) => b.referrals - a.referrals);
 
-        // Find my rank index
         const myRankIndex = sortedRanks.findIndex(r => r.code === ambassadorCode);
         const myRank = myRankIndex !== -1 ? `#${myRankIndex + 1}` : 'N/A';
         document.getElementById('referralRank').textContent = myRank;
 
-        // Render Milestones progress
         let targetVal = 10;
         let milestoneTitle = '🥉 Next Milestone: Campus Leader (10 Signups)';
         let reachedAll = false;
@@ -629,35 +549,32 @@
         document.getElementById('milestoneBar').style.width = `${progressPct}%`;
         document.getElementById('milestoneBarText').textContent = `${progressPct}% Complete`;
 
-        // Highlight unlocked perks
         const perk1 = document.getElementById('perk1');
         const perk2 = document.getElementById('perk2');
         const perk3 = document.getElementById('perk3');
 
         if (referralsCount >= 10) {
-          perk1.style.background = '#e6fffa';
-          perk1.style.borderColor = '#319795';
+          perk1.style.background = '#f0fdf4';
+          perk1.style.borderColor = '#22c55e';
           perk1.innerHTML = '✅ 10 Signups: Ambassador Certificate (UNLOCKED)';
         }
         if (referralsCount >= 50) {
-          perk2.style.background = '#e6fffa';
-          perk2.style.borderColor = '#319795';
-          perk2.innerHTML = '✅ 50 Signups: TFC T-Shirt & Goodies (UNLOCKED)';
+          perk2.style.background = '#f0fdf4';
+          perk2.style.borderColor = '#22c55e';
+          perk2.innerHTML = '✅ 50 Signups: TFC Swag Pack (UNLOCKED)';
         }
         if (referralsCount >= 100) {
-          perk3.style.background = '#e6fffa';
-          perk3.style.borderColor = '#319795';
-          perk3.innerHTML = '✅ 100 Signups: Direct Internship in TFC (UNLOCKED)';
+          perk3.style.background = '#f0fdf4';
+          perk3.style.borderColor = '#22c55e';
+          perk3.innerHTML = '✅ 100 Signups: Direct Internship (UNLOCKED)';
         }
 
-        // Render My Referrals Table
         const tableBody = document.querySelector('#myReferralsTable tbody');
         if (tableBody) {
           tableBody.innerHTML = '';
           if (myReferrals.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-gray-500 font-semibold">No referred signups logged. Share your link to get started! 🚀</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--ink-soft);">No referred signups logged yet. Share your link to get started! 🚀</td></tr>';
           } else {
-            // Sort by registration date desc
             const sortedReferrals = [...myReferrals].sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
             sortedReferrals.forEach(m => {
               const regDate = m.created_at ? new Date(m.created_at).toLocaleDateString('en-IN', {
@@ -665,19 +582,17 @@
               }) : 'N/A';
 
               const parsedCol = parseCollegeField(m.college);
-              
-              // App status: Active if they have uploaded profile picture
               const isLogged = m.image && m.image !== '';
               const appStatusHtml = isLogged 
-                ? '<span class="px-2 py-0.5 border border-green-600 bg-green-50 text-green-700 font-bold uppercase text-[0.68rem] tracking-wider">Logged In</span>'
-                : '<span class="px-2 py-0.5 border border-red-500 bg-red-50 text-red-600 font-bold uppercase text-[0.68rem] tracking-wider">Pending App Login</span>';
+                ? '<span class="tfc-badge tfc-badge-lime" style="font-size: 0.68rem;">Verified</span>'
+                : '<span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem;">Registered</span>';
 
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td><span class="font-mono font-bold">${m.member_id || m.id}</span></td>
+                <td><span style="font-family: monospace; font-weight: 700;">${m.member_id || m.id}</span></td>
                 <td><strong>${m.name}</strong></td>
                 <td>${parsedCol.displayName}</td>
-                <td><span class="text-xs text-gray-500 font-bold">${regDate}</span></td>
+                <td><span style="font-size: 0.8rem; color: var(--ink-soft);">${regDate}</span></td>
                 <td>${appStatusHtml}</td>
               `;
               tableBody.appendChild(row);
@@ -685,28 +600,29 @@
           }
         }
 
-        // Render Leaderboard
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         if (leaderboardContainer) {
           leaderboardContainer.innerHTML = '';
           const topAmbs = sortedRanks.slice(0, 5);
 
           if (topAmbs.length === 0) {
-            leaderboardContainer.innerHTML = '<p class="text-xs text-gray-500 italic">No rankings logged.</p>';
+            leaderboardContainer.innerHTML = '<p style="font-size: 0.82rem; color: var(--ink-soft); font-style: italic;">No rankings logged.</p>';
           } else {
             const maxVal = topAmbs[0].referrals || 1;
             topAmbs.forEach((r, idx) => {
               const widthPct = Math.round((r.referrals / maxVal) * 100);
               const isMe = r.code === ambassadorCode;
               const barDiv = document.createElement('div');
-              barDiv.className = isMe ? 'bg-amber-50 p-2 border-2 border-black shadow-[2px_2px_0_#000]' : 'p-1';
+              barDiv.style.padding = '8px 10px';
+              barDiv.style.borderRadius = '8px';
+              barDiv.style.background = isMe ? 'rgba(255, 122, 61, 0.1)' : 'rgba(20, 17, 15, 0.03)';
               barDiv.innerHTML = `
-                <div class="flex justify-between text-xs font-bold mb-1">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">
                   <span>#${idx + 1} ${r.name} ${isMe ? ' (You)' : ''}</span>
-                  <span>${r.referrals} refs</span>
+                  <span style="color: var(--primary-orange);">${r.referrals} refs</span>
                 </div>
-                <div style="background: #eee; height: 8px; border: 1px solid var(--ink); border-radius: 1px;">
-                  <div style="background: ${isMe ? 'var(--orange)' : '#3b82f6'}; height: 100%; width: ${widthPct}%;"></div>
+                <div style="background: rgba(20,17,15,0.08); height: 6px; border-radius: 9999px; overflow: hidden;">
+                  <div style="background: ${isMe ? 'var(--primary-orange)' : '#3b82f6'}; height: 100%; width: ${widthPct}%;"></div>
                 </div>
               `;
               leaderboardContainer.appendChild(barDiv);

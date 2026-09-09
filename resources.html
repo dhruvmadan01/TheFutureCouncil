@@ -1,890 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Builder Vault & Startup Resources | Future Council</title>
-<meta name="description" content="Access free startup playbooks, swipe files, investor pitch deck templates, and founder roadmaps curated by Future Council (The Future Council)." />
-<meta name="keywords" content="Future Council resources, The Future Council, startup resources, founder vault, cold email swipe files, startup playbooks, pitch deck templates, TFC resources" />
-<meta name="author" content="Future Council" />
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-<link rel="canonical" href="https://thefuturecouncil.in/resources" />
-<link rel="manifest" href="site.webmanifest" />
-<meta name="theme-color" content="#ff9e59" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founder Resource Library | The Future Council</title>
+  <meta name="description" content="Access free startup playbooks, swipe files, investor pitch deck templates, and founder roadmaps curated by Future Council." />
+  <meta name="keywords" content="Future Council resources, The Future Council, startup resources, founder vault, cold email swipe files, startup playbooks, pitch deck templates, TFC resources" />
+  <meta name="author" content="Future Council" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://thefuturecouncil.in/resources" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#ff7a3d" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Future Council | The Future Council" />
-<meta property="og:url" content="https://thefuturecouncil.in/resources" />
-<meta property="og:title" content="Builder Vault & Startup Resources | Future Council" />
-<meta property="og:description" content="Access battle-tested startup playbooks, swipe files, cold email frameworks, and founder guides from Future Council." />
-<meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Future Council Builder Vault" />
-<meta property="og:locale" content="en_IN" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Future Council | The Future Council" />
+  <meta property="og:url" content="https://thefuturecouncil.in/resources" />
+  <meta property="og:title" content="Founder Resource Library | The Future Council" />
+  <meta property="og:description" content="Access battle-tested startup playbooks, swipe files, cold email frameworks, and founder guides from Future Council." />
+  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content="https://thefuturecouncil.in/resources" />
-<meta name="twitter:title" content="Builder Vault & Startup Resources | Future Council" />
-<meta name="twitter:description" content="Free toolkits, swipe files, and playbooks for early-stage builders by Future Council." />
-<meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
-
-<!-- Schema.org JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "name": "Future Council Builder Vault & Startup Resources",
-      "description": "Curated collection of startup frameworks, templates, swipe files, and guides for early-stage founders by Future Council.",
-      "url": "https://thefuturecouncil.in/resources",
-      "publisher": {
-        "@type": ["Organization", "EducationalOrganization"],
-        "name": "Future Council",
-        "legalName": "The Future Council",
-        "alternateName": ["The Future Council", "TFC", "Future Council India"],
-        "url": "https://thefuturecouncil.in"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://thefuturecouncil.in/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Resources",
-          "item": "https://thefuturecouncil.in/resources"
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "The Future Council Founder Resource Library",
+        "description": "Curated collection of startup frameworks, templates, swipe files, and guides for early-stage founders.",
+        "url": "https://thefuturecouncil.in/resources",
+        "publisher": {
+          "@type": ["Organization", "EducationalOrganization"],
+          "name": "Future Council",
+          "legalName": "The Future Council",
+          "url": "https://thefuturecouncil.in"
         }
-      ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <style>
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(20, 17, 15, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
-  ]
-}
-</script>
-
-<link rel="icon" href="TFC.png" type="image/png">
-<link rel="apple-touch-icon" href="TFC.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Supabase JS CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-  :root{
-    --ink:#0a0a0a;
-    --paper:#fdfdf8;
-    --yellow:#ffd93d;
-    --pink:#ff5c7c;
-    --blue:#4d7fff;
-    --green:#8dff7a;
-    --orange:#ff9e59;
-    --shadow: 6px 6px 0 var(--ink);
-    --shadow-lg: 10px 10px 0 var(--ink);
-    --shadow-sm: 4px 4px 0 var(--ink);
-  }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Space Grotesk', sans-serif;font-size:17px;line-height:1.5;}
-  .display{font-family:'Archivo Black', sans-serif;text-transform:uppercase;line-height:0.95;}
-  
-  /* Top Ticker */
-  .ticker{background:var(--ink);color:var(--yellow);overflow:hidden;white-space:nowrap;border-bottom:4px solid var(--ink);padding:10px 0;}
-  .ticker-track{display:inline-block;font-family:'Archivo Black', sans-serif;font-size:0.95rem;letter-spacing:0.04em;animation: scroll 26s linear infinite;}
-  .ticker-track span{margin:0 22px;}
-  @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
-
-  /* Navigation Bar */
-  .site-nav {
-    background: var(--ink);
-    color: var(--paper);
-    border-bottom: 4px solid var(--ink);
-    padding: 12px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .site-nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--paper);
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1.15rem;
-    text-transform: uppercase;
-  }
-  .site-nav-brand img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-  }
-  .site-nav-links {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .nav-btn {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 7px 14px;
-    border: 2px solid var(--paper);
-    text-decoration: none;
-    transition: transform 0.1s ease;
-  }
-  .nav-btn:hover {
-    background: var(--yellow);
-    border-color: var(--yellow);
-  }
-  .nav-btn.primary {
-    background: var(--yellow);
-    border-color: var(--yellow);
-  }
-
-  /* Member Status Header Bar */
-  .member-status-bar {
-    background: #181818;
-    color: #fff;
-    padding: 10px 24px;
-    border-bottom: 3px solid var(--ink);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 0.88rem;
-    font-weight: 600;
-  }
-  .member-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .pulse-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--green);
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 8px var(--green);
-  }
-  .btn-member-login {
-    background: var(--yellow);
-    color: var(--ink);
-    border: 2px solid var(--ink);
-    box-shadow: 2px 2px 0 var(--ink);
-    padding: 4px 12px;
-    font-size: 0.78rem;
-    font-family: 'Archivo Black', sans-serif;
-    font-weight: 800;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .btn-member-login:hover {
-    background: #ffea79;
-    transform: translateY(-1px);
-  }
-  .btn-switch-user {
-    background: transparent;
-    color: #bbb;
-    border: 1px solid #444;
-    padding: 3px 8px;
-    font-size: 0.75rem;
-    font-family: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-  }
-  .btn-switch-user:hover {
-    color: #fff;
-    border-color: #fff;
-    background: #333;
-  }
-
-  /* Main Container */
-  .wrap{max-width:1120px;margin:0 auto;border-left:4px solid var(--ink);border-right:4px solid var(--ink);background:var(--paper);min-height: 100vh;}
-
-  /* Hero Section */
-  .vault-hero {
-    background: var(--yellow);
-    padding: 56px 40px 44px;
-    border-bottom: 4px solid var(--ink);
-  }
-  .badge{display:inline-block;background:var(--ink);color:var(--paper);font-family:'Archivo Black', sans-serif;font-size:0.75rem;padding:8px 14px;border:3px solid var(--ink);transform:rotate(-2deg);margin-bottom:18px;}
-  h1.vault-title {
-    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
-    margin: 0 0 16px;
-  }
-  .vault-sub {
-    max-width: 720px;
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0 0 24px;
-    line-height: 1.45;
-  }
-
-  /* Search & Filter Toolbar */
-  .filter-toolbar {
-    background: var(--paper);
-    border: 4px solid var(--ink);
-    box-shadow: var(--shadow);
-    padding: 18px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 10px;
-  }
-  .search-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .search-input-wrap {
-    flex: 1;
-    min-width: 260px;
-    position: relative;
-  }
-  .search-input {
-    width: 100%;
-    padding: 12px 16px 12px 42px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 3px solid var(--ink);
-    background: #fff;
-    outline: none;
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  .search-input:focus {
-    background: #fffef5;
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  .search-icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1rem;
-    pointer-events: none;
-  }
-
-  .pill-filters {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .filter-pill {
-    background: #fff;
-    color: var(--ink);
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 0.75rem;
-    padding: 8px 14px;
-    border: 2px solid var(--ink);
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.12s ease;
-  }
-  .filter-pill:hover {
-    background: #eee;
-  }
-  .filter-pill.active {
-    background: var(--ink);
-    color: var(--yellow);
-    border-color: var(--ink);
-    box-shadow: 3px 3px 0 var(--yellow);
-  }
-
-  /* Grid Layout */
-  .resources-section {
-    padding: 44px 40px;
-    border-bottom: 4px solid var(--ink);
-  }
-  .section-intro {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .section-title {
-    font-size: 1.8rem;
-    margin: 0;
-  }
-  .results-count {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 26px;
-  }
-
-  /* Resource Card */
-  .res-card {
-    background: #fff;
-    border: 4px solid var(--ink);
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    position: relative;
-  }
-  .res-card:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 12px 12px 0 var(--ink);
-  }
-
-  .res-card-top {
-    padding: 22px 22px 16px;
-  }
-  .res-badges-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
-  .access-badge {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    padding: 5px 10px;
-    border: 2px solid var(--ink);
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .badge-locked {
-    background: var(--yellow);
-    color: var(--ink);
-  }
-  .badge-open {
-    background: var(--green);
-    color: var(--ink);
-  }
-  .badge-soon {
-    background: #eee;
-    color: #666;
-    border-color: #888;
-  }
-  .category-tag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .res-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    margin: 0 0 10px;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .res-desc {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #444;
-    line-height: 1.5;
-    margin: 0 0 16px;
-  }
-
-  .res-meta-chips {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-  .meta-chip {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: #f4f4ec;
-    border: 1px solid var(--ink);
-    padding: 3px 8px;
-  }
-
-  .res-card-bottom {
-    padding: 16px 22px;
-    background: #fafaf5;
-    border-top: 3px solid var(--ink);
-  }
-  .card-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding: 12px 18px;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 3px solid var(--ink);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .card-btn-primary {
-    background: var(--yellow);
-    color: var(--ink);
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  .card-btn-primary:hover {
-    background: #ffe359;
-    transform: translateY(-1px);
-    box-shadow: 5px 5px 0 var(--ink);
-  }
-  .card-btn-green {
-    background: var(--green);
-    color: var(--ink);
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  .card-btn-green:hover {
-    background: #a6ff98;
-    transform: translateY(-1px);
-    box-shadow: 5px 5px 0 var(--ink);
-  }
-  .card-btn-disabled {
-    background: #e2e2dc;
-    color: #777;
-    border-color: #aaa;
-    cursor: not-allowed;
-  }
-
-  /* Zero to One Free Modal */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(6px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  .modal-overlay.active {
-    display: flex;
-  }
-  .modal-box {
-    background: var(--paper);
-    border: 5px solid var(--ink);
-    box-shadow: 14px 14px 0 var(--green), 14px 14px 0 4px var(--ink);
-    max-width: 680px;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    animation: authPopIn 0.25s ease-out;
-  }
-  .modal-header {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 20px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 4px solid var(--ink);
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-  .modal-header h3 {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1.3rem;
-    margin: 0;
-    text-transform: uppercase;
-    color: var(--green);
-  }
-  .modal-close-btn {
-    background: var(--paper);
-    color: var(--ink);
-    border: 2px solid var(--paper);
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1.1rem;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  .modal-close-btn:hover {
-    background: var(--pink);
-    color: #fff;
-  }
-  .modal-body {
-    padding: 28px;
-  }
-
-  /* Quick Auth Modal on Directory */
-  .auth-modal-box {
-    background: var(--paper);
-    border: 5px solid var(--ink);
-    box-shadow: 14px 14px 0 var(--yellow), 14px 14px 0 4px var(--ink);
-    max-width: 520px;
-    width: 100%;
-    position: relative;
-  }
-
-  /* CTA Band */
-  .cta-section{background:var(--ink);color:var(--paper);padding:50px 40px;border-bottom:none;}
-  .cta-section h2{color:var(--paper);font-size: 2rem; margin: 0 0 12px;}
-  .cta-section p.lead{color:#e7e7e7; max-width: 640px; margin: 0 0 24px;}
-  .cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-  .btn-cta{display:inline-block;background:var(--yellow);color:var(--ink);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1rem;padding:14px 26px;border:3px solid var(--paper);box-shadow:5px 5px 0 var(--yellow);text-decoration:none;cursor: pointer;}
-  .btn-cta:hover{transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--yellow);}
-  .btn-cta-outline{display:inline-block;background:transparent;color:var(--paper);font-family:'Archivo Black', sans-serif;text-transform:uppercase;font-size:1rem;padding:14px 26px;border:3px solid var(--paper);box-shadow:5px 5px 0 #fff;text-decoration:none;cursor: pointer;}
-  .btn-cta-outline:hover{background: #222; transform: translate(-2px, -2px);}
-
-  footer{padding:22px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-weight:700;font-size:0.78rem;background:var(--paper);}
-
-  @keyframes authPopIn {
-    0% { transform: scale(0.92) translateY(20px); opacity: 0; }
-    100% { transform: scale(1) translateY(0); opacity: 1; }
-  }
-
-  @media(max-width:680px){
-    .vault-hero {padding: 36px 20px 28px;}
-    .resources-section {padding: 32px 20px;}
-    .cta-section {padding: 36px 20px;}
-    footer {padding: 20px;}
-  }
-</style>
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--cream-bg);
+      border-radius: 16px;
+      border: 1.5px solid var(--border-subtle);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-header {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: var(--cream-bg);
+      z-index: 2;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Marquee -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span>★ BUILDER VAULT</span><span>STARTUP PLAYBOOKS</span><span>COUNCIL RESOURCES</span><span>★ SWIPE FILES</span><span>VALIDATION TOOLS</span><span>EXCLUSIVES</span>
-      <span>★ BUILDER VAULT</span><span>STARTUP PLAYBOOKS</span><span>COUNCIL RESOURCES</span><span>★ SWIPE FILES</span><span>VALIDATION TOOLS</span><span>EXCLUSIVES</span>
-    </div>
-  </div>
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
 
-  <!-- Navigation Bar -->
-  <header class="site-nav">
-    <a href="index.html" class="site-nav-brand">
-      <img src="TFC.png" alt="TFC Logo" />
-      <span>The Future Council</span>
-    </a>
-    <nav class="site-nav-links">
-      <a href="index.html" class="nav-btn">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="nav-btn">Fellowship '26</a>
-      <a href="branches.html" class="nav-btn">Our Branches</a>
-      <a href="resources.html" class="nav-btn primary">Resources</a>
-      <a href="join.html" class="nav-btn">Join Council</a>
-    </nav>
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link active">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <button id="btnQuickAuth" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Member Unlock 🔑</button>
+        <button id="btnLogOut" class="tfc-btn tfc-btn-outline" style="display: none; padding: 7px 14px; font-size: 0.82rem;">Log Out</button>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
   </header>
 
-  <!-- Member Quick Login / Status Bar -->
-  <div id="memberStatusBar" class="member-status-bar">
-    <div class="member-tag">
-      <span id="memberStatusIcon" class="pulse-dot"></span>
-      <span id="memberStatusText">Checking council membership status...</span>
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
     </div>
-    <div id="memberAuthActions">
-      <button id="btnQuickAuth" class="btn-member-login">🔑 Member Unlock</button>
-      <button id="btnLogOut" class="btn-switch-user" style="display: none;">Log Out</button>
+
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link active">Resources</a></li>
+      <li><a href="join-ambassador.html" class="tfc-mobile-nav-link">Ambassadors</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
     </div>
   </div>
 
-  <!-- Main Wrap -->
-  <div class="wrap">
+  <main>
+    <!-- Hero Section (Ref Page 08 Wireframe) -->
+    <section class="tfc-section" style="padding-top: 48px; padding-bottom: 24px;">
+      <div class="tfc-container" style="text-align: center; max-width: 860px;">
+        <div class="tfc-badge tfc-badge-orange" style="margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px;">
+          <img src="TFC.png" alt="TFC" style="width: 16px; height: 16px; border-radius: 4px; object-fit: contain;" />
+          RESOURCE DIRECTORY
+        </div>
+        <h1 style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 18px; letter-spacing: -1.5px;">
+          The founder resource library.
+        </h1>
+        <p style="font-size: 1.12rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 28px; max-width: 680px; margin-left: auto; margin-right: auto;">
+          Battle-tested playbooks, swipe files, validation frameworks, and pitch deck templates built for ambitious student founders and operators.
+        </p>
 
-    <!-- Hero Section -->
-    <div class="vault-hero">
-      <span class="badge">TFC RESOURCE DIRECTORY</span>
-      <h1 class="vault-title display">The Builder Vault</h1>
-      <p class="vault-sub">Battle-tested outreach swipe files, idea validation frameworks, and founder playbooks built for ambitious student builders. Access open resources or unlock full member exclusives.</p>
-
-      <!-- Search & Filters Toolbar -->
-      <div class="filter-toolbar">
-        <div class="search-row">
-          <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="resourceSearchInput" class="search-input" placeholder="Search templates, swipe files, guides, playbooks..." />
-          </div>
+        <!-- Search Bar -->
+        <div style="max-width: 580px; margin: 0 auto 28px; position: relative;">
+          <input type="text" id="resourceSearchInput" class="tfc-input" style="padding: 14px 20px 14px 44px; font-size: 0.95rem; border-radius: 9999px;" placeholder="Search playbooks, templates, swipe files..." />
+          <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; pointer-events: none;">🔍</span>
         </div>
 
-        <div class="pill-filters">
-          <button class="filter-pill active" data-filter="all">All Resources</button>
-          <button class="filter-pill" data-filter="members">🔒 Member Exclusives</button>
-          <button class="filter-pill" data-filter="open">🔓 Open Access (Free)</button>
-          <button class="filter-pill" data-filter="outreach">Outreach & Sales</button>
-          <button class="filter-pill" data-filter="validation">Ideation & MVP</button>
+        <!-- Tabbed Filters (Ref Page 08 Wireframe: All | Playbooks | Templates | Videos | Guest Sessions | Toolkits) -->
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+          <span class="tfc-chip active" data-filter="all">All</span>
+          <span class="tfc-chip" data-filter="playbook">Playbooks</span>
+          <span class="tfc-chip" data-filter="template">Templates</span>
+          <span class="tfc-chip" data-filter="video">Videos</span>
+          <span class="tfc-chip" data-filter="guest">Guest Sessions</span>
+          <span class="tfc-chip" data-filter="toolkit">Toolkits</span>
         </div>
-      </div>
-    </div>
-
-    <!-- Listing Section -->
-    <section class="resources-section">
-      <div class="section-intro">
-        <h2 class="section-title display">Available Playbooks & Guides</h2>
-        <span id="resultsCount" class="results-count">Showing 6 resources</span>
-      </div>
-
-      <div class="resources-grid" id="resourcesGrid">
-
-        <!-- 1. How to Find a Startup Idea (Open Access - ACTIVE) -->
-        <article class="res-card" data-category="open validation" data-keywords="how to find a startup idea ideation framework problem sourcing unfair advantage curiosity trend arbitrage mvp founders litmus filter">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-open">🔓 OPEN ACCESS (FREE)</span>
-              <span class="category-tag">Ideation & MVP</span>
-            </div>
-            <h3 class="res-title">How to Find a Startup Idea</h3>
-            <p class="res-desc">
-              A grounded, 4-step framework to source high-conviction startup ideas from personal pain, curious exploration, unfair advantages, and trend arbitrage — plus a 3-question litmus filter.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">Public Guide</span>
-              <span class="meta-chip">4 Sourcing Methods</span>
-              <span class="meta-chip">6 Min Read</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <a href="how-to-find-a-startup-idea.html" class="card-btn card-btn-green">
-              <span>Read Playbook (Open)</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- 2. The Cold-to-Warm Networking Swipe File (Members Only - ACTIVE) -->
-        <article class="res-card" data-category="members outreach" data-keywords="networking outreach swipe cold email linkedin mentor dm intro templates">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-locked">🔒 MEMBERS EXCLUSIVE</span>
-              <span class="category-tag">Outreach & Growth</span>
-            </div>
-            <h3 class="res-title">The Cold-to-Warm Networking Swipe File</h3>
-            <p class="res-desc">
-              7 plug-and-play outreach scripts for ambitious builders to reach senior founders, mentors, and peers — without sounding needy, robotic, or transactional. Includes psychology breakdowns and 1-click copying.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">7 Templates</span>
-              <span class="meta-chip">Copy & Send</span>
-              <span class="meta-chip">⚡ Instant Unlock</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <a href="resource-networking-swipe-file.html" class="card-btn card-btn-primary">
-              <span>Open Swipe File</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- 2. Zero-to-One Idea Validation Checklist (Open Access - ACTIVE) -->
-        <article class="res-card" data-category="open validation" data-keywords="idea validation checklist problem interviews early traction mvp customers">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-open">🔓 OPEN ACCESS (FREE)</span>
-              <span class="category-tag">Ideation & MVP</span>
-            </div>
-            <h3 class="res-title">Zero-to-One Idea Validation Framework</h3>
-            <p class="res-desc">
-              The 5-question customer interview framework and 48-hour demand test to validate problem urgency and willingness to pay before building a single line of code. Free and open to everyone.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">Public Guide</span>
-              <span class="meta-chip">Step-by-Step</span>
-              <span class="meta-chip">3 Min Read</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <button type="button" class="card-btn card-btn-green" id="btnOpenValidationGuide">
-              <span>Read Framework (Open)</span>
-              <span aria-hidden="true">↗</span>
-            </button>
-          </div>
-        </article>
-
-        <!-- 3. Pitch Deck Teardowns (Coming Soon) -->
-        <article class="res-card" data-category="members" data-keywords="pitch deck fundraising vc angel seed pre-seed slides teardown">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-locked">🔒 MEMBERS ONLY</span>
-              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
-            </div>
-            <h3 class="res-title">YC & Student Founder Pitch Deck Teardowns</h3>
-            <p class="res-desc">
-              Slide-by-slide breakdowns of real pre-seed and seed pitch decks that raised funding from top accelerators and angels, analyzing structure, metrics framing, and storytelling.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">Fundraising</span>
-              <span class="meta-chip">Real Decks</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <button type="button" class="card-btn card-btn-disabled" disabled>
-              <span>🔒 Member Release Soon</span>
-            </button>
-          </div>
-        </article>
-
-        <!-- 4. Co-Founder Equity Matrix (Open Access - Coming Soon) -->
-        <article class="res-card" data-category="open" data-keywords="cofounder equity vesting legal split roles matrix agreement">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-open">🔓 OPEN ACCESS</span>
-              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
-            </div>
-            <h3 class="res-title">The Co-Founder Split & Alignment Canvas</h3>
-            <p class="res-desc">
-              Standard 4-year vesting calculators, role-splitting frameworks, and decision rights matrix designed specifically for college founding teams.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">Team & Legal</span>
-              <span class="meta-chip">Calculators</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <button type="button" class="card-btn card-btn-disabled" disabled>
-              <span>⏳ Dropping Soon</span>
-            </button>
-          </div>
-        </article>
-
-        <!-- 5. Campus Chapter Playbook (Members Only - Coming Soon) -->
-        <article class="res-card" data-category="members" data-keywords="campus society chapter university growth events community">
-          <div class="res-card-top">
-            <div class="res-badges-row">
-              <span class="access-badge badge-locked">🔒 MEMBERS ONLY</span>
-              <span class="access-badge badge-soon">⏳ DROPPING SOON</span>
-            </div>
-            <h3 class="res-title">Campus Society Chapter Playbook</h3>
-            <p class="res-desc">
-              How to incorporate, recruit, and operate a high-impact student startup community on your university campus, partnering directly with TFC Central.
-            </p>
-            <div class="res-meta-chips">
-              <span class="meta-chip">Chapter Leaders</span>
-              <span class="meta-chip">Operations</span>
-            </div>
-          </div>
-          <div class="res-card-bottom">
-            <button type="button" class="card-btn card-btn-disabled" disabled>
-              <span>🔒 Member Release Soon</span>
-            </button>
-          </div>
-        </article>
-
       </div>
     </section>
 
-    <!-- Bottom CTA Band -->
-    <div class="cta-section">
-      <div class="section-head"><span class="section-num" style="background:var(--yellow);color:var(--ink);">★</span><h2 class="display">Unlock Every Playbook</h2></div>
-      <p class="lead">All members of The Future Council gain instant access to our private swipe files, founder playbooks, mentor directories, and fellowship cohort sessions.</p>
-      <div class="cta-row">
-        <a class="btn-cta" href="join.html">Join Council (Free Membership) ➔</a>
-        <a class="btn-cta-outline" href="fellowship.html" target="_blank">Apply For Fellowship '26</a>
+    <!-- Featured Dark Banner (Ref Page 08 Wireframe) -->
+    <section style="padding: 12px 0 36px;">
+      <div class="tfc-container">
+        <div class="tfc-dark-banner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 32px 40px;">
+          <div style="max-width: 650px;">
+            <span class="tfc-badge tfc-badge-lime" style="margin-bottom: 12px;">FEATURED OF THE WEEK</span>
+            <h2 style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 8px;">
+              The 0 → 1 Pitch Deck Template
+            </h2>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0;">
+              Used by 14 funded student founders. Downloaded 840+ times. Slide-by-slide structure with live commentary on storytelling and valuation.
+            </p>
+          </div>
+          <div>
+            <button type="button" id="btnOpenFeatured" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="white-space: nowrap;">
+              Download Free →
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-      <span>The Future Council — Builder Vault & Resource Directory</span>
-      <span>thefuturecouncil.in</span>
-    </footer>
+    <!-- Resource Cards Grid -->
+    <section class="tfc-section" style="padding-top: 0; padding-bottom: 60px;">
+      <div class="tfc-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <h3 style="font-size: 1.3rem; font-weight: 800;">Available Founder Resources</h3>
+          <span id="resultsCount" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft);">Showing 6 resources</span>
+        </div>
 
-  </div>
+        <div class="tfc-grid tfc-grid-3" id="resourcesGrid">
 
-  <!-- =========================================================================
-       MODAL: ZERO-TO-ONE VALIDATION FRAMEWORK (OPEN ACCESS)
-       ========================================================================= -->
+          <!-- Card 1: How to Find a Startup Idea -->
+          <div class="tfc-card res-card" data-category="playbook toolkit" data-keywords="how to find a startup idea ideation framework problem sourcing unfair advantage curiosity trend arbitrage mvp founders" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge tfc-badge-lime">PLAYBOOK · PDF</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">IDEATION</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">How to Find a Startup Idea</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                A grounded 4-step framework to source high-conviction startup ideas from personal pain, curious exploration, and trend arbitrage — plus a 3-question litmus filter.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="how-to-find-a-startup-idea.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center;">
+                Read Playbook →
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Networking Swipe File -->
+          <div class="tfc-card res-card" data-category="template toolkit" data-keywords="networking outreach swipe cold email linkedin mentor dm intro templates" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge tfc-badge-orange">TEMPLATE · NOTION</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">GROWTH</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Cold-to-Warm Networking Swipe File</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                7 plug-and-play outreach scripts for ambitious builders to reach senior founders, mentors, and angels without sounding needy or transactional.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="resource-networking-swipe-file.html" class="tfc-btn tfc-btn-primary" style="width: 100%; justify-content: center;">
+                Open Swipe File ⚡
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Zero-to-One Validation Framework -->
+          <div class="tfc-card res-card" data-category="playbook toolkit" data-keywords="idea validation checklist problem interviews early traction mvp customers" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge tfc-badge-lime">FRAMEWORK · GUIDE</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">VALIDATION</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Zero-to-One Validation Framework</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                The 5-question customer interview framework and 48-hour demand test to validate problem urgency and willingness to pay before writing any code.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <button type="button" id="btnOpenValidationGuide" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center;">
+                Open Framework ↗
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4: Pitch Deck Teardowns (Video) -->
+          <div class="tfc-card res-card" data-category="video guest" data-keywords="pitch deck teardown vc funding accelerator video" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge" style="background: rgba(59, 130, 246, 0.15); color: #2563eb;">VIDEO · 45 MIN</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">PITCHING</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">YC & Student Pitch Deck Teardowns</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                Slide-by-slide breakdowns of real seed pitch decks that raised funding from top accelerators and angels, analyzing narrative structure and metrics framing.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="fellowship.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center;">
+                Fellowship Vault 🔒
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 5: Co-Founder Equity Canvas -->
+          <div class="tfc-card res-card" data-category="template toolkit" data-keywords="cofounder equity vesting legal split roles matrix agreement template" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge tfc-badge-orange">TEMPLATE · SPREADSHEET</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">LEGAL & TEAM</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Co-Founder Equity & Alignment Canvas</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                Standard 4-year vesting calculators, role-splitting frameworks, and decision rights matrix designed specifically for university founding teams.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="join.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center;">
+                Unlock with Member ID →
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 6: Campus Chapter Playbook -->
+          <div class="tfc-card res-card" data-category="playbook guest" data-keywords="campus society chapter university growth events community operations" style="display: flex; flex-direction: column; justify-content: space-between; padding: 26px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tfc-badge tfc-badge-lime">PLAYBOOK · NOTION</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);">COMMUNITY</span>
+              </div>
+              <h3 class="res-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 10px;">Campus Society Chapter Playbook</h3>
+              <p class="res-desc" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 18px;">
+                How to incorporate, recruit, and operate a high-impact student startup community on your university campus, partnering directly with TFC Central.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+              <a href="join-ambassador.html" class="tfc-btn tfc-btn-outline" style="width: 100%; justify-content: center;">
+                Ambassador Access →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Newsletter Strip (Ref Page 08 Wireframe) -->
+    <section style="padding: 20px 0 60px;">
+      <div class="tfc-container">
+        <div class="tfc-card" style="padding: 40px; text-align: center; max-width: 680px; margin: 0 auto;">
+          <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 12px;">SUNDAY DISPATCH</div>
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">
+            Get new playbooks every Sunday.
+          </h2>
+          <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 24px;">
+            Join 1,200+ student founders getting curated teardowns, grant updates, and founder swipe files directly in their inbox.
+          </p>
+
+          <form id="newsletterForm" onsubmit="handleNewsletter(event)" style="display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap;">
+            <input type="email" id="newsletterEmail" class="tfc-input" placeholder="founder@college.edu" required style="flex: 1; min-width: 220px;" />
+            <button type="submit" class="tfc-btn tfc-btn-primary" style="white-space: nowrap;">
+              Subscribe Free →
+            </button>
+          </form>
+          <div id="newsletterMsg" style="display: none; font-size: 0.85rem; font-weight: 700; color: #16a34a; margin-top: 12px;">
+            ✓ You're on the list! First dispatch arrives this Sunday.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: ZERO-TO-ONE VALIDATION FRAMEWORK -->
   <div id="validationModal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Zero-to-One Validation Framework</h3>
-        <button id="btnCloseValidationModal" class="modal-close-btn" title="Close">✕</button>
+        <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0;">Zero-to-One Validation Framework</h3>
+        <button id="btnCloseValidationModal" style="background:none; border:none; font-size:1.4rem; cursor:pointer;" title="Close">✕</button>
       </div>
-      <div class="modal-body" style="line-height: 1.6;">
-        <div style="background: #eaffea; border: 3px solid var(--ink); padding: 14px 18px; margin-bottom: 20px; font-weight: 600;">
-          🔓 <strong>Open Resource:</strong> This framework is available to all founders in the TFC ecosystem.
-        </div>
+      <div style="padding: 28px; line-height: 1.6;">
+        <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 16px;">OPEN COMMUNITY RESOURCE</div>
 
-        <h4 style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:1.1rem; margin:16px 0 8px;">1. The 5-Question Customer Litmus Test</h4>
-        <p>Never ask <em>"Would you buy this?"</em> (they will lie to be nice). Instead, ask about past behavior:</p>
-        <ul style="padding-left: 20px; font-weight: 500;">
-          <li><strong>"What's the hardest part about [doing X] today?"</strong> (Reveals if pain is top of mind)</li>
-          <li><strong>"When was the last time you encountered that problem?"</strong> (If not within 14 days, not urgent)</li>
-          <li><strong>"What have you tried to solve it so far?"</strong> (If they haven't tried DIY solutions, they won't pay)</li>
-          <li><strong>"How much time or money does this problem currently cost you?"</strong> (Quantifies value)</li>
+        <h4 style="font-size: 1.05rem; font-weight: 800; margin: 16px 0 8px;">1. The 5-Question Customer Litmus Test</h4>
+        <p style="font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 12px;">Never ask <em>"Would you buy this?"</em> (people lie to be nice). Instead, ask about past behavior:</p>
+        <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--ink); margin-bottom: 20px;">
+          <li style="margin-bottom: 6px;"><strong>"What's the hardest part about [doing X] today?"</strong> (Reveals top-of-mind pain)</li>
+          <li style="margin-bottom: 6px;"><strong>"When was the last time you encountered that problem?"</strong> (If not within 14 days, not urgent)</li>
+          <li style="margin-bottom: 6px;"><strong>"What have you tried to solve it so far?"</strong> (If no DIY solutions tried, won't pay)</li>
+          <li style="margin-bottom: 6px;"><strong>"How much time or money does this problem currently cost you?"</strong> (Quantifies value)</li>
           <li><strong>"Who else should I talk to who deals with this?"</strong> (Viral discovery loop)</li>
         </ul>
 
-        <h4 style="font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:1.1rem; margin:22px 0 8px;">2. The 48-Hour Demand Test</h4>
-        <p>Before coding, set up a simple one-page Notion/Framer site with an explicit "Join Private Beta" or "Pre-Order" deposit button. If you cannot get 15 strangers to sign up from direct conversations, building product will not solve distribution.</p>
+        <h4 style="font-size: 1.05rem; font-weight: 800; margin: 20px 0 8px;">2. The 48-Hour Demand Test</h4>
+        <p style="font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px;">
+          Before coding, set up a simple one-page site with an explicit "Join Private Beta" button. If you cannot get 15 strangers to sign up from direct conversations, building product won't solve distribution.
+        </p>
 
-        <div style="background: #fff9d6; border: 3px solid var(--ink); padding: 14px 18px; margin-top: 24px;">
-          <h5 style="font-family:'Archivo Black',sans-serif; margin:0 0 6px; text-transform:uppercase;">Want More Tactical Scripts?</h5>
-          <p style="margin:0 0 10px; font-size: 0.92rem; font-weight: 500;">Check out our Member Exclusive: <strong>The Cold-to-Warm Networking Swipe File</strong> for verbatim outreach scripts.</p>
-          <a href="resource-networking-swipe-file.html" class="btn-member-login" style="font-size:0.8rem; text-decoration:none;">Open Swipe File →</a>
+        <div style="background: rgba(255,122,61,0.08); border-radius: 12px; padding: 18px; border: 1px solid rgba(255,122,61,0.2);">
+          <h5 style="margin:0 0 6px; font-weight: 800; font-size: 0.95rem;">Want Verbatim Outreach Scripts?</h5>
+          <p style="margin:0 0 12px; font-size: 0.88rem; color: var(--ink-soft);">Check out our Member Exclusive: <strong>The Cold-to-Warm Networking Swipe File</strong>.</p>
+          <a href="resource-networking-swipe-file.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="display: inline-flex;">Open Swipe File →</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- =========================================================================
-       MODAL: QUICK MEMBER VERIFICATION DIALOG
-       ========================================================================= -->
+  <!-- MODAL: QUICK MEMBER VERIFICATION -->
   <div id="quickAuthModal" class="modal-overlay">
-    <div class="auth-modal-box">
+    <div class="modal-box" style="max-width: 480px;">
       <div class="modal-header">
-        <h3 style="color: var(--yellow);">Member Vault Unlock</h3>
-        <button id="btnCloseQuickAuth" class="modal-close-btn" title="Close">✕</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="TFC.png" alt="TFC Logo" style="width: 26px; height: 26px; border-radius: 6px; object-fit: contain; background: #fff; padding: 2px; border: 1px solid var(--border-subtle);" />
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0;">Member Vault Unlock</h3>
+        </div>
+        <button id="btnCloseQuickAuth" style="background:none; border:none; font-size:1.4rem; cursor:pointer;" title="Close">✕</button>
       </div>
-      <div class="modal-body">
-        <p style="font-size: 0.95rem; font-weight: 500; margin: 0 0 18px; color: #333;">
+      <div style="padding: 28px;">
+        <p style="font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px;">
           Enter the email address you registered with on The Future Council to unlock all member-exclusive playbooks across the site.
         </p>
 
-        <form id="quickAuthForm" onsubmit="return false;">
-          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom: 16px;">
-            <label for="quickEmailInput" style="font-family:'Archivo Black',sans-serif; font-size:0.8rem; text-transform:uppercase;">Registered Email</label>
-            <input type="email" id="quickEmailInput" class="search-input" style="padding-left:14px;" placeholder="e.g. founder@college.edu" required />
+        <form id="quickAuthForm">
+          <div style="margin-bottom: 16px;">
+            <label for="quickEmailInput" style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px;">Registered Student Email</label>
+            <input type="email" id="quickEmailInput" class="tfc-input" placeholder="e.g. founder@college.edu" required />
           </div>
 
-          <button type="submit" id="btnSubmitQuickAuth" class="card-btn card-btn-primary" style="margin-bottom:12px;">
-            <span>Verify & Unlock</span>
-            <span aria-hidden="true">→</span>
+          <button type="submit" id="btnSubmitQuickAuth" class="tfc-btn tfc-btn-primary" style="width: 100%; margin-bottom: 12px;">
+            Verify & Unlock →
           </button>
         </form>
 
-        <!-- Error / Not Registered Box -->
-        <div id="quickRestrictedBox" style="display:none; background:#fff0f3; border:3px solid var(--pink); padding:16px; margin-top:14px;">
-          <strong style="color:var(--pink); font-family:'Archivo Black',sans-serif; font-size:0.82rem; text-transform:uppercase; display:block; margin-bottom:6px;">⚠️ Member Not Found</strong>
-          <p style="font-size:0.88rem; margin:0 0 12px; font-weight:500;">
-            This email is not registered in our member directory yet. Membership in The Future Council is free for university builders.
+        <div id="quickRestrictedBox" style="display:none; background: #fef2f2; border: 1.5px solid #ef4444; border-radius: 10px; padding: 16px; margin-top: 14px;">
+          <strong style="color:#b91c1c; font-size: 0.85rem; display: block; margin-bottom: 6px;">⚠️ Member Not Found</strong>
+          <p style="font-size: 0.85rem; margin: 0 0 12px; color: #7f1d1d;">
+            This email is not registered in our member directory yet. Membership is free for university builders.
           </p>
-          <a id="btnQuickRegisterRedirect" href="join.html" class="card-btn" style="background:var(--ink); color:var(--yellow); font-size:0.85rem;">
+          <a id="btnQuickRegisterRedirect" href="join.html" class="tfc-btn tfc-btn-outline" style="width: 100%; font-size: 0.85rem; justify-content: center;">
             Register as a Member on Join Council →
           </a>
         </div>
@@ -892,10 +421,54 @@
     </div>
   </div>
 
-  <!-- JavaScript Logic for Filtering, Search & Member State -->
+  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <aside class="tfc-mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 15</div>
+    </div>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+  </aside>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Supabase Configuration
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
@@ -903,10 +476,6 @@
       const STORAGE_KEY_AUTH = 'tfc_resource_auth_email';
       const STORAGE_KEY_NAME = 'tfc_resource_auth_name';
 
-      // Elements
-      const memberStatusBar = document.getElementById('memberStatusBar');
-      const memberStatusIcon = document.getElementById('memberStatusIcon');
-      const memberStatusText = document.getElementById('memberStatusText');
       const btnQuickAuth = document.getElementById('btnQuickAuth');
       const btnLogOut = document.getElementById('btnLogOut');
       const quickAuthModal = document.getElementById('quickAuthModal');
@@ -920,53 +489,40 @@
       const validationModal = document.getElementById('validationModal');
       const btnOpenValidationGuide = document.getElementById('btnOpenValidationGuide');
       const btnCloseValidationModal = document.getElementById('btnCloseValidationModal');
+      const btnOpenFeatured = document.getElementById('btnOpenFeatured');
 
       const resourceSearchInput = document.getElementById('resourceSearchInput');
-      const filterPills = document.querySelectorAll('.filter-pill');
+      const filterChips = document.querySelectorAll('.tfc-chip');
       const resCards = document.querySelectorAll('.res-card');
       const resultsCount = document.getElementById('resultsCount');
 
-      // 1. Initial Member Auth Check
-      initMemberStatus();
-
-      async function initMemberStatus() {
+      // Member Status Check
+      function checkMemberStatus() {
         let cachedEmail = localStorage.getItem(STORAGE_KEY_AUTH);
         if (!cachedEmail && sessionStorage.getItem('tfc_member_auth') === 'true') {
           cachedEmail = sessionStorage.getItem('tfc_member_email');
         }
 
         if (cachedEmail) {
-          const cachedName = localStorage.getItem(STORAGE_KEY_NAME) || '';
-          updateMemberUI(true, cachedEmail, cachedName);
+          btnQuickAuth.textContent = 'Verified Member ✓';
+          btnQuickAuth.classList.remove('tfc-btn-outline');
+          btnQuickAuth.classList.add('tfc-btn-primary');
+          btnLogOut.style.display = 'inline-flex';
         } else {
-          updateMemberUI(false);
-        }
-      }
-
-      function updateMemberUI(isAuth, email = '', name = '') {
-        if (isAuth) {
-          memberStatusIcon.style.background = 'var(--green)';
-          memberStatusIcon.style.boxShadow = '0 0 8px var(--green)';
-          memberStatusText.innerHTML = `🟢 <strong>Verified Council Member:</strong> ${name ? name + ' (' + email + ')' : email}`;
-          btnQuickAuth.style.display = 'none';
-          btnLogOut.style.display = 'inline-block';
-        } else {
-          memberStatusIcon.style.background = '#888';
-          memberStatusIcon.style.boxShadow = 'none';
-          memberStatusText.textContent = 'Guest Visitor • Free resources open below. Sign in to unlock full member playbooks.';
-          btnQuickAuth.style.display = 'inline-flex';
+          btnQuickAuth.textContent = 'Member Unlock 🔑';
+          btnQuickAuth.classList.add('tfc-btn-outline');
+          btnQuickAuth.classList.remove('tfc-btn-primary');
           btnLogOut.style.display = 'none';
         }
       }
+      checkMemberStatus();
 
-      // Logout handler
       btnLogOut.addEventListener('click', () => {
         localStorage.removeItem(STORAGE_KEY_AUTH);
         localStorage.removeItem(STORAGE_KEY_NAME);
-        updateMemberUI(false);
+        checkMemberStatus();
       });
 
-      // Quick Auth Dialog
       btnQuickAuth.addEventListener('click', () => {
         quickAuthModal.classList.add('active');
         quickRestrictedBox.style.display = 'none';
@@ -977,29 +533,26 @@
         quickAuthModal.classList.remove('active');
       });
 
-      // Submit Quick Auth
       quickAuthForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = quickEmailInput.value.trim().toLowerCase();
         if (!email) return;
 
         btnSubmitQuickAuth.disabled = true;
-        btnSubmitQuickAuth.innerHTML = '<span>Verifying... ⏳</span>';
+        btnSubmitQuickAuth.textContent = 'Verifying... ⏳';
         quickRestrictedBox.style.display = 'none';
 
         try {
-          const { data: member, error } = await supabaseClient
+          const { data: member } = await supabaseClient
             .from('members')
             .select('email, name, tier')
             .ilike('email', email)
             .maybeSingle();
 
-          if (error) throw error;
-
           if (member && member.email) {
             localStorage.setItem(STORAGE_KEY_AUTH, member.email);
             if (member.name) localStorage.setItem(STORAGE_KEY_NAME, member.name);
-            updateMemberUI(true, member.email, member.name);
+            checkMemberStatus();
             quickAuthModal.classList.remove('active');
             alert(`✓ Welcome back, ${member.name || member.email}! All member playbooks unlocked.`);
           } else {
@@ -1011,148 +564,48 @@
           alert("Network verification error. Please try again.");
         } finally {
           btnSubmitQuickAuth.disabled = false;
-          btnSubmitQuickAuth.innerHTML = '<span>Verify & Unlock</span><span aria-hidden="true">→</span>';
+          btnSubmitQuickAuth.textContent = 'Verify & Unlock →';
         }
       });
 
-      // =========================================================================
-      // RESOURCE ENGAGEMENT TELEMETRY (Open Resources)
-      // =========================================================================
-      let validationTimer = null;
-      let validationSeconds = 0;
-
-      function logVaultResourceEvent(resId, resTitle, eventType) {
-        const email = localStorage.getItem(STORAGE_KEY_AUTH) || 'guest_reader';
-        const name = localStorage.getItem(STORAGE_KEY_NAME) || (email === 'guest_reader' ? 'Guest Visitor' : '');
-        const STORAGE_KEY_GLOBAL = 'tfc_global_resource_tracking';
-
-        let globalData = {};
-        try {
-          globalData = JSON.parse(localStorage.getItem(STORAGE_KEY_GLOBAL) || '{}');
-        } catch (e) {
-          globalData = {};
-        }
-
-        if (!globalData[email]) {
-          globalData[email] = {
-            email: email,
-            name: name,
-            college: '',
-            resources: {}
-          };
-        }
-
-        if (!globalData[email].resources[resId]) {
-          globalData[email].resources[resId] = {
-            id: resId,
-            title: resTitle,
-            opens: 0,
-            totalSeconds: 0,
-            lastOpened: new Date().toISOString(),
-            firstOpened: new Date().toISOString()
-          };
-        }
-
-        const resEntry = globalData[email].resources[resId];
-        if (eventType === 'open') {
-          resEntry.opens = (resEntry.opens || 0) + 1;
-          resEntry.lastOpened = new Date().toISOString();
-        } else if (eventType === 'heartbeat' || eventType === 'close') {
-          resEntry.totalSeconds = (resEntry.totalSeconds || 0) + 5;
-          resEntry.lastOpened = new Date().toISOString();
-        }
-
-        try {
-          localStorage.setItem(STORAGE_KEY_GLOBAL, JSON.stringify(globalData));
-        } catch (e) {}
-
-        // If registered member, sync to Supabase
-        if (email !== 'guest_reader' && (eventType === 'open' || eventType === 'close')) {
-          syncMemberResData(email, resId, resEntry);
-        }
+      // Modals
+      if (btnOpenValidationGuide) {
+        btnOpenValidationGuide.addEventListener('click', () => {
+          validationModal.classList.add('active');
+        });
+      }
+      if (btnOpenFeatured) {
+        btnOpenFeatured.addEventListener('click', () => {
+          validationModal.classList.add('active');
+        });
+      }
+      if (btnCloseValidationModal) {
+        btnCloseValidationModal.addEventListener('click', () => {
+          validationModal.classList.remove('active');
+        });
       }
 
-      async function syncMemberResData(email, resId, resEntry) {
-        try {
-          const { data: member } = await supabaseClient
-            .from('members')
-            .select('college')
-            .ilike('email', email)
-            .maybeSingle();
-
-          if (member) {
-            let currentCollege = member.college || '';
-            const resDataJson = JSON.stringify({
-              [resId]: {
-                opens: resEntry.opens,
-                totalSeconds: resEntry.totalSeconds,
-                lastOpened: resEntry.lastOpened
-              }
-            });
-
-            let updatedCollege = '';
-            if (currentCollege.includes(' | ResData: ')) {
-              updatedCollege = currentCollege.replace(/\s*\|\s*ResData:\s*\{.*?\}/g, ` | ResData: ${resDataJson}`);
-            } else {
-              updatedCollege = `${currentCollege} | ResData: ${resDataJson}`;
-            }
-
-            await supabaseClient
-              .from('members')
-              .update({ college: updatedCollege })
-              .eq('email', email);
-          }
-        } catch (err) {}
-      }
-
-      // 2. Open Access Modal (Free Guide)
-      btnOpenValidationGuide.addEventListener('click', () => {
-        validationModal.classList.add('active');
-        validationSeconds = 0;
-        logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'open');
-
-        if (validationTimer) clearInterval(validationTimer);
-        validationTimer = setInterval(() => {
-          validationSeconds += 5;
-          logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'heartbeat');
-        }, 5000);
-      });
-
-      function closeValidation() {
-        validationModal.classList.remove('active');
-        if (validationTimer) {
-          clearInterval(validationTimer);
-          validationTimer = null;
-          logVaultResourceEvent('zero_to_one_validation', 'Zero-to-One Idea Validation Framework', 'close');
-        }
-      }
-
-      btnCloseValidationModal.addEventListener('click', closeValidation);
-
-      // Close modal on background click
       [validationModal, quickAuthModal].forEach(modal => {
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.classList.remove('active');
-          }
+          if (e.target === modal) modal.classList.remove('active');
         });
       });
 
-      // 3. Search & Filter System
+      // Filter Chips and Search logic
       let currentFilter = 'all';
 
-      filterPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-          filterPills.forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          currentFilter = pill.getAttribute('data-filter');
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          currentFilter = chip.getAttribute('data-filter');
           applyFilters();
         });
       });
 
-      resourceSearchInput.addEventListener('input', () => {
-        applyFilters();
-      });
+      if (resourceSearchInput) {
+        resourceSearchInput.addEventListener('input', applyFilters);
+      }
 
       function applyFilters() {
         const query = (resourceSearchInput.value || '').toLowerCase().trim();
@@ -1164,23 +617,8 @@
           const title = card.querySelector('.res-title').textContent.toLowerCase();
           const desc = card.querySelector('.res-desc').textContent.toLowerCase();
 
-          // Category match
-          let matchesCategory = true;
-          if (currentFilter === 'members') {
-            matchesCategory = category.includes('members');
-          } else if (currentFilter === 'open') {
-            matchesCategory = category.includes('open');
-          } else if (currentFilter === 'outreach') {
-            matchesCategory = category.includes('outreach');
-          } else if (currentFilter === 'validation') {
-            matchesCategory = category.includes('validation');
-          }
-
-          // Search query match
-          let matchesQuery = true;
-          if (query) {
-            matchesQuery = title.includes(query) || desc.includes(query) || keywords.includes(query);
-          }
+          let matchesCategory = (currentFilter === 'all') || category.includes(currentFilter);
+          let matchesQuery = !query || title.includes(query) || desc.includes(query) || keywords.includes(query);
 
           if (matchesCategory && matchesQuery) {
             card.style.display = 'flex';
@@ -1190,9 +628,19 @@
           }
         });
 
-        resultsCount.textContent = `Showing ${visibleCount} resource${visibleCount === 1 ? '' : 's'}`;
+        if (resultsCount) {
+          resultsCount.textContent = `Showing ${visibleCount} resource${visibleCount === 1 ? '' : 's'}`;
+        }
       }
 
+      window.handleNewsletter = (e) => {
+        e.preventDefault();
+        const input = document.getElementById('newsletterEmail');
+        if (input && input.value) {
+          document.getElementById('newsletterMsg').style.display = 'block';
+          input.value = '';
+        }
+      };
     });
   </script>
 </body>

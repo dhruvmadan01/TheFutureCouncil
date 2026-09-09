@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Campus Ambassador Program '26 | Future Council</title>
-  <meta name="description" content="Become the official face of Future Council (The Future Council) on your campus. Lead startup mixers, build student founder communities, and unlock certificates, merchandise, and VIP perks." />
+  <meta name="description" content="Become the official face of Future Council on your campus. Lead startup mixers, build student founder communities, and unlock certificates, merchandise, and VIP perks." />
   <meta name="keywords" content="Future Council ambassador, campus ambassador program, student ambassador startup, college entrepreneurship leader, TFC ambassador 2026, campus director, The Future Council" />
   <meta name="author" content="Future Council" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/join-ambassador" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff9e59" />
+  <meta name="theme-color" content="#ff7a3d" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -21,15 +21,7 @@
   <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Future Council Campus Ambassador Program" />
   <meta property="og:locale" content="en_IN" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thefuturecouncil.in/join-ambassador" />
-  <meta name="twitter:title" content="Campus Ambassador Program '26 | Future Council" />
-  <meta name="twitter:description" content="Apply to become a Future Council Campus Ambassador at your university." />
-  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -45,26 +37,8 @@
           "@type": ["Organization", "EducationalOrganization"],
           "name": "Future Council",
           "legalName": "The Future Council",
-          "alternateName": ["The Future Council", "TFC", "Future Council India"],
           "url": "https://thefuturecouncil.in"
         }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://thefuturecouncil.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Campus Ambassador Program",
-            "item": "https://thefuturecouncil.in/join-ambassador"
-          }
-        ]
       }
     ]
   }
@@ -72,306 +46,334 @@
 
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      background: #000000;
-      color: #f7f3ee;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    ::selection {
-      background: rgba(255, 158, 89, 0.2);
-      color: #fff;
-    }
-    .dropdown-item:hover {
-      background-color: #fff7eb !important;
-      color: #ff9e59 !important;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-    .fomo-pulse {
-      animation: pulse 2s infinite ease-in-out;
-    }
-  </style>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Interactive Floating Stickers (Desktop Margin Parallax + Magnetic Follow) -->
-  <div class="floating-sticker star" style="top: 15%; left: 3%; --rotation: 12deg;" data-parallax-speed="0.2">★</div>
-  <div class="floating-sticker orange" style="top: 32%; left: 4%; --rotation: -8deg;" data-parallax-speed="0.35">🔥 LEAD</div>
-  <div class="floating-sticker" style="top: 50%; left: 2%; --rotation: 6deg;" data-parallax-speed="0.18">✦ EXECUTE</div>
-  <div class="floating-sticker yellow" style="top: 72%; left: 5%; --rotation: -15deg;" data-parallax-speed="0.25">💡 NETWORK</div>
-  <div class="floating-sticker star" style="top: 88%; left: 3%; --rotation: -5deg;" data-parallax-speed="0.15">★</div>
 
-  <div class="floating-sticker yellow" style="top: 12%; right: 4%; --rotation: -10deg;" data-parallax-speed="0.28">🚀 COHORT 1</div>
-  <div class="floating-sticker star" style="top: 30%; right: 5%; --rotation: 15deg;" data-parallax-speed="0.15">★</div>
-  <div class="floating-sticker orange" style="top: 48%; right: 3%; --rotation: -6deg;" data-parallax-speed="0.3">★ GRASSROOTS</div>
-  <div class="floating-sticker" style="top: 68%; right: 4%; --rotation: 8deg;" data-parallax-speed="0.22">✦ DREAMS</div>
-  <div class="floating-sticker yellow" style="top: 84%; right: 3%; --rotation: -12deg;" data-parallax-speed="0.32">💎 INFLUENCE</div>
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
 
-  <main class="desktop-window" style="max-width: 1000px; margin: 40px auto; box-shadow: 8px 8px 0 var(--ink);">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="ambassador.html" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Ambassador Login 🔑</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
-      <div class="window-title">The Future Council • Campus Ambassadors</div>
-    </header>
+    </div>
+  </header>
 
-    <nav class="window-tabs">
-      <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
-      <a href="branches.html" class="window-tab">Our Branches</a>
-      <a href="join-ambassador.html" class="window-tab active">Apply Ambassador</a>
-    </nav>
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
+    </div>
 
-    <section class="workspace">
-      <!-- Welcome Title (FOMO Upgraded & Animated) -->
-      <div class="partners-hero" style="background: #fff7eb; color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden; transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
-        <!-- FOMO Corner Badge -->
-        <div style="position: absolute; top: 0; right: 0; background: var(--orange); color: #fff; font-family: var(--font-heading); font-weight: 900; font-size: 0.65rem; padding: 4px 12px; border-bottom: 3px solid var(--ink); border-left: 3px solid var(--ink); text-transform: uppercase; letter-spacing: 0.1em;" class="fomo-pulse">
-          🔥 Cohort 1 Applications Open
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
+      <li><a href="join-ambassador.html" class="tfc-mobile-nav-link active">Ambassador Program</a></li>
+      <li><a href="ambassador.html" class="tfc-mobile-nav-link">Ambassador Login</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="#applyForm" class="tfc-btn tfc-btn-primary" style="width: 100%;">Apply as Ambassador →</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Ambassador Hero Section (Ref Page 10 Wireframe) -->
+    <section class="tfc-section" style="padding-top: 48px; padding-bottom: 32px;">
+      <div class="tfc-container" style="text-align: center; max-width: 860px;">
+        <div class="tfc-badge tfc-badge-orange" style="margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px;">
+          <img src="TFC.png" alt="TFC" style="width: 16px; height: 16px; border-radius: 4px; object-fit: contain;" />
+          CAMPUS AMBASSADOR PROGRAM · COHORT 1
         </div>
-        <h1 class="reveal-type" style="font-size: 2.2rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin: 4px 0 10px; color: var(--ink);">
-          Shape the Future of Startups on Your Campus
+        <h1 style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 18px; letter-spacing: -1.5px;">
+          Shape the future of startups on your campus.
         </h1>
-        <p class="hero-text" style="color: #222; font-weight: 700; max-width: 720px; line-height: 1.5; font-size: 0.95rem;">
-          Represent TFC, lead grassroots student founder networks, and run active startup mixers. ⚡ **Apply now to get instant access to the Ambassador Portal** to track your milestones, signups, and rewards.
+        <p style="font-size: 1.12rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
+          Represent The Future Council, lead grassroots student founder networks, and run active startup mixers. Unlock direct VC connections, VIP mixer invites, elite merch, and pre-seed fast track.
         </p>
+        
+        <!-- Two Action Buttons (Page 10: Apply Now + Ambassador Login) -->
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="#applyForm" class="tfc-btn tfc-btn-primary tfc-btn-lg">
+            Apply Now →
+          </a>
+          <a href="ambassador.html" class="tfc-btn tfc-btn-outline tfc-btn-lg">
+            Ambassador Login 🔑
+          </a>
+        </div>
       </div>
+    </section>
 
-      <!-- The Ambassador Dream Section (More Dreams & Perks - Swapped to Top) -->
-      <section id="perksSection" class="panel wide perks-section" style="margin-top: 0; background: #fff7eb; transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
-        <div class="panel-heading">
-          <p class="mini-label" style="color: var(--orange);">YOUR ECOSYSTEM LAUNCHPAD</p>
-          <h2 class="reveal-type" style="margin: 0 0 10px; font-size: 1.7rem; font-weight: 900;">WHAT YOU ARE ACTUALLY UNLOCKING: THE DREAM</h2>
-          <p style="font-size: 0.95rem; margin-top: 4px; font-weight: 600; color: #333;">
-            Being a Campus Ambassador is not just about promotions—it is a fast-track into high-tier venture capital, core developer guilds, and founder circles.
-          </p>
+    <!-- Perks Grid: 4 Cards (Ref Page 10 Wireframe) -->
+    <section class="tfc-section" style="padding-top: 20px; padding-bottom: 40px;">
+      <div class="tfc-container">
+        <div class="tfc-section-header" style="text-align: center; margin-bottom: 32px;">
+          <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 10px;">AMBASSADOR ADVANTAGE</div>
+          <h2 style="font-size: 2rem; font-weight: 800;">What you are actually unlocking</h2>
         </div>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 18px;">
-          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
-            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">💼 Direct VC Connections</h4>
-            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Interface directly with institutional investors and active angels. Learn what VCs look for and pitch your own ideas to them.</p>
+
+        <div class="tfc-grid tfc-grid-4">
+          <div class="tfc-card" style="padding: 24px;">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">💼</div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Direct VC Connections</h3>
+            <p style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;">
+              Interface directly with institutional investors and active angels. Learn what VCs look for and pitch your ideas.
+            </p>
           </div>
-          
-          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
-            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">🎟️ VIP Mixer invites</h4>
-            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Access closed-door networking dinners, ecosystem meetups, and TFC Demo Days. Shake hands with high-impact founders.</p>
+
+          <div class="tfc-card" style="padding: 24px;">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🎟️</div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">VIP Mixer Invites</h3>
+            <p style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;">
+              Access closed-door networking dinners, ecosystem meetups, and TFC Demo Days with high-impact founders.
+            </p>
           </div>
-          
-          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
-            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">📦 Elite TFC Swag Pack</h4>
-            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">Unlock limited-edition developer hoodies, metal membership cards, branded laptop overlays, and elite representative badges.</p>
+
+          <div class="tfc-card" style="padding: 24px;">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">📦</div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Elite TFC Swag Pack</h3>
+            <p style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;">
+              Unlock limited-edition developer hoodies, metal membership cards, branded laptop overlays, and leader badges.
+            </p>
           </div>
-          
-          <div style="border: 2px solid var(--ink); padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink); color: var(--ink);">
-            <h4 style="font-weight: 900; font-size: 0.95rem; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">🚀 Pre-Seed Fast Track</h4>
-            <p style="font-size: 0.76rem; color: #444; line-height: 1.4; font-weight: 600;">If you start your own company, skip the initial screens and get warm-introductions directly into the flagship TFC Fellowship cohort.</p>
+
+          <div class="tfc-card" style="padding: 24px;">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🚀</div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Pre-Seed Fast Track</h3>
+            <p style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;">
+              When building your startup, skip the initial screens and get warm intros directly into the TFC Fellowship cohort.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start text-black" style="margin-top: 24px;">
-        
-        <!-- Left: Form & Success panel (col-span-7) -->
-        <div id="leftColumn" class="md:col-span-7 space-y-6" style="transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
-          <!-- Already an Ambassador Link Banner -->
-          <div class="panel" style="background: #fff; color: var(--ink); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 14px 20px; margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <span style="font-size: 0.85rem; font-weight: 800; color: var(--ink);">🔑 Registered Ambassador? Access your portal:</span>
-            <a href="ambassador.html" class="pill-btn" style="min-width: 150px; padding: 8px 16px; font-size: 0.76rem; margin: 0; background: #000; color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); text-transform: uppercase; font-weight: 900; text-align: center; display: inline-flex; justify-content: center; align-items: center;">
-              Login to Portal 🚪
-            </a>
-          </div>
-
-          <div id="signupFormPanel" class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 0;">
-            <h2 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px;">
-              Leader Application Form
-            </h2>
-
-            <form id="ambassadorSignupForm" class="space-y-4">
-              
-              <div class="form-group">
-                <label for="studentName">Full Name</label>
-                <input type="text" id="studentName" class="form-control" placeholder="e.g. John Doe" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
+    <!-- Workspace: Application Form (Left) & Milestones/Scarcity (Right) -->
+    <section class="tfc-section" id="applyForm" style="padding-top: 20px;">
+      <div class="tfc-container">
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px;" class="ambassador-grid">
+          
+          <!-- Left Column: Leader Application Form (Page 10) -->
+          <div>
+            <div class="tfc-card" id="signupFormPanel" style="padding: 36px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px;">
+                <h2 style="font-size: 1.35rem; font-weight: 800; margin: 0;">Leader Application Form</h2>
+                <span class="tfc-badge tfc-badge-orange">COHORT 1</span>
               </div>
 
-              <div class="form-group" style="position: relative;">
-                <label for="studentCollegeInput">Select or Search Your College</label>
-                <div class="custom-select-wrapper" style="position: relative; width: 100%;">
-                  <input type="text" id="studentCollegeInput" class="form-control" placeholder="Search or type your college..." autocomplete="off" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box;" required />
-                  <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); z-index: 1000; max-height: 180px; overflow-y: auto; margin-top: 4px; color: #000;">
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hansraj College">Hansraj College</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hindu College">Hindu College</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="St. Stephen's College">St. Stephen's College</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Miranda House">Miranda House</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
-                    <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Patna (Hybrid)">IIT Patna (Hybrid)</div>
+              <form id="ambassadorSignupForm">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                  <div>
+                    <label for="studentName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Full Name *</label>
+                    <input type="text" id="studentName" class="tfc-input" placeholder="e.g. John Doe" required />
                   </div>
+
+                  <div style="position: relative;">
+                    <label for="studentCollegeInput" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Select or Search Your College *</label>
+                    <div class="custom-select-wrapper" style="position: relative; width: 100%;">
+                      <input type="text" id="studentCollegeInput" class="tfc-input" placeholder="Search or type your college..." autocomplete="off" required />
+                      <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1.5px solid var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,0.1); z-index: 1000; max-height: 200px; overflow-y: auto; margin-top: 4px; border-radius: 10px;">
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hansraj College">Hansraj College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hindu College">Hindu College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="St. Stephen's College">St. Stephen's College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIT Delhi">IIT Delhi</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIIT Delhi">IIIT Delhi</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                    <div>
+                      <label for="studentEmail" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Email Address *</label>
+                      <input type="email" id="studentEmail" class="tfc-input" placeholder="e.g. johndoe@gmail.com" required />
+                    </div>
+                    <div>
+                      <label for="studentPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Phone Number *</label>
+                      <input type="tel" id="studentPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="motivation" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Why do you want to represent TFC on your campus? *</label>
+                    <textarea id="motivation" class="tfc-input" style="min-height: 80px;" placeholder="Tell us about your campus reach & active builder circles..." required></textarea>
+                  </div>
+
+                  <div>
+                    <label for="studentPassword" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Choose Portal Password *</label>
+                    <input type="password" id="studentPassword" class="tfc-input" placeholder="Create your portal password" required />
+                  </div>
+
+                  <div id="signupError" class="hidden p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm rounded-lg"></div>
+
+                  <button type="submit" id="submitBtn" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 6px;">
+                    Submit Application 🚀
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- SUCCESS PANEL -->
+            <div id="successPanel" class="tfc-card hidden" style="padding: 36px; text-align: center;">
+              <span style="font-size: 2.5rem;">🎉</span>
+              <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-orange); margin-top: 8px; margin-bottom: 6px;">
+                Welcome to the Council!
+              </h2>
+              <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 24px;">
+                Your Campus Ambassador account has been created successfully.
+              </p>
+
+              <!-- Credentials Card -->
+              <div style="background: var(--ink); color: #fff; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: left;">
+                <h3 style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--accent-lime); margin-bottom: 12px;">
+                  🔑 Ambassador Access Keys
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
+                  <div>Ambassador Code: <span id="successCode" style="font-family: monospace; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-weight: 800; color: var(--accent-lime);">TFC-AMB-XX</span></div>
+                  <div>Login Username: <span id="successEmail" style="font-family: monospace;">email@gmail.com</span></div>
+                  <div>Password: <span id="successPassword" style="font-family: monospace;">••••••••</span></div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="studentEmail">Email Address</label>
-                <input type="email" id="studentEmail" class="form-control" placeholder="e.g. johndoe@example.com" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-              </div>
-
-              <div class="form-group">
-                <label for="studentPhone">Phone Number</label>
-                <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 98765 43210" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-              </div>
-
-              <div class="form-group">
-                <label for="motivation">Why do you want to represent TFC on your campus?</label>
-                <textarea id="motivation" class="form-control" placeholder="Tell us about your campus reach & active circles..." required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; height: 80px;"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="studentPassword">Choose Portal Password</label>
-                <input type="password" id="studentPassword" class="form-control" placeholder="Create your portal password" required style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%;" />
-              </div>
-
-              <div id="signupError" class="hidden text-xs font-bold text-red-500 bg-red-50 p-2.5 border-2 border-red-500"></div>
-
-              <button type="submit" id="submitBtn" class="pill-btn" style="width: 100%; font-weight: 900; background: var(--orange); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px; margin-top: 12px;">
-                Submit Application 🚀
-              </button>
-            </form>
-          </div>
-
-          <!-- SUCCESS PANEL -->
-          <div id="successPanel" class="panel hidden" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; text-align: center;">
-            <span style="font-size: 3rem;">🎉</span>
-            <h2 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: var(--orange); margin-top: 8px;">
-              Welcome to the Council!
-            </h2>
-            <p style="font-size: 0.95rem; font-weight: 700; margin-top: 10px; color: #333;">
-              Your Campus Ambassador account has been created successfully.
-            </p>
-
-            <!-- Credentials Card -->
-            <div style="background: #fff7eb; border: 2.5px solid var(--ink); border-radius: 4px; padding: 16px; margin: 20px 0; text-align: left;">
-              <h3 style="font-size: 0.85rem; font-weight: 900; text-transform: uppercase; border-bottom: 1.5px dashed var(--ink); padding-bottom: 6px; margin-bottom: 10px;">
-                🔑 Ambassador Access Keys
-              </h3>
-              <div class="space-y-2 text-xs font-bold">
-                <div>Ambassador Code: <span id="successCode" style="font-family: monospace; background: #fff; border: 1.5px solid var(--ink); padding: 2px 6px; font-size: 0.85rem;">TFC-AMB-XX</span></div>
-                <div>Login Username: <span id="successEmail" style="font-family: monospace;">email@gmail.com</span></div>
-                <div>Password: <span id="successPassword" style="font-family: monospace;">••••••••</span></div>
-              </div>
-            </div>
-
-            <a href="ambassador.html" class="pill-btn" style="display: block; width: 100%; font-weight: 900; background: #000; color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); text-transform: uppercase; padding: 12px;">
-              Enter Ambassador Workspace 🚪
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Milestones & FOMO (col-span-5) -->
-        <div id="rightColumn" class="md:col-span-5 space-y-6" style="transition: transform 0.15s ease-out, opacity 0.15s ease-out; will-change: transform, opacity;">
-          <!-- Active Scarcity & Countdown Alert Banner -->
-          <div class="panel" style="background: #ff5d5d; color: #fff; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 18px; position: relative;">
-            <div style="font-weight: 900; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: #000; display: inline-block; padding: 2px 8px; margin-bottom: 6px;">
-              ⏳ TIMELINE SCARCITY
-            </div>
-            <h3 style="font-size: 1.15rem; font-weight: 900; text-transform: uppercase; line-height: 1.15; margin: 0 0 4px;">APPLICATION STAGE 01</h3>
-            <p style="font-size: 0.75rem; font-weight: 700; line-height: 1.35; color: #fff;">
-              Cohort 1 onboarding is active now. Complete your registration before September 15 to start building your campus leaderboard points immediately.
-            </p>
-          </div>
-
-          <!-- Milestones reward panel -->
-          <div class="panel" style="background: #fff; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
-            <h2 class="reveal-type" style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-              🎯 Milestone Rewards & Swag
-            </h2>
-            <div class="space-y-4">
-              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
-                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥉 10 Signups</div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Ambassador Certificate</div>
-                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
-                  Official representative certificate from The Future Council with a verified credential ID.
-                </p>
-              </div>
-              
-              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
-                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥈 50 Signups</div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">TFC T-Shirt & Swag Pack</div>
-                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
-                  Official premium developer/founder merchandise pack including custom-printed t-shirts, stickers, and swag.
-                </p>
-              </div>
-              
-              <div style="border-left: 4px solid var(--orange); padding-left: 12px;">
-                <div style="font-weight: 900; font-size: 0.95rem; color: var(--orange);">🥇 100 Signups</div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #333; margin-top: 2px;">Direct TFC Internship & Perks</div>
-                <p style="font-size: 0.75rem; color: #666; font-weight: 600; line-height: 1.35; margin-top: 2px;">
-                  Fast-track your application to work directly with the core team at TFC HQ and VCs.
-                </p>
-              </div>
+              <a href="ambassador.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">
+                Enter Ambassador Workspace 🚪
+              </a>
             </div>
           </div>
 
-          <!-- Community Status panel -->
-          <div class="panel" style="background: #ffe600; color: var(--ink); border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-              <span style="font-size: 1.4rem;">📢</span>
-              <h2 class="reveal-type" style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; margin: 0; color: #000;">
-                CAMPUS LEADER NETWORK
-              </h2>
-            </div>
-            <p style="font-size: 0.8rem; font-weight: 800; line-height: 1.4; color: #000; margin-bottom: 14px;">
-              Join a high-octane community of student builders. Coordinate launch sprints, host campus meetups, and bridge your college directly with active startup capital.
-            </p>
-            <div style="background: rgba(255, 255, 255, 0.75); border: 2px solid var(--ink); padding: 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; color: #000;" class="space-y-1.5">
-              <div style="display: flex; justify-content: space-between;">
-                <span>👥 Ambassador Enrollment:</span>
-                <span style="color: var(--orange); font-weight: 900;">Open to All Eligible Students</span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span>🏢 Target Campuses:</span>
-                <span style="color: var(--orange); font-weight: 900;">National & Global</span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span>📅 Applications Close:</span>
-                <span style="color: #dc2626; font-weight: 900;">September 15, 2026</span>
-              </div>
-            </div>
+          <!-- Right Column: Scarcity & Milestones -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
             
-            <!-- Real-time Countdown Timer (Cool Interaction) -->
-            <div style="background: #fff; border: 2px solid var(--ink); padding: 10px; margin-top: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 4px 4px 0 var(--ink); text-align: center; color: var(--ink);">
-              <span style="font-size: 0.68rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); display: flex; align-items: center; gap: 4px;">
-                ⚡ TIME TO CLAIM YOUR SEAT
-              </span>
-              <span id="countdownClock" style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 900; color: var(--ink); margin-top: 4px; letter-spacing: 0.05em;">00d : 00h : 00m : 00s</span>
+            <!-- Active Scarcity & Countdown Alert Banner -->
+            <div class="tfc-dark-banner" style="padding: 24px;">
+              <div style="font-weight: 800; font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent-lime); margin-bottom: 6px;">
+                ⏳ COHORT 01 DEADLINE
+              </div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Applications Stage 01</h3>
+              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 16px;">
+                Cohort 1 onboarding is active now. Complete your registration before September 15 to start building your campus leaderboard points immediately.
+              </p>
+              
+              <!-- Real-time Countdown Timer -->
+              <div style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 12px; text-align: center;">
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 4px;">Time Remaining</div>
+                <div id="countdownClock" style="font-family: monospace; font-size: 1.3rem; font-weight: 800; color: var(--accent-lime);">00d : 00h : 00m : 00s</div>
+              </div>
             </div>
-          </div>
-        </div>
 
+            <!-- Milestones reward panel -->
+            <div class="tfc-card" style="padding: 24px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                🎯 Milestone Rewards & Swag
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="border-left: 3px solid var(--primary-orange); padding-left: 12px;">
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--primary-orange);">🥉 10 Signups</div>
+                  <div style="font-size: 0.85rem; font-weight: 700; margin-top: 2px;">Ambassador Certificate</div>
+                  <p style="font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; line-height: 1.4;">
+                    Official representative certificate from The Future Council with a verified credential ID.
+                  </p>
+                </div>
+                
+                <div style="border-left: 3px solid var(--primary-orange); padding-left: 12px;">
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--primary-orange);">🥈 50 Signups</div>
+                  <div style="font-size: 0.85rem; font-weight: 700; margin-top: 2px;">TFC Swag & Hoodie Pack</div>
+                  <p style="font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; line-height: 1.4;">
+                    Official premium developer/founder merchandise pack including custom-printed t-shirts, stickers, and swag.
+                  </p>
+                </div>
+                
+                <div style="border-left: 3px solid var(--primary-orange); padding-left: 12px;">
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--primary-orange);">🥇 100 Signups</div>
+                  <div style="font-size: 0.85rem; font-weight: 700; margin-top: 2px;">Direct TFC Internship & Perks</div>
+                  <p style="font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; line-height: 1.4;">
+                    Fast-track your application to work directly with the core team at TFC HQ and venture partners.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </section>
   </main>
+
+  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <aside class="tfc-mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 15</div>
+    </div>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+  </aside>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     // Initialize Supabase Client
@@ -485,6 +487,7 @@
 
         signupFormPanel.classList.add('hidden');
         successPanel.classList.remove('hidden');
+        successPanel.scrollIntoView({ behavior: 'smooth' });
 
       } catch (err) {
         console.error("Ambassador signup failed:", err);
@@ -524,66 +527,6 @@
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Scroll-Linked Assemblies and Animations (Wow scrolling)
-    function initScrollLinkedTransforms() {
-      const hero = document.querySelector('.partners-hero');
-      const leftCol = document.getElementById('leftColumn');
-      const rightCol = document.getElementById('rightColumn');
-      const perks = document.getElementById('perksSection');
-      
-      function updateTransforms() {
-        const scrollY = window.scrollY;
-        const viewportHeight = window.innerHeight;
-        
-        // 1. Hero fades and slides up slightly on scroll
-        if (hero) {
-          const heroOpacity = Math.max(0, 1 - scrollY / 250);
-          const heroY = -scrollY * 0.28;
-          const heroScale = Math.max(0.94, 1 - scrollY / 1800);
-          hero.style.transform = `translate3d(0, ${heroY}px, 0) scale(${heroScale})`;
-          hero.style.opacity = heroOpacity;
-        }
-        
-        // 2. Perks Section (now sits right below the hero) fades/slides slightly on scroll
-        if (perks) {
-          const progress = Math.min(1, scrollY / 250);
-          const perksY = -scrollY * 0.15;
-          const perksScale = Math.max(0.95, 1 - scrollY / 2000);
-          const perksOpacity = Math.max(0, 1 - scrollY / 550);
-          perks.style.transform = `translate3d(0, ${perksY}px, 0) scale(${perksScale})`;
-          perks.style.opacity = perksOpacity;
-        }
-        
-        // 3. Left & Right Columns slide inward to assemble as you scroll
-        if (leftCol && rightCol) {
-          const start = 120;
-          const end = 340;
-          let progress = 0;
-          if (scrollY > start) {
-            progress = Math.min(1, (scrollY - start) / (end - start));
-          }
-          
-          const leftX = -100 * (1 - progress);
-          const rightX = 100 * (1 - progress);
-          const rot = 3 * (1 - progress);
-          const colOpacity = 0.35 + 0.65 * progress;
-          
-          leftCol.style.transform = `translate3d(${leftX}px, 0, 0) rotate(${-rot}deg)`;
-          leftCol.style.opacity = colOpacity;
-          
-          rightCol.style.transform = `translate3d(${rightX}px, 0, 0) rotate(${rot}deg)`;
-          rightCol.style.opacity = colOpacity;
-        }
-      }
-      
-      window.addEventListener('scroll', updateTransforms, { passive: true });
-      window.addEventListener('resize', updateTransforms, { passive: true });
-      updateTransforms(); // Initial run
-    }
-    
-    // Call after DOM is ready
-    initScrollLinkedTransforms();
   </script>
 </body>
 </html>

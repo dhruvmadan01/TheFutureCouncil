@@ -97,306 +97,422 @@
       color: #ff9e59 !important;
     }
   </style>
+  <link rel="icon" href="TFC.png" type="image/png">
+  <link rel="apple-touch-icon" href="TFC.png">
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="desktop-window">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
-      <div class="window-title">The Future Council</div>
-    </header>
+    </div>
+  </header>
 
-    <nav class="window-tabs">
-      <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
-      <a href="branches.html" class="window-tab">Our Branches</a>
-      <a href="resources.html" class="window-tab">Resources</a>
-      <a href="join.html" class="window-tab active">Join Council</a>
-    </nav>
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
+    </div>
 
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link active">Join Council</a></li>
+    </ul>
 
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
+    </div>
+  </div>
 
-    <section class="workspace">
-      <!-- Nav Header -->
-      <div class="partners-nav-header">
-        <a href="index.html" class="back-link-btn">
-          <span class="icon">←</span>
-          <span>Back to Home Hub</span>
-        </a>
-        <div class="brand-row mini-brand">
-          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
-          <span class="mini-kicker">Join Ecosystem</span>
-        </div>
-      </div>
-
-      <!-- Main Layout Grid -->
-      <div class="hero-grid">
-        <!-- Left Column: Copy & Checklist (Flyer Inspired) -->
-        <div class="hero-copy">
-          <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 0.95; margin-bottom: 1.5rem;">
-            WANT TO BECOME A MILLIONAIRE IN COLLEGE?
+  <main class="tfc-section-lg">
+    <div class="tfc-container">
+      
+      <!-- Split Layout (Page 09 Wireframe) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 48px; align-items: start; margin-bottom: 48px;">
+        
+        <!-- Left Column: Value Prop Recap + Testimonial (Page 09) -->
+        <div>
+          <span class="tfc-eyebrow">MEMBERSHIP APPLICATION</span>
+          <h1 class="tfc-headline" style="font-size: clamp(2rem, 3.8vw, 3.2rem); margin-bottom: 18px;">
+            Join 1,000+ builders across 90+ campuses.
           </h1>
-          <p class="hero-text" style="font-size: 1.15rem; color: var(--orange); font-weight: 800; text-transform: uppercase; margin-bottom: 1.25rem;">
-            Don't just dream about building a company. Build one. Or join one.
-          </p>
-          <p class="hero-text" style="margin-bottom: 1.5rem;">
-            The Future Council is a global student-run ecosystem for founders, operators, designers, developers, and marketers. Fill the registration form to pre-approve your membership, generate your custom Member ID card, and access our network.
+          <p class="tfc-subheadline" style="margin-bottom: 28px;">
+            An open door into India's premier student startup ecosystem. Connect with engineers, find co-founders, access curated playbooks, and build real ventures.
           </p>
 
-          <!-- Checklist -->
-          <div class="panel" style="background: #fff7eb; padding: 24px; margin-top: 1.5rem; color: var(--ink);">
-            <h2 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 1rem; border-bottom: 2px solid var(--ink); padding-bottom: 8px;">What You Access When You Join</h2>
-            <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; text-align: left;">
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Find a co-founder and build your startup team
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect with developers, designers, and marketers globally
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Access exclusive startup playbooks and builder playbooks
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Build with ambitious builders across top colleges and campuses worldwide
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Connect directly with corporate sponsors, mentors, and investors
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Land startup internships and operations roles
-              </li>
-              <li style="font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; line-height: 1.45;">
-                <span style="color: var(--orange); font-weight: 900; font-size: 1.1rem;">✓</span> Participate in pitch clinics, cohorts, and IRL founder mixers
-              </li>
-            </ul>
+          <!-- Bullets: Mixers · Builder Vaults · Project Groups -->
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; shrink-0;">🍕</span>
+              <div>
+                <strong style="font-size: 1rem; color: var(--ink);">Curated IRL Mixers</strong>
+                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Exclusive invitations to offline dinners, hack sprints, and founder gatherings across campuses.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; shrink-0;">📚</span>
+              <div>
+                <strong style="font-size: 1rem; color: var(--ink);">Founder Builder Vaults</strong>
+                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Battle-tested pitch decks, cold email templates, operator frameworks, and launch swipe files.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; shrink-0;">⚡</span>
+              <div>
+                <strong style="font-size: 1rem; color: var(--ink);">Autonomous Project Squads</strong>
+                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Find technical co-founders, developers, and designers to build products from 0 to 1.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Quote Card (Page 09) -->
+          <div class="tfc-card" style="background: #FFFFFF; border-left: 4px solid var(--primary-orange); padding: 22px;">
+            <p style="font-size: 0.95rem; font-style: italic; color: var(--ink); margin-bottom: 12px; line-height: 1.5;">
+              "Future Council connected me with my co-founder and gave us the structure we needed to validate our prototype within weeks."
+            </p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-orange); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.78rem;">
+                FC
+              </div>
+              <div>
+                <strong style="font-size: 0.85rem; display: block;">Student Founder</strong>
+                <span style="font-size: 0.75rem; color: var(--ink-soft);">DTU Tech Chapter</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Right Column: Signup Form & Success View -->
-        <div class="hero-side" style="display: flex; flex-direction: column; gap: 20px;">
-          <!-- Form Panel -->
-          <div class="admin-form-panel" id="signupFormPanel" style="width: 100%; margin: 0; box-sizing: border-box; color: var(--ink);">
-            <h2 style="border-bottom: 3px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Join The Council</h2>
+        <!-- Right Column: 3-Step Application Form (Page 09) -->
+        <div>
+          <div class="tfc-card" id="signupFormPanel" style="padding: 36px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
             
-            <div id="signupError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
+            <!-- 3-Step Progress Bar (Basics → College/Role → Interests) -->
+            <div style="margin-bottom: 24px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; color: var(--ink-soft);">
+                <span id="stepLabel1" style="color: var(--primary-orange);">1. Basics</span>
+                <span id="stepLabel2">2. College & Role</span>
+                <span id="stepLabel3">3. Interests</span>
+              </div>
+              <div style="width: 100%; height: 6px; background: rgba(20, 17, 15, 0.08); border-radius: 9999px; overflow: hidden;">
+                <div id="stepProgressBar" style="width: 33.33%; height: 100%; background: var(--primary-orange); border-radius: 9999px; transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <div id="signupError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm rounded-lg" style="margin-bottom: 16px;">
               Error occurred.
             </div>
-            
+
             <form id="signupForm">
-              <!-- STEP 1 CONTAINER -->
+              <!-- STEP 1: BASICS -->
               <div id="step1Container">
-                <div class="form-group">
-                  <label for="studentName">Full Name</label>
-                  <input type="text" id="studentName" class="form-control" placeholder="e.g. John Doe" required />
-                </div>
-                <div class="form-group" style="position: relative;">
-                  <label for="studentCollegeInput">Select or Search Your College</label>
-                  <div class="custom-select-wrapper" style="position: relative; width: 100%;">
-                    <input type="text" id="studentCollegeInput" class="form-control" placeholder="Search or type your college..." autocomplete="off" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px; width: 100%; box-sizing: border-box;" required />
-                    <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); z-index: 1000; max-height: 200px; overflow-y: auto; margin-top: 4px; color: #000;">
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hansraj College">Hansraj College</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Hindu College">Hindu College</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="St. Stephen's College">St. Stephen's College</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Miranda House">Miranda House</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indira Gandhi Delhi Technical University for Women (IGDTUW)">Indira Gandhi Delhi Technical University for Women (IGDTUW)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Delhi">IIT Delhi</div>
-                      <div class="dropdown-item" style="padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; font-weight: 700;" data-value="IIT Patna (Hybrid)">IIT Patna (Hybrid)</div>
-                      <div id="dropdownItemManual" style="padding: 10px 8px; cursor: pointer; border-top: 2px dashed var(--ink); background: #fff0e6; font-weight: 900; color: var(--orange); text-align: center;">✨ College not listed? Type manually</div>
-                    </div>
-                  </div>
-                  <div id="manualCollegeToggleRow" style="margin-top: 6px; font-size: 0.78rem; font-weight: 700; color: #555; display: flex; justify-content: space-between; align-items: center; font-family: inherit;">
-                    <span>College not listed?</span>
-                    <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--orange); text-decoration: underline; font-weight: 800;">Type Manually ✎</a>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="studentYear">Current Year of Study</label>
-                  <select id="studentYear" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;" required>
-                    <option value="1st Year">1st Year</option>
-                    <option value="2nd Year">2nd Year</option>
-                    <option value="3rd Year">3rd Year</option>
-                    <option value="4th Year">4th Year</option>
-                    <option value="Postgraduate">Postgraduate</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="studentEmail">Student Email</label>
-                  <input type="email" id="studentEmail" class="form-control" placeholder="e.g. johndoe@example.com" required />
-                </div>
-                <div class="form-group">
-                  <label for="studentPhone">Phone Number</label>
-                  <input type="tel" id="studentPhone" class="form-control" placeholder="e.g. +91 98765 43210" required />
-                </div>
-                <div class="form-group">
-                  <label for="studentCountry">Country</label>
-                  <input type="text" id="studentCountry" class="form-control" placeholder="e.g. India" required />
-                </div>
-                <div class="form-group">
-                  <label for="fellowshipApply">Are you interested in the Fellowship Program?</label>
-                  <select id="fellowshipApply" class="form-control" style="background: #fff; color: #000; font-weight: 700; border: 2px solid var(--ink); padding: 8px;">
-                    <option value="no">No, just joining the general network</option>
-                    <option value="yes">Yes, I am interested 🚀</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="referralCode">Referral Code / Ambassador Code (Optional)</label>
-                  <input type="text" id="referralCode" class="form-control" placeholder="e.g. TFC-AMB-HANSRAJ" />
-                </div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Personal Details</h3>
                 
-                <button type="button" id="nextStepBtn" class="admin-submit-btn" style="margin-top: 10px;">Next: Onboarding Questionnaire →</button>
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  <div>
+                    <label for="studentName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Full Name *</label>
+                    <input type="text" id="studentName" class="tfc-input" placeholder="e.g. John Doe" required />
+                  </div>
+                  <div>
+                    <label for="studentEmail" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Student Email *</label>
+                    <input type="email" id="studentEmail" class="tfc-input" placeholder="e.g. johndoe@college.edu" required />
+                  </div>
+                  <div>
+                    <label for="studentPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Phone Number *</label>
+                    <input type="tel" id="studentPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
+                  </div>
+                  <div>
+                    <label for="studentCountry" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Country *</label>
+                    <input type="text" id="studentCountry" class="tfc-input" value="India" placeholder="e.g. India" required />
+                  </div>
+
+                  <button type="button" id="btnGoToStep2" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 10px;">
+                    Continue to Step 2 →
+                  </button>
+                </div>
               </div>
 
-              <!-- STEP 2 CONTAINER -->
+              <!-- STEP 2: COLLEGE & ROLE -->
               <div id="step2Container" style="display: none;">
-                <p style="font-size: 0.82rem; font-weight: bold; background: #FFF9E6; border: 2px solid var(--ink); padding: 10px; margin-bottom: 18px; line-height: 1.4; color: var(--ink);">
-                  ✨ Step 1 credentials validated. Please answer these quick onboarding questions to complete your application.
-                </p>
-                <div class="form-group">
-                  <label for="question1">Q1: Why are you interested in entrepreneurship?</label>
-                  <textarea id="question1" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="Tell us what draws you to building or startup culture..." required></textarea>
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Campus & Academic Standing</h3>
+                
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  <div style="position: relative;">
+                    <label for="studentCollegeInput" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Select or Search Your College *</label>
+                    <div class="custom-select-wrapper" style="position: relative; width: 100%;">
+                      <input type="text" id="studentCollegeInput" class="tfc-input" placeholder="Search or type your college..." autocomplete="off" required />
+                      <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1.5px solid var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,0.1); z-index: 1000; max-height: 200px; overflow-y: auto; margin-top: 4px; border-radius: 10px;">
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hansraj College">Hansraj College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hindu College">Hindu College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="St. Stephen's College">St. Stephen's College</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIT Delhi">IIT Delhi</div>
+                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIIT Delhi">IIIT Delhi</div>
+                        <div id="dropdownItemManual" style="padding: 10px 14px; cursor: pointer; background: #fff0e6; font-weight: 800; color: var(--primary-orange); text-align: center; font-size: 0.85rem;">✨ Type custom college name</div>
+                      </div>
+                    </div>
+                    <div id="manualCollegeToggleRow" style="margin-top: 6px; font-size: 0.78rem; display: flex; justify-content: space-between; color: var(--ink-soft);">
+                      <span>College not listed?</span>
+                      <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--primary-orange); font-weight: 700;">Type Manually ✎</a>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="studentYear" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Current Year of Study *</label>
+                    <select id="studentYear" class="tfc-input" required>
+                      <option value="1st Year">1st Year</option>
+                      <option value="2nd Year">2nd Year</option>
+                      <option value="3rd Year">3rd Year</option>
+                      <option value="4th Year">4th Year</option>
+                      <option value="Postgraduate">Postgraduate</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="fellowshipApply" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Are you interested in Fellowship '26?</label>
+                    <select id="fellowshipApply" class="tfc-input">
+                      <option value="no">No, general network access only</option>
+                      <option value="yes">Yes, interested in Fellowship '26 🚀</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="referralCode" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Ambassador Referral Code (Optional)</label>
+                    <input type="text" id="referralCode" class="tfc-input" placeholder="e.g. TFC-AMB-HANSRAJ" />
+                  </div>
+
+                  <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="button" id="btnBackToStep1" class="tfc-btn tfc-btn-outline" style="flex: 1;">
+                      ← Back
+                    </button>
+                    <button type="button" id="nextStepBtn" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="flex: 2;">
+                      Continue to Interests →
+                    </button>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="question2">Q2: Are you building anything right now or thinking of building something? If yes, on which stage are you, tell us more.</label>
-                  <textarea id="question2" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="Describe your idea, project, or startup (even if it is just a concept)..." required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="question3">Q3: What's your motivation to join The Future Council?</label>
-                  <textarea id="question3" class="form-control" style="border: 2px solid var(--ink); padding: 8px; background: #fff; color: #000; width: 100%; min-height: 80px;" placeholder="What do you hope to learn or contribute..." required></textarea>
+              </div>
+
+              <!-- STEP 3: INTEREST TAGS (MULTI-SELECT CHIPS) & ONBOARDING (Page 09) -->
+              <div id="step3Container" style="display: none;">
+                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 6px;">Builder Interests & Questions</h3>
+                <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">Select all areas you want to explore or build in:</p>
+
+                <!-- Interest Chips (Page 09 Wireframe: DESIGN, GROWTH, ENGINEERING, PRODUCT, etc.) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;" id="interestChipsContainer">
+                  <span class="tfc-chip active" data-interest="ENGINEERING">ENGINEERING</span>
+                  <span class="tfc-chip" data-interest="PRODUCT">PRODUCT</span>
+                  <span class="tfc-chip" data-interest="DESIGN">DESIGN</span>
+                  <span class="tfc-chip" data-interest="GROWTH">GROWTH</span>
+                  <span class="tfc-chip" data-interest="AI/ML">AI / ML</span>
+                  <span class="tfc-chip" data-interest="FINTECH">FINTECH</span>
+                  <span class="tfc-chip" data-interest="HARDWARE">HARDWARE</span>
+                  <span class="tfc-chip" data-interest="OPERATIONS">OPERATIONS</span>
                 </div>
 
-                <button type="button" id="completeSignupBtn" class="admin-submit-btn" style="margin-top: 10px;">Complete Registration & Get Badge</button>
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  <div>
+                    <label for="question1" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q1: Why are you interested in entrepreneurship? *</label>
+                    <textarea id="question1" class="tfc-input" style="min-height: 70px;" placeholder="Tell us what draws you to startup culture..." required></textarea>
+                  </div>
+
+                  <div>
+                    <label for="question2" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q2: Are you building anything right now? Tell us more. *</label>
+                    <textarea id="question2" class="tfc-input" style="min-height: 70px;" placeholder="Describe your concept or project..." required></textarea>
+                  </div>
+
+                  <div>
+                    <label for="question3" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q3: What's your motivation to join The Future Council? *</label>
+                    <textarea id="question3" class="tfc-input" style="min-height: 70px;" placeholder="What do you hope to learn or contribute..." required></textarea>
+                  </div>
+
+                  <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="button" id="btnBackToStep2" class="tfc-btn tfc-btn-outline" style="flex: 1;">
+                      ← Back
+                    </button>
+                    <button type="button" id="completeSignupBtn" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="flex: 2;">
+                      Complete & Get Badge ⚡
+                    </button>
+                  </div>
+                </div>
               </div>
             </form>
 
           </div>
 
           <!-- Success View (Hidden by default) -->
-          <div class="admin-form-panel hidden" id="successPanel" style="width: 100%; margin: 0; box-sizing: border-box; text-align: center; color: var(--ink);">
-            <h2 style="color: #10b981; border-color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 8px; margin-bottom: 20px; font-size: 1.25rem; font-weight: 900;">Thank You!</h2>
-            
-            <p style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.45;">
-              We have received your application. We will reach out to you for further shortlisting within a week! Here is your digital ecosystem member card:
+          <div id="successPanel" class="tfc-card hidden" style="padding: 36px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md); text-align: center;">
+            <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 14px;">APPLICATION ACCEPTED</div>
+            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Welcome to Future Council!</h3>
+            <p style="font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 24px;">
+              Your student builder profile is now active. Here is your official verified Council Member Card:
             </p>
 
-            <!-- ID Card Container -->
-            <div class="member-card-container">
-              <div class="member-card" style="margin: 0 auto; box-shadow: 4px 4px 0 var(--ink);">
-                <!-- Header -->
-                <div class="member-card-header-bar">
-                  <img src="TFC.png" alt="TFC Logo" class="member-card-logo" />
-                  <span class="member-card-title">THE FUTURE COUNCIL</span>
+            <!-- Digital Member Card -->
+            <div style="background: var(--ink); color: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-bottom: 24px; border: 2px solid var(--primary-orange); box-shadow: 0 12px 30px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <img src="TFC.png" alt="TFC Logo" style="width: 28px; height: 28px; border-radius: 6px; background: #fff; padding: 2px; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
+                  <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px;">THE FUTURE COUNCIL</span>
                 </div>
-                
-                <!-- Body -->
-                <div class="member-card-body">
-                  <!-- Photo -->
-                  <div class="member-card-photo-box" style="font-size: 3rem; background: #fff;">🎓</div>
-                  
-                  <!-- Details -->
-                  <div class="member-card-details-wrap">
-                    <h3 id="cardMemberName" style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; margin: 0;">Kartik Goel</h3>
-                    
-                    <!-- Info Grid -->
-                    <div class="member-card-info-grid" style="padding: 10px; margin-top: 8px;">
-                      <div class="member-card-field">
-                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">TFC TIER</span>
-                        <span class="member-card-value" style="font-size: 0.72rem; line-height: 1.3;">Student</span>
-                      </div>
-                      <div class="member-card-field">
-                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">COLLEGE</span>
-                        <span class="member-card-value" id="cardMemberCollege" style="font-size: 0.72rem; line-height: 1.3;">SRCC</span>
-                      </div>
-                      <div class="member-card-field">
-                        <span class="member-card-label" style="font-size: 0.55rem; line-height: 1.1; margin-bottom: 2px;">ID NUMBER</span>
-                        <span class="member-card-value font-mono" id="cardMemberId" style="font-size: 0.72rem; line-height: 1.3;">TFC-2026-0812</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Footer -->
-                  <div class="member-card-footer-row" style="padding-top: 10px;">
-                    <span class="member-status-badge" style="padding: 3px 8px; font-size: 0.6rem; display: flex; align-items: center; gap: 4px;">
-                      <span class="pulsing-dot"></span>
-                      <span>Active Member</span>
-                    </span>
-                    <div class="member-card-qr-box" style="width: 44px; height: 44px; padding: 2px;">
-                      <img id="cardMemberQr" src="" alt="Verification QR" style="width: 100%; height: 100%; object-fit: contain;" />
-                    </div>
-                  </div>
+                <span class="tfc-badge tfc-badge-orange" style="font-size: 0.7rem;">COUNCIL ID</span>
+              </div>
+
+              <div style="margin-bottom: 20px;">
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: rgba(255,255,255,0.6); letter-spacing: 0.5px;">BUILDER NAME</div>
+                <div id="cardMemberName" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff; margin-top: 2px;">John Doe</div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px; background: rgba(255,255,255,0.06); border-radius: 10px; margin-bottom: 16px;">
+                <div>
+                  <div style="font-size: 0.68rem; text-transform: uppercase; color: rgba(255,255,255,0.6);">CAMPUS / YEAR</div>
+                  <div id="cardMemberCollege" style="font-size: 0.85rem; font-weight: 700; color: #fff; margin-top: 2px;">IIT Delhi</div>
                 </div>
+                <div>
+                  <div style="font-size: 0.68rem; text-transform: uppercase; color: rgba(255,255,255,0.6);">MEMBER ID</div>
+                  <div id="cardMemberId" style="font-size: 0.85rem; font-weight: 800; font-family: monospace; color: var(--accent-lime); margin-top: 2px;">TFC-2026-8921</div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 14px;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--accent-lime); font-weight: 700;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-lime); display: inline-block;"></span>
+                  Active Verified Member
+                </span>
+                <img id="cardMemberQr" src="" alt="Verification QR" style="width: 44px; height: 44px; border-radius: 6px; background: #fff; padding: 2px;" />
               </div>
             </div>
 
-            <p style="font-size: 0.8rem; color: #666; margin-bottom: 1.5rem; line-height: 1.45;">
-              Our campus society chapter leaders will reach out to you via WhatsApp/Email to onboard your team and activate your local branch.
+            <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 20px; line-height: 1.5;">
+              Our campus chapter leaders will connect with you via WhatsApp/Email to onboard your team and introduce you to fellow builders.
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
-              <a href="resources.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #ffd93d; color: #000; border: 3px solid #000; font-weight: 900;">
-                🎁 Access Member Swipe File & Resources →
+              <a href="resources.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">
+                Access Founder Resources Library →
               </a>
-              <a href="index.html" class="admin-submit-btn" style="display: block; text-decoration: none; text-align: center; background: #f0f0f0; color: #000;">Return to Home Hub</a>
+              <a href="index.html" class="tfc-btn tfc-btn-outline" style="width: 100%;">Return to Home</a>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand-side">
-          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
-          <a href="index.html" class="footer-link">Back to Hub</a>
-        </div>
-        <div class="footer-meta">
-          <div class="apply-now">Join Our Ecosystem</div>
-          <div class="url-text">thefuturecouncil.in</div>
-          <div class="footer-credit">
-            This website was built by <a href="https://dhruvmadan.in" target="_blank" rel="noopener noreferrer">Dhruv Madan</a>
-          </div>
-        </div>
-      </footer>
-    </section>
+    </div>
   </main>
+
+  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <aside class="tfc-mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 15</div>
+    </div>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+  </aside>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Elements
       const signupForm = document.getElementById('signupForm');
-
-      // EmailJS Configurations
-      const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"; // Replace with your EmailJS Public Key
-      const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // Replace with your EmailJS Service ID
-      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Replace with your EmailJS Template ID
-
-      if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-      }
       const signupFormPanel = document.getElementById('signupFormPanel');
       const successPanel = document.getElementById('successPanel');
       const signupError = document.getElementById('signupError');
-      const nextStepBtn = document.getElementById('nextStepBtn');
+
+      // Containers & Buttons for 3-Step Form
       const step1Container = document.getElementById('step1Container');
       const step2Container = document.getElementById('step2Container');
+      const step3Container = document.getElementById('step3Container');
+
+      const btnGoToStep2 = document.getElementById('btnGoToStep2');
+      const btnBackToStep1 = document.getElementById('btnBackToStep1');
+      const nextStepBtn = document.getElementById('nextStepBtn');
+      const btnBackToStep2 = document.getElementById('btnBackToStep2');
+      const completeSignupBtn = document.getElementById('completeSignupBtn');
+
+      const stepProgressBar = document.getElementById('stepProgressBar');
+      const stepLabel1 = document.getElementById('stepLabel1');
+      const stepLabel2 = document.getElementById('stepLabel2');
+      const stepLabel3 = document.getElementById('stepLabel3');
 
       // Initialize Supabase Client
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // EmailJS Configurations
+      const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+      const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+
+      if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+      }
 
       // Custom search-select dropdown logic
       const collegeInput = document.getElementById('studentCollegeInput');
@@ -472,7 +588,6 @@
       }
 
       if (collegeInput && collegeDropdown) {
-        // Show dropdown on focus & click
         collegeInput.addEventListener('focus', () => {
           openCollegeDropdown();
         });
@@ -480,7 +595,6 @@
           openCollegeDropdown();
         });
 
-        // Filter dropdown items as the user types
         collegeInput.addEventListener('input', () => {
           if (isManualCollege) return;
           collegeDropdown.style.display = 'block';
@@ -499,7 +613,6 @@
           });
         });
 
-        // Select an item
         dropdownItems.forEach(item => {
           if (item === dropdownItemManual) return;
           item.addEventListener('click', (e) => {
@@ -509,7 +622,6 @@
           });
         });
 
-        // Hide dropdown if clicked outside
         document.addEventListener('click', (e) => {
           if (!e.target.closest('.custom-select-wrapper')) {
             collegeDropdown.style.display = 'none';
@@ -532,136 +644,117 @@
         }
       }
 
+      // Multi-Select Interest Chips Toggle
+      const interestChips = document.querySelectorAll('#interestChipsContainer .tfc-chip');
+      interestChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chip.classList.toggle('active');
+        });
+      });
+
       // State tracking variables
       let currentEmail = '';
       let currentName = '';
       let currentCollegeText = '';
       let currentCombinedCollegeBase = '';
       let currentMemberId = '';
-      let currentPassword = '';
+      const defaultPassword = 'member2026';
 
-      // STEP 1 Checkpoint Handler
-      nextStepBtn.addEventListener('click', async () => {
-        signupError.classList.add('hidden');
+      // ==========================================
+      // STEP 1 -> STEP 2
+      // ==========================================
+      if (btnGoToStep2) {
+        btnGoToStep2.addEventListener('click', () => {
+          signupError.classList.add('hidden');
+          const nameInput = document.getElementById('studentName');
+          const emailInput = document.getElementById('studentEmail');
+          const phoneInput = document.getElementById('studentPhone');
+          const countryInput = document.getElementById('studentCountry');
 
-        // Form fields
-        const name = document.getElementById('studentName').value.trim();
-        const collegeInputVal = document.getElementById('studentCollegeInput').value.trim();
-        const studentYearVal = document.getElementById('studentYear').value;
-        const email = document.getElementById('studentEmail').value.trim().toLowerCase();
-        const phone = document.getElementById('studentPhone').value.trim();
-        const country = document.getElementById('studentCountry').value.trim();
-        const defaultPassword = 'member2026';
-        const refCode = document.getElementById('referralCode').value.trim();
-        const fellowshipApply = document.getElementById('fellowshipApply').value;
-        const societyName = document.getElementById('societyName') ? document.getElementById('societyName').value.trim() : '';
-
-        // Validate Step 1 fields
-        if (!name || !collegeInputVal || !email || !phone || !country) {
-          signupForm.reportValidity();
-          return;
-        }
-
-        nextStepBtn.disabled = true;
-        nextStepBtn.textContent = 'Saving details...';
-
-        const finalCollege = collegeInputVal;
-        const cleanCollegeDisplay = `${finalCollege}, ${studentYearVal}`;
-
-        // Combine college and phone in backwards-compatible layout for profile parser
-        let combinedCollege = `${cleanCollegeDisplay} | Phone: ${phone} | Country: ${country} | Source: JoinPage`;
-        if (fellowshipApply === 'yes') {
-          combinedCollege += ` | Fellowship: Yes | Society: ${societyName}`;
-        }
-        if (refCode) {
-          combinedCollege += ` | RefBy: ${refCode}`;
-        }
-
-        // Generate a random 4-digit number for TFC ID
-        const randomIdNum = Math.floor(1000 + Math.random() * 9000);
-        const memberId = `TFC-2026-${randomIdNum}`;
-
-        try {
-          // Check if email already exists
-          const { data: dbMember, error: queryError } = await supabaseClient
-            .from('members')
-            .select('*')
-            .eq('email', email)
-            .maybeSingle();
-
-          if (queryError) {
-            console.error("Database query warning:", queryError);
+          if (!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim() || !countryInput.value.trim()) {
+            if (!nameInput.value.trim()) nameInput.reportValidity();
+            else if (!emailInput.value.trim()) emailInput.reportValidity();
+            else if (!phoneInput.value.trim()) phoneInput.reportValidity();
+            else countryInput.reportValidity();
+            return;
           }
 
-          if (dbMember) {
-            const hasAnswers = dbMember.college && dbMember.college.includes(' | Q1: ');
-            if (hasAnswers) {
-              signupError.textContent = "A member with this email already exists! Try logging in or contact support.";
-              signupError.classList.remove('hidden');
-              nextStepBtn.disabled = false;
-              nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
-              return;
-            } else {
-              // Proceed directly to Step 2 using existing member data
-              currentEmail = dbMember.email;
-              currentName = dbMember.name;
-              currentCollegeText = cleanCollegeDisplay;
-              currentCombinedCollegeBase = dbMember.college;
-              currentMemberId = dbMember.member_id || memberId;
-              currentPassword = dbMember.password || defaultPassword;
+          currentName = nameInput.value.trim();
+          currentEmail = emailInput.value.trim().toLowerCase();
 
-              // Transition to Step 2
-              step1Container.style.display = 'none';
-              step2Container.style.display = 'block';
-              signupFormPanel.scrollIntoView({ behavior: 'smooth' });
-              nextStepBtn.disabled = false;
-              nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
-              return;
-            }
-          }
-
-          // Insert registration checkpoint into database (Unverified/Student tier)
-          const memberData = {
-            email: email,
-            name: name,
-            college: combinedCollege,
-            tier: 'Student',
-            member_id: memberId,
-            password: defaultPassword,
-            image: ''
-          };
-
-          const { error: insertError } = await supabaseClient
-            .from('members')
-            .insert([memberData]);
-
-          if (insertError) throw insertError;
-
-          // Cache Step 1 state
-          currentEmail = email;
-          currentName = name;
-          currentCollegeText = cleanCollegeDisplay;
-          currentCombinedCollegeBase = combinedCollege;
-          currentMemberId = memberId;
-          currentPassword = defaultPassword;
-
-          // Transition to Step 2
+          // Advance UI to Step 2
           step1Container.style.display = 'none';
           step2Container.style.display = 'block';
+          stepProgressBar.style.width = '66.66%';
+          stepLabel2.style.color = 'var(--primary-orange)';
           signupFormPanel.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
 
-        } catch (err) {
-          console.error("Step 1 saving failed:", err);
-          signupError.textContent = "Saving details failed: " + (err.message || "Please check your network and try again.");
-          signupError.classList.remove('hidden');
-        } finally {
-          nextStepBtn.disabled = false;
-          nextStepBtn.textContent = 'Next: Onboarding Questionnaire →';
-        }
-      });
+      // ==========================================
+      // STEP 2 -> STEP 1 (Back)
+      // ==========================================
+      if (btnBackToStep1) {
+        btnBackToStep1.addEventListener('click', () => {
+          step2Container.style.display = 'none';
+          step1Container.style.display = 'block';
+          stepProgressBar.style.width = '33.33%';
+          stepLabel2.style.color = 'var(--ink-soft)';
+        });
+      }
 
-      // STEP 2 Form Complete Handler
-      const completeSignupBtn = document.getElementById('completeSignupBtn');
+      // ==========================================
+      // STEP 2 -> STEP 3
+      // ==========================================
+      if (nextStepBtn) {
+        nextStepBtn.addEventListener('click', () => {
+          signupError.classList.add('hidden');
+          const collegeInputVal = collegeInput.value.trim();
+          const studentYearVal = document.getElementById('studentYear').value;
+
+          if (!collegeInputVal) {
+            collegeInput.reportValidity();
+            return;
+          }
+
+          const phone = document.getElementById('studentPhone').value.trim();
+          const country = document.getElementById('studentCountry').value.trim();
+          const refCode = document.getElementById('referralCode') ? document.getElementById('referralCode').value.trim() : '';
+          const fellowshipApply = document.getElementById('fellowshipApply') ? document.getElementById('fellowshipApply').value : 'no';
+
+          currentCollegeText = `${collegeInputVal}, ${studentYearVal}`;
+          currentCombinedCollegeBase = `${currentCollegeText} | Phone: ${phone} | Country: ${country} | Source: JoinPage`;
+          if (fellowshipApply === 'yes') {
+            currentCombinedCollegeBase += ` | Fellowship: Yes`;
+          }
+          if (refCode) {
+            currentCombinedCollegeBase += ` | RefBy: ${refCode}`;
+          }
+
+          // Advance UI to Step 3
+          step2Container.style.display = 'none';
+          step3Container.style.display = 'block';
+          stepProgressBar.style.width = '100%';
+          stepLabel3.style.color = 'var(--primary-orange)';
+          signupFormPanel.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // ==========================================
+      // STEP 3 -> STEP 2 (Back)
+      // ==========================================
+      if (btnBackToStep2) {
+        btnBackToStep2.addEventListener('click', () => {
+          step3Container.style.display = 'none';
+          step2Container.style.display = 'block';
+          stepProgressBar.style.width = '66.66%';
+          stepLabel3.style.color = 'var(--ink-soft)';
+        });
+      }
+
+      // ==========================================
+      // STEP 3 SUBMIT (Complete & Get Badge)
+      // ==========================================
       if (completeSignupBtn) {
         completeSignupBtn.addEventListener('click', async () => {
           const q1Input = document.getElementById('question1');
@@ -669,66 +762,83 @@
           const q3Input = document.getElementById('question3');
 
           if (!q1Input.value.trim() || !q2Input.value.trim() || !q3Input.value.trim()) {
-            q1Input.reportValidity();
-            q2Input.reportValidity();
-            q3Input.reportValidity();
+            if (!q1Input.value.trim()) q1Input.reportValidity();
+            else if (!q2Input.value.trim()) q2Input.reportValidity();
+            else q3Input.reportValidity();
             return;
           }
 
           completeSignupBtn.disabled = true;
-          completeSignupBtn.textContent = 'Submitting answers...';
+          completeSignupBtn.textContent = 'Creating Your Member Card...';
           signupError.classList.add('hidden');
 
-          const q1 = q1Input.value.trim();
-          const q2 = q2Input.value.trim();
-          const q3 = q3Input.value.trim();
+          // Collect selected interests
+          const selectedInterests = Array.from(document.querySelectorAll('#interestChipsContainer .tfc-chip.active'))
+            .map(chip => chip.getAttribute('data-interest'))
+            .join(', ');
 
-          // Safe replace delimiters
-          const safeQ1 = q1.replace(/\|/g, '/');
-          const safeQ2 = q2.replace(/\|/g, '/');
-          const safeQ3 = q3.replace(/\|/g, '/');
+          const q1 = q1Input.value.trim().replace(/\|/g, '/');
+          const q2 = q2Input.value.trim().replace(/\|/g, '/');
+          const q3 = q3Input.value.trim().replace(/\|/g, '/');
 
-          // Append Q1, Q2, Q3 to metadata college string
-          const finalCollegeData = `${currentCombinedCollegeBase} | Q1: ${safeQ1} | Q2: ${safeQ2} | Q3: ${safeQ3}`;
+          // Build final combined college metadata string
+          const finalCollegeData = `${currentCombinedCollegeBase} | Interests: [${selectedInterests}] | Q1: ${q1} | Q2: ${q2} | Q3: ${q3}`;
+
+          // Generate unique ID
+          const randomIdNum = Math.floor(1000 + Math.random() * 9000);
+          currentMemberId = `TFC-2026-${randomIdNum}`;
 
           try {
-            // Update details with onboarding answers
-            const { error: updateError } = await supabaseClient
+            // Check if member already exists
+            const { data: dbMember } = await supabaseClient
               .from('members')
-              .update({ college: finalCollegeData })
-              .eq('email', currentEmail);
+              .select('*')
+              .eq('email', currentEmail)
+              .maybeSingle();
 
-            if (updateError) throw updateError;
+            if (dbMember) {
+              currentMemberId = dbMember.member_id || currentMemberId;
+              const { error: updateError } = await supabaseClient
+                .from('members')
+                .update({ college: finalCollegeData })
+                .eq('email', currentEmail);
+              if (updateError) throw updateError;
+            } else {
+              const memberData = {
+                email: currentEmail,
+                name: currentName,
+                college: finalCollegeData,
+                tier: 'Student',
+                member_id: currentMemberId,
+                password: defaultPassword,
+                image: ''
+              };
+              const { error: insertError } = await supabaseClient
+                .from('members')
+                .insert([memberData]);
+              if (insertError) throw insertError;
+            }
 
-            // Populate ID badge
+            // Populate Member Card
             document.getElementById('cardMemberName').textContent = currentName;
             document.getElementById('cardMemberCollege').textContent = currentCollegeText;
             document.getElementById('cardMemberId').textContent = currentMemberId;
-            document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=ff6b00&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
+            document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&color=14110F&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
 
-            // Send welcome email via EmailJS (asynchronously in the background)
-            if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY" && EMAILJS_SERVICE_ID !== "YOUR_SERVICE_ID" && EMAILJS_TEMPLATE_ID !== "YOUR_TEMPLATE_ID") {
-              const templateParams = {
+            // Send welcome email via EmailJS (if configured)
+            if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+              emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 to_name: currentName,
                 to_email: currentEmail,
                 member_id: currentMemberId,
-                college: currentCollegeText,
-                dashboard_url: "https://thefuturecouncil.in/download"
-              };
-
-              emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-                .then(response => {
-                  console.log("Welcome email sent successfully via EmailJS!", response.status, response.text);
-                })
-                .catch(err => {
-                  console.error("Failed to send welcome email via EmailJS:", err);
-                });
-            } else {
-              console.log("EmailJS keys not configured yet. Skipping welcome email dispatch.");
+                college: currentCollegeText
+              }).catch(err => console.error("EmailJS dispatch:", err));
             }
 
+            // Transition to Success Panel
             signupFormPanel.classList.add('hidden');
             successPanel.classList.remove('hidden');
+            successPanel.scrollIntoView({ behavior: 'smooth' });
 
             // Set SessionStorage active state
             sessionStorage.setItem('tfc_member_auth', 'true');
@@ -736,17 +846,15 @@
             sessionStorage.setItem('tfc_member_college', finalCollegeData);
             sessionStorage.setItem('tfc_member_tier', 'Student');
             sessionStorage.setItem('tfc_member_id', currentMemberId);
-            sessionStorage.setItem('tfc_member_photo', '');
             sessionStorage.setItem('tfc_member_email', currentEmail);
-            sessionStorage.setItem('tfc_member_password', currentPassword);
 
           } catch (err) {
-            console.error("Step 2 updating failed:", err);
-            signupError.textContent = "Submitting answers failed: " + (err.message || "Failed to update response database.");
+            console.error("Signup failed:", err);
+            signupError.textContent = "Submission error: " + (err.message || "Please check your network and try again.");
             signupError.classList.remove('hidden');
           } finally {
             completeSignupBtn.disabled = false;
-            completeSignupBtn.textContent = 'Complete Registration & Get Badge';
+            completeSignupBtn.textContent = 'Complete & Get Badge ⚡';
           }
         });
       }

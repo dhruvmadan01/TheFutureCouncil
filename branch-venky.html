@@ -10,25 +10,24 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/branch-venky" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff9e59" />
+  <meta name="theme-color" content="#ff7a3d" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Future Council | The Future Council" />
   <meta property="og:url" content="https://thefuturecouncil.in/branch-venky" />
   <meta property="og:title" content="Sri Venkateswara College (Venky) Chapter | Future Council" />
-  <meta property="og:description" content="Official campus startup chapter at Sri Venkateswara College (Venky) by Future Council. Connecting student builders with early founder networks and launchpads." />
+  <meta property="og:description" content="Official student startup chapter at Sri Venkateswara College (Venky) by Future Council. Fostering bio-tech, logistics, and retail-tech initiatives across South Campus." />
   <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Sri Venkateswara College (Venky) - Future Council" />
   <meta property="og:locale" content="en_IN" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://thefuturecouncil.in/branch-venky" />
   <meta name="twitter:title" content="Sri Venkateswara College (Venky) Chapter | Future Council" />
-  <meta name="twitter:description" content="Official student startup chapter at Sri Venkateswara College (Venky) by Future Council. Fostering bio-tech, logistics, and retail-tech initiatives across South Campus." />
+  <meta name="twitter:description" content="Official student startup chapter at Sri Venkateswara College (Venky) by Future Council." />
   <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
 
   <!-- Schema.org JSON-LD Structured Data -->
@@ -52,32 +51,8 @@
           "@type": ["Organization", "EducationalOrganization"],
           "name": "Future Council",
           "legalName": "The Future Council",
-          "alternateName": ["The Future Council", "TFC", "Future Council India"],
           "url": "https://thefuturecouncil.in"
         }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://thefuturecouncil.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Branches",
-            "item": "https://thefuturecouncil.in/branches"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Sri Venkateswara College (Venky)",
-            "item": "https://thefuturecouncil.in/branch-venky"
-          }
-        ]
       }
     ]
   }
@@ -85,153 +60,171 @@
 
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      background: #000000;
-      color: #f7f3ee;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    ::selection {
-      background: rgba(255, 158, 89, 0.2);
-      color: #fff;
-    }
-  </style>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="desktop-window">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+
+  <!-- Sticky Top Navigation -->
+  <header class="tfc-header">
+    <div class="tfc-container tfc-nav-wrapper">
+      <a href="index.html" class="tfc-brand">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+
+      <ul class="tfc-nav-links">
+        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
+        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link active">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
-      <div class="window-title">The Future Council - Sri Venkateswara College (Venky)</div>
-    </header>
+    </div>
+  </header>
 
-    <nav class="window-tabs">
-      <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
-      <a href="branches.html" class="window-tab active">Our Branches</a>
-      <a href="join.html" class="window-tab">Join Council</a>
-    </nav>
+  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <div class="tfc-mobile-menu" id="mobileMenu">
+    <div class="tfc-mobile-menu-header">
+      <a href="index.html" class="tfc-brand" style="color: #fff;">
+        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+        <span>THE FUTURE COUNCIL</span>
+      </a>
+      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
+    </div>
 
-    <section class="workspace">
-      <!-- Back Header -->
-      <div class="partners-nav-header">
-        <a href="branches.html" class="back-link-btn">
-          <span class="icon">←</span>
-          <span>Back to Branches Directory</span>
-        </a>
-        <div class="brand-row mini-brand">
-          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
-          <span class="mini-kicker">DU Chapter Hub</span>
+    <ul class="tfc-mobile-nav-links">
+      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
+      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link active">Our Branches</a></li>
+      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Header Section -->
+    <section class="tfc-section" style="padding-top: 36px; padding-bottom: 24px;">
+      <div class="tfc-container">
+        <div style="margin-bottom: 20px;">
+          <a href="branches.html" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px;">
+            ← Back to Branches Directory
+          </a>
         </div>
       </div>
+    </section>
 
-      <!-- Detail Layout Grid -->
-      <div class="hero-grid" style="display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 10px;">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+    <!-- Branch Details -->
+    <section class="tfc-section" style="padding-top: 0; padding-bottom: 60px;">
+      <div class="tfc-container">
+        <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 32px;" class="branch-grid">
           
-          <!-- Left Column (Copy & Incubation Details) - col-span-7 -->
-          <div class="md:col-span-7 space-y-6">
-            <div class="panel bg-white" style="color: var(--ink); padding: 32px 24px; border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
-              <div style="font-weight: 900; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--orange); color: #fff; display: inline-block; padding: 2px 8px; margin-bottom: 12px;">
-                ACTIVE CAMPUS CHAPTER
+          <!-- Left Column: Chapter Description & Perks -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="tfc-card" style="padding: 36px;">
+              <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                <span class="tfc-badge tfc-badge-orange">DU CHAPTER</span>
+                <span class="tfc-badge tfc-badge-lime">ACTIVE CHAPTER</span>
               </div>
-              <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.05; margin: 0 0 10px; text-transform: uppercase; color: #000;">
+              
+              <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px;">
                 Sri Venkateswara College (Venky)
               </h1>
-              <p style="font-size: 0.95rem; font-weight: 800; color: var(--orange); text-transform: uppercase; margin: 0 0 16px;">
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 16px;">
                 📍 Delhi University • South Delhi
               </p>
-              <p style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; color: #333; margin-bottom: 20px;">
+              <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 28px;">
                 Fostering bio-tech, logistics, and retail-tech initiatives across South Campus.
               </p>
-              
-              <div style="border-top: 2px dashed var(--ink); padding-top: 20px;">
-                <h3 style="font-size: 1.05rem; font-weight: 900; text-transform: uppercase; color: #000; margin-bottom: 12px;">
+
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+                <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">
                   ⚡ Chapter Activations & Perks
                 </h3>
-                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
-                  <li style="font-size: 0.85rem; font-weight: 700; color: #444; display: flex; align-items: center; gap: 8px;">
-                    <span style="color: var(--orange); font-weight: 900;">✓</span> Early-stage startup ideation sessions & product clinics.
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Early-stage startup ideation clinics and prototype validation sprints.</span>
                   </li>
-                  <li style="font-size: 0.85rem; font-weight: 700; color: #444; display: flex; align-items: center; gap: 8px;">
-                    <span style="color: var(--orange); font-weight: 900;">✓</span> Exclusive local networking mixers with top-tier operators.
+                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Exclusive local networking mixers with alumni operators and investors.</span>
                   </li>
-                  <li style="font-size: 0.85rem; font-weight: 700; color: #444; display: flex; align-items: center; gap: 8px;">
-                    <span style="color: var(--orange); font-weight: 900;">✓</span> Active leaderboard rewards for student builders.
+                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Active leaderboard rewards and verified Council Member passes.</span>
                   </li>
-                  <li style="font-size: 0.85rem; font-weight: 700; color: #444; display: flex; align-items: center; gap: 8px;">
-                    <span style="color: var(--orange); font-weight: 900;">✓</span> Direct pipeline to apply for the ₹15 Lakhs TFC Fellowship.
+                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Direct priority fast-track to apply for the equity-free Fellowship '26.</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <!-- Join CTA Block -->
-            <div class="panel bg-white" style="color: var(--ink); padding: 24px; border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); text-align: center;">
-              <h2 style="font-size: 1.2rem; font-weight: 900; text-transform: uppercase; color: #000; margin-bottom: 8px;">
-                Ready to build with us?
+            <!-- Join CTA Card -->
+            <div class="tfc-card" style="padding: 32px; text-align: center;">
+              <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">
+                Ready to build with this chapter?
               </h2>
-              <p style="font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 16px;">
-                Secure your official membership ID card and enter the student startup network.
+              <p style="font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto;">
+                Secure your official digital member badge and connect with ambitious founders on campus.
               </p>
-              <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                <a href="join.html?college=Sri%20Venkateswara%20College%20(Venky)" class="pill-btn" style="background: var(--orange); color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); text-transform: uppercase; font-weight: 900; padding: 10px 24px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center;">
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="join.html?college=Sri%20Venkateswara%20College%20(Venky)" class="tfc-btn tfc-btn-primary">
                   Join Chapter Ecosystem 🚀
                 </a>
-                <a href="fellowship.html" class="pill-btn" style="background: #000; color: #fff; text-decoration: none; border: 2.5px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); text-transform: uppercase; font-weight: 900; padding: 10px 24px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center;">
+                <a href="fellowship.html" class="tfc-btn tfc-btn-outline">
                   Fellowship Details 💡
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Right Column (Leadership Profile & Stats) - col-span-5 -->
-          <div class="md:col-span-5 space-y-6">
+          <!-- Right Column: Leadership & Recruitment Status -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
             
             <!-- Leadership Panel -->
-            <div class="panel bg-white" style="color: var(--ink); padding: 24px; border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); display: flex; flex-direction: column; align-items: center; text-align: center;">
-              <h3 style="font-size: 0.85rem; font-weight: 900; text-transform: uppercase; border-bottom: 1.5px dashed var(--ink); padding-bottom: 6px; margin-bottom: 16px; width: 100%; letter-spacing: 0.05em; color: #555;">
+            <div class="tfc-card" style="padding: 28px; text-align: center;">
+              <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.5px; margin-bottom: 18px;">
                 👑 Chapter Leadership
-              </h3>
+              </div>
+
               
-              
-                <div style="width: 110px; height: 110px; overflow: hidden; border: 3px solid var(--ink); background: var(--orange); display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 12px; box-shadow: 4px 4px 0 var(--ink);">
-                  <span style="font-size: 2.5rem; font-weight: 900; color: #fff;">VEN</span>
+                <div style="width: 90px; height: 90px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-weight: 800; font-size: 1.6rem; border: 3px solid var(--primary-orange);">
+                  VEN
                 </div>
               
 
-              <h4 style="font-size: 1.05rem; font-weight: 900; margin: 0; text-transform: uppercase; color: #000;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">
                 TFC Student Council
-              </h4>
-              <p style="font-size: 0.76rem; font-weight: 800; color: var(--orange); margin: 2px 0 0; text-transform: uppercase; letter-spacing: 0.05em;">
+              </h3>
+              <p style="font-size: 0.82rem; font-weight: 700; color: var(--primary-orange); text-transform: uppercase; margin-bottom: 12px;">
                 Interim Committee
               </p>
-              
-              <p style="font-size: 0.72rem; font-weight: 700; color: #666; line-height: 1.4; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 10px; width: 100%;">
-                Responsible for coordinating founder sprint cycles, hackathons, and local ambassador nodes.
+              <p style="font-size: 0.85rem; color: var(--ink-soft); line-height: 1.45; margin: 0;">
+                Responsible for coordinating founder sprint cycles, hackathons, and campus nodes.
               </p>
             </div>
 
-            <!-- Stats/FOMO Panel -->
-            <div class="panel bg-white" style="color: var(--ink); padding: 20px; border: 3.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);">
-              <div style="font-weight: 900; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; background: #000; color: #fff; display: inline-block; padding: 2px 6px; margin-bottom: 8px;">
+            <!-- Recruitment Status Banner -->
+            <div class="tfc-dark-banner" style="padding: 24px;">
+              <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: var(--accent-lime); margin-bottom: 6px;">
                 💡 RECRUITMENT STATUS
               </div>
-              <h4 style="font-size: 0.95rem; font-weight: 900; margin: 0 0 6px; text-transform: uppercase; color: #000;">COHORT 1 ONBOARDING</h4>
-              <p style="font-size: 0.75rem; font-weight: 700; line-height: 1.35; color: #555;">
-                We are actively approving student representation roles and operator entries for the Autumn sprint cycle. Apply to generate your credentials immediately.
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;">
+                Cohort 1 Onboarding
+              </h3>
+              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0;">
+                We are actively approving student representation roles and builder entries for the Autumn cycle. Apply to generate your credentials immediately.
               </p>
             </div>
 
@@ -241,5 +234,52 @@
       </div>
     </section>
   </main>
+
+  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <aside class="tfc-mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 15</div>
+    </div>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+  </aside>
+
+  <!-- Clean Footer (Ref p. 05 & 14) -->
+  <footer class="tfc-footer">
+    <div class="tfc-container">
+      <div class="tfc-footer-row">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span style="color: var(--border-subtle);">|</span>
+          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+        </div>
+
+        <div class="tfc-footer-links">
+          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
+          <a href="branches.html" class="tfc-footer-link">Branches</a>
+          <a href="resources.html" class="tfc-footer-link">Resources</a>
+          <a href="partners.html" class="tfc-footer-link">Partners</a>
+          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
+          <a href="terms.html" class="tfc-footer-link">Terms</a>
+          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        </div>
+      </div>
+
+      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
+        <div>
+          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
