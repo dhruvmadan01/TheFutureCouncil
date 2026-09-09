@@ -8,233 +8,153 @@
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --green: #00E599;
-      --green-dark: #059669;
-      --offwhite: #FAF9F6;
-      --charcoal: #1E1E1E;
-      --ink: #000000;
-      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-    body {
-      background: var(--green);
-      color: var(--ink);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      padding: 24px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-    .desktop-window {
-      width: min(1100px, 100%);
-      background: var(--offwhite);
-      border: 3px solid var(--ink);
-      box-shadow: 8px 8px 0 var(--ink);
-      animation: floatIn 0.6s ease-out both;
-    }
-    .window-bar {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 16px;
-      background: var(--charcoal);
-      border-bottom: 3px solid var(--ink);
-    }
-    .window-controls {
-      position: absolute;
-      left: 16px;
-      display: flex;
-      gap: 8px;
-    }
-    .window-controls span {
-      display: block;
-      width: 12px;
-      height: 12px;
-      border: 3px solid var(--ink);
-    }
-    .window-controls .red { background: #ff5d5d; }
-    .window-controls .yellow { background: #f5c542; }
-    .window-controls .gray { background: #bdbdbd; }
-    
-    .window-title {
-      font-size: 0.76rem;
-      letter-spacing: 0.32em;
-      font-weight: 800;
-      color: var(--offwhite);
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .workspace {
-      padding: 28px 24px;
-    }
-    .partners-hero {
-      border: 3px solid var(--ink);
-      background: #EBFDF7;
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .hero-text {
-      margin: 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.5;
-    }
     .analytics-panel {
-      border: 3px solid var(--ink);
       background: #fff;
-      box-shadow: 6px 6px 0 var(--ink);
-      padding: 20px;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
       margin-bottom: 24px;
     }
     .analytics-panel h2 {
       margin: 0 0 16px;
-      font-size: 1.15rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-      border-bottom: 2px solid var(--ink);
-      padding-bottom: 8px;
-    }
-    .metric-card {
-      background: #fff;
-      border: 2px solid var(--ink);
-      padding: 16px;
-      text-align: center;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .metric-val {
-      font-size: 2rem;
-      font-weight: 900;
-      display: block;
-      line-height: 1.1;
-      font-family: var(--font-heading);
-    }
-    .metric-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #555;
-      display: block;
-      margin-top: 4px;
-    }
-    .admin-submit-btn {
-      background: var(--ink);
-      border: 2px solid var(--ink);
-      color: var(--green);
-      font-size: 0.75rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
-      transition: transform 100ms ease, box-shadow 100ms ease;
-    }
-    .admin-submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-    .back-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--ink);
-      text-decoration: underline;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-subtle);
+      padding-bottom: 10px;
     }
     .stage-card {
-      border: 2px solid var(--ink);
+      border: 1.5px solid var(--border-subtle);
       background: #fff;
-      padding: 10px;
+      padding: 12px;
+      border-radius: 12px;
       margin-bottom: 10px;
-      box-shadow: 2px 2px 0 var(--ink);
-      transition: transform 100ms ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .stage-card:hover {
-      transform: translateY(-1px);
-    }
-    @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
   </style>
 </head>
-<body>
+<body class="tfc-portal-body">
 
   <!-- AUTH PORTAL GATE -->
-  <div class="bg-white border-3 border-black p-8 shadow-[8px_8px_0_rgba(0,0,0,1)] w-full max-w-sm" id="loginContainer">
-    <div class="text-center mb-6">
-      <img src="TFC.png" alt="TFC Logo" class="w-16 h-16 border-3 border-black mx-auto mb-3" />
-      <h2 class="font-black text-xl uppercase tracking-tight">Sales Portal Gate</h2>
-      <p class="text-xs text-gray-500 font-bold uppercase mt-1">Ecosystem Sponsorship CRM</p>
-    </div>
+  <div class="min-h-screen flex items-center justify-center p-4" id="loginContainer">
+    <div class="tfc-card w-full max-w-sm text-center" style="padding: 40px 32px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+      <img src="TFC.png" alt="TFC Logo" class="w-14 h-14 object-contain rounded-xl mx-auto mb-4 p-1 bg-white border border-zinc-200 shadow-sm" />
+      <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 10px; font-size: 0.68rem;">INTERNAL PORTAL SUITE</span>
+      <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
+        Sales & Sponsors CRM
+      </h1>
+      <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 24px;">
+        Ecosystem console for sponsorships, deals, and corporate partnerships.
+      </p>
 
-    <form id="loginForm" class="space-y-4">
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Username</label>
-        <input type="text" id="loginUsername" required class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Password</label>
-        <input type="password" id="loginPassword" required class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div id="loginError" class="hidden text-xs text-red-500 font-bold">
-        ⚠️ Invalid credentials! Please check admin password.
-      </div>
-      <button type="submit" class="w-full bg-black text-emerald-400 border-2 border-black p-2.5 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
-        Unlock Sales OS ⚡
-      </button>
-    </form>
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Username / Sales ID</label>
+          <input type="text" id="loginUsername" required placeholder="Enter authorized ID" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Console Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div id="loginError" class="hidden p-3 bg-red-50 border border-red-300 text-red-700 font-bold text-xs rounded-xl">
+          ⚠️ Invalid credentials! Please check admin password.
+        </div>
+        <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full justify-center" style="margin-top: 8px;">
+          Unlock Sales OS ⚡
+        </button>
+      </form>
+    </div>
   </div>
 
   <!-- MAIN SALES WINDOW -->
-  <main class="desktop-window hidden" id="adminContent">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+  <div class="hidden min-h-screen flex flex-col" id="adminContent">
+    <!-- Top Sticky Portal Header -->
+    <header class="tfc-portal-nav-bar">
+      <div class="tfc-portal-container">
+        <div class="tfc-portal-header-row">
+          <div class="flex items-center gap-3 flex-wrap">
+            <a href="index.html" class="tfc-brand">
+              <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+              <span>THE FUTURE COUNCIL</span>
+            </a>
+            <span class="text-zinc-300">|</span>
+            <span class="tfc-badge tfc-badge-orange text-[0.68rem]">SALES & SPONSORS</span>
+          </div>
+
+          <!-- Suite Links -->
+          <nav class="tfc-portal-tabs">
+            <a href="data.html" class="tfc-portal-tab">📊 Growth CRM</a>
+            <a href="admin.html" class="tfc-portal-tab">⚙️ Admin Console</a>
+            <a href="society.html" class="tfc-portal-tab">🏛️ Society Leads</a>
+            <a href="marketing.html" class="tfc-portal-tab">📣 Marketing</a>
+            <a href="sales.html" class="tfc-portal-tab active">💼 Sales & Sponsors</a>
+          </nav>
+
+          <!-- User Meta & Logout -->
+          <div class="flex items-center gap-2.5">
+            <span class="tfc-badge tfc-badge-neutral text-xs">User: Sales</span>
+            <a href="resources.html" target="_blank" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Vault ↗</a>
+            <button onclick="sessionStorage.removeItem('tfc_sales_auth'); location.reload();" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Logout 🚪</button>
+          </div>
+        </div>
       </div>
-      <div class="window-title">The Future Council • Sales CRM</div>
     </header>
 
-    <div class="workspace">
-      <!-- Back Btn -->
-      <a href="index.html" class="back-link-btn">
-        <span>← Back to Home Hub</span>
-      </a>
+    <!-- Workspace Body -->
+    <main class="tfc-portal-container py-8 flex-1">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="mb-8">
+        <div class="flex justify-between items-end flex-wrap gap-4">
+          <div>
+            <span class="tfc-eyebrow">SPONSORSHIPS & REVENUE</span>
+            <h1 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 6px; letter-spacing: -0.8px;">
+              Sales & Sponsorship Pipeline
+            </h1>
+            <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0; max-width: 760px;">
+              Manage corporate sponsorship accounts, brand partnerships, and perk allocations from initial pitch to closed-won agreements.
+            </p>
+          </div>
 
-      <!-- Hero Banner -->
-      <div class="partners-hero">
-        <h1 class="hero-title">💼 Sales & Sponsorship Pipeline</h1>
-        <p class="hero-text">Manage corporate sponsorship accounts, brand partnerships, and resource allocations. Track deal pipelines from initial contact to closed-won agreements.</p>
+          <div class="flex gap-2">
+            <a href="index.html" class="tfc-btn tfc-btn-outline" style="padding: 8px 16px; font-size: 0.82rem;">
+              ← Back to Website
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- SALES KPI CARDS -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="tfc-portal-metric-card">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2">Cash Raised</span>
+          <span class="text-3xl font-extrabold text-emerald-600 tracking-tight" id="statCashRaised">₹0</span>
+          <span class="text-[0.72rem] text-emerald-500 mt-2">Direct bank receipts</span>
+        </div>
+        <div class="tfc-portal-metric-card">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Perks Distributed</span>
+          <span class="text-3xl font-extrabold text-blue-600 tracking-tight" id="statPerkValue">₹0</span>
+          <span class="text-[0.72rem] text-blue-400 mt-2">Cloud credits & tooling</span>
+        </div>
+        <div class="tfc-portal-metric-card">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-2">Weighted Pipeline</span>
+          <span class="text-3xl font-extrabold text-amber-600 tracking-tight" id="statPipeline">₹0</span>
+          <span class="text-[0.72rem] text-amber-500 mt-2">Forecasted deal value</span>
+        </div>
+        <div class="tfc-portal-metric-card">
+          <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Deal Win Rate</span>
+          <span class="text-3xl font-extrabold text-zinc-900 tracking-tight" id="statWinRate">0%</span>
+          <span class="text-[0.72rem] text-zinc-400 mt-2">Closing percentage</span>
+        </div>
+      </div>
         <div class="metric-card" style="border-color: var(--green-dark);">
           <span class="metric-val text-emerald-600" id="statCashRaised">₹0</span>
           <span class="metric-label">Cash Raised</span>
@@ -366,8 +286,21 @@
         </div>
       </div>
 
-    </div>
-  </main>
+    </main>
+
+    <!-- Modern Portal Footer -->
+    <footer class="border-t border-zinc-200 bg-white py-6">
+      <div class="tfc-portal-container flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-semibold">
+        <div class="flex items-center gap-2">
+          <img src="TFC.png" alt="TFC logo" class="w-6 h-6 object-contain" />
+          <span>The Future Council • Sales & Sponsorship CRM</span>
+        </div>
+        <div>
+          <span>thefuturecouncil.in</span>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {

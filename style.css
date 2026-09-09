@@ -2192,4 +2192,291 @@ textarea.form-control {
   }
 }
 
+/* ==========================================================================
+   INTERNAL SUITE & BACKEND PORTALS (CRM, Admin, Society, Marketing, Sales)
+   ========================================================================== */
+.tfc-portal-body {
+  background: var(--cream-bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.tfc-portal-nav-bar {
+  background: #FFFFFF;
+  border-bottom: 1.5px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.tfc-portal-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tfc-portal-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tfc-portal-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0;
+  white-space: nowrap;
+}
+
+.tfc-portal-tab {
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tfc-portal-tab:hover {
+  background: rgba(20, 17, 15, 0.05);
+  color: var(--ink);
+}
+
+.tfc-portal-tab.active {
+  background: var(--ink);
+  color: #FFFFFF;
+}
+
+.tfc-portal-metric-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tfc-portal-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tfc-portal-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.tfc-portal-table th {
+  background: rgba(20, 17, 15, 0.03);
+  padding: 12px 16px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  border-bottom: 1.5px solid var(--border-subtle);
+}
+
+.tfc-portal-table td {
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(20, 17, 15, 0.06);
+  vertical-align: middle;
+}
+
+.tfc-portal-table tr:hover td {
+  background: rgba(255, 122, 61, 0.03);
+}
+
+.tfc-portal-table-wrapper {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 14px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.tfc-subtab-pill {
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border-radius: 9999px;
+  border: 1.5px solid var(--border-subtle);
+  background: #FFFFFF;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.tfc-subtab-pill:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.tfc-subtab-pill.active {
+  background: var(--ink) !important;
+  color: #FFFFFF !important;
+  border-color: var(--ink) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.tfc-portal-body .admin-table-panel,
+.tfc-portal-body .admin-form-panel {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+
+.tfc-portal-body .admin-table-panel h2,
+.tfc-portal-body .admin-form-panel h2 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--border-subtle);
+  padding-bottom: 10px;
+}
+
+.tfc-portal-body .form-control {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: inherit;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.tfc-portal-body .form-control:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.15);
+}
+
+.tfc-portal-body .admin-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #FFFFFF;
+  border: 1.5px solid var(--ink);
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tfc-portal-body .admin-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  background: #222;
+}
+
+.tfc-portal-body .admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  background: #FFFFFF;
+}
+
+.tfc-portal-body .admin-table th {
+  background: rgba(20, 17, 15, 0.03);
+  padding: 12px 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  border: none;
+  border-bottom: 1.5px solid var(--border-subtle);
+}
+
+.tfc-portal-body .admin-table td {
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  border: none;
+  border-bottom: 1px solid rgba(20, 17, 15, 0.06);
+  color: var(--ink);
+}
+
+.tfc-portal-body .admin-table tr:hover td {
+  background: rgba(255, 122, 61, 0.03);
+}
+
+.tfc-portal-body .admin-table tr:nth-child(even) {
+  background: transparent;
+}
+
+.tfc-portal-body .admin-delete-btn {
+  padding: 5px 10px;
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FCA5A5;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tfc-portal-body .admin-delete-btn:hover {
+  background: #DC2626;
+  color: #FFFFFF;
+  border-color: #DC2626;
+}
+
+.tfc-portal-body .admin-edit-btn {
+  padding: 5px 10px;
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FCD34D;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tfc-portal-body .admin-edit-btn:hover {
+  background: #F59E0B;
+  color: #FFFFFF;
+  border-color: #F59E0B;
+}
+
 

@@ -9,89 +9,13 @@
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800;900&display=swap');
-
-    :root {
-      --orange: #ff6b00;
-      --orange-light: #ff8533;
-      --offwhite: #FAF9F6;
-      --charcoal: #1E1E1E;
-      --ink: #000000;
-      --emerald: #10b981;
-      --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      background: var(--orange);
-      color: var(--ink);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      padding: 20px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .desktop-window {
-      width: min(1360px, 100%);
-      background: var(--offwhite);
-      border: 3px solid var(--ink);
-      box-shadow: 8px 8px 0 var(--ink);
-      position: relative;
-    }
-
-    .window-bar {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 16px;
-      background: var(--charcoal);
-      border-bottom: 3px solid var(--ink);
-    }
-
-    .window-controls {
-      position: absolute;
-      left: 16px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .window-controls span {
-      display: block;
-      width: 12px;
-      height: 12px;
-      border: 2px solid var(--ink);
-    }
-
-    .window-controls .red { background: #ff5d5d; }
-    .window-controls .yellow { background: #f5c542; }
-    .window-controls .gray { background: #bdbdbd; }
-
-    .window-title {
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      font-weight: 800;
-      color: var(--offwhite);
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-
-    .workspace {
-      padding: 28px 24px;
-    }
-
     .neo-panel {
-      border: 3px solid var(--ink);
+      border: 1.5px solid var(--border-subtle);
       background: #fff;
-      box-shadow: 5px 5px 0 var(--ink);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
       padding: 24px;
       margin-bottom: 24px;
     }
@@ -101,125 +25,106 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 10px 18px;
-      background: var(--orange);
-      color: #000;
-      font-weight: 900;
-      text-transform: uppercase;
+      padding: 9px 18px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 800;
       font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      border: 2.5px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 9999px;
+      border: 1.5px solid var(--ink);
       cursor: pointer;
       transition: all 0.15s ease;
-      font-family: var(--font-heading);
       text-decoration: none;
     }
 
     .neo-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 5px 5px 0 var(--ink);
-      background: #ff7a1a;
-    }
-
-    .neo-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 var(--ink);
-    }
-
-    .neo-btn.dark {
-      background: var(--ink);
-      color: #fff;
-    }
-    .neo-btn.dark:hover {
       background: #222;
-    }
-
-    .neo-btn.yellow {
-      background: #ffe600;
-      color: #000;
-    }
-    .neo-btn.yellow:hover {
-      background: #fff033;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .neo-btn.secondary {
       background: #fff;
-      color: #000;
+      color: var(--ink);
+      border: 1.5px solid var(--border-subtle);
     }
     .neo-btn.secondary:hover {
-      background: #f4f4f5;
+      border-color: var(--ink);
+      background: rgba(20, 17, 15, 0.02);
+    }
+
+    .neo-btn.yellow {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1.5px solid #FCD34D;
+    }
+    .neo-btn.yellow:hover {
+      background: #FDE68A;
     }
 
     .neo-badge {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 3px 10px;
       font-size: 0.68rem;
-      font-weight: 900;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border: 1.5px solid var(--ink);
-      border-radius: 4px;
-      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
     }
 
-    .badge-primary { background: #ffebd6; color: #b43403; border-color: #b43403; }
-    .badge-green { background: #d1fae5; color: #065f46; border-color: #065f46; }
-    .badge-yellow { background: #fef3c7; color: #92400e; border-color: #92400e; }
-    .badge-purple { background: #ede9fe; color: #5b21b6; border-color: #5b21b6; }
-    .badge-gray { background: #f3f4f6; color: #374151; border-color: #374151; }
+    .badge-primary { background: #FFEDD5; color: #C2410C; }
+    .badge-green { background: #D1FAE5; color: #047857; }
+    .badge-yellow { background: #FEF3C7; color: #B45309; }
+    .badge-purple { background: #EDE9FE; color: #6D28D9; }
+    .badge-gray { background: #F3F4F6; color: #4B5563; }
 
-    /* Custom Table Styling */
     .table-container {
       width: 100%;
       overflow-x: auto;
-      border: 3px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 16px;
       background: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
     table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       text-align: left;
     }
 
     th {
-      background: var(--charcoal);
-      color: #fff;
-      font-family: var(--font-heading);
+      background: rgba(20, 17, 15, 0.03);
+      color: var(--ink-soft);
       font-weight: 800;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 12px 14px;
-      border-bottom: 3px solid var(--ink);
-      border-right: 1px solid #333;
+      letter-spacing: 0.05em;
+      padding: 12px 16px;
+      border-bottom: 1.5px solid var(--border-subtle);
     }
 
     td {
-      padding: 12px 14px;
-      border-bottom: 2px solid #e5e7eb;
-      border-right: 1px solid #f3f4f6;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(20, 17, 15, 0.06);
       font-size: 0.85rem;
-      font-weight: 600;
-      color: #111;
+      color: var(--ink);
     }
 
     tr:hover td {
-      background: #fffaf5;
+      background: rgba(255, 122, 61, 0.03);
     }
 
-    /* Modal Overlay */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
+      background: rgba(20, 17, 15, 0.65);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
+      z-index: 2000;
       padding: 20px;
       opacity: 0;
       visibility: hidden;
@@ -233,14 +138,15 @@
 
     .modal-card {
       background: #fff;
-      border: 3.5px solid var(--ink);
-      box-shadow: 8px 8px 0 var(--ink);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
       width: min(580px, 100%);
       padding: 28px;
-      transform: scale(0.95);
+      transform: scale(0.96);
       transition: transform 0.2s ease-in-out;
       position: relative;
-      max-height: 90vh;
+      max-height: 85vh;
       overflow-y: auto;
     }
 
@@ -250,123 +156,129 @@
 
     .form-input {
       width: 100%;
-      border: 2px solid var(--ink);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 10px;
       padding: 10px 14px;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.88rem;
       background: #fff;
-      color: #000;
+      color: var(--ink);
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .form-input:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.15);
     }
 
     .society-card {
       background: #fff;
-      border: 3px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--ink);
-      padding: 20px;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.2s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
       position: relative;
     }
 
     .society-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 8px 8px 0 var(--ink);
-      border-color: var(--orange);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-orange);
     }
 
     .society-card.assigned-card {
-      background: #fffdf7;
-      border-color: var(--orange);
+      background: #FFFDF9;
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 1px var(--primary-orange), var(--shadow-sm);
     }
 
     .metric-card {
       background: #fff;
-      border: 2.5px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 16px;
-    }
-
-    .footer-credit {
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-top: 6px;
-      color: #555;
-    }
-
-    .footer-credit a {
-      color: var(--ink);
-      text-decoration: underline;
-      font-weight: 800;
-      transition: color 0.2s ease;
-    }
-
-    .footer-credit a:hover {
-      color: var(--orange);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
     }
   </style>
 </head>
-<body>
+<body class="tfc-portal-body">
 
-  <main class="desktop-window">
-    
-    <!-- Window Bar -->
-    <header class="window-bar">
-      <div class="window-controls">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
-      </div>
-      <div class="window-title">THE FUTURE COUNCIL // SOCIETY PRESIDENTS CRM PORTAL</div>
-    </header>
-
-    <div class="workspace">
-
-      <!-- ==========================================
-           SECTION 1: PRESIDENT LOGIN PANEL
-           ========================================== -->
-      <section id="loginSection" class="neo-panel max-w-lg mx-auto my-8">
-        <div class="text-center mb-6">
-          <div class="inline-block p-3 bg-orange-100 border-2 border-black rounded-full mb-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-            <span class="text-3xl">🏛️</span>
-          </div>
-          <p class="text-xs font-black tracking-widest text-orange-600 uppercase">Executive Access Gate</p>
-          <h1 class="text-2xl font-black uppercase font-['Space_Grotesk'] mt-1">Society Presidents Portal</h1>
-          <p class="text-xs font-semibold text-gray-600 mt-1">
-            Sign in with your verified President credentials to access your chapter's private member registry.
-          </p>
+  <!-- Top Sticky Portal Header -->
+  <header class="tfc-portal-nav-bar">
+    <div class="tfc-portal-container">
+      <div class="tfc-portal-header-row">
+        <div class="flex items-center gap-3 flex-wrap">
+          <a href="index.html" class="tfc-brand">
+            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+            <span>THE FUTURE COUNCIL</span>
+          </a>
+          <span class="text-zinc-300">|</span>
+          <span class="tfc-badge tfc-badge-orange text-[0.68rem]">SOCIETY CRM</span>
         </div>
 
-        <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-600 text-red-900 text-xs font-bold leading-relaxed"></div>
+        <!-- Suite Links -->
+        <nav class="tfc-portal-tabs">
+          <a href="data.html" class="tfc-portal-tab">📊 Growth CRM</a>
+          <a href="admin.html" class="tfc-portal-tab">⚙️ Admin Console</a>
+          <a href="society.html" class="tfc-portal-tab active">🏛️ Society Leads</a>
+          <a href="marketing.html" class="tfc-portal-tab">📣 Marketing</a>
+          <a href="sales.html" class="tfc-portal-tab">💼 Sales & Sponsors</a>
+        </nav>
 
-        <form id="presidentLoginForm" class="flex flex-col gap-4">
+        <!-- User Meta & Logout -->
+        <div class="flex items-center gap-2.5">
+          <span class="tfc-badge tfc-badge-neutral text-xs" id="suiteUserIndicator">Presidents Console</span>
+          <a href="resources.html" target="_blank" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Vault ↗</a>
+          <button onclick="handlePresidentLogout()" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Logout 🚪</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Workspace Container -->
+  <main class="tfc-portal-container py-8 flex-1">
+
+    <!-- ==========================================
+         SECTION 1: PRESIDENT LOGIN PANEL
+         ========================================== -->
+    <div id="loginSection" class="min-h-[70vh] flex items-center justify-center p-4">
+      <div class="tfc-card w-full max-w-sm text-center" style="padding: 40px 32px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+        <img src="TFC.png" alt="The Future Council Logo" class="w-14 h-14 object-contain rounded-xl mx-auto mb-4 p-1 bg-white border border-zinc-200 shadow-sm" />
+        <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 10px; font-size: 0.68rem;">EXECUTIVE ACCESS GATE</span>
+        <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
+          Society Presidents Portal
+        </h1>
+        <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 24px;">
+          Sign in with your verified credentials to access your chapter's private member registry.
+        </p>
+
+        <div id="loginError" class="hidden p-3 bg-red-50 border border-red-300 text-red-700 font-bold text-xs rounded-xl mb-4 text-left"></div>
+
+        <form id="presidentLoginForm" class="space-y-4 text-left">
           <div>
-            <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginEmail">Email / Username</label>
-            <input type="text" id="loginEmail" required placeholder="e.g. jamgev0@gmail.com or admin" class="form-input" autocomplete="username" />
+            <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5" for="loginEmail">Email / Username</label>
+            <input type="text" id="loginEmail" required placeholder="e.g. jamgev0@gmail.com or admin" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" autocomplete="username" />
           </div>
           <div>
-            <label class="block text-xs font-black uppercase tracking-wider mb-1" for="loginPassword">Portal Password</label>
-            <input type="password" id="loginPassword" required placeholder="••••••••" class="form-input" />
+            <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5" for="loginPassword">Portal Password</label>
+            <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
           </div>
-          <button type="submit" class="neo-btn w-full mt-2 text-center">
+          <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full justify-center" style="margin-top: 8px;">
             Sign In to Presidents Portal 🚀
           </button>
         </form>
 
-        <div class="mt-6 pt-4 border-t-2 border-gray-200 text-center">
-          <p class="text-[0.72rem] font-bold text-gray-500">
-            Need help accessing your chapter registry? Contact <a href="mailto:support@thefuturecouncil.in" class="underline text-black font-black">support@thefuturecouncil.in</a>
+        <div class="mt-6 pt-4 border-t border-zinc-200 text-center">
+          <p class="text-[0.75rem] text-zinc-500 font-medium">
+            Need chapter access? Contact <a href="mailto:support@thefuturecouncil.in" class="underline text-black font-bold">support@thefuturecouncil.in</a>
           </p>
         </div>
-      </section>
+      </div>
+    </div>
 
 
       <!-- ==========================================
@@ -550,19 +462,20 @@
 
       </section>
 
-      <!-- Footer -->
-      <footer class="footer mt-10 pt-6 border-t-2 border-black flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold">
-        <div class="flex items-center gap-3">
-          <img src="TFC.png" alt="TFC logo" class="w-8 h-8 border-2 border-black bg-white" />
-          <span>The Future Council Executive Society Portal</span>
-        </div>
-        <div class="footer-credit">
-          This website was built by <a href="https://dhruvmadan.in" target="_blank" rel="noopener noreferrer">Dhruv Madan</a>
-        </div>
-      </footer>
+    </main>
 
-    </div>
-  </main>
+    <!-- Modern Portal Footer -->
+    <footer class="border-t border-zinc-200 bg-white py-6 mt-12">
+      <div class="tfc-portal-container flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-semibold">
+        <div class="flex items-center gap-2">
+          <img src="TFC.png" alt="TFC logo" class="w-6 h-6 object-contain" />
+          <span>The Future Council • Society Presidents Registry</span>
+        </div>
+        <div>
+          <span>thefuturecouncil.in</span>
+        </div>
+      </div>
+    </footer>
 
 
   <!-- ==========================================
@@ -570,32 +483,31 @@
        ========================================== -->
   <div id="reAuthModal" class="modal-overlay">
     <div class="modal-card">
-      <button onclick="closeReAuthModal()" class="absolute top-4 right-4 text-xl font-black text-gray-600 hover:text-black" type="button">✕</button>
+      <button onclick="closeReAuthModal()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;" type="button">✕</button>
       
-      <div class="flex items-center gap-2 mb-2">
-        <span class="text-2xl">🔐</span>
-        <span class="neo-badge badge-primary">CONFIDENTIAL ACCESS GATE</span>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="tfc-badge tfc-badge-orange text-xs">🔐 CONFIDENTIAL ACCESS GATE</span>
       </div>
 
-      <h3 class="text-xl font-black uppercase font-['Space_Grotesk']" id="reAuthSocietyTitle">
+      <h3 class="text-xl font-extrabold tracking-tight" id="reAuthSocietyTitle">
         Unlock Society CRM
       </h3>
-      <p class="text-xs font-bold text-gray-600 mt-1 mb-4 leading-relaxed" id="reAuthModalPrompt">
+      <p class="text-xs text-zinc-600 mt-1 mb-5 leading-relaxed font-medium" id="reAuthModalPrompt">
         To protect student privacy and verify your executive authorization, please re-enter your password to access the member registry for <strong id="reAuthSocietyName" class="text-black">--</strong>.
       </p>
 
-      <div id="reAuthError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-600 text-red-900 text-xs font-bold leading-relaxed"></div>
+      <div id="reAuthError" class="hidden mb-4 p-3 bg-red-50 border border-red-300 text-red-700 text-xs font-bold rounded-xl leading-relaxed"></div>
 
       <form id="reAuthForm" class="flex flex-col gap-4">
         <div>
-          <label class="block text-xs font-black uppercase mb-1" for="reAuthPassword">Confirm Password</label>
-          <input type="password" id="reAuthPassword" required placeholder="Enter your password..." class="form-input" />
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5" for="reAuthPassword">Confirm Password</label>
+          <input type="password" id="reAuthPassword" required placeholder="Enter your password..." class="tfc-input" style="padding: 10px 14px;" />
         </div>
         <div class="flex items-center gap-3 mt-2">
-          <button type="submit" class="neo-btn flex-1 text-center">
+          <button type="submit" class="tfc-btn tfc-btn-primary flex-1 justify-center">
             Unlock Chapter CRM 🔓
           </button>
-          <button type="button" onclick="closeReAuthModal()" class="neo-btn secondary">
+          <button type="button" onclick="closeReAuthModal()" class="tfc-btn tfc-btn-outline">
             Cancel
           </button>
         </div>
@@ -609,47 +521,46 @@
        ========================================== -->
   <div id="detailModal" class="modal-overlay">
     <div class="modal-card max-w-xl">
-      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-xl font-black text-gray-600 hover:text-black" type="button">✕</button>
+      <button onclick="closeDetailModal()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;" type="button">✕</button>
       
-      <div class="flex items-center gap-2 mb-2">
-        <span class="text-2xl">👤</span>
-        <span class="neo-badge badge-green">STUDENT DOSSIER</span>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="tfc-badge tfc-badge-green text-xs">👤 STUDENT DOSSIER</span>
       </div>
 
-      <h3 id="modalStudentName" class="text-xl font-black uppercase font-['Space_Grotesk']">--</h3>
-      <p id="modalStudentMeta" class="text-xs font-bold text-gray-600 mt-0.5 mb-4">--</p>
+      <h3 id="modalStudentName" class="text-xl font-extrabold tracking-tight text-zinc-900">--</h3>
+      <p id="modalStudentMeta" class="text-xs font-semibold text-zinc-500 mt-0.5 mb-4">--</p>
 
-      <div class="flex flex-col gap-3 text-xs font-bold text-gray-800">
-        <div class="p-3 bg-gray-50 border-2 border-black grid grid-cols-2 gap-2">
-          <div><span class="text-gray-500 font-semibold">TFC Member ID:</span> <span id="modalStudentId" class="font-mono font-black text-orange-600">--</span></div>
-          <div><span class="text-gray-500 font-semibold">Track:</span> <span id="modalStudentTrack" class="font-black">--</span></div>
-          <div><span class="text-gray-500 font-semibold">Email:</span> <span id="modalStudentEmail" class="font-black">--</span></div>
-          <div><span class="text-gray-500 font-semibold">Phone:</span> <span id="modalStudentPhone" class="font-black">--</span></div>
+      <div class="flex flex-col gap-3 text-xs text-zinc-800">
+        <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-xl grid grid-cols-2 gap-3">
+          <div><span class="text-zinc-500 font-medium">TFC Member ID:</span> <span id="modalStudentId" class="font-mono font-bold text-orange-600">--</span></div>
+          <div><span class="text-zinc-500 font-medium">Track:</span> <span id="modalStudentTrack" class="font-bold">--</span></div>
+          <div><span class="text-zinc-500 font-medium">Email:</span> <span id="modalStudentEmail" class="font-bold">--</span></div>
+          <div><span class="text-zinc-500 font-medium">Phone:</span> <span id="modalStudentPhone" class="font-bold">--</span></div>
         </div>
 
-        <div class="p-3 bg-orange-50 border-2 border-black flex flex-col gap-2">
+        <div class="p-4 bg-orange-50/60 border border-orange-200 rounded-xl flex flex-col gap-3">
           <div>
-            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q1: Entrepreneurship Interest & Motivation</p>
-            <p id="modalStudentQ1" class="font-medium text-gray-800 mt-1 leading-relaxed whitespace-pre-line">--</p>
+            <p class="font-bold text-orange-900 uppercase text-[0.68rem] tracking-wider">Q1: Entrepreneurship Interest & Motivation</p>
+            <p id="modalStudentQ1" class="font-semibold text-zinc-800 mt-1 leading-relaxed whitespace-pre-line text-xs">--</p>
           </div>
-          <div class="pt-2 border-t border-orange-200">
-            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q2: Current Skills, Projects, or Startup Idea</p>
-            <p id="modalStudentQ2" class="font-medium text-gray-800 mt-1 leading-relaxed whitespace-pre-line">--</p>
+          <div class="pt-3 border-t border-orange-200/80">
+            <p class="font-bold text-orange-900 uppercase text-[0.68rem] tracking-wider">Q2: Current Skills, Projects, or Startup Idea</p>
+            <p id="modalStudentQ2" class="font-semibold text-zinc-800 mt-1 leading-relaxed whitespace-pre-line text-xs">--</p>
           </div>
-          <div class="pt-2 border-t border-orange-200">
-            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q3: Hometown / Current Location</p>
-            <p id="modalStudentQ3" class="font-medium text-gray-800 mt-1 leading-relaxed">--</p>
+          <div class="pt-3 border-t border-orange-200/80">
+            <p class="font-bold text-orange-900 uppercase text-[0.68rem] tracking-wider">Q3: Hometown / Current Location</p>
+            <p id="modalStudentQ3" class="font-semibold text-zinc-800 mt-1 leading-relaxed text-xs">--</p>
           </div>
-          <div id="modalStudentQ4Container" class="pt-2 border-t border-orange-200 hidden">
-            <p class="font-black text-orange-950 uppercase text-[0.7rem]">Q4: Additional Information</p>
-            <p id="modalStudentQ4" class="font-medium text-gray-800 mt-1 leading-relaxed">--</p>
+          <div id="modalStudentQ4Container" class="pt-3 border-t border-orange-200/80 hidden">
+            <p class="font-bold text-orange-900 uppercase text-[0.68rem] tracking-wider">Q4: Additional Information</p>
+            <p id="modalStudentQ4" class="font-semibold text-zinc-800 mt-1 leading-relaxed text-xs">--</p>
           </div>
         </div>
       </div>
 
-      <div class="mt-4 pt-3 border-t-2 border-gray-200 flex items-center justify-between">
-        <span id="modalStudentSourceBadge" class="text-[0.68rem] font-bold text-gray-500">Source: --</span>
-        <button type="button" onclick="closeDetailModal()" class="neo-btn secondary text-xs">
+      <div class="mt-5 pt-3 border-t border-zinc-200 flex items-center justify-between">
+        <span id="modalStudentSourceBadge" class="text-[0.72rem] font-semibold text-zinc-500">Source: --</span>
+        <button type="button" onclick="closeDetailModal()" class="tfc-btn tfc-btn-outline text-xs">
           Close Dossier
         </button>
       </div>

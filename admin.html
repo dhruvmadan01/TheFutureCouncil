@@ -13,19 +13,8 @@
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      background: #000000;
-      color: #f7f3ee;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    ::selection {
-      background: rgba(255, 158, 89, 0.2);
-      color: #fff;
-    }
     @media (min-width: 901px) {
       .admin-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -34,104 +23,148 @@
         grid-column: span 3;
       }
     }
-    .admin-edit-btn {
-      padding: 6px 12px;
-      background: #f5c542;
-      color: #000;
-      border: 2px solid var(--ink);
-      font-weight: 900;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: transform 100ms ease, box-shadow 100ms ease;
-      margin-right: 4px;
-    }
-    .admin-edit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
   </style>
-  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <main class="desktop-window">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
-      </div>
-      <div class="window-title">The Future Council</div>
-    </header>
-    <nav class="window-tabs">
-      <a href="index.html" class="window-tab">Home Hub</a>
-      <a href="fellowship.html" target="_blank" class="window-tab">Fellowship '26</a>
-      <a href="branches.html" class="window-tab">Our Branches</a>
-      <a href="resources.html" class="window-tab">Resources</a>
-      <a href="data.html" target="_blank" class="window-tab" style="background:#ffd93d; color:#000;">Growth & Resources CRM ⚡</a>
-      <a href="admin.html" class="window-tab active">Admin Panel</a>
-    </nav>
+<body class="tfc-portal-body">
 
-    <section class="workspace hidden" id="adminContent">
-      <!-- Nav Header -->
-      <div class="partners-nav-header">
-        <a href="index.html" class="back-link-btn">
-          <span class="icon">←</span>
-          <span>Back to Home</span>
-        </a>
-        <div class="brand-row mini-brand">
-          <img src="TFC.png" alt="The Future Council logo" class="brand-mark-mini" />
-          <span class="mini-kicker">Administration</span>
+  <!-- AUTH PORTAL GATE (Centered on Cream Canvas) -->
+  <div class="min-h-screen flex items-center justify-center p-4" id="loginContainer">
+    <div class="tfc-card w-full max-w-sm text-center" style="padding: 40px 32px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+      <img src="TFC.png" alt="The Future Council Logo" class="w-14 h-14 object-contain rounded-xl mx-auto mb-4 p-1 bg-white border border-zinc-200 shadow-sm" />
+      <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 10px; font-size: 0.68rem;">INTERNAL PORTAL SUITE</span>
+      <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
+        Admin Console & DB
+      </h1>
+      <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 24px;">
+        Authorized console for ecosystem directories, projects, and ambassadors.
+      </p>
+
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Username / Admin ID</label>
+          <input type="text" id="loginUsername" required placeholder="Enter authorized ID" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Console Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div id="loginError" class="hidden p-3 bg-red-50 border border-red-300 text-red-700 font-bold text-xs rounded-xl">
+          ⚠️ Invalid credentials! Please check your access codes.
+        </div>
+        <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full justify-center" style="margin-top: 8px;">
+          Unlock Admin Console ⚡
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN INTERFACE -->
+  <div class="hidden min-h-screen flex flex-col" id="adminContent">
+    
+    <!-- Top Sticky Portal Header -->
+    <header class="tfc-portal-nav-bar">
+      <div class="tfc-portal-container">
+        <div class="tfc-portal-header-row">
+          <div class="flex items-center gap-3 flex-wrap">
+            <a href="index.html" class="tfc-brand">
+              <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+              <span>THE FUTURE COUNCIL</span>
+            </a>
+            <span class="text-zinc-300">|</span>
+            <span class="tfc-badge tfc-badge-orange text-[0.68rem]">ADMIN CONSOLE</span>
+          </div>
+
+          <!-- Suite Links -->
+          <nav class="tfc-portal-tabs">
+            <a href="data.html" class="tfc-portal-tab">📊 Growth CRM</a>
+            <a href="admin.html" class="tfc-portal-tab active">⚙️ Admin Console</a>
+            <a href="society.html" class="tfc-portal-tab">🏛️ Society Leads</a>
+            <a href="marketing.html" class="tfc-portal-tab">📣 Marketing</a>
+            <a href="sales.html" class="tfc-portal-tab">💼 Sales & Sponsors</a>
+          </nav>
+
+          <!-- User Meta & Logout -->
+          <div class="flex items-center gap-2.5">
+            <span class="tfc-badge tfc-badge-neutral text-xs">User: Admin</span>
+            <a href="resources.html" target="_blank" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Vault ↗</a>
+            <button onclick="sessionStorage.removeItem('tfc_auth'); location.reload();" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Logout 🚪</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Workspace Body -->
+    <main class="tfc-portal-container py-8 flex-1">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="mb-8">
+        <div class="flex justify-between items-end flex-wrap gap-4">
+          <div>
+            <span class="tfc-eyebrow">ECOSYSTEM GOVERNANCE</span>
+            <h1 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 6px; letter-spacing: -0.8px;">
+              Administration & Listings Console
+            </h1>
+            <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0; max-width: 760px;">
+              Manage verified partner organizations, registered student startups, ecosystem member privileges, and core team deliverables.
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <a href="index.html" class="tfc-btn tfc-btn-outline" style="padding: 8px 16px; font-size: 0.82rem;">
+              ← Back to Website
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Hero Header -->
-      <div class="partners-hero">
-        <h1 class="hero-title">Admin Dashboard</h1>
-        <p class="hero-text">Manage ecosystem partners and student startups. Add or delete listings, and the changes will be dynamically visible in the respective directories.</p>
-      </div>
-
-      <!-- Tab Navigation Menu -->
-      <div style="display: flex; gap: 8px; border-bottom: 3px solid var(--ink); margin-bottom: 24px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; -ms-overflow-style: none;">
-        <button id="tabBtnEcosystem" onclick="switchAdminSubTab('ecosystem')" style="padding: 10px 16px; font-size: 0.76rem; font-weight: 900; text-transform: uppercase; border: 3px solid var(--ink); border-bottom: none; background: #fff; color: var(--ink); cursor: pointer; box-shadow: 2px 0 0 rgba(0,0,0,0.1); flex-shrink: 0;">🌐 Listings & Analytics</button>
-        <button id="tabBtnProjects" onclick="switchAdminSubTab('projects')" style="padding: 10px 16px; font-size: 0.76rem; font-weight: 900; text-transform: uppercase; border: 3px solid var(--ink); border-bottom: none; background: #eee; color: var(--ink); cursor: pointer; box-shadow: 2px 0 0 rgba(0,0,0,0.1); flex-shrink: 0;">📂 Core Project Board</button>
-        <button id="tabBtnAmbassadors" onclick="switchAdminSubTab('ambassadors')" style="padding: 10px 16px; font-size: 0.76rem; font-weight: 900; text-transform: uppercase; border: 3px solid var(--ink); border-bottom: none; background: #eee; color: var(--ink); cursor: pointer; box-shadow: 2px 0 0 rgba(0,0,0,0.1); flex-shrink: 0;">🎓 Ambassador Milestones</button>
+      <!-- Tab Navigation Pills -->
+      <div class="flex items-center gap-2 mb-8 overflow-x-auto pb-1" style="scrollbar-width: none;">
+        <button id="tabBtnEcosystem" onclick="switchAdminSubTab('ecosystem')" class="tfc-subtab-pill active">
+          🌐 Listings & Analytics
+        </button>
+        <button id="tabBtnProjects" onclick="switchAdminSubTab('projects')" class="tfc-subtab-pill">
+          📂 Core Project Board
+        </button>
+        <button id="tabBtnAmbassadors" onclick="switchAdminSubTab('ambassadors')" class="tfc-subtab-pill">
+          🎓 Ambassador Milestones
+        </button>
       </div>
 
       <!-- ECOSYSTEM TAB CONTENT CONTAINER -->
       <div id="subTabContentEcosystem">
 
-      <!-- ECOSYSTEM ANALYTICS DASHBOARD -->
-      <section class="admin-table-panel mb-6" style="grid-column: 1 / -1; margin-bottom: 24px;">
-        <h2>📊 App Conversion & Login Analytics</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: #FFF9E6; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); margin-bottom: 16px;">
-          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
-            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2;" id="dashTotalMembers">0</span>
-            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #555;">Total Members</span>
+        <!-- ECOSYSTEM ANALYTICS DASHBOARD -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="tfc-portal-metric-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Total Signups</span>
+            <span class="text-3xl font-extrabold text-zinc-900 tracking-tight" id="dashTotalMembers">0</span>
+            <span class="text-[0.72rem] text-zinc-400 mt-2">All registered platform users</span>
           </div>
-          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
-            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #ff5d5d;" id="dashNeverLoggedIn">0</span>
-            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #ff5d5d;">Registered (Never Logged In)</span>
+          <div class="tfc-portal-metric-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-red-600 mb-2">Never Logged In</span>
+            <span class="text-3xl font-extrabold text-red-600 tracking-tight" id="dashNeverLoggedIn">0</span>
+            <span class="text-[0.72rem] text-red-400 mt-2">Needs activation outreach</span>
           </div>
-          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
-            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #10b981;" id="dashAppActive">0</span>
-            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #10b981;">App Active Users</span>
+          <div class="tfc-portal-metric-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2">App Active Users</span>
+            <span class="text-3xl font-extrabold text-emerald-600 tracking-tight" id="dashAppActive">0</span>
+            <span class="text-[0.72rem] text-emerald-500 mt-2">Successfully authenticated</span>
           </div>
-          <div style="background: #fff; border: 2px solid var(--ink); padding: 16px; text-align: center;">
-            <span style="font-size: 2.25rem; font-weight: 800; display: block; line-height: 1.2; color: #f59e0b;" id="dashPendingVerification">0</span>
-            <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; tracking-spacing: 0.05em; color: #f59e0b;">Pending Verification</span>
+          <div class="tfc-portal-metric-card">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-2">Pending Verification</span>
+            <span class="text-3xl font-extrabold text-amber-600 tracking-tight" id="dashPendingVerification">0</span>
+            <span class="text-[0.72rem] text-amber-500 mt-2">Awaiting approval</span>
           </div>
         </div>
 
         <!-- Never Logged In Members Accordion -->
-        <details style="background: #fff; border: 2px solid var(--ink); padding: 12px; cursor: pointer; outline: none;" id="neverLoggedInDetails">
-          <summary style="font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: #000; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+        <details class="bg-white border border-zinc-200 rounded-2xl p-4 mb-6 cursor-pointer" id="neverLoggedInDetails">
+          <summary class="font-bold text-sm text-zinc-800 flex justify-between items-center outline-none">
             <span>🔍 View Website Registrants Who Never Logged In</span>
-            <span style="font-size: 0.75rem; color: #ff5d5d;" id="dashNeverLoggedInCountLabel">(0 users)</span>
+            <span class="text-xs text-red-600 font-extrabold" id="dashNeverLoggedInCountLabel">(0 users)</span>
           </summary>
-          <div class="admin-table-wrapper" style="max-height: 320px; overflow-y: auto; margin-top: 12px; cursor: default;">
-            <table class="admin-table" id="neverLoggedInTable" style="margin-top: 0;">
+          <div class="tfc-portal-table-wrapper mt-3 max-h-80 overflow-y-auto cursor-default">
+            <table class="tfc-portal-table" id="neverLoggedInTable" style="margin-top: 0;">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -325,17 +358,17 @@
         <div class="admin-table-panel">
           <h2>Ecosystem Members List</h2>
           <!-- Filter/Sort Toolbar -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 bg-[#fff7eb] p-3 border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,1)] text-black">
-            <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 bg-zinc-50 p-3.5 border border-zinc-200 rounded-xl">
+            <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
               <!-- Search Input -->
               <div class="flex items-center gap-2 w-full sm:w-auto">
-                <span class="text-xs font-black uppercase tracking-wider">Search:</span>
-                <input type="text" id="memberSearchInput" placeholder="Name, email, college..." class="bg-white border-2 border-black px-2 py-1 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-amber-500 w-full sm:w-48 text-black font-sans" />
+                <span class="text-xs font-bold uppercase text-zinc-500">Search:</span>
+                <input type="text" id="memberSearchInput" placeholder="Name, email, college..." class="tfc-input text-xs py-1.5 px-3 w-full sm:w-56" />
               </div>
               <!-- Sort Select -->
               <div class="flex items-center gap-2 w-full sm:w-auto">
-                <span class="text-xs font-black uppercase tracking-wider">Sort By:</span>
-                <select id="memberSortSelect" class="bg-white border-2 border-black font-extrabold text-xs uppercase px-2 py-1 focus:outline-none cursor-pointer hover:bg-amber-50 transition-colors text-black w-full sm:w-auto font-sans">
+                <span class="text-xs font-bold uppercase text-zinc-500">Sort:</span>
+                <select id="memberSortSelect" class="tfc-input text-xs py-1.5 px-3 font-semibold cursor-pointer w-full sm:w-auto">
                   <option value="reg-desc">Registration (Newest)</option>
                   <option value="reg-asc">Registration (Oldest)</option>
                   <option value="name-asc">Name (A-Z)</option>
@@ -347,8 +380,8 @@
               </div>
             </div>
             <!-- Member Count -->
-            <div class="text-xs font-extrabold uppercase bg-black text-[#f7f3ee] px-2 py-1 self-stretch sm:self-auto text-center font-sans">
-              Total: <span id="memberCountVal">0</span> members
+            <div class="tfc-badge tfc-badge-neutral text-xs py-1.5 px-3">
+              Total: <strong id="memberCountVal" class="text-black ml-1">0</strong> members
             </div>
           </div>
           <div class="admin-table-wrapper">
@@ -489,52 +522,21 @@
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand-side">
-          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
-          <a href="index.html" class="footer-link">Back to Hub</a>
-        </div>
-        <div class="footer-meta">
-          <div class="apply-now">Join Our Ecosystem</div>
-          <div class="url-text">thefuturecouncil.in</div>
-        </div>
-      </footer>
-    </section>
+    </main>
 
-    <!-- Login Form Section (shown by default) -->
-    <section class="workspace" id="loginContainer">
-      <div class="max-w-md mx-auto my-12 admin-form-panel">
-        <h2>Administrator Login</h2>
-        <div id="loginError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm">
-          Invalid username or password. Please try again.
+    <!-- Modern Portal Footer -->
+    <footer class="border-t border-zinc-200 bg-white py-6">
+      <div class="tfc-portal-container flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-semibold">
+        <div class="flex items-center gap-2">
+          <img src="TFC.png" alt="The Future Council logo" class="w-6 h-6 object-contain" />
+          <span>The Future Council • Internal Operations Console</span>
         </div>
-        <form id="loginForm">
-          <div class="form-group">
-            <label for="loginUsername">Username</label>
-            <input type="text" id="loginUsername" class="form-control" placeholder="Enter username" required />
-          </div>
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required />
-          </div>
-          <button type="submit" class="admin-submit-btn">Login</button>
-        </form>
+        <div>
+          <span>thefuturecouncil.in</span>
+        </div>
       </div>
-
-      <!-- Footer for Login View -->
-      <footer class="footer">
-        <div class="footer-brand-side">
-          <img src="TFC.png" alt="The Future Council logo" class="footer-logo" />
-          <a href="index.html" class="footer-link">Back to Hub</a>
-        </div>
-        <div class="footer-meta">
-          <div class="apply-now">Join Our Ecosystem</div>
-          <div class="url-text">thefuturecouncil.in</div>
-        </div>
-      </footer>
-    </section>
-  </main>
+    </footer>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -1630,10 +1632,9 @@
         
         if (!btnEcosystem || !btnProjects || !btnAmbassadors) return;
 
-        // Reset styles to inactive states
-        btnEcosystem.style.background = '#eee';
-        btnProjects.style.background = '#eee';
-        btnAmbassadors.style.background = '#eee';
+        btnEcosystem.classList.remove('active');
+        btnProjects.classList.remove('active');
+        btnAmbassadors.classList.remove('active');
         
         // Hide all
         contentEcosystem.classList.add('hidden');
@@ -1641,14 +1642,14 @@
         contentAmbassadors.classList.add('hidden');
         
         if (tab === 'ecosystem') {
-          btnEcosystem.style.background = '#fff';
+          btnEcosystem.classList.add('active');
           contentEcosystem.classList.remove('hidden');
         } else if (tab === 'projects') {
-          btnProjects.style.background = '#fff';
+          btnProjects.classList.add('active');
           contentProjects.classList.remove('hidden');
           renderKanbanTasks();
         } else if (tab === 'ambassadors') {
-          btnAmbassadors.style.background = '#fff';
+          btnAmbassadors.classList.add('active');
           contentAmbassadors.classList.remove('hidden');
           renderAmbassadorsMilestones();
         }

@@ -9,306 +9,157 @@
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --ink: #000000;
-      --paper: #FAF9F6;
-      --yellow: #ffd93d;
-      --orange: #ff9e59;
-      --green: #10b981;
-      --pink: #ff5c7c;
-      --blue: #3b82f6;
-      --font-heading: 'Archivo Black', system-ui, -apple-system, sans-serif;
-    }
-    body {
-      background: #000000;
-      color: #000000;
-      font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
+    .tfc-filter-control {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      gap: 6px;
     }
-    .desktop-window {
-      background: #FAF9F6;
-      border: 3px solid var(--ink);
-      box-shadow: 8px 8px 0 var(--ink);
-      width: 100%;
-      max-width: 1280px;
-      margin: 20px;
-      position: relative;
-    }
-    .window-bar {
-      background: var(--ink);
-      color: #FAF9F6;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      border-bottom: 3px solid var(--ink);
-    }
-    .window-controls {
-      position: absolute;
-      left: 16px;
-      display: flex;
-      gap: 8px;
-    }
-    .window-controls span {
-      display: block;
-      width: 12px;
-      height: 12px;
-      border: 3px solid var(--ink);
-    }
-    .window-controls .red { background: #ff5d5d; }
-    .window-controls .yellow { background: #f5c542; }
-    .window-controls .gray { background: #bdbdbd; }
-    
-    .window-title {
-      font-size: 0.76rem;
-      letter-spacing: 0.32em;
-      font-weight: 800;
-      color: #FAF9F6;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .workspace {
-      padding: 28px 24px;
-    }
-    .partners-hero {
-      border: 3px solid var(--ink);
-      background: #FFF9E6;
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-    .hero-text {
-      margin: 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    /* Top Sub-Navigation Tabs */
-    .crm-subnav {
-      display: flex;
-      gap: 8px;
-      border-bottom: 3px solid var(--ink);
-      margin-bottom: 24px;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 2px;
-    }
-    .crm-subtab-btn {
-      padding: 12px 20px;
-      font-size: 0.85rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-      border: 3px solid var(--ink);
-      border-bottom: none;
-      background: #e5e5dc;
-      color: var(--ink);
-      cursor: pointer;
-      box-shadow: 3px 0 0 rgba(0,0,0,0.1);
-      transition: all 0.12s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .crm-subtab-btn:hover {
-      background: #f0f0e8;
-    }
-    .crm-subtab-btn.active {
-      background: var(--yellow);
-      color: var(--ink);
-      border-bottom: 3px solid var(--yellow);
-      margin-bottom: -3px;
-      box-shadow: 4px -2px 0 var(--ink);
-    }
-    .subtab-badge {
-      background: var(--ink);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 2px 7px;
-      border-radius: 999px;
-    }
-    .crm-subtab-btn.active .subtab-badge {
-      background: var(--ink);
-      color: var(--yellow);
-    }
-
-    .analytics-panel {
-      border: 3px solid var(--ink);
-      background: #fff;
-      box-shadow: 6px 6px 0 var(--ink);
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-    .analytics-panel h2 {
-      margin: 0 0 16px;
-      font-size: 1.15rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-      border-bottom: 2.5px solid var(--ink);
-      padding-bottom: 8px;
-    }
-    .metric-card {
-      background: #fff;
-      border: 2.5px solid var(--ink);
-      padding: 16px;
-      text-align: center;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .metric-val {
-      font-size: 2.1rem;
-      font-weight: 900;
-      display: block;
-      line-height: 1.1;
-      font-family: var(--font-heading);
-    }
-    .metric-label {
+    .tfc-filter-label {
       font-size: 0.72rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #666;
-      display: block;
-      margin-top: 4px;
-    }
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    .admin-table th, .admin-table td {
-      border: 2px solid var(--ink);
-      padding: 10px 12px;
-      font-size: 0.8rem;
-    }
-    .admin-table th {
-      background: #eee;
       font-weight: 800;
       text-transform: uppercase;
-      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
     }
-    .back-link-btn {
+    .tfc-subtab-pill {
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: 9999px;
+      border: 1.5px solid var(--border-subtle);
+      background: #FFFFFF;
+      color: var(--ink-soft);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 800;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .tfc-subtab-pill:hover {
+      border-color: var(--ink);
       color: var(--ink);
-      text-decoration: underline;
-      text-transform: uppercase;
-      margin-bottom: 12px;
     }
-
-    /* Catalog Cards */
-    .res-overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+    .tfc-subtab-pill.active {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-color: var(--ink);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
-    .res-overview-card {
-      background: #fff;
-      border: 3px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .tfc-subtab-pill.active .subtab-badge {
+      background: var(--primary-orange);
+      color: #FFFFFF;
     }
-
-    @media (max-width: 640px) {
-      body { padding: 12px; }
-      .workspace { padding: 16px 12px; }
-      .hero-title { font-size: 1.4rem; }
-      .crm-subtab-btn { padding: 8px 12px; font-size: 0.75rem; }
+    .subtab-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(20, 17, 15, 0.08);
+      color: var(--ink);
     }
   </style>
-  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="tfc-portal-body">
 
-  <!-- AUTH PORTAL GATE -->
-  <div class="bg-white border-3 border-black p-8 shadow-[8px_8px_0_rgba(0,0,0,1)] w-full max-w-sm" id="loginContainer">
-    <div class="text-center mb-6">
-      <img src="TFC.png" alt="TFC Logo" class="w-16 h-16 border-3 border-black mx-auto mb-3" />
-      <h2 class="font-black text-xl uppercase tracking-tight">TFC CRM Database</h2>
-      <p class="text-xs text-gray-500 font-bold uppercase mt-1">Authorized Access Only</p>
+  <!-- AUTH PORTAL GATE (Centered on Cream Canvas) -->
+  <div class="min-h-screen flex items-center justify-center p-4" id="loginContainer">
+    <div class="tfc-card w-full max-w-sm text-center" style="padding: 40px 32px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+      <img src="TFC.png" alt="The Future Council Logo" class="w-14 h-14 object-contain rounded-xl mx-auto mb-4 p-1 bg-white border border-zinc-200 shadow-sm" />
+      <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 10px; font-size: 0.68rem;">INTERNAL PORTAL SUITE</span>
+      <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
+        Growth CRM & Telemetry
+      </h1>
+      <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 24px;">
+        Authorized ecosystem console for member data and reading analytics.
+      </p>
+
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Username / Admin ID</label>
+          <input type="text" id="loginUsername" required placeholder="Enter authorized ID" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Console Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
+        </div>
+        <div id="loginError" class="hidden p-3 bg-red-50 border border-red-300 text-red-700 font-bold text-xs rounded-xl">
+          ⚠️ Invalid credentials! Please check your access codes.
+        </div>
+        <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full justify-center" style="margin-top: 8px;">
+          Unlock CRM Console ⚡
+        </button>
+      </form>
     </div>
-
-    <form id="loginForm" class="space-y-4">
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Username</label>
-        <input type="text" id="loginUsername" required placeholder="Enter login ID" class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div>
-        <label class="block text-xs font-black uppercase mb-1">Password</label>
-        <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full border-2 border-black p-2 font-bold focus:outline-none" />
-      </div>
-      <div id="loginError" class="hidden text-xs text-red-500 font-bold">
-        ⚠️ Invalid credentials! Please check your access codes.
-      </div>
-      <button type="submit" class="w-full bg-black text-[#ff9e59] border-2 border-black p-2.5 font-extrabold uppercase text-xs tracking-wider hover:translate-y-[-1px] hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
-        Unlock CRM Console ⚡
-      </button>
-    </form>
   </div>
 
   <!-- MAIN CRM INTERFACE -->
-  <main class="desktop-window hidden" id="crmContent">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="red"></span>
-        <span class="yellow"></span>
-        <span class="gray"></span>
+  <div class="hidden min-h-screen flex flex-col" id="crmContent">
+    
+    <!-- Top Sticky Portal Header -->
+    <header class="tfc-portal-nav-bar">
+      <div class="tfc-portal-container">
+        <div class="tfc-portal-header-row">
+          <div class="flex items-center gap-3 flex-wrap">
+            <a href="index.html" class="tfc-brand">
+              <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
+              <span>THE FUTURE COUNCIL</span>
+            </a>
+            <span class="text-zinc-300">|</span>
+            <span class="tfc-badge tfc-badge-orange text-[0.68rem]">GROWTH CRM</span>
+          </div>
+
+          <!-- Suite Links -->
+          <nav class="tfc-portal-tabs">
+            <a href="data.html" class="tfc-portal-tab active">📊 Growth CRM</a>
+            <a href="admin.html" class="tfc-portal-tab">⚙️ Admin Console</a>
+            <a href="society.html" class="tfc-portal-tab">🏛️ Society Leads</a>
+            <a href="marketing.html" class="tfc-portal-tab">📣 Marketing</a>
+            <a href="sales.html" class="tfc-portal-tab">💼 Sales & Sponsors</a>
+          </nav>
+
+          <!-- User Meta & Logout -->
+          <div class="flex items-center gap-2.5">
+            <span class="tfc-badge tfc-badge-neutral text-xs" id="currentUserLabel">User: Admin</span>
+            <a href="resources.html" target="_blank" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Vault ↗</a>
+            <button onclick="handleLogout()" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Logout 🚪</button>
+          </div>
+        </div>
       </div>
-      <div class="window-title">The Future Council • Growth CRM & Telemetry</div>
     </header>
 
-    <div class="workspace">
-      <!-- Top Actions Row -->
-      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
-        <div class="flex gap-2 items-center">
-          <a href="index.html" class="back-link-btn" style="margin-bottom:0;">
-            <span>← Back to Home</span>
-          </a>
-          <a href="resources.html" target="_blank" class="back-link-btn" style="margin-bottom:0; color: #ff6b00;">
-            <span>📚 Open Resource Vault ↗</span>
-          </a>
-        </div>
-        <div class="flex gap-2">
-          <span class="text-xs font-extrabold bg-[#FFF9E6] border-2 border-black px-3 py-1 uppercase" id="currentUserLabel">User: Admin</span>
-          <button onclick="handleLogout()" class="text-xs font-black bg-red-100 hover:bg-red-200 border-2 border-black px-3 py-1 uppercase tracking-wider hover:shadow-[2px_2px_0_#000] transition-all">
-            Logout 🚪
-          </button>
+    <!-- Workspace Body -->
+    <main class="tfc-portal-container py-8 flex-1">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="mb-8">
+        <div class="flex justify-between items-end flex-wrap gap-4">
+          <div>
+            <span class="tfc-eyebrow">INTERNAL OPERATIONAL CONSOLE</span>
+            <h1 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 6px; letter-spacing: -0.8px;">
+              Growth CRM & Reader Telemetry
+            </h1>
+            <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0; max-width: 760px;">
+              Manage student builder registrations, founder questionnaire responses, resource engagement rates, and live session duration analytics powered by Supabase.
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <a href="index.html" class="tfc-btn tfc-btn-outline" style="padding: 8px 16px; font-size: 0.82rem;">
+              ← Back to Website
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Welcome Banner -->
-      <div class="partners-hero">
-        <h1 class="hero-title">Growth CRM & Resource Telemetry</h1>
-        <p class="hero-text">Manage ecosystem leads, applicant questionnaires, resource reader engagement, view counts, and reader time telemetry from Supabase.</p>
-      </div>
-
-      <!-- SUB-NAVIGATION TABS -->
-      <div class="crm-subnav">
-        <button id="tabBtnLeads" class="crm-subtab-btn active" onclick="switchCrmSubTab('leads')">
+      <!-- SUB-NAVIGATION PILL TABS -->
+      <div class="flex gap-3 mb-6 overflow-x-auto pb-1">
+        <button id="tabBtnLeads" class="tfc-subtab-pill active" onclick="switchCrmSubTab('leads')">
           <span>📋 CRM Contacts & Leads</span>
           <span class="subtab-badge" id="tabBadgeLeads">0</span>
         </button>
-        <button id="tabBtnResources" class="crm-subtab-btn" onclick="switchCrmSubTab('resources')">
+        <button id="tabBtnResources" class="tfc-subtab-pill" onclick="switchCrmSubTab('resources')">
           <span>📚 Resource Readers & Engagement</span>
           <span class="subtab-badge" id="tabBadgeResources">0</span>
         </button>
@@ -320,34 +171,38 @@
       <div id="subTabContentLeads">
         <!-- METRICS CARDS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="metric-card" style="border-color: #ff6b00;">
-            <span class="metric-val text-[#ff6b00]" id="totalRegistrants">0</span>
-            <span class="metric-label">Total Leads</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid var(--primary-orange);">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-[#ff7a3d]" id="totalRegistrants">0</span>
+            <span class="tfc-filter-label mt-1">Total Leads</span>
           </div>
-          <div class="metric-card" style="border-color: #3b82f6;">
-            <span class="metric-val text-blue-600" id="fellowshipCount">0</span>
-            <span class="metric-label">Fellowship Interested</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="fellowshipCount">0</span>
+            <span class="tfc-filter-label mt-1">Fellowship Interested</span>
           </div>
-          <div class="metric-card" style="border-color: #10b981;">
-            <span class="metric-val text-green-600" id="ambassadorCount">0</span>
-            <span class="metric-label">Ambassadors</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="ambassadorCount">0</span>
+            <span class="tfc-filter-label mt-1">Campus Ambassadors</span>
           </div>
-          <div class="metric-card" style="border-color: #a855f7;">
-            <span class="metric-val text-purple-600" id="activeReferrals">0</span>
-            <span class="metric-label">Step 1 Dropoffs ⚠️</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #9333ea;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-purple-600" id="activeReferrals">0</span>
+            <span class="tfc-filter-label mt-1">Step 1 Dropoffs ⚠️</span>
           </div>
         </div>
 
-        <div class="analytics-panel">
-          <h2>🔍 Search & Advanced Filtering</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-2">
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Query Search</label>
-              <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
+        <!-- SEARCH & ADVANCED FILTER PANEL -->
+        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
+            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Search & Advanced Filtering</h3>
+            <span class="text-xs font-bold text-zinc-400">Real-time dynamic query</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-1">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Query Search</label>
+              <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
             </div>
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Filter Tier</label>
-              <select id="crmTierFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Filter Tier</label>
+              <select id="crmTierFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Tiers</option>
                 <option value="student">Student</option>
                 <option value="student founder">Student Founder</option>
@@ -356,9 +211,9 @@
                 <option value="unverified">Unverified</option>
               </select>
             </div>
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Fellowship / Onboarding</label>
-              <select id="crmFellowshipFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Fellowship Application</label>
+              <select id="crmFellowshipFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Applications</option>
                 <option value="yes">Fellowship Interested Only</option>
                 <option value="no">General Network Only</option>
@@ -367,9 +222,9 @@
                 <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
               </select>
             </div>
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Filter Lead Source</label>
-              <select id="crmSourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Lead Origin Source</label>
+              <select id="crmSourceFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Sources</option>
                 <option value="joinpage">General Join Page</option>
                 <option value="fellowshippage">Fellowship Form</option>
@@ -377,8 +232,8 @@
                 <option value="financialaid">Financial Aid Request</option>
               </select>
             </div>
-            <div class="flex flex-col gap-1 justify-end">
-              <button onclick="exportToCSV()" class="w-full bg-[#10b981] hover:bg-[#0ea5e9] border-2 border-black p-2 font-black text-xs text-black uppercase tracking-wider hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
+            <div class="flex flex-col justify-end">
+              <button onclick="exportToCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 14px; font-size: 0.8rem; justify-content: center; width: 100%;">
                 📊 Export to CSV
               </button>
             </div>
@@ -386,26 +241,26 @@
         </div>
 
         <!-- MAIN CRM TABLE -->
-        <div class="analytics-panel">
-          <div class="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
-            <h2 style="border:none; margin:0; padding:0;">📋 CRM Contact Entries</h2>
-            <span class="text-xs font-black bg-amber-100 border border-amber-400 px-2 py-0.5" id="filteredCount">0 shown</span>
+        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
+            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">📋 CRM Contact Entries</h3>
+            <span class="tfc-badge tfc-badge-orange text-xs" id="filteredCount">0 shown</span>
           </div>
 
-          <div class="admin-table-wrapper" style="overflow-x: auto;">
-            <table class="admin-table" id="crmTable">
+          <div class="tfc-portal-table-wrapper">
+            <table class="tfc-portal-table" id="crmTable">
               <thead>
                 <tr>
                   <th>Lead Info</th>
                   <th>College / Campuses</th>
                   <th>Phone</th>
                   <th>Network Tier</th>
-                  <th>Fellowship?</th>
+                  <th>Fellowship Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">Loading data pipelines...</td></tr>
+                <tr><td colspan="6" class="text-center py-8 text-zinc-400 font-semibold">Loading data pipelines...</td></tr>
               </tbody>
             </table>
           </div>
@@ -418,73 +273,73 @@
       <div id="subTabContentResources" class="hidden">
         <!-- RESOURCE METRICS CARDS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="metric-card" style="border-color: #ffd93d; background: #fffdf5;">
-            <span class="metric-val text-black" id="resMetricTotalOpens">0</span>
-            <span class="metric-label">Total Resource Opens 📖</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid var(--primary-orange);">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-[#ff7a3d]" id="resMetricTotalOpens">0</span>
+            <span class="tfc-filter-label mt-1">Total Resource Opens 📖</span>
           </div>
-          <div class="metric-card" style="border-color: #10b981; background: #f6fff9;">
-            <span class="metric-val text-green-700" id="resMetricUniqueReaders">0</span>
-            <span class="metric-label">Unique Readers 👥</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="resMetricUniqueReaders">0</span>
+            <span class="tfc-filter-label mt-1">Unique Readers 👥</span>
           </div>
-          <div class="metric-card" style="border-color: #3b82f6; background: #f5f9ff;">
-            <span class="metric-val text-blue-700" id="resMetricTotalTime">0m</span>
-            <span class="metric-label">Total Read Time ⏱️</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="resMetricTotalTime">0m</span>
+            <span class="tfc-filter-label mt-1">Total Read Time ⏱️</span>
           </div>
-          <div class="metric-card" style="border-color: #ff5c7c; background: #fff5f7;">
-            <span class="metric-val text-pink-700" id="resMetricAvgTime">0s</span>
-            <span class="metric-label">Avg Time / Reader ⏳</span>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #ec4899;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-pink-600" id="resMetricAvgTime">0s</span>
+            <span class="tfc-filter-label mt-1">Avg Time / Reader ⏳</span>
           </div>
         </div>
 
         <!-- RESOURCE CATALOG BREAKDOWN CARDS -->
-        <div class="res-overview-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <!-- Card 1 -->
-          <div class="res-overview-card" style="border-top: 6px solid var(--yellow);">
+          <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-[0.68rem] font-black uppercase bg-black text-yellow-300 px-2 py-0.5 border border-black">🔒 Member Exclusive</span>
-                <span class="text-xs font-bold text-gray-500" id="swipeStatsSummary">0 Opens</span>
+                <span class="tfc-badge tfc-badge-orange text-[0.68rem]">🔒 Member Exclusive</span>
+                <span class="text-xs font-bold text-zinc-500" id="swipeStatsSummary">0 Opens</span>
               </div>
-              <h3 class="font-extrabold text-base uppercase mb-1">Cold-to-Warm Networking Swipe File</h3>
-              <p class="text-xs text-gray-600 font-medium mb-3">7 outreach templates, mentor asks, and psychology breakdown.</p>
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">Cold-to-Warm Networking Swipe File</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">7 battle-tested outreach templates, founder asks, and psychology breakdown.</p>
             </div>
-            <div class="bg-[#FFF9E6] border-2 border-black p-2.5 flex justify-between text-xs font-bold">
+            <div class="bg-zinc-50 rounded-xl p-3 flex justify-between text-xs font-bold border border-zinc-200/60">
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Readers</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Readers</span>
                 <strong id="swipeUniqueReaders" class="text-sm">0</strong>
               </div>
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Time</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Time</span>
                 <strong id="swipeTotalTime" class="text-sm">0m</strong>
               </div>
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Avg Time</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Avg Time</span>
                 <strong id="swipeAvgTime" class="text-sm">0s</strong>
               </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="res-overview-card" style="border-top: 6px solid var(--green);">
+          <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-[0.68rem] font-black uppercase bg-green-600 text-white px-2 py-0.5 border border-black">🔓 Open Access</span>
-                <span class="text-xs font-bold text-gray-500" id="valStatsSummary">0 Opens</span>
+                <span class="tfc-badge tfc-badge-lime text-[0.68rem]">🔓 Open Access</span>
+                <span class="text-xs font-bold text-zinc-500" id="valStatsSummary">0 Opens</span>
               </div>
-              <h3 class="font-extrabold text-base uppercase mb-1">Zero-to-One Idea Validation Framework</h3>
-              <p class="text-xs text-gray-600 font-medium mb-3">5-question customer litmus test and 48-hour demand checklist.</p>
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">Zero-to-One Idea Validation Framework</h3>
+              <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">5-question customer litmus test and 48-hour demand validation checklist.</p>
             </div>
-            <div class="bg-[#f0fff4] border-2 border-black p-2.5 flex justify-between text-xs font-bold">
+            <div class="bg-zinc-50 rounded-xl p-3 flex justify-between text-xs font-bold border border-zinc-200/60">
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Readers</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Readers</span>
                 <strong id="valUniqueReaders" class="text-sm">0</strong>
               </div>
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Total Time</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Time</span>
                 <strong id="valTotalTime" class="text-sm">0m</strong>
               </div>
               <div>
-                <span class="text-gray-500 block text-[0.65rem] uppercase">Avg Time</span>
+                <span class="text-zinc-400 block text-[0.65rem] uppercase">Avg Time</span>
                 <strong id="valAvgTime" class="text-sm">0s</strong>
               </div>
             </div>
@@ -492,48 +347,51 @@
         </div>
 
         <!-- SEARCH & FILTER FOR RESOURCES -->
-        <div class="analytics-panel">
-          <h2>🔍 Filter Resource Readers & Telemetry</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-2">
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Search Reader</label>
-              <input type="text" id="resSearchInput" placeholder="Name, email, college, resource..." class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black" />
+        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
+            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Resource Readers & Telemetry</h3>
+            <span class="text-xs font-bold text-zinc-400">Live engagement tracking</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-1">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Search Reader</label>
+              <input type="text" id="resSearchInput" placeholder="Name, email, college..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
             </div>
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Filter Resource</label>
-              <select id="resResourceFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Filter Resource</label>
+              <select id="resResourceFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Resources</option>
                 <option value="swipe_file">Cold-to-Warm Swipe File</option>
                 <option value="how_to_find_startup_idea">How to Find a Startup Idea</option>
                 <option value="zero_to_one_validation">Idea Validation Framework</option>
               </select>
             </div>
-            <div class="flex flex-col gap-1">
-              <label class="text-xs font-black uppercase text-gray-500">Filter Engagement / Time</label>
-              <select id="resEngagementFilter" class="border-2 border-black p-1.5 text-xs font-bold focus:outline-none bg-white text-black cursor-pointer">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Engagement / Read Duration</label>
+              <select id="resEngagementFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Engagement Levels</option>
                 <option value="high">🔥 High Intent (> 2 mins)</option>
                 <option value="moderate">📖 Moderate (30s - 2m)</option>
                 <option value="quick">⚡ Quick Glance (< 30s)</option>
               </select>
             </div>
-            <div class="flex flex-col gap-1 justify-end">
-              <button onclick="exportResourceAnalyticsCSV()" class="w-full bg-[#ffd93d] hover:bg-[#ffe359] border-2 border-black p-2 font-black text-xs text-black uppercase tracking-wider hover:shadow-[3px_3px_0_rgba(0,0,0,1)] transition-all">
-                📊 Export Resources CSV
+            <div class="flex flex-col justify-end">
+              <button onclick="exportResourceAnalyticsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 14px; font-size: 0.8rem; justify-content: center; width: 100%;">
+                📊 Export Telemetry CSV
               </button>
             </div>
           </div>
         </div>
 
         <!-- RESOURCE READER ACTIVITY TABLE -->
-        <div class="analytics-panel">
-          <div class="flex justify-between items-center border-b-2 border-black pb-2 mb-4">
-            <h2 style="border:none; margin:0; padding:0;">👥 Reader Activity & Telemetry Stream</h2>
-            <span class="text-xs font-black bg-yellow-100 border border-yellow-400 px-2 py-0.5" id="resFilteredCount">0 shown</span>
+        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
+            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">👥 Reader Activity & Telemetry Stream</h3>
+            <span class="tfc-badge tfc-badge-orange text-xs" id="resFilteredCount">0 shown</span>
           </div>
 
-          <div class="admin-table-wrapper" style="overflow-x: auto;">
-            <table class="admin-table" id="resourceTable">
+          <div class="tfc-portal-table-wrapper">
+            <table class="tfc-portal-table" id="resourceTable">
               <thead>
                 <tr>
                   <th>Reader Profile</th>
@@ -541,12 +399,12 @@
                   <th>Resource Accessed</th>
                   <th>Times Opened</th>
                   <th>Time Spent</th>
-                  <th>Last Opened</th>
+                  <th>Last Active</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td colspan="7" class="text-center py-6 text-gray-500 font-semibold">Loading resource engagement telemetry...</td></tr>
+                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading resource engagement telemetry...</td></tr>
               </tbody>
             </table>
           </div>
@@ -554,8 +412,14 @@
 
       </div>
 
-    </div>
-  </main>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="py-6 border-t border-zinc-200/80 text-center text-xs text-zinc-500 font-medium bg-white">
+      The Future Council Internal Suite • Authorized Operational Environment • © 2026
+    </footer>
+
+  </div>
 
   <script>
     // Initialize Supabase Client
@@ -1027,42 +891,42 @@
       const modalDiv = document.createElement('div');
       modalDiv.id = 'resDetailOverlay';
       modalDiv.style.cssText = `
-        position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+        position: fixed; inset: 0; background: rgba(20, 17, 15, 0.65); backdrop-filter: blur(8px);
         display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
       `;
 
       modalDiv.innerHTML = `
-        <div style="background:#FAF9F6; border:4px solid #000; box-shadow:8px 8px 0 #ffd93d, 8px 8px 0 3px #000; padding:24px; max-width:580px; width:100%; max-height:85vh; overflow-y:auto; position:relative; color:#000;">
-          <button onclick="document.getElementById('resDetailOverlay').remove()" style="position:absolute; top:12px; right:12px; background:#ff5d5d; color:#fff; border:2px solid #000; font-weight:900; padding:4px 10px; cursor:pointer;">✕ CLOSE</button>
+        <div style="background: #FFFFFF; border: 1.5px solid var(--border-subtle); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 28px; max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; color: var(--ink);">
+          <button onclick="document.getElementById('resDetailOverlay').remove()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;">✕</button>
           
-          <div style="margin-bottom:16px; border-bottom:3px solid #000; padding-bottom:10px;">
-            <span style="background:#ffd93d; border:2px solid #000; font-size:0.7rem; font-weight:900; text-transform:uppercase; padding:3px 8px;">📊 Reader Engagement Telemetry</span>
-            <h2 style="font-size:1.35rem; font-weight:900; margin:8px 0 0; text-transform:uppercase;">
+          <div style="margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 16px;">
+            <span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem; margin-bottom: 8px;">📊 Reader Engagement Telemetry</span>
+            <h2 style="font-size: 1.4rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: -0.5px;">
               ${log.name}
             </h2>
-            <div style="font-size:0.8rem; font-family:monospace; color:#555;">${log.email} • ${log.college}</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">${log.email} • ${log.college}</div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
-            <div style="background:#fff; border:2px solid #000; padding:12px; text-align:center;">
-              <span style="font-size:1.8rem; font-weight:900; display:block;">${log.opens}x</span>
-              <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:#666;">Total Times Opened</span>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 14px; text-align: center;">
+              <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1.2;">${log.opens}x</span>
+              <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.05em;">Total Times Opened</span>
             </div>
-            <div style="background:#fff; border:2px solid #000; padding:12px; text-align:center;">
-              <span style="font-size:1.8rem; font-weight:900; color:#3b82f6; display:block;">${formatDuration(log.totalSeconds)}</span>
-              <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:#666;">Active Reading Duration</span>
+            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 14px; text-align: center;">
+              <span style="font-size: 1.8rem; font-weight: 800; color: #2563EB; display: block; line-height: 1.2;">${formatDuration(log.totalSeconds)}</span>
+              <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.05em;">Active Reading Duration</span>
             </div>
           </div>
 
-          <div style="background:#FFF9E6; border:2px solid #000; padding:14px; margin-bottom:16px; font-size:0.85rem; line-height:1.5;">
-            <div><strong>Resource:</strong> ${log.resourceTitle}</div>
-            <div><strong>Access Type:</strong> ${log.isMemberOnly ? '🔒 Member Exclusive' : '🔓 Open Access'}</div>
-            <div><strong>Last Activity:</strong> ${new Date(log.lastOpened).toLocaleString()} (${timeAgo(log.lastOpened)})</div>
-            ${log.phone ? `<div><strong>Phone Number:</strong> ${log.phone}</div>` : ''}
+          <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-bottom: 20px; font-size: 0.88rem; line-height: 1.6;">
+            <div><strong style="color: var(--ink-soft);">Resource:</strong> <span style="font-weight: 700;">${log.resourceTitle}</span></div>
+            <div><strong style="color: var(--ink-soft);">Access Type:</strong> <span style="font-weight: 700;">${log.isMemberOnly ? '🔒 Member Exclusive' : '🔓 Open Access'}</span></div>
+            <div><strong style="color: var(--ink-soft);">Last Activity:</strong> <span style="font-weight: 600;">${new Date(log.lastOpened).toLocaleString()} (${timeAgo(log.lastOpened)})</span></div>
+            ${log.phone ? `<div><strong style="color: var(--ink-soft);">Phone:</strong> <span style="font-weight: 700;">${log.phone}</span></div>` : ''}
           </div>
 
-          <div style="display:flex; gap:10px;">
-            <a href="mailto:${log.email}?subject=${encodeURIComponent('The Future Council — Founder Playbook Follow-up')}" class="card-btn card-btn-primary" style="flex:1; text-align:center; padding:10px; font-size:0.85rem; text-decoration:none;">
+          <div style="display: flex; gap: 10px;">
+            <a href="mailto:${log.email}?subject=${encodeURIComponent('The Future Council — Founder Playbook Follow-up')}" class="tfc-btn tfc-btn-primary w-full justify-center" style="padding: 10px; font-size: 0.88rem; text-decoration: none;">
               ✉️ Send Email Outreach
             </a>
           </div>
@@ -1233,43 +1097,53 @@
       const modalDiv = document.createElement('div');
       modalDiv.id = 'crmDetailOverlay';
       modalDiv.style.cssText = `
-        position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+        position: fixed; inset: 0; background: rgba(20, 17, 15, 0.65); backdrop-filter: blur(8px);
         display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
       `;
 
       modalDiv.innerHTML = `
-        <div style="background:#FAF9F6; border:3px solid #000; box-shadow:8px 8px 0 #000; padding:24px; max-width:600px; width:100%; max-height:85vh; overflow-y:auto; position:relative; color:#000;">
-          <button onclick="document.getElementById('crmDetailOverlay').remove()" style="position:absolute; top:12px; right:12px; background:#ff5d5d; color:#fff; border:2px solid #000; font-weight:bold; padding:4px 10px; cursor:pointer;">✕ CLOSE</button>
+        <div style="background: #FFFFFF; border: 1.5px solid var(--border-subtle); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 28px; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; color: var(--ink);">
+          <button onclick="document.getElementById('crmDetailOverlay').remove()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;">✕</button>
           
-          <h2 style="font-size:1.3rem; font-weight:900; border-bottom:3px solid #000; padding-bottom:6px; margin-bottom:16px; text-transform:uppercase;">
-            📋 Onboarding Profile Responses
-          </h2>
+          <div style="margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 16px;">
+            <span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem; margin-bottom: 8px;">📋 Lead Application Profile</span>
+            <h2 style="font-size: 1.4rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: -0.5px;">
+              ${member.name}
+            </h2>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">${meta.displayName}</div>
+          </div>
 
-          <div style="font-size:0.85rem; line-height:1.5;" class="space-y-4">
-            <div><strong>Name:</strong> ${member.name}</div>
-            <div><strong>College / Campuses:</strong> ${meta.displayName}</div>
-            <div><strong>Phone Number:</strong> ${meta.phone || 'No Phone'}</div>
-            ${meta.country ? `<div><strong>Country:</strong> ${meta.country}</div>` : ''}
+          <div style="font-size: 0.88rem; line-height: 1.6;" class="space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Phone</span>
+                <span style="font-weight: 700;">${meta.phone || 'No Phone'}</span>
+              </div>
+              <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Country</span>
+                <span style="font-weight: 700;">${meta.country || 'India'}</span>
+              </div>
+            </div>
             
-            <div style="background:#FFF9E6; border:2px solid #000; padding:12px; margin-top:14px;" class="space-y-3">
+            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-top: 16px;" class="space-y-3">
               ${(() => {
                 if (meta.source === 'FellowshipPage') {
                   return `
                     <div>
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q1: What startup idea are you building/validating?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q1: What startup idea are you building/validating?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q1 || 'Not Answered'}</p>
                     </div>
-                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: What is your motivation to join the fellowship?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q2: What is your motivation to join the fellowship?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q2 || 'Not Answered'}</p>
                     </div>
-                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q3: Where are you based (your city/state)?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q3 || 'Not Answered'}</p>
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q3: Where are you based (your city/state)?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q3 || 'Not Answered'}</p>
                     </div>
-                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q4 || 'Not Answered'}</p>
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q4 || 'Not Answered'}</p>
                     </div>
                   `;
                 } else if (meta.source === 'FinancialAid') {
@@ -1280,23 +1154,23 @@
                   });
                   return `
                     <div>
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Financial Aid Case justification</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${aidCase || 'Not Answered'}</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Financial Aid Case Justification</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${aidCase || 'Not Answered'}</p>
                     </div>
                   `;
                 } else {
                   return `
                     <div>
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q1: Why are you interested in entrepreneurship?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q1 || 'Not Answered'}</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q1: Why are you interested in entrepreneurship?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q1 || 'Not Answered'}</p>
                     </div>
-                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q2: Are you building anything right now?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q2 || 'Not Answered'}</p>
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q2: Are you building anything right now?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q2 || 'Not Answered'}</p>
                     </div>
-                    <div style="border-top:1.5px dashed #000; padding-top:8px;">
-                      <p style="font-weight:900; text-transform:uppercase; font-size:0.75rem; color:#ff6b00; margin:0 0 4px;">Q3: What's your motivation to join The Future Council?</p>
-                      <p style="margin:0; font-weight:700; color:#222;">${meta.q3 || 'Not Answered'}</p>
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q3: What's your motivation to join The Future Council?</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q3 || 'Not Answered'}</p>
                     </div>
                   `;
                 }
