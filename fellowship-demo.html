@@ -175,7 +175,7 @@
             type="submit"
             class="w-full py-4 px-6 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-black font-black uppercase text-sm tracking-wider rounded-xl shadow-lg shadow-orange-500/20 transition cursor-pointer flex items-center justify-center gap-2"
           >
-            <span>Launch UPI Checkout Modal (₹2,000) ⚡</span>
+            <span>Launch UPI Checkout Modal (₹1,999) ⚡</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </form>
@@ -228,7 +228,7 @@
           <pre id="jsonPayloadPreview" class="p-3 bg-black rounded-xl border border-zinc-800 text-[0.7rem] text-emerald-400 font-mono overflow-x-auto max-h-48">{
   "status": "awaiting_form_submit",
   "applicant": "Aryan Sharma",
-  "amount": 2000,
+  "amount": 1999,
   "vpa": "dhruvmadan235@okhdfcbank"
 }</pre>
         </div>
@@ -264,7 +264,7 @@
           Standardized URI scheme opens PhonePe, Google Pay, Paytm, or CRED directly on iOS/Android:
         </p>
         <code class="block p-2.5 bg-black rounded-lg border border-zinc-800 text-[0.68rem] text-orange-400 font-mono break-all select-all">
-          upi://pay?pa=dhruvmadan235@okhdfcbank&pn=The%20Future%20Council&am=2000&cu=INR&tn=Fellowship26-Registration
+          upi://pay?pa=dhruvmadan235@okhdfcbank&pn=Dhruv%20Madan&am=1999.00&cu=INR&aid=uGICAgJDgseLxBg
         </code>
       </div>
 
@@ -312,7 +312,7 @@
         <!-- Branded Payment Header & Subtext -->
         <div class="space-y-1">
           <h3 class="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
-            Secure your application — pay the ₹2,000 registration pass to The Future Council
+            Secure your application — pay the ₹1,999 registration pass to The Future Council
           </h3>
           <p class="text-xs text-zinc-400 font-medium">
             Tap to pay via UPI, or scan the QR code
@@ -331,7 +331,7 @@
           </div>
           <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80">
             <span class="text-xs text-zinc-300 font-bold uppercase">Registration Pass:</span>
-            <span class="text-xl font-black text-orange-500 font-mono">₹2,000</span>
+            <span class="text-xl font-black text-orange-500 font-mono">₹1,999</span>
           </div>
         </div>
 
@@ -356,11 +356,11 @@
               href="#"
               class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
             >
-              <span>Pay ₹2,000 via UPI →</span>
+              <span>Pay ₹1,999 via UPI →</span>
               <i data-lucide="external-link" class="w-4 h-4"></i>
             </a>
             <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
-              ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹2,000 pre-filled
+              ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹1,999 pre-filled
             </p>
             <div id="upiAppFallbackNote" class="hidden mt-2 p-2 bg-zinc-900/90 rounded-lg border border-zinc-700 text-center text-[0.72rem] text-zinc-300">
               Didn't open? Tap one of the app buttons below, or use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong>.
@@ -450,7 +450,7 @@
           onclick="setCheckoutStep('utr')"
           class="w-full py-3.5 px-4 rounded-xl font-black uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-black shadow-lg shadow-orange-500/20 cursor-pointer"
         >
-          <span>I have paid ₹2,000 → Enter UTR</span>
+          <span>I have paid ₹1,999 → Enter UTR</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
@@ -627,7 +627,7 @@
     const UPI_CONFIG = {
       upiId: 'dhruvmadan235@okhdfcbank',
       payeeName: 'Dhruv Madan',
-      amount: '2000.00'
+      amount: '1999.00'
     };
 
     let checkoutTimerInterval = null;
@@ -653,13 +653,13 @@
       const payee = encodeURIComponent(UPI_CONFIG.payeeName);
       
       if (scheme === 'gpay') {
-        return `gpay://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR&aid=uGICAgJDgseLxBg`;
+        return `gpay://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=1999.00&cu=INR&aid=uGICAgJDgseLxBg`;
       } else if (scheme === 'phonepe') {
-        return `phonepe://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR`;
+        return `phonepe://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=1999.00&cu=INR`;
       } else if (scheme === 'paytm') {
-        return `paytmmp://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR`;
+        return `paytmmp://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=1999.00&cu=INR`;
       }
-      return `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR&aid=uGICAgJDgseLxBg`;
+      return `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=1999.00&cu=INR&aid=uGICAgJDgseLxBg`;
     }
 
     function updateInspectorView() {
@@ -673,7 +673,7 @@
           email: currentDemoState.email,
           phone: currentDemoState.phone,
           college: currentDemoState.college,
-          amount: 2000,
+          amount: 1999,
           utr: currentDemoState.utr || "None yet",
           hasScreenshot: !!currentDemoState.screenshot,
           formSubmittedAt: currentDemoState.formSubmittedAt,
@@ -968,7 +968,7 @@
         name,
         email,
         orderId: memberId,
-        amount: 2000
+        amount: 1999
       });
     });
 
@@ -1037,7 +1037,7 @@
       currentDemoState.status = 'payment_verified';
       currentDemoState.verifiedAt = new Date().toISOString();
       updateInspectorView();
-      alert(`🎉 Simulated Admin Verification completed for ${currentDemoState.name}!\n\nEmail invitation preview:\n"Hi ${currentDemoState.name},\nCongratulations! Your ₹2,000 Fellowship '26 registration pass (UTR: ${currentDemoState.utr}) is verified. Admissions interview slot details will arrive within 24 hours."`);
+      alert(`🎉 Simulated Admin Verification completed for ${currentDemoState.name}!\n\nEmail invitation preview:\n"Hi ${currentDemoState.name},\nCongratulations! Your ₹1,999 Fellowship '26 registration pass (UTR: ${currentDemoState.utr}) is verified. Admissions interview slot details will arrive within 24 hours."`);
     };
 
     // Initial render

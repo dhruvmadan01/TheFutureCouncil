@@ -29,7 +29,7 @@ import { QRCodeSVG } from 'qrcode.react';
  * @param {string} props.order.name - Customer full name
  * @param {string} props.order.email - Customer email address
  * @param {string} props.order.orderId - Application / Order reference ID (e.g. TFC-FEL-1024)
- * @param {number} props.order.amount - Exact amount in INR (default: 2000)
+ * @param {number} props.order.amount - Exact amount in INR (default: 1999)
  * @param {string} [props.upiId] - Receiver UPI ID (default: dhruvmadan235@okhdfcbank)
  * @param {string} [props.qrImageUrl] - Path or URL to official UPI QR image (default: 'payment-qr.jpg')
  * @param {Function} [props.onSuccess] - Callback when UTR is verified
@@ -41,7 +41,7 @@ export default function UpiCheckoutModal({
     name: 'Applicant Name',
     email: 'applicant@example.com',
     orderId: 'TFC-FEL-2026',
-    amount: 2000
+    amount: 1999
   },
   upiId = 'dhruvmadan235@okhdfcbank',
   payeeName = 'Dhruv Madan',
@@ -67,7 +67,7 @@ export default function UpiCheckoutModal({
   const fileInputRef = useRef(null);
 
   // Generate the official UPI standard payment URI
-  const amountFormatted = (order.amount || 2000).toFixed(2);
+  const amountFormatted = (order.amount || 1999).toFixed(2);
   const upiUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&am=${amountFormatted}&cu=INR&tn=${encodeURIComponent(order.orderId || 'TFC-FELLOWSHIP')}`;
 
   // App-specific Intent URLs
@@ -234,7 +234,7 @@ export default function UpiCheckoutModal({
           </div>
           <div className="flex items-baseline gap-1">
             <span className="text-zinc-400 text-[0.7rem] uppercase">Payable:</span>
-            <span className="text-lg font-black text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '2,000'}</span>
+            <span className="text-lg font-black text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '1,999'}</span>
           </div>
         </div>
 
@@ -627,7 +627,7 @@ export default function UpiCheckoutModal({
               </div>
               <div className="flex justify-between border-b border-zinc-800 pb-2">
                 <span className="text-zinc-400">Amount Paid</span>
-                <span className="font-bold text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '2,000'}</span>
+                <span className="font-bold text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '1,999'}</span>
               </div>
               <div className="flex justify-between pt-1">
                 <span className="text-zinc-400">Next Step</span>
