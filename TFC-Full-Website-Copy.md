@@ -83,7 +83,7 @@ Lead the mixers. Launch the builder circles. Be the reason your college has a st
 
 Fellowship '26 is the Council's flagship launchpad — a structured 2-month sprint that takes early-stage student founders from raw concept to a product real users have actually touched. We take no equity, no fees, and no filler: every week is built around getting you closer to product-market fit.
 
-`Apply Now →`   `Download the Fellowship One-Pager`
+`Apply Now →`   `Download Fellowship Brochure`
 
 **Key facts strip:** Cohort 01 · 20 seats · Equity-free · Starts Oct 1 · Applications close Sep 30
 
