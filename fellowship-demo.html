@@ -272,28 +272,28 @@
   </main>
 
   <!-- REUSABLE DARK-THEMED UPI CHECKOUT MODAL (IDENTICAL TO LIVE) -->
-  <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-    <div class="relative w-full max-w-lg bg-[#0d0d0d] border-2 border-zinc-800 rounded-2xl shadow-2xl text-zinc-100 overflow-hidden my-auto">
+  <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div class="relative w-full max-w-lg bg-[#0d0d0d] border border-zinc-800 rounded-2xl shadow-2xl text-zinc-100 overflow-hidden my-auto max-h-[94vh] flex flex-col">
       
-      <!-- Top Header Bar -->
-      <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-800/80 bg-zinc-900/50">
-        <div class="flex items-center gap-2.5">
-          <img src="TFC.png" alt="TFC Logo" class="w-8 h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5" />
+      <!-- Top Header Bar (Fixed at top of modal) -->
+      <div class="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b border-zinc-800/80 bg-zinc-900/50 shrink-0">
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <img src="TFC.png" alt="TFC Logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5" />
           <div>
-            <h2 class="text-sm font-black uppercase tracking-wider text-white">
+            <h2 class="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
               The Future Council · Admissions
             </h2>
-            <div class="flex items-center gap-1.5 text-[0.68rem] text-zinc-400 font-medium">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 inline"></i>
+            <div class="flex items-center gap-1.5 text-[0.65rem] sm:text-[0.68rem] text-zinc-400 font-medium">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 inline shrink-0"></i>
               <span>Official Direct UPI · Fellowship '26</span>
             </div>
           </div>
         </div>
 
         <!-- Countdown Timer Badge & Close -->
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
-            <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[0.7rem] sm:text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
+            <i data-lucide="clock" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
             <span id="upiCheckoutTimer">10:00</span>
           </div>
           <button
@@ -306,146 +306,149 @@
         </div>
       </div>
 
-      <!-- STEP 1: SCAN & PAY VIEW -->
-      <div id="upiStepPayment" class="p-5 sm:p-6 space-y-4">
-        
-        <!-- Branded Payment Header & Subtext -->
-        <div class="space-y-1">
-          <h3 class="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
-            Secure your application — pay the ₹1,999 registration pass to The Future Council
-          </h3>
-          <p class="text-xs text-zinc-400 font-medium">
-            Tap to pay via UPI, or scan the QR code
-          </p>
-        </div>
+      <!-- Scrollable Modal Body -->
+      <div class="overflow-y-auto overscroll-contain flex-1">
 
-        <!-- Order Summary Card -->
-        <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800 space-y-2.5">
-          <div class="flex justify-between items-center text-xs">
-            <span class="text-zinc-400 font-medium">Applicant:</span>
-            <span id="checkoutApplicantName" class="font-bold text-white">Applicant</span>
-          </div>
-          <div class="flex justify-between items-center text-xs">
-            <span class="text-zinc-400 font-medium">Cohort 01 Program Fee:</span>
-            <div class="flex items-center gap-1.5 font-mono">
-              <span class="text-zinc-500 line-through decoration-rose-500 decoration-2 text-[0.75rem]">₹1,50,000</span>
-              <span class="text-emerald-400 font-bold">₹0 (Waived)</span>
-            </div>
-          </div>
-          <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80">
-            <span class="text-xs text-zinc-300 font-bold uppercase">Application Registration Pass:</span>
-            <span class="text-xl font-black text-orange-500 font-mono">₹1,999</span>
-          </div>
-        </div>
-
-        <!-- In-App Browser Warning Alert (Instagram, LinkedIn, WhatsApp) -->
-        <div id="inAppBrowserAlert" class="hidden p-3 bg-amber-500/15 border border-amber-500/30 rounded-xl text-left text-xs space-y-1">
-          <div class="flex items-center gap-1.5 font-bold text-amber-400 text-[0.74rem]">
-            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
-            <span>In-App Browser Detected</span>
-          </div>
-          <p class="text-zinc-300 text-[0.72rem] leading-relaxed">
-            UPI apps may be blocked inside Instagram/LinkedIn. Tap <strong>•••</strong> at top right and choose <strong>"Open in Chrome / Safari"</strong>, OR use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong> below.
-          </p>
-        </div>
-
-        <!-- Multiple Resilient Payment Methods (Guaranteed Not to Fail) -->
-        <div class="space-y-3">
+        <!-- STEP 1: SCAN & PAY VIEW -->
+        <div id="upiStepPayment" class="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
           
-          <!-- Primary Universal UPI Intent Button -->
-          <div>
-            <a
-              id="upiIntentMobileBtn"
-              href="#"
-              class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
-            >
-              <span>Pay ₹1,999 via UPI →</span>
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-            <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
-              ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹1,999 pre-filled
+          <!-- Branded Payment Header & Subtext -->
+          <div class="space-y-1">
+            <h3 class="text-sm sm:text-base md:text-lg font-black text-white tracking-tight leading-snug">
+              Secure your application — pay the ₹1,999 registration pass to The Future Council
+            </h3>
+            <p class="text-[0.7rem] sm:text-xs text-zinc-400 font-medium">
+              Tap to pay via UPI, or scan the QR code
             </p>
-            <div id="upiAppFallbackNote" class="hidden mt-2 p-2 bg-zinc-900/90 rounded-lg border border-zinc-700 text-center text-[0.72rem] text-zinc-300">
-              Didn't open? Tap one of the app buttons below, or use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong>.
+          </div>
+
+          <!-- Order Summary Card -->
+          <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800 space-y-2.5">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-zinc-400 font-medium">Applicant:</span>
+              <span id="checkoutApplicantName" class="font-bold text-white">Applicant</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-zinc-400 font-medium">Cohort 01 Program Fee:</span>
+              <div class="flex items-center gap-1.5 font-mono">
+                <span class="text-zinc-500 line-through decoration-rose-500 decoration-2 text-[0.75rem]">₹1,50,000</span>
+                <span class="text-emerald-400 font-bold">₹0 (Waived)</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80">
+              <span class="text-xs text-zinc-300 font-bold uppercase">Application Registration Pass:</span>
+              <span class="text-xl font-black text-orange-500 font-mono">₹1,999</span>
             </div>
           </div>
 
-          <!-- Direct App Quick Launchers -->
-          <div class="grid grid-cols-3 gap-2">
-            <a
-              id="upiBtnGPay"
-              href="#"
-              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
-            >
-              <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center">G</span>
-              <span>Google Pay</span>
-            </a>
-            <a
-              id="upiBtnPhonePe"
-              href="#"
-              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
-            >
-              <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center">Pe</span>
-              <span>PhonePe</span>
-            </a>
-            <a
-              id="upiBtnPaytm"
-              href="#"
-              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
-            >
-              <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center">P</span>
-              <span>Paytm</span>
-            </a>
+          <!-- In-App Browser Warning Alert (Instagram, LinkedIn, WhatsApp) -->
+          <div id="inAppBrowserAlert" class="hidden p-3 bg-amber-500/15 border border-amber-500/30 rounded-xl text-left text-xs space-y-1">
+            <div class="flex items-center gap-1.5 font-bold text-amber-400 text-[0.74rem]">
+              <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
+              <span>In-App Browser Detected</span>
+            </div>
+            <p class="text-zinc-300 text-[0.72rem] leading-relaxed">
+              UPI apps may be blocked inside Instagram/LinkedIn. Tap <strong>•••</strong> at top right and choose <strong>"Open in Chrome / Safari"</strong>, OR use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong> below.
+            </p>
           </div>
 
-          <!-- Official Original QR Code Container -->
-          <div class="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
-            <img
-              src="payment-qr.jpg"
-              alt="Official Fellowship '26 UPI QR Code"
-              class="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain rounded-xl select-none"
-            />
-            <div class="flex items-center gap-2 pt-1">
+          <!-- Multiple Resilient Payment Methods (Guaranteed Not to Fail) -->
+          <div class="space-y-3">
+            
+            <!-- Primary Universal UPI Intent Button -->
+            <div>
               <a
-                href="payment-qr.jpg"
-                download="TFC-Fellowship-Payment-QR.jpg"
-                class="text-[0.7rem] font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1 cursor-pointer no-underline shadow-sm"
-                title="Save QR to photo gallery for mobile scanning"
+                id="upiIntentMobileBtn"
+                href="#"
+                class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
               >
-                <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                <span>Save QR to Photos (Gallery Scan)</span>
+                <span>Pay ₹1,999 via UPI →</span>
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+              <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
+                ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹1,999 pre-filled
+              </p>
+              <div id="upiAppFallbackNote" class="hidden mt-2 p-2 bg-zinc-900/90 rounded-lg border border-zinc-700 text-center text-[0.72rem] text-zinc-300">
+                Didn't open? Tap one of the app buttons below, or use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong>.
+              </div>
+            </div>
+
+            <!-- Direct App Quick Launchers -->
+            <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+              <a
+                id="upiBtnGPay"
+                href="#"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+              >
+                <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center shrink-0">G</span>
+                <span>Google Pay</span>
+              </a>
+              <a
+                id="upiBtnPhonePe"
+                href="#"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+              >
+                <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center shrink-0">Pe</span>
+                <span>PhonePe</span>
+              </a>
+              <a
+                id="upiBtnPaytm"
+                href="#"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+              >
+                <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center shrink-0">P</span>
+                <span>Paytm</span>
               </a>
             </div>
-            <p class="text-[0.7rem] text-zinc-600 font-medium text-center">
-              Scan with any UPI app on another device, or save to gallery
+
+            <!-- Official Original QR Code Container -->
+            <div class="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
+              <img
+                src="payment-qr.jpg"
+                alt="Official Fellowship '26 UPI QR Code"
+                class="w-full max-w-[200px] sm:max-w-[240px] h-auto object-contain rounded-xl select-none mx-auto"
+              />
+              <div class="flex items-center justify-center gap-2 pt-1 w-full">
+                <a
+                  href="payment-qr.jpg"
+                  download="TFC-Fellowship-Payment-QR.jpg"
+                  class="text-[0.68rem] sm:text-xs font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5 cursor-pointer no-underline shadow-sm text-center"
+                  title="Save QR to photo gallery for mobile scanning"
+                >
+                  <i data-lucide="download" class="w-3.5 h-3.5 shrink-0"></i>
+                  <span>Save QR to Photos (Gallery Scan)</span>
+                </a>
+              </div>
+              <p class="text-[0.68rem] text-zinc-600 font-medium text-center">
+                Scan with any UPI app on another device, or save to gallery
+              </p>
+            </div>
+
+            <!-- Copy UPI ID Box -->
+            <div class="p-2.5 sm:p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between gap-2">
+              <div class="min-w-0 pr-1 sm:pr-2">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="text-[0.65rem] sm:text-[0.68rem] text-zinc-400 uppercase font-bold block truncate">Direct VPA / UPI ID</span>
+                  <span class="text-[0.6rem] sm:text-[0.65rem] text-zinc-500 font-medium shrink-0">(Payee: Dhruv Madan)</span>
+                </div>
+                <span id="displayUpiId" class="font-mono text-[0.72rem] sm:text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
+              </div>
+              <button
+                type="button"
+                id="btnCopyUpiId"
+                onclick="copyUpiIdToClipboard()"
+                class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
+              >
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <!-- Mandatory Representation Disclaimer -->
+            <p class="text-[0.68rem] sm:text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2 sm:p-2.5 rounded-lg border border-zinc-800/80">
+              Payments are collected on behalf of The Future Council for Fellowship '26 admissions.
             </p>
           </div>
-
-          <!-- Copy UPI ID Box -->
-          <div class="p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between">
-            <div class="min-w-0 pr-2">
-              <div class="flex items-center gap-1.5">
-                <span class="text-[0.68rem] text-zinc-400 uppercase font-bold block">Direct VPA / UPI ID</span>
-                <span class="text-[0.65rem] text-zinc-500 font-medium">(Payee: Dhruv Madan)</span>
-              </div>
-              <span id="displayUpiId" class="font-mono text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
-            </div>
-            <button
-              type="button"
-              id="btnCopyUpiId"
-              onclick="copyUpiIdToClipboard()"
-              class="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
-            >
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span>Copy</span>
-            </button>
-          </div>
-
-          <!-- Mandatory Representation Disclaimer -->
-          <p class="text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
-            Payments are collected on behalf of The Future Council for Fellowship '26 admissions.
-          </p>
-        </div>
 
         <!-- Button to Step 2 -->
         <button
@@ -601,6 +604,7 @@
         </button>
       </div>
 
+      </div>
     </div>
   </div>
 

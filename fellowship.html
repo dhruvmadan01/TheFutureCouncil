@@ -144,9 +144,9 @@
             <span class="tfc-stat-label">Only 20 in Total</span>
           </div>
           <div class="tfc-stat-item">
-            <div style="display: flex; align-items: baseline; justify-content: center; gap: 6px;">
-              <span style="font-size: 1.05rem; color: #ef4444; text-decoration: line-through; text-decoration-color: #dc2626; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
-              <span class="tfc-stat-num" style="color: #059669;">₹0</span>
+            <div style="display: flex; align-items: baseline; justify-content: center; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 0.95rem; sm:font-size: 1.05rem; color: #ef4444; text-decoration: line-through; text-decoration-color: #dc2626; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
+              <span class="tfc-stat-num" style="color: #059669; margin-bottom: 0;">₹0</span>
             </div>
             <span class="tfc-stat-label">Program Fee (100% Waived)</span>
           </div>
@@ -423,11 +423,11 @@
     <!-- Direct Application Form Section (Ref Page 06) -->
     <section class="tfc-section" id="apply" style="padding-top: 20px; padding-bottom: 60px;">
       <div class="tfc-container" style="max-width: 760px;">
-        <div class="tfc-card" style="padding: 40px; box-shadow: var(--shadow-md);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;">
+        <div class="tfc-card" style="padding: 24px 18px; sm:padding: 36px 32px; box-shadow: var(--shadow-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 8px;">
             <div>
               <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 6px;">APPLICATION FORM</span>
-              <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0;">Fellowship '26 Admissions</h2>
+              <h2 style="font-size: clamp(1.3rem, 4vw, 1.6rem); font-weight: 800; margin: 0;">Fellowship '26 Admissions</h2>
             </div>
             <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary-orange);">Closes Sep 30</span>
           </div>
@@ -435,7 +435,7 @@
           <form id="fellowshipDirectForm">
             <div style="display: flex; flex-direction: column; gap: 16px;">
               
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label for="fName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Full Name *</label>
                   <input type="text" id="fName" class="tfc-input" placeholder="e.g. Dhruv Madan" required />
@@ -446,7 +446,7 @@
                 </div>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label for="fPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">WhatsApp Phone Number *</label>
                   <input type="tel" id="fPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
@@ -481,24 +481,22 @@
               </div>
 
               <!-- Program Fee Strike-Through & ₹0 Breakdown Card -->
-              <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 122, 61, 0.06)); border-radius: 12px; padding: 18px 20px; border: 1.5px solid rgba(16, 185, 129, 0.35); margin-top: 4px; margin-bottom: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px dashed rgba(0,0,0,0.12); padding-bottom: 12px; margin-bottom: 12px;">
+              <div class="rounded-xl p-3.5 sm:p-4 border border-emerald-500/35 bg-gradient-to-br from-emerald-500/10 to-orange-500/5 my-2 space-y-2.5">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-zinc-300/40 pb-2.5">
                   <div>
-                    <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #059669; display: block; margin-bottom: 2px;">Cohort 01 Fellowship Tuition</span>
-                    <strong style="font-size: 1.05rem; color: var(--ink); display: block;">Program Fee for Selected Founders</strong>
-                    <span style="font-size: 0.76rem; color: var(--ink-soft);">Zero tuition, zero equity taken (100% equity-free)</span>
+                    <span class="text-[0.68rem] font-extrabold uppercase tracking-wider text-emerald-700 block mb-0.5">Cohort 01 Fellowship Tuition</span>
+                    <strong class="text-sm sm:text-base text-zinc-900 block">Program Fee for Selected Founders</strong>
+                    <span class="text-[0.72rem] sm:text-xs text-zinc-600 block">Zero tuition, zero equity taken (100% equity-free)</span>
                   </div>
-                  <div style="text-align: right;">
-                    <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
-                      <span style="font-size: 1.05rem; color: #ef4444; text-decoration: line-through; font-weight: 700; text-decoration-color: #dc2626; text-decoration-thickness: 2px;">₹1,50,000</span>
-                      <span style="font-size: 1.6rem; font-weight: 900; color: #059669; line-height: 1;">₹0</span>
-                    </div>
-                    <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 999px; text-transform: uppercase; margin-top: 4px;">100% Fee Waived</span>
+                  <div class="flex items-center gap-2 self-start sm:self-auto pt-1 sm:pt-0">
+                    <span class="text-sm sm:text-base text-rose-500 line-through font-bold decoration-rose-600 decoration-2">₹1,50,000</span>
+                    <span class="text-xl sm:text-2xl font-black text-emerald-600">₹0</span>
+                    <span class="text-[0.65rem] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full uppercase">Waived</span>
                   </div>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--ink-soft);">
+                <div class="flex flex-col xs:flex-row justify-between items-start xs:items-center gap-1 text-xs text-zinc-600 pt-0.5">
                   <span>One-time Application Screening Pass (merit review):</span>
-                  <strong style="font-size: 0.95rem; color: var(--ink);">₹1,999</strong>
+                  <strong class="text-sm font-bold text-zinc-900">₹1,999</strong>
                 </div>
               </div>
 
@@ -583,28 +581,28 @@
     </section>
 
     <!-- FULL-FEATURED DARK-THEMED UPI CHECKOUT MODAL -->
-    <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-      <div class="relative w-full max-w-lg bg-[#0d0d0d] border-2 border-zinc-800 rounded-2xl shadow-2xl text-zinc-100 overflow-hidden my-auto">
+    <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+      <div class="relative w-full max-w-lg bg-[#0d0d0d] border border-zinc-800 rounded-2xl shadow-2xl text-zinc-100 overflow-hidden my-auto max-h-[94vh] flex flex-col">
         
-        <!-- Top Header Bar -->
-        <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-800/80 bg-zinc-900/50">
-          <div class="flex items-center gap-2.5">
-            <img src="TFC.png" alt="TFC Logo" class="w-8 h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5" />
+        <!-- Top Header Bar (Fixed at top of modal) -->
+        <div class="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b border-zinc-800/80 bg-zinc-900/50 shrink-0">
+          <div class="flex items-center gap-2 sm:gap-2.5">
+            <img src="TFC.png" alt="TFC Logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5" />
             <div>
-              <h2 class="text-sm font-black uppercase tracking-wider text-white">
+              <h2 class="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
                 The Future Council · Admissions
               </h2>
-              <div class="flex items-center gap-1.5 text-[0.68rem] text-zinc-400 font-medium">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 inline"></i>
+              <div class="flex items-center gap-1.5 text-[0.65rem] sm:text-[0.68rem] text-zinc-400 font-medium">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 inline shrink-0"></i>
                 <span>Official Direct UPI · Fellowship '26</span>
               </div>
             </div>
           </div>
 
           <!-- Countdown Timer Badge & Close -->
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
-              <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <div class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[0.7rem] sm:text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
+              <i data-lucide="clock" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
               <span id="upiCheckoutTimer">10:00</span>
             </div>
             <button
@@ -617,18 +615,21 @@
           </div>
         </div>
 
-        <!-- STEP 1: SCAN & PAY VIEW -->
-        <div id="upiStepPayment" class="p-5 sm:p-6 space-y-4">
-          
-          <!-- Branded Payment Header & Subtext -->
-          <div class="space-y-1">
-            <h3 class="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
-              Secure your application — pay the ₹1,999 registration pass to The Future Council
-            </h3>
-            <p class="text-xs text-zinc-400 font-medium">
-              Tap to pay via UPI, or scan the QR code
-            </p>
-          </div>
+        <!-- Scrollable Modal Body -->
+        <div class="overflow-y-auto overscroll-contain flex-1">
+
+          <!-- STEP 1: SCAN & PAY VIEW -->
+          <div id="upiStepPayment" class="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
+            
+            <!-- Branded Payment Header & Subtext -->
+            <div class="space-y-1">
+              <h3 class="text-sm sm:text-base md:text-lg font-black text-white tracking-tight leading-snug">
+                Secure your application — pay the ₹1,999 registration pass to The Future Council
+              </h3>
+              <p class="text-[0.7rem] sm:text-xs text-zinc-400 font-medium">
+                Tap to pay via UPI, or scan the QR code
+              </p>
+            </div>
 
           <!-- Order Summary Card -->
           <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800 space-y-2.5">
@@ -682,70 +683,70 @@
             </div>
 
             <!-- Direct App Quick Launchers -->
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
               <a
                 id="upiBtnGPay"
                 href="#"
-                class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
               >
-                <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center">G</span>
+                <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center shrink-0">G</span>
                 <span>Google Pay</span>
               </a>
               <a
                 id="upiBtnPhonePe"
                 href="#"
-                class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
               >
-                <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center">Pe</span>
+                <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center shrink-0">Pe</span>
                 <span>PhonePe</span>
               </a>
               <a
                 id="upiBtnPaytm"
                 href="#"
-                class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
               >
-                <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center">P</span>
+                <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center shrink-0">P</span>
                 <span>Paytm</span>
               </a>
             </div>
 
             <!-- Official Original QR Code Container -->
-            <div class="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
+            <div class="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
               <img
                 src="payment-qr.jpg"
                 alt="Official Fellowship '26 UPI QR Code"
-                class="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain rounded-xl select-none"
+                class="w-full max-w-[200px] sm:max-w-[240px] h-auto object-contain rounded-xl select-none mx-auto"
               />
-              <div class="flex items-center gap-2 pt-1">
+              <div class="flex items-center justify-center gap-2 pt-1 w-full">
                 <a
                   href="payment-qr.jpg"
                   download="TFC-Fellowship-Payment-QR.jpg"
-                  class="text-[0.7rem] font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1 cursor-pointer no-underline shadow-sm"
+                  class="text-[0.68rem] sm:text-xs font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5 cursor-pointer no-underline shadow-sm text-center"
                   title="Save QR to photo gallery for mobile scanning"
                 >
-                  <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                  <i data-lucide="download" class="w-3.5 h-3.5 shrink-0"></i>
                   <span>Save QR to Photos (Gallery Scan)</span>
                 </a>
               </div>
-              <p class="text-[0.7rem] text-zinc-600 font-medium text-center">
+              <p class="text-[0.68rem] text-zinc-600 font-medium text-center">
                 Scan with any UPI app on another device, or save to gallery
               </p>
             </div>
 
             <!-- Copy UPI ID Box -->
-            <div class="p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between">
-              <div class="min-w-0 pr-2">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[0.68rem] text-zinc-400 uppercase font-bold block">Direct VPA / UPI ID</span>
-                  <span class="text-[0.65rem] text-zinc-500 font-medium">(Payee: Dhruv Madan)</span>
+            <div class="p-2.5 sm:p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between gap-2">
+              <div class="min-w-0 pr-1 sm:pr-2">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="text-[0.65rem] sm:text-[0.68rem] text-zinc-400 uppercase font-bold block truncate">Direct VPA / UPI ID</span>
+                  <span class="text-[0.6rem] sm:text-[0.65rem] text-zinc-500 font-medium shrink-0">(Payee: Dhruv Madan)</span>
                 </div>
-                <span id="displayUpiId" class="font-mono text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
+                <span id="displayUpiId" class="font-mono text-[0.72rem] sm:text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
               </div>
               <button
                 type="button"
                 id="btnCopyUpiId"
                 onclick="copyUpiIdToClipboard()"
-                class="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
+                class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
               >
                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                 <span>Copy</span>
@@ -753,7 +754,7 @@
             </div>
 
             <!-- Mandatory Representation Disclaimer -->
-            <p class="text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
+            <p class="text-[0.68rem] sm:text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2 sm:p-2.5 rounded-lg border border-zinc-800/80">
               Payments are collected on behalf of The Future Council for Fellowship '26 admissions.
             </p>
           </div>
@@ -912,6 +913,7 @@
           </button>
         </div>
 
+        </div>
       </div>
     </div>
   </main>
