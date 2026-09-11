@@ -335,54 +335,114 @@
           </div>
         </div>
 
-        <!-- Primary UPI Deep Link Button (Mobile First) -->
-        <div>
-          <a
-            id="upiIntentMobileBtn"
-            href="#"
-            class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
-          >
-            <span>Pay ₹2,000 via UPI →</span>
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
-          <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
-            ⚡ Opens GPay, PhonePe, Paytm, CRED with payee & ₹2,000 pre-filled
-          </p>
-        </div>
-
-        <!-- Official Original QR Code Container -->
-        <div class="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-1.5">
-          <img
-            src="payment-qr.jpg"
-            alt="Official Fellowship '26 UPI QR Code"
-            class="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain rounded-xl"
-          />
-          <p class="text-[0.72rem] text-zinc-700 font-bold tracking-tight text-center">
-            Scan with GPay, PhonePe, Paytm, CRED or any UPI App
-          </p>
-        </div>
-
-        <!-- Copy UPI ID Box -->
-        <div class="p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between">
-          <div class="min-w-0 pr-2">
-            <span class="text-[0.68rem] text-zinc-400 uppercase font-bold block">Direct VPA / UPI ID</span>
-            <span id="displayUpiId" class="font-mono text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
+        <!-- In-App Browser Warning Alert (Instagram, LinkedIn, WhatsApp) -->
+        <div id="inAppBrowserAlert" class="hidden p-3 bg-amber-500/15 border border-amber-500/30 rounded-xl text-left text-xs space-y-1">
+          <div class="flex items-center gap-1.5 font-bold text-amber-400 text-[0.74rem]">
+            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
+            <span>In-App Browser Detected</span>
           </div>
-          <button
-            type="button"
-            id="btnCopyUpiId"
-            onclick="copyUpiIdToClipboard()"
-            class="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
-          >
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-            <span>Copy</span>
-          </button>
+          <p class="text-zinc-300 text-[0.72rem] leading-relaxed">
+            UPI apps may be blocked inside Instagram/LinkedIn. Tap <strong>•••</strong> at top right and choose <strong>"Open in Chrome / Safari"</strong>, OR use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong> below.
+          </p>
         </div>
 
-        <!-- Mandatory Representation Disclaimer -->
-        <p class="text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
-          Payments are collected on behalf of The Future Council for Fellowship '26 admissions.
-        </p>
+        <!-- Multiple Resilient Payment Methods (Guaranteed Not to Fail) -->
+        <div class="space-y-3">
+          
+          <!-- Primary Universal UPI Intent Button -->
+          <div>
+            <a
+              id="upiIntentMobileBtn"
+              href="#"
+              class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
+            >
+              <span>Pay ₹2,000 via UPI →</span>
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+            <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
+              ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹2,000 pre-filled
+            </p>
+            <div id="upiAppFallbackNote" class="hidden mt-2 p-2 bg-zinc-900/90 rounded-lg border border-zinc-700 text-center text-[0.72rem] text-zinc-300">
+              Didn't open? Tap one of the app buttons below, or use <strong>"Save QR to Photos"</strong> / <strong>"Copy UPI ID"</strong>.
+            </div>
+          </div>
+
+          <!-- Direct App Quick Launchers -->
+          <div class="grid grid-cols-3 gap-2">
+            <a
+              id="upiBtnGPay"
+              href="#"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+            >
+              <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center">G</span>
+              <span>Google Pay</span>
+            </a>
+            <a
+              id="upiBtnPhonePe"
+              href="#"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+            >
+              <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center">Pe</span>
+              <span>PhonePe</span>
+            </a>
+            <a
+              id="upiBtnPaytm"
+              href="#"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-xs font-bold transition shadow-sm no-underline"
+            >
+              <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center">P</span>
+              <span>Paytm</span>
+            </a>
+          </div>
+
+          <!-- Official Original QR Code Container -->
+          <div class="flex flex-col items-center justify-center p-3 sm:p-4 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
+            <img
+              src="payment-qr.jpg"
+              alt="Official Fellowship '26 UPI QR Code"
+              class="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain rounded-xl select-none"
+            />
+            <div class="flex items-center gap-2 pt-1">
+              <a
+                href="payment-qr.jpg"
+                download="TFC-Fellowship-Payment-QR.jpg"
+                class="text-[0.7rem] font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1 cursor-pointer no-underline shadow-sm"
+                title="Save QR to photo gallery for mobile scanning"
+              >
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Save QR to Photos (Gallery Scan)</span>
+              </a>
+            </div>
+            <p class="text-[0.7rem] text-zinc-600 font-medium text-center">
+              Scan with any UPI app on another device, or save to gallery
+            </p>
+          </div>
+
+          <!-- Copy UPI ID Box -->
+          <div class="p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between">
+            <div class="min-w-0 pr-2">
+              <div class="flex items-center gap-1.5">
+                <span class="text-[0.68rem] text-zinc-400 uppercase font-bold block">Direct VPA / UPI ID</span>
+                <span class="text-[0.65rem] text-zinc-500 font-medium">(Payee: Dhruv Madan)</span>
+              </div>
+              <span id="displayUpiId" class="font-mono text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
+            </div>
+            <button
+              type="button"
+              id="btnCopyUpiId"
+              onclick="copyUpiIdToClipboard()"
+              class="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
+            >
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+
+          <!-- Mandatory Representation Disclaimer -->
+          <p class="text-[0.72rem] text-zinc-400 text-center font-medium leading-relaxed bg-zinc-900/60 p-2.5 rounded-lg border border-zinc-800/80">
+            Payments are collected on behalf of The Future Council for Fellowship '26 admissions.
+          </p>
+        </div>
 
         <!-- Button to Step 2 -->
         <button
@@ -404,15 +464,20 @@
 
         <form id="utrSubmissionForm" onsubmit="handleDemoUtrSubmit(event)" class="space-y-4">
           
-          <!-- Helper Line Directly Above UTR Input -->
-          <div class="p-3 bg-orange-500/10 border border-orange-500/25 rounded-xl space-y-1">
-            <div class="flex items-center gap-1.5 text-orange-400 font-bold text-xs uppercase tracking-wide">
+          <!-- Helper Line Directly Above UTR Input with Multi-App Guide -->
+          <div class="p-3.5 bg-orange-500/10 border border-orange-500/25 rounded-xl space-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 text-orange-400 font-bold uppercase tracking-wide text-[0.72rem]">
               <i data-lucide="help-circle" class="w-4 h-4 shrink-0"></i>
-              <span>Where to find your 12-digit UTR:</span>
+              <span>Where to find your 12-digit UTR in your UPI app:</span>
             </div>
-            <p class="text-[0.78rem] text-zinc-300 font-medium leading-relaxed">
+            <p class="text-[0.76rem] text-zinc-300 font-medium leading-relaxed">
               Find this in your UPI app under Transaction History → the payment you just made → 'UPI Ref No.' or 'UTR.' It's always 12 digits.
             </p>
+            <ul class="text-[0.72rem] text-zinc-400 font-medium leading-relaxed space-y-0.5 pt-0.5 border-t border-orange-500/15">
+              <li>• <strong>Google Pay:</strong> Look for <strong>"UPI transaction ID"</strong> (12 digits)</li>
+              <li>• <strong>PhonePe:</strong> Look for <strong>"UTR"</strong> (12 digits)</li>
+              <li>• <strong>Paytm / CRED:</strong> Look for <strong>"UPI Ref No."</strong> (12 digits)</li>
+            </ul>
           </div>
 
           <!-- UTR Input Field -->
@@ -561,8 +626,8 @@
 
     const UPI_CONFIG = {
       upiId: 'dhruvmadan235@okhdfcbank',
-      payeeName: 'The Future Council',
-      amount: 2000
+      payeeName: 'Dhruv Madan',
+      amount: '2000.00'
     };
 
     let checkoutTimerInterval = null;
@@ -570,10 +635,31 @@
     let currentQrInstance = null;
     let uploadedScreenshotBase64 = null;
 
-    function buildUpiUri(order) {
+    function checkInAppBrowser() {
+      const ua = (navigator.userAgent || navigator.vendor || window.opera || '').toLowerCase();
+      const isInApp = ua.includes('instagram') || ua.includes('fban') || ua.includes('fbav') || 
+                      ua.includes('linkedin') || ua.includes('whatsapp') || ua.includes('snapchat') ||
+                      ua.includes('wv') || ua.includes('line');
+      const alertEl = document.getElementById('inAppBrowserAlert');
+      if (alertEl && isInApp) {
+        alertEl.classList.remove('hidden');
+      }
+    }
+
+    function buildUpiUri(scheme = 'upi') {
       const upiId = UPI_CONFIG.upiId;
+      // CRITICAL FOR NPCI & BANK FRAUD RULES:
+      // Payee registered in HDFC Bank for dhruvmadan235@okhdfcbank is Dhruv Madan.
       const payee = encodeURIComponent(UPI_CONFIG.payeeName);
-      return `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000&cu=INR&tn=Fellowship26-Registration`;
+      
+      if (scheme === 'gpay') {
+        return `gpay://upi/pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR&aid=uGICAgJDgseLxBg`;
+      } else if (scheme === 'phonepe') {
+        return `phonepe://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR`;
+      } else if (scheme === 'paytm') {
+        return `paytmmp://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR`;
+      }
+      return `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${payee}&am=2000.00&cu=INR&aid=uGICAgJDgseLxBg`;
     }
 
     function updateInspectorView() {
@@ -681,10 +767,27 @@
     window.openUpiCheckoutModal = function(orderDetails) {
       document.getElementById('checkoutApplicantName').textContent = orderDetails.name;
 
-      const upiUri = buildUpiUri(orderDetails);
+      checkInAppBrowser();
 
       const intentBtn = document.getElementById('upiIntentMobileBtn');
-      if (intentBtn) intentBtn.href = upiUri;
+      if (intentBtn) {
+        intentBtn.href = buildUpiUri('upi');
+        intentBtn.onclick = () => {
+          setTimeout(() => {
+            const fb = document.getElementById('upiAppFallbackNote');
+            if (fb) fb.classList.remove('hidden');
+          }, 1800);
+        };
+      }
+
+      const gpayBtn = document.getElementById('upiBtnGPay');
+      if (gpayBtn) gpayBtn.href = buildUpiUri('gpay');
+
+      const phonepeBtn = document.getElementById('upiBtnPhonePe');
+      if (phonepeBtn) phonepeBtn.href = buildUpiUri('phonepe');
+
+      const paytmBtn = document.getElementById('upiBtnPaytm');
+      if (paytmBtn) paytmBtn.href = buildUpiUri('paytm');
 
       document.getElementById('displayUpiId').textContent = UPI_CONFIG.upiId;
 
