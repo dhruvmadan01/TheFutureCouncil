@@ -619,25 +619,45 @@ p {
 }
 
 @media (max-width: 640px) {
+  .tfc-container {
+    padding: 0 16px;
+  }
   .tfc-section {
-    padding: 44px 0;
+    padding: 36px 0;
+  }
+  .tfc-card {
+    padding: 20px 16px;
   }
   .tfc-stat-strip {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+    padding: 14px 10px;
   }
   .tfc-stat-item {
-    border-right: none;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 14px;
+    border-right: none !important;
+    border-bottom: none !important;
+    padding: 10px 6px;
+    background: #f8fafc;
+    border-radius: 12px;
   }
   .tfc-stat-item:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
+  }
+  .tfc-stat-num {
+    font-size: 1.35rem;
+  }
+  .tfc-stat-label {
+    font-size: 0.68rem;
+    line-height: 1.3;
+  }
+  .tfc-input {
+    font-size: 16px !important; /* Prevents iOS Safari auto-zoom when focusing inputs */
+    padding: 12px 14px;
   }
   .tfc-dark-banner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px;
+    padding: 20px 16px;
   }
   .tfc-dark-banner .tfc-btn {
     width: 100%;
@@ -646,9 +666,11 @@ p {
     display: flex;
   }
   body {
-    padding-bottom: 60px;
+    padding-bottom: 64px;
   }
 }
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(16px);

@@ -77,9 +77,10 @@
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="#apply" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Cohort 01 Status</a>
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="#apply" class="tfc-btn tfc-btn-outline hidden sm:inline-flex" style="padding: 7px 16px; font-size: 0.85rem;">Cohort 01 Status</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary hidden md:inline-flex">Join Council</a>
+        <a href="#apply" class="tfc-btn tfc-btn-primary sm:hidden" style="padding: 6px 14px; font-size: 0.8rem;">Apply Now</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -124,16 +125,16 @@
         </p>
 
         <!-- Two Action Buttons -->
-        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
-          <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-3.5 justify-center max-w-md sm:max-w-none mx-auto mb-8 sm:mb-10">
+          <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full sm:w-auto">
             Apply Now →
           </a>
-          <a href="fellowship-brochure.html" class="tfc-btn tfc-btn-outline tfc-btn-lg">
+          <a href="fellowship-brochure.html" class="tfc-btn tfc-btn-outline tfc-btn-lg w-full sm:w-auto">
             Download the Fellowship One-Pager ⚡
           </a>
         </div>
 
-        <!-- 4-Col Stat Strip -->
+        <!-- 4-Col Stat Strip (2x2 on Mobile, 4-Col on Desktop) -->
         <div class="tfc-stat-strip" style="background: #fff; border-radius: 16px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
           <div class="tfc-stat-item">
             <span class="tfc-stat-num">Cohort 01</span>
@@ -145,7 +146,7 @@
           </div>
           <div class="tfc-stat-item">
             <div style="display: flex; align-items: baseline; justify-content: center; gap: 6px; flex-wrap: wrap;">
-              <span style="font-size: 0.95rem; sm:font-size: 1.05rem; color: #ef4444; text-decoration: line-through; text-decoration-color: #dc2626; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
+              <span style="font-size: 0.95rem; color: #ef4444; text-decoration: line-through; text-decoration-color: #dc2626; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
               <span class="tfc-stat-num" style="color: #059669; margin-bottom: 0;">₹0</span>
             </div>
             <span class="tfc-stat-label">Program Fee (100% Waived)</span>
@@ -194,18 +195,18 @@
         </div>
 
         <!-- Timeline details pill bar -->
-        <div style="margin-top: 24px; padding: 18px 24px; background: #fff; border: 1.5px solid var(--border-subtle); border-radius: 12px; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; text-align: center;">
-          <div>
+        <div class="mt-6 p-4 sm:p-5 bg-white border border-zinc-200/80 rounded-xl grid grid-cols-1 sm:grid-cols-3 gap-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200 text-center shadow-sm">
+          <div class="pb-2 sm:pb-0">
             <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase;">Applications Close</div>
             <div style="font-size: 1rem; font-weight: 800; color: var(--primary-orange);">September 30</div>
           </div>
-          <div style="border-left: 1px solid var(--border-subtle); padding-left: 20px;">
+          <div class="pt-2.5 sm:pt-0 sm:pl-4">
             <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase;">Cohort Starts</div>
             <div style="font-size: 1rem; font-weight: 800; color: var(--ink);">October 1</div>
           </div>
-          <div style="border-left: 1px solid var(--border-subtle); padding-left: 20px;">
+          <div class="pt-2.5 sm:pt-0 sm:pl-4">
             <div style="font-size: 0.75rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase;">Format</div>
-            <div style="font-size: 1rem; font-weight: 800; color: var(--ink);">2 Months, Hybrid (Delhi NCR + Remote)</div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: var(--ink);">2 Months, Hybrid (Delhi NCR + Remote)</div>
           </div>
         </div>
       </div>
@@ -423,7 +424,7 @@
     <!-- Direct Application Form Section (Ref Page 06) -->
     <section class="tfc-section" id="apply" style="padding-top: 20px; padding-bottom: 60px;">
       <div class="tfc-container" style="max-width: 760px;">
-        <div class="tfc-card" style="padding: 24px 18px; sm:padding: 36px 32px; box-shadow: var(--shadow-md);">
+        <div class="tfc-card p-4 sm:p-8 md:p-9 shadow-md">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 8px;">
             <div>
               <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 6px;">APPLICATION FORM</span>
@@ -500,7 +501,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 8px;">
+              <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg min-h-[50px] w-full mt-2 font-bold shadow-md active:scale-[0.99] transition-transform">
                 Submit Application & Pay Fee (₹1,999) ⚡
               </button>
             </div>
@@ -580,35 +581,41 @@
       </div>
     </section>
 
-    <!-- FULL-FEATURED DARK-THEMED UPI CHECKOUT MODAL -->
-    <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-      <div class="relative w-full max-w-lg bg-[#0d0d0d] border border-zinc-800 rounded-2xl shadow-2xl text-zinc-100 overflow-hidden my-auto max-h-[94vh] flex flex-col">
+    <!-- FULL-FEATURED DARK-THEMED UPI CHECKOUT MODAL (Responsive Bottom-Sheet on Mobile, Centered Modal on Desktop) -->
+    <div id="upiCheckoutOverlay" class="fixed inset-0 z-[99999] hidden items-end sm:items-center justify-center p-0 sm:p-4 bg-black/85 backdrop-blur-md overflow-hidden">
+      <div class="relative w-full max-w-lg bg-[#0d0d0d] border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-2xl shadow-2xl text-zinc-100 overflow-hidden max-h-[90vh] sm:max-h-[94vh] flex flex-col transition-all duration-300">
         
+        <!-- Mobile Bottom-Sheet Pull Handle Indicator -->
+        <div class="sm:hidden flex justify-center pt-2.5 pb-1 bg-zinc-900/60 shrink-0 cursor-pointer" onclick="closeUpiCheckoutModal()">
+          <div class="w-10 h-1 bg-zinc-600 rounded-full"></div>
+        </div>
+
         <!-- Top Header Bar (Fixed at top of modal) -->
         <div class="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b border-zinc-800/80 bg-zinc-900/50 shrink-0">
-          <div class="flex items-center gap-2 sm:gap-2.5">
-            <img src="TFC.png" alt="TFC Logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5" />
-            <div>
-              <h2 class="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
+          <div class="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <img src="TFC.png" alt="TFC Logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-zinc-700 shadow-sm object-contain bg-white p-0.5 shrink-0" />
+            <div class="min-w-0">
+              <h2 class="text-xs sm:text-sm font-black uppercase tracking-wider text-white truncate">
                 The Future Council · Admissions
               </h2>
-              <div class="flex items-center gap-1.5 text-[0.65rem] sm:text-[0.68rem] text-zinc-400 font-medium">
+              <div class="flex items-center gap-1.5 text-[0.65rem] sm:text-[0.68rem] text-zinc-400 font-medium truncate">
                 <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 inline shrink-0"></i>
-                <span>Official Direct UPI · Fellowship '26</span>
+                <span class="truncate">Official Direct UPI · Fellowship '26</span>
               </div>
             </div>
           </div>
 
-          <!-- Countdown Timer Badge & Close -->
-          <div class="flex items-center gap-2 sm:gap-3">
-            <div class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[0.7rem] sm:text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
-              <i data-lucide="clock" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+          <!-- Countdown Timer Badge & Close Button -->
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full text-[0.68rem] sm:text-xs font-mono font-bold border bg-zinc-800/80 text-zinc-300 border-zinc-700">
+              <i data-lucide="clock" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-400"></i>
               <span id="upiCheckoutTimer">10:00</span>
             </div>
             <button
               type="button"
               onclick="closeUpiCheckoutModal()"
-              class="w-7 h-7 flex items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition cursor-pointer"
+              class="w-8 h-8 sm:w-7 sm:h-7 flex items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-zinc-300 hover:text-white transition cursor-pointer"
+              aria-label="Close Checkout Modal"
             >
               <i data-lucide="x" class="w-4 h-4"></i>
             </button>
@@ -616,7 +623,7 @@
         </div>
 
         <!-- Scrollable Modal Body -->
-        <div class="overflow-y-auto overscroll-contain flex-1">
+        <div class="overflow-y-auto overscroll-contain flex-1 pb-6 sm:pb-4">
 
           <!-- STEP 1: SCAN & PAY VIEW -->
           <div id="upiStepPayment" class="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
@@ -669,10 +676,10 @@
               <a
                 id="upiIntentMobileBtn"
                 href="#"
-                class="w-full py-4 px-5 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline"
+                class="w-full min-h-[48px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-400 active:from-emerald-400 active:to-emerald-300 hover:from-emerald-400 hover:to-emerald-300 text-black shadow-lg shadow-emerald-500/25 cursor-pointer text-center no-underline active:scale-[0.98]"
               >
-                <span>Pay ₹1,999 via UPI →</span>
-                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <span>Pay ₹1,999 via UPI App →</span>
+                <i data-lucide="external-link" class="w-4 h-4 shrink-0"></i>
               </a>
               <p class="text-[0.68rem] text-zinc-500 text-center mt-1.5 font-medium">
                 ⚡ Directly opens Google Pay, PhonePe, Paytm, CRED or BHIM with ₹1,999 pre-filled
@@ -687,26 +694,26 @@
               <a
                 id="upiBtnGPay"
                 href="#"
-                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 min-h-[42px] py-2 px-1 bg-zinc-900 active:bg-zinc-800 border border-zinc-700/80 hover:border-blue-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline"
               >
                 <span class="w-4 h-4 rounded-full bg-white text-blue-600 font-black text-[9px] flex items-center justify-center shrink-0">G</span>
-                <span>Google Pay</span>
+                <span class="truncate">Google Pay</span>
               </a>
               <a
                 id="upiBtnPhonePe"
                 href="#"
-                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 min-h-[42px] py-2 px-1 bg-zinc-900 active:bg-zinc-800 border border-zinc-700/80 hover:border-purple-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline"
               >
                 <span class="w-4 h-4 rounded-full bg-[#5f259f] text-white font-black text-[9px] flex items-center justify-center shrink-0">Pe</span>
-                <span>PhonePe</span>
+                <span class="truncate">PhonePe</span>
               </a>
               <a
                 id="upiBtnPaytm"
                 href="#"
-                class="flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1 sm:px-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline whitespace-nowrap"
+                class="flex items-center justify-center gap-1 sm:gap-1.5 min-h-[42px] py-2 px-1 bg-zinc-900 active:bg-zinc-800 border border-zinc-700/80 hover:border-sky-400 text-white rounded-xl text-[0.68rem] sm:text-xs font-bold transition shadow-sm no-underline"
               >
                 <span class="w-4 h-4 rounded-full bg-[#00b9f5] text-white font-black text-[9px] flex items-center justify-center shrink-0">P</span>
-                <span>Paytm</span>
+                <span class="truncate">Paytm</span>
               </a>
             </div>
 
@@ -715,30 +722,30 @@
               <img
                 src="payment-qr.jpg"
                 alt="Official Fellowship '26 UPI QR Code"
-                class="w-full max-w-[200px] sm:max-w-[240px] h-auto object-contain rounded-xl select-none mx-auto"
+                class="w-full max-w-[190px] sm:max-w-[230px] h-auto object-contain rounded-xl select-none mx-auto"
               />
-              <div class="flex items-center justify-center gap-2 pt-1 w-full">
+              <div class="flex items-center justify-center gap-2 pt-0.5 w-full">
                 <a
                   href="payment-qr.jpg"
                   download="TFC-Fellowship-Payment-QR.jpg"
-                  class="text-[0.68rem] sm:text-xs font-bold text-zinc-700 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5 cursor-pointer no-underline shadow-sm text-center"
+                  class="text-[0.68rem] sm:text-xs font-bold text-zinc-800 hover:text-black bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 px-3 py-2 rounded-lg transition inline-flex items-center gap-1.5 cursor-pointer no-underline shadow-sm text-center min-h-[36px]"
                   title="Save QR to photo gallery for mobile scanning"
                 >
                   <i data-lucide="download" class="w-3.5 h-3.5 shrink-0"></i>
                   <span>Save QR to Photos (Gallery Scan)</span>
                 </a>
               </div>
-              <p class="text-[0.68rem] text-zinc-600 font-medium text-center">
+              <p class="text-[0.65rem] sm:text-[0.68rem] text-zinc-600 font-medium text-center">
                 Scan with any UPI app on another device, or save to gallery
               </p>
             </div>
 
             <!-- Copy UPI ID Box -->
             <div class="p-2.5 sm:p-3 bg-zinc-900/90 rounded-xl border border-zinc-800 flex items-center justify-between gap-2">
-              <div class="min-w-0 pr-1 sm:pr-2">
-                <div class="flex items-center gap-1 sm:gap-1.5">
-                  <span class="text-[0.65rem] sm:text-[0.68rem] text-zinc-400 uppercase font-bold block truncate">Direct VPA / UPI ID</span>
-                  <span class="text-[0.6rem] sm:text-[0.65rem] text-zinc-500 font-medium shrink-0">(Payee: Dhruv Madan)</span>
+              <div class="min-w-0 pr-1 flex-1">
+                <div class="flex items-center gap-1">
+                  <span class="text-[0.65rem] text-zinc-400 uppercase font-bold">UPI ID</span>
+                  <span class="text-[0.62rem] text-zinc-500 font-medium shrink-0">(Dhruv Madan)</span>
                 </div>
                 <span id="displayUpiId" class="font-mono text-[0.72rem] sm:text-xs font-bold text-white truncate block select-all">dhruvmadan235@okhdfcbank</span>
               </div>
@@ -746,7 +753,7 @@
                 type="button"
                 id="btnCopyUpiId"
                 onclick="copyUpiIdToClipboard()"
-                class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer"
+                class="flex items-center gap-1 px-3 py-2 bg-zinc-800 active:bg-zinc-700 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-lg text-xs font-bold transition shrink-0 cursor-pointer min-h-[36px]"
               >
                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                 <span>Copy</span>
@@ -763,10 +770,10 @@
           <button
             type="button"
             onclick="setCheckoutStep('utr')"
-            class="w-full py-3.5 px-4 rounded-xl font-black uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-black shadow-lg shadow-orange-500/20 cursor-pointer"
+            class="w-full min-h-[48px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-orange-500 active:bg-orange-400 hover:bg-orange-400 text-black shadow-lg shadow-orange-500/20 cursor-pointer"
           >
             <span>I have paid ₹1,999 → Enter UTR</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4 shrink-0"></i>
           </button>
         </div>
 
@@ -862,28 +869,28 @@
             <button
               type="submit"
               id="btnSubmitUtr"
-              class="w-full py-3.5 px-4 rounded-xl font-black uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 cursor-pointer"
+              class="w-full min-h-[48px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-emerald-500 active:bg-emerald-400 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
-              <i data-lucide="send" class="w-4 h-4"></i>
+              <i data-lucide="send" class="w-4 h-4 shrink-0"></i>
               <span>Submit for Verification →</span>
             </button>
           </form>
         </div>
 
         <!-- STEP 3: SUCCESS CONFIRMATION STATE -->
-        <div id="upiStepSuccess" class="hidden p-6 text-center space-y-5">
-          <div class="w-16 h-16 bg-amber-500/10 border-2 border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center mx-auto">
-            <i data-lucide="clock" class="w-8 h-8"></i>
+        <div id="upiStepSuccess" class="hidden p-5 sm:p-6 text-center space-y-4 sm:space-y-5">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-500/10 border-2 border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center mx-auto">
+            <i data-lucide="clock" class="w-7 h-7 sm:w-8 sm:h-8"></i>
           </div>
 
-          <div class="space-y-3">
-            <span class="text-[0.7rem] font-mono font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 inline-block">
+          <div class="space-y-2.5 sm:space-y-3">
+            <span class="text-[0.68rem] sm:text-[0.7rem] font-mono font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 inline-block">
               Verification in Progress ⏳
             </span>
-            <h3 class="text-2xl font-black uppercase text-white tracking-wide">
+            <h3 class="text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
               Application Received!
             </h3>
-            <p class="text-sm font-medium text-zinc-300 leading-relaxed max-w-sm mx-auto">
+            <p class="text-xs sm:text-sm font-medium text-zinc-300 leading-relaxed max-w-sm mx-auto">
               Application received. We're verifying your payment manually — you'll get a confirmation email within a few hours, and interview slot details within 24 hours.
             </p>
           </div>
@@ -907,7 +914,7 @@
           <button
             type="button"
             onclick="closeUpiCheckoutModal()"
-            class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase rounded-xl border border-zinc-700 transition cursor-pointer"
+            class="w-full min-h-[48px] py-3.5 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-white font-bold text-xs sm:text-sm uppercase rounded-xl border border-zinc-700 transition cursor-pointer"
           >
             Done / Return to Fellowship Hub
           </button>
@@ -1369,6 +1376,15 @@
         } finally {
           btn.disabled = false;
           btn.textContent = 'Submit Application & Pay Fee (₹1,999) ⚡';
+        }
+      });
+    }
+
+    const overlayModal = document.getElementById('upiCheckoutOverlay');
+    if (overlayModal) {
+      overlayModal.addEventListener('click', (e) => {
+        if (e.target === overlayModal) {
+          closeUpiCheckoutModal();
         }
       });
     }
