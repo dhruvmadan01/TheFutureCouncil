@@ -144,8 +144,11 @@
             <span class="tfc-stat-label">Only 20 in Total</span>
           </div>
           <div class="tfc-stat-item">
-            <span class="tfc-stat-num">₹0 Fee</span>
-            <span class="tfc-stat-label">0% Equity · No ₹1.5L Fee</span>
+            <div style="display: flex; align-items: baseline; justify-content: center; gap: 6px;">
+              <span style="font-size: 1.05rem; color: #ef4444; text-decoration: line-through; text-decoration-color: #dc2626; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
+              <span class="tfc-stat-num" style="color: #059669;">₹0</span>
+            </div>
+            <span class="tfc-stat-label">Program Fee (100% Waived)</span>
           </div>
           <div class="tfc-stat-item">
             <span class="tfc-stat-num">Starts Oct 1</span>
@@ -400,7 +403,7 @@
           </div>
           <div class="tfc-card" style="padding: 24px;">
             <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--primary-orange); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto 12px;">2</div>
-            <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 6px;">Confirm Slot (₹2k)</h4>
+            <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 6px;">Confirm Slot (₹1,999)</h4>
             <p style="font-size: 0.82rem; color: var(--ink-soft); margin: 0;">Pay registration pass via secure UPI to filter non-serious applicants.</p>
           </div>
           <div class="tfc-card" style="padding: 24px;">
@@ -477,8 +480,26 @@
                 </select>
               </div>
 
-              <div style="background: rgba(255,122,61,0.08); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,122,61,0.2); font-size: 0.82rem; color: var(--ink-soft); line-height: 1.45;">
-                ℹ️ <strong>100% Equity-Free &amp; ₹0 Program Fee:</strong> We take 0% equity, and we do NOT take the ₹1.5 Lakh program fee — we have made even the program fee ₹0 for all 20 selected founders.
+              <!-- Program Fee Strike-Through & ₹0 Breakdown Card -->
+              <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(255, 122, 61, 0.06)); border-radius: 12px; padding: 18px 20px; border: 1.5px solid rgba(16, 185, 129, 0.35); margin-top: 4px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px dashed rgba(0,0,0,0.12); padding-bottom: 12px; margin-bottom: 12px;">
+                  <div>
+                    <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #059669; display: block; margin-bottom: 2px;">Cohort 01 Fellowship Tuition</span>
+                    <strong style="font-size: 1.05rem; color: var(--ink); display: block;">Program Fee for Selected Founders</strong>
+                    <span style="font-size: 0.76rem; color: var(--ink-soft);">Zero tuition, zero equity taken (100% equity-free)</span>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
+                      <span style="font-size: 1.05rem; color: #ef4444; text-decoration: line-through; font-weight: 700; text-decoration-color: #dc2626; text-decoration-thickness: 2px;">₹1,50,000</span>
+                      <span style="font-size: 1.6rem; font-weight: 900; color: #059669; line-height: 1;">₹0</span>
+                    </div>
+                    <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 999px; text-transform: uppercase; margin-top: 4px;">100% Fee Waived</span>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--ink-soft);">
+                  <span>One-time Application Screening Pass (merit review):</span>
+                  <strong style="font-size: 0.95rem; color: var(--ink);">₹1,999</strong>
+                </div>
               </div>
 
               <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 8px;">
@@ -514,7 +535,7 @@
               <span class="tfc-accordion-icon">+</span>
             </button>
             <div class="tfc-accordion-content">
-              Yes — 100%. The fellowship is completely equity-free (we take 0% equity). Furthermore, we do not take the ₹1.5 Lakh program fee — we have made even the program fee ₹0 for all 20 admitted founders. You pay zero tuition fees and give up zero equity. Mentorship, venue access, masterclasses, and demo day pitching are 100% free for admitted fellows.
+              Yes — 100%. The fellowship is completely equity-free (we take 0% equity). The standard <strong><span style="text-decoration: line-through; text-decoration-color: #ef4444; color: #ef4444;">₹1,50,000</span> program fee has been slashed to ₹0</strong> for all 20 admitted founders. You pay zero tuition fees and give up zero equity. Mentorship, venue access, masterclasses, and demo day pitching are 100% free for admitted fellows.
             </div>
           </div>
 
@@ -610,17 +631,20 @@
           </div>
 
           <!-- Order Summary Card -->
-          <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800 space-y-2">
+          <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800 space-y-2.5">
             <div class="flex justify-between items-center text-xs">
               <span class="text-zinc-400 font-medium">Applicant:</span>
               <span id="checkoutApplicantName" class="font-bold text-white">Applicant</span>
             </div>
             <div class="flex justify-between items-center text-xs">
-              <span class="text-zinc-400 font-medium">Cohort Application:</span>
-              <span class="font-mono text-zinc-300">Fellowship '26 Slot</span>
+              <span class="text-zinc-400 font-medium">Cohort 01 Program Fee:</span>
+              <div class="flex items-center gap-1.5 font-mono">
+                <span class="text-zinc-500 line-through decoration-rose-500 decoration-2 text-[0.75rem]">₹1,50,000</span>
+                <span class="text-emerald-400 font-bold">₹0 (Waived)</span>
+              </div>
             </div>
             <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80">
-              <span class="text-xs text-zinc-300 font-bold uppercase">Registration Pass:</span>
+              <span class="text-xs text-zinc-300 font-bold uppercase">Application Registration Pass:</span>
               <span class="text-xl font-black text-orange-500 font-mono">₹1,999</span>
             </div>
           </div>
