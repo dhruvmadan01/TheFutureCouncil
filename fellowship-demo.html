@@ -350,11 +350,15 @@
           </p>
         </div>
 
-        <!-- Desktop Fallback QR Code Container -->
-        <div class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-2">
-          <div id="dynamicUpiQrCode" class="w-[170px] h-[170px] flex items-center justify-center bg-white"></div>
+        <!-- Official Original QR Code Container -->
+        <div class="flex flex-col items-center justify-center p-3 bg-white rounded-2xl border-2 border-zinc-700 shadow-xl space-y-1.5">
+          <img
+            src="payment-qr.jpg"
+            alt="Official Fellowship '26 UPI QR Code"
+            class="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain rounded-xl"
+          />
           <p class="text-[0.72rem] text-zinc-700 font-bold tracking-tight text-center">
-            Scan QR code with any UPI app on desktop
+            Scan with GPay, PhonePe, Paytm, CRED or any UPI App
           </p>
         </div>
 
@@ -678,16 +682,6 @@
       document.getElementById('checkoutApplicantName').textContent = orderDetails.name;
 
       const upiUri = buildUpiUri(orderDetails);
-      const qrContainer = document.getElementById('dynamicUpiQrCode');
-      qrContainer.innerHTML = '';
-      currentQrInstance = new QRCode(qrContainer, {
-        text: upiUri,
-        width: 170,
-        height: 170,
-        colorDark: '#000000',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
-      });
 
       const intentBtn = document.getElementById('upiIntentMobileBtn');
       if (intentBtn) intentBtn.href = upiUri;
