@@ -128,6 +128,9 @@
         <button id="tabBtnAmbassadors" onclick="switchAdminSubTab('ambassadors')" class="tfc-subtab-pill">
           🎓 Ambassador Milestones
         </button>
+        <button id="tabBtnFellowship" onclick="switchAdminSubTab('fellowship')" class="tfc-subtab-pill">
+          ⚡ Fellowship '26 Queue
+        </button>
       </div>
 
       <!-- ECOSYSTEM TAB CONTENT CONTAINER -->
@@ -518,6 +521,201 @@
                 <tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">Loading ambassador metrics...</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- FELLOWSHIP '26 VERIFICATION QUEUE SUBTAB CONTENT -->
+      <div id="subTabContentFellowship" class="hidden space-y-6">
+        
+        <!-- Header Banner -->
+        <div class="bg-white border-2 border-black p-6 rounded-2xl shadow-[4px_4px_0_#000]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-black uppercase tracking-wider text-orange-600 bg-orange-100 px-2.5 py-1 rounded-full border border-orange-300 inline-block mb-2">Admissions Pipeline</span>
+              <h2 class="text-2xl font-black uppercase tracking-tight text-zinc-900">
+                ⚡ Fellowship '26 Manual Verification Queue
+              </h2>
+              <p class="text-sm text-zinc-600 font-medium mt-1 max-w-2xl">
+                Manual substitute for payment gateway webhooks. Cross-reference 12-digit UTRs and screenshot proofs against your bank statement/UPI app, mark payments as verified, and trigger interview scheduling confirmations.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onclick="exportFellowshipCsv()"
+                class="px-4 py-2.5 bg-black hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[2px_2px_0_#444] transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>Export to CSV 📥</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="tfc-portal-metric-card border-2 border-black shadow-[3px_3px_0_#000]">
+            <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-1">Total Applicants</span>
+            <span class="text-3xl font-extrabold text-zinc-900 tracking-tight" id="fellowshipMetricTotal">0</span>
+            <span class="text-[0.72rem] text-zinc-500 mt-2 font-medium">All Fellowship form submissions</span>
+          </div>
+          <div class="tfc-portal-metric-card border-2 border-black shadow-[3px_3px_0_#000]">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Pending Verification</span>
+            <span class="text-3xl font-extrabold text-amber-600 tracking-tight" id="fellowshipMetricPending">0</span>
+            <span class="text-[0.72rem] text-amber-700 mt-2 font-bold">UTR submitted · Needs review ⏳</span>
+          </div>
+          <div class="tfc-portal-metric-card border-2 border-black shadow-[3px_3px_0_#000]">
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1">Dropped Off (Form Only)</span>
+            <span class="text-3xl font-extrabold text-rose-600 tracking-tight" id="fellowshipMetricDropped">0</span>
+            <span class="text-[0.72rem] text-rose-600 mt-2 font-medium">Filled form but haven't paid</span>
+          </div>
+          <div class="tfc-portal-metric-card border-2 border-black shadow-[3px_3px_0_#000]">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Verified & Confirmed</span>
+            <span class="text-3xl font-extrabold text-emerald-600 tracking-tight" id="fellowshipMetricVerified">0</span>
+            <span class="text-[0.72rem] text-emerald-700 mt-2 font-medium">Payment verified · Ready for interview</span>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-4 border-2 border-black rounded-xl shadow-[3px_3px_0_#000]">
+          <div class="flex flex-wrap items-center gap-2">
+            <button
+              id="filterBtnAll"
+              onclick="setFellowshipFilter('all')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-orange-500 text-black shadow-[1.5px_1.5px_0_#000] cursor-pointer"
+            >
+              All Applicants (<span id="countPillAll">0</span>)
+            </button>
+            <button
+              id="filterBtnPending"
+              onclick="setFellowshipFilter('pending')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-zinc-100 hover:bg-zinc-200 text-black cursor-pointer"
+            >
+              Pending Verification ⏳ (<span id="countPillPending">0</span>)
+            </button>
+            <button
+              id="filterBtnDropped"
+              onclick="setFellowshipFilter('dropped')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-zinc-100 hover:bg-zinc-200 text-black cursor-pointer"
+            >
+              Dropped Off ⚠️ (<span id="countPillDropped">0</span>)
+            </button>
+            <button
+              id="filterBtnVerified"
+              onclick="setFellowshipFilter('verified')"
+              class="px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-zinc-100 hover:bg-zinc-200 text-black cursor-pointer"
+            >
+              Verified ✓ (<span id="countPillVerified">0</span>)
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="w-full sm:w-72">
+            <input
+              type="text"
+              id="fellowshipSearchInput"
+              oninput="handleFellowshipSearch(this.value)"
+              placeholder="Search by name, email, UTR, college..."
+              class="w-full text-xs font-semibold px-3 py-2 bg-zinc-50 border-2 border-black rounded-lg focus:outline-none focus:bg-white"
+            />
+          </div>
+        </div>
+
+        <!-- Verification Queue Table -->
+        <div class="bg-white border-2 border-black rounded-2xl shadow-[4px_4px_0_#000] overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse" id="fellowshipQueueTable">
+              <thead>
+                <tr class="bg-zinc-100 border-b-2 border-black text-black font-black uppercase text-[0.7rem] tracking-wider">
+                  <th class="p-3.5">Applicant / ID</th>
+                  <th class="p-3.5">Contact Info</th>
+                  <th class="p-3.5">College & Year</th>
+                  <th class="p-3.5">Payment Status</th>
+                  <th class="p-3.5">12-Digit UTR</th>
+                  <th class="p-3.5">Proof Screenshot</th>
+                  <th class="p-3.5">Timestamp</th>
+                  <th class="p-3.5 text-right">Verification Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-200 font-medium text-zinc-800">
+                <tr>
+                  <td colspan="8" class="text-center py-8 text-zinc-500 font-semibold">
+                    Loading Fellowship applications...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Screenshot High-Res Preview Modal -->
+      <div id="screenshotPreviewModal" class="hidden fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-4">
+        <div class="relative bg-zinc-900 border-4 border-black rounded-2xl max-w-2xl w-full p-4 space-y-3">
+          <div class="flex justify-between items-center pb-2 border-b border-zinc-700">
+            <h3 class="text-sm font-black uppercase text-white" id="screenshotModalTitle">Payment Screenshot Proof</h3>
+            <button
+              type="button"
+              onclick="closeScreenshotModal()"
+              class="px-2.5 py-1 bg-red-500 hover:bg-red-400 text-white font-bold text-xs rounded border border-black cursor-pointer"
+            >
+              ✕ Close
+            </button>
+          </div>
+          <div class="flex items-center justify-center bg-black rounded-xl p-2 max-h-[75vh] overflow-hidden">
+            <img id="screenshotModalImg" src="" alt="Payment Proof" class="max-w-full max-h-[70vh] object-contain rounded" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation Email Trigger Modal -->
+      <div id="emailTriggerModal" class="hidden fixed inset-0 z-[99999] bg-black/80 flex items-center justify-center p-4">
+        <div class="bg-white border-4 border-black rounded-2xl max-w-lg w-full p-6 shadow-[8px_8px_0_#000] space-y-4">
+          <div class="flex justify-between items-center pb-2 border-b-2 border-black">
+            <h3 class="text-base font-black uppercase text-zinc-900">
+              ✉️ Send Interview Confirmation Email
+            </h3>
+            <button
+              type="button"
+              onclick="closeEmailModal()"
+              class="px-2.5 py-1 bg-zinc-200 hover:bg-zinc-300 text-black font-bold text-xs rounded border border-black cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-zinc-600 uppercase text-[0.68rem]">To:</label>
+              <input id="emailModalTo" type="text" readonly class="w-full p-2 bg-zinc-100 border border-zinc-300 rounded font-mono font-bold" />
+            </div>
+            <div>
+              <label class="block font-bold text-zinc-600 uppercase text-[0.68rem]">Subject:</label>
+              <input id="emailModalSubject" type="text" readonly class="w-full p-2 bg-zinc-100 border border-zinc-300 rounded font-bold" />
+            </div>
+            <div>
+              <label class="block font-bold text-zinc-600 uppercase text-[0.68rem]">Message Body Preview:</label>
+              <textarea id="emailModalBody" rows="7" readonly class="w-full p-2 bg-zinc-50 border border-zinc-300 rounded font-mono text-xs leading-relaxed"></textarea>
+            </div>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <a
+              id="emailModalMailtoBtn"
+              href="#"
+              class="flex-1 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase text-xs rounded-xl border-2 border-black shadow-[2px_2px_0_#000] text-center no-underline cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <span>Open in Email App ↗</span>
+            </a>
+            <button
+              type="button"
+              id="btnCopyEmailTemplate"
+              onclick="copyEmailTemplate()"
+              class="px-4 py-3 bg-zinc-100 hover:bg-zinc-200 text-black font-bold text-xs uppercase rounded-xl border-2 border-black shadow-[2px_2px_0_#000] cursor-pointer"
+            >
+              Copy Text 📋
+            </button>
           </div>
         </div>
       </div>
@@ -1625,21 +1823,25 @@
         const btnEcosystem = document.getElementById('tabBtnEcosystem');
         const btnProjects = document.getElementById('tabBtnProjects');
         const btnAmbassadors = document.getElementById('tabBtnAmbassadors');
+        const btnFellowship = document.getElementById('tabBtnFellowship');
         
         const contentEcosystem = document.getElementById('subTabContentEcosystem');
         const contentProjects = document.getElementById('subTabContentProjects');
         const contentAmbassadors = document.getElementById('subTabContentAmbassadors');
+        const contentFellowship = document.getElementById('subTabContentFellowship');
         
         if (!btnEcosystem || !btnProjects || !btnAmbassadors) return;
 
         btnEcosystem.classList.remove('active');
         btnProjects.classList.remove('active');
         btnAmbassadors.classList.remove('active');
+        if (btnFellowship) btnFellowship.classList.remove('active');
         
         // Hide all
         contentEcosystem.classList.add('hidden');
         contentProjects.classList.add('hidden');
         contentAmbassadors.classList.add('hidden');
+        if (contentFellowship) contentFellowship.classList.add('hidden');
         
         if (tab === 'ecosystem') {
           btnEcosystem.classList.add('active');
@@ -1652,7 +1854,496 @@
           btnAmbassadors.classList.add('active');
           contentAmbassadors.classList.remove('hidden');
           renderAmbassadorsMilestones();
+        } else if (tab === 'fellowship') {
+          if (btnFellowship) btnFellowship.classList.add('active');
+          if (contentFellowship) contentFellowship.classList.remove('hidden');
+          renderFellowshipQueue();
         }
+      };
+
+      // =========================================================================
+      // FELLOWSHIP '26 MANUAL VERIFICATION QUEUE & PIPELINE SYSTEM
+      // =========================================================================
+      let cachedFellowshipApplicants = [];
+      let currentFellowshipFilter = 'all';
+      let currentFellowshipSearch = '';
+
+      const parseFellowshipRecord = (member) => {
+        const collegeStr = member.college || '';
+        const parts = collegeStr.split(' | ');
+        const meta = {
+          id: member.id,
+          member_id: member.member_id || member.id || 'TFC-FEL-N/A',
+          name: member.name || 'Unnamed',
+          email: member.email || '',
+          college: parts[0] ? parts[0].split(' | CollegeID: ')[0] : 'N/A',
+          phone: '',
+          utr: '',
+          status: 'form_submitted',
+          formSubmittedAt: '',
+          paymentSubmittedAt: '',
+          verifiedAt: '',
+          screenshot: (member.image && member.image.startsWith('data:image/')) ? member.image : null,
+          q1: 'Not answered',
+          q2: 'Not answered',
+          q3: 'Not answered',
+          q4: 'Not answered'
+        };
+
+        parts.forEach(part => {
+          if (part.startsWith('Phone: ')) meta.phone = part.replace('Phone: ', '').trim();
+          else if (part.startsWith('UTR: ')) meta.utr = part.replace('UTR: ', '').trim();
+          else if (part.startsWith('PaymentStatus: ')) meta.status = part.replace('PaymentStatus: ', '').trim();
+          else if (part.startsWith('Payment: ')) {
+            const pVal = part.replace('Payment: ', '').trim();
+            if (pVal.toLowerCase() === 'verified') meta.status = 'payment_verified';
+            else if (pVal.toLowerCase() === 'pending') meta.status = 'form_submitted';
+          }
+          else if (part.startsWith('FormSubmittedAt: ')) meta.formSubmittedAt = part.replace('FormSubmittedAt: ', '').trim();
+          else if (part.startsWith('PaymentSubmittedAt: ')) meta.paymentSubmittedAt = part.replace('PaymentSubmittedAt: ', '').trim();
+          else if (part.startsWith('PaymentVerifiedAt: ')) meta.verifiedAt = part.replace('PaymentVerifiedAt: ', '').trim();
+          else if (part.startsWith('Screenshot: ')) {
+            if (!meta.screenshot) meta.screenshot = part.replace('Screenshot: ', '').trim();
+          }
+          else if (part.startsWith('Q1: ')) meta.q1 = part.replace('Q1: ', '').trim();
+          else if (part.startsWith('Q2: ')) meta.q2 = part.replace('Q2: ', '').trim();
+          else if (part.startsWith('Q3: ')) meta.q3 = part.replace('Q3: ', '').trim();
+          else if (part.startsWith('Q4: ')) meta.q4 = part.replace('Q4: ', '').trim();
+        });
+
+        // Derive status fallback if not explicit
+        if (meta.status === 'form_submitted' && meta.utr && meta.utr.length >= 10) {
+          meta.status = 'payment_pending_verification';
+        }
+
+        return meta;
+      };
+
+      window.renderFellowshipQueue = async (fetchFromDb = true) => {
+        const tableBody = document.querySelector('#fellowshipQueueTable tbody');
+        if (!tableBody) return;
+
+        if (fetchFromDb) {
+          tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-8 text-zinc-500 font-semibold">Fetching latest applicant records from database... ⏳</td></tr>';
+          try {
+            const { data, error } = await supabaseClient
+              .from('members')
+              .select('*');
+
+            if (error) throw error;
+
+            // Filter for Fellowship records
+            const allDb = data || [];
+            const felList = allDb.filter(m => 
+              (m.member_id && m.member_id.startsWith('TFC-FEL-')) ||
+              (m.college && (
+                m.college.includes('FellowshipPage') ||
+                m.college.includes('PaymentStatus:') ||
+                m.college.includes('Fellowship: Yes') ||
+                m.college.includes('Q1:')
+              ))
+            );
+
+            cachedFellowshipApplicants = felList.map(parseFellowshipRecord);
+          } catch (e) {
+            console.error("Failed to load fellowship applicants:", e);
+            tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-8 text-red-600 font-bold">Failed to load applicants: ' + e.message + '</td></tr>';
+            return;
+          }
+        }
+
+        // Compute metrics across all applicants
+        const total = cachedFellowshipApplicants.length;
+        const pending = cachedFellowshipApplicants.filter(a => a.status === 'payment_pending_verification').length;
+        const dropped = cachedFellowshipApplicants.filter(a => a.status === 'form_submitted').length;
+        const verified = cachedFellowshipApplicants.filter(a => a.status === 'payment_verified').length;
+
+        // Update DOM Metric Cards
+        const mTotal = document.getElementById('fellowshipMetricTotal');
+        const mPending = document.getElementById('fellowshipMetricPending');
+        const mDropped = document.getElementById('fellowshipMetricDropped');
+        const mVerified = document.getElementById('fellowshipMetricVerified');
+        if (mTotal) mTotal.textContent = total;
+        if (mPending) mPending.textContent = pending;
+        if (mDropped) mDropped.textContent = dropped;
+        if (mVerified) mVerified.textContent = verified;
+
+        // Update Filter Pill Counts
+        const pAll = document.getElementById('countPillAll');
+        const pPending = document.getElementById('countPillPending');
+        const pDropped = document.getElementById('countPillDropped');
+        const pVerified = document.getElementById('countPillVerified');
+        if (pAll) pAll.textContent = total;
+        if (pPending) pPending.textContent = pending;
+        if (pDropped) pDropped.textContent = dropped;
+        if (pVerified) pVerified.textContent = verified;
+
+        // Filter applicants
+        let filtered = [...cachedFellowshipApplicants];
+        if (currentFellowshipFilter === 'pending') {
+          filtered = filtered.filter(a => a.status === 'payment_pending_verification');
+        } else if (currentFellowshipFilter === 'dropped') {
+          filtered = filtered.filter(a => a.status === 'form_submitted');
+        } else if (currentFellowshipFilter === 'verified') {
+          filtered = filtered.filter(a => a.status === 'payment_verified');
+        }
+
+        // Apply search query
+        if (currentFellowshipSearch) {
+          const q = currentFellowshipSearch.toLowerCase();
+          filtered = filtered.filter(a => 
+            (a.name || '').toLowerCase().includes(q) ||
+            (a.email || '').toLowerCase().includes(q) ||
+            (a.phone || '').toLowerCase().includes(q) ||
+            (a.utr || '').toLowerCase().includes(q) ||
+            (a.college || '').toLowerCase().includes(q) ||
+            (a.member_id || '').toLowerCase().includes(q)
+          );
+        }
+
+        // Sort: pending first, then newest
+        filtered.sort((a, b) => {
+          if (a.status === 'payment_pending_verification' && b.status !== 'payment_pending_verification') return -1;
+          if (b.status === 'payment_pending_verification' && a.status !== 'payment_pending_verification') return 1;
+          return (b.paymentSubmittedAt || b.formSubmittedAt || '').localeCompare(a.paymentSubmittedAt || a.formSubmittedAt || '');
+        });
+
+        tableBody.innerHTML = '';
+        if (filtered.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-10 text-zinc-500 font-semibold">No applications found matching the selected filter.</td></tr>';
+          return;
+        }
+
+        filtered.forEach(applicant => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-zinc-50/80 transition';
+
+          // Status Badge
+          let statusBadgeHtml = '';
+          if (applicant.status === 'payment_pending_verification') {
+            statusBadgeHtml = `<span class="inline-flex items-center gap-1 font-mono text-[0.68rem] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-400">⏳ Pending Verification</span>`;
+          } else if (applicant.status === 'payment_verified') {
+            statusBadgeHtml = `<span class="inline-flex items-center gap-1 font-mono text-[0.68rem] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-400">✓ Verified</span>`;
+          } else {
+            statusBadgeHtml = `<span class="inline-flex items-center gap-1 font-mono text-[0.68rem] font-black uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300">⚠️ Form Only (Unpaid)</span>`;
+          }
+
+          // UTR Display with Copy
+          let utrHtml = '<span class="text-zinc-400 italic text-[0.72rem]">None</span>';
+          if (applicant.utr) {
+            utrHtml = `
+              <div class="flex items-center gap-1">
+                <span class="font-mono font-bold text-xs text-zinc-900 select-all">${applicant.utr}</span>
+                <button
+                  type="button"
+                  onclick="copyUtrToClipboard('${applicant.utr}', this)"
+                  title="Copy UTR"
+                  class="p-1 text-zinc-400 hover:text-black transition cursor-pointer"
+                >
+                  📋
+                </button>
+              </div>
+            `;
+          }
+
+          // Screenshot Proof Thumbnail
+          let proofHtml = '<span class="text-zinc-400 italic text-[0.7rem]">No upload</span>';
+          if (applicant.screenshot) {
+            proofHtml = `
+              <div class="flex items-center gap-1.5">
+                <img
+                  src="${applicant.screenshot}"
+                  alt="Proof"
+                  onclick="viewScreenshotModal('${applicant.screenshot}', '${applicant.name}')"
+                  class="w-9 h-9 object-cover rounded border border-black cursor-pointer hover:opacity-80 transition shadow-sm"
+                  title="Click to zoom proof"
+                />
+                <button
+                  type="button"
+                  onclick="viewScreenshotModal('${applicant.screenshot}', '${applicant.name}')"
+                  class="text-[0.68rem] font-bold text-blue-600 underline cursor-pointer"
+                >
+                  Zoom
+                </button>
+              </div>
+            `;
+          }
+
+          // Formatted Timestamp
+          const rawTime = applicant.paymentSubmittedAt || applicant.formSubmittedAt;
+          let timeDisplay = 'N/A';
+          if (rawTime) {
+            const d = new Date(rawTime);
+            timeDisplay = !isNaN(d.getTime()) ? d.toLocaleString('en-IN', {
+              day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+            }) : rawTime;
+          }
+
+          // Actions
+          let actionsHtml = `<div class="flex items-center justify-end gap-1.5 flex-wrap">`;
+          if (applicant.status === 'payment_pending_verification') {
+            actionsHtml += `
+              <button
+                type="button"
+                onclick="markFellowshipVerified('${applicant.id}', '${applicant.email}')"
+                class="px-2.5 py-1 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-[0.68rem] uppercase rounded border border-black shadow-[1.5px_1.5px_0_#000] cursor-pointer transition"
+              >
+                Verify ✓
+              </button>
+            `;
+          } else if (applicant.status === 'payment_verified') {
+            actionsHtml += `
+              <button
+                type="button"
+                onclick="openEmailModalForApplicant('${applicant.email}')"
+                class="px-2.5 py-1 bg-blue-500 hover:bg-blue-400 text-white font-black text-[0.68rem] uppercase rounded border border-black shadow-[1.5px_1.5px_0_#000] cursor-pointer transition"
+              >
+                Email ✉️
+              </button>
+            `;
+          }
+
+          actionsHtml += `
+            <button
+              type="button"
+              onclick="viewApplication('${applicant.id}')"
+              class="px-2 py-1 bg-zinc-100 hover:bg-zinc-200 text-black font-bold text-[0.68rem] uppercase rounded border border-black cursor-pointer transition"
+            >
+              Q&A 📋
+            </button>
+          </div>`;
+
+          row.innerHTML = `
+            <td class="p-3.5">
+              <div class="font-bold text-zinc-900">${applicant.name}</div>
+              <div class="font-mono text-[0.68rem] text-zinc-500 font-bold">${applicant.member_id}</div>
+            </td>
+            <td class="p-3.5">
+              <div><a href="mailto:${applicant.email}" class="text-blue-600 hover:underline font-semibold">${applicant.email}</a></div>
+              <div class="text-zinc-600 font-mono text-[0.72rem]">${applicant.phone || 'No phone'}</div>
+            </td>
+            <td class="p-3.5 max-w-xs truncate" title="${applicant.college}">
+              ${applicant.college}
+            </td>
+            <td class="p-3.5">
+              ${statusBadgeHtml}
+            </td>
+            <td class="p-3.5">
+              ${utrHtml}
+            </td>
+            <td class="p-3.5">
+              ${proofHtml}
+            </td>
+            <td class="p-3.5 whitespace-nowrap text-zinc-500 font-mono text-[0.72rem]">
+              ${timeDisplay}
+            </td>
+            <td class="p-3.5 text-right">
+              ${actionsHtml}
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      };
+
+      // Filter Switcher
+      window.setFellowshipFilter = (filterKey) => {
+        currentFellowshipFilter = filterKey;
+        const btns = {
+          all: document.getElementById('filterBtnAll'),
+          pending: document.getElementById('filterBtnPending'),
+          dropped: document.getElementById('filterBtnDropped'),
+          verified: document.getElementById('filterBtnVerified')
+        };
+
+        Object.entries(btns).forEach(([key, btn]) => {
+          if (!btn) return;
+          if (key === filterKey) {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-orange-500 text-black shadow-[1.5px_1.5px_0_#000] cursor-pointer';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-black bg-zinc-100 hover:bg-zinc-200 text-black cursor-pointer';
+          }
+        });
+
+        renderFellowshipQueue(false);
+      };
+
+      window.handleFellowshipSearch = (query) => {
+        currentFellowshipSearch = query.trim();
+        renderFellowshipQueue(false);
+      };
+
+      // Copy UTR to clipboard
+      window.copyUtrToClipboard = (utr, btnEl) => {
+        navigator.clipboard.writeText(utr).then(() => {
+          const orig = btnEl.innerHTML;
+          btnEl.innerHTML = '✓';
+          setTimeout(() => { btnEl.innerHTML = orig; }, 1500);
+        });
+      };
+
+      // Mark applicant as verified
+      window.markFellowshipVerified = async (memberId, email) => {
+        const applicant = cachedFellowshipApplicants.find(a => String(a.id) === String(memberId) || a.email === email);
+        if (!applicant) return;
+
+        const confirmVerif = confirm(`Mark payment for ${applicant.name} (UTR: ${applicant.utr || 'N/A'}) as VERIFIED? This will open their confirmation email.`);
+        if (!confirmVerif) return;
+
+        try {
+          const { data: member } = await supabaseClient
+            .from('members')
+            .select('college')
+            .eq('id', memberId)
+            .maybeSingle();
+
+          let collegeStr = member ? (member.college || '') : '';
+          const timestamp = new Date().toISOString();
+
+          if (collegeStr.includes('PaymentStatus: ')) {
+            collegeStr = collegeStr.replace(/PaymentStatus:\s*[^|]+/, 'PaymentStatus: payment_verified');
+          } else if (collegeStr.includes('Payment: ')) {
+            collegeStr = collegeStr.replace(/Payment:\s*[^|]+/, 'PaymentStatus: payment_verified');
+          } else {
+            collegeStr += ' | PaymentStatus: payment_verified';
+          }
+
+          collegeStr += ` | PaymentVerifiedAt: ${timestamp}`;
+
+          const { error } = await supabaseClient
+            .from('members')
+            .update({ college: collegeStr })
+            .eq('id', memberId);
+
+          if (error) throw error;
+
+          // Update cached applicant
+          applicant.status = 'payment_verified';
+          applicant.verifiedAt = timestamp;
+
+          alert(`✓ ${applicant.name}'s payment marked as verified!`);
+          renderFellowshipQueue(false);
+
+          // Open confirmation email modal
+          openEmailModalForApplicant(applicant.email);
+
+        } catch (err) {
+          console.error("Error marking fellowship verified:", err);
+          alert("Failed to update status in database: " + err.message);
+        }
+      };
+
+      // Confirmation Email Trigger Modal Logic
+      window.openEmailModalForApplicant = (email) => {
+        const applicant = cachedFellowshipApplicants.find(a => a.email === email);
+        if (!applicant) return;
+
+        const subject = `Fellowship '26 Application Confirmed — Next Steps | The Future Council`;
+        const body = `Hi ${applicant.name},
+
+Congratulations! We have received and verified your ₹2,000 Fellowship '26 registration pass (UTR: ${applicant.utr || 'Verified'}).
+
+Your application is now officially under admissions board review. You will receive your 1-on-1 interview slot details within 24 hours.
+
+If you have any questions in the meantime, feel free to reply directly to this email or reach out to us at support@thefuturecouncil.in.
+
+Best regards,
+Admissions Board
+The Future Council
+thefuturecouncil.in`;
+
+        document.getElementById('emailModalTo').value = applicant.email;
+        document.getElementById('emailModalSubject').value = subject;
+        document.getElementById('emailModalBody').value = body;
+
+        const mailtoUri = `mailto:${encodeURIComponent(applicant.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        document.getElementById('emailModalMailtoBtn').href = mailtoUri;
+
+        const modal = document.getElementById('emailTriggerModal');
+        if (modal) modal.classList.remove('hidden');
+      };
+
+      window.closeEmailModal = () => {
+        const modal = document.getElementById('emailTriggerModal');
+        if (modal) modal.classList.add('hidden');
+      };
+
+      window.copyEmailTemplate = () => {
+        const bodyText = document.getElementById('emailModalBody').value;
+        navigator.clipboard.writeText(bodyText).then(() => {
+          const btn = document.getElementById('btnCopyEmailTemplate');
+          const orig = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => { btn.textContent = orig; }, 1800);
+        });
+      };
+
+      // Screenshot Modal
+      window.viewScreenshotModal = (imgSrc, applicantName) => {
+        const modal = document.getElementById('screenshotPreviewModal');
+        const img = document.getElementById('screenshotModalImg');
+        const title = document.getElementById('screenshotModalTitle');
+        if (img) img.src = imgSrc;
+        if (title) title.textContent = `Payment Screenshot — ${applicantName}`;
+        if (modal) modal.classList.remove('hidden');
+      };
+
+      window.closeScreenshotModal = () => {
+        const modal = document.getElementById('screenshotPreviewModal');
+        if (modal) modal.classList.add('hidden');
+      };
+
+      // CSV Export
+      window.exportFellowshipCsv = () => {
+        if (!cachedFellowshipApplicants || cachedFellowshipApplicants.length === 0) {
+          alert("No applicant data available to export.");
+          return;
+        }
+
+        const headers = [
+          "Member ID",
+          "Applicant Name",
+          "Email",
+          "WhatsApp Phone",
+          "College",
+          "Payment Status",
+          "12-Digit UTR",
+          "Form Submitted At",
+          "Payment Submitted At",
+          "Q1 Product Concept",
+          "Q2 Unfair Advantage",
+          "Q3 Links",
+          "Q4 Offline Sprints"
+        ];
+
+        const escapeCsv = (str) => {
+          if (!str) return '""';
+          return `"${String(str).replace(/"/g, '""').replace(/\n/g, ' ')}"`;
+        };
+
+        const rows = cachedFellowshipApplicants.map(a => [
+          escapeCsv(a.member_id),
+          escapeCsv(a.name),
+          escapeCsv(a.email),
+          escapeCsv(a.phone),
+          escapeCsv(a.college),
+          escapeCsv(a.status),
+          escapeCsv(a.utr),
+          escapeCsv(a.formSubmittedAt),
+          escapeCsv(a.paymentSubmittedAt),
+          escapeCsv(a.q1),
+          escapeCsv(a.q2),
+          escapeCsv(a.q3),
+          escapeCsv(a.q4)
+        ]);
+
+        const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `TFC_Fellowship_Applications_${new Date().toISOString().slice(0, 10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       };
 
       // ==========================================
