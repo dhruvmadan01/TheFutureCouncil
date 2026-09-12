@@ -11,6 +11,14 @@
         }
       ],
       "destination": "/fellowship"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/refund.html"
+    },
+    {
+      "source": "/cancellation-and-refund",
+      "destination": "/refund.html"
     }
   ]
 }
