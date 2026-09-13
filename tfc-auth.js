@@ -1074,7 +1074,9 @@
 
     navWrappers.forEach((wrapper) => {
       let authContainer = wrapper.querySelector('.tfc-nav-auth-container');
-      const primaryBtn = wrapper.querySelector('a.tfc-btn-primary[href*="join.html"], a.tfc-btn-primary[href*="fellowship.html"], a.tfc-btn-primary#navActionBtn');
+      const primaryBtn = wrapper.querySelector('#navActionBtn') ||
+                         wrapper.querySelector('a.tfc-btn-primary') ||
+                         wrapper.querySelector('a.tfc-btn-google');
 
       if (currentUser) {
         if (!authContainer) {
@@ -1129,26 +1131,31 @@
         const dropdown = authContainer.querySelector('#tfcUserDropdown');
         const logoutBtn = authContainer.querySelector('#tfcLogoutBtn');
 
-        pillBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const isOpen = dropdown.classList.toggle('open');
-          pillBtn.setAttribute('aria-expanded', isOpen);
-        });
+        if (pillBtn && dropdown) {
+          pillBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = dropdown.classList ? dropdown.classList.toggle('open') : false;
+            pillBtn.setAttribute('aria-expanded', isOpen);
+          });
 
-        document.addEventListener('click', (e) => {
-          if (!authContainer.contains(e.target)) {
-            dropdown.classList.remove('open');
-            pillBtn.setAttribute('aria-expanded', 'false');
-          }
-        });
+          document.addEventListener('click', (e) => {
+            if (authContainer.contains && !authContainer.contains(e.target)) {
+              if (dropdown.classList) dropdown.classList.remove('open');
+              pillBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
 
-        logoutBtn.addEventListener('click', () => {
-          clearSession();
-        });
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', () => {
+            clearSession();
+          });
+        }
 
         // Determine button based on Council Membership:
         // "once they are logged in then only show them join concil button, and if they already joined the council, just show the fellowship button don't show the join counil button"
         if (primaryBtn) {
+          primaryBtn.id = 'navActionBtn';
           primaryBtn.style.display = '';
           primaryBtn.className = 'tfc-btn tfc-btn-primary';
           const hasJoinedCouncil = window.TFCAuth.isCouncilMember(currentUser);
@@ -1168,6 +1175,7 @@
           authContainer.remove();
         }
         if (primaryBtn) {
+          primaryBtn.id = 'navActionBtn';
           primaryBtn.style.display = '';
           if (isHomePage) {
             primaryBtn.className = 'tfc-btn tfc-btn-google';
