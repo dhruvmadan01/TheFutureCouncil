@@ -33,7 +33,7 @@ The Future Council is India's largest grassroots student startup ecosystem — 9
 
 ### WHAT WE BUILD
 **01 · Societies — Campus Venture Societies**
-Officially recognized startup societies inside India's top engineering and commerce colleges — a standing home for founders on your own campus, not a one-off event.
+Officially recognized startup societies inside India's top colleges — a standing home for founders on your own campus, not a one-off event.
 
 **02 · Launchpad — The Founder Fellowship**
 Two months, zero equity. 20 founders go from raw idea to a product people actually use — with the structure, deadlines, and pressure that make that possible.
