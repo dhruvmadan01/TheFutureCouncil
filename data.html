@@ -195,7 +195,7 @@
             <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Search & Advanced Filtering</h3>
             <span class="text-xs font-bold text-zinc-400">Real-time dynamic query</span>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 pt-1">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 pt-1">
             <div class="tfc-filter-control">
               <label class="tfc-filter-label">Query Search</label>
               <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
@@ -232,8 +232,21 @@
                 <option value="financialaid">Financial Aid Request</option>
               </select>
             </div>
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Sort Order</label>
+              <select id="crmSortSelect" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
+                <option value="date_desc" selected>Newest First (Registration)</option>
+                <option value="date_asc">Oldest First (Registration)</option>
+                <option value="name_asc">Name: A → Z</option>
+                <option value="name_desc">Name: Z → A</option>
+                <option value="college_asc">College: A → Z</option>
+                <option value="tier_asc">Network Tier: A → Z</option>
+                <option value="paid_first">💳 Paid Fellowship First</option>
+                <option value="answers_first">📋 Answers Provided First</option>
+              </select>
+            </div>
             <div class="flex flex-col justify-end">
-              <button onclick="exportToCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 14px; font-size: 0.8rem; justify-content: center; width: 100%;">
+              <button onclick="exportToCSV()" id="crmExportBtn" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
                 📊 Export to CSV
               </button>
             </div>
@@ -251,11 +264,19 @@
             <table class="tfc-portal-table" id="crmTable">
               <thead>
                 <tr>
-                  <th>Lead Info</th>
-                  <th>College / Campuses</th>
+                  <th onclick="toggleCrmSort('name')" style="cursor: pointer; user-select: none;" title="Click to sort by Name">
+                    Lead Info <span id="sortCol_name" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
+                  </th>
+                  <th onclick="toggleCrmSort('college')" style="cursor: pointer; user-select: none;" title="Click to sort by College">
+                    College / Campuses <span id="sortCol_college" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
+                  </th>
                   <th>Phone</th>
-                  <th>Network Tier</th>
-                  <th>Fellowship Status</th>
+                  <th onclick="toggleCrmSort('tier')" style="cursor: pointer; user-select: none;" title="Click to sort by Network Tier">
+                    Network Tier <span id="sortCol_tier" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
+                  </th>
+                  <th onclick="toggleCrmSort('fellowship')" style="cursor: pointer; user-select: none;" title="Click to sort by Fellowship Status">
+                    Fellowship Status <span id="sortCol_fellowship" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
+                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -431,6 +452,9 @@
     const USER_ROLE_KEY = 'tfc_crm_user';
     let cachedMembers = [];
     let aggregatedResourceLogs = [];
+    let currentFilteredMembers = [];
+    let currentFilteredResources = [];
+    let crmSortCriterion = 'date_desc';
 
     // Session Management
     const checkAuth = () => {
@@ -803,6 +827,7 @@
 
       // Sort by last opened desc
       filtered.sort((a, b) => new Date(b.lastOpened) - new Date(a.lastOpened));
+      currentFilteredResources = filtered;
 
       document.getElementById('resFilteredCount').textContent = `${filtered.length} shown`;
 
@@ -936,9 +961,13 @@
       document.body.appendChild(modalDiv);
     };
 
-    // CSV Export for Resources
+    // CSV Export for Resources (exports only the sorted, filtered entries)
     window.exportResourceAnalyticsCSV = () => {
-      if (aggregatedResourceLogs.length === 0) {
+      const exportList = (currentFilteredResources && currentFilteredResources.length > 0)
+        ? currentFilteredResources
+        : aggregatedResourceLogs;
+
+      if (!exportList || exportList.length === 0) {
         alert("No resource telemetry to export!");
         return;
       }
@@ -946,7 +975,7 @@
       let csvContent = "data:text/csv;charset=utf-8,";
       csvContent += "Reader_Name,Email,College,Phone,Tier,Member_ID,Resource_Title,Resource_ID,Times_Opened,Total_Time_Seconds,Total_Time_Formatted,Last_Opened\n";
 
-      aggregatedResourceLogs.forEach(r => {
+      exportList.forEach(r => {
         const row = [
           `"${(r.name || '').replace(/"/g, '""')}"`,
           r.email,
@@ -973,6 +1002,102 @@
       document.body.removeChild(link);
     };
 
+    // Sort logic for Leads CRM
+    function sortCrmMembers(list, criterion) {
+      const sorted = [...list];
+      switch (criterion) {
+        case 'date_desc':
+          return sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        case 'date_asc':
+          return sorted.sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+        case 'name_asc':
+          return sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+        case 'name_desc':
+          return sorted.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+        case 'college_asc':
+          return sorted.sort((a, b) => {
+            const ca = parseCollegeField(a.college, a).displayName || '';
+            const cb = parseCollegeField(b.college, b).displayName || '';
+            return ca.localeCompare(cb);
+          });
+        case 'college_desc':
+          return sorted.sort((a, b) => {
+            const ca = parseCollegeField(a.college, a).displayName || '';
+            const cb = parseCollegeField(b.college, b).displayName || '';
+            return cb.localeCompare(ca);
+          });
+        case 'tier_asc':
+          return sorted.sort((a, b) => (a.tier || '').localeCompare(b.tier || ''));
+        case 'tier_desc':
+          return sorted.sort((a, b) => (b.tier || '').localeCompare(a.tier || ''));
+        case 'paid_first':
+          return sorted.sort((a, b) => {
+            const pa = parseCollegeField(a.college, a).payment === 'Paid' ? 1 : 0;
+            const pb = parseCollegeField(b.college, b).payment === 'Paid' ? 1 : 0;
+            return pb - pa;
+          });
+        case 'answers_first':
+          return sorted.sort((a, b) => {
+            const ma = parseCollegeField(a.college, a);
+            const mb = parseCollegeField(b.college, b);
+            const hasA = (ma.q1 || ma.q2 || ma.q3 || ma.q4) ? 1 : 0;
+            const hasB = (mb.q1 || mb.q2 || mb.q3 || mb.q4) ? 1 : 0;
+            return hasB - hasA;
+          });
+        default:
+          return sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+      }
+    }
+
+    window.toggleCrmSort = (col) => {
+      const sortSelect = document.getElementById('crmSortSelect');
+      if (col === 'name') {
+        crmSortCriterion = (crmSortCriterion === 'name_asc') ? 'name_desc' : 'name_asc';
+      } else if (col === 'college') {
+        crmSortCriterion = (crmSortCriterion === 'college_asc') ? 'college_desc' : 'college_asc';
+      } else if (col === 'tier') {
+        crmSortCriterion = (crmSortCriterion === 'tier_asc') ? 'tier_desc' : 'tier_asc';
+      } else if (col === 'fellowship') {
+        crmSortCriterion = (crmSortCriterion === 'paid_first') ? 'answers_first' : 'paid_first';
+      }
+      if (sortSelect) {
+        const opt = Array.from(sortSelect.options).find(o => o.value === crmSortCriterion);
+        if (opt) sortSelect.value = crmSortCriterion;
+      }
+      renderCrmTable();
+    };
+
+    function updateSortHeaderIcons() {
+      const cols = ['name', 'college', 'tier', 'fellowship'];
+      cols.forEach(c => {
+        const el = document.getElementById(`sortCol_${c}`);
+        if (el) el.textContent = '↕';
+      });
+
+      if (crmSortCriterion === 'name_asc') {
+        const el = document.getElementById('sortCol_name');
+        if (el) el.textContent = '▲';
+      } else if (crmSortCriterion === 'name_desc') {
+        const el = document.getElementById('sortCol_name');
+        if (el) el.textContent = '▼';
+      } else if (crmSortCriterion === 'college_asc') {
+        const el = document.getElementById('sortCol_college');
+        if (el) el.textContent = '▲';
+      } else if (crmSortCriterion === 'college_desc') {
+        const el = document.getElementById('sortCol_college');
+        if (el) el.textContent = '▼';
+      } else if (crmSortCriterion === 'tier_asc') {
+        const el = document.getElementById('sortCol_tier');
+        if (el) el.textContent = '▲';
+      } else if (crmSortCriterion === 'tier_desc') {
+        const el = document.getElementById('sortCol_tier');
+        if (el) el.textContent = '▼';
+      } else if (crmSortCriterion === 'paid_first' || crmSortCriterion === 'answers_first') {
+        const el = document.getElementById('sortCol_fellowship');
+        if (el) el.textContent = '▼';
+      }
+    }
+
     // Render Leads Table
     function renderCrmTable() {
       const tableBody = document.querySelector('#crmTable tbody');
@@ -989,10 +1114,11 @@
       if (query) {
         filtered = filtered.filter(m => {
           const meta = parseCollegeField(m.college, m);
-          return m.name.toLowerCase().includes(query) ||
-                 m.email.toLowerCase().includes(query) ||
-                 meta.phone.includes(query) ||
-                 meta.displayName.toLowerCase().includes(query);
+          return (m.name || '').toLowerCase().includes(query) ||
+                 (m.email || '').toLowerCase().includes(query) ||
+                 (meta.phone || '').includes(query) ||
+                 (meta.displayName || '').toLowerCase().includes(query) ||
+                 (m.member_id || '').toLowerCase().includes(query);
         });
       }
 
@@ -1019,15 +1145,32 @@
         });
       }
 
-      document.getElementById('filteredCount').textContent = `${filtered.length} shown`;
+      // Read selected sort
+      const sortSelect = document.getElementById('crmSortSelect');
+      if (sortSelect && sortSelect.value) {
+        crmSortCriterion = sortSelect.value;
+      }
+
+      // Sort the filtered results
+      filtered = sortCrmMembers(filtered, crmSortCriterion);
+      currentFilteredMembers = filtered;
+      updateSortHeaderIcons();
+
+      const countEl = document.getElementById('filteredCount');
+      if (countEl) countEl.textContent = `${currentFilteredMembers.length} shown`;
+
+      const exportBtn = document.getElementById('crmExportBtn');
+      if (exportBtn) {
+        exportBtn.innerHTML = `📊 Export CSV (${currentFilteredMembers.length})`;
+      }
 
       tableBody.innerHTML = '';
-      if (filtered.length === 0) {
+      if (currentFilteredMembers.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">No CRM entries found matching filters.</td></tr>';
         return;
       }
 
-      filtered.forEach(m => {
+      currentFilteredMembers.forEach(m => {
         const meta = parseCollegeField(m.college, m);
         const hasAnswers = meta.q1 || meta.q2 || meta.q3 || meta.q4;
 
@@ -1183,28 +1326,34 @@
       document.body.appendChild(modalDiv);
     };
 
-    // CSV Export for Leads
+    // CSV Export for Leads (exports only the sorted, filtered entries currently visible in the CRM)
     window.exportToCSV = () => {
-      if (cachedMembers.length === 0) {
-        alert("No entries to export!");
+      const exportList = (currentFilteredMembers && currentFilteredMembers.length > 0)
+        ? currentFilteredMembers
+        : (document.getElementById('crmSearchInput')?.value || document.getElementById('crmTierFilter')?.value !== 'all' || document.getElementById('crmFellowshipFilter')?.value !== 'all' || document.getElementById('crmSourceFilter')?.value !== 'all')
+          ? []
+          : cachedMembers;
+
+      if (!exportList || exportList.length === 0) {
+        alert("No matching sorted entries found to export! Adjust your filters or search query.");
         return;
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
       csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Q1,Q2,Q3,Q4\n";
 
-      cachedMembers.forEach(m => {
+      exportList.forEach(m => {
         const meta = parseCollegeField(m.college, m);
         const row = [
           m.member_id || m.id,
-          `"${m.name.replace(/"/g, '""')}"`,
-          m.email,
-          `"${meta.displayName.replace(/"/g, '""')}"`,
+          `"${(m.name || '').replace(/"/g, '""')}"`,
+          m.email || '',
+          `"${(meta.displayName || '').replace(/"/g, '""')}"`,
           meta.phone || '',
           meta.country || '',
           meta.source || '',
-          m.tier,
-          meta.fellowship,
+          m.tier || '',
+          meta.fellowship || '',
           `"${(meta.q1 || '').replace(/"/g, '""')}"`,
           `"${(meta.q2 || '').replace(/"/g, '""')}"`,
           `"${(meta.q3 || '').replace(/"/g, '""')}"`,
@@ -1216,7 +1365,7 @@
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `TFC_CRM_Leads_${new Date().toISOString().slice(0,10)}.csv`);
+      link.setAttribute("download", `TFC_CRM_Leads_Sorted_${exportList.length}_${new Date().toISOString().slice(0,10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -1227,6 +1376,7 @@
     document.getElementById('crmTierFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmFellowshipFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmSourceFilter').addEventListener('change', renderCrmTable);
+    document.getElementById('crmSortSelect')?.addEventListener('change', renderCrmTable);
 
     document.getElementById('resSearchInput')?.addEventListener('input', renderResourceTable);
     document.getElementById('resResourceFilter')?.addEventListener('change', renderResourceTable);

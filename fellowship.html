@@ -1451,6 +1451,7 @@
       const activeBox = document.getElementById('fellowshipAuthActive');
       const nameInput = document.getElementById('fName');
       const emailInput = document.getElementById('fEmail');
+      const phoneInput = document.getElementById('fPhone');
       const collegeInput = document.getElementById('fCollege');
       const avatarEl = document.getElementById('fAuthAvatar');
       const authNameEl = document.getElementById('fAuthName');
@@ -1485,8 +1486,12 @@
             emailInput.style.backgroundColor = 'rgba(20,17,15,0.04)';
           }
 
+          if (phoneInput && user.phone && !phoneInput.value) {
+            phoneInput.value = user.phone;
+          }
+
           if (collegeInput && !collegeInput.value && user.college && user.college !== 'Ecosystem Member') {
-            collegeInput.value = user.college;
+            collegeInput.value = user.college.split(' | ')[0].trim();
           }
 
           // Initialize draft auto-save

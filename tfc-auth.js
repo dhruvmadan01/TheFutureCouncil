@@ -27,12 +27,34 @@
   let currentUser = null;
   const authStateListeners = [];
 
+  // Helper to extract phone number from combined college field
+  function extractPhoneFromCollege(collegeStr) {
+    if (!collegeStr || typeof collegeStr !== 'string') return '';
+    const parts = collegeStr.split(' | ');
+    for (const part of parts) {
+      if (part.startsWith('Phone: ')) {
+        return part.replace('Phone: ', '').trim();
+      }
+    }
+    return '';
+  }
+
+  // Helper to extract base college name without metadata tags
+  function extractBaseCollege(collegeStr) {
+    if (!collegeStr || typeof collegeStr !== 'string') return '';
+    if (collegeStr === 'Ecosystem Member') return '';
+    return collegeStr.split(' | ')[0].trim();
+  }
+
   // Initialize from persisted storage
   function loadStoredSession() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
       if (stored) {
         currentUser = JSON.parse(stored);
+        if (currentUser && !currentUser.phone && currentUser.college) {
+          currentUser.phone = extractPhoneFromCollege(currentUser.college);
+        }
       }
     } catch (e) {
       console.warn('[TFCAuth] Failed to parse stored session:', e);
@@ -90,6 +112,7 @@
         return {
           ...googleProfile,
           ...additionalData,
+          phone: '',
           member_id: additionalData.member_id || 'TFC-MBR-' + Math.floor(1000 + Math.random() * 9000)
         };
       }
@@ -109,42 +132,32 @@
 
       if (existing && existing.length > 0) {
         const member = existing[0];
+        const existingPhone = member.phone || extractPhoneFromCollege(member.college);
         // Merge with existing
         return {
           ...member,
+          phone: existingPhone,
           avatar: googleProfile.avatar || member.image,
           googleAuth: true
         };
       }
 
-      // 2. New member insertion
+      // 2. New member - return pending profile without committing blank record
+      // Phone and college will be collected in Step 2 before committing to Supabase
       const tier = additionalData.tier || 'Student';
       const prefix = tier === 'Campus Ambassador' ? 'TFC-AMB-' : 'TFC-FEL-';
       const memberId = prefix + Math.floor(1000 + Math.random() * 9000);
 
-      const newRow = {
+      return {
+        ...googleProfile,
         name: googleProfile.name,
         email: googleProfile.email,
-        college: additionalData.college || 'Ecosystem Member',
+        college: '',
+        phone: '',
         tier: tier,
         member_id: memberId,
-        password: 'google_oauth_verified',
-        image: googleProfile.avatar || ''
-      };
-
-      const { data: inserted, error: insertErr } = await supabaseClient
-        .from('members')
-        .insert([newRow])
-        .select();
-
-      if (insertErr) {
-        console.warn('[TFCAuth] Supabase profile insert notice:', insertErr.message);
-        return { ...googleProfile, ...newRow, googleAuth: true };
-      }
-
-      return {
-        ...(inserted && inserted[0] ? inserted[0] : newRow),
-        avatar: googleProfile.avatar,
+        avatar: googleProfile.avatar || '',
+        isNewUser: true,
         googleAuth: true
       };
     } catch (err) {
@@ -152,6 +165,7 @@
       return {
         ...googleProfile,
         ...additionalData,
+        phone: '',
         member_id: 'TFC-MBR-' + Math.floor(1000 + Math.random() * 9000),
         googleAuth: true
       };
@@ -399,15 +413,22 @@
   // --- Check if Role-specific Profile Step is needed ---
   function checkNeedsProfile(user, profileType) {
     if (!user) return true;
+    if (user.isNewUser) return true;
+
+    // Mandatory: Every Google user must provide a WhatsApp phone number
+    const phone = user.phone || extractPhoneFromCollege(user.college);
+    if (!phone) return true;
+
     const college = (user.college || '').toLowerCase();
+    if (!user.college || college === 'ecosystem member') return true;
 
     if (profileType === 'fellowship') {
       // Must have college and course/year
-      return !user.college || college === 'ecosystem member' || !college.includes(',');
+      return !college.includes(',');
     }
     if (profileType === 'ambassador') {
       // Must have registered campus or chapter selection
-      return !user.college || college === 'ecosystem member' || user.tier !== 'Campus Ambassador';
+      return user.tier !== 'Campus Ambassador' || !college.includes('chapter:');
     }
     return false;
   }
@@ -626,6 +647,9 @@
     const card = container.querySelector('#tfcAuthCard');
     if (!card) return;
 
+    const existingBaseCollege = extractBaseCollege(user.college);
+    const existingPhone = user.phone || extractPhoneFromCollege(user.college);
+
     let fieldsHtml = '';
 
     if (config.profileFields === 'fellowship') {
@@ -633,9 +657,16 @@
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+              WhatsApp Phone Number *
+            </label>
+            <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
+            <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Required for admissions updates & squad onboarding.</span>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
               College / University *
             </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. IIT Delhi or Delhi University (SRCC)" required />
+            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. IIT Delhi or Delhi University (SRCC)" value="${existingBaseCollege}" required />
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -664,9 +695,16 @@
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+              WhatsApp Phone Number *
+            </label>
+            <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
+            <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Direct channel for chapter briefings & referral payouts.</span>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
               College / University *
             </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. DTU or Hansraj College" required />
+            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. DTU or Hansraj College" value="${existingBaseCollege}" required />
           </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -692,9 +730,16 @@
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+              WhatsApp Phone Number *
+            </label>
+            <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
+            <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Used for WhatsApp invite link, member card & admissions updates.</span>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
               College / University *
             </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. Delhi University / IIT Delhi" required />
+            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. Delhi University / IIT Delhi" value="${existingBaseCollege}" required />
           </div>
         </div>
       `;
@@ -734,14 +779,39 @@
       </form>
     `;
 
-    document.getElementById('tfcAuthCloseBtn2').addEventListener('click', closeModal);
+    const closeBtn = document.getElementById('tfcAuthCloseBtn2');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (confirm('A WhatsApp phone number is required to complete your Google registration with The Future Council. Cancel and exit?')) {
+          closeModal();
+        }
+      });
+    }
 
     const form = document.getElementById('tfcProfileForm');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Saving profile…';
+
+      const phoneInput = document.getElementById('tfcProfilePhone');
+      let phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      const cleanDigits = phoneVal.replace(/[^0-9]/g, '');
+
+      if (!phoneVal || cleanDigits.length < 10) {
+        alert('Please enter a valid WhatsApp phone number (at least 10 digits).');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      // Standardize 10-digit number to +91 format if no country code provided
+      if (!phoneVal.startsWith('+') && cleanDigits.length === 10) {
+        phoneVal = '+91 ' + cleanDigits;
+      }
 
       let collegeString = '';
       const collegeInput = document.getElementById('tfcProfileCollege');
@@ -750,29 +820,55 @@
       if (config.profileFields === 'fellowship') {
         const course = document.getElementById('tfcProfileCourse').value.trim();
         const year = document.getElementById('tfcProfileYear').value;
-        collegeString = `${baseCollege}, ${course} (${year})`;
+        collegeString = `${baseCollege}, ${course} (${year}) | Phone: ${phoneVal} | Source: FellowshipPage`;
       } else if (config.profileFields === 'ambassador') {
         const chapter = document.getElementById('tfcProfileChapter').value;
-        collegeString = `${baseCollege} | Chapter: ${chapter} | Role: Ambassador`;
+        collegeString = `${baseCollege} | Phone: ${phoneVal} | Chapter: ${chapter} | Role: Ambassador | Source: AmbassadorPage`;
+      } else if (context === 'join') {
+        collegeString = `${baseCollege} | Phone: ${phoneVal} | Country: India | Source: JoinPage`;
       } else {
-        collegeString = baseCollege;
+        collegeString = `${baseCollege} | Phone: ${phoneVal} | Source: GoogleAuth`;
       }
 
       const updatedUser = {
         ...user,
+        phone: phoneVal,
         college: collegeString,
         profileCompleted: true
       };
 
-      // Async update in Supabase
+      // Sync or Insert in Supabase
       if (supabaseClient) {
         try {
-          await supabaseClient
+          const { data: existing } = await supabaseClient
             .from('members')
-            .update({ college: collegeString })
-            .eq('email', user.email);
+            .select('id, member_id')
+            .eq('email', user.email)
+            .limit(1);
+
+          if (existing && existing.length > 0) {
+            await supabaseClient
+              .from('members')
+              .update({
+                college: collegeString,
+                name: user.name,
+                image: user.avatar || ''
+              })
+              .eq('email', user.email);
+          } else {
+            const memberRow = {
+              name: user.name,
+              email: user.email,
+              college: collegeString,
+              tier: user.tier || (context === 'ambassador' ? 'Campus Ambassador' : 'Student'),
+              member_id: user.member_id || ('TFC-MBR-' + Math.floor(1000 + Math.random() * 9000)),
+              password: 'google_oauth_verified',
+              image: user.avatar || ''
+            };
+            await supabaseClient.from('members').insert([memberRow]);
+          }
         } catch (err) {
-          console.warn('[TFCAuth] Supabase profile update error:', err);
+          console.warn('[TFCAuth] Supabase profile sync error:', err);
         }
       }
 
