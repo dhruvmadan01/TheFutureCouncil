@@ -633,7 +633,7 @@
             heroPrimaryBtn.innerHTML = `${googleSvg} <span>Continue with Google</span> <span class="tfc-arrow">→</span>`;
             heroPrimaryBtn.onclick = (e) => {
               e.preventDefault();
-              window.TFCAuth.openLoginModal({ context: 'join' });
+              window.TFCAuth.openLoginModal({ context: 'general' });
             };
           }
           if (heroSecondaryBtn) {

@@ -52,8 +52,14 @@
       const stored = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
       if (stored) {
         currentUser = JSON.parse(stored);
-        if (currentUser && !currentUser.phone && currentUser.college) {
-          currentUser.phone = extractPhoneFromCollege(currentUser.college);
+        if (currentUser) {
+          if (!currentUser.phone && currentUser.college) {
+            currentUser.phone = extractPhoneFromCollege(currentUser.college);
+          }
+          // Strictly evaluate council & fellowship membership: signing up != joining council
+          const collegeStr = currentUser.college || '';
+          currentUser.isCouncilMember = collegeStr.includes('Source: JoinPage') || (collegeStr.includes('Interests:') && collegeStr.includes('Q1:'));
+          currentUser.isFellowshipApplicant = collegeStr.includes('Source: FellowshipPage') || collegeStr.includes('PaymentStatus:') || collegeStr.includes('FormSubmittedAt:');
         }
       }
     } catch (e) {
@@ -103,23 +109,22 @@
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
   }
 
-  // --- Supabase DB Synchronization ---
+  // --- Supabase Lookup / Profile Fetch ---
   async function syncMemberWithSupabase(googleProfile, additionalData = {}) {
     if (!supabaseClient) {
-      if (window.supabase && typeof window.supabase.createClient === 'function') {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      } else {
-        return {
-          ...googleProfile,
-          ...additionalData,
-          phone: '',
-          member_id: additionalData.member_id || 'TFC-MBR-' + Math.floor(1000 + Math.random() * 9000)
-        };
-      }
+      return {
+        ...googleProfile,
+        ...additionalData,
+        phone: '',
+        member_id: 'TFC-2026-' + Math.floor(1000 + Math.random() * 9000),
+        isCouncilMember: false,
+        isFellowshipApplicant: false,
+        googleAuth: true
+      };
     }
 
     try {
-      // 1. Check if member already exists
+      // 1. Check if member already exists in Supabase
       const { data: existing, error: fetchErr } = await supabaseClient
         .from('members')
         .select('*')
@@ -134,12 +139,16 @@
         const member = existing[0];
         const existingPhone = member.phone || extractPhoneFromCollege(member.college);
         const collegeStr = member.college || '';
-        const isCouncil = collegeStr.includes('Source: JoinPage') || collegeStr.includes('Interests:') || collegeStr.includes('Q1:') || (member.member_id && member.member_id.startsWith('TFC-2026-') && collegeStr && collegeStr !== 'Ecosystem Member');
+        // STRICT: Signing up on website is NOT equal to joining the council.
+        // Joining council requires filling the form on join.html (Source: JoinPage or Interests + Q1)
+        const isCouncil = collegeStr.includes('Source: JoinPage') || (collegeStr.includes('Interests:') && collegeStr.includes('Q1:'));
         const isFellowship = collegeStr.includes('Source: FellowshipPage') || collegeStr.includes('PaymentStatus:') || collegeStr.includes('FormSubmittedAt:');
 
         // Merge with existing
         return {
           ...member,
+          name: googleProfile.name || member.name,
+          email: googleProfile.email || member.email,
           phone: existingPhone,
           avatar: googleProfile.avatar || member.image,
           isCouncilMember: isCouncil,
@@ -148,16 +157,11 @@
         };
       }
 
-      // 2. New member - return pending profile without committing blank record
-      // Phone and college will be collected in Step 2 before committing to Supabase
+      // 2. New member who signed up via Google on website
+      // NOTE: Signing up on website is NOT equal to joining the council!
+      // They must fill the form on join.html to become a council member.
       const tier = additionalData.tier || 'Student';
-      let prefix = 'TFC-2026-';
-      if (tier === 'Campus Ambassador' || additionalData.context === 'ambassador') {
-        prefix = 'TFC-AMB-';
-      } else if (tier === 'Fellow' || additionalData.context === 'fellowship') {
-        prefix = 'TFC-FEL-';
-      }
-      const memberId = prefix + Math.floor(1000 + Math.random() * 9000);
+      const memberId = 'TFC-2026-' + Math.floor(1000 + Math.random() * 9000);
 
       return {
         ...googleProfile,
@@ -190,32 +194,24 @@
   // --- Context-Specific Titles and Copy ---
   const CONTEXT_CONFIG = {
     fellowship: {
-      headline: 'Sign in to start your application',
-      subtext: 'Google sign-in is mandatory to save your progress and submit your application.',
-      profileTitle: 'Complete Fellowship Profile',
-      role: 'Fellowship Applicant',
-      profileFields: 'fellowship'
+      headline: 'Sign in to Fellowship',
+      subtext: 'Google sign-in is required to save your fellowship application and access your status dashboard.',
+      role: 'Fellowship Applicant'
     },
     ambassador: {
       headline: 'Ambassador Sign-in',
-      subtext: 'Google sign-in is mandatory to register as an Ambassador and access your leader console.',
-      profileTitle: 'Ambassador Registration',
-      role: 'Campus Ambassador',
-      profileFields: 'ambassador'
+      subtext: 'Google sign-in is required to register as an Ambassador and access your leader console.',
+      role: 'Campus Ambassador'
     },
     join: {
-      headline: 'Join the Council',
-      subtext: 'Google sign-in is mandatory to verify your student identity and claim your membership card.',
-      profileTitle: 'Create Member Profile',
-      role: 'Member',
-      profileFields: 'general'
+      headline: 'Continue with Google',
+      subtext: 'Google verification is required to verify your student identity for your Council application.',
+      role: 'Member'
     },
     general: {
       headline: 'Sign in to Future Council',
-      subtext: 'Google sign-in is required for all official Future Council accounts.',
-      profileTitle: 'Complete Profile',
-      role: 'Member',
-      profileFields: 'general'
+      subtext: 'Sign in with your Google account to access Future Council.',
+      role: 'Member'
     }
   };
 
@@ -367,30 +363,17 @@
         throw new Error('Authentication was cancelled or failed.');
       }
 
-      // 2. Check profile completeness in ecosystem
+      // 2. Sync profile in ecosystem
       const existingUser = await syncMemberWithSupabase(authResult, {
         tier: context === 'ambassador' ? 'Campus Ambassador' : 'Student'
       });
 
-      const roleConfig = CONTEXT_CONFIG[context] || CONTEXT_CONFIG.general;
-      const needsProfileStep = checkNeedsProfile(existingUser, roleConfig.profileFields);
-
-      if (needsProfileStep) {
-        renderProfileStep({
-          user: existingUser,
-          context,
-          container,
-          onComplete: (completedUser) => {
-            persistSession(completedUser, true);
-            closeModal();
-            if (typeof onSuccess === 'function') onSuccess(completedUser);
-          }
-        });
-      } else {
-        persistSession(existingUser, true);
-        closeModal();
-        if (typeof onSuccess === 'function') onSuccess(existingUser);
-      }
+      // Google Sign-in authenticates the user into the ecosystem.
+      // Signing up on the website != Joining the council.
+      // Persist session, close modal, and notify success immediately.
+      persistSession(existingUser, true);
+      closeModal();
+      if (typeof onSuccess === 'function') onSuccess(existingUser);
     } catch (err) {
       console.error('[TFCAuth] Auth failure:', err);
       if (googleBtn) {
@@ -1192,7 +1175,7 @@
             primaryBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg> <span>Sign In</span>`;
             primaryBtn.onclick = (e) => {
               e.preventDefault();
-              openLoginModal({ context: 'join' });
+              openLoginModal({ context: 'general' });
             };
           } else {
             primaryBtn.className = 'tfc-btn tfc-btn-primary';
@@ -1262,7 +1245,7 @@
             mobileActionBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg> <span>Continue with Google →</span>`;
             mobileActionBtn.onclick = (e) => {
               e.preventDefault();
-              openLoginModal({ context: 'join' });
+              openLoginModal({ context: 'general' });
             };
           } else {
             mobileActionBtn.className = 'tfc-btn tfc-btn-primary';
@@ -1286,11 +1269,11 @@
 
     // Restore draft
     try {
-      const savedDraft = localStorage.getItem(draftKey);
-      if (savedDraft) {
-        const parsed = JSON.parse(savedDraft);
-        Object.entries(parsed).forEach(([id, val]) => {
-          const field = form.querySelector(`#${id}`);
+      const saved = localStorage.getItem(draftKey);
+      if (saved) {
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([key, val]) => {
+          const field = form.querySelector(`[name="${key}"], #${key}`);
           if (field && !field.value && val) {
             field.value = val;
           }
@@ -1300,12 +1283,10 @@
 
     // Auto-save on input
     form.addEventListener('input', () => {
-      const fields = form.querySelectorAll('input, textarea, select');
-      const data = {};
-      fields.forEach((f) => {
-        if (f.id && f.value) data[f.id] = f.value;
-      });
       try {
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => { data[key] = value; });
         localStorage.setItem(draftKey, JSON.stringify(data));
       } catch (e) {}
     });
@@ -1327,22 +1308,26 @@
     isCouncilMember: function (userToCheck) {
       const u = userToCheck || currentUser;
       if (!u) return false;
-      if (u.isCouncilMember === true) return true;
       const collegeStr = (u.college || '');
-      if (collegeStr.includes('Source: JoinPage') || collegeStr.includes('Interests:') || collegeStr.includes('Q1:')) {
-        return true;
-      }
-      if (u.member_id && u.member_id.startsWith('TFC-2026-') && collegeStr && collegeStr !== 'Ecosystem Member') {
-        return true;
-      }
-      return false;
+      // Strict definition: only true if submitted join form on join.html
+      return collegeStr.includes('Source: JoinPage') || (collegeStr.includes('Interests:') && collegeStr.includes('Q1:'));
     },
     isFellowshipApplicant: function (userToCheck) {
       const u = userToCheck || currentUser;
       if (!u) return false;
-      if (u.isFellowshipApplicant === true) return true;
       const collegeStr = (u.college || '');
       return collegeStr.includes('Source: FellowshipPage') || collegeStr.includes('PaymentStatus:') || collegeStr.includes('FormSubmittedAt:');
+    },
+    updateUser: function (updatedFields) {
+      if (!currentUser && !updatedFields) return null;
+      currentUser = {
+        ...(currentUser || {}),
+        ...updatedFields
+      };
+      currentUser.isCouncilMember = window.TFCAuth.isCouncilMember(currentUser);
+      currentUser.isFellowshipApplicant = window.TFCAuth.isFellowshipApplicant(currentUser);
+      persistSession(currentUser, true);
+      return currentUser;
     },
     openLoginModal: function (options) {
       openLoginModal(options);

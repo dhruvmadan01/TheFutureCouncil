@@ -1019,6 +1019,19 @@
             sessionStorage.setItem('tfc_member_id', currentMemberId);
             sessionStorage.setItem('tfc_member_email', currentEmail);
 
+            // Update TFCAuth session immediately so entire site recognizes council membership
+            if (window.TFCAuth && typeof window.TFCAuth.updateUser === 'function') {
+              window.TFCAuth.updateUser({
+                name: currentName,
+                email: currentEmail,
+                college: finalCollegeData,
+                phone: finalPhone,
+                member_id: currentMemberId,
+                tier: 'Student',
+                isCouncilMember: true
+              });
+            }
+
           } catch (err) {
             console.error("Signup failed:", err);
             signupError.textContent = "Submission error: " + (err.message || "Please check your network and try again.");
@@ -1079,11 +1092,65 @@
         currentEmail = '';
       }
 
-      function applyGoogleUserToJoinForm(user) {
+      function showExistingMemberCard(user) {
+        if (!user) return;
+        signupFormPanel.classList.add('hidden');
+        successPanel.classList.remove('hidden');
+
+        document.getElementById('cardMemberName').textContent = user.name || 'Council Member';
+        const baseCollege = (user.college || '').split(' | ')[0].trim() || 'Council Member';
+        document.getElementById('cardMemberCollege').textContent = baseCollege;
+        const memberId = user.member_id || 'TFC-2026-ACTIVE';
+        document.getElementById('cardMemberId').textContent = memberId;
+        const qrEl = document.getElementById('cardMemberQr');
+        if (qrEl) {
+          qrEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&color=14110F&bgcolor=ffffff&data=${encodeURIComponent(memberId)}`;
+        }
+
+        // Add action buttons if not already injected
+        let actionLinks = document.getElementById('existingMemberActionLinks');
+        if (!actionLinks) {
+          actionLinks = document.createElement('div');
+          actionLinks.id = 'existingMemberActionLinks';
+          actionLinks.style.marginTop = '14px';
+          actionLinks.innerHTML = `
+            <a href="fellowship.html" class="tfc-btn tfc-btn-primary" style="width: 100%; margin-bottom: 8px;">
+              Explore Fellowship '26 →
+            </a>
+            <button type="button" id="btnEditJoinForm" class="tfc-btn tfc-btn-outline" style="width: 100%;">
+              Update / Re-edit Council Application Details ✎
+            </button>
+          `;
+          const actionsContainer = successPanel.querySelector('div[style*="flex-direction: column"]');
+          if (actionsContainer && actionsContainer.parentNode) {
+            actionsContainer.parentNode.insertBefore(actionLinks, actionsContainer);
+          }
+
+          const btnEdit = document.getElementById('btnEditJoinForm');
+          if (btnEdit) {
+            btnEdit.addEventListener('click', () => {
+              successPanel.classList.add('hidden');
+              signupFormPanel.classList.remove('hidden');
+              applyGoogleUserToJoinForm(user, true);
+            });
+          }
+        }
+      }
+
+      function applyGoogleUserToJoinForm(user, bypassExistingCardCheck = false) {
         if (!user) {
           resetJoinGoogleUI();
           return;
         }
+
+        // If user already completed the council form, show their verified Member Card
+        if (!bypassExistingCardCheck && window.TFCAuth && window.TFCAuth.isCouncilMember(user)) {
+          showExistingMemberCard(user);
+          return;
+        }
+
+        signupFormPanel.classList.remove('hidden');
+        successPanel.classList.add('hidden');
 
         const mandBox = document.getElementById('googleAuthMandatoryBox');
         const verBox = document.getElementById('googleAuthVerifiedBox');
@@ -1114,9 +1181,16 @@
 
         if (nameInput) {
           nameInput.value = user.name || '';
-          nameInput.readOnly = true;
-          nameInput.style.backgroundColor = 'rgba(20,17,15,0.03)';
-          nameInput.style.cursor = 'not-allowed';
+          if (user.name) {
+            nameInput.readOnly = true;
+            nameInput.style.backgroundColor = 'rgba(20,17,15,0.03)';
+            nameInput.style.cursor = 'not-allowed';
+          } else {
+            nameInput.readOnly = false;
+            nameInput.style.backgroundColor = '';
+            nameInput.style.cursor = '';
+            nameInput.placeholder = 'Enter your full name';
+          }
         }
         if (emailInput) {
           emailInput.value = user.email || '';
