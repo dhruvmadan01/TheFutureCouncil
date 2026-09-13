@@ -2501,4 +2501,459 @@ textarea.form-control {
   border-color: #F59E0B;
 }
 
+/* ==========================================================================
+   GOOGLE AUTHENTICATION & USER PROFILE DESIGN SYSTEM (SPEC V2)
+   ========================================================================== */
+
+.tfc-auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(20, 17, 15, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 1;
+  animation: tfcAuthFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tfc-auth-modal-overlay.tfc-modal-closing {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+@keyframes tfcAuthFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.tfc-auth-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(20, 17, 15, 0.1));
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg, 0 10px 30px rgba(20, 17, 15, 0.08));
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.tfc-auth-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.tfc-auth-close-btn:hover {
+  background: rgba(20, 17, 15, 0.06);
+  color: var(--ink);
+}
+
+.tfc-auth-header {
+  margin-bottom: 24px;
+}
+
+.tfc-auth-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 122, 61, 0.1);
+  border: 1px solid rgba(255, 122, 61, 0.2);
+  padding: 4px 12px 4px 6px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+}
+
+.tfc-auth-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.tfc-auth-badge-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary-orange);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tfc-auth-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.tfc-auth-subtext {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Official Google Sign-In Button */
+.tfc-google-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #ffffff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.tfc-google-btn:hover:not(:disabled) {
+  background-color: #f8fafd;
+  border-color: #c2c7cf;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.15);
+}
+
+.tfc-google-btn:focus-visible {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
+
+.tfc-google-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.tfc-auth-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(60, 64, 67, 0.2);
+  border-top-color: var(--primary-orange);
+  border-radius: 50%;
+  animation: tfcSpin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+@keyframes tfcSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Auth Alerts (Blocked popup, error) */
+.tfc-auth-alert {
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.tfc-auth-alert-blocked {
+  background: rgba(255, 122, 61, 0.1);
+  border: 1px solid rgba(255, 122, 61, 0.25);
+  color: var(--ink);
+}
+
+.tfc-auth-alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.tfc-auth-retry-btn {
+  background: none;
+  border: none;
+  color: var(--primary-orange);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.tfc-auth-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tfc-auth-legal {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tfc-auth-legal a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* User Nav Menu & Soft Card Dropdown */
+.tfc-nav-auth-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tfc-user-menu-wrapper {
+  position: relative;
+}
+
+.tfc-user-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 4px 12px 4px 5px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-body);
+}
+
+.tfc-user-pill-btn:hover {
+  border-color: var(--primary-orange);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.tfc-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary-orange);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.tfc-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tfc-user-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tfc-user-arrow {
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  transition: transform 0.2s ease;
+}
+
+.tfc-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  z-index: 10000;
+  animation: tfcDropdownOpen 0.15s ease-out;
+}
+
+.tfc-user-dropdown.open {
+  display: flex;
+}
+
+@keyframes tfcDropdownOpen {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tfc-user-dropdown-header {
+  padding: 10px 12px 8px;
+}
+
+.tfc-user-dropdown-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tfc-user-dropdown-email {
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  word-break: break-all;
+  margin-top: 2px;
+}
+
+.tfc-user-dropdown-id {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  background: rgba(255, 122, 61, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.tfc-user-dropdown-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 6px 0;
+}
+
+.tfc-user-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  box-sizing: border-box;
+}
+
+.tfc-user-dropdown-link:hover {
+  background: rgba(20, 17, 15, 0.05);
+}
+
+.tfc-user-logout-btn {
+  color: #dc2626 !important;
+}
+
+.tfc-user-logout-btn:hover {
+  background: #fef2f2 !important;
+}
+
+/* Google Account Picker Sandbox Modal */
+.tfc-google-picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100005;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.tfc-google-picker-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  animation: tfcAuthFadeIn 0.18s ease-out;
+}
+
+.tfc-google-picker-top {
+  padding: 16px 20px;
+  border-bottom: 1px solid #dadce0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tfc-google-account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tfc-google-account-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.tfc-google-account-item:hover {
+  background: #f1f3f4;
+  border-color: #bdc1c6;
+}
+
+.tfc-google-account-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.tfc-google-account-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #202124;
+}
+
+.tfc-google-account-email {
+  font-size: 0.78rem;
+  color: #5f6368;
+}
+
+.tfc-google-picker-custom {
+  margin-top: 10px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+
 
