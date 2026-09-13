@@ -176,28 +176,28 @@
   const CONTEXT_CONFIG = {
     fellowship: {
       headline: 'Sign in to start your application',
-      subtext: 'Your progress will be saved automatically across devices.',
+      subtext: 'Google sign-in is mandatory to save your progress and submit your application.',
       profileTitle: 'Complete Fellowship Profile',
       role: 'Fellowship Applicant',
       profileFields: 'fellowship'
     },
     ambassador: {
-      headline: 'Ambassador sign-in',
-      subtext: 'Access your console, referral tracking, and campus outreach toolkit.',
+      headline: 'Ambassador Sign-in',
+      subtext: 'Google sign-in is mandatory to register as an Ambassador and access your leader console.',
       profileTitle: 'Ambassador Registration',
       role: 'Campus Ambassador',
       profileFields: 'ambassador'
     },
     join: {
       headline: 'Join the Council',
-      subtext: 'Get access to builder vaults, project squads, and founder networks.',
+      subtext: 'Google sign-in is mandatory to verify your student identity and claim your membership card.',
       profileTitle: 'Create Member Profile',
       role: 'Member',
       profileFields: 'general'
     },
     general: {
       headline: 'Sign in to Future Council',
-      subtext: 'Welcome to India’s grassroots founder ecosystem.',
+      subtext: 'Google sign-in is required for all official Future Council accounts.',
       profileTitle: 'Complete Profile',
       role: 'Member',
       profileFields: 'general'
@@ -641,6 +641,171 @@
     });
   }
 
+  // Canonical TFC College & Chapter Directory for selection
+  const TFC_COLLEGES = [
+    'Faculty of Technology (FoT), DU',
+    'Shri Ram College of Commerce (SRCC)',
+    'IIT Delhi',
+    'IIT Patna (Hybrid)',
+    'Delhi Technological University (DTU)',
+    'Netaji Subhas University of Technology (NSUT)',
+    'IIIT Delhi',
+    'IGDTUW',
+    'Hansraj College',
+    'Hindu College',
+    "St. Stephen's College",
+    'Kirori Mal College (KMC)',
+    'Indraprastha College for Women (IPCW)',
+    'Lady Shri Ram College (LSR)',
+    'Sri Venkateswara College (Venky)',
+    'Miranda House',
+    'Daulat Ram College (DRC)',
+    'SGTB Khalsa College'
+  ];
+
+  function buildCollegeDropdownHtml(existingCollege = '') {
+    const itemsHtml = TFC_COLLEGES.map(c => `
+      <div class="tfc-college-dropdown-item" data-value="${c}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #f0ede6; font-size: 0.86rem; font-weight: 600; color: #14110F; text-align: left; transition: background 0.15s ease;">${c}</div>
+    `).join('');
+
+    return `
+      <div style="position: relative; text-align: left;">
+        <label for="tfcProfileCollege" style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+          College / University *
+        </label>
+        <div style="position: relative; width: 100%;">
+          <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="Select or search your college..." value="${existingCollege}" autocomplete="off" required style="padding-right: 34px;" />
+          <span id="tfcCollegeDropdownToggle" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.72rem; color: var(--ink-soft); user-select: none; padding: 4px;">▼</span>
+          
+          <div id="tfcCollegeDropdown" style="display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #FFFFFF; border: 1.5px solid var(--border-subtle, #14110F); box-shadow: 0 10px 28px rgba(0,0,0,0.16); z-index: 2500; max-height: 200px; overflow-y: auto; border-radius: 12px;">
+            ${itemsHtml}
+            <div id="tfcDropdownItemManual" style="padding: 10px 14px; cursor: pointer; background: #fff0e6; font-weight: 800; color: var(--primary-orange, #FF5500); text-align: center; font-size: 0.82rem; border-top: 1px solid #eee;">✨ College not listed? Type manually</div>
+          </div>
+        </div>
+        <div id="tfcManualCollegeToggleRow" style="margin-top: 5px; font-size: 0.75rem; display: flex; justify-content: space-between; color: var(--ink-soft, #70757a);">
+          <span>College not listed?</span>
+          <a href="javascript:void(0)" id="tfcBtnManualCollege" style="color: var(--primary-orange, #FF5500); font-weight: 700; text-decoration: none;">Type Manually ✎</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function initCollegeDropdown(container) {
+    const input = container.querySelector('#tfcProfileCollege');
+    const dropdown = container.querySelector('#tfcCollegeDropdown');
+    const toggle = container.querySelector('#tfcCollegeDropdownToggle');
+    const manualBtn = container.querySelector('#tfcBtnManualCollege');
+    const manualItem = container.querySelector('#tfcDropdownItemManual');
+    const items = container.querySelectorAll('.tfc-college-dropdown-item');
+
+    if (!input || !dropdown) return;
+
+    let isManual = false;
+
+    function openDropdown() {
+      if (isManual) return;
+      dropdown.style.display = 'block';
+      if (toggle) toggle.textContent = '▲';
+      filterItems(input.value);
+    }
+
+    function closeDropdown() {
+      dropdown.style.display = 'none';
+      if (toggle) toggle.textContent = '▼';
+    }
+
+    function filterItems(query) {
+      const q = (query || '').toLowerCase().trim();
+      items.forEach(item => {
+        const val = item.textContent.toLowerCase();
+        if (!q || val.includes(q)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function enableManual() {
+      isManual = true;
+      closeDropdown();
+      input.value = '';
+      input.placeholder = 'Type your college name manually...';
+      if (manualBtn) manualBtn.textContent = '← Select from list';
+      input.focus();
+    }
+
+    function disableManual() {
+      isManual = false;
+      input.value = '';
+      input.placeholder = 'Select or search your college...';
+      if (manualBtn) manualBtn.textContent = 'Type Manually ✎';
+      openDropdown();
+      input.focus();
+    }
+
+    input.addEventListener('focus', openDropdown);
+    input.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openDropdown();
+    });
+
+    if (toggle) {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (dropdown.style.display === 'block') {
+          closeDropdown();
+        } else {
+          openDropdown();
+          input.focus();
+        }
+      });
+    }
+
+    input.addEventListener('input', () => {
+      if (isManual) return;
+      openDropdown();
+      filterItems(input.value);
+    });
+
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.style.background = '#FFF5EB';
+      });
+      item.addEventListener('mouseleave', () => {
+        item.style.background = '';
+      });
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        input.value = item.getAttribute('data-value');
+        closeDropdown();
+      });
+    });
+
+    if (manualItem) {
+      manualItem.addEventListener('click', (e) => {
+        e.stopPropagation();
+        enableManual();
+      });
+    }
+
+    if (manualBtn) {
+      manualBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!isManual) enableManual();
+        else disableManual();
+      });
+    }
+
+    // Close on click outside inside card
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && e.target !== input && e.target !== toggle) {
+        closeDropdown();
+      }
+    });
+  }
+
   // --- Render Short Profile Onboarding Step (Spec §3.3) ---
   function renderProfileStep({ user, context, container, onComplete }) {
     const config = CONTEXT_CONFIG[context] || CONTEXT_CONFIG.general;
@@ -662,12 +827,7 @@
             <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
             <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Required for admissions updates & squad onboarding.</span>
           </div>
-          <div>
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-              College / University *
-            </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. IIT Delhi or Delhi University (SRCC)" value="${existingBaseCollege}" required />
-          </div>
+          ${buildCollegeDropdownHtml(existingBaseCollege)}
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -700,12 +860,7 @@
             <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
             <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Direct channel for chapter briefings & referral payouts.</span>
           </div>
-          <div>
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-              College / University *
-            </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. DTU or Hansraj College" value="${existingBaseCollege}" required />
-          </div>
+          ${buildCollegeDropdownHtml(existingBaseCollege)}
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
               Select Chapter *
@@ -735,12 +890,7 @@
             <input type="tel" id="tfcProfilePhone" class="tfc-input" placeholder="e.g. +91 98765 43210" value="${existingPhone}" required />
             <span style="display: block; font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px;">Used for WhatsApp invite link, member card & admissions updates.</span>
           </div>
-          <div>
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-              College / University *
-            </label>
-            <input type="text" id="tfcProfileCollege" class="tfc-input" placeholder="e.g. Delhi University / IIT Delhi" value="${existingBaseCollege}" required />
-          </div>
+          ${buildCollegeDropdownHtml(existingBaseCollege)}
         </div>
       `;
     }
@@ -758,9 +908,9 @@
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-              Full Name
+              Full Name *
             </label>
-            <input type="text" value="${user.name}" class="tfc-input" readonly style="background: rgba(20,17,15,0.04); cursor: not-allowed;" />
+            <input type="text" id="tfcProfileName" value="${user.name || ''}" class="tfc-input" ${user.name ? '' : 'required'} placeholder="e.g. Priyanshu Sharma" style="${user.name ? '' : 'border-color: var(--primary-orange);'}" />
           </div>
 
           <div>
@@ -779,6 +929,9 @@
       </form>
     `;
 
+    // Initialize college dropdown interactions immediately
+    initCollegeDropdown(card);
+
     const closeBtn = document.getElementById('tfcAuthCloseBtn2');
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
@@ -795,6 +948,12 @@
       const originalBtnText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Saving profile…';
+
+      const nameInput = document.getElementById('tfcProfileName');
+      let nameVal = nameInput ? nameInput.value.trim() : '';
+      if (!nameVal) {
+        nameVal = user.name || (user.email ? user.email.split('@')[0] : 'Community Member');
+      }
 
       const phoneInput = document.getElementById('tfcProfilePhone');
       let phoneVal = phoneInput ? phoneInput.value.trim() : '';
@@ -813,6 +972,17 @@
         phoneVal = '+91 ' + cleanDigits;
       }
 
+      // Check for ref URL parameter across any context
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const urlRef = urlSearchParams.get('ref');
+
+      let ambCode = '';
+      if (config.profileFields === 'ambassador' || context === 'ambassador') {
+        const initials = (nameVal || 'AMB').split(' ').map(n => n[0]).join('').toUpperCase();
+        const rand = Math.floor(100 + Math.random() * 900);
+        ambCode = `TFC-AMB-${initials}${rand}`;
+      }
+
       let collegeString = '';
       const collegeInput = document.getElementById('tfcProfileCollege');
       const baseCollege = collegeInput ? collegeInput.value.trim() : 'Ecosystem Member';
@@ -823,17 +993,33 @@
         collegeString = `${baseCollege}, ${course} (${year}) | Phone: ${phoneVal} | Source: FellowshipPage`;
       } else if (config.profileFields === 'ambassador') {
         const chapter = document.getElementById('tfcProfileChapter').value;
-        collegeString = `${baseCollege} | Phone: ${phoneVal} | Chapter: ${chapter} | Role: Ambassador | Source: AmbassadorPage`;
+        collegeString = `${baseCollege} | Phone: ${phoneVal} | RefCode: ${ambCode} | Chapter: ${chapter} | Role: Ambassador | Source: AmbassadorPage`;
       } else if (context === 'join') {
         collegeString = `${baseCollege} | Phone: ${phoneVal} | Country: India | Source: JoinPage`;
       } else {
         collegeString = `${baseCollege} | Phone: ${phoneVal} | Source: GoogleAuth`;
       }
 
+      // Preserve referral attribution if referred by an ambassador
+      if (urlRef && !collegeString.includes('RefBy:')) {
+        collegeString += ` | RefBy: ${urlRef.toUpperCase().trim()}`;
+      }
+
+      const assignedMemberId = (config.profileFields === 'ambassador' || context === 'ambassador')
+        ? (user.member_id && user.member_id.startsWith('TFC-AMB-') ? user.member_id : ambCode)
+        : (user.member_id || ('TFC-MBR-' + Math.floor(1000 + Math.random() * 9000)));
+
+      const assignedTier = (config.profileFields === 'ambassador' || context === 'ambassador')
+        ? 'Campus Ambassador'
+        : (user.tier || 'Student');
+
       const updatedUser = {
         ...user,
+        name: nameVal,
         phone: phoneVal,
         college: collegeString,
+        member_id: assignedMemberId,
+        tier: assignedTier,
         profileCompleted: true
       };
 
@@ -847,21 +1033,28 @@
             .limit(1);
 
           if (existing && existing.length > 0) {
+            const updatePayload = {
+              college: collegeString,
+              name: nameVal,
+              image: user.avatar || ''
+            };
+            if (config.profileFields === 'ambassador' || context === 'ambassador') {
+              updatePayload.tier = 'Campus Ambassador';
+              if (!existing[0].member_id || !existing[0].member_id.startsWith('TFC-AMB-')) {
+                updatePayload.member_id = assignedMemberId;
+              }
+            }
             await supabaseClient
               .from('members')
-              .update({
-                college: collegeString,
-                name: user.name,
-                image: user.avatar || ''
-              })
+              .update(updatePayload)
               .eq('email', user.email);
           } else {
             const memberRow = {
-              name: user.name,
+              name: nameVal,
               email: user.email,
               college: collegeString,
-              tier: user.tier || (context === 'ambassador' ? 'Campus Ambassador' : 'Student'),
-              member_id: user.member_id || ('TFC-MBR-' + Math.floor(1000 + Math.random() * 9000)),
+              tier: assignedTier,
+              member_id: assignedMemberId,
               password: 'google_oauth_verified',
               image: user.avatar || ''
             };

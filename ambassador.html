@@ -219,56 +219,99 @@
           <div id="milestoneBar" style="width: 0%; height: 100%; background: var(--primary-orange); border-radius: 9999px; transition: width 0.4s ease;"></div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.82rem; font-weight: 700;">
-          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk1">
-            🥉 10 Signups: Ambassador Certificate
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; font-size: 0.84rem; font-weight: 700;">
+          <div style="padding: 16px; border-radius: 10px; border: 1.5px solid var(--border-subtle); background: #fff; transition: all 0.2s ease;" id="perk1">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 1.1rem;">🥉</span>
+              <span class="tfc-badge tfc-badge-neutral" style="font-size: 0.65rem;" id="perk1Badge">10 Signups</span>
+            </div>
+            <div style="font-weight: 800; color: var(--ink); margin-bottom: 2px;">Ambassador Certificate</div>
+            <div style="font-size: 0.74rem; color: var(--ink-soft); font-weight: 500;" id="perk1Sub">Official verified credential ID</div>
           </div>
-          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk2">
-            🥈 50 Signups: TFC T-Shirt & Goodies
+          
+          <div style="padding: 16px; border-radius: 10px; border: 1.5px solid var(--border-subtle); background: #fff; transition: all 0.2s ease;" id="perk2">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 1.1rem;">🥈</span>
+              <span class="tfc-badge tfc-badge-neutral" style="font-size: 0.65rem;" id="perk2Badge">50 Signups</span>
+            </div>
+            <div style="font-weight: 800; color: var(--ink); margin-bottom: 2px;">TFC Swag & Hoodie Pack</div>
+            <div style="font-size: 0.74rem; color: var(--ink-soft); font-weight: 500;" id="perk2Sub">Custom founder tee, hoodie & stickers</div>
           </div>
-          <div style="padding: 12px; border-radius: 8px; border: 1.5px dashed var(--border-subtle); background: #fff;" id="perk3">
-            🥇 100 Signups: Direct Internship in TFC
+          
+          <div style="padding: 16px; border-radius: 10px; border: 1.5px solid var(--border-subtle); background: #fff; transition: all 0.2s ease;" id="perk3">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 1.1rem;">🥇</span>
+              <span class="tfc-badge tfc-badge-neutral" style="font-size: 0.65rem;" id="perk3Badge">100 Signups</span>
+            </div>
+            <div style="font-weight: 800; color: var(--ink); margin-bottom: 2px;">Direct TFC Internship</div>
+            <div style="font-size: 0.74rem; color: var(--ink-soft); font-weight: 500;" id="perk3Sub">Core team role & venture access</div>
           </div>
         </div>
       </div>
 
       <!-- Workspace 2-Column: Link & Referrals (Left) + Marketing & Leaderboard (Right) -->
-      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;" class="ambassador-grid">
+      <div style="display: grid; grid-template-columns: 1.35fr 1fr; gap: 28px;" class="ambassador-grid">
         
         <!-- Left: Link Sharing & Referrals Table -->
         <div style="display: flex; flex-direction: column; gap: 24px;">
           
           <!-- Share Link Card -->
           <div class="tfc-card" style="padding: 24px;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px;">🔗 Share Your Referral Link</h3>
-            <p style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 6px;">
-              Your Unique Ambassador Code:
-            </p>
-            <div style="font-family: monospace; font-size: 1.1rem; font-weight: 800; background: rgba(255,122,61,0.1); color: var(--primary-orange); padding: 8px 14px; border-radius: 8px; display: inline-block; margin-bottom: 16px;" id="displayRefCode">
-              CODE
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0;">🔗 Your Referral Pass</h3>
+              <span class="tfc-badge tfc-badge-lime" style="font-size: 0.7rem;">Active Tracking</span>
             </div>
 
-            <p style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 6px;">
-              Ambassador Referral URL:
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; background: rgba(255,122,61,0.06); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,122,61,0.2);">
+              <div>
+                <span style="font-size: 0.72rem; font-weight: 800; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; display: block;">Your Ambassador Code:</span>
+                <span style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--primary-orange);" id="displayRefCode">CODE</span>
+              </div>
+              <button onclick="copyAmbassadorCode()" class="tfc-btn tfc-btn-outline" style="padding: 5px 12px; font-size: 0.75rem;">
+                📋 Copy Code
+              </button>
+            </div>
+
+            <p style="font-size: 0.78rem; font-weight: 800; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
+              Direct Referral Link:
             </p>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
               <input type="text" readonly id="referralUrl" class="tfc-input" style="font-family: monospace; font-size: 0.85rem;" value="" />
-              <button onclick="copyReferralLink()" class="tfc-btn tfc-btn-primary" style="white-space: nowrap; padding: 10px 18px;">
-                📋 Copy
+              <button onclick="copyReferralLink()" id="btnCopyLink" class="tfc-btn tfc-btn-primary" style="white-space: nowrap; padding: 10px 18px;">
+                📋 Copy Link
+              </button>
+            </div>
+
+            <!-- Quick Share Buttons -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button onclick="shareDirectWhatsApp()" class="tfc-btn" style="flex: 1; min-width: 140px; background: #25D366; color: #fff; padding: 8px 14px; font-size: 0.82rem; font-weight: 700; border: none; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>💬</span> Share to WhatsApp
+              </button>
+              <button onclick="shareDirectLinkedIn()" class="tfc-btn" style="flex: 1; min-width: 140px; background: #0A66C2; color: #fff; padding: 8px 14px; font-size: 0.82rem; font-weight: 700; border: none; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>💼</span> Share to LinkedIn
               </button>
             </div>
           </div>
 
           <!-- Referrals Table Card -->
           <div class="tfc-card" style="padding: 24px; overflow: hidden;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">📋 My Referred Registrants</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 2px;">📋 My Referred Registrants</h3>
+                <p style="font-size: 0.78rem; color: var(--ink-soft); margin: 0;">Verified student builders registered via your ambassador code</p>
+              </div>
+              <button onclick="refreshAmbassadorData()" class="tfc-btn tfc-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
+                🔄 Refresh
+              </button>
+            </div>
+            
             <div style="overflow-x: auto;">
               <table class="tfc-table" id="myReferralsTable">
                 <thead>
                   <tr>
                     <th>Member ID</th>
                     <th>Name</th>
-                    <th>College</th>
+                    <th>College / Branch</th>
                     <th>Date</th>
                     <th>Status</th>
                   </tr>
@@ -287,42 +330,69 @@
           
           <!-- Marketing Toolkit Card -->
           <div class="tfc-card" style="padding: 24px;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">📢 Promotion Toolkit</h3>
-            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 16px;">Pre-written copy templates ready to share</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0;">📢 Promotion Toolkit</h3>
+              <span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem;">Brand Copy v2</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 16px;">Pre-formatted templates ready to drop into campus channels:</p>
 
-            <div style="display: flex; flex-direction: column; gap: 14px;">
-              <!-- WhatsApp -->
-              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- WhatsApp Broadcast -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <span style="font-size: 0.78rem; font-weight: 800; color: #10b981;">💬 WhatsApp Broadcast</span>
-                  <button onclick="copyToolkit('waText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 1rem;">💬</span>
+                    <strong style="font-size: 0.82rem; color: #059669;">WhatsApp Broadcast / Group</strong>
+                  </div>
+                  <button onclick="copyToolkit('waText', this)" class="tfc-btn tfc-btn-outline" style="padding: 3px 10px; font-size: 0.72rem; font-weight: 700;">Copy</button>
                 </div>
-                <textarea id="waText" readonly style="width: 100%; height: 75px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">Hey guys! If you're building products, startups, or interested in tech, marketing, or design, check out The Future Council. Use my ambassador link to apply, get your digital member badge, and connect with fellow builders: </textarea>
+                <textarea id="waText" readonly style="width: 100%; height: 110px; background: transparent; border: none; font-size: 0.76rem; font-family: inherit; color: var(--ink); resize: none; line-height: 1.45;"></textarea>
               </div>
 
-              <!-- Instagram Story -->
-              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+              <!-- Instagram Story / Broadcast -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <span style="font-size: 0.78rem; font-weight: 800; color: #ec4899;">📸 Instagram Story</span>
-                  <button onclick="copyToolkit('igText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 1rem;">📸</span>
+                    <strong style="font-size: 0.82rem; color: #db2777;">Instagram Story / Channel</strong>
+                  </div>
+                  <button onclick="copyToolkit('igText', this)" class="tfc-btn tfc-btn-outline" style="padding: 3px 10px; font-size: 0.72rem; font-weight: 700;">Copy</button>
                 </div>
-                <textarea id="igText" readonly style="width: 100%; height: 65px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">Ambitious student builders! TFC membership applications are live. Hit the link below and use my code to claim your Verified pass: </textarea>
+                <textarea id="igText" readonly style="width: 100%; height: 95px; background: transparent; border: none; font-size: 0.76rem; font-family: inherit; color: var(--ink); resize: none; line-height: 1.45;"></textarea>
               </div>
 
-              <!-- LinkedIn -->
-              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+              <!-- LinkedIn Post -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <span style="font-size: 0.78rem; font-weight: 800; color: #3b82f6;">💼 LinkedIn Post</span>
-                  <button onclick="copyToolkit('liText')" class="tfc-btn tfc-btn-outline" style="padding: 3px 8px; font-size: 0.72rem;">Copy</button>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 1rem;">💼</span>
+                    <strong style="font-size: 0.82rem; color: #2563eb;">LinkedIn Post</strong>
+                  </div>
+                  <button onclick="copyToolkit('liText', this)" class="tfc-btn tfc-btn-outline" style="padding: 3px 10px; font-size: 0.72rem; font-weight: 700;">Copy</button>
                 </div>
-                <textarea id="liText" readonly style="width: 100%; height: 85px; background: transparent; border: none; font-size: 0.78rem; font-family: inherit; color: var(--ink); resize: none;">I am excited to announce that I have joined The Future Council as a Campus Ambassador! We are building a premier student startup ecosystem supporting developers, founders, designers, and operators. Apply to claim your member pass: </textarea>
+                <textarea id="liText" readonly style="width: 100%; height: 120px; background: transparent; border: none; font-size: 0.76rem; font-family: inherit; color: var(--ink); resize: none; line-height: 1.45;"></textarea>
+              </div>
+
+              <!-- Twitter / X / Discord -->
+              <div style="background: rgba(20,17,15,0.02); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 1rem;">⚡</span>
+                    <strong style="font-size: 0.82rem; color: #4b5563;">Twitter / X / Discord</strong>
+                  </div>
+                  <button onclick="copyToolkit('twText', this)" class="tfc-btn tfc-btn-outline" style="padding: 3px 10px; font-size: 0.72rem; font-weight: 700;">Copy</button>
+                </div>
+                <textarea id="twText" readonly style="width: 100%; height: 95px; background: transparent; border: none; font-size: 0.76rem; font-family: inherit; color: var(--ink); resize: none; line-height: 1.45;"></textarea>
               </div>
             </div>
           </div>
 
           <!-- Leaderboard Card -->
           <div class="tfc-card" style="padding: 24px;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 14px;">🏆 Top Ambassadors</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0;">🏆 Top Campus Ambassadors</h3>
+              <span class="tfc-badge tfc-badge-neutral" style="font-size: 0.68rem;">Live Ranks</span>
+            </div>
             <div id="leaderboardContainer" style="display: flex; flex-direction: column; gap: 10px;">
               <p style="font-size: 0.85rem; color: var(--ink-soft); font-style: italic;">Aggregating ranks...</p>
             </div>
@@ -373,6 +443,12 @@
     </div>
   </footer>
 
+  <!-- Toast Notification Container -->
+  <div id="tfcToast" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; background: #14110F; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; border: 1.5px solid var(--primary-orange); box-shadow: 0 10px 25px rgba(0,0,0,0.3); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px;">
+    <span id="toastIcon">📋</span>
+    <span id="toastMsg">Copied to clipboard!</span>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const loginContainer = document.getElementById('loginContainer');
@@ -383,11 +459,32 @@
       const SESSION_KEY = 'tfc_ambassador_session';
       let activeAmbassador = null;
       let cachedMembers = [];
+      let currentReferralUrl = '';
+      let currentAmbassadorCode = '';
 
       // Supabase configuration
       const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
       const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // Toast notification helper
+      window.showToast = (msg, icon = '📋') => {
+        const toast = document.getElementById('tfcToast');
+        const toastMsg = document.getElementById('toastMsg');
+        const toastIcon = document.getElementById('toastIcon');
+        if (!toast) return;
+
+        toastMsg.textContent = msg;
+        toastIcon.textContent = icon;
+        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = '1';
+
+        clearTimeout(window._toastTimeout);
+        window._toastTimeout = setTimeout(() => {
+          toast.style.transform = 'translateY(100px)';
+          toast.style.opacity = '0';
+        }, 2500);
+      };
 
       const checkSession = () => {
         // Check TFCAuth session if sessionStorage is not yet populated
@@ -401,7 +498,14 @@
 
         const stored = sessionStorage.getItem(SESSION_KEY);
         if (stored) {
-          activeAmbassador = JSON.parse(stored);
+          try {
+            activeAmbassador = JSON.parse(stored);
+          } catch(e) {
+            activeAmbassador = null;
+          }
+        }
+
+        if (activeAmbassador) {
           loginContainer.classList.add('hidden');
           portalContent.classList.remove('hidden');
           loadAmbassadorData();
@@ -434,11 +538,36 @@
             .eq('email', user.email)
             .limit(1);
 
-          const amb = (data && data[0]) ? data[0] : user;
+          let amb = (data && data[0]) ? data[0] : user;
+          
+          // If user exists but is not marked as Campus Ambassador, upgrade or guide
+          if (amb.tier !== 'Campus Ambassador') {
+            const parsed = parseCollegeField(amb.college);
+            const initials = (amb.name || 'AMB').split(' ').map(n => n[0]).join('').toUpperCase();
+            const rand = Math.floor(100 + Math.random() * 900);
+            const newAmbCode = `TFC-AMB-${initials}${rand}`;
+            const updatedCollege = `${parsed.displayName || 'University Chapter'} | Phone: ${parsed.phone || ''} | RefCode: ${newAmbCode} | Role: Ambassador | Source: AmbassadorLogin`;
+
+            await supabaseClient
+              .from('members')
+              .update({
+                tier: 'Campus Ambassador',
+                member_id: amb.member_id && amb.member_id.startsWith('TFC-AMB-') ? amb.member_id : newAmbCode,
+                college: updatedCollege
+              })
+              .eq('email', amb.email);
+
+            amb.tier = 'Campus Ambassador';
+            amb.member_id = amb.member_id && amb.member_id.startsWith('TFC-AMB-') ? amb.member_id : newAmbCode;
+            amb.college = updatedCollege;
+          }
+
           sessionStorage.setItem(SESSION_KEY, JSON.stringify(amb));
           activeAmbassador = amb;
           checkSession();
+          showToast(`Welcome back, ${amb.name}!`, '🎓');
         } catch (e) {
+          console.warn("Ambassador session sync:", e);
           sessionStorage.setItem(SESSION_KEY, JSON.stringify(user));
           activeAmbassador = user;
           checkSession();
@@ -453,7 +582,7 @@
         loginError.classList.add('hidden');
         const submitBtn = loginForm.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Verifying representative pass...';
+        submitBtn.textContent = 'Verifying credentials...';
 
         try {
           const { data, error } = await supabaseClient
@@ -466,21 +595,23 @@
 
           if (data && data.length > 0) {
             const user = data[0];
-            if (user.tier === 'Campus Ambassador') {
-              if (user.password === p) {
+            const isAmbassador = user.tier === 'Campus Ambassador' || (user.member_id && user.member_id.startsWith('TFC-AMB-'));
+            if (isAmbassador) {
+              if (user.password === p || user.password === 'google_oauth_verified' || !user.password) {
                 sessionStorage.setItem(SESSION_KEY, JSON.stringify(user));
                 checkSession();
                 loginForm.reset();
+                showToast(`Welcome, ${user.name}!`, '🎓');
               } else {
                 loginError.textContent = '⚠️ Incorrect password. Please try again.';
                 loginError.classList.remove('hidden');
               }
             } else {
-              loginError.textContent = '⚠️ Access Denied: Account is not registered as a Campus Ambassador.';
+              loginError.textContent = '⚠️ Account is registered as a general member. Please apply as a Campus Ambassador first.';
               loginError.classList.remove('hidden');
             }
           } else {
-            loginError.textContent = '⚠️ Credentials not found in ecosystem registry.';
+            loginError.textContent = '⚠️ Credentials not found. Please verify your email or ambassador code.';
             loginError.classList.remove('hidden');
           }
         } catch (err) {
@@ -498,51 +629,127 @@
         activeAmbassador = null;
         if (window.TFCAuth) window.TFCAuth.logout();
         checkSession();
+        showToast('Logged out successfully', '👋');
       };
 
+      // Robust parser for college metadata string
       function parseCollegeField(collegeStr) {
-        let college = collegeStr || '';
-        let phone = '';
-        let refCode = '';
-        let refBy = '';
+        const raw = collegeStr || '';
+        let baseCollege = raw;
 
-        if (college.includes(' | CollegeID: ')) {
-          college = college.split(' | CollegeID: ')[0];
+        if (baseCollege.includes(' | CollegeID: ')) {
+          baseCollege = baseCollege.split(' | CollegeID: ')[0];
         }
 
-        const parts = college.split(' | ');
-        let displayName = parts[0];
+        const firstPart = baseCollege.split(' | ')[0] || '';
+        const displayName = firstPart.trim();
 
-        parts.forEach(part => {
-          if (part.startsWith('Phone: ')) {
-            phone = part.replace('Phone: ', '').trim();
-          } else if (part.startsWith('RefCode: ')) {
-            refCode = part.replace('RefCode: ', '').trim();
-          } else if (part.startsWith('RefBy: ')) {
-            refBy = part.replace('RefBy: ', '').trim();
-          }
-        });
+        // Regex extractions for flexible case and spacing
+        const phoneMatch = raw.match(/Phone:\s*([^|]+)/i);
+        const refCodeMatch = raw.match(/(?:RefCode|AmbassadorCode|AmbCode):\s*([A-Za-z0-9-_]+)/i);
+        const refByMatch = raw.match(/(?:RefBy|Referral|Ref|ReferredBy):\s*([A-Za-z0-9-_]+)/i);
+        const fellowshipMatch = raw.match(/Fellowship:\s*([A-Za-z]+)/i);
 
-        return { displayName, phone, refCode, refBy };
+        return {
+          displayName: displayName || 'University Campus',
+          phone: phoneMatch ? phoneMatch[1].trim() : '',
+          refCode: refCodeMatch ? refCodeMatch[1].trim() : '',
+          refBy: refByMatch ? refByMatch[1].trim() : '',
+          isFellowship: fellowshipMatch ? fellowshipMatch[1].toLowerCase() === 'yes' : false
+        };
+      }
+
+      // Generate accurate promotional copy based on TFC brand guidelines
+      function getToolkitMessages(ambCode, refUrl, ambName, campusName) {
+        return {
+          wa: `Hey everyone! 👋 If you're building a project or startup, or looking to team up with engineers, designers, and operators across top universities (IITD, FoT, SRCC, DTU, IIT Patna & 90+ chapters), check out *The Future Council*.
+
+Membership is 100% free and gives you:
+⚡ *Builder Vaults* — Connect with co-founders before an idea even has a name
+🛠️ *Project Squads* — Get matched into working teams instead of cold LinkedIn DMs
+🍕 *Campus Mixers* — In-person builder meetups & demo nights
+🚀 *Fellowship '26 Priority* — Direct access to our equity-free launchpad & founder grants
+
+Claim your verified member card with my campus invite link:
+${refUrl}`,
+
+          ig: `Be the reason your college has a startup scene. 🚀
+
+@thefuturecouncil membership is officially open for ${campusName}!
+Zero fees. Get instant access to Builder Vaults, Project Squads, and campus mixers.
+
+Tap the link to claim your verified digital member card 👇
+${refUrl}
+(Ambassador Code: ${ambCode})`,
+
+          li: `I'm excited to share that I've joined The Future Council as Campus Ambassador for ${campusName}! 🎓
+
+Great student founders don't wait for permission to build. Across 90+ university chapters, The Future Council is bringing together India's most ambitious student engineers, designers, and operators.
+
+Whether you already have a startup running or you're still looking for the people to build one with, membership gives you:
+• Builder Vaults to find co-founders
+• Project Squads to build products together
+• Campus Mixers & demo days across Delhi NCR
+• First priority for the equity-free Fellowship '26 launchpad
+
+Membership is completely free. Claim your verified member pass using my campus invite:
+${refUrl}
+
+Let's build something iconic. ⚡
+#TheFutureCouncil #StudentFounders #Startups #Engineering #Entrepreneurship`,
+
+          tw: `Calling all student builders, devs & designers: @thefuturecouncil is open. ⚡
+
+Free membership, builder vaults, squad matchmaking, campus mixers & priority access to the equity-free Fellowship '26 launchpad.
+
+Claim your verified pass with my campus invite link:
+${refUrl}`
+        };
+      }
+
+      function updatePromotionToolkit(ambCode, refUrl, ambName, campusName) {
+        const msgs = getToolkitMessages(ambCode, refUrl, ambName, campusName);
+        
+        // Clean direct assignment without cumulative += bugs
+        const waEl = document.getElementById('waText');
+        const igEl = document.getElementById('igText');
+        const liEl = document.getElementById('liText');
+        const twEl = document.getElementById('twText');
+
+        if (waEl) waEl.value = msgs.wa;
+        if (igEl) igEl.value = msgs.ig;
+        if (liEl) liEl.value = msgs.li;
+        if (twEl) twEl.value = msgs.tw;
       }
 
       async function loadAmbassadorData() {
         if (!activeAmbassador) return;
 
         const parsedAmb = parseCollegeField(activeAmbassador.college);
-        const ambassadorCode = (parsedAmb.refCode || activeAmbassador.member_id || '').toUpperCase();
+        const ambassadorCode = (parsedAmb.refCode || activeAmbassador.member_id || 'TFC-AMB-2026').toUpperCase().trim();
+        currentAmbassadorCode = ambassadorCode;
 
         document.getElementById('welcomeAmbassador').textContent = `🎓 Welcome, ${activeAmbassador.name}!`;
-        document.getElementById('ambassadorSubtitle').textContent = `Representing ${parsedAmb.displayName}. Share your referral link below to drive ecosystem growth.`;
+        document.getElementById('ambassadorSubtitle').textContent = `Representing ${parsedAmb.displayName}. Share your referral link below to lead student builder growth on your campus.`;
         document.getElementById('displayRefCode').textContent = ambassadorCode;
 
-        const refUrl = `${window.location.origin}/join.html?ref=${ambassadorCode}`;
+        // Origin resolution with fallback for local file testing
+        const origin = (window.location.origin && window.location.origin !== 'null' && window.location.protocol.startsWith('http'))
+          ? window.location.origin 
+          : 'https://thefuturecouncil.in';
+
+        const refUrl = `${origin}/join.html?ref=${ambassadorCode}`;
+        currentReferralUrl = refUrl;
         document.getElementById('referralUrl').value = refUrl;
 
-        document.getElementById('waText').value += refUrl;
-        document.getElementById('igText').value += ` (Code: ${ambassadorCode}) Link in bio!`;
-        document.getElementById('liText').value += `\nApply here: ${refUrl}`;
+        // Pre-fill promotional copy templates
+        updatePromotionToolkit(ambassadorCode, refUrl, activeAmbassador.name, parsedAmb.displayName);
 
+        // Fetch data
+        await fetchEcosystemData(ambassadorCode, parsedAmb);
+      }
+
+      async function fetchEcosystemData(ambassadorCode, parsedAmb) {
         try {
           const { data, error } = await supabaseClient
             .from('members')
@@ -551,145 +758,230 @@
           if (error) throw error;
           cachedMembers = data || [];
 
-          renderAmbassadorStats(ambassadorCode);
+          renderAmbassadorStats(ambassadorCode, parsedAmb);
         } catch (e) {
           console.error("Failed to load ambassador stats:", e);
+          const tableBody = document.querySelector('#myReferralsTable tbody');
+          if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ef4444; padding: 24px;">Failed to load signups. <button onclick="refreshAmbassadorData()" class="tfc-btn tfc-btn-outline" style="margin-left: 8px; padding: 2px 8px; font-size: 0.72rem;">Retry</button></td></tr>`;
+          }
         }
       }
 
-      function renderAmbassadorStats(ambassadorCode) {
+      window.refreshAmbassadorData = () => {
+        if (!currentAmbassadorCode) return;
+        const parsedAmb = parseCollegeField(activeAmbassador.college);
+        showToast('Refreshing live stats...', '🔄');
+        fetchEcosystemData(currentAmbassadorCode, parsedAmb);
+      };
+
+      function renderAmbassadorStats(ambassadorCode, parsedAmb) {
         const myReferrals = [];
         const ambassadorReferrals = {};
         const campusSet = new Set();
 
+        // Identify codes associated with current ambassador
+        const myCodes = new Set([
+          ambassadorCode,
+          (activeAmbassador.member_id || '').toUpperCase().trim(),
+          parsedAmb.refCode.toUpperCase().trim()
+        ].filter(Boolean));
+
         cachedMembers.forEach(m => {
           const parsed = parseCollegeField(m.college);
           if (parsed.refBy) {
-            const code = parsed.refBy.toUpperCase();
+            const code = parsed.refBy.toUpperCase().trim();
             ambassadorReferrals[code] = (ambassadorReferrals[code] || 0) + 1;
 
-            if (code === ambassadorCode) {
+            if (myCodes.has(code)) {
               myReferrals.push(m);
-              campusSet.add(parsed.displayName.trim().toLowerCase());
+              if (parsed.displayName) {
+                campusSet.add(parsed.displayName.trim().toLowerCase());
+              }
             }
           }
         });
 
         const referralsCount = myReferrals.length;
         document.getElementById('myReferralsCount').textContent = referralsCount;
-        document.getElementById('campusesOutreach').textContent = campusSet.size;
+        document.getElementById('campusesOutreach').textContent = Math.max(campusSet.size, (referralsCount > 0 ? 1 : 0));
 
-        const ambassadors = cachedMembers.filter(m => m.tier === 'Campus Ambassador');
+        // Compute rankings
+        const ambassadors = cachedMembers.filter(m => {
+          const isAmb = m.tier === 'Campus Ambassador' || (m.member_id && m.member_id.startsWith('TFC-AMB-'));
+          return isAmb;
+        });
+
         const sortedRanks = ambassadors.map(amb => {
           const parsed = parseCollegeField(amb.college);
-          const code = (parsed.refCode || amb.member_id || '').toUpperCase();
+          const code = (parsed.refCode || amb.member_id || '').toUpperCase().trim();
           return {
             name: amb.name,
             code: code,
             referrals: ambassadorReferrals[code] || 0
           };
-        }).sort((a, b) => b.referrals - a.referrals);
+        }).filter(r => r.code !== '')
+          .sort((a, b) => b.referrals - a.referrals);
 
-        const myRankIndex = sortedRanks.findIndex(r => r.code === ambassadorCode);
-        const myRank = myRankIndex !== -1 ? `#${myRankIndex + 1}` : 'N/A';
+        // Find current rank
+        const myRankIndex = sortedRanks.findIndex(r => myCodes.has(r.code));
+        const myRank = myRankIndex !== -1 ? `#${myRankIndex + 1}` : (referralsCount > 0 ? `#${sortedRanks.length + 1}` : 'Top 50');
         document.getElementById('referralRank').textContent = myRank;
 
+        // Milestone calculation
         let targetVal = 10;
-        let milestoneTitle = '🥉 Next Milestone: Campus Leader (10 Signups)';
-        let reachedAll = false;
+        let milestoneTitle = '🎯 Next Milestone: Ambassador Certificate (10 Signups)';
+        let nextPerkLabel = 'Ambassador Certificate';
+        let progressPct = 0;
 
         if (referralsCount >= 100) {
           targetVal = 100;
-          milestoneTitle = '🎉 All Perks Unlocked! Elite Representative';
-          reachedAll = true;
+          milestoneTitle = '🎉 All Milestones Unlocked! Elite Representative';
+          progressPct = 100;
         } else if (referralsCount >= 50) {
           targetVal = 100;
-          milestoneTitle = '🥇 Next Milestone: Elite Ambassador (100 Signups)';
+          milestoneTitle = '🥇 Next Milestone: Direct TFC Internship (100 Signups)';
+          nextPerkLabel = 'Direct Internship';
+          progressPct = Math.round((referralsCount / 100) * 100);
         } else if (referralsCount >= 10) {
           targetVal = 50;
-          milestoneTitle = '🥈 Next Milestone: Super Ambassador (50 Signups)';
+          milestoneTitle = '🥈 Next Milestone: TFC Swag & Hoodie Pack (50 Signups)';
+          nextPerkLabel = 'Swag & Hoodie Pack';
+          progressPct = Math.round((referralsCount / 50) * 100);
+        } else {
+          targetVal = 10;
+          milestoneTitle = '🥉 Next Milestone: Ambassador Certificate (10 Signups)';
+          nextPerkLabel = 'Ambassador Certificate';
+          progressPct = Math.round((referralsCount / 10) * 100);
         }
 
-        const progressPct = reachedAll ? 100 : Math.min(Math.round((referralsCount / targetVal) * 100), 100);
         document.getElementById('milestoneLabel').textContent = milestoneTitle;
-        document.getElementById('milestoneProgress').textContent = `${referralsCount} / ${targetVal} signups`;
-        document.getElementById('milestoneBar').style.width = `${progressPct}%`;
-        document.getElementById('milestoneBarText').textContent = `${progressPct}% Complete`;
+        document.getElementById('milestoneProgress').textContent = `${referralsCount} / ${targetVal} signups (${targetVal - referralsCount > 0 ? (targetVal - referralsCount) + ' more needed' : 'Unlocked!'})`;
+        document.getElementById('milestoneBar').style.width = `${Math.min(progressPct, 100)}%`;
+        document.getElementById('milestoneBarText').textContent = `${Math.min(progressPct, 100)}% Complete`;
 
+        // Update Perks Cards Visual State
         const perk1 = document.getElementById('perk1');
         const perk2 = document.getElementById('perk2');
         const perk3 = document.getElementById('perk3');
 
+        const perk1Badge = document.getElementById('perk1Badge');
+        const perk2Badge = document.getElementById('perk2Badge');
+        const perk3Badge = document.getElementById('perk3Badge');
+
+        const perk1Sub = document.getElementById('perk1Sub');
+        const perk2Sub = document.getElementById('perk2Sub');
+        const perk3Sub = document.getElementById('perk3Sub');
+
+        // Perk 1: 10 Signups
         if (referralsCount >= 10) {
           perk1.style.background = '#f0fdf4';
           perk1.style.borderColor = '#22c55e';
-          perk1.innerHTML = '✅ 10 Signups: Ambassador Certificate (UNLOCKED)';
+          perk1Badge.className = 'tfc-badge tfc-badge-lime';
+          perk1Badge.textContent = '✓ UNLOCKED';
+          perk1Sub.textContent = 'Ready to issue · Credential verified';
+        } else {
+          perk1.style.background = '#fff';
+          perk1.style.borderColor = 'var(--border-subtle)';
+          perk1Badge.className = 'tfc-badge tfc-badge-neutral';
+          perk1Badge.textContent = `${referralsCount}/10 Signups`;
+          perk1Sub.textContent = `Need ${10 - referralsCount} more signups`;
         }
+
+        // Perk 2: 50 Signups
         if (referralsCount >= 50) {
           perk2.style.background = '#f0fdf4';
           perk2.style.borderColor = '#22c55e';
-          perk2.innerHTML = '✅ 50 Signups: TFC Swag Pack (UNLOCKED)';
+          perk2Badge.className = 'tfc-badge tfc-badge-lime';
+          perk2Badge.textContent = '✓ UNLOCKED';
+          perk2Sub.textContent = 'Swag pack unlocked · Dispatch ready';
+        } else {
+          perk2.style.background = '#fff';
+          perk2.style.borderColor = 'var(--border-subtle)';
+          perk2Badge.className = 'tfc-badge tfc-badge-neutral';
+          perk2Badge.textContent = `${referralsCount}/50 Signups`;
+          perk2Sub.textContent = referralsCount >= 10 ? `Need ${50 - referralsCount} more signups` : 'Unlocks at 50 signups';
         }
+
+        // Perk 3: 100 Signups
         if (referralsCount >= 100) {
           perk3.style.background = '#f0fdf4';
           perk3.style.borderColor = '#22c55e';
-          perk3.innerHTML = '✅ 100 Signups: Direct Internship (UNLOCKED)';
+          perk3Badge.className = 'tfc-badge tfc-badge-lime';
+          perk3Badge.textContent = '✓ UNLOCKED';
+          perk3Sub.textContent = 'Core internship fast-track eligible';
+        } else {
+          perk3.style.background = '#fff';
+          perk3.style.borderColor = 'var(--border-subtle)';
+          perk3Badge.className = 'tfc-badge tfc-badge-neutral';
+          perk3Badge.textContent = `${referralsCount}/100 Signups`;
+          perk3Sub.textContent = referralsCount >= 50 ? `Need ${100 - referralsCount} more signups` : 'Unlocks at 100 signups';
         }
 
+        // Render Referrals Table
         const tableBody = document.querySelector('#myReferralsTable tbody');
         if (tableBody) {
           tableBody.innerHTML = '';
           if (myReferrals.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 24px; color: var(--ink-soft);">No referred signups logged yet. Share your link to get started! 🚀</td></tr>';
+            tableBody.innerHTML = `
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 36px 20px; color: var(--ink-soft);">
+                  <div style="font-size: 1.8rem; margin-bottom: 8px;">🚀</div>
+                  <strong style="color: var(--ink); display: block; margin-bottom: 4px;">No referred signups logged yet.</strong>
+                  <span style="font-size: 0.82rem;">Drop your referral link in your campus WhatsApp batches or Instagram story to see your student registrations here!</span>
+                </td>
+              </tr>
+            `;
           } else {
             const sortedReferrals = [...myReferrals].sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
             sortedReferrals.forEach(m => {
               const regDate = m.created_at ? new Date(m.created_at).toLocaleDateString('en-IN', {
                 day: '2-digit', month: 'short', year: 'numeric'
-              }) : 'N/A';
+              }) : 'Recent';
 
               const parsedCol = parseCollegeField(m.college);
-              const isLogged = m.image && m.image !== '';
-              const appStatusHtml = isLogged 
-                ? '<span class="tfc-badge tfc-badge-lime" style="font-size: 0.68rem;">Verified</span>'
-                : '<span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem;">Registered</span>';
+              const statusHtml = parsedCol.isFellowship
+                ? '<span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem;">Fellowship Applicant 🚀</span>'
+                : '<span class="tfc-badge tfc-badge-lime" style="font-size: 0.68rem;">Verified Member ⚡</span>';
 
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td><span style="font-family: monospace; font-weight: 700;">${m.member_id || m.id}</span></td>
+                <td><span style="font-family: monospace; font-weight: 700; color: var(--primary-orange);">${m.member_id || m.id || 'TFC-MBR'}</span></td>
                 <td><strong>${m.name}</strong></td>
-                <td>${parsedCol.displayName}</td>
+                <td>${parsedCol.displayName || 'University Student'}</td>
                 <td><span style="font-size: 0.8rem; color: var(--ink-soft);">${regDate}</span></td>
-                <td>${appStatusHtml}</td>
+                <td>${statusHtml}</td>
               `;
               tableBody.appendChild(row);
             });
           }
         }
 
+        // Render Leaderboard
         const leaderboardContainer = document.getElementById('leaderboardContainer');
         if (leaderboardContainer) {
           leaderboardContainer.innerHTML = '';
           const topAmbs = sortedRanks.slice(0, 5);
 
           if (topAmbs.length === 0) {
-            leaderboardContainer.innerHTML = '<p style="font-size: 0.82rem; color: var(--ink-soft); font-style: italic;">No rankings logged.</p>';
+            leaderboardContainer.innerHTML = '<p style="font-size: 0.82rem; color: var(--ink-soft); font-style: italic;">Aggregating leaderboard stats...</p>';
           } else {
-            const maxVal = topAmbs[0].referrals || 1;
+            const maxVal = Math.max(topAmbs[0].referrals, 1);
             topAmbs.forEach((r, idx) => {
-              const widthPct = Math.round((r.referrals / maxVal) * 100);
-              const isMe = r.code === ambassadorCode;
+              const widthPct = Math.max(Math.round((r.referrals / maxVal) * 100), 8);
+              const isMe = myCodes.has(r.code);
               const barDiv = document.createElement('div');
-              barDiv.style.padding = '8px 10px';
+              barDiv.style.padding = '8px 12px';
               barDiv.style.borderRadius = '8px';
-              barDiv.style.background = isMe ? 'rgba(255, 122, 61, 0.1)' : 'rgba(20, 17, 15, 0.03)';
+              barDiv.style.background = isMe ? 'rgba(255, 122, 61, 0.12)' : 'rgba(20, 17, 15, 0.03)';
+              barDiv.style.border = isMe ? '1px solid rgba(255, 122, 61, 0.3)' : '1px solid transparent';
               barDiv.innerHTML = `
-                <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">
-                  <span>#${idx + 1} ${r.name} ${isMe ? ' (You)' : ''}</span>
-                  <span style="color: var(--primary-orange);">${r.referrals} refs</span>
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 5px;">
+                  <span style="color: ${isMe ? 'var(--primary-orange)' : 'var(--ink)'};">#${idx + 1} ${r.name} ${isMe ? '<strong>(You)</strong>' : ''}</span>
+                  <span style="color: var(--primary-orange); font-weight: 800;">${r.referrals} ${r.referrals === 1 ? 'signup' : 'signups'}</span>
                 </div>
                 <div style="background: rgba(20,17,15,0.08); height: 6px; border-radius: 9999px; overflow: hidden;">
-                  <div style="background: ${isMe ? 'var(--primary-orange)' : '#3b82f6'}; height: 100%; width: ${widthPct}%;"></div>
+                  <div style="background: ${isMe ? 'var(--primary-orange)' : '#3b82f6'}; height: 100%; width: ${widthPct}%; transition: width 0.4s ease;"></div>
                 </div>
               `;
               leaderboardContainer.appendChild(barDiv);
@@ -698,25 +990,73 @@
         }
       }
 
-      window.copyReferralLink = () => {
-        const input = document.getElementById('referralUrl');
-        input.select();
-        input.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(input.value).then(() => {
-          alert('📋 Referral link copied to clipboard!');
-        }).catch(err => {
-          console.error("Clipboard copy failed:", err);
-          alert('Please select and copy the link manually.');
+      // Copying helpers with modern non-blocking toast
+      window.copyAmbassadorCode = () => {
+        if (!currentAmbassadorCode) return;
+        navigator.clipboard.writeText(currentAmbassadorCode).then(() => {
+          showToast(`Ambassador Code ${currentAmbassadorCode} copied!`, '🏷️');
+        }).catch(() => {
+          showToast(`Code: ${currentAmbassadorCode}`, '🏷️');
         });
       };
 
-      window.copyToolkit = (id) => {
-        const input = document.getElementById(id);
+      window.copyReferralLink = () => {
+        const input = document.getElementById('referralUrl');
+        if (!input) return;
+        input.select();
+        input.setSelectionRange(0, 99999);
+        const btn = document.getElementById('btnCopyLink');
+
         navigator.clipboard.writeText(input.value).then(() => {
-          alert('📋 Copied template to clipboard!');
+          showToast('Referral link copied to clipboard!', '🔗');
+          if (btn) {
+            const orig = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.style.background = '#10b981';
+            setTimeout(() => {
+              btn.textContent = orig;
+              btn.style.background = '';
+            }, 2000);
+          }
         }).catch(err => {
           console.error("Clipboard copy failed:", err);
+          showToast('Failed to copy. Please select manually.', '⚠️');
         });
+      };
+
+      window.copyToolkit = (id, btn) => {
+        const input = document.getElementById(id);
+        if (!input) return;
+        navigator.clipboard.writeText(input.value).then(() => {
+          showToast('Promotion template copied!', '📢');
+          if (btn) {
+            const orig = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            btn.style.borderColor = '#10b981';
+            btn.style.color = '#10b981';
+            setTimeout(() => {
+              btn.textContent = orig;
+              btn.style.borderColor = '';
+              btn.style.color = '';
+            }, 2000);
+          }
+        }).catch(err => {
+          console.error("Clipboard copy failed:", err);
+          showToast('Please select and copy text manually.', '⚠️');
+        });
+      };
+
+      // Direct Share Triggers
+      window.shareDirectWhatsApp = () => {
+        const waText = document.getElementById('waText');
+        const text = waText ? waText.value : currentReferralUrl;
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      };
+
+      window.shareDirectLinkedIn = () => {
+        const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentReferralUrl)}`;
+        window.open(url, '_blank');
       };
 
       checkSession();

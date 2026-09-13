@@ -425,7 +425,7 @@
     <!-- Direct Application Form Section (Ref Page 06) -->
     <section class="tfc-section" id="apply" style="padding-top: 20px; padding-bottom: 60px;">
       <div class="tfc-container" style="max-width: 760px;">
-        <div class="tfc-card p-4 sm:p-8 md:p-9 shadow-md">
+        <div id="fellowshipApplyCard" class="tfc-card p-4 sm:p-8 md:p-9 shadow-md">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 8px;">
             <div>
               <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 6px;">APPLICATION FORM</span>
@@ -556,6 +556,194 @@
             </div>
           </form>
         </div>
+
+        <!-- FELLOWSHIP APPLICANT DASHBOARD (For users who have submitted application) -->
+        <div id="fellowshipDashboardPanel" class="hidden">
+          <div class="tfc-card p-5 sm:p-8 md:p-9 shadow-lg border border-zinc-200" style="background: #ffffff;">
+            
+            <!-- Top Header & Live Status Badge -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-zinc-200">
+              <div class="flex items-center gap-3.5">
+                <div id="dashUserAvatar" class="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center font-black text-lg border-2 border-orange-400 shadow-md overflow-hidden flex-shrink-0">
+                  U
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h2 id="dashUserName" class="text-lg sm:text-xl font-black text-zinc-900 leading-tight">Applicant Name</h2>
+                    <span class="tfc-badge tfc-badge-lime text-xs">Cohort 01 Applicant</span>
+                  </div>
+                  <p id="dashUserEmail" class="text-xs sm:text-sm text-zinc-500 font-medium">applicant@email.com</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 self-start sm:self-auto">
+                <span id="dashApplicationId" class="font-mono text-xs font-bold px-3 py-1.5 bg-zinc-100 border border-zinc-300 rounded-lg text-zinc-800">
+                  ID: TFC-FEL-2026
+                </span>
+                <button type="button" onclick="window.TFCAuth.logout()" class="tfc-btn tfc-btn-outline text-xs px-2.5 py-1 text-zinc-500">
+                  Log Out
+                </button>
+              </div>
+            </div>
+
+            <!-- Prominent Status Banner -->
+            <div class="my-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50 to-orange-50 border border-emerald-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-sm mt-0.5 sm:mt-0">
+                  <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <h3 class="text-sm sm:text-base font-extrabold text-zinc-900">Application & Payment Received</h3>
+                    <span class="inline-flex items-center gap-1 text-[0.7rem] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Verification in Progress
+                    </span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-zinc-600 mt-1 leading-relaxed">
+                    Thank you for your submission! <strong>You will receive a confirmation email and WhatsApp message within 24 hours</strong> with your 1-on-1 interview schedule.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admissions Progress Stepper -->
+            <div class="mb-8">
+              <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Admissions Pipeline</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                
+                <!-- Step 1: Complete -->
+                <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/50 flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold">✓</span>
+                    <span class="text-[0.68rem] font-bold text-emerald-700 uppercase">Complete</span>
+                  </div>
+                  <div>
+                    <div class="text-xs font-extrabold text-zinc-900">1. Application & Pass</div>
+                    <div class="text-[0.72rem] text-zinc-500 mt-0.5">₹1,999 registration pass submitted</div>
+                  </div>
+                </div>
+
+                <!-- Step 2: Active -->
+                <div class="p-3.5 rounded-xl border-2 border-orange-500 bg-orange-50/60 flex flex-col justify-between shadow-sm">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold animate-pulse">2</span>
+                    <span class="text-[0.68rem] font-bold text-orange-700 uppercase">In Progress</span>
+                  </div>
+                  <div>
+                    <div class="text-xs font-extrabold text-zinc-900">2. Verification</div>
+                    <div class="text-[0.72rem] text-zinc-600 mt-0.5 font-medium">WhatsApp & email within 24h</div>
+                  </div>
+                </div>
+
+                <!-- Step 3: Upcoming -->
+                <div class="p-3.5 rounded-xl border border-zinc-200 bg-zinc-50/50 flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="w-6 h-6 rounded-full bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs font-bold">3</span>
+                    <span class="text-[0.68rem] font-bold text-zinc-400 uppercase">Upcoming</span>
+                  </div>
+                  <div>
+                    <div class="text-xs font-extrabold text-zinc-700">3. Founder Drill</div>
+                    <div class="text-[0.72rem] text-zinc-400 mt-0.5">15-min admissions interview</div>
+                  </div>
+                </div>
+
+                <!-- Step 4: Final -->
+                <div class="p-3.5 rounded-xl border border-zinc-200 bg-zinc-50/50 flex flex-col justify-between">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="w-6 h-6 rounded-full bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs font-bold">4</span>
+                    <span class="text-[0.68rem] font-bold text-zinc-400 uppercase">Oct 1</span>
+                  </div>
+                  <div>
+                    <div class="text-xs font-extrabold text-zinc-700">4. Cohort 01 Welcome</div>
+                    <div class="text-[0.72rem] text-zinc-400 mt-0.5">Delhi NCR Offline Sprints</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Application Summary Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              
+              <!-- Box 1: Profile & College Details -->
+              <div class="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 space-y-2.5">
+                <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wide flex items-center gap-1.5">
+                  <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                  <span>Applicant Summary</span>
+                </h4>
+                <div class="space-y-1.5 text-xs">
+                  <div class="flex justify-between py-1 border-b border-zinc-200/60">
+                    <span class="text-zinc-500">College & Standing:</span>
+                    <span id="dashCollege" class="font-bold text-zinc-800 text-right">-</span>
+                  </div>
+                  <div class="flex justify-between py-1 border-b border-zinc-200/60">
+                    <span class="text-zinc-500">WhatsApp Phone:</span>
+                    <span id="dashPhone" class="font-bold text-zinc-800 text-right">-</span>
+                  </div>
+                  <div class="flex justify-between py-1 border-b border-zinc-200/60">
+                    <span class="text-zinc-500">Submitted At:</span>
+                    <span id="dashSubmittedAt" class="font-bold text-zinc-800 text-right">-</span>
+                  </div>
+                  <div class="flex justify-between py-1">
+                    <span class="text-zinc-500">Cohort Tuition:</span>
+                    <span class="font-bold text-emerald-600">₹0 (100% Equity-Free)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Box 2: Product & Idea Submission -->
+              <div class="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 space-y-2.5">
+                <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wide flex items-center gap-1.5">
+                  <i data-lucide="rocket" class="w-3.5 h-3.5"></i>
+                  <span>Venture Concept</span>
+                </h4>
+                <div class="space-y-2 text-xs">
+                  <div>
+                    <span class="text-zinc-400 text-[0.7rem] uppercase font-bold block">Building:</span>
+                    <p id="dashQ1" class="text-zinc-700 italic line-clamp-3 mt-0.5">"..."</p>
+                  </div>
+                  <div class="pt-1 border-t border-zinc-200/60">
+                    <span class="text-zinc-400 text-[0.7rem] uppercase font-bold block">Sprint Availability:</span>
+                    <span id="dashQ4" class="font-bold text-zinc-800">Delhi NCR Offline Sprints</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Unlocked Applicant Toolkit & Resources -->
+            <div class="pt-6 border-t border-zinc-200">
+              <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                <div>
+                  <h4 class="text-sm font-extrabold text-zinc-900">Applicant Perks & Founder Toolkit</h4>
+                  <p class="text-xs text-zinc-500">Unlocked immediately upon application pass submission</p>
+                </div>
+                <span class="tfc-badge tfc-badge-orange text-xs">Unlocked</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <a href="fellowship-brochure.html" class="p-3.5 rounded-xl border border-zinc-200 hover:border-orange-400 bg-white hover:bg-orange-50/30 transition block text-left no-underline group shadow-sm">
+                  <div class="text-base mb-1.5">📄</div>
+                  <strong class="text-xs text-zinc-900 group-hover:text-orange-600 font-bold block">Cohort 01 Syllabus</strong>
+                  <span class="text-[0.72rem] text-zinc-500 block mt-0.5">Download program breakdown & Demo Day guide</span>
+                </a>
+
+                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl border border-zinc-200 hover:border-emerald-400 bg-white hover:bg-emerald-50/30 transition block text-left no-underline group shadow-sm">
+                  <div class="text-base mb-1.5">💬</div>
+                  <strong class="text-xs text-zinc-900 group-hover:text-emerald-600 font-bold block">Admissions Desk</strong>
+                  <span class="text-[0.72rem] text-zinc-500 block mt-0.5">Direct founder & applicant hotline</span>
+                </a>
+
+                <a href="resources.html" class="p-3.5 rounded-xl border border-zinc-200 hover:border-orange-400 bg-white hover:bg-orange-50/30 transition block text-left no-underline group shadow-sm">
+                  <div class="text-base mb-1.5">⚡</div>
+                  <strong class="text-xs text-zinc-900 group-hover:text-orange-600 font-bold block">Founder Vault</strong>
+                  <span class="text-[0.72rem] text-zinc-500 block mt-0.5">Templates, term sheets, & pitch decks</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
 
@@ -568,61 +756,61 @@
 
         <div class="tfc-accordion">
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>Do I need a registered company to apply?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               No. Idea-stage founders with genuine conviction are welcome. You don't need a registered legal entity, an incorporated business, or a complete team.
             </div>
           </div>
 
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>Is it really equity-free? What about the program fee?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               Yes — 100%. The fellowship is completely equity-free (we take 0% equity). The standard <strong><span style="text-decoration: line-through; text-decoration-color: #ef4444; color: #ef4444;">₹1,50,000</span> program fee has been slashed to ₹0</strong> for all 20 admitted founders. You pay zero tuition fees and give up zero equity. Mentorship, venue access, masterclasses, and demo day pitching are 100% free for admitted fellows.
             </div>
           </div>
 
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>What happens if I'm not selected?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               You're still eligible to join the wider Council for free — mixers, builder vaults, and project squads stay open to you so you can keep building alongside the community.
             </div>
           </div>
 
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>What is the ₹1,999 application fee used for?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               The application registration pass ensures high-intent submissions from serious founders and filters out automated spam applications. It directly covers admissions board review and 1-on-1 screening interviews.
             </div>
           </div>
 
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>Is it refundable?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               No — the ₹1,999 keeps the applicant pool serious and directly funds admissions review. If you're not selected, you still get the full Fellowship Toolkit, every masterclass on-demand, and 50% off your next application — so it's never just a sunk cost.
             </div>
           </div>
 
           <div class="tfc-accordion-item">
-            <button class="tfc-accordion-header">
+            <button class="tfc-accordion-header" type="button">
               <span>What if I am from outside Delhi NCR?</span>
               <span class="tfc-accordion-icon">+</span>
             </button>
-            <div class="tfc-accordion-content">
+            <div class="tfc-accordion-body">
               The cohort runs as a hybrid program (Delhi NCR + remote). Outstation founders are welcome to join online sprints and travel for core weekend intensives and Demo Day.
             </div>
           </div>
@@ -815,157 +1003,59 @@
             </p>
           </div>
 
-          <!-- Button to Step 2 -->
+          <!-- Button to Confirm Payment (No UTR Required) -->
           <button
             type="button"
-            onclick="setCheckoutStep('utr')"
-            class="w-full min-h-[48px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-orange-500 active:bg-orange-400 hover:bg-orange-400 text-black shadow-lg shadow-orange-500/20 cursor-pointer"
+            id="btnConfirmPaymentCompleted"
+            onclick="handlePaymentCompleted()"
+            class="w-full min-h-[50px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-400 active:from-emerald-400 hover:from-emerald-400 text-black shadow-lg shadow-emerald-500/25 cursor-pointer active:scale-[0.99]"
           >
-            <span>I have paid ₹1,999 → Enter UTR</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 shrink-0"></i>
+            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
+            <span>I have completed my payment ✓</span>
           </button>
         </div>
 
-        <!-- STEP 2: UTR & OPTIONAL SCREENSHOT FORM -->
-        <div id="upiStepUtr" class="hidden p-5 sm:p-6 space-y-4">
-          <div class="flex items-center gap-2 text-zinc-400 text-xs font-medium cursor-pointer hover:text-white transition" onclick="setCheckoutStep('payment')">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span>Back to QR & Payment</span>
-          </div>
-
-          <form id="utrSubmissionForm" onsubmit="handleUtrSubmit(event)" class="space-y-4">
-            
-            <!-- Helper Line Directly Above UTR Input with Multi-App Guide -->
-            <div class="p-3.5 bg-orange-500/10 border border-orange-500/25 rounded-xl space-y-1.5 text-xs">
-              <div class="flex items-center gap-1.5 text-orange-400 font-bold uppercase tracking-wide text-[0.72rem]">
-                <i data-lucide="help-circle" class="w-4 h-4 shrink-0"></i>
-                <span>Where to find your 12-digit UTR in your UPI app:</span>
-              </div>
-              <p class="text-[0.76rem] text-zinc-300 font-medium leading-relaxed">
-                Find this in your UPI app under Transaction History → the payment you just made → 'UPI Ref No.' or 'UTR.' It's always 12 digits.
-              </p>
-              <ul class="text-[0.72rem] text-zinc-400 font-medium leading-relaxed space-y-0.5 pt-0.5 border-t border-orange-500/15">
-                <li>• <strong>Google Pay:</strong> Look for <strong>"UPI transaction ID"</strong> (12 digits)</li>
-                <li>• <strong>PhonePe:</strong> Look for <strong>"UTR"</strong> (12 digits)</li>
-                <li>• <strong>Paytm / CRED:</strong> Look for <strong>"UPI Ref No."</strong> (12 digits)</li>
-              </ul>
-            </div>
-
-            <!-- UTR Input Field -->
-            <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-xs">
-                <label for="utrInputVal" class="font-bold text-zinc-300 uppercase text-[0.72rem]">
-                  12-Digit UPI Transaction ID / UTR <span class="text-rose-400">*</span>
-                </label>
-                <span id="utrDigitCounter" class="font-mono text-[0.7rem] text-zinc-500">0/12 digits</span>
-              </div>
-
-              <input
-                id="utrInputVal"
-                type="text"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                maxlength="12"
-                placeholder="e.g. 423589104523"
-                class="w-full px-4 py-3 bg-zinc-900 border-2 border-zinc-700 rounded-xl font-mono text-base font-bold text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 transition tracking-widest text-center"
-                required
-                autocomplete="off"
-              />
-              
-              <!-- Inline Error Display -->
-              <div id="utrInlineError" class="hidden text-xs text-rose-400 font-semibold flex items-center gap-1.5 pt-0.5">
-                <i data-lucide="alert-circle" class="w-3.5 h-3.5 inline shrink-0"></i>
-                <span id="utrInlineErrorText">Please enter exactly 12 numeric digits (no letters or spaces).</span>
-              </div>
-            </div>
-
-            <!-- Optional Screenshot Upload Field -->
-            <div class="space-y-2 p-3.5 bg-zinc-900/60 rounded-xl border border-zinc-800">
-              <div class="flex justify-between items-center text-xs">
-                <label for="paymentScreenshotInput" class="font-bold text-zinc-300 uppercase text-[0.72rem] flex items-center gap-1.5">
-                  <i data-lucide="upload" class="w-3.5 h-3.5 text-zinc-400"></i>
-                  <span>Upload payment screenshot <span class="text-zinc-500 font-normal lowercase">(optional)</span></span>
-                </label>
-              </div>
-              <p class="text-[0.7rem] text-zinc-400">
-                Helps fast-track verification if the UTR was mistyped or payment status is delayed.
-              </p>
-              
-              <input
-                id="paymentScreenshotInput"
-                type="file"
-                accept="image/*"
-                class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-zinc-800 file:text-zinc-200 hover:file:bg-zinc-700 cursor-pointer"
-              />
-              
-              <!-- Screenshot Preview Thumbnail Container -->
-              <div id="screenshotPreviewBox" class="hidden items-center justify-between p-2 bg-zinc-800/80 rounded-lg border border-zinc-700">
-                <div class="flex items-center gap-2.5 overflow-hidden">
-                  <img id="screenshotPreviewImg" src="" alt="Proof Preview" class="w-10 h-10 object-cover rounded border border-zinc-600 shrink-0" />
-                  <span id="screenshotPreviewName" class="text-xs text-zinc-300 font-mono truncate">screenshot.jpg</span>
-                </div>
-                <button
-                  type="button"
-                  id="btnRemoveScreenshot"
-                  class="text-xs text-rose-400 hover:text-rose-300 font-bold px-2 py-1 bg-zinc-900 rounded cursor-pointer shrink-0"
-                >
-                  ✕ Remove
-                </button>
-              </div>
-            </div>
-
-            <!-- Submit UTR Button -->
-            <button
-              type="submit"
-              id="btnSubmitUtr"
-              class="w-full min-h-[48px] py-3.5 px-4 rounded-xl font-black uppercase text-xs sm:text-sm tracking-wider transition-all flex items-center justify-center gap-2 bg-emerald-500 active:bg-emerald-400 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 cursor-pointer"
-            >
-              <i data-lucide="send" class="w-4 h-4 shrink-0"></i>
-              <span>Submit for Verification →</span>
-            </button>
-          </form>
-        </div>
-
-        <!-- STEP 3: SUCCESS CONFIRMATION STATE -->
+        <!-- SUCCESS CONFIRMATION STATE -->
         <div id="upiStepSuccess" class="hidden p-5 sm:p-6 text-center space-y-4 sm:space-y-5">
-          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-500/10 border-2 border-amber-500/30 text-amber-400 rounded-full flex items-center justify-center mx-auto">
-            <i data-lucide="clock" class="w-7 h-7 sm:w-8 sm:h-8"></i>
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-500/15 border-2 border-emerald-500/30 text-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
+            <i data-lucide="check-circle" class="w-8 h-8 text-emerald-400"></i>
           </div>
 
-          <div class="space-y-2.5 sm:space-y-3">
-            <span class="text-[0.68rem] sm:text-[0.7rem] font-mono font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 inline-block">
-              Verification in Progress ⏳
+          <div class="space-y-2">
+            <span class="text-[0.68rem] sm:text-[0.7rem] font-mono font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/25 inline-block">
+              Application & Payment Received ✓
             </span>
-            <h3 class="text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-              Application Received!
+            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+              Thank You for Applying!
             </h3>
             <p class="text-xs sm:text-sm font-medium text-zinc-300 leading-relaxed max-w-sm mx-auto">
-              Application received. We're verifying your payment manually — you'll get a confirmation email within a few hours, and interview slot details within 24 hours.
+              We have received your application and registration pass. <strong>You will get a confirmation email and WhatsApp message within 24 hours.</strong>
             </p>
           </div>
 
           <!-- Submitted Summary Pill -->
-          <div class="p-3 bg-zinc-900/80 rounded-xl border border-zinc-800 text-left text-xs space-y-1.5 font-mono">
+          <div class="p-3.5 bg-zinc-900/90 rounded-xl border border-zinc-800 text-left text-xs space-y-2 font-mono">
             <div class="flex justify-between">
               <span class="text-zinc-500">Applicant:</span>
               <span id="successApplicantName" class="text-white font-bold font-sans"></span>
             </div>
             <div class="flex justify-between">
-              <span class="text-zinc-500">UTR Entered:</span>
-              <span id="successUtrVal" class="text-orange-400 font-bold"></span>
+              <span class="text-zinc-500">Application ID:</span>
+              <span id="successOrderId" class="text-orange-400 font-bold">TFC-FEL-2026</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-zinc-500">Status:</span>
-              <span class="text-amber-400 font-bold">payment_pending_verification</span>
+              <span class="text-zinc-500">Next Step:</span>
+              <span class="text-emerald-400 font-bold">Email & WhatsApp confirmation (24h)</span>
             </div>
           </div>
 
           <button
             type="button"
-            onclick="closeUpiCheckoutModal()"
-            class="w-full min-h-[48px] py-3.5 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-white font-bold text-xs sm:text-sm uppercase rounded-xl border border-zinc-700 transition cursor-pointer"
+            onclick="finishCheckoutAndOpenDashboard()"
+            class="w-full min-h-[48px] py-3.5 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 text-black font-extrabold text-xs sm:text-sm uppercase rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20"
           >
-            Done / Return to Fellowship Hub
+            <span>Go to Fellowship Dashboard →</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
 
@@ -1111,21 +1201,6 @@
       const vpaDisplay = document.getElementById('displayUpiId');
       if (vpaDisplay) vpaDisplay.textContent = (window.TFC_CONFIG && window.TFC_CONFIG.UPI_ID) || UPI_CONFIG.upiId;
 
-      // Reset UTR form
-      const utrInput = document.getElementById('utrInputVal');
-      if (utrInput) utrInput.value = '';
-      const utrCounter = document.getElementById('utrDigitCounter');
-      if (utrCounter) utrCounter.textContent = '0/12 digits';
-      const inlineErr = document.getElementById('utrInlineError');
-      if (inlineErr) inlineErr.classList.add('hidden');
-
-      // Reset Screenshot
-      uploadedScreenshotBase64 = null;
-      const fileInput = document.getElementById('paymentScreenshotInput');
-      if (fileInput) fileInput.value = '';
-      const previewBox = document.getElementById('screenshotPreviewBox');
-      if (previewBox) previewBox.classList.add('hidden');
-
       setCheckoutStep('payment');
       startCheckoutTimer();
 
@@ -1147,16 +1222,13 @@
 
     window.setCheckoutStep = function(step) {
       const stepPayment = document.getElementById('upiStepPayment');
-      const stepUtr = document.getElementById('upiStepUtr');
       const stepSuccess = document.getElementById('upiStepSuccess');
 
-      stepPayment.classList.add('hidden');
-      stepUtr.classList.add('hidden');
-      stepSuccess.classList.add('hidden');
+      if (stepPayment) stepPayment.classList.add('hidden');
+      if (stepSuccess) stepSuccess.classList.add('hidden');
 
-      if (step === 'payment') stepPayment.classList.remove('hidden');
-      else if (step === 'utr') stepUtr.classList.remove('hidden');
-      else if (step === 'success') stepSuccess.classList.remove('hidden');
+      if (step === 'payment' && stepPayment) stepPayment.classList.remove('hidden');
+      else if (step === 'success' && stepSuccess) stepSuccess.classList.remove('hidden');
 
       if (window.lucide) lucide.createIcons();
     };
@@ -1192,174 +1264,306 @@
       });
     };
 
-    // Client-side UTR input event listener (numeric filtering & digit counter)
-    const utrInputEl = document.getElementById('utrInputVal');
-    if (utrInputEl) {
-      utrInputEl.addEventListener('input', (e) => {
-        // Strip non-digits
-        const filtered = e.target.value.replace(/[^0-9]/g, '');
-        e.target.value = filtered;
-
-        const counter = document.getElementById('utrDigitCounter');
-        if (counter) counter.textContent = `${filtered.length}/12 digits`;
-
-        const inlineErr = document.getElementById('utrInlineError');
-        if (filtered.length === 12 && inlineErr) {
-          inlineErr.classList.add('hidden');
-          e.target.classList.remove('border-rose-500');
-          e.target.classList.add('border-emerald-500');
-        } else {
-          e.target.classList.remove('border-emerald-500');
-        }
-      });
-    }
-
-    // Screenshot file input handling (resize and convert to base64)
-    const screenshotInputEl = document.getElementById('paymentScreenshotInput');
-    if (screenshotInputEl) {
-      screenshotInputEl.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        if (!file.type.startsWith('image/')) {
-          alert("Please select an image file (PNG, JPG, or WEBP).");
-          e.target.value = '';
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const maxDim = 800; // compress for lightweight storage
-            let w = img.width;
-            let h = img.height;
-            if (w > h && w > maxDim) {
-              h *= maxDim / w;
-              w = maxDim;
-            } else if (h > maxDim) {
-              w *= maxDim / h;
-              h = maxDim;
-            }
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
-            uploadedScreenshotBase64 = canvas.toDataURL('image/jpeg', 0.78);
-
-            // Show preview
-            const previewBox = document.getElementById('screenshotPreviewBox');
-            const previewImg = document.getElementById('screenshotPreviewImg');
-            const previewName = document.getElementById('screenshotPreviewName');
-            if (previewImg) previewImg.src = uploadedScreenshotBase64;
-            if (previewName) previewName.textContent = file.name;
-            if (previewBox) previewBox.classList.remove('hidden');
-          };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Remove screenshot button
-    const removeScreenshotBtn = document.getElementById('btnRemoveScreenshot');
-    if (removeScreenshotBtn) {
-      removeScreenshotBtn.addEventListener('click', () => {
-        uploadedScreenshotBase64 = null;
-        if (screenshotInputEl) screenshotInputEl.value = '';
-        const previewBox = document.getElementById('screenshotPreviewBox');
-        if (previewBox) previewBox.classList.add('hidden');
-      });
-    }
-
-    // Handle UTR Submit
-    window.handleUtrSubmit = async function(e) {
-      e.preventDefault();
-      const utrVal = document.getElementById('utrInputVal').value.trim();
-      const inlineErr = document.getElementById('utrInlineError');
-      const inlineErrText = document.getElementById('utrInlineErrorText');
-      const utrInput = document.getElementById('utrInputVal');
-
-      // Strict client-side validation: exactly 12 numeric digits
-      if (!/^\d{12}$/.test(utrVal)) {
-        if (inlineErr) {
-          inlineErrText.textContent = "Please enter a valid 12-digit numeric UPI Ref / UTR number.";
-          inlineErr.classList.remove('hidden');
-        }
-        if (utrInput) {
-          utrInput.classList.add('border-rose-500');
-          utrInput.focus();
-        }
-        return;
+    // Handle Payment Completed Click (No UTR Required)
+    window.handlePaymentCompleted = async function() {
+      const btn = document.getElementById('btnConfirmPaymentCompleted');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="tfc-auth-spinner"></span> <span>Confirming submission...</span>`;
       }
 
-      if (inlineErr) inlineErr.classList.add('hidden');
-      if (utrInput) utrInput.classList.remove('border-rose-500');
-
-      const submitBtn = document.getElementById('btnSubmitUtr');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>Saving Verification Details... ⏳</span>`;
+      const email = activeCheckoutOrder.email;
+      const timestamp = new Date().toISOString();
 
       try {
-        const email = activeCheckoutOrder.email;
         const { data: member } = await supabaseClient
           .from('members')
-          .select('id, college, image')
+          .select('id, college, member_id, name, image')
           .eq('email', email)
           .maybeSingle();
 
-        const timestamp = new Date().toISOString();
         let existingCollege = member ? (member.college || '') : '';
-
-        // Update PaymentStatus to payment_pending_verification
         if (existingCollege.includes('PaymentStatus: ')) {
-          existingCollege = existingCollege.replace(/PaymentStatus:\s*[^|]+/, 'PaymentStatus: payment_pending_verification');
-        } else if (existingCollege.includes('Payment: ')) {
-          existingCollege = existingCollege.replace(/Payment:\s*[^|]+/, 'PaymentStatus: payment_pending_verification');
+          existingCollege = existingCollege.replace(/PaymentStatus:\s*[^|]+/, 'PaymentStatus: payment_completed');
         } else {
-          existingCollege += ' | PaymentStatus: payment_pending_verification';
+          existingCollege += ' | PaymentStatus: payment_completed';
         }
 
-        // Add or update UTR
-        if (existingCollege.includes('UTR: ')) {
-          existingCollege = existingCollege.replace(/UTR:\s*[^|]+/, `UTR: ${utrVal}`);
-        } else {
-          existingCollege += ` | UTR: ${utrVal}`;
-        }
-
-        existingCollege += ` | PaymentSubmittedAt: ${timestamp}`;
-
-        const updatePayload = {
-          college: existingCollege
-        };
-
-        // If screenshot was uploaded, save it
-        if (uploadedScreenshotBase64) {
-          updatePayload.image = uploadedScreenshotBase64;
-          if (!existingCollege.includes('HasScreenshot: Yes')) {
-            updatePayload.college += ' | HasScreenshot: Yes';
-          }
-        }
+        existingCollege += ` | PaymentConfirmedAt: ${timestamp} | ConfirmedByApplicant: true`;
 
         await supabaseClient
           .from('members')
-          .update(updatePayload)
+          .update({
+            college: existingCollege
+          })
           .eq('email', email);
 
-        // Update Step 3 details
-        document.getElementById('successApplicantName').textContent = activeCheckoutOrder.name;
-        document.getElementById('successUtrVal').textContent = utrVal;
+        const orderId = activeCheckoutOrder.orderId || (member ? member.member_id : 'TFC-FEL-2026');
+        const applicantData = {
+          name: activeCheckoutOrder.name || (member ? member.name : 'Applicant'),
+          email: email,
+          phone: activeCheckoutOrder.phone || '',
+          college: activeCheckoutOrder.college || '',
+          orderId: orderId,
+          submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          q1: activeCheckoutOrder.q1 || '',
+          q4: activeCheckoutOrder.q4 || 'Delhi NCR Offline Sprints',
+          paymentStatus: 'payment_completed'
+        };
+
+        // Cache locally for this Google ID
+        localStorage.setItem('tfc_fellowship_applicant_' + email, JSON.stringify(applicantData));
+
+        document.getElementById('successApplicantName').textContent = applicantData.name;
+        const successOrderIdEl = document.getElementById('successOrderId');
+        if (successOrderIdEl) successOrderIdEl.textContent = applicantData.orderId;
 
         setCheckoutStep('success');
+
       } catch (err) {
-        console.error("UTR Verification submission error:", err);
-        alert("Verification update failed: " + err.message);
+        console.error("Payment status update notice:", err);
+        const applicantData = {
+          name: activeCheckoutOrder.name,
+          email: email,
+          phone: activeCheckoutOrder.phone,
+          college: activeCheckoutOrder.college,
+          orderId: activeCheckoutOrder.orderId || 'TFC-FEL-2026',
+          submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          paymentStatus: 'payment_completed'
+        };
+        localStorage.setItem('tfc_fellowship_applicant_' + email, JSON.stringify(applicantData));
+        document.getElementById('successApplicantName').textContent = applicantData.name;
+        setCheckoutStep('success');
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<span>Submit for Verification →</span>`;
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> <span>I have completed my payment ✓</span>`;
+        }
       }
     };
+
+    window.finishCheckoutAndOpenDashboard = function() {
+      closeUpiCheckoutModal();
+      const email = activeCheckoutOrder.email;
+      const cached = localStorage.getItem('tfc_fellowship_applicant_' + email);
+      if (cached) {
+        showFellowshipDashboard(JSON.parse(cached));
+      } else {
+        const user = window.TFCAuth ? window.TFCAuth.getUser() : null;
+        checkUserFellowshipStatus(user);
+      }
+      const applySec = document.getElementById('apply');
+      if (applySec) applySec.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Helper: Parse fellowship member data
+    function parseFellowshipMemberData(member, user) {
+      const collegeStr = (member && member.college) || '';
+      const name = (user && user.name) || (member && member.name) || 'Fellowship Founder';
+      const email = (user && user.email) || (member && member.email) || '';
+      const avatar = (user && user.avatar) || (member && member.image) || '';
+      const orderId = (member && member.member_id) || 'TFC-FEL-2026';
+
+      let phone = (user && user.phone) || '';
+      const phoneMatch = collegeStr.match(/Phone:\s*([^|]+)/);
+      if (phoneMatch) phone = phoneMatch[1].trim();
+
+      let college = '';
+      const collegeParts = collegeStr.split(' | ');
+      if (collegeParts.length > 0 && !collegeParts[0].includes(':')) {
+        college = collegeParts[0].trim();
+      }
+
+      let q1 = '';
+      const q1Match = collegeStr.match(/Q1:\s*([^|]+)/);
+      if (q1Match) q1 = q1Match[1].trim();
+
+      let q4 = 'Delhi NCR Offline Sprints';
+      const q4Match = collegeStr.match(/Q4:\s*([^|]+)/);
+      if (q4Match) q4 = q4Match[1].trim();
+
+      let submittedAt = '';
+      const dateMatch = collegeStr.match(/FormSubmittedAt:\s*([^|]+)/);
+      if (dateMatch) {
+        try {
+          submittedAt = new Date(dateMatch[1].trim()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } catch (e) {
+          submittedAt = dateMatch[1].trim();
+        }
+      } else {
+        submittedAt = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      return {
+        name,
+        email,
+        phone,
+        college: college || 'Founder Applicant',
+        orderId,
+        avatar,
+        q1: q1 || 'Early-stage tech venture application submitted.',
+        q4,
+        submittedAt,
+        paymentStatus: 'payment_completed'
+      };
+    }
+
+    // Helper: Show Fellowship Dashboard
+    function showFellowshipDashboard(applicantData) {
+      const applyCard = document.getElementById('fellowshipApplyCard');
+      const dashPanel = document.getElementById('fellowshipDashboardPanel');
+      if (applyCard) applyCard.classList.add('hidden');
+      if (dashPanel) dashPanel.classList.remove('hidden');
+
+      const nameEl = document.getElementById('dashUserName');
+      const emailEl = document.getElementById('dashUserEmail');
+      const avatarEl = document.getElementById('dashUserAvatar');
+      const orderIdEl = document.getElementById('dashApplicationId');
+      const collegeEl = document.getElementById('dashCollege');
+      const phoneEl = document.getElementById('dashPhone');
+      const submittedAtEl = document.getElementById('dashSubmittedAt');
+      const q1El = document.getElementById('dashQ1');
+      const q4El = document.getElementById('dashQ4');
+
+      if (nameEl) nameEl.textContent = applicantData.name || 'Applicant';
+      if (emailEl) emailEl.textContent = applicantData.email || '';
+      if (orderIdEl) orderIdEl.textContent = `ID: ${applicantData.orderId || 'TFC-FEL-2026'}`;
+      if (collegeEl) collegeEl.textContent = applicantData.college || 'Ecosystem Founder';
+      if (phoneEl) phoneEl.textContent = applicantData.phone || '-';
+      if (submittedAtEl) submittedAtEl.textContent = applicantData.submittedAt || 'Today';
+      if (q1El) q1El.textContent = `"${applicantData.q1 || 'Early-stage technology startup concept'}"`;
+      if (q4El) q4El.textContent = applicantData.q4 || 'Delhi NCR Offline Sprints';
+
+      if (avatarEl) {
+        if (applicantData.avatar) {
+          avatarEl.innerHTML = `<img src="${applicantData.avatar}" alt="${applicantData.name}" class="w-full h-full object-cover" />`;
+        } else {
+          const initial = (applicantData.name || 'F').charAt(0).toUpperCase();
+          avatarEl.textContent = initial;
+        }
+      }
+
+      // Update CTA buttons across the page
+      document.querySelectorAll('a[href="#apply"]').forEach(btn => {
+        btn.innerHTML = `<span>Fellowship Dashboard ⚡</span>`;
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const target = document.getElementById('apply');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        };
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Helper: Show Fellowship Application Form
+    function showFellowshipForm(user) {
+      const applyCard = document.getElementById('fellowshipApplyCard');
+      const dashPanel = document.getElementById('fellowshipDashboardPanel');
+      if (applyCard) applyCard.classList.remove('hidden');
+      if (dashPanel) dashPanel.classList.add('hidden');
+
+      const promptBox = document.getElementById('fellowshipAuthPrompt');
+      const activeBox = document.getElementById('fellowshipAuthActive');
+      const nameInput = document.getElementById('fName');
+      const emailInput = document.getElementById('fEmail');
+      const phoneInput = document.getElementById('fPhone');
+      const collegeInput = document.getElementById('fCollege');
+      const avatarEl = document.getElementById('fAuthAvatar');
+      const authNameEl = document.getElementById('fAuthName');
+      const authEmailEl = document.getElementById('fAuthEmail');
+
+      if (user) {
+        if (promptBox) promptBox.classList.add('hidden');
+        if (activeBox) activeBox.classList.remove('hidden');
+        if (authNameEl) authNameEl.textContent = user.name || 'Applicant';
+        if (authEmailEl) authEmailEl.textContent = user.email || '';
+        if (avatarEl) {
+          if (user.avatar) {
+            avatarEl.innerHTML = `<img src="${user.avatar}" alt="${user.name}" class="w-full h-full object-cover" />`;
+          } else {
+            avatarEl.textContent = (user.name || 'F').charAt(0).toUpperCase();
+          }
+        }
+        if (nameInput) {
+          nameInput.value = user.name || '';
+          nameInput.readOnly = true;
+          nameInput.style.backgroundColor = 'rgba(20,17,15,0.04)';
+        }
+        if (emailInput) {
+          emailInput.value = user.email || '';
+          emailInput.readOnly = true;
+          emailInput.style.backgroundColor = 'rgba(20,17,15,0.04)';
+        }
+        if (phoneInput && user.phone && !phoneInput.value) {
+          phoneInput.value = user.phone;
+        }
+        if (collegeInput && !collegeInput.value && user.college && user.college !== 'Ecosystem Member') {
+          collegeInput.value = user.college.split(' | ')[0].trim();
+        }
+        window.TFCAuth.initFormDraftAutoSave('fellowshipDirectForm');
+      } else {
+        if (promptBox) promptBox.classList.remove('hidden');
+        if (activeBox) activeBox.classList.add('hidden');
+        if (nameInput) {
+          nameInput.value = '';
+          nameInput.readOnly = false;
+          nameInput.style.backgroundColor = '';
+        }
+        if (emailInput) {
+          emailInput.value = '';
+          emailInput.readOnly = false;
+          emailInput.style.backgroundColor = '';
+        }
+      }
+    }
+
+    // Check if user already submitted fellowship application once with this Google ID
+    async function checkUserFellowshipStatus(user) {
+      if (!user) {
+        showFellowshipForm(null);
+        return;
+      }
+
+      // 1. Check local storage cache first
+      const cachedStr = localStorage.getItem('tfc_fellowship_applicant_' + user.email);
+      if (cachedStr) {
+        try {
+          const cachedData = JSON.parse(cachedStr);
+          showFellowshipDashboard(cachedData);
+          return;
+        } catch (e) {
+          console.warn("Cached applicant parse error:", e);
+        }
+      }
+
+      // 2. Query Supabase
+      try {
+        const { data: member, error } = await supabaseClient
+          .from('members')
+          .select('*')
+          .eq('email', user.email)
+          .maybeSingle();
+
+        if (!error && member) {
+          const collegeStr = member.college || '';
+          const isApplicant = collegeStr.includes('Source: FellowshipPage') ||
+                              (member.member_id && member.member_id.startsWith('TFC-FEL')) ||
+                              collegeStr.includes('PaymentStatus:');
+
+          if (isApplicant) {
+            const applicantData = parseFellowshipMemberData(member, user);
+            localStorage.setItem('tfc_fellowship_applicant_' + user.email, JSON.stringify(applicantData));
+            showFellowshipDashboard(applicantData);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn("Supabase fellowship applicant lookup notice:", err);
+      }
+
+      showFellowshipForm(user);
+    }
 
     // Direct Fellowship Application Form submit with Early Status Tracking
     const fForm = document.getElementById('fellowshipDirectForm');
@@ -1367,6 +1571,18 @@
       fForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = fForm.querySelector('button[type="submit"]');
+
+        // STRICT MANDATORY GOOGLE AUTH CHECK FOR FELLOWSHIP
+        if (window.TFCAuth && !window.TFCAuth.isAuthenticated()) {
+          window.TFCAuth.openLoginModal({
+            context: 'fellowship',
+            onSuccess: () => {
+              fForm.requestSubmit();
+            }
+          });
+          return;
+        }
+
         btn.disabled = true;
         btn.textContent = 'Saving Application & Launching Payment... ⚡';
 
@@ -1404,7 +1620,6 @@
               image: ''
             }]);
           } else {
-            // Update existing record to record the latest form submission
             await supabaseClient.from('members').update({
               name: name,
               college: combinedCollege
@@ -1417,6 +1632,8 @@
             email: email,
             phone: phone,
             college: college,
+            q1: q1,
+            q4: q4,
             orderId: memberId || 'TFC-FEL-2026',
             amount: 1999
           });
@@ -1447,68 +1664,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       if (!window.TFCAuth) return;
 
-      const promptBox = document.getElementById('fellowshipAuthPrompt');
-      const activeBox = document.getElementById('fellowshipAuthActive');
-      const nameInput = document.getElementById('fName');
-      const emailInput = document.getElementById('fEmail');
-      const phoneInput = document.getElementById('fPhone');
-      const collegeInput = document.getElementById('fCollege');
-      const avatarEl = document.getElementById('fAuthAvatar');
-      const authNameEl = document.getElementById('fAuthName');
-      const authEmailEl = document.getElementById('fAuthEmail');
-
       window.TFCAuth.onAuthStateChanged((user) => {
-        if (user) {
-          if (promptBox) promptBox.classList.add('hidden');
-          if (activeBox) activeBox.classList.remove('hidden');
-
-          if (authNameEl) authNameEl.textContent = user.name || 'Applicant';
-          if (authEmailEl) authEmailEl.textContent = user.email || '';
-
-          if (avatarEl) {
-            if (user.avatar) {
-              avatarEl.innerHTML = `<img src="${user.avatar}" alt="${user.name}" class="w-full h-full object-cover" />`;
-            } else {
-              const initials = (user.name || 'F').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-              avatarEl.textContent = initials;
-            }
-          }
-
-          if (nameInput) {
-            nameInput.value = user.name || '';
-            nameInput.readOnly = true;
-            nameInput.style.backgroundColor = 'rgba(20,17,15,0.04)';
-          }
-
-          if (emailInput) {
-            emailInput.value = user.email || '';
-            emailInput.readOnly = true;
-            emailInput.style.backgroundColor = 'rgba(20,17,15,0.04)';
-          }
-
-          if (phoneInput && user.phone && !phoneInput.value) {
-            phoneInput.value = user.phone;
-          }
-
-          if (collegeInput && !collegeInput.value && user.college && user.college !== 'Ecosystem Member') {
-            collegeInput.value = user.college.split(' | ')[0].trim();
-          }
-
-          // Initialize draft auto-save
-          window.TFCAuth.initFormDraftAutoSave('fellowshipDirectForm');
-        } else {
-          if (promptBox) promptBox.classList.remove('hidden');
-          if (activeBox) activeBox.classList.add('hidden');
-
-          if (nameInput) {
-            nameInput.readOnly = false;
-            nameInput.style.backgroundColor = '';
-          }
-          if (emailInput) {
-            emailInput.readOnly = false;
-            emailInput.style.backgroundColor = '';
-          }
-        }
+        checkUserFellowshipStatus(user);
       });
 
       // Intercept CTA "Apply Now" buttons to prompt Google sign-in if unauthenticated
@@ -1523,6 +1680,25 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
               }
             });
+          }
+        });
+      });
+
+      // Initialize FAQ Accordion
+      const accordionItems = document.querySelectorAll('.tfc-accordion-item');
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.tfc-accordion-header');
+        if (!header) return;
+        header.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          const parent = item.closest('.tfc-accordion');
+          if (parent) {
+            parent.querySelectorAll('.tfc-accordion-item').forEach(other => {
+              other.classList.remove('active');
+            });
+          }
+          if (!isActive) {
+            item.classList.add('active');
           }
         });
       });

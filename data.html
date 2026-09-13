@@ -538,39 +538,49 @@
       let resData = null;
 
       const parts = college.split(' | ');
-      let displayName = parts[0];
+      let displayName = parts[0] ? parts[0].trim() : '';
 
       parts.forEach(part => {
-        if (part.startsWith('Phone: ')) {
-          phone = part.replace('Phone: ', '').trim();
-        } else if (part.startsWith('Country: ')) {
-          country = part.replace('Country: ', '').trim();
-        } else if (part.startsWith('RefCode: ')) {
-          refCode = part.replace('RefCode: ', '').trim();
-        } else if (part.startsWith('RefBy: ')) {
-          refBy = part.replace('RefBy: ', '').trim();
-        } else if (part.startsWith('Fellowship: ')) {
-          fellowship = part.replace('Fellowship: ', '').trim();
-        } else if (part.startsWith('Society: ')) {
-          societyName = part.replace('Society: ', '').trim();
-        } else if (part.startsWith('Source: ')) {
-          source = part.replace('Source: ', '').trim();
-        } else if (part.startsWith('Q1: ')) {
-          q1 = part.replace('Q1: ', '').trim();
-        } else if (part.startsWith('Q2: ')) {
-          q2 = part.replace('Q2: ', '').trim();
-        } else if (part.startsWith('Q3: ')) {
-          q3 = part.replace('Q3: ', '').trim();
-        } else if (part.startsWith('Q4: ')) {
-          q4 = part.replace('Q4: ', '').trim();
-        } else if (part.startsWith('Payment: ')) {
-          payment = part.replace('Payment: ', '').trim();
-        } else if (part.startsWith('ResData: ')) {
+        const trimmed = part.trim();
+        if (/^phone:\s*/i.test(trimmed)) {
+          phone = trimmed.replace(/^phone:\s*/i, '').trim();
+        } else if (/^country:\s*/i.test(trimmed)) {
+          country = trimmed.replace(/^country:\s*/i, '').trim();
+        } else if (/^refcode:\s*/i.test(trimmed)) {
+          refCode = trimmed.replace(/^refcode:\s*/i, '').trim();
+        } else if (/^refby:\s*/i.test(trimmed)) {
+          refBy = trimmed.replace(/^refby:\s*/i, '').trim();
+        } else if (/^fellowship:\s*/i.test(trimmed)) {
+          fellowship = trimmed.replace(/^fellowship:\s*/i, '').trim();
+        } else if (/^society:\s*/i.test(trimmed)) {
+          societyName = trimmed.replace(/^society:\s*/i, '').trim();
+        } else if (/^source:\s*/i.test(trimmed)) {
+          source = trimmed.replace(/^source:\s*/i, '').trim();
+        } else if (/^q1:\s*/i.test(trimmed)) {
+          q1 = trimmed.replace(/^q1:\s*/i, '').trim();
+        } else if (/^q2:\s*/i.test(trimmed)) {
+          q2 = trimmed.replace(/^q2:\s*/i, '').trim();
+        } else if (/^q3:\s*/i.test(trimmed)) {
+          q3 = trimmed.replace(/^q3:\s*/i, '').trim();
+        } else if (/^q4:\s*/i.test(trimmed)) {
+          q4 = trimmed.replace(/^q4:\s*/i, '').trim();
+        } else if (/^payment:\s*/i.test(trimmed)) {
+          payment = trimmed.replace(/^payment:\s*/i, '').trim();
+        } else if (/^resdata:\s*/i.test(trimmed)) {
           try {
-            resData = JSON.parse(part.replace('ResData: ', '').trim());
+            resData = JSON.parse(trimmed.replace(/^resdata:\s*/i, '').trim());
           } catch(e) {}
         }
       });
+
+      if (!phone && memberObj && memberObj.phone) {
+        phone = memberObj.phone.trim();
+      }
+
+      const isGoogleAuth = memberObj && (
+        memberObj.password === 'google_oauth_verified' || 
+        (memberObj.image && memberObj.image.includes('googleusercontent.com'))
+      );
 
       if (!source && memberObj) {
         const memId = memberObj.member_id || '';
@@ -581,12 +591,18 @@
           source = 'FellowshipPage';
         } else if (memId.startsWith('TFC-AID-')) {
           source = 'FinancialAid';
+        } else if (isGoogleAuth) {
+          source = 'GoogleAuth';
         } else {
           source = 'JoinPage';
         }
       }
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment, resData };
+      if (!displayName || displayName === 'Ecosystem Member') {
+        displayName = isGoogleAuth ? 'Ecosystem Member (Google)' : (displayName || 'Not Specified');
+      }
+
+      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment, resData, isGoogleAuth };
     }
 
     // Helper: format seconds to '1m 24s' or '45s' or '1h 12m'
@@ -1173,12 +1189,31 @@
       currentFilteredMembers.forEach(m => {
         const meta = parseCollegeField(m.college, m);
         const hasAnswers = meta.q1 || meta.q2 || meta.q3 || meta.q4;
+        const isGoogleUser = meta.isGoogleAuth || (m.password === 'google_oauth_verified') || (m.image && m.image.includes('googleusercontent.com'));
+
+        // Handle empty or blank names cleanly
+        let rawName = (m.name || '').trim();
+        let displayName = rawName;
+        let nameNotice = '';
+        if (!displayName) {
+          if (m.email && m.email.trim()) {
+            const userPrefix = m.email.split('@')[0];
+            displayName = userPrefix.charAt(0).toUpperCase() + userPrefix.slice(1);
+            nameNotice = `<span class="text-[0.62rem] text-amber-600 font-bold block">(Inferred from email)</span>`;
+          } else {
+            displayName = isGoogleUser ? 'Google User (Name Pending)' : 'Unspecified User';
+            nameNotice = `<span class="text-[0.62rem] text-red-500 font-bold block">(Missing name)</span>`;
+          }
+        }
+
+        const displayEmail = (m.email || '').trim() || '<span class="text-red-500 italic text-xs">No email provided</span>';
 
         let waUrl = '';
         if (meta.phone) {
           let cleanPhone = meta.phone.replace(/[^0-9]/g, '');
           if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-          const msg = `Hey ${m.name.split(' ')[0]}! This is Brahmleen from The Future Council. Great to see you registered on our ecosystem. Let's hop on a call to review your Fellowship/Builder details!`;
+          const firstName = displayName.split(' ')[0] || 'there';
+          const msg = `Hey ${firstName}! This is Brahmleen from The Future Council. Great to see you registered on our ecosystem. Let's hop on a call to review your Fellowship/Builder details!`;
           waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
         }
 
@@ -1189,6 +1224,13 @@
           </div>
         `;
 
+        const googleBadge = isGoogleUser
+          ? `<span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 border border-blue-200 text-[0.6rem] font-black uppercase px-1.5 py-0.5 rounded ml-1" title="Authenticated via Google OAuth">
+              <svg width="10" height="10" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+              Google
+            </span>`
+          : '';
+
         let sourceBadge = '';
         if (meta.source === 'JoinPage') {
           sourceBadge = `<span class="bg-green-100 text-green-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-green-300 ml-1">Join Portal</span>`;
@@ -1198,6 +1240,8 @@
           sourceBadge = `<span class="bg-purple-100 text-purple-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-purple-300 ml-1">Ambassador Form</span>`;
         } else if (meta.source === 'FinancialAid') {
           sourceBadge = `<span class="bg-yellow-100 text-yellow-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-yellow-300 ml-1">Financial Aid</span>`;
+        } else if (meta.source === 'GoogleAuth') {
+          sourceBadge = `<span class="bg-blue-100 text-blue-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-blue-300 ml-1">Google Auth</span>`;
         }
 
         const row = document.createElement('tr');
@@ -1206,15 +1250,17 @@
         }
         row.innerHTML = `
           <td>
-            <div class="flex items-center gap-1">
-              <div class="font-extrabold text-black text-sm">${m.name}</div>
+            <div class="flex items-center gap-1 flex-wrap">
+              <div class="font-extrabold text-black text-sm">${displayName}</div>
+              ${googleBadge}
               ${sourceBadge}
             </div>
-            <div class="text-xs text-gray-500 font-semibold font-mono">${m.email}</div>
+            ${nameNotice}
+            <div class="text-xs text-gray-500 font-semibold font-mono">${displayEmail}</div>
             ${meta.country ? `<div class="text-[0.68rem] text-orange-600 font-extrabold mt-0.5">🌐 ${meta.country.toUpperCase()}</div>` : ''}
           </td>
           <td><span class="font-bold">${meta.displayName}</span></td>
-          <td><span class="font-mono text-xs font-bold">${meta.phone || 'No Phone'}</span></td>
+          <td><span class="font-mono text-xs font-bold ${meta.phone ? 'text-gray-900' : 'text-gray-400'}">${meta.phone || 'No Phone'}</span></td>
           <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded bg-gray-100">${m.tier}</span></td>
           <td>
             ${meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' ? '<span class="font-extrabold text-xs uppercase text-green-600 bg-green-50 px-2 block mb-1">Interested 🚀</span>' : '<span class="text-gray-400 text-xs font-bold block mb-1">No</span>'}
@@ -1344,9 +1390,14 @@
 
       exportList.forEach(m => {
         const meta = parseCollegeField(m.college, m);
+        let nameVal = (m.name || '').trim();
+        if (!nameVal && m.email) {
+          const userPrefix = m.email.split('@')[0];
+          nameVal = userPrefix.charAt(0).toUpperCase() + userPrefix.slice(1);
+        }
         const row = [
           m.member_id || m.id,
-          `"${(m.name || '').replace(/"/g, '""')}"`,
+          `"${nameVal.replace(/"/g, '""')}"`,
           m.email || '',
           `"${(meta.displayName || '').replace(/"/g, '""')}"`,
           meta.phone || '',
