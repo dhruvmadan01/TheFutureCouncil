@@ -255,6 +255,77 @@ p {
   box-shadow: 0 6px 18px rgba(255, 122, 61, 0.34);
 }
 
+/* Official Google SSO Button (Clean, Modern, Spec-compliant) */
+.tfc-btn-google {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  border: 1.5px solid #e5e7eb !important;
+  border-radius: 9999px !important;
+  padding: 10px 22px !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: -0.01em !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+}
+
+.tfc-btn-google:hover {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.03) !important;
+  transform: translateY(-1px) !important;
+}
+
+.tfc-btn-google:active {
+  background: #f8fafc !important;
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.tfc-btn-google-lg {
+  padding: 14px 28px !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+}
+
+.tfc-btn-google-lg:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.tfc-btn-google svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tfc-btn-google-lg svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tfc-btn-google .tfc-arrow {
+  color: var(--primary-orange);
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.tfc-btn-google:hover .tfc-arrow {
+  transform: translateX(3px);
+}
+
 .tfc-btn-outline {
   background: transparent;
   color: var(--ink) !important;
@@ -449,7 +520,7 @@ p {
 
 .tfc-accordion-item.active .tfc-accordion-body,
 .tfc-accordion-item.active .tfc-accordion-content {
-  display: block;
+  display: block !important;
 }
 
 .tfc-accordion-item.active .tfc-accordion-icon {

@@ -173,12 +173,14 @@ function initAccordions() {
     const items = document.querySelectorAll('.tfc-accordion-item');
     items.forEach(item => {
         const header = item.querySelector('.tfc-accordion-header');
-        if (!header) return;
+        if (!header || header.dataset.accordionBound) return;
+        header.dataset.accordionBound = 'true';
 
-        header.addEventListener('click', () => {
+        header.addEventListener('click', (e) => {
+            e.preventDefault();
             const isOpen = item.classList.contains('active');
             
-            // Optional: close other open items in the same accordion group
+            // Close other open items in the same accordion group unless multi-expand is allowed
             const parent = item.closest('.tfc-accordion');
             if (parent && !parent.hasAttribute('data-multi-expand')) {
                 parent.querySelectorAll('.tfc-accordion-item').forEach(other => {
@@ -194,6 +196,7 @@ function initAccordions() {
         });
     });
 }
+window.initAccordions = initAccordions;
 
 /**
  * Highlights the current active navigation item based on path
