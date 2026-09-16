@@ -46,6 +46,28 @@
     return collegeStr.split(' | ')[0].trim();
   }
 
+  // Helper to push user registration / login to Zoho CRM
+  function syncToZohoCrm(userData, eventContext = '') {
+    if (!userData || !userData.email) return;
+    try {
+      const payload = {
+        name: userData.name || '',
+        email: userData.email || '',
+        phone: userData.phone || extractPhoneFromCollege(userData.college),
+        college: userData.college || '',
+        tier: userData.tier || 'Student',
+        member_id: userData.member_id || '',
+        source: eventContext || (userData.college && userData.college.includes('Source: ') ? userData.college.split('Source: ')[1].split(' | ')[0] : 'Website Auth')
+      };
+      fetch('/api/zoho-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('[ZohoSync] Async push notice:', err));
+    } catch (e) {}
+  }
+  window.syncToZoho = syncToZohoCrm;
+
   // Initialize from persisted storage
   function loadStoredSession() {
     try {
@@ -372,6 +394,7 @@
       // Signing up on the website != Joining the council.
       // Persist session, close modal, and notify success immediately.
       persistSession(existingUser, true);
+      syncToZohoCrm(existingUser, 'Google Auth Sign-in');
       closeModal();
       if (typeof onSuccess === 'function') onSuccess(existingUser);
     } catch (err) {
@@ -1063,6 +1086,9 @@
         }
       }
 
+      // Sync updated profile to Zoho CRM
+      syncToZohoCrm(updatedUser, context ? 'Profile Modal (' + context + ')' : 'Profile Onboarding');
+
       onComplete(updatedUser);
     });
   }
@@ -1302,6 +1328,7 @@
 
   // --- Public API ---
   window.TFCAuth = {
+    syncToZoho: syncToZohoCrm,
     init: function () {
       loadStoredSession();
       updateNavUI();

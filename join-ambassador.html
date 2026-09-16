@@ -748,6 +748,34 @@
 
         if (insertError) throw insertError;
 
+        // Real-time Push to Zoho CRM
+        try {
+          const zohoPayload = {
+            name: name,
+            email: email,
+            phone: phone,
+            college: collegeString,
+            tier: 'Campus Ambassador',
+            member_id: ambassadorCode,
+            source: 'Campus Ambassador Application',
+            details: {
+              college: collegeName,
+              instagram: igHandle,
+              whyJoin: whyJoin,
+              referralCode: ambassadorCode
+            }
+          };
+          if (typeof window.syncToZoho === 'function') {
+            window.syncToZoho(zohoPayload, 'Campus Ambassador Application');
+          } else {
+            fetch('/api/zoho-sync', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(zohoPayload)
+            }).catch(e => console.warn('[Zoho] Push error:', e));
+          }
+        } catch(e) {}
+
         // Auto-save session for seamless 1-click workspace entry
         sessionStorage.setItem('tfc_ambassador_session', JSON.stringify(ambassadorData));
         if (window.TFCAuth) {

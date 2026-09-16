@@ -953,6 +953,23 @@
 
         // Start active duration & open tracking
         startResourceTracking(email, memberName);
+
+        // Push lead / access event to Zoho CRM
+        try {
+          fetch('/api/zoho-sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: memberName || email.split('@')[0],
+              email: email,
+              source: 'Resource Download - Networking Swipe File',
+              details: {
+                resource: 'The Cold-to-Warm Networking Swipe File',
+                unlockedAt: new Date().toISOString()
+              }
+            })
+          }).catch(e => console.warn('[Zoho] Push notice:', e));
+        } catch(e) {}
       }
 
       // Lock UI Helper

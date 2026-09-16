@@ -145,7 +145,10 @@
             </p>
           </div>
 
-          <div class="flex gap-2">
+          <div class="flex items-center gap-2">
+            <button onclick="triggerZohoSync()" id="btnZohoSync" class="tfc-btn tfc-btn-primary flex items-center gap-1.5" style="padding: 8px 16px; font-size: 0.82rem; background: #e04a2f; border-color: #e04a2f;">
+              <span id="zohoSyncIcon">⚡</span> <span id="zohoSyncText">Sync to Zoho CRM</span>
+            </button>
             <a href="index.html" class="tfc-btn tfc-btn-outline" style="padding: 8px 16px; font-size: 0.82rem;">
               ← Back to Website
             </a>
@@ -1432,6 +1435,41 @@
     document.getElementById('resSearchInput')?.addEventListener('input', renderResourceTable);
     document.getElementById('resResourceFilter')?.addEventListener('change', renderResourceTable);
     document.getElementById('resEngagementFilter')?.addEventListener('change', renderResourceTable);
+
+    // Zoho CRM Synchronization Handler
+    window.triggerZohoSync = async function() {
+      const btn = document.getElementById('btnZohoSync');
+      const icon = document.getElementById('zohoSyncIcon');
+      const text = document.getElementById('zohoSyncText');
+
+      btn.disabled = true;
+      icon.textContent = '⏳';
+      text.textContent = 'Syncing to Zoho CRM...';
+
+      try {
+        const res = await fetch('/api/zoho-sync?action=sync_all', { method: 'POST' });
+        const data = await res.json();
+        if (data.success && data.summary) {
+          alert(`✅ Zoho CRM Sync Complete!\n\nTotal records processed: ${data.summary.total}\nNew leads added: ${data.summary.inserted}\nExisting leads updated: ${data.summary.updated}\nErrors: ${data.summary.errors.length}`);
+          text.textContent = `Synced (${data.summary.total})`;
+          icon.textContent = '✅';
+        } else {
+          alert('⚠️ Sync notice: ' + (data.error || JSON.stringify(data)));
+          text.textContent = 'Sync Notice';
+          icon.textContent = '⚠️';
+        }
+      } catch (err) {
+        alert('❌ Error contacting Zoho Sync API: ' + err.message);
+        text.textContent = 'Sync to Zoho CRM';
+        icon.textContent = '⚡';
+      } finally {
+        setTimeout(() => {
+          btn.disabled = false;
+          text.textContent = 'Sync to Zoho CRM';
+          icon.textContent = '⚡';
+        }, 3500);
+      }
+    };
 
     // Run auth checker
     checkAuth();

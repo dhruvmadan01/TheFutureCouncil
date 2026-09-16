@@ -990,6 +990,28 @@
               if (insertError) throw insertError;
             }
 
+            // Real-time Push to Zoho CRM
+            try {
+              const zohoPayload = {
+                name: currentName,
+                email: currentEmail,
+                phone: currentPhone || '',
+                college: finalCollegeData,
+                tier: 'Student',
+                member_id: currentMemberId,
+                source: 'Join Council Page'
+              };
+              if (typeof window.syncToZoho === 'function') {
+                window.syncToZoho(zohoPayload, 'Join Council Application');
+              } else {
+                fetch('/api/zoho-sync', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(zohoPayload)
+                }).catch(e => console.warn('[Zoho] Push error:', e));
+              }
+            } catch(e) {}
+
             // Populate Member Card
             document.getElementById('cardMemberName').textContent = currentName;
             document.getElementById('cardMemberCollege').textContent = currentCollegeText;
