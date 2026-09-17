@@ -9,7 +9,7 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://thefuturecouncil.in/privacy" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff7a3d" />
+  <meta name="theme-color" content="#E2542A" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -35,8 +35,8 @@
       transition: all 0.15s ease;
     }
     .legal-toc-link:hover, .legal-toc-link.active {
-      color: var(--primary-orange);
-      background: rgba(255, 122, 61, 0.08);
+      color: var(--accent);
+      background: rgba(226, 84, 42, 0.08);
       font-weight: 700;
     }
     .legal-section {
@@ -81,14 +81,14 @@
       </a>
 
       <ul class="tfc-nav-links">
-        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
         <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
         <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -105,14 +105,11 @@
     </div>
 
     <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
       <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
       <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="terms.html" class="tfc-mobile-nav-link">Terms & Conditions</a></li>
-      <li><a href="privacy.html" class="tfc-mobile-nav-link active">Privacy Policy</a></li>
-      <li><a href="refund.html" class="tfc-mobile-nav-link">Refund Policy</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
     </ul>
 
     <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
@@ -228,48 +225,62 @@
     </section>
   </main>
 
-  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
+  <!-- Sticky Mobile Bar -->
   <aside class="tfc-mobile-sticky-bar">
     <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30</div>
+      <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Fellowship '26</div>
+      <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Closes Sep 30, 7PM IST</div>
     </div>
-    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+    <a href="fellowship.html#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply for Fellowship '26 →</a>
   </aside>
 
-  <!-- Clean Footer (Ref p. 05 & 14) -->
-  <footer class="tfc-footer">
+  <!-- Global Footer (§2) -->
+  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 56px 0 32px;">
     <div class="tfc-container">
-      <div class="tfc-footer-row">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand">
+      <div class="tfc-footer-grid">
+        <div>
+          <a href="index.html" class="tfc-brand" style="color: #FFFFFF; text-decoration: none; margin-bottom: 12px; display: inline-flex;">
             <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
             <span>THE FUTURE COUNCIL</span>
           </a>
-          <span style="color: var(--border-subtle);">|</span>
-          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+          <p style="color: var(--paper-70); font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-top: 8px;">
+            Where student builders stop waiting for permission.
+          </p>
         </div>
 
-        <div class="tfc-footer-links">
-          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
-          <a href="branches.html" class="tfc-footer-link">Branches</a>
-          <a href="resources.html" class="tfc-footer-link">Resources</a>
-          <a href="partners.html" class="tfc-footer-link">Partners</a>
-          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
-          <a href="terms.html" class="tfc-footer-link">Terms</a>
-          <a href="privacy.html" class="tfc-footer-link active">Privacy</a>
-          <a href="refund.html" class="tfc-footer-link">Refunds</a>
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Program</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="fellowship.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Fellowship '26</a></li>
+            <li><a href="join-ambassador.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Apply as Ambassador</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Ecosystem</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="branches.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Branches</a></li>
+            <li><a href="resources.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Resources</a></li>
+            <li><a href="partners.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Partners</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Legal</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="terms.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Terms</a></li>
+            <li><a href="privacy.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Privacy</a></li>
+            <li><a href="refund.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Refunds</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
-        <div>
-          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
-        </div>
-        <div style="display: flex; gap: 18px;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--paper-70);">
+        <div>© 2026 The Future Council · thefuturecouncil.in</div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper-70); text-decoration: none;">support@thefuturecouncil.in</a>
         </div>
       </div>
     </div>

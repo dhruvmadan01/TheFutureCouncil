@@ -1,39 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Public+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
 :root {
-  /* TFC Design System Foundations */
-  --primary-orange: #FF7A3D;
-  --orange: #FF7A3D;
-  --ink: #14110F;
-  --cream-bg: #FBF8F3;
+  /* Future Council Redesign Spec v2.0 Tokens (§1) */
+  --ink: #0E0D0C;
+  --paper: #FBF8F4;
+  --accent: #E2542A;
+  --accent-dim: #7A2E17;
+  --ink-70: #0E0D0CB3;
+  --paper-70: #FBF8F4B3;
+  --success: #3E8E5A;
+  --warn: #C24B2E;
+
+  /* Aliases & Shared Design Tokens */
+  --primary-orange: #E2542A;
+  --orange: #E2542A;
+  --cream-bg: #FBF8F4;
   --accent-lime: #C7F464;
   --ink-soft: #4A453F;
   --card-bg: #FFFFFF;
-  --border-subtle: rgba(20, 17, 15, 0.10);
-  --border-strong: #14110F;
-  --offwhite: #FBF8F3;
+  --border-subtle: rgba(14, 13, 12, 0.10);
+  --border-strong: #0E0D0C;
+  --offwhite: #FBF8F4;
   --charcoal: #1E1E1E;
 
-  /* Digital Relaunch Tokens (Build Brief §3) */
-  --c-ink: #14161A;
-  --c-paper: #F3F1EA;
+  /* Digital Relaunch Tokens */
+  --c-ink: #0E0D0C;
+  --c-paper: #FBF8F4;
   --c-ember: #E2542A;
   --c-teal: #17494A;
   --c-sand: #C9C2B0;
 
   /* Typography */
   --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', 'Public Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
   --font-display: 'Fraunces', Georgia, serif;
   --font-public-body: 'Public Sans', system-ui, -apple-system, sans-serif;
   --font-utility: 'IBM Plex Mono', monospace;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(20, 17, 15, 0.05);
-  --shadow-md: 0 4px 14px rgba(20, 17, 15, 0.06), 0 1px 2px rgba(20, 17, 15, 0.04);
-  --shadow-lg: 0 10px 30px rgba(20, 17, 15, 0.08), 0 2px 6px rgba(20, 17, 15, 0.04);
-  --shadow-orange: 0 6px 20px rgba(255, 122, 61, 0.28);
+  --shadow-sm: 0 1px 3px rgba(14, 13, 12, 0.05);
+  --shadow-md: 0 4px 14px rgba(14, 13, 12, 0.06), 0 1px 2px rgba(14, 13, 12, 0.04);
+  --shadow-lg: 0 10px 30px rgba(14, 13, 12, 0.08), 0 2px 6px rgba(14, 13, 12, 0.04);
+  --shadow-orange: 0 6px 20px rgba(226, 84, 42, 0.28);
+  --shadow-accent: 0 6px 20px rgba(226, 84, 42, 0.28);
 }
 
 * {
@@ -3274,7 +3284,7 @@ textarea.form-control {
   background: var(--c-ink);
   color: var(--c-paper);
   padding: 12px 20px;
-  box-shadow: 0 -4px 20px rgba(20, 22, 26, 0.25);
+  box-shadow: 0 -4px 20px rgba(14, 13, 12, 0.25);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -3282,6 +3292,148 @@ textarea.form-control {
   gap: 16px;
 }
 
+/* ==========================================================================
+   SHARED COMPONENT LIBRARY (SPEC §1)
+   ========================================================================== */
 
+/* Standardized Benefit Card (Fellowship, Join, Ambassador) */
+.tfc-benefit-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(14, 13, 12, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
 
-
+.tfc-benefit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(226, 84, 42, 0.3);
+}
+
+.tfc-benefit-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tfc-benefit-card-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tfc-benefit-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.tfc-benefit-card-body {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Standardized Pill Progress Stepper (§1) */
+.tfc-pill-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tfc-pill-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: var(--paper);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tfc-pill-step:hover {
+  border-color: rgba(226, 84, 42, 0.4);
+}
+
+.tfc-pill-step.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(226, 84, 42, 0.28);
+}
+
+.tfc-pill-step.completed {
+  background: rgba(62, 142, 90, 0.12);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.tfc-pill-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--ink);
+  line-height: 1;
+}
+
+.tfc-pill-step.active .tfc-pill-step-num {
+  background: #FFFFFF;
+  color: var(--accent);
+}
+
+.tfc-pill-step.completed .tfc-pill-step-num {
+  background: var(--success);
+  color: #FFFFFF;
+}
+
+/* Global Footer 3-Column Grid (§2) */
+.tfc-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 840px) {
+  .tfc-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 540px) {
+  .tfc-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

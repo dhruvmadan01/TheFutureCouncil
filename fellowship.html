@@ -77,16 +77,21 @@
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <a href="#apply" class="tfc-btn tfc-btn-outline hidden sm:inline-flex" style="padding: 7px 16px; font-size: 0.85rem; border-color: var(--c-sand);">Cohort Status</a>
-        <a href="join.html" class="tfc-btn tfc-btn-primary hidden md:inline-flex" style="background: var(--c-ember); border-color: var(--c-ember);">Join Council</a>
-        <a href="#apply" class="tfc-btn tfc-btn-primary sm:hidden" style="background: var(--c-ember); border-color: var(--c-ember); padding: 6px 14px; font-size: 0.8rem;">Apply Now</a>
+      <ul class="tfc-nav-links">
+        <li><a href="fellowship.html" class="tfc-nav-link active">Fellowship '26</a></li>
+        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
+        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="#apply" class="tfc-btn tfc-btn-primary" id="navActionBtn" style="background: var(--accent); border-color: var(--accent);">Apply for Fellowship '26 →</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
   </header>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
+  <!-- Fullscreen Dark Mobile Menu Drawer (§2) -->
   <div class="tfc-mobile-menu" id="mobileMenu">
     <div class="tfc-mobile-menu-header">
       <a href="index.html" class="tfc-brand" style="color: #fff;">
@@ -97,15 +102,22 @@
     </div>
 
     <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
       <li><a href="fellowship.html" class="tfc-mobile-nav-link active">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
       <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
     </ul>
 
     <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="#apply" class="tfc-btn tfc-btn-primary" style="background: var(--c-ember); border-color: var(--c-ember); width: 100%;">Apply for Fellowship '26 →</a>
+      <a href="#apply" class="tfc-btn tfc-btn-primary" style="background: var(--accent); border-color: var(--accent); width: 100%;">Apply for Fellowship '26 →</a>
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #888; padding-top: 8px; flex-wrap: wrap; gap: 8px;">
+        <a href="partners.html" style="color: #bbb; text-decoration: none;">Partners</a>
+        <a href="join-ambassador.html" style="color: #bbb; text-decoration: none;">Ambassadors</a>
+        <a href="terms.html" style="color: #bbb; text-decoration: none;">Terms</a>
+        <a href="privacy.html" style="color: #bbb; text-decoration: none;">Privacy</a>
+        <a href="refund.html" style="color: #bbb; text-decoration: none;">Refunds</a>
+      </div>
     </div>
   </div>
 
@@ -113,53 +125,50 @@
     <!-- Hero Section (Build Brief §4) -->
     <section class="tfc-section" style="padding-top: 56px; padding-bottom: 36px;">
       <div class="tfc-container" style="text-align: center; max-width: 920px;">
-        <div class="tfc-badge" style="background: rgba(226, 84, 42, 0.08); color: var(--c-ember); border: 1px solid rgba(226, 84, 42, 0.25); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-utility); font-size: 0.78rem;">
-          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--c-ember); display: inline-block;"></span>
-          The Future Council · 90+ Chapters
+        <div class="tfc-badge" style="background: rgba(226, 84, 42, 0.08); color: var(--accent); border: 1px solid rgba(226, 84, 42, 0.25); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-utility); font-size: 0.78rem;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block;"></span>
+          THE FUTURE COUNCIL · 90+ CHAPTERS
         </div>
         
         <h1 class="font-display" style="font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 800; line-height: 1.08; margin-bottom: 18px; letter-spacing: -1.5px; color: var(--c-ink);">
           Fellowship '26
         </h1>
         
-        <h2 class="font-display" style="font-size: clamp(1.25rem, 2.8vw, 1.85rem); font-weight: 600; line-height: 1.35; color: var(--c-ember); margin-bottom: 22px; max-width: 760px; margin-left: auto; margin-right: auto;">
-          A 4-week, equity-free fellowship for student founders — now fully online.
+        <h2 class="font-display" style="font-size: clamp(1.25rem, 2.8vw, 1.85rem); font-weight: 600; line-height: 1.35; color: var(--accent); margin-bottom: 22px; max-width: 760px; margin-left: auto; margin-right: auto;">
+          A 4-week, equity-free fellowship for student founders — fully online.
         </h2>
 
         <p style="font-size: 1.12rem; color: #4A453F; line-height: 1.68; margin-bottom: 34px; max-width: 760px; margin-left: auto; margin-right: auto;">
-          No relocation, no campus, no single city deciding who gets in. Fellowship '26 runs entirely online this year, in a focused 4-week sprint: a weekly cohort lab, small founder pods that meet every week, direct mentor office hours, and a virtual demo day in front of real investors and alumni.
+          No relocation, no campus, no single city deciding who gets in. Four weeks: a weekly cohort lab, small founder pods that meet every week, direct mentor office hours, and a virtual demo day in front of real investors and alumni.
         </p>
 
         <!-- Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-3.5 justify-center max-w-md sm:max-w-none mx-auto mb-10">
-          <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full sm:w-auto" style="background: var(--c-ember); border-color: var(--c-ember); font-weight: 700;">
-            Apply now →
+          <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full sm:w-auto" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">
+            Apply for Fellowship '26 →
           </a>
           <a href="#structure" class="tfc-btn tfc-btn-outline tfc-btn-lg w-full sm:w-auto" style="border-color: var(--c-sand); color: var(--c-ink);">
-            See how the cohort runs
-          </a>
-          <a href="fellowship-brochure.html" class="tfc-btn tfc-btn-outline tfc-btn-lg w-full sm:w-auto" style="border-color: var(--c-sand); color: var(--c-ink);">
-            Digital Brochure ⚡
+            See How It Runs →
           </a>
         </div>
 
-        <!-- 4-Col Stat Strip -->
+        <!-- 4-Col Stat Strip (§4) -->
         <div class="tfc-stat-strip" style="background: #FFFFFF; border-radius: 16px; border: 1px solid var(--c-sand); box-shadow: var(--shadow-sm);">
           <div class="tfc-stat-item">
             <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4 Weeks</span>
-            <span class="tfc-stat-label font-mono-alt">Fully Remote Cohort</span>
+            <span class="tfc-stat-label font-mono-alt">Fully Remote</span>
           </div>
           <div class="tfc-stat-item">
             <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4–6 Pods</span>
-            <span class="tfc-stat-label font-mono-alt">Founder Pods Weekly</span>
+            <span class="tfc-stat-label font-mono-alt">Founder Pods</span>
           </div>
           <div class="tfc-stat-item">
-            <span class="tfc-stat-num font-display" style="color: var(--c-ember);">₹999</span>
-            <span class="tfc-stat-label font-mono-alt">Registration Pass</span>
+            <span class="tfc-stat-num font-display" style="color: var(--accent);">₹999</span>
+            <span class="tfc-stat-label font-mono-alt">Flat Fee</span>
           </div>
           <div class="tfc-stat-item">
             <span class="tfc-stat-num font-display" style="color: var(--c-teal);">Sep 30</span>
-            <span class="tfc-stat-label font-mono-alt">Closes 7:00 PM IST</span>
+            <span class="tfc-stat-label font-mono-alt">Closes 7PM IST</span>
           </div>
         </div>
       </div>
@@ -169,7 +178,7 @@
     <section class="tfc-section" id="why-online" style="padding-top: 30px; padding-bottom: 40px;">
       <div class="tfc-container" style="max-width: 980px;">
         <div style="text-align: center; margin-bottom: 28px;">
-          <span class="tfc-reason-tag">WHY ONLINE</span>
+          <span class="tfc-eyebrow">WHY ONLINE</span>
           <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
             Lower barrier, higher speed, zero relocation.
           </h2>
@@ -188,7 +197,7 @@
             <span class="tfc-reason-tag">SPEED</span>
             <h3 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">No venue lead time</h3>
             <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Applications open now, the cohort starts on schedule without logistical friction.
+              Cohort starts on schedule without logistical friction. Applications open now.
             </p>
           </div>
 
@@ -196,7 +205,7 @@
             <span class="tfc-reason-tag">DEPTH</span>
             <h3 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">4–6 person pods</h3>
             <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Pods meet weekly outside the main call, so no one hides in a large call.
+              Pods meet weekly outside the main call — no one hides in a large group.
             </p>
           </div>
         </div>
@@ -207,9 +216,9 @@
     <section class="tfc-section" id="structure" style="padding-top: 30px; padding-bottom: 40px;">
       <div class="tfc-container" style="max-width: 980px;">
         <div style="text-align: center; margin-bottom: 32px;">
-          <span class="tfc-reason-tag">PROGRAM STRUCTURE</span>
+          <span class="tfc-eyebrow">PROGRAM STRUCTURE</span>
           <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
-            The 4 pillars of the online cohort
+            What Fellowship '26 actually gives you.
           </h2>
         </div>
 
@@ -218,7 +227,7 @@
             <div class="tfc-pillar-index">01 — WEEKLY COHORT LAB</div>
             <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Weekly Cohort Lab</h3>
             <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              One live session a week — mentor talks, workshops, peer feedback rounds. The anchor everyone shows up for together.
+              One live session a week: mentor talks, workshops, peer feedback. The anchor everyone shows up for together.
             </p>
           </div>
 
@@ -226,7 +235,7 @@
             <div class="tfc-pillar-index">02 — FOUNDER PODS</div>
             <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Founder Pods</h3>
             <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Groups of 4–6 founders meet weekly outside the main call — this is where the real depth and accountability happen.
+              Groups of 4–6 meet weekly outside the main call — this is where the real depth and accountability happen.
             </p>
           </div>
 
@@ -234,7 +243,7 @@
             <div class="tfc-pillar-index">03 — MENTOR OFFICE HOURS</div>
             <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Mentor Office Hours</h3>
             <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              1:1 slots with operators and investors from the Future Council network, booked directly by each founder.
+              1:1 slots with operators and investors from the network, booked directly by you.
             </p>
           </div>
 
@@ -242,10 +251,15 @@
             <div class="tfc-pillar-index">04 — DEMO DAY</div>
             <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Virtual Demo Day</h3>
             <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              A virtual pitch event in front of investors and alumni to close the cohort — treated as the flagship moment, not an afterthought.
+              A pitch event in front of real investors and alumni, closing the cohort as the flagship moment, not an afterthought.
             </p>
           </div>
         </div>
+
+        <!-- 5th Line Value Proposition (§4) -->
+        <p style="text-align: center; margin-top: 24px; font-size: 1rem; color: var(--ink-soft); line-height: 1.6; max-width: 760px; margin-left: auto; margin-right: auto;">
+          Every fellow keeps everything they build — no equity taken, ever — and joins the permanent alumni network at the end of Week 4.
+        </p>
       </div>
     </section>
 
@@ -451,23 +465,23 @@
             </div>
           </div>
 
-          <!-- Multi-Step Progress Header -->
-          <div class="tfc-form-steps-nav" id="formStepsNav">
-            <div class="tfc-form-step-badge active" id="stepBadge1" onclick="goToStep(1)">
-              <div class="tfc-form-step-num">1</div>
-              <span class="hidden sm:inline">Founder & Team</span>
+          <!-- Multi-Step Progress Header (§1, §4) -->
+          <div class="tfc-pill-stepper" id="formStepsNav">
+            <div class="tfc-pill-step active" id="stepBadge1" onclick="goToStep(1)">
+              <span class="tfc-pill-step-num">1</span>
+              <span>Founder & Team</span>
             </div>
-            <div class="tfc-form-step-badge" id="stepBadge2" onclick="goToStep(2)">
-              <div class="tfc-form-step-num">2</div>
-              <span class="hidden sm:inline">Venture Details</span>
+            <div class="tfc-pill-step" id="stepBadge2" onclick="goToStep(2)">
+              <span class="tfc-pill-step-num">2</span>
+              <span>Venture Details</span>
             </div>
-            <div class="tfc-form-step-badge" id="stepBadge3" onclick="goToStep(3)">
-              <div class="tfc-form-step-num">3</div>
-              <span class="hidden sm:inline">Commitment</span>
+            <div class="tfc-pill-step" id="stepBadge3" onclick="goToStep(3)">
+              <span class="tfc-pill-step-num">3</span>
+              <span>Commitment</span>
             </div>
-            <div class="tfc-form-step-badge" id="stepBadge4" onclick="goToStep(4)">
-              <div class="tfc-form-step-num">4</div>
-              <span class="hidden sm:inline">Registration Pass</span>
+            <div class="tfc-pill-step" id="stepBadge4" onclick="goToStep(4)">
+              <span class="tfc-pill-step-num">4</span>
+              <span>Registration Pass</span>
             </div>
           </div>
 
@@ -598,8 +612,8 @@
                 <button type="button" onclick="goToStep(2)" class="tfc-btn tfc-btn-outline">
                   ← Back
                 </button>
-                <button type="button" id="btnToPayment" onclick="nextStep(4)" class="tfc-btn tfc-btn-primary" style="background: var(--c-ember); border-color: var(--c-ember);">
-                  Unlock Registration Pass (₹999) →
+                <button type="button" id="btnToPayment" onclick="nextStep(4)" class="tfc-btn tfc-btn-primary" style="background: var(--accent); border-color: var(--accent);">
+                  Pay ₹999 & Continue →
                 </button>
               </div>
             </div>
@@ -660,7 +674,7 @@
 
                 <!-- Error notice fallback -->
                 <div id="paymentErrorNotice" class="hidden mt-3 p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800">
-                  We couldn't confirm this payment yet. Double-check the reference number, or reach us at <a href="mailto:contact@thefuturecouncil.in" class="underline font-bold">contact@thefuturecouncil.in</a> and we'll sort it out.
+                  We couldn't confirm this payment yet. Double-check the reference number, or reach us at <a href="mailto:support@thefuturecouncil.in" class="underline font-bold">support@thefuturecouncil.in</a> and we'll sort it out.
                 </div>
               </div>
 
@@ -805,42 +819,75 @@
     </section>
   </main>
 
-  <!-- Sticky Mobile & Desktop CTA Bar (Build Brief §2) -->
+  <!-- Sticky Mobile & Desktop CTA Bar -->
   <aside class="tfc-sticky-relaunch-bar">
     <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase; font-family: var(--font-utility);">Fellowship '26 · Online Cohort</div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
       <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · ₹999 Pass</div>
     </div>
-    <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--c-ember); border-color: var(--c-ember); font-weight: 700;">Apply Now →</a>
+    <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
   </aside>
 
-  <!-- Clean Footer -->
-  <footer class="tfc-footer" style="background: var(--c-ink); color: var(--c-paper);">
+  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
+  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
     <div class="tfc-container">
-      <div class="tfc-footer-row">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand" style="color: #fff;">
-            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span class="font-display font-bold">THE FUTURE COUNCIL</span>
-          </a>
-          <span style="color: rgba(255,255,255,0.2);">|</span>
-          <span style="font-size: 0.85rem; color: #a1a1aa; font-style: italic;">Where student builders stop waiting for permission.</span>
+      <div class="tfc-footer-grid">
+        <!-- Col 1: Brand -->
+        <div class="tfc-footer-col">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; filter: brightness(0) invert(1);" />
+            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
+            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--paper-70);">
+            Admissions & Support: <br />
+            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
+          </div>
         </div>
 
-        <div class="tfc-footer-links">
-          <a href="fellowship.html" class="tfc-footer-link active">Fellowship '26</a>
-          <a href="branches.html" class="tfc-footer-link">Branches</a>
-          <a href="resources.html" class="tfc-footer-link">Resources</a>
-          <a href="partners.html" class="tfc-footer-link">Partners</a>
-          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
-          <a href="terms.html" class="tfc-footer-link">Terms</a>
-          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        <!-- Col 2: Navigation Columns -->
+        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="fellowship.html" style="color: var(--paper); font-weight: 600;">Fellowship '26</a></li>
+              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
+              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
+              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="branches.html" style="color: var(--paper-70); transition: color 0.2s;">Collegiate Branches</a></li>
+              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
+              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
+              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
+              <li><a href="join.html" style="color: var(--paper-70); transition: color 0.2s;">Join the Council</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 3: Legal & Status -->
+        <div class="tfc-footer-col">
+          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
+            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
+            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+          </ul>
+          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
+            Cohort 01 Applications Open · ₹999 Registration Pass
+          </div>
         </div>
       </div>
 
-      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #71717a; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <span>© 2026 The Future Council. All rights reserved.</span>
-        <span>Admissions Support: <a href="mailto:contact@thefuturecouncil.in" style="color: #e4e4e7;">contact@thefuturecouncil.in</a></span>
+        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
       </div>
     </div>
   </footer>

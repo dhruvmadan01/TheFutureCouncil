@@ -10,7 +10,7 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/join" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff9e59" />
+  <meta name="theme-color" content="#E2542A" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -89,12 +89,12 @@
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     ::selection {
-      background: rgba(255, 158, 89, 0.2);
+      background: rgba(226, 84, 42, 0.25);
       color: #fff;
     }
     .dropdown-item:hover {
       background-color: #fff7eb !important;
-      color: #ff9e59 !important;
+      color: var(--accent) !important;
     }
   </style>
   <link rel="icon" href="TFC.png" type="image/png">
@@ -105,7 +105,7 @@
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
+  <!-- Sticky Top Navigation (Spec §2) -->
   <header class="tfc-header">
     <div class="tfc-container tfc-nav-wrapper">
       <a href="index.html" class="tfc-brand">
@@ -114,14 +114,14 @@
       </a>
 
       <ul class="tfc-nav-links">
-        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
         <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
         <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -138,15 +138,15 @@
     </div>
 
     <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
       <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
       <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link active">Join Council</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link active">Join the Council</a></li>
     </ul>
 
     <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join the Council →</a>
     </div>
   </div>
 
@@ -164,49 +164,47 @@
           </h1>
           <p class="tfc-subheadline" style="margin-bottom: 28px;">
             Joining the Council costs nothing and takes two minutes. You get into builder vaults, project squads, campus mixers, and first access to the Fellowship application — whether you already have a startup or you're still looking for the people to build one with.
-          </p>
-
-          <!-- WHAT MEMBERSHIP GETS YOU -->
+              <!-- WHAT MEMBERSHIP GETS YOU (Spec §6: 4 Benefit Cards) -->
           <div style="margin-bottom: 16px;">
-            <span style="font-size: 0.76rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 0.5px; text-transform: uppercase;">WHAT MEMBERSHIP GETS YOU</span>
+            <span style="font-size: 0.76rem; font-weight: 800; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-utility);">WHAT MEMBERSHIP GETS YOU</span>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
-            <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">📚</span>
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
+            <div class="tfc-benefit-card">
+              <div class="tfc-benefit-num">01</div>
               <div>
-                <strong style="font-size: 1rem; color: var(--ink);">Builder Vaults</strong>
-                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Digital spaces where student founders, engineers, and designers find each other before an idea even has a name.</p>
+                <h4 class="tfc-benefit-title">Builder Vaults</h4>
+                <p class="tfc-benefit-desc">Digital spaces where student founders, engineers, and designers find each other before an idea even has a name.</p>
               </div>
             </div>
 
-            <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">⚡</span>
+            <div class="tfc-benefit-card">
+              <div class="tfc-benefit-num">02</div>
               <div>
-                <strong style="font-size: 1rem; color: var(--ink);">Project Squads</strong>
-                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Get matched into a working team instead of cold-messaging strangers on LinkedIn.</p>
+                <h4 class="tfc-benefit-title">Project Squads</h4>
+                <p class="tfc-benefit-desc">Get matched into a working team instead of cold-messaging strangers on LinkedIn.</p>
               </div>
             </div>
 
-            <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">🍕</span>
+            <div class="tfc-benefit-card">
+              <div class="tfc-benefit-num">03</div>
               <div>
-                <strong style="font-size: 1rem; color: var(--ink);">Campus Mixers</strong>
-                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">In-person events at your chapter, and access to Delhi NCR mixers even if your campus doesn't have one yet.</p>
+                <h4 class="tfc-benefit-title">Campus Mixers</h4>
+                <p class="tfc-benefit-desc">In-person events at your chapter, and access to Delhi NCR mixers even if your campus doesn't have one yet.</p>
               </div>
             </div>
 
-            <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <span style="background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">🚀</span>
+            <div class="tfc-benefit-card">
+              <div class="tfc-benefit-num">04</div>
               <div>
-                <strong style="font-size: 1rem; color: var(--ink);">Fellowship Priority</strong>
-                <p style="font-size: 0.88rem; margin: 2px 0 0; color: var(--ink-soft);">Members get first access when Fellowship applications open each cohort.</p>
+                <h4 class="tfc-benefit-title">Fellowship Priority</h4>
+                <p class="tfc-benefit-desc">Members get first access when Fellowship applications open each cohort.</p>
               </div>
             </div>
           </div>
 
           <!-- WHO SHOULD JOIN Card -->
-          <div class="tfc-card" style="background: #FFFFFF; border-left: 4px solid var(--primary-orange); padding: 22px;">
+          <div class="tfc-card" style="background: #FFFFFF; border-left: 4px solid var(--accent); padding: 22px;">
             <span class="tfc-badge tfc-badge-neutral" style="margin-bottom: 8px;">WHO SHOULD JOIN</span>
             <p style="font-size: 0.92rem; color: var(--ink); margin-bottom: 0; line-height: 1.55;">
               Any student builder, engineer, designer, or operator — whether you've already got a startup running or you're still looking for your team. There's no minimum experience, no application fee, and no requirement that you already have an idea.
@@ -218,16 +216,19 @@
         <div>
           <div class="tfc-card" id="signupFormPanel" style="padding: 36px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
             
-            <!-- 3-Step Progress Bar (Basics → College/Role → Interests) -->
-            <div style="margin-bottom: 24px;">
-              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; color: var(--ink-soft);">
-                <span id="stepLabel1" style="color: var(--primary-orange);">1. Basics</span>
-                <span id="stepLabel2">2. College & Role</span>
-                <span id="stepLabel3">3. Interests</span>
-              </div>
-              <div style="width: 100%; height: 6px; background: rgba(20, 17, 15, 0.08); border-radius: 9999px; overflow: hidden;">
-                <div id="stepProgressBar" style="width: 33.33%; height: 100%; background: var(--primary-orange); border-radius: 9999px; transition: width 0.3s ease;"></div>
-              </div>
+            <!-- 3-Step Pill Progress Stepper (Spec §1 & §6) -->
+            <div class="tfc-pill-stepper" id="joinPillStepper" style="margin-bottom: 24px; flex-wrap: wrap;">
+              <div class="tfc-pill-step active" id="pillStep1"><span class="tfc-pill-step-num">1</span> Basics</div>
+              <div class="tfc-pill-step" id="pillStep2"><span class="tfc-pill-step-num">2</span> College & Role</div>
+              <div class="tfc-pill-step" id="pillStep3"><span class="tfc-pill-step-num">3</span> Interests</div>
+            </div>
+            
+            <!-- Hidden elements for JS compatibility -->
+            <div style="display: none;">
+              <span id="stepLabel1"></span>
+              <span id="stepLabel2"></span>
+              <span id="stepLabel3"></span>
+              <div id="stepProgressBar"></div>
             </div>
 
             <div id="signupError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm rounded-lg" style="margin-bottom: 16px;">
@@ -296,7 +297,7 @@
                   </div>
                   <div>
                     <label for="studentPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">
-                      Phone Number * <span style="font-size: 0.76rem; font-weight: 500; color: var(--primary-orange);">(Required for chapter WhatsApp invite)</span>
+                      Phone Number * <span style="font-size: 0.76rem; font-weight: 500; color: var(--accent);">(Required for chapter WhatsApp invite)</span>
                     </label>
                     <input type="tel" id="studentPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
                   </div>
@@ -339,12 +340,12 @@
                         <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Miranda House">Miranda House</div>
                         <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
                         <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
-                        <div id="dropdownItemManual" style="padding: 10px 14px; cursor: pointer; background: #fff0e6; font-weight: 800; color: var(--primary-orange); text-align: center; font-size: 0.85rem;">✨ Type custom college name</div>
+                        <div id="dropdownItemManual" style="padding: 10px 14px; cursor: pointer; background: #fff0e6; font-weight: 800; color: var(--accent); text-align: center; font-size: 0.85rem;">✨ Type custom college name</div>
                       </div>
                     </div>
                     <div id="manualCollegeToggleRow" style="margin-top: 6px; font-size: 0.78rem; display: flex; justify-content: space-between; color: var(--ink-soft);">
                       <span>College not listed?</span>
-                      <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--primary-orange); font-weight: 700;">Type Manually ✎</a>
+                      <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--accent); font-weight: 700;">Type Manually ✎</a>
                     </div>
                   </div>
 
@@ -439,13 +440,13 @@
             </p>
 
             <!-- Digital Member Card -->
-            <div style="background: var(--ink); color: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-bottom: 24px; border: 2px solid var(--primary-orange); box-shadow: 0 12px 30px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+            <div style="background: var(--ink); color: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-bottom: 24px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px;">
                   <img src="TFC.png" alt="TFC Logo" style="width: 28px; height: 28px; border-radius: 6px; background: #fff; padding: 2px; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
                   <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px;">THE FUTURE COUNCIL</span>
                 </div>
-                <span class="tfc-badge tfc-badge-orange" style="font-size: 0.7rem;">COUNCIL ID</span>
+                <span class="tfc-badge" style="background: rgba(226, 84, 42, 0.2); color: var(--accent); font-size: 0.7rem;">COUNCIL ID</span>
               </div>
 
               <div style="margin-bottom: 20px;">
@@ -489,48 +490,75 @@
     </div>
   </main>
 
-  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
-  <aside class="tfc-mobile-sticky-bar">
+  <!-- Sticky Mobile & Desktop CTA Bar -->
+  <aside class="tfc-sticky-relaunch-bar">
     <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30</div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · ₹999 Pass</div>
     </div>
-    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
   </aside>
 
-  <!-- Clean Footer (Ref p. 05 & 14) -->
-  <footer class="tfc-footer">
+  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
+  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
     <div class="tfc-container">
-      <div class="tfc-footer-row">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand">
-            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span>THE FUTURE COUNCIL</span>
-          </a>
-          <span style="color: var(--border-subtle);">|</span>
-          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+      <div class="tfc-footer-grid">
+        <!-- Col 1: Brand -->
+        <div class="tfc-footer-col">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; filter: brightness(0) invert(1);" />
+            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
+            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--paper-70);">
+            Admissions & Support: <br />
+            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
+          </div>
         </div>
 
-        <div class="tfc-footer-links">
-          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
-          <a href="branches.html" class="tfc-footer-link">Branches</a>
-          <a href="resources.html" class="tfc-footer-link">Resources</a>
-          <a href="partners.html" class="tfc-footer-link">Partners</a>
-          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
-          <a href="terms.html" class="tfc-footer-link">Terms</a>
-          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        <!-- Col 2: Navigation Columns -->
+        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="fellowship.html" style="color: var(--paper-70); transition: color 0.2s;">Fellowship '26</a></li>
+              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
+              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
+              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="branches.html" style="color: var(--paper-70); transition: color 0.2s;">Collegiate Branches</a></li>
+              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
+              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
+              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
+              <li><a href="join.html" style="color: var(--paper); font-weight: 600;">Join the Council</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 3: Legal & Status -->
+        <div class="tfc-footer-col">
+          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
+            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
+            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+          </ul>
+          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
+            Council Membership Free · Open to All Students
+          </div>
         </div>
       </div>
 
-      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
-        <div>
-          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
-        </div>
-        <div style="display: flex; gap: 18px;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
-        </div>
+      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <span>© 2026 The Future Council. All rights reserved.</span>
+        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
       </div>
     </div>
   </footer>
@@ -799,7 +827,11 @@
           step1Container.style.display = 'none';
           step2Container.style.display = 'block';
           stepProgressBar.style.width = '66.66%';
-          stepLabel2.style.color = 'var(--primary-orange)';
+          stepLabel2.style.color = 'var(--accent)';
+          const p1 = document.getElementById('pillStep1');
+          const p2 = document.getElementById('pillStep2');
+          const p3 = document.getElementById('pillStep3');
+          if (p1 && p2) { p1.className = 'tfc-pill-step completed'; p2.className = 'tfc-pill-step active'; }
           signupFormPanel.scrollIntoView({ behavior: 'smooth' });
         });
       }
@@ -813,6 +845,9 @@
           step1Container.style.display = 'block';
           stepProgressBar.style.width = '33.33%';
           stepLabel2.style.color = 'var(--ink-soft)';
+          const p1 = document.getElementById('pillStep1');
+          const p2 = document.getElementById('pillStep2');
+          if (p1 && p2) { p1.className = 'tfc-pill-step active'; p2.className = 'tfc-pill-step'; }
         });
       }
 
@@ -858,7 +893,10 @@
           step2Container.style.display = 'none';
           step3Container.style.display = 'block';
           stepProgressBar.style.width = '100%';
-          stepLabel3.style.color = 'var(--primary-orange)';
+          stepLabel3.style.color = 'var(--accent)';
+          const p2 = document.getElementById('pillStep2');
+          const p3 = document.getElementById('pillStep3');
+          if (p2 && p3) { p2.className = 'tfc-pill-step completed'; p3.className = 'tfc-pill-step active'; }
           signupFormPanel.scrollIntoView({ behavior: 'smooth' });
         });
       }
@@ -872,6 +910,9 @@
           step2Container.style.display = 'block';
           stepProgressBar.style.width = '66.66%';
           stepLabel3.style.color = 'var(--ink-soft)';
+          const p2 = document.getElementById('pillStep2');
+          const p3 = document.getElementById('pillStep3');
+          if (p2 && p3) { p2.className = 'tfc-pill-step active'; p3.className = 'tfc-pill-step'; }
         });
       }
 

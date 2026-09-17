@@ -6,6 +6,7 @@
   <title>Ambassador Portal & Console | Future Council</title>
   <meta name="description" content="Official Ambassador workspace and dashboard for Future Council campus leaders." />
   <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="theme-color" content="#E2542A" />
   <link rel="icon" href="TFC.png" type="image/png">
   <link rel="apple-touch-icon" href="TFC.png">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -44,15 +45,15 @@
       </a>
 
       <ul class="tfc-nav-links">
-        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
         <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
         <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join-ambassador.html" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Become Ambassador</a>
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <a href="join-ambassador.html" class="tfc-btn tfc-btn-outline" style="padding: 7px 16px; font-size: 0.85rem;">Apply as Ambassador</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -69,13 +70,13 @@
     </div>
 
     <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
       <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
       <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="join-ambassador.html" class="tfc-mobile-nav-link">Ambassador Program</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
+      <li><a href="join-ambassador.html" class="tfc-mobile-nav-link">Apply as Ambassador</a></li>
       <li><a href="ambassador.html" class="tfc-mobile-nav-link active">Ambassador Portal</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
     </ul>
 
     <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
@@ -151,7 +152,7 @@
         <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-subtle); font-size: 0.85rem; color: var(--ink-soft);">
           <span style="color: var(--ink-soft);">Forgot password?</span>
           <span style="margin: 0 6px;">·</span>
-          <span>Not an ambassador yet? <a href="join-ambassador.html" style="color: var(--primary-orange); font-weight: 700;">Apply</a></span>
+          <span>Not an ambassador yet? <a href="join-ambassador.html" style="color: var(--accent); font-weight: 700;">Apply</a></span>
         </div>
       </div>
     </div>
@@ -185,7 +186,7 @@
       <!-- Metrics 4-Card Strip -->
       <div class="tfc-grid tfc-grid-4" style="margin-bottom: 28px;">
         <div class="tfc-card" style="padding: 20px; text-align: center;">
-          <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary-orange); line-height: 1.1;" id="myReferralsCount">0</div>
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1.1;" id="myReferralsCount">0</div>
           <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-top: 6px;">My Referrals</div>
         </div>
 
@@ -216,7 +217,7 @@
         </div>
 
         <div style="width: 100%; height: 10px; background: rgba(20,17,15,0.08); border-radius: 9999px; overflow: hidden; margin-bottom: 20px;">
-          <div id="milestoneBar" style="width: 0%; height: 100%; background: var(--primary-orange); border-radius: 9999px; transition: width 0.4s ease;"></div>
+          <div id="milestoneBar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 9999px; transition: width 0.4s ease;"></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; font-size: 0.84rem; font-weight: 700;">
@@ -265,7 +266,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; background: rgba(255,122,61,0.06); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,122,61,0.2);">
               <div>
                 <span style="font-size: 0.72rem; font-weight: 800; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; display: block;">Your Ambassador Code:</span>
-                <span style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--primary-orange);" id="displayRefCode">CODE</span>
+                <span style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--accent);" id="displayRefCode">CODE</span>
               </div>
               <button onclick="copyAmbassadorCode()" class="tfc-btn tfc-btn-outline" style="padding: 5px 12px; font-size: 0.75rem;">
                 📋 Copy Code
@@ -406,45 +407,60 @@
 
   </main>
 
-  <!-- Clean Footer (Ref p. 05 & 14) -->
-  <footer class="tfc-footer">
+  <!-- Global Footer (§2) -->
+  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 56px 0 32px;">
     <div class="tfc-container">
-      <div class="tfc-footer-row">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand">
+      <div class="tfc-footer-grid">
+        <div>
+          <a href="index.html" class="tfc-brand" style="color: #FFFFFF; text-decoration: none; margin-bottom: 12px; display: inline-flex;">
             <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
             <span>THE FUTURE COUNCIL</span>
           </a>
-          <span style="color: var(--border-subtle);">|</span>
-          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+          <p style="color: var(--paper-70); font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-top: 8px;">
+            Where student builders stop waiting for permission.
+          </p>
         </div>
 
-        <div class="tfc-footer-links">
-          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
-          <a href="branches.html" class="tfc-footer-link">Branches</a>
-          <a href="resources.html" class="tfc-footer-link">Resources</a>
-          <a href="partners.html" class="tfc-footer-link">Partners</a>
-          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
-          <a href="terms.html" class="tfc-footer-link">Terms</a>
-          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Program</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="fellowship.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Fellowship '26</a></li>
+            <li><a href="join-ambassador.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Apply as Ambassador</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Ecosystem</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="branches.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Branches</a></li>
+            <li><a href="resources.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Resources</a></li>
+            <li><a href="partners.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Partners</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Legal</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="terms.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Terms</a></li>
+            <li><a href="privacy.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Privacy</a></li>
+            <li><a href="refund.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Refunds</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
-        <div>
-          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
-        </div>
-        <div style="display: flex; gap: 18px;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
+      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--paper-70);">
+        <div>© 2026 The Future Council · thefuturecouncil.in</div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">Instagram</a>
+          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">LinkedIn</a>
+          <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper-70); text-decoration: none;">support@thefuturecouncil.in</a>
         </div>
       </div>
     </div>
   </footer>
 
   <!-- Toast Notification Container -->
-  <div id="tfcToast" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; background: #14110F; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; border: 1.5px solid var(--primary-orange); box-shadow: 0 10px 25px rgba(0,0,0,0.3); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px;">
+  <div id="tfcToast" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; background: #14110F; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; border: 1.5px solid var(--accent); box-shadow: 0 10px 25px rgba(0,0,0,0.3); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px;">
     <span id="toastIcon">📋</span>
     <span id="toastMsg">Copied to clipboard!</span>
   </div>
@@ -946,7 +962,7 @@ ${refUrl}`
 
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td><span style="font-family: monospace; font-weight: 700; color: var(--primary-orange);">${m.member_id || m.id || 'TFC-MBR'}</span></td>
+                <td><span style="font-family: monospace; font-weight: 700; color: var(--accent);">${m.member_id || m.id || 'TFC-MBR'}</span></td>
                 <td><strong>${m.name}</strong></td>
                 <td>${parsedCol.displayName || 'University Student'}</td>
                 <td><span style="font-size: 0.8rem; color: var(--ink-soft);">${regDate}</span></td>
@@ -977,11 +993,11 @@ ${refUrl}`
               barDiv.style.border = isMe ? '1px solid rgba(255, 122, 61, 0.3)' : '1px solid transparent';
               barDiv.innerHTML = `
                 <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 5px;">
-                  <span style="color: ${isMe ? 'var(--primary-orange)' : 'var(--ink)'};">#${idx + 1} ${r.name} ${isMe ? '<strong>(You)</strong>' : ''}</span>
-                  <span style="color: var(--primary-orange); font-weight: 800;">${r.referrals} ${r.referrals === 1 ? 'signup' : 'signups'}</span>
+                  <span style="color: ${isMe ? 'var(--accent)' : 'var(--ink)'};">#${idx + 1} ${r.name} ${isMe ? '<strong>(You)</strong>' : ''}</span>
+                  <span style="color: var(--accent); font-weight: 800;">${r.referrals} ${r.referrals === 1 ? 'signup' : 'signups'}</span>
                 </div>
                 <div style="background: rgba(20,17,15,0.08); height: 6px; border-radius: 9999px; overflow: hidden;">
-                  <div style="background: ${isMe ? 'var(--primary-orange)' : '#3b82f6'}; height: 100%; width: ${widthPct}%; transition: width 0.4s ease;"></div>
+                  <div style="background: ${isMe ? 'var(--accent)' : '#3b82f6'}; height: 100%; width: ${widthPct}%; transition: width 0.4s ease;"></div>
                 </div>
               `;
               leaderboardContainer.appendChild(barDiv);

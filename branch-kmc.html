@@ -10,7 +10,7 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/branch-kmc" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff7a3d" />
+  <meta name="theme-color" content="#E2542A" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -65,7 +65,7 @@
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
+  <!-- Sticky Top Navigation (Spec §2) -->
   <header class="tfc-header">
     <div class="tfc-container tfc-nav-wrapper">
       <a href="index.html" class="tfc-brand">
@@ -74,14 +74,14 @@
       </a>
 
       <ul class="tfc-nav-links">
-        <li><a href="index.html" class="tfc-nav-link">Home</a></li>
         <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
         <li><a href="branches.html" class="tfc-nav-link active">Branches</a></li>
         <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
+        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join Council</a>
+        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -98,108 +98,109 @@
     </div>
 
     <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
       <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link active">Our Branches</a></li>
+      <li><a href="branches.html" class="tfc-mobile-nav-link active">Branches</a></li>
       <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
+      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
+      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
     </ul>
 
     <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
+      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join the Council →</a>
     </div>
   </div>
 
   <main>
-    <!-- Header Section -->
+    <!-- Header Section (Spec §5.1: Back link) -->
     <section class="tfc-section" style="padding-top: 36px; padding-bottom: 24px;">
       <div class="tfc-container">
         <div style="margin-bottom: 20px;">
-          <a href="branches.html" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px;">
+          <a href="branches.html" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
             ← Back to Branches Directory
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Branch Details -->
+    <!-- Branch Details (Spec §5: 5-Part Template) -->
     <section class="tfc-section" style="padding-top: 0; padding-bottom: 60px;">
       <div class="tfc-container">
         <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 32px;" class="branch-grid">
           
-          <!-- Left Column: Chapter Description & Perks -->
+          <!-- Left Column: What this chapter does & Live Activations -->
           <div style="display: flex; flex-direction: column; gap: 24px;">
             <div class="tfc-card" style="padding: 36px;">
               <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                <span class="tfc-badge tfc-badge-orange">DU CHAPTER</span>
+                <span class="tfc-badge" style="background: rgba(226, 84, 42, 0.1); color: var(--accent);">DU CHAPTER</span>
                 <span class="tfc-badge tfc-badge-lime">ACTIVE CHAPTER</span>
               </div>
               
-              <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px;">
+              <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 8px; letter-spacing: -0.02em;">
                 Kirori Mal College (KMC)
               </h1>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 16px;">
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px;">
                 📍 Delhi University • North Campus
               </p>
               <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 28px;">
                 Runs venture building workshops, operations cohorts, and peer mentoring networks.
               </p>
 
+              <!-- §5.3 What's active right now -->
               <div style="border-top: 1px solid var(--border-subtle); padding-top: 24px;">
                 <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">
-                  ⚡ Chapter Activations & Perks
+                  ⚡ Live Chapter Activations & Perks
                 </h3>
                 <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
                   <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Early-stage startup ideation clinics and prototype validation sprints.</span>
+                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Early-stage startup ideation clinics, customer discovery labs, and prototype validation sprints.</span>
                   </li>
                   <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Exclusive local networking mixers with alumni operators and investors.</span>
+                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Exclusive campus mixers with verified alumni founders, institutional angel investors, and operators.</span>
                   </li>
                   <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Active leaderboard rewards and verified Council Member passes.</span>
+                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Council builder pass with verified member credentials and ecosystem directory listing.</span>
                   </li>
                   <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--primary-orange); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Direct priority fast-track to apply for the equity-free Fellowship '26.</span>
+                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
+                    <span>Direct priority fast-track pipeline for Fellowship '26 (4-week online founder cohort, equity-free).</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <!-- Join CTA Card -->
-            <div class="tfc-card" style="padding: 32px; text-align: center;">
-              <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">
-                Ready to build with this chapter?
+            <!-- §5.5 CTA band with parameterized college -->
+            <div class="tfc-card" style="padding: 36px; text-align: center; border: 1.5px solid var(--ink);">
+              <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px;">
+                Ready to build at Kirori Mal College (KMC)?
               </h2>
-              <p style="font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto;">
-                Secure your official digital member badge and connect with ambitious founders on campus.
+              <p style="font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+                Join this chapter's builder circle to connect with peer founders, access curated tools, and ship real products on campus.
               </p>
-              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
                 <a href="join.html?college=Kirori%20Mal%20College%20(KMC)" class="tfc-btn tfc-btn-primary">
-                  Join Chapter Ecosystem 🚀
+                  Join Chapter Ecosystem →
                 </a>
                 <a href="fellowship.html" class="tfc-btn tfc-btn-outline">
-                  Fellowship Details 💡
+                  Apply for Fellowship '26 →
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Right Column: Leadership & Recruitment Status -->
+          <!-- Right Column: Leadership & Recruitment Status (§5.4) -->
           <div style="display: flex; flex-direction: column; gap: 24px;">
             
             <!-- Leadership Panel -->
             <div class="tfc-card" style="padding: 28px; text-align: center;">
-              <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.5px; margin-bottom: 18px;">
-                👑 Chapter Leadership
+              <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.08em; margin-bottom: 18px; font-family: var(--font-utility);">
+                Chapter Leadership
               </div>
 
               
-                <div style="width: 90px; height: 90px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-weight: 800; font-size: 1.6rem; border: 3px solid var(--primary-orange);">
+                <div style="width: 84px; height: 84px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-weight: 800; font-size: 1.5rem; border: 3px solid var(--accent);">
                   KMC
                 </div>
               
@@ -207,24 +208,24 @@
               <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">
                 TFC Student Council
               </h3>
-              <p style="font-size: 0.82rem; font-weight: 700; color: var(--primary-orange); text-transform: uppercase; margin-bottom: 12px;">
+              <p style="font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.05em; font-family: var(--font-utility);">
                 Interim Committee
               </p>
-              <p style="font-size: 0.85rem; color: var(--ink-soft); line-height: 1.45; margin: 0;">
+              <p style="font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; margin: 0;">
                 Responsible for coordinating founder sprint cycles, hackathons, and campus nodes.
               </p>
             </div>
 
             <!-- Recruitment Status Banner -->
             <div class="tfc-dark-banner" style="padding: 24px;">
-              <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: var(--accent-lime); margin-bottom: 6px;">
-                💡 RECRUITMENT STATUS
+              <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: var(--accent); margin-bottom: 6px; font-family: var(--font-utility); letter-spacing: 0.08em;">
+                RECRUITMENT STATUS
               </div>
               <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;">
-                Cohort 1 Onboarding
+                Cohort 1 Onboarding Open
               </h3>
               <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0;">
-                We are actively approving student representation roles and builder entries for the Autumn cycle. Apply to generate your credentials immediately.
+                Active student builder and ambassador roles are now reviewing applications. Apply to activate your official chapter status.
               </p>
             </div>
 
@@ -235,48 +236,75 @@
     </section>
   </main>
 
-  <!-- Sticky Mobile Bar for Fellowship Deadline (Ref p. 13) -->
-  <aside class="tfc-mobile-sticky-bar">
+  <!-- Sticky Mobile & Desktop CTA Bar -->
+  <aside class="tfc-sticky-relaunch-bar">
     <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: #ff9e59; text-transform: uppercase;">Fellowship '26</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30</div>
+      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · ₹999 Pass</div>
     </div>
-    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply Now →</a>
+    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
   </aside>
 
-  <!-- Clean Footer (Ref p. 05 & 14) -->
-  <footer class="tfc-footer">
+  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
+  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
     <div class="tfc-container">
-      <div class="tfc-footer-row">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand">
-            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span>THE FUTURE COUNCIL</span>
-          </a>
-          <span style="color: var(--border-subtle);">|</span>
-          <span style="font-size: 0.85rem; color: var(--ink-soft);">Global Student Startup Ecosystem</span>
+      <div class="tfc-footer-grid">
+        <!-- Col 1: Brand -->
+        <div class="tfc-footer-col">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; filter: brightness(0) invert(1);" />
+            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
+            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--paper-70);">
+            Admissions & Support: <br />
+            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
+          </div>
         </div>
 
-        <div class="tfc-footer-links">
-          <a href="fellowship.html" class="tfc-footer-link">Fellowship '26</a>
-          <a href="branches.html" class="tfc-footer-link">Branches</a>
-          <a href="resources.html" class="tfc-footer-link">Resources</a>
-          <a href="partners.html" class="tfc-footer-link">Partners</a>
-          <a href="join-ambassador.html" class="tfc-footer-link">Ambassadors</a>
-          <a href="terms.html" class="tfc-footer-link">Terms</a>
-          <a href="privacy.html" class="tfc-footer-link">Privacy</a>
+        <!-- Col 2: Navigation Columns -->
+        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="fellowship.html" style="color: var(--paper-70); transition: color 0.2s;">Fellowship '26</a></li>
+              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
+              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
+              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+              <li><a href="branches.html" style="color: var(--paper); font-weight: 600;">Collegiate Branches</a></li>
+              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
+              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
+              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
+              <li><a href="join.html" style="color: var(--paper-70); transition: color 0.2s;">Join the Council</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 3: Legal & Status -->
+        <div class="tfc-footer-col">
+          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
+            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
+            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+          </ul>
+          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
+            Kirori Mal College (KMC) Active Collegiate Node
+          </div>
         </div>
       </div>
 
-      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
-        <div>
-          © 2026 The Future Council (thefuturecouncil.in). All rights reserved.
-        </div>
-        <div style="display: flex; gap: 18px;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
-        </div>
+      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <span>© 2026 The Future Council. All rights reserved.</span>
+        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
       </div>
     </div>
   </footer>
