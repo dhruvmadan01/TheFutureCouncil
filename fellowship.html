@@ -479,10 +479,6 @@
               <span class="tfc-pill-step-num">3</span>
               <span>Commitment</span>
             </div>
-            <div class="tfc-pill-step" id="stepBadge4" onclick="goToStep(4)">
-              <span class="tfc-pill-step-num">4</span>
-              <span>Registration Pass</span>
-            </div>
           </div>
 
           <form id="fellowshipDirectForm">
@@ -612,78 +608,8 @@
                 <button type="button" onclick="goToStep(2)" class="tfc-btn tfc-btn-outline">
                   ← Back
                 </button>
-                <button type="button" id="btnToPayment" onclick="nextStep(4)" class="tfc-btn tfc-btn-primary" style="background: var(--accent); border-color: var(--accent);">
-                  Pay ₹999 & Continue →
-                </button>
-              </div>
-            </div>
-
-            <!-- STEP 4: Registration Fee Payment (₹999 via UPI) -->
-            <div id="formStep4" class="tfc-form-step hidden space-y-5">
-              <div class="tfc-upi-card">
-                <div class="flex items-center justify-between border-b border-zinc-200 pb-3.5 mb-4 flex-wrap gap-2">
-                  <div>
-                    <span class="text-xs font-bold text-zinc-500 font-mono-alt uppercase tracking-wider block">Cohort Registration</span>
-                    <strong class="font-display text-lg text-zinc-900">Application Review & Registration Pass</strong>
-                  </div>
-                  <div class="text-right">
-                    <span class="font-display text-2xl font-black text-emerald-600 block leading-tight">₹999</span>
-                    <span class="text-[0.68rem] text-zinc-500 font-mono-alt block">One-time pass</span>
-                  </div>
-                </div>
-
-                <p style="font-size: 0.86rem; color: #52525b; line-height: 1.5; margin-bottom: 16px;">
-                  Registration fee: ₹999 — pay via UPI and enter your reference number below.
-                </p>
-
-                <!-- UPI Details Box -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-[#FAF8F5] p-4 rounded-xl border border-[#E8DFD3]">
-                  <!-- UPI ID & Instructions -->
-                  <div>
-                    <span class="text-xs font-bold text-zinc-600 font-mono-alt uppercase block mb-1.5">Official UPI ID:</span>
-                    <div class="tfc-upi-id-pill" id="upiPill" onclick="copyUpiId()">
-                      <span id="upiText">thefuturecouncil@axl</span>
-                      <button type="button" class="text-xs text-orange-600 font-bold hover:underline" title="Copy UPI ID">
-                        Copy
-                      </button>
-                    </div>
-                    <p class="text-[0.75rem] text-zinc-500 mt-2">
-                      Scan QR or send ₹999 via any UPI app (GPay, PhonePe, Paytm, BHIM, CRED).
-                    </p>
-                  </div>
-
-                  <!-- QR Code -->
-                  <div class="text-center sm:text-right">
-                    <div class="inline-block p-2 bg-white border border-zinc-200 rounded-xl shadow-xs">
-                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi%3A%2F%2Fpay%3Fpa%3Dthefuturecouncil%40axl%26pn%3DThe%2520Future%2520Council%26am%3D999%26cu%3DINR" alt="UPI QR Code for ₹999" class="w-32 h-32 mx-auto object-contain" />
-                      <span class="text-[0.68rem] font-bold text-zinc-600 block mt-1 font-mono-alt">₹999 · Scan & Pay</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Reference Capture Form -->
-                <div class="mt-5 space-y-3">
-                  <label for="fUpiRef" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">
-                    12-digit UPI / UTR Transaction Reference Number *
-                  </label>
-                  <input type="text" id="fUpiRef" class="tfc-input font-mono-alt" placeholder="e.g. 426819284719 or UTR ID" required />
-                  <p class="text-[0.74rem] text-zinc-500">
-                    Found in your UPI app receipt under "UPI Transaction ID" or "UTR / Ref No."
-                  </p>
-                </div>
-
-                <!-- Error notice fallback -->
-                <div id="paymentErrorNotice" class="hidden mt-3 p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800">
-                  We couldn't confirm this payment yet. Double-check the reference number, or reach us at <a href="mailto:support@thefuturecouncil.in" class="underline font-bold">support@thefuturecouncil.in</a> and we'll sort it out.
-                </div>
-              </div>
-
-              <div class="flex items-center gap-3 pt-2">
-                <button type="button" onclick="goToStep(3)" class="tfc-btn tfc-btn-outline">
-                  ← Back
-                </button>
-                <button type="submit" id="btnSubmitApp" class="tfc-btn tfc-btn-primary flex-1 min-h-[48px] font-bold" style="background: var(--c-ember); border-color: var(--c-ember);">
-                  Confirm Payment & Submit Application →
+                <button type="submit" id="btnSubmitApp" class="tfc-btn tfc-btn-primary flex-1 min-h-[48px] font-bold" style="background: var(--accent); border-color: var(--accent);">
+                  Submit Application →
                 </button>
               </div>
             </div>
@@ -694,15 +620,15 @@
         <div id="fellowshipDashboardPanel" class="hidden">
           <div class="tfc-card p-5 sm:p-8 md:p-9 shadow-lg border border-zinc-200" style="background: #ffffff; border-radius: 16px;">
             
-            <!-- "You're in" Confirmation Banner (Page 3 & 6 of Brief) -->
+            <!-- Application Received Confirmation Banner -->
             <div id="dashConfirmationAlert" class="mb-6 p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3.5 shadow-sm">
               <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
               </div>
               <div>
-                <h3 class="font-display text-sm sm:text-base font-extrabold text-emerald-950">You're in.</h3>
+                <h3 class="font-display text-sm sm:text-base font-extrabold text-emerald-950">Application Received ✓</h3>
                 <p class="text-xs sm:text-sm text-emerald-800 mt-0.5 leading-relaxed font-body-alt">
-                  You're in. There's no shortlist — once your payment is confirmed, you're part of Fellowship '26. Pod assignments and kickoff details land in your inbox before Week 1.
+                  Application received. Our team will reach out on WhatsApp/email within 24 hours with next steps, including the ₹999 registration pass.
                 </p>
               </div>
             </div>
@@ -732,24 +658,24 @@
               </div>
             </div>
 
-            <!-- Payment & Automatic Admission Status -->
-            <div class="my-6 p-5 rounded-2xl border bg-gradient-to-br from-emerald-50/60 via-white to-amber-50/40 border-emerald-200/80 shadow-sm" id="dashPaymentBanner">
+            <!-- Application & Manual Payment Next Steps Status -->
+            <div class="my-6 p-5 rounded-2xl border bg-gradient-to-br from-amber-50/60 via-white to-orange-50/40 border-amber-200/80 shadow-sm" id="dashPaymentBanner">
               <div class="flex items-start gap-4">
-                <div id="dashPaymentIcon" class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-md">
-                  <i data-lucide="check-check" class="w-6 h-6"></i>
+                <div id="dashPaymentIcon" class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold shrink-0 shadow-md">
+                  <i data-lucide="clock" class="w-6 h-6"></i>
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-2.5 flex-wrap">
-                    <span class="text-xs font-bold text-zinc-500 uppercase font-mono-alt">Registration Status:</span>
-                    <span id="dashPaymentBadge" class="inline-flex items-center gap-1.5 text-xs font-black px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono-alt">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span> ₹999 Pass Recorded — Confirmed ✓
+                    <span class="text-xs font-bold text-zinc-500 uppercase font-mono-alt">Application Status:</span>
+                    <span id="dashPaymentBadge" class="inline-flex items-center gap-1.5 text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-mono-alt">
+                      <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Application Submitted — Awaiting WhatsApp/Email Next Steps ⏳
                     </span>
                   </div>
                   <p id="dashPaymentHeading" class="text-sm sm:text-base text-zinc-800 mt-2 font-bold leading-relaxed font-body-alt">
-                    Admission is automatic on registration. You're officially enrolled in the Fellowship '26 online cohort.
+                    Application received. Our team will reach out on WhatsApp/email within 24 hours with next steps, including the ₹999 registration pass.
                   </p>
                   <p id="dashPaymentSubtext" class="text-xs text-zinc-600 mt-1">
-                    Reference ID: <strong id="dashUpiRefDisplay" class="font-mono-alt text-zinc-900">-</strong>. Your founder pod assignment (4–6 builders) and Week 1 kickoff details will be delivered to your registered email before kickoff.
+                    Payment is collected manually via WhatsApp/email within 24 hours. Your spot in the 4–6 founder pod and Week 1 kickoff details will be confirmed once completed.
                   </p>
                 </div>
               </div>
@@ -899,7 +825,7 @@
     let currentStep = 1;
 
     function goToStep(step) {
-      if (step < 1 || step > 4) return;
+      if (step < 1 || step > 3) return;
 
       // Validate prior steps before moving forward
       if (step > 1 && !validateStep(1)) {
@@ -908,14 +834,11 @@
       if (step > 2 && !validateStep(2)) {
         return;
       }
-      if (step > 3 && !validateStep(3)) {
-        return;
-      }
 
       currentStep = step;
 
       // Toggle step visibility
-      for (let i = 1; i <= 4; i++) {
+      for (let i = 1; i <= 3; i++) {
         const stepEl = document.getElementById('formStep' + i);
         const badgeEl = document.getElementById('stepBadge' + i);
         if (stepEl) {
@@ -927,11 +850,11 @@
         }
         if (badgeEl) {
           if (i === step) {
-            badgeEl.className = 'tfc-form-step-badge active';
+            badgeEl.className = 'tfc-pill-step active';
           } else if (i < step) {
-            badgeEl.className = 'tfc-form-step-badge completed';
+            badgeEl.className = 'tfc-pill-step active';
           } else {
-            badgeEl.className = 'tfc-form-step-badge';
+            badgeEl.className = 'tfc-pill-step';
           }
         }
       }
@@ -1231,7 +1154,7 @@
       if (cachedStr) {
         try {
           const cachedData = JSON.parse(cachedStr);
-          if (cachedData && (cachedData.source === 'FellowshipPage' || cachedData.upiRef)) {
+          if (cachedData && cachedData.source === 'FellowshipPage') {
             showFellowshipDashboard(cachedData);
             return;
           }
@@ -1262,7 +1185,7 @@
       showFellowshipForm(user);
     }
 
-    // Form Submit Event
+    // Form Submit Event (Decoupled Form Submission - Payment collected manually via WhatsApp/Email)
     const fForm = document.getElementById('fellowshipDirectForm');
     if (fForm) {
       fForm.addEventListener('submit', async (e) => {
@@ -1279,12 +1202,7 @@
           return;
         }
 
-        const upiRef = document.getElementById('fUpiRef').value.trim();
-        if (!upiRef || upiRef.length < 6) {
-          const errBox = document.getElementById('paymentErrorNotice');
-          if (errBox) errBox.classList.remove('hidden');
-          alert("Please enter a valid UPI / UTR Transaction Reference Number.");
-          document.getElementById('fUpiRef').focus();
+        if (!validateStep(1) || !validateStep(2) || !validateStep(3)) {
           return;
         }
 
@@ -1315,7 +1233,7 @@
               .maybeSingle();
 
             memberId = dbMember ? dbMember.member_id : null;
-            const combinedCollege = `${chapter} | Phone: ${phone} | Source: FellowshipPage | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | UpiRef: ${upiRef} | PaymentFee: 999 | PaymentStatus: ref_submitted | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
+            const combinedCollege = `${chapter} | Phone: ${phone} | Source: FellowshipPage | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_payment_instructions | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
 
             if (!dbMember) {
               const randomNum = Math.floor(1000 + Math.random() * 9000);
@@ -1347,9 +1265,8 @@
             submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
             q1: `${ventureName}: ${q1}`,
             q4: '4-Week Online Cohort',
-            upiRef: upiRef,
             source: 'FellowshipPage',
-            paymentStatus: 'ref_submitted'
+            paymentStatus: 'awaiting_payment_instructions'
           };
 
           // Cache locally
@@ -1366,7 +1283,7 @@
           alert("Submission note: " + err.message);
         } finally {
           btn.disabled = false;
-          btn.textContent = 'Confirm Payment & Submit Application →';
+          btn.textContent = 'Submit Application →';
         }
       });
     }
