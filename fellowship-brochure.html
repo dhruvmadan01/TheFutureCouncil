@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fellowship '26 Brochure & Curriculum | The Future Council</title>
-  <meta name="description" content="Official 8-week curriculum, syllabus breakdown, weekly schedule, and venue details for Future Council Fellowship '26 (Cohort 01). Delhi NCR · Oct 19–Dec 19, 2026." />
-  <meta name="keywords" content="Future Council Fellowship brochure, Future Council syllabus, The Future Council, TFC Fellowship Brochure, startup curriculum, student founder syllabus, accelerator roadmap, Future Council Fellowship guide" />
+  <title>Fellowship '26 Digital Brochure | The Future Council</title>
+  <meta name="description" content="Official brochure for Future Council Fellowship '26. A 4-week, equity-free online fellowship for student founders across 90+ university chapters." />
+  <meta name="keywords" content="Future Council Fellowship brochure, Future Council syllabus, The Future Council, TFC Fellowship Brochure, online startup curriculum, student founder syllabus" />
   <meta name="author" content="Future Council" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://thefuturecouncil.in/fellowship-brochure" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ff7a3d" />
+  <meta name="theme-color" content="#E2542A" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Future Council | The Future Council" />
   <meta property="og:url" content="https://thefuturecouncil.in/fellowship-brochure" />
-  <meta property="og:title" content="Fellowship '26 Brochure & Curriculum | The Future Council" />
-  <meta property="og:description" content="Explore the comprehensive 8-week curriculum and syllabus for Future Council Fellowship '26. Week-by-week sprint guide from zero to one." />
+  <meta property="og:title" content="Fellowship '26 Digital Brochure | The Future Council" />
+  <meta property="og:description" content="Explore the official 4-week online syllabus and curriculum for Future Council Fellowship '26." />
   <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Future Council Fellowship '26 Brochure" />
   <meta property="og:locale" content="en_IN" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://thefuturecouncil.in/fellowship-brochure" />
-  <meta name="twitter:title" content="Fellowship '26 Brochure & Curriculum | The Future Council" />
-  <meta name="twitter:description" content="Explore the comprehensive 8-week curriculum for Future Council Fellowship '26 Cohort 01." />
+  <meta name="twitter:title" content="Fellowship '26 Digital Brochure | The Future Council" />
+  <meta name="twitter:description" content="Official 4-week online fellowship curriculum for Future Council Fellowship '26." />
   <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
 
   <!-- Schema.org JSON-LD -->
@@ -36,14 +35,13 @@
   {
     "@context": "https://schema.org",
     "@type": "DigitalDocument",
-    "name": "Future Council Fellowship '26 Brochure & Curriculum",
-    "description": "The official 8-week curriculum and syllabus breakdown for Future Council Fellowship '26 Cohort 01.",
+    "name": "Future Council Fellowship '26 Digital Brochure",
+    "description": "The official 4-week online curriculum and syllabus for Future Council Fellowship '26.",
     "url": "https://thefuturecouncil.in/fellowship-brochure",
     "publisher": {
       "@type": ["Organization", "EducationalOrganization"],
       "name": "Future Council",
       "legalName": "The Future Council",
-      "alternateName": ["The Future Council", "TFC", "Future Council India"],
       "url": "https://thefuturecouncil.in"
     },
     "inLanguage": "en-IN"
@@ -52,51 +50,30 @@
 
   <link rel="icon" href="TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="TFC.png" />
-
-  <!-- Google Fonts & Site Design System -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 
   <style>
-    /* Brochure-specific enhancements matching TFC Design System */
+    body {
+      background: var(--c-paper);
+      color: var(--c-ink);
+      font-family: var(--font-public-body);
+      line-height: 1.6;
+    }
+
     .brochure-bar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(251, 248, 243, 0.95);
+      background: rgba(243, 241, 234, 0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--c-sand);
       padding: 12px 0;
-      transition: all 0.2s ease;
     }
 
-    .brochure-bar-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .brochure-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brochure-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Marquee Ticker */
     .brochure-ticker {
-      background: var(--ink);
+      background: var(--c-ink);
       color: #FFFFFF;
       overflow: hidden;
       white-space: nowrap;
@@ -106,8 +83,8 @@
 
     .brochure-ticker-track {
       display: inline-block;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
+      font-family: var(--font-utility);
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -115,11 +92,11 @@
     }
 
     .brochure-ticker-track span {
-      margin: 0 18px;
+      margin: 0 16px;
     }
 
     .brochure-ticker-track .highlight {
-      color: var(--primary-orange);
+      color: var(--c-ember);
     }
 
     @keyframes tfcTickerScroll {
@@ -127,1040 +104,302 @@
       100% { transform: translateX(-50%); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .brochure-ticker-track { animation: none; }
-    }
-
-    /* Syllabus Week Cards */
-    .syllabus-week-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .syllabus-week-card:hover {
-      border-color: rgba(255, 122, 61, 0.3);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .syllabus-week-header {
-      background: linear-gradient(135deg, #181513 0%, #25201C 100%);
-      color: #FFFFFF;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .syllabus-week-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: -0.01em;
-      color: #FFFFFF;
-    }
-
-    .syllabus-week-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      background: var(--primary-orange);
-      color: #FFFFFF;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      letter-spacing: 0.04em;
-    }
-
-    .syllabus-week-dates {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: #D3CECA;
-      font-weight: 500;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 4px 12px;
-      border-radius: 9999px;
-    }
-
-    .syllabus-week-body {
-      padding: 20px 24px;
-    }
-
-    .syllabus-session-item {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px dashed var(--border-subtle);
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-
-    .syllabus-session-item:last-child {
-      border-bottom: none;
-      padding-bottom: 4px;
-    }
-
-    .session-badge {
-      font-family: var(--font-heading);
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--ink);
-      background: rgba(20, 17, 15, 0.05);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 10px;
-      border-radius: 6px;
-      height: fit-content;
-      text-align: center;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .session-badge-sat {
-      color: var(--primary-orange);
-      background: rgba(255, 122, 61, 0.1);
-      border-color: rgba(255, 122, 61, 0.25);
-    }
-
-    .session-speaker-tag {
-      display: inline-block;
-      color: var(--primary-orange);
-      font-weight: 600;
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-    }
-
-    /* Benefits Grid */
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px;
-    }
-
-    .benefit-item-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 22px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .benefit-item-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(255, 122, 61, 0.3);
-    }
-
-    .benefit-icon-box {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: rgba(255, 122, 61, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
-
-    .benefit-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 0;
-    }
-
-    .benefit-desc {
-      font-size: 0.88rem;
-      color: var(--ink-soft);
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    /* Selection Steps */
-    .selection-steps-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-    }
-
-    .selection-step-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 20px 18px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-    }
-
-    .selection-step-num {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--primary-orange);
-      line-height: 1;
-    }
-
-    .selection-step-title {
-      font-family: var(--font-heading);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin: 0;
-    }
-
-    .selection-step-desc {
-      font-size: 0.82rem;
-      color: var(--ink-soft);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    /* Campus chips */
-    .campus-chips-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .campus-chip {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 9999px;
-      padding: 8px 18px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--ink);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.15s ease;
-    }
-
-    .campus-chip:hover {
-      border-color: var(--primary-orange);
-      transform: translateY(-1px);
-    }
-
-    .campus-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-lime);
-      display: inline-block;
-    }
-
-    /* ==========================================================================
-       PRINT & PDF STYLES
-       ========================================================================== */
     @media print {
       .no-print,
       .brochure-bar,
       .tfc-mobile-menu,
-      .tfc-mobile-sticky-bar,
       .brochure-ticker {
         display: none !important;
       }
-
       body {
         background: #FFFFFF !important;
-        color: #14110F !important;
-        font-size: 12pt;
-        line-height: 1.45;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        color: #14161A !important;
+        font-size: 11pt;
       }
-
-      .tfc-container {
-        max-width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-
-      .tfc-section,
-      .tfc-section-lg {
-        padding: 24px 0 !important;
-        border-bottom: 1px solid #E5E0DA !important;
-      }
-
-      .syllabus-week-card {
+      .tfc-card, .tfc-pillar-card, .tfc-reason-card, .tfc-timeline-card {
         box-shadow: none !important;
-        border: 1px solid #333333 !important;
+        border: 1px solid #C9C2B0 !important;
         page-break-inside: avoid !important;
-        break-inside: avoid !important;
-        margin-bottom: 16px !important;
-      }
-
-      .syllabus-week-header {
-        background: #14110F !important;
-        color: #FFFFFF !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .selection-step-card,
-      .benefit-item-card,
-      .tfc-card {
-        box-shadow: none !important;
-        border: 1px solid #E0DDD8 !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .tfc-stat-strip {
-        box-shadow: none !important;
-        border: 1px solid #14110F !important;
-        background: #FFFFFF !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .tfc-dark-banner {
-        background: #14110F !important;
-        color: #FFFFFF !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .print-header-watermark {
-        display: block !important;
-        padding-bottom: 12px;
-        border-bottom: 2px solid #14110F;
-        margin-bottom: 20px;
-      }
-    }
-
-    .print-header-watermark {
-      display: none;
-    }
-
-    @media (max-width: 860px) {
-      .selection-steps-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .syllabus-session-item {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .selection-steps-grid {
-        grid-template-columns: 1fr;
-      }
-      .brochure-bar-inner {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .brochure-bar-right {
-        justify-content: space-between;
-      }
-      .brochure-bar-right .tfc-btn {
-        flex: 1;
-        text-align: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sticky Top Utility Bar -->
+  <!-- Top Action Bar -->
   <header class="brochure-bar no-print">
-    <div class="tfc-container brochure-bar-inner">
-      <div class="brochure-bar-left">
+    <div class="tfc-container" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 12px;">
         <a href="index.html" class="tfc-brand">
-          <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-          <span>THE FUTURE COUNCIL</span>
+          <img src="TFC.png" alt="TFC Logo" class="tfc-brand-logo" />
+          <span class="font-display font-bold">THE FUTURE COUNCIL</span>
         </a>
-        <span style="color: var(--border-subtle); display: inline-block; margin: 0 4px;">|</span>
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary-orange); letter-spacing: 0.04em; text-transform: uppercase;">Fellowship '26 Brochure</span>
+        <span style="color: var(--c-sand);">|</span>
+        <span class="font-mono-alt" style="font-size: 0.8rem; color: var(--c-teal); font-weight: 700;">BROCHURE · ONLINE COHORT</span>
       </div>
 
-      <div class="brochure-bar-right">
-        <a href="fellowship.html" class="tfc-btn tfc-btn-outline tfc-btn-sm">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="fellowship.html" class="tfc-btn tfc-btn-outline tfc-btn-sm" style="border-color: var(--c-sand); font-weight: 600;">
           ← Back to Fellowship Page
         </a>
-        <button onclick="window.print()" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="box-shadow: var(--shadow-sm);">
-          🖨️ Save as PDF / Print Brochure
+        <button onclick="window.print()" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--c-ember); border-color: var(--c-ember); font-weight: 700;">
+          🖨️ Save as PDF / Print
         </button>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
   </header>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="index.html" class="tfc-mobile-nav-link">Home</a></li>
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link active">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Our Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <button onclick="window.print();" class="tfc-btn tfc-btn-primary" style="width: 100%;">
-        🖨️ Print / Save PDF
-      </button>
-      <a href="fellowship.html#apply" class="tfc-btn tfc-btn-outline" style="width: 100%; border-color: rgba(255,255,255,0.3); color: #fff !important;">
-        Apply for Cohort 01 →
-      </a>
-    </div>
-  </div>
-
   <!-- Marquee Ticker -->
   <div class="brochure-ticker no-print">
     <div class="brochure-ticker-track">
-      <span>★ BUILD 0 TO 1</span>
-      <span>20 FOUNDERS</span>
-      <span>ZERO EQUITY</span>
+      <span>★ 4-WEEK ONLINE COHORT</span>
+      <span>90+ CAMPUS CHAPTERS</span>
       <span class="highlight">FELLOWSHIP '26</span>
-      <span>★ 90+ CAMPUS CHAPTERS</span>
-      <span>DELHI NCR</span>
-      <span>★ LAUNCHPAD</span>
-      <span>OPERATOR ADVISORY</span>
-      <span>★ BUILD 0 TO 1</span>
-      <span>20 FOUNDERS</span>
-      <span>ZERO EQUITY</span>
+      <span>★ ZERO RELOCATION</span>
+      <span>WEEKLY LIVE LABS</span>
+      <span>FOUNDER PODS</span>
+      <span>VIRTUAL DEMO DAY</span>
+      <span>★ 4-WEEK ONLINE COHORT</span>
+      <span>90+ CAMPUS CHAPTERS</span>
       <span class="highlight">FELLOWSHIP '26</span>
-      <span>★ 90+ CAMPUS CHAPTERS</span>
-      <span>DELHI NCR</span>
-      <span>★ LAUNCHPAD</span>
-      <span>OPERATOR ADVISORY</span>
+      <span>★ ZERO RELOCATION</span>
+      <span>WEEKLY LIVE LABS</span>
+      <span>FOUNDER PODS</span>
+      <span>VIRTUAL DEMO DAY</span>
     </div>
   </div>
 
   <main>
-    <!-- Document Header for Print Only -->
-    <div class="tfc-container print-header-watermark">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="TFC.png" alt="TFC Logo" style="width: 28px; height: 28px; border-radius: 6px;" />
-          <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em;">THE FUTURE COUNCIL</span>
-        </div>
-        <div style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: #666;">
-          Fellowship '26 Official Brochure · Cohort 01
-        </div>
-      </div>
-    </div>
-
-    <!-- HERO SECTION -->
-    <section class="tfc-section-lg" style="padding-top: 56px; padding-bottom: 48px;">
-      <div class="tfc-container">
-        <div style="max-width: 860px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,122,61,0.1); border: 1px solid rgba(255,122,61,0.24); padding: 6px 14px 6px 8px; border-radius: 9999px; margin-bottom: 22px;">
-            <img src="TFC.png" alt="TFC Logo" style="width: 18px; height: 18px; border-radius: 4px; object-fit: contain;" />
-            <span style="font-size: 0.76rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 0.06em; text-transform: uppercase;">Cohort 01 · Delhi NCR · Oct 19 – Dec 19, 2026</span>
-          </div>
-
-          <h1 class="tfc-headline" style="margin-bottom: 20px; letter-spacing: -0.025em;">
-            Fellowship '26 Official Syllabus &amp; Curriculum
-          </h1>
-
-          <p class="tfc-subheadline" style="max-width: 760px; margin-bottom: 30px;">
-            A 100% in-person, 8-week intensive builder program for 20 early-stage founders. Bring an idea — we'll help you build it from zero to one, recruit your founding team, and put your product in front of leading angel syndicates and venture funds.
-          </p>
-
-          <div class="no-print" style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
-            <button onclick="window.print()" class="tfc-btn tfc-btn-primary tfc-btn-lg">
-              🖨️ Save as PDF / Print Brochure
-            </button>
-            <a href="fellowship.html#apply" class="tfc-btn tfc-btn-outline tfc-btn-lg">
-              Apply for Cohort 01 →
-            </a>
-            <a href="#syllabus" class="tfc-btn tfc-btn-ghost" style="font-weight: 600;">
-              Jump to 8-Week Syllabus ↓
-            </a>
-          </div>
+    <!-- Hero / Masthead Section (Build Brief §5) -->
+    <section class="tfc-section-lg" style="padding-top: 56px; padding-bottom: 40px;">
+      <div class="tfc-container" style="max-width: 900px;">
+        <div class="tfc-badge" style="background: rgba(226, 84, 42, 0.08); color: var(--c-ember); border: 1px solid rgba(226, 84, 42, 0.25); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-utility); font-size: 0.78rem;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--c-ember); display: inline-block;"></span>
+          The Future Council · 90+ Chapters
         </div>
 
-        <!-- 4-Stat Strip -->
-        <div class="tfc-stat-strip" style="margin-top: 44px;">
-          <div class="tfc-stat-item">
-            <div class="tfc-stat-num" style="color: var(--ink);">20</div>
-            <div class="tfc-stat-label">Founder Seats Total</div>
-          </div>
-          <div class="tfc-stat-item">
-            <div class="tfc-stat-num" style="color: var(--ink);">8 Weeks</div>
-            <div class="tfc-stat-label">Oct 19 – Dec 19, 2026</div>
-          </div>
-          <div class="tfc-stat-item">
-            <div style="display: flex; align-items: baseline; justify-content: center; gap: 6px; flex-wrap: wrap;">
-              <span style="font-size: 0.95rem; color: #ef4444; text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 700;">₹1,50,000</span>
-              <span class="tfc-stat-num" style="color: #059669; margin-bottom: 0;">₹0</span>
-            </div>
-            <div class="tfc-stat-label">Tuition (100% Waived)</div>
-          </div>
-          <div class="tfc-stat-item">
-            <div class="tfc-stat-num" style="color: var(--primary-orange);">90+</div>
-            <div class="tfc-stat-label">Campus Chapters Nationwide</div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <h1 class="font-display" style="font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1.5px; color: var(--c-ink);">
+          Fellowship '26
+        </h1>
 
-    <!-- SECTION 00: MANDATE -->
-    <section class="tfc-section" style="background: #FFFFFF; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container">
-        <div style="max-width: 860px;">
-          <span class="tfc-eyebrow">00 · The Mandate</span>
-          <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 16px;">
-            Got an idea? Bring it.
-          </h2>
-          <p style="font-size: 1.08rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 18px;">
-            Fellowship '26 is engineered for early-stage student founders ready to turn raw vision into validated products. Over eight weeks in Delhi NCR, you receive hands-on operator advisory, technical masterclasses, and weekly teardowns from founders who've scaled from 0 to 1 — plus active assistance recruiting co-founders, full-stack engineers, and product designers from our collegiate chapters.
-          </p>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <span class="tfc-badge tfc-badge-neutral">✓ No Team Required to Apply</span>
-            <span class="tfc-badge tfc-badge-neutral">✓ No Traction or Revenue Required</span>
-            <span class="tfc-badge tfc-badge-neutral">✓ 0% Equity Taken</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 01: FEES & LOCATION -->
-    <section class="tfc-section">
-      <div class="tfc-container">
-        <span class="tfc-eyebrow">01 · Financials &amp; Venues</span>
-        <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 28px;">
-          Fee Structure &amp; Logistics
+        <h2 class="font-display" style="font-size: clamp(1.2rem, 2.8vw, 1.7rem); font-weight: 600; line-height: 1.35; color: var(--c-ember); margin-bottom: 24px;">
+          Now fully online — a 4-week, equity-free fellowship for student founders
         </h2>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 24px;">
-          <!-- Card 1: Program Fee -->
-          <div class="tfc-card" style="border-top: 4px solid #059669;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #059669;">Cohort 01 Grant</span>
-              <span class="tfc-badge tfc-badge-lime">100% Equity-Free</span>
-            </div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Program Fee</h3>
-            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;">
-              <span style="font-size: 1.3rem; text-decoration: line-through; color: #ef4444; opacity: 0.7; font-weight: 700;">₹1,50,000</span>
-              <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: #059669;">₹0</span>
-            </div>
-            <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin: 0;">
-              The ₹1.5 Lakh program fee is completely waived for all 20 admitted founders via ecosystem grants. Zero tuition, zero equity taken, zero hidden costs.
-            </p>
-          </div>
+        <!-- Intro Paragraph (Build Brief §5 Verbatim) -->
+        <p style="font-size: 1.12rem; color: #4A453F; line-height: 1.7; margin-bottom: 36px;">
+          Fellowship '26 now runs entirely online — built for founders across all 90+ Future Council chapters, not just the ones who can relocate. We traded a single campus for a tighter cohort structure: small founder pods, a weekly cohort lab, and a virtual demo day that still culminates in a real room of investors and alumni.
+        </p>
 
-          <!-- Card 2: Application Fee -->
-          <div class="tfc-card" style="border-top: 4px solid var(--primary-orange);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-orange);">Admissions Filter</span>
-              <span class="tfc-badge tfc-badge-neutral">High-Intent Filter</span>
-            </div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Application Fee</h3>
-            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;">
-              <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--ink);">₹1,999</span>
-            </div>
-            <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin: 0;">
-              Charged exclusively to attract serious, high-conviction builders and fund detailed pitch reviews by operator panels — never a hidden tuition cost.
-            </p>
+        <!-- Stat Strip -->
+        <div class="tfc-stat-strip" style="background: #FFFFFF; border-radius: 16px; border: 1px solid var(--c-sand); box-shadow: var(--shadow-sm);">
+          <div class="tfc-stat-item">
+            <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4 Weeks</span>
+            <span class="tfc-stat-label font-mono-alt">Fully Remote</span>
+          </div>
+          <div class="tfc-stat-item">
+            <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4–6 Pods</span>
+            <span class="tfc-stat-label font-mono-alt">Weekly Syncs</span>
+          </div>
+          <div class="tfc-stat-item">
+            <span class="tfc-stat-num font-display" style="color: var(--c-ember);">₹999</span>
+            <span class="tfc-stat-label font-mono-alt">Registration Pass</span>
+          </div>
+          <div class="tfc-stat-item">
+            <span class="tfc-stat-num font-display" style="color: var(--c-teal);">Sep 30</span>
+            <span class="tfc-stat-label font-mono-alt">Closes 7 PM IST</span>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Venue Notice Card -->
-        <div style="background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 14px; padding: 22px 26px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 16px;">
-          <div style="font-size: 1.5rem; line-height: 1;">📍</div>
-          <div>
-            <h4 style="margin: 0 0 6px 0; font-size: 1rem; font-family: var(--font-heading); font-weight: 700;">In-Person Delhi NCR Hubs</h4>
-            <p style="margin: 0; font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6;">
-              This is an offline sprint. You must be available in person in Delhi NCR across the eight weeks. Build labs run at our 25-seater Workshop Hub in Delhi, and Saturday cohort teardowns occur at WeWork Delhi NCR. (Non-residential: accommodation is self-managed, though the Council assists out-of-town founders with vetted housing options).
+    <!-- SECTION: Why Online (Build Brief §5) -->
+    <section class="tfc-section" style="padding-top: 30px; padding-bottom: 40px; background: #FFFFFF; border-top: 1px solid var(--c-sand); border-bottom: 1px solid var(--c-sand);">
+      <div class="tfc-container" style="max-width: 900px;">
+        <span class="tfc-reason-tag">WHY ONLINE</span>
+        <h3 class="font-display" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">
+          Built for every founder across 90+ campuses
+        </h3>
+
+        <div class="tfc-reasons-grid">
+          <div class="tfc-reason-card">
+            <span class="tfc-reason-tag">REACH</span>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Every chapter, every city</h4>
+            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
+              No relocation required to join the cohort. Built for founders across all 90+ chapters.
+            </p>
+          </div>
+
+          <div class="tfc-reason-card">
+            <span class="tfc-reason-tag">SPEED</span>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">No venue lead time</h4>
+            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
+              Applications open now, the cohort starts on schedule.
+            </p>
+          </div>
+
+          <div class="tfc-reason-card">
+            <span class="tfc-reason-tag">DEPTH</span>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">4–6 person pods</h4>
+            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
+              Pods meet weekly outside the main call, so no one hides in a large call.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 02: WEEKLY RHYTHM -->
-    <section class="tfc-section" style="background: #FFFFFF; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container">
-        <span class="tfc-eyebrow">02 · Cadence</span>
-        <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 28px;">
-          Weekly Rhythm: Structured for Momentum
-        </h2>
+    <!-- SECTION: How the Cohort Runs (4 Pillars - Build Brief §5) -->
+    <section class="tfc-section" style="padding-top: 36px; padding-bottom: 40px;">
+      <div class="tfc-container" style="max-width: 900px;">
+        <span class="tfc-reason-tag">HOW THE COHORT RUNS</span>
+        <h3 class="font-display" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">
+          The 4 pillars of Fellowship '26
+        </h3>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-          <!-- Rhythm 1: Tue & Fri -->
-          <div class="tfc-card" style="border-left: 4px solid var(--ink);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: var(--ink);">Tue &amp; Fri</span>
-              <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; background: rgba(20, 17, 15, 0.08); padding: 4px 10px; border-radius: 6px;">5:00 PM – 7:30 PM</span>
-            </div>
-            <h4 style="font-size: 1rem; margin: 0 0 8px 0; color: var(--primary-orange);">Masterclass &amp; Live Build Lab</h4>
-            <p style="margin: 0; font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6;">
-              Focused technical execution, live wireframing, architecture clinics, and standups held at our 25-seater Workshop Hub in Delhi.
+        <div class="tfc-pillars-grid">
+          <div class="tfc-pillar-card">
+            <div class="tfc-pillar-index">01 — WEEKLY COHORT LAB</div>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Weekly Cohort Lab</h4>
+            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
+              One live session a week — mentor talks, workshops, peer feedback rounds. The anchor everyone shows up for together.
             </p>
           </div>
 
-          <!-- Rhythm 2: Saturday -->
-          <div class="tfc-card" style="border-left: 4px solid var(--primary-orange);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: var(--ink);">Saturdays</span>
-              <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; background: rgba(255, 122, 61, 0.12); color: var(--primary-orange); padding: 4px 10px; border-radius: 6px;">2:30 PM – 6:30 PM</span>
-            </div>
-            <h4 style="font-size: 1rem; margin: 0 0 8px 0; color: var(--ink);">Leader Masterclass &amp; Teardowns</h4>
-            <p style="margin: 0; font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6;">
-              Closed-door AMAs with scale-stage founders, product teardowns, full-cohort strategy audits, and demo rehearsals hosted at WeWork Delhi NCR.
+          <div class="tfc-pillar-card">
+            <div class="tfc-pillar-index">02 — FOUNDER PODS</div>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Founder Pods</h4>
+            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
+              Groups of 4–6 founders meet weekly outside the main call — this is where the real depth and accountability happen.
+            </p>
+          </div>
+
+          <div class="tfc-pillar-card">
+            <div class="tfc-pillar-index">03 — MENTOR OFFICE HOURS</div>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Mentor Office Hours</h4>
+            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
+              1:1 slots with operators and investors from the Future Council network, booked directly by each founder.
+            </p>
+          </div>
+
+          <div class="tfc-pillar-card">
+            <div class="tfc-pillar-index">04 — DEMO DAY</div>
+            <h4 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Virtual Demo Day</h4>
+            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
+              A virtual pitch event in front of investors and alumni to close the cohort — treated as the flagship moment, not an afterthought.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 03: 12 BENEFITS -->
-    <section class="tfc-section">
-      <div class="tfc-container">
-        <div style="max-width: 780px; margin-bottom: 36px;">
-          <span class="tfc-eyebrow">03 · Ecosystem Value</span>
-          <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 12px;">
-            What Admitted Founders Receive
-          </h2>
-          <p style="font-size: 1.05rem; color: var(--ink-soft); margin: 0;">
-            Every fellow is backed by hands-on operator advisory, university recruitment pipelines, and institutional capital introductions.
+    <!-- SECTION: 4-Week Timeline Strip (Build Brief §5) -->
+    <section class="tfc-section" style="padding-top: 30px; padding-bottom: 40px; background: #FFFFFF; border-top: 1px solid var(--c-sand); border-bottom: 1px solid var(--c-sand);">
+      <div class="tfc-container" style="max-width: 900px;">
+        <span class="tfc-reason-tag">TIMELINE (4 WEEKS)</span>
+        <h3 class="font-display" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">
+          Curriculum & Sprint Cadence
+        </h3>
+
+        <div class="tfc-timeline-strip">
+          <div class="tfc-timeline-card">
+            <span class="tfc-timeline-week">WEEK 1</span>
+            <h5 class="font-display" style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Kickoff & Pod Formation</h5>
+            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Cohort orientation, founder matching into 4-6 person pods, and benchmark goals.</p>
+          </div>
+
+          <div class="tfc-timeline-card">
+            <span class="tfc-timeline-week">WEEK 2</span>
+            <h5 class="font-display" style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Live Labs & Pod Check-ins</h5>
+            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Live labs, execution workshops, and weekly pod accountability check-ins.</p>
+          </div>
+
+          <div class="tfc-timeline-card">
+            <span class="tfc-timeline-week">WEEK 3</span>
+            <h5 class="font-display" style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Demo Prep & Mock Pitches</h5>
+            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Deck teardowns, 1:1 mentor office hours, and mock pitch feedback rounds.</p>
+          </div>
+
+          <div class="tfc-timeline-card">
+            <span class="tfc-timeline-week">WEEK 4</span>
+            <h5 class="font-display" style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Virtual Demo Day</h5>
+            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Flagship virtual demo day pitching to active investors, angels, and alumni.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Who Should Apply (Build Brief §5) -->
+    <section class="tfc-section" style="padding-top: 36px; padding-bottom: 36px;">
+      <div class="tfc-container" style="max-width: 900px;">
+        <div class="tfc-card" style="padding: 32px; border: 1px solid var(--c-sand); background: #FFFFFF; border-radius: 16px;">
+          <span class="tfc-reason-tag">WHO SHOULD APPLY</span>
+          <h3 class="font-display" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 12px;">
+            Eligibility & Selection Criteria
+          </h3>
+          <p style="font-size: 1.02rem; color: #3f3f46; line-height: 1.68; margin: 0;">
+            Student founders building an early-stage venture, in or outside a Future Council chapter, who can commit roughly 6–8 hours a week for 4 weeks, fully remote. We're looking for founders who want peer accountability, not just a certificate.
           </p>
         </div>
-
-        <div class="benefits-grid">
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🤝</div>
-            <h4 class="benefit-title">Matched Mentorship</h4>
-            <p class="benefit-desc">Seasoned operators and domain-specialist advisors matched directly to your industry vertical and product architecture.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">📈</div>
-            <h4 class="benefit-title">Weekly Strategy Audits</h4>
-            <p class="benefit-desc">Structured KPI reviews, execution sprint tracking, and metrics check-ins aimed squarely at product-market validation.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🎙️</div>
-            <h4 class="benefit-title">Leader Masterclasses</h4>
-            <p class="benefit-desc">Off-the-record masterclasses and unfiltered AMAs with high-growth founders, technical architects, and product leads.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🚀</div>
-            <h4 class="benefit-title">Launch Support</h4>
-            <p class="benefit-desc">Amplify your initial launch through the Council's collegiate network, distribution channels, and press ecosystems.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🎟️</div>
-            <h4 class="benefit-title">IRL Mixers</h4>
-            <p class="benefit-desc">High-conviction networking meetups and private dinners connecting you with ambitious peer builders across universities.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">📖</div>
-            <h4 class="benefit-title">Masterclass Playbooks</h4>
-            <p class="benefit-desc">Battle-tested templates on legal incorporation, early user interviews, zero-CAC distribution, and growth loops.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🎓</div>
-            <h4 class="benefit-title">Lifetime Alumni Access</h4>
-            <p class="benefit-desc">Join an exclusive alumni network with permanent access to future demo day showcases, investor dinners, and talent pools.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🌱</div>
-            <h4 class="benefit-title">Grassroots Talent Radar</h4>
-            <p class="benefit-desc">Direct recruiting access to engineers, product designers, and growth marketers across our 90+ campus chapters nationwide.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">💰</div>
-            <h4 class="benefit-title">Investor Introductions</h4>
-            <p class="benefit-desc">Curated demo day presentations, 1-on-1 pitch sessions, and warm syndication intros to angel networks and micro-VCs.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🌐</div>
-            <h4 class="benefit-title">Industry Connections</h4>
-            <p class="benefit-desc">Warm introductions to corporate innovation teams, technology cloud vendors, and legal/accounting partners.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">👥</div>
-            <h4 class="benefit-title">Co-founder Matchmaking</h4>
-            <p class="benefit-desc">No co-founder? We actively match complementary technical and business minds across our admitted and chapter pools.</p>
-          </div>
-
-          <div class="benefit-item-card">
-            <div class="benefit-icon-box">🛡️</div>
-            <h4 class="benefit-title">Verified Credential</h4>
-            <p class="benefit-desc">A verifiable digital badge, alumni credentials for LinkedIn and official founder directories, and council endorsement.</p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- SECTION 04: THE 8-WEEK BUILD SYLLABUS -->
-    <section id="syllabus" class="tfc-section" style="background: #FFFFFF; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container">
-        <div style="max-width: 840px; margin-bottom: 36px;">
-          <span class="tfc-eyebrow">04 · Syllabus Roadmap</span>
-          <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 14px;">
-            The 8-Week Build: Zero to One
-          </h2>
-          <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; margin: 0;">
-            Orientation kicks off on Monday, Oct 19. Every subsequent week follows our structured rhythm: two build-focused weekday sessions, followed by a Saturday leader masterclass, closed-door AMA, and teardown sprint.
-          </p>
-        </div>
+    <!-- SECTION: Dark Applications Panel (Build Brief §5 Verbatim Spec) -->
+    <section class="tfc-section" style="padding-top: 20px; padding-bottom: 60px;">
+      <div class="tfc-container" style="max-width: 900px;">
+        <div style="background: var(--c-ink); color: var(--c-paper); border-radius: 20px; padding: 44px 36px; box-shadow: var(--shadow-lg);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px;">
+            <div style="max-width: 540px;">
+              <span class="font-mono-alt" style="font-size: 0.78rem; font-weight: 700; color: var(--c-ember); letter-spacing: 0.08em; text-transform: uppercase;">
+                Applications Open · Cohort 01
+              </span>
+              <h3 class="font-display" style="color: #FFFFFF; font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin: 10px 0 12px 0;">
+                Join the 4-Week Online Fellowship
+              </h3>
+              <p style="color: #D3CECA; font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0;">
+                Fully remote, equity-free launchpad for ambitious student founders. No relocation required.
+              </p>
 
-        <!-- WEEK 1 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 1</span>
-              <span>Problem Validation &amp; Customer Discovery</span>
-            </div>
-            <span class="syllabus-week-dates">Oct 20–25</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>Customer discovery &amp; hypothesis formulation</strong> — Drafting falsifiable customer assumptions and non-leading interview questions; live 40-target customer outreach sprint; conducting user interviews to extract hard truths.
+              <div class="flex items-center gap-3 flex-wrap">
+                <a href="fellowship.html#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="background: var(--c-ember); border-color: var(--c-ember); font-weight: 700;">
+                  Apply Now →
+                </a>
+                <button onclick="window.print()" class="tfc-btn tfc-btn-outline" style="border-color: rgba(255,255,255,0.3); color: #FFFFFF !important;">
+                  🖨️ Print / Save PDF
+                </button>
               </div>
             </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
+
+            <!-- Hard Numbers Block -->
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 24px 28px; min-width: 240px;">
+              <div style="margin-bottom: 16px;">
+                <span class="font-mono-alt" style="font-size: 0.72rem; color: #a1a1aa; text-transform: uppercase; display: block;">Registration Fee:</span>
+                <span class="font-display" style="font-size: 2.2rem; font-weight: 800; color: #10B981; line-height: 1.1;">₹999</span>
+                <span class="font-mono-alt" style="font-size: 0.7rem; color: #a1a1aa; display: block; margin-top: 2px;">One-time review pass</span>
+              </div>
               <div>
-                <strong>Validating real market demand before writing code</strong> <span class="session-speaker-tag">— Seed-Funded Founder Masterclass</span>; live hypothesis canvas teardowns with actionable operator critique.
+                <span class="font-mono-alt" style="font-size: 0.72rem; color: #a1a1aa; text-transform: uppercase; display: block;">Application Deadline:</span>
+                <span class="font-display" style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; line-height: 1.2;">30 September 2026</span>
+                <span class="font-mono-alt" style="font-size: 0.75rem; color: var(--c-ember); font-weight: 700; display: block; margin-top: 2px;">7:00 PM IST</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- WEEK 2 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 2</span>
-              <span>Grassroots Talent &amp; Value Proposition</span>
-            </div>
-            <span class="syllabus-week-dates">Oct 26–Nov 1</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>Synthesizing discovery into a high-resonance value proposition</strong>; pitching technical builders and sourcing co-founders; founder role definitions, equity split clinics, and founder vesting schedules.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Co-founder equity splits, vesting &amp; avoiding early breakups</strong> <span class="session-speaker-tag">— Serial Founder Masterclass</span>; grassroots talent matchmaking mixer with engineers and designers from DU/IIT chapters.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 3 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 3</span>
-              <span>Rapid Prototyping &amp; Flow Elimination</span>
-            </div>
-            <span class="syllabus-week-dates">Nov 2–8</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>The 1-flow PRD</strong> — Radically scoping an MVP to one core action; Figma wireframing for non-designers; peer-to-peer usability testing and edge-case elimination.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Building intuitive zero-to-one UX without bloated feature sets</strong> <span class="session-speaker-tag">— Head of Product Masterclass</span>; on-screen interactive prototype teardowns.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 4 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 4</span>
-              <span>The 7-Day MVP Build Sprint</span>
-            </div>
-            <span class="syllabus-week-dates">Nov 9–15</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>Rapid full-stack architecture &amp; database schema reviews</strong>; instrumenting product analytics from day zero (PostHog/Mixpanel); setting up staging environments and CI/CD pipelines.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Deploying resilient MVPs &amp; dodging cloud infrastructure traps</strong> <span class="session-speaker-tag">— Lead Systems Architect Masterclass</span>; live staging deployment audit for all 20 products.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 5 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 5</span>
-              <span>Launch &amp; Distribution Engine</span>
-            </div>
-            <span class="syllabus-week-dates">Nov 16–22</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>High-conversion launch copywriting</strong> for LinkedIn, X, Reddit, and student communities; concierge onboarding protocols for your first 25 organic users.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Zero-CAC growth: community seeding &amp; viral campus loops</strong> <span class="session-speaker-tag">— Growth Operator Masterclass</span>; co-launch sprint, pushing all 20 founder products live to real users.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 6 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 6</span>
-              <span>Retention, Churn &amp; Investor Readiness</span>
-            </div>
-            <span class="syllabus-week-dates">Nov 23–29</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>Analyzing cohort retention curves &amp; churn triage</strong>; designing early monetization hypotheses and executing willingness-to-pay pricing experiments.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Unit economics, sustainable burn &amp; startup fundability</strong> <span class="session-speaker-tag">— Seed Angel Operator Masterclass</span>; investor readiness audits and metric validation.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 7 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 7</span>
-              <span>Pitch Storytelling &amp; Slide Deck</span>
-            </div>
-            <span class="syllabus-week-dates">Nov 30–Dec 6</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>The 10-slide seed pitch deck formula</strong>; data presentation, narrative arcs, and peer deck reviews; crafting compelling product demos.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>What venture and angel investors evaluate in the first 90 seconds</strong> <span class="session-speaker-tag">— Active Angel Investor Masterclass</span>; rapid-fire slide deck teardowns.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WEEK 8 -->
-        <div class="syllabus-week-card">
-          <div class="syllabus-week-header">
-            <div class="syllabus-week-title">
-              <span class="syllabus-week-tag">Week 8</span>
-              <span>Dress Rehearsal &amp; Demo Day</span>
-            </div>
-            <span class="syllabus-week-dates">Dec 7–19</span>
-          </div>
-          <div class="syllabus-week-body">
-            <div class="syllabus-session-item">
-              <div><span class="session-badge">Tue / Fri</span></div>
-              <div>
-                <strong>Handling tough investor Q&amp;A</strong> under simulated cross-examination; final deck lockdown, stage pacing, and product presentation rehearsal.
-              </div>
-            </div>
-            <div class="syllabus-session-item">
-              <div><span class="session-badge session-badge-sat">Saturday</span></div>
-              <div>
-                <strong>Official Demo Day Showcase</strong> — 3-minute pitches with live investor Q&amp;A before top angel syndicates, micro-VCs, and ecosystem leaders, followed by the formal Alumni Credential Ceremony.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 05: CAMPUS NETWORK -->
-    <section class="tfc-section">
-      <div class="tfc-container">
-        <div style="max-width: 820px; margin-bottom: 28px;">
-          <span class="tfc-eyebrow">05 · Talent Pipeline</span>
-          <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 12px;">
-            Grassroots Collegiate Ecosystem
-          </h2>
-          <p style="font-size: 1.05rem; color: var(--ink-soft); margin: 0;">
-            The Council runs 90+ chapters nationwide, giving fellows a built-in recruiting pipeline for founding engineers, designers, and growth leads. Fellowship '26's in-person cohort draws deepest from these flagship Delhi NCR campuses:
-          </p>
-        </div>
-
-        <div class="campus-chips-wrap">
-          <span class="campus-chip"><span class="campus-dot"></span> FoT — Faculty of Technology, DU</span>
-          <span class="campus-chip"><span class="campus-dot"></span> SRCC — Shri Ram College of Commerce</span>
-          <span class="campus-chip"><span class="campus-dot"></span> Hansraj College E-Cell</span>
-          <span class="campus-chip"><span class="campus-dot"></span> LSR — Lady Shri Ram College</span>
-          <span class="campus-chip"><span class="campus-dot"></span> SGTB Khalsa College</span>
-          <span class="campus-chip"><span class="campus-dot"></span> Hindu College</span>
-          <span class="campus-chip"><span class="campus-dot"></span> St. Stephen's College</span>
-          <span class="campus-chip"><span class="campus-dot"></span> KMC — Kirori Mal College</span>
-          <span class="campus-chip"><span class="campus-dot"></span> Miranda House</span>
-          <span class="campus-chip"><span class="campus-dot"></span> IIT Delhi</span>
-          <span class="campus-chip"><span class="campus-dot"></span> DTU — Delhi Technological University</span>
-          <span class="campus-chip"><span class="campus-dot"></span> NSUT — Netaji Subhas University of Tech</span>
-          <span class="campus-chip"><span class="campus-dot"></span> IIIT Delhi</span>
-          <span class="campus-chip"><span class="campus-dot"></span> IIT Patna (Hybrid Chapter)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 06: SELECTION TIMELINE -->
-    <section class="tfc-section" style="background: #FFFFFF; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container">
-        <div style="max-width: 820px; margin-bottom: 32px;">
-          <span class="tfc-eyebrow">06 · Admissions Pathway</span>
-          <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 12px;">
-            How Founders Get Selected
-          </h2>
-          <p style="font-size: 1.05rem; color: var(--ink-soft); margin: 0;">
-            A rigorous 5-stage evaluation focused on raw builder capability, speed of thought, and clarity of vision.
-          </p>
-        </div>
-
-        <div class="selection-steps-grid">
-          <div class="selection-step-card">
-            <div class="selection-step-num">01</div>
-            <h4 class="selection-step-title">Application</h4>
-            <p class="selection-step-desc">Sept 1–30. Submit your product concept, background, and vision. No team or traction required.</p>
-          </div>
-
-          <div class="selection-step-card">
-            <div class="selection-step-num">02</div>
-            <h4 class="selection-step-title">Pitch Screening</h4>
-            <p class="selection-step-desc">Oct 1–5. Initial screening evaluating market sizing, problem sharpness, and execution velocity.</p>
-          </div>
-
-          <div class="selection-step-card">
-            <div class="selection-step-num">03</div>
-            <h4 class="selection-step-title">Operator Interviews</h4>
-            <p class="selection-step-desc">Oct 6–12. 1-on-1 panel interviews and live problem-solving sessions with startup operators.</p>
-          </div>
-
-          <div class="selection-step-card">
-            <div class="selection-step-num">04</div>
-            <h4 class="selection-step-title">Final Selection</h4>
-            <p class="selection-step-desc">Oct 15. The 20 accepted founders receive formal offer letters and cohort onboarding packages.</p>
-          </div>
-
-          <div class="selection-step-card">
-            <div class="selection-step-num">05</div>
-            <h4 class="selection-step-title">Cohort Kick-off</h4>
-            <p class="selection-step-desc">Oct 19. Cohort commences — orientation, cloud credit allocations, and peer founder mixers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 07: CTA BANNER -->
-    <section class="tfc-section no-print">
-      <div class="tfc-container">
-        <div class="tfc-dark-banner" style="flex-direction: column; align-items: flex-start; gap: 20px; padding: 48px 40px;">
-          <div style="max-width: 680px;">
-            <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--primary-orange); letter-spacing: 0.08em; text-transform: uppercase;">Admissions Closing Soon</span>
-            <h2 style="color: #FFFFFF; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; margin: 12px 0 14px 0; letter-spacing: -0.02em;">
-              Ready to build from zero to one?
-            </h2>
-            <p style="color: #D3CECA; font-size: 1.05rem; line-height: 1.6; margin: 0;">
-              Only 20 seats available for Cohort 01. Applications close September 30. Zero equity taken, ₹0 program fee. Bring your idea — we'll help you bring it to life.
-            </p>
-          </div>
-
-          <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 10px;">
-            <a href="fellowship.html#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg">
-              Apply for Fellowship '26 →
-            </a>
-            <button onclick="window.print()" class="tfc-btn tfc-btn-outline" style="border-color: rgba(255,255,255,0.4); color: #FFFFFF !important;">
-              🖨️ Print / Save Syllabus (PDF)
-            </button>
-            <span style="font-family: var(--font-mono); font-size: 0.82rem; color: #A09890; margin-left: 8px;">
-              thefuturecouncil.in/fellowship
-            </span>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Clean Footer Matching Website Design -->
-  <footer class="tfc-footer">
+  <!-- Footer -->
+  <footer class="tfc-footer" style="background: var(--c-ink); color: var(--c-paper);">
     <div class="tfc-container">
       <div class="tfc-footer-row">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <a href="index.html" class="tfc-brand">
+          <a href="index.html" class="tfc-brand" style="color: #fff;">
             <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span>THE FUTURE COUNCIL</span>
+            <span class="font-display font-bold">THE FUTURE COUNCIL</span>
           </a>
-          <span style="color: var(--border-subtle);">|</span>
-          <span style="font-size: 0.85rem; color: var(--ink-soft); font-style: italic;">Where student builders stop waiting for permission.</span>
+          <span style="color: rgba(255,255,255,0.2);">|</span>
+          <span style="font-size: 0.85rem; color: #a1a1aa; font-style: italic;">Where student builders stop waiting for permission.</span>
         </div>
 
         <div class="tfc-footer-links">
@@ -1174,15 +413,9 @@
         </div>
       </div>
 
-      <div class="tfc-footer-row" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--ink-soft);">
-        <div>
-          © 2026 The Future Council (thefuturecouncil.in). All rights reserved. · Delhi NCR, India
-        </div>
-        <div style="display: flex; gap: 18px;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" class="tfc-footer-link">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" class="tfc-footer-link">support@thefuturecouncil.in</a>
-        </div>
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: #71717a; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <span>© 2026 The Future Council. All rights reserved.</span>
+        <span>Admissions Support: <a href="mailto:contact@thefuturecouncil.in" style="color: #e4e4e7;">contact@thefuturecouncil.in</a></span>
       </div>
     </div>
   </footer>
