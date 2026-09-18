@@ -167,6 +167,8 @@ p {
   font-size: 1.05rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tfc-brand-logo {
@@ -209,6 +211,7 @@ p {
   transition: color 0.15s ease;
   position: relative;
   padding: 6px 0;
+  white-space: nowrap;
 }
 
 .tfc-nav-link:hover {
