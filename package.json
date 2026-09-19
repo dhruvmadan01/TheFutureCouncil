@@ -6,6 +6,7 @@
   "scripts": {},
   "dependencies": {
     "dotenv": "^17.4.2",
+    "mixpanel-browser": "^2.83.0",
     "razorpay": "^2.9.8"
   }
 }

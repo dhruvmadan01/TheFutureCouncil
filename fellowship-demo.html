@@ -19,6 +19,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="fellowship.css" />
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1763806951409454');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
+  /></noscript>
+  <script src="tfc-analytics.js" defer></script>
 </head>
 <body class="bg-[#080808] text-zinc-100 font-['Plus_Jakarta_Sans',sans-serif] min-h-screen">
 
@@ -774,11 +791,25 @@
         document.getElementById('demoQ1').value = 'Instant cross-border remittance gateway using UPI QR rails';
         document.getElementById('demoQ2').value = 'Won ETHIndia hackathon and built direct UPI NPCI protocol wrapper';
       }
+
+      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationStarted === 'function') {
+        window.TFCAnalytics.trackApplicationStarted({
+          university: document.getElementById('demoCollege').value
+        });
+      }
     };
 
     // Open Checkout Modal
     window.openUpiCheckoutModal = function(orderDetails) {
       document.getElementById('checkoutApplicantName').textContent = orderDetails.name;
+
+      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackFellowshipEnrollmentStarted === 'function') {
+        window.TFCAnalytics.trackFellowshipEnrollmentStarted({
+          university: currentDemoState.college || 'Ecosystem Founder',
+          enrollment_step: 'payment_details',
+          review_batch: '2026Q3 Batch'
+        });
+      }
 
       checkInAppBrowser();
 
@@ -977,6 +1008,16 @@
       }
 
       updateInspectorView();
+
+      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationCompleted === 'function') {
+        window.TFCAnalytics.trackApplicationCompleted({
+          email: email,
+          name: name,
+          university: college,
+          submission_status: 'submitted'
+        });
+      }
+
       openUpiCheckoutModal({
         name,
         email,
@@ -1012,6 +1053,19 @@
       currentDemoState.utr = utrVal;
       currentDemoState.status = 'payment_pending_verification';
       currentDemoState.paymentSubmittedAt = timestamp;
+
+      if (window.TFCAnalytics) {
+        window.TFCAnalytics.trackFellowshipEnrollmentStarted({
+          university: currentDemoState.college || 'Ecosystem Founder',
+          enrollment_step: 'confirm_details',
+          review_batch: '2026Q3 Batch'
+        });
+        window.TFCAnalytics.trackApplicationReviewDecisionViewed({
+          university: currentDemoState.college || 'Ecosystem Founder',
+          selection_outcome: 'selected',
+          decision_page_variant: 'demo_modal_v1'
+        });
+      }
 
       if (isLiveMode) {
         try {
@@ -1050,6 +1104,21 @@
       currentDemoState.status = 'payment_verified';
       currentDemoState.verifiedAt = new Date().toISOString();
       updateInspectorView();
+
+      if (window.TFCAnalytics) {
+        window.TFCAnalytics.trackSelectionOutcomeRecorded({
+          university: currentDemoState.college || 'Ecosystem Founder',
+          selection_outcome: 'selected',
+          review_batch: '2026Q3 Batch'
+        });
+        window.TFCAnalytics.trackFellowshipEnrolled({
+          university: currentDemoState.college || 'Ecosystem Founder',
+          fellowship_fee_amount: 999,
+          payment_status: 'paid',
+          review_batch: '2026Q3 Batch'
+        });
+      }
+
       alert(`🎉 Simulated Admin Verification completed for ${currentDemoState.name}!\n\nEmail invitation preview:\n"Hi ${currentDemoState.name},\nCongratulations! Your ₹1,999 Fellowship '26 registration pass (UTR: ${currentDemoState.utr}) is verified. Admissions interview slot details will arrive within 24 hours."`);
     };
 

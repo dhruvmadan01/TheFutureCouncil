@@ -269,6 +269,25 @@ function generateHtml(branch) {
   <link rel="apple-touch-icon" href="TFC.png">
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
+  <script src="tfc-analytics.js" defer></script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1763806951409454');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -451,7 +470,7 @@ function generateHtml(branch) {
   <aside class="tfc-sticky-relaunch-bar">
     <div>
       <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · ₹999 Pass</div>
+      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · Applications Open</div>
     </div>
     <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
   </aside>
