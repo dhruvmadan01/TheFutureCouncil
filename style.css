@@ -3277,22 +3277,28 @@ textarea.form-control {
   user-select: all;
 }
 
-/* Sticky Mobile & Desktop CTA Bar */
+/* Sticky CTA Bar - Mobile Only (Hidden on Laptop & Desktop) */
 .tfc-sticky-relaunch-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  background: var(--c-ink);
-  color: var(--c-paper);
-  padding: 12px 20px;
-  box-shadow: 0 -4px 20px rgba(14, 13, 12, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .tfc-sticky-relaunch-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--c-ink);
+    color: var(--c-paper);
+    padding: 12px 20px;
+    box-shadow: 0 -4px 20px rgba(14, 13, 12, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
 }
 
 /* ==========================================================================
