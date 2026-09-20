@@ -475,20 +475,169 @@
       });
     },
 
+    /**
+     * Event 11: fellowship_scroll_depth_reached
+     * Fired when a user scrolls through fellowship pages to key thresholds (25%, 50%, 75%, 90%, 100%).
+     */
+    trackFellowshipScrollDepthReached: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      const university = detectUniversity(options.university);
+      const depth = options.depth_percentage || 0;
+
+      safeTrack('fellowship_scroll_depth_reached', {
+        acquisition_channel: channel,
+        university: university,
+        depth_percentage: depth,
+        page_path: window.location.pathname
+      });
+    },
+
+    /**
+     * Event 12: chapter_join_scroll_depth_reached
+     * Fired when a user scrolls through chapter/branch directory, branch detail, or join pages.
+     */
+    trackChapterJoinScrollDepthReached: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      const university = detectUniversity(options.university);
+      const depth = options.depth_percentage || 0;
+
+      safeTrack('chapter_join_scroll_depth_reached', {
+        acquisition_channel: channel,
+        university: university,
+        depth_percentage: depth,
+        page_path: window.location.pathname
+      });
+    },
+
+    /**
+     * Event 13: exit_intent_detected
+     * Triggered when a visitor moves their cursor out of the top of the browser window (tab close / switch attempt).
+     */
+    trackExitIntentDetected: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      const university = detectUniversity(options.university);
+
+      safeTrack('exit_intent_detected', {
+        acquisition_channel: channel,
+        university: university,
+        page_path: window.location.pathname,
+        time_on_page_seconds: Math.max(1, Math.round((Date.now() - pageLoadTime) / 1000))
+      });
+    },
+
+    /**
+     * Event 14: form_field_drop_off
+     * Fires when a user interacts with a form field and leaves without submitting.
+     */
+    trackFormFieldDropOff: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      const university = detectUniversity(options.university);
+
+      safeTrack('form_field_drop_off', {
+        acquisition_channel: channel,
+        university: university,
+        last_field_id: options.last_field_id || 'unknown',
+        last_field_name: options.last_field_name || '',
+        form_id: options.form_id || '',
+        time_on_field_seconds: options.time_on_field_seconds || 0,
+        page_path: window.location.pathname
+      });
+    },
+
     // Step state helper
     setCurrentStep: function (step) {
       appSession.currentStep = step;
     }
   };
 
-  // 7. AUTOMATIC ABANDONMENT LISTENER (beforeunload)
+  const pageLoadTime = Date.now();
+  let lastFocusedField = null;
+  let fieldFocusTimestamp = null;
+  let formSubmittedLocally = false;
+
+  // 7. FORM FIELD INTERACTION & DROP-OFF LISTENER (blur + beforeunload)
+  document.addEventListener('focusin', (e) => {
+    const target = e.target;
+    if (target && (target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA')) {
+      lastFocusedField = {
+        id: target.id || '',
+        name: target.name || target.getAttribute('placeholder') || target.id || 'unnamed_field',
+        formId: target.form ? target.form.id : (target.closest('form') ? target.closest('form').id : 'application_form')
+      };
+      fieldFocusTimestamp = Date.now();
+    }
+  }, true);
+
+  document.addEventListener('submit', () => {
+    formSubmittedLocally = true;
+  }, true);
+
+  // 8. AUTOMATIC ABANDONMENT & FIELD DROP-OFF LISTENER (beforeunload)
   window.addEventListener('beforeunload', () => {
     if (appSession.started && !appSession.submitted) {
       TFCAnalytics.trackApplicationAbandoned();
     }
+    if (lastFocusedField && !formSubmittedLocally && !appSession.submitted) {
+      const timeOnField = fieldFocusTimestamp ? Math.max(1, Math.round((Date.now() - fieldFocusTimestamp) / 1000)) : 0;
+      TFCAnalytics.trackFormFieldDropOff({
+        last_field_id: lastFocusedField.id,
+        last_field_name: lastFocusedField.name,
+        form_id: lastFocusedField.formId,
+        time_on_field_seconds: timeOnField
+      });
+    }
   });
 
-  // 8. SYNCHRONIZE WITH GOOGLE AUTH (TFCAuth) IF PRESENT
+  // 9. EXIT INTENT DETECTION (mouseleave on document when leaving through top)
+  let exitIntentFired = false;
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 0 && !exitIntentFired) {
+      exitIntentFired = true;
+      TFCAnalytics.trackExitIntentDetected();
+    }
+  });
+
+  // 10. SCROLL DEPTH TRACKING (fellowship & chapter join pages)
+  (function initScrollTracking() {
+    const path = window.location.pathname.toLowerCase();
+    const isFellowship = path.includes('fellowship');
+    const isChapterJoin = path.includes('branch') || path.includes('join') || path.includes('ambassador');
+
+    if (isFellowship || isChapterJoin) {
+      const trackedThresholds = new Set();
+      const thresholds = [25, 50, 75, 90, 100];
+
+      const checkScrollDepth = () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return;
+        const scrollPercent = Math.round((window.scrollY / docHeight) * 100);
+
+        thresholds.forEach((th) => {
+          if (scrollPercent >= th && !trackedThresholds.has(th)) {
+            trackedThresholds.add(th);
+            if (isFellowship) {
+              TFCAnalytics.trackFellowshipScrollDepthReached({ depth_percentage: th });
+            }
+            if (isChapterJoin) {
+              TFCAnalytics.trackChapterJoinScrollDepthReached({ depth_percentage: th });
+            }
+          }
+        });
+      };
+
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            scrollTimeout = null;
+            checkScrollDepth();
+          }, 250);
+        }
+      }, { passive: true });
+    }
+  })();
+
+  // 11. SYNCHRONIZE WITH GOOGLE AUTH (TFCAuth) IF PRESENT
   if (window.TFCAuth && typeof window.TFCAuth.onAuthStateChanged === 'function') {
     window.TFCAuth.onAuthStateChanged((user) => {
       if (user && user.email && window.mixpanel) {
@@ -511,7 +660,7 @@
   // Expose globally
   window.TFCAnalytics = TFCAnalytics;
 
-  // 9. AUTOMATIC LANDING PAGE VIEW TRACKING ON BOOT
+  // 12. AUTOMATIC LANDING PAGE VIEW TRACKING ON BOOT
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       TFCAnalytics.trackLandingPageViewed();

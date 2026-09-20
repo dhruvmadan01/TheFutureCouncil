@@ -59,6 +59,10 @@ window.mixpanel.init(MIXPANEL_TOKEN, {
 | 8 | `application_abandoned` | User leaves application before submission (`beforeunload`) | `acquisition_channel`, `university`, `abandon_step`, `abandon_duration_seconds` |
 | 9 | `eligibility_filter_shown` | Step 3 commitment displayed or `#eligibility` viewed | `acquisition_channel`, `university`, `eligibility_version`, `eligibility_check_entry_point` |
 | 10 | `application_review_decision_viewed` | Applicant views selection / admission dashboard status | `acquisition_channel`, `university`, `selection_outcome`, `decision_page_variant` |
+| 11 | `fellowship_scroll_depth_reached` | User scrolls through fellowship pages to depth thresholds (25, 50, 75, 90, 100) | `acquisition_channel`, `university`, `depth_percentage`, `page_path` |
+| 12 | `chapter_join_scroll_depth_reached` | User scrolls through chapter/branch directory, branch detail, or join pages | `acquisition_channel`, `university`, `depth_percentage`, `page_path` |
+| 13 | `exit_intent_detected` | Visitor moves mouse out top of window toward tabs / address bar | `acquisition_channel`, `university`, `page_path`, `time_on_page_seconds` |
+| 14 | `form_field_drop_off` | User focuses/interacts with form field and exits without submitting | `acquisition_channel`, `university`, `last_field_id`, `last_field_name`, `form_id`, `time_on_field_seconds` |
 
 ---
 
