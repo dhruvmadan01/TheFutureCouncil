@@ -484,8 +484,8 @@
                   <input type="text" id="fName" class="tfc-input" placeholder="e.g. Dhruv Madan" required />
                 </div>
                 <div>
-                  <label for="fEmail" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Student Email Address *</label>
-                  <input type="email" id="fEmail" class="tfc-input" placeholder="e.g. founder@college.edu" required />
+                  <label for="fEmail" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Email Address *</label>
+                  <input type="email" id="fEmail" class="tfc-input" placeholder="e.g. founder@example.com" required />
                 </div>
               </div>
 
@@ -495,31 +495,57 @@
                   <input type="tel" id="fPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
                 </div>
                 <div>
-                  <label for="fChapter" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Chapter / Campus *</label>
-                  <select id="fChapter" class="tfc-input" required>
-                    <option value="">Select your university chapter...</option>
-                    <option value="Delhi University (DU Chapters)">Delhi University (FoT, SRCC, Hansraj, LSR, Hindu, Stephen's)</option>
-                    <option value="IIT Delhi Chapter">IIT Delhi Chapter</option>
-                    <option value="DTU Chapter">DTU (Delhi Technological University)</option>
-                    <option value="NSUT Chapter">NSUT (Netaji Subhas University of Technology)</option>
-                    <option value="IIIT Delhi Chapter">IIIT Delhi Chapter</option>
-                    <option value="IIT Patna Chapter">IIT Patna Chapter</option>
-                    <option value="BITS Pilani Chapter">BITS Pilani Chapter</option>
-                    <option value="Ashoka University Chapter">Ashoka University Chapter</option>
-                    <option value="NMIMS Mumbai Chapter">NMIMS Mumbai Chapter</option>
-                    <option value="IIT Bombay / Kharagpur / Madras">IIT Bombay / Kharagpur / Madras Chapters</option>
-                    <option value="Other / Not Affiliated">Other / Not affiliated with an active chapter</option>
+                  <label for="fTeamSize" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Team Size *</label>
+                  <select id="fTeamSize" class="tfc-input" required>
+                    <option value="Solo Founder">Solo Founder</option>
+                    <option value="2 Founders">2 Co-Founders</option>
+                    <option value="3+ Founders">3 or more Team Members</option>
                   </select>
                 </div>
               </div>
 
+              <!-- College Enrollment Selection -->
               <div>
-                <label for="fTeamSize" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Team Size *</label>
-                <select id="fTeamSize" class="tfc-input" required>
-                  <option value="Solo Founder">Solo Founder</option>
-                  <option value="2 Founders">2 Co-Founders</option>
-                  <option value="3+ Founders">3 or more Team Members</option>
-                </select>
+                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">
+                  Are you currently enrolled in a college or university? *
+                </label>
+                <div class="grid grid-cols-2 gap-3" role="radiogroup" aria-label="College Enrollment Status">
+                  <label class="tfc-radio-pill flex items-center justify-center gap-2 p-3 rounded-xl border border-zinc-200 bg-zinc-50/70 hover:bg-white cursor-pointer transition-all duration-150 font-bold text-sm text-zinc-800" id="labelEnrolledYes">
+                    <input type="radio" name="fEnrolled" value="yes" id="fEnrolledYes" class="w-4 h-4 accent-[#E2542A]" onchange="toggleCollegeFields(true)" />
+                    <span>Yes</span>
+                  </label>
+                  <label class="tfc-radio-pill flex items-center justify-center gap-2 p-3 rounded-xl border border-zinc-200 bg-zinc-50/70 hover:bg-white cursor-pointer transition-all duration-150 font-bold text-sm text-zinc-800" id="labelEnrolledNo">
+                    <input type="radio" name="fEnrolled" value="no" id="fEnrolledNo" class="w-4 h-4 accent-[#E2542A]" onchange="toggleCollegeFields(false)" />
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Conditional College Details (revealed if Yes) -->
+              <div id="collegeDetailsSection" class="hidden space-y-3.5 p-4 rounded-xl border border-zinc-200 bg-zinc-50/80 transition-all duration-200">
+                <div>
+                  <label for="fCollegeName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">College / University Name *</label>
+                  <input type="text" id="fCollegeName" class="tfc-input" placeholder="e.g. IIT Delhi, Delhi University, BITS Pilani" />
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label for="fCollegeYear" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Year of Study *</label>
+                    <select id="fCollegeYear" class="tfc-input">
+                      <option value="">Select year of study...</option>
+                      <option value="1st Year">1st Year</option>
+                      <option value="2nd Year">2nd Year</option>
+                      <option value="3rd Year">3rd Year</option>
+                      <option value="4th Year / Final Year">4th Year / Final Year</option>
+                      <option value="5th Year (Dual/Integrated)">5th Year (Dual / Integrated)</option>
+                      <option value="Postgraduate / Masters">Postgraduate / Masters</option>
+                      <option value="PhD / Research Scholar">PhD / Research Scholar</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="fCollegeCourse" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Course / Major *</label>
+                    <input type="text" id="fCollegeCourse" class="tfc-input" placeholder="e.g. B.Tech Computer Science, B.Com (Hons)" />
+                  </div>
+                </div>
               </div>
 
               <div class="pt-3">
@@ -684,7 +710,7 @@
                 </h4>
                 <div class="space-y-1.5 text-xs">
                   <div class="flex justify-between py-1 border-b border-zinc-200/60">
-                    <span class="text-zinc-500">Chapter / Campus:</span>
+                    <span class="text-zinc-500">College / Affiliation:</span>
                     <span id="dashCollege" class="font-bold text-zinc-800 text-right">-</span>
                   </div>
                   <div class="flex justify-between py-1 border-b border-zinc-200/60">
@@ -837,7 +863,7 @@
           window.TFCAnalytics.setCurrentStep('eligibility');
           window.TFCAnalytics.trackEligibilityFilterShown({
             eligibility_check_entry_point: 'from_application_start',
-            university: document.getElementById('fChapter')?.value || ''
+            university: getApplicantUniversity()
           });
         }
       }
@@ -870,12 +896,59 @@
       goToStep(step);
     }
 
+    function toggleCollegeFields(isEnrolled) {
+      const sec = document.getElementById('collegeDetailsSection');
+      const nameInput = document.getElementById('fCollegeName');
+      const yearInput = document.getElementById('fCollegeYear');
+      const courseInput = document.getElementById('fCollegeCourse');
+      const labelYes = document.getElementById('labelEnrolledYes');
+      const labelNo = document.getElementById('labelEnrolledNo');
+
+      if (labelYes && labelNo) {
+        if (isEnrolled) {
+          labelYes.classList.add('active');
+          labelNo.classList.remove('active');
+        } else {
+          labelNo.classList.add('active');
+          labelYes.classList.remove('active');
+        }
+      }
+
+      if (isEnrolled) {
+        if (sec) sec.classList.remove('hidden');
+        if (nameInput) nameInput.required = true;
+        if (yearInput) yearInput.required = true;
+        if (courseInput) courseInput.required = true;
+      } else {
+        if (sec) sec.classList.add('hidden');
+        if (nameInput) { nameInput.required = false; nameInput.value = ''; }
+        if (yearInput) { yearInput.required = false; yearInput.value = ''; }
+        if (courseInput) { courseInput.required = false; courseInput.value = ''; }
+      }
+      saveDraftLocally();
+    }
+
+    function getApplicantUniversity() {
+      const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
+      if (!enrolledRadio) return '';
+      if (enrolledRadio.value === 'yes') {
+        const col = document.getElementById('fCollegeName')?.value.trim() || '';
+        const yr = document.getElementById('fCollegeYear')?.value || '';
+        const crs = document.getElementById('fCollegeCourse')?.value.trim() || '';
+        const details = [yr, crs].filter(Boolean).join(', ');
+        return details ? `${col} (${details})` : (col || 'College Student');
+      } else {
+        return 'Independent / Not Enrolled in College';
+      }
+    }
+
     function validateStep(step) {
       if (step === 1) {
         const name = document.getElementById('fName').value.trim();
         const email = document.getElementById('fEmail').value.trim();
         const phone = document.getElementById('fPhone').value.trim();
-        const chapter = document.getElementById('fChapter').value;
+        const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
+
         if (!name) {
           alert("Please enter your full name.");
           document.getElementById('fName').focus();
@@ -891,10 +964,30 @@
           document.getElementById('fPhone').focus();
           return false;
         }
-        if (!chapter) {
-          alert("Please select your university chapter or affiliation.");
-          document.getElementById('fChapter').focus();
+        if (!enrolledRadio) {
+          alert("Please indicate whether you are currently enrolled in a college or university.");
+          document.getElementById('fEnrolledYes')?.focus();
           return false;
+        }
+        if (enrolledRadio.value === 'yes') {
+          const colName = document.getElementById('fCollegeName')?.value.trim();
+          const colYear = document.getElementById('fCollegeYear')?.value;
+          const colCourse = document.getElementById('fCollegeCourse')?.value.trim();
+          if (!colName) {
+            alert("Please enter your college or university name.");
+            document.getElementById('fCollegeName')?.focus();
+            return false;
+          }
+          if (!colYear) {
+            alert("Please select your current year of study.");
+            document.getElementById('fCollegeYear')?.focus();
+            return false;
+          }
+          if (!colCourse) {
+            alert("Please enter your course or major.");
+            document.getElementById('fCollegeCourse')?.focus();
+            return false;
+          }
         }
         return true;
       } else if (step === 2) {
@@ -918,7 +1011,7 @@
             window.TFCAnalytics.trackEligibilityCheckCompleted({
               eligibility_result: 'ineligible',
               eligibility_ineligibility_reason: 'commitment_unconfirmed',
-              university: document.getElementById('fChapter')?.value || ''
+              university: getApplicantUniversity()
             });
           }
           alert("Please confirm your commitment (6-8 hours/week for 4 weeks fully remote) to continue.");
@@ -929,7 +1022,7 @@
             window.TFCAnalytics.trackEligibilityCheckCompleted({
               eligibility_result: 'eligible',
               eligibility_ineligibility_reason: '',
-              university: document.getElementById('fChapter')?.value || ''
+              university: getApplicantUniversity()
             });
           }
         }
@@ -949,11 +1042,15 @@
 
     // Local Draft Autosave
     function saveDraftLocally() {
+      const enrolledVal = document.querySelector('input[name="fEnrolled"]:checked')?.value || '';
       const draft = {
         name: document.getElementById('fName')?.value || '',
         email: document.getElementById('fEmail')?.value || '',
         phone: document.getElementById('fPhone')?.value || '',
-        chapter: document.getElementById('fChapter')?.value || '',
+        enrolled: enrolledVal,
+        collegeName: document.getElementById('fCollegeName')?.value || '',
+        collegeYear: document.getElementById('fCollegeYear')?.value || '',
+        collegeCourse: document.getElementById('fCollegeCourse')?.value || '',
         teamSize: document.getElementById('fTeamSize')?.value || '',
         ventureName: document.getElementById('fVentureName')?.value || '',
         stage: document.getElementById('fStage')?.value || '',
@@ -972,7 +1069,22 @@
         const d = JSON.parse(draftStr);
         if (d.name && !document.getElementById('fName').value) document.getElementById('fName').value = d.name;
         if (d.phone && !document.getElementById('fPhone').value) document.getElementById('fPhone').value = d.phone;
-        if (d.chapter && !document.getElementById('fChapter').value) document.getElementById('fChapter').value = d.chapter;
+        if (d.enrolled === 'yes') {
+          const rYes = document.getElementById('fEnrolledYes');
+          if (rYes) {
+            rYes.checked = true;
+            toggleCollegeFields(true);
+          }
+          if (d.collegeName && document.getElementById('fCollegeName')) document.getElementById('fCollegeName').value = d.collegeName;
+          if (d.collegeYear && document.getElementById('fCollegeYear')) document.getElementById('fCollegeYear').value = d.collegeYear;
+          if (d.collegeCourse && document.getElementById('fCollegeCourse')) document.getElementById('fCollegeCourse').value = d.collegeCourse;
+        } else if (d.enrolled === 'no') {
+          const rNo = document.getElementById('fEnrolledNo');
+          if (rNo) {
+            rNo.checked = true;
+            toggleCollegeFields(false);
+          }
+        }
         if (d.teamSize) document.getElementById('fTeamSize').value = d.teamSize;
         if (d.ventureName) document.getElementById('fVentureName').value = d.ventureName;
         if (d.stage) document.getElementById('fStage').value = d.stage;
@@ -988,13 +1100,13 @@
       const ref = urlParams.get('ref') || urlParams.get('chapter');
       if (ref) {
         localStorage.setItem('tfc_chapter_ref', ref);
-        const chapterSelect = document.getElementById('fChapter');
-        if (chapterSelect) {
-          for (let i = 0; i < chapterSelect.options.length; i++) {
-            if (chapterSelect.options[i].text.toLowerCase().includes(ref.toLowerCase())) {
-              chapterSelect.selectedIndex = i;
-              break;
-            }
+        const colInput = document.getElementById('fCollegeName');
+        if (colInput && !colInput.value) {
+          colInput.value = ref;
+          const rYes = document.getElementById('fEnrolledYes');
+          if (rYes) {
+            rYes.checked = true;
+            toggleCollegeFields(true);
           }
         }
       }
@@ -1257,7 +1369,14 @@
         const name = document.getElementById('fName').value.trim();
         const email = document.getElementById('fEmail').value.trim().toLowerCase();
         const phone = document.getElementById('fPhone').value.trim();
-        const chapter = document.getElementById('fChapter').value;
+        const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
+        const isEnrolled = enrolledRadio ? enrolledRadio.value === 'yes' : false;
+        const colName = document.getElementById('fCollegeName')?.value.trim() || '';
+        const colYear = document.getElementById('fCollegeYear')?.value || '';
+        const colCourse = document.getElementById('fCollegeCourse')?.value.trim() || '';
+        const collegeSummary = isEnrolled
+          ? [colName, colYear, colCourse].filter(Boolean).join(' - ')
+          : 'Independent / Not Currently Enrolled';
         const teamSize = document.getElementById('fTeamSize').value;
         const ventureName = document.getElementById('fVentureName').value.trim();
         const stage = document.getElementById('fStage').value;
@@ -1277,7 +1396,7 @@
               .maybeSingle();
 
             memberId = dbMember ? dbMember.member_id : null;
-            const combinedCollege = `${chapter} | Phone: ${phone} | Source: FellowshipPage | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_payment_instructions | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
+            const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_payment_instructions | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
 
             if (!dbMember) {
               const randomNum = Math.floor(1000 + Math.random() * 9000);
@@ -1304,7 +1423,7 @@
             name: name,
             email: email,
             phone: phone,
-            college: chapter,
+            college: collegeSummary,
             orderId: memberId || 'TFC-FEL-2026',
             submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
             q1: `${ventureName}: ${q1}`,
@@ -1322,7 +1441,7 @@
             window.TFCAnalytics.trackApplicationCompleted({
               email: email,
               name: name,
-              university: chapter,
+              university: collegeSummary,
               submission_status: 'submitted'
             });
           }
@@ -1346,18 +1465,28 @@
     function handleAppInteraction() {
       if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationStarted === 'function') {
         window.TFCAnalytics.trackApplicationStarted({
-          university: document.getElementById('fChapter')?.value || ''
+          university: getApplicantUniversity()
         });
       }
     }
 
     // Auto-save form inputs on change & monitor first interaction
-    ['fName', 'fEmail', 'fPhone', 'fChapter', 'fTeamSize', 'fVentureName', 'fStage', 'fQ1', 'fQ3'].forEach(id => {
+    ['fName', 'fEmail', 'fPhone', 'fTeamSize', 'fCollegeName', 'fCollegeYear', 'fCollegeCourse', 'fVentureName', 'fStage', 'fQ1', 'fQ3'].forEach(id => {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('focus', handleAppInteraction, { once: true });
         el.addEventListener('input', saveDraftLocally);
         el.addEventListener('change', saveDraftLocally);
+      }
+    });
+
+    ['fEnrolledYes', 'fEnrolledNo'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => {
+          handleAppInteraction();
+          saveDraftLocally();
+        });
       }
     });
 

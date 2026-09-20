@@ -570,6 +570,26 @@ p {
   box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.15);
 }
 
+/* Radio Selection Pills */
+.tfc-radio-pill {
+  position: relative;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.tfc-radio-pill:hover {
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.tfc-radio-pill.active,
+.tfc-radio-pill:has(input:checked) {
+  border-color: var(--c-ember, #E2542A) !important;
+  background-color: rgba(226, 84, 42, 0.08) !important;
+  color: var(--c-ember, #E2542A) !important;
+  box-shadow: 0 0 0 2px rgba(226, 84, 42, 0.15);
+}
+
 /* Interactive Chips & Tags */
 .tfc-chip {
   display: inline-flex;

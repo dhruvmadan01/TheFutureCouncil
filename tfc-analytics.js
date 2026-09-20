@@ -128,6 +128,10 @@
       if (chapterSelect && chapterSelect.value) {
         return chapterSelect.value;
       }
+      const collegeInput = document.getElementById('fCollegeName');
+      if (collegeInput && collegeInput.value) {
+        return collegeInput.value;
+      }
 
       // Check stored chapter referral
       const storedRef = localStorage.getItem('tfc_chapter_ref');
