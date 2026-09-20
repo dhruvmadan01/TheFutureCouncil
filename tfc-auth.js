@@ -111,6 +111,9 @@
     try {
       localStorage.removeItem(STORAGE_KEY);
       sessionStorage.removeItem(STORAGE_KEY);
+      if (window.mixpanel && typeof window.mixpanel.reset === 'function') {
+        window.mixpanel.reset();
+      }
     } catch (e) {}
     notifyListeners();
     updateNavUI();
@@ -408,7 +411,10 @@
       }
 
       if (alertContainer) {
-        if (err.isPopupBlocked) {
+        if (err.isCancelled) {
+          // User intentionally closed or cancelled the popup - cleanly reset
+          alertContainer.innerHTML = '';
+        } else if (err.isPopupBlocked) {
           alertContainer.innerHTML = `
             <div class="tfc-auth-alert tfc-auth-alert-blocked">
               <span>⚠️ Popup blocked — <button type="button" class="tfc-auth-retry-btn" id="tfcRetryPopupBtn">click here to continue</button></span>
@@ -480,6 +486,12 @@
     });
   }
 
+  function isLocalEnvironment() {
+    return window.location.hostname === 'localhost' || 
+           window.location.hostname === '127.0.0.1' || 
+           window.location.protocol === 'file:';
+  }
+
   // --- OAuth Trigger (GIS / Popup / Fallback simulation) ---
   async function triggerOAuth({ isMobile, context }) {
     await loadGoogleSDK();
@@ -494,12 +506,10 @@
             callback: async (tokenResponse) => {
               if (tokenResponse.error) {
                 console.warn('[TFCAuth] Google OAuth response notification:', tokenResponse.error);
-                if (tokenResponse.error === 'popup_closed_by_user') {
-                  return reject(new Error('Sign-in was closed by user.'));
-                }
-                if (tokenResponse.error === 'access_denied' || tokenResponse.error === 'idpiframe_initialization_failed') {
-                  // Fall back to dialog if origin is not yet whitelisted on Google Cloud
-                  return openAuthPopupDialog({ isMobile, context }).then(resolve).catch(reject);
+                if (tokenResponse.error === 'popup_closed_by_user' || tokenResponse.error === 'access_denied') {
+                  const cancelErr = new Error('Sign-in was closed by user.');
+                  cancelErr.isCancelled = true;
+                  return reject(cancelErr);
                 }
                 return reject(new Error(tokenResponse.error_description || tokenResponse.error));
               }
@@ -522,13 +532,23 @@
             },
             error_callback: (err) => {
               console.warn('[TFCAuth] Google OAuth client error:', err);
+              // When user closes/cuts the Google popup, cleanly cancel without falling back to mock dialog
+              if (err && (err.type === 'popup_closed' || err.type === 'popup_closed_by_user')) {
+                const cancelErr = new Error('Sign-in popup was closed.');
+                cancelErr.isCancelled = true;
+                return reject(cancelErr);
+              }
               if (err && err.type === 'popup_failed_to_open') {
                 const blockedErr = new Error('Popup blocked');
                 blockedErr.isPopupBlocked = true;
-                reject(blockedErr);
-              } else {
-                // If running on local dev or unwhitelisted origin, open dialog
+                return reject(blockedErr);
+              }
+
+              // Only fall back to sandbox dialog in local development environment
+              if (isLocalEnvironment()) {
                 openAuthPopupDialog({ isMobile, context }).then(resolve).catch(reject);
+              } else {
+                reject(new Error('Google sign-in could not be completed. Please try again.'));
               }
             }
           });
@@ -536,53 +556,53 @@
           client.requestAccessToken({ prompt: 'select_account' });
           return;
         } catch (initErr) {
-          console.warn('[TFCAuth] GIS init error, falling back to modal dialog:', initErr);
+          console.warn('[TFCAuth] GIS init error:', initErr);
+          if (isLocalEnvironment()) {
+            return openAuthPopupDialog({ isMobile, context }).then(resolve).catch(reject);
+          }
+          return reject(initErr);
         }
       }
 
-      // Standard / Fallback Account Picker Dialog
-      openAuthPopupDialog({ isMobile, context })
-        .then(resolve)
-        .catch(reject);
+      // Standard / Fallback Account Picker Dialog (Only in local dev environment)
+      if (isLocalEnvironment()) {
+        openAuthPopupDialog({ isMobile, context })
+          .then(resolve)
+          .catch(reject);
+      } else {
+        reject(new Error('Google Identity Services is currently unavailable. Please reload the page.'));
+      }
     });
   }
 
-  // --- Popup Dialog Engine with Sandbox Fallback ---
+  // --- Popup Dialog Engine with Sandbox Fallback (Local Dev Only) ---
   function openAuthPopupDialog({ isMobile, context }) {
-    return new Promise((resolve, reject) => {
-      const width = 480;
-      const height = 580;
-      const left = window.screenX + (window.outerWidth - width) / 2;
-      const top = window.screenY + (window.outerHeight - height) / 2.5;
+    if (!isLocalEnvironment()) {
+      return Promise.reject(new Error('Dev account picker is not permitted in production.'));
+    }
 
-      // Simulated authentic Google Account Picker dialog
-      // This ensures 100% working interactive flow immediately even before Google Cloud Console verification
+    return new Promise((resolve, reject) => {
       const promptEl = document.createElement('div');
       promptEl.className = 'tfc-google-picker-backdrop';
       promptEl.innerHTML = `
         <div class="tfc-google-picker-card">
           <div class="tfc-google-picker-top">
             <svg width="24" height="24" viewBox="0 0 24 24">${GOOGLE_G_LOGO}</svg>
-            <span style="font-size: 14px; font-weight: 500; color: #5f6368;">Sign in with Google</span>
+            <span style="font-size: 14px; font-weight: 500; color: #5f6368;">Sign in with Google [Dev Sandbox]</span>
           </div>
           <div style="padding: 16px 20px 8px;">
+            <div style="background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; font-size: 11px; padding: 6px 10px; border-radius: 6px; margin-bottom: 12px; font-weight: 600;">
+              Local Development Auth Sandbox
+            </div>
             <h3 style="font-size: 18px; font-weight: 600; color: #202124; margin: 0 0 4px;">Choose an account</h3>
             <p style="font-size: 13px; color: #5f6368; margin: 0 0 16px;">to continue to <strong style="color: #202124;">The Future Council</strong></p>
             
             <div class="tfc-google-account-list">
               <button type="button" class="tfc-google-account-item" id="tfcMockAccount1">
-                <div class="tfc-google-account-avatar" style="background: #e37400;">D</div>
+                <div class="tfc-google-account-avatar" style="background: #0284c7;">T</div>
                 <div class="tfc-google-account-meta">
-                  <div class="tfc-google-account-name">Dhruv Madan</div>
-                  <div class="tfc-google-account-email">dhruv.founder@gmail.com</div>
-                </div>
-              </button>
-
-              <button type="button" class="tfc-google-account-item" id="tfcMockAccount2">
-                <div class="tfc-google-account-avatar" style="background: #1a73e8;">A</div>
-                <div class="tfc-google-account-meta">
-                  <div class="tfc-google-account-name">Aryaveer Chauhan</div>
-                  <div class="tfc-google-account-email">aryaveer.tfc@gmail.com</div>
+                  <div class="tfc-google-account-name">Demo Student</div>
+                  <div class="tfc-google-account-email">demo.student@thefuturecouncil.in</div>
                 </div>
               </button>
 
@@ -614,33 +634,27 @@
 
       document.getElementById('tfcCancelPickerBtn').addEventListener('click', () => {
         cleanup();
-        reject(new Error('User dismissed account picker.'));
+        const cancelErr = new Error('User dismissed account picker.');
+        cancelErr.isCancelled = true;
+        reject(cancelErr);
       });
 
       promptEl.addEventListener('click', (e) => {
         if (e.target === promptEl) {
           cleanup();
-          reject(new Error('User dismissed account picker.'));
+          const cancelErr = new Error('User dismissed account picker.');
+          cancelErr.isCancelled = true;
+          reject(cancelErr);
         }
       });
 
       document.getElementById('tfcMockAccount1').addEventListener('click', () => {
         cleanup();
         resolve({
-          name: 'Dhruv Madan',
-          email: 'dhruv.founder@gmail.com',
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
-          googleId: 'google-uid-101'
-        });
-      });
-
-      document.getElementById('tfcMockAccount2').addEventListener('click', () => {
-        cleanup();
-        resolve({
-          name: 'Aryaveer Chauhan',
-          email: 'aryaveer.tfc@gmail.com',
-          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-          googleId: 'google-uid-102'
+          name: 'Demo Student',
+          email: 'demo.student@thefuturecouncil.in',
+          avatar: '',
+          googleId: 'dev-google-uid-demo'
         });
       });
 
