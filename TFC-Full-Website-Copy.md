@@ -107,7 +107,7 @@ Warm intros to angel syndicates when you're ready to raise, and first access to 
 Future Council (officially The Future Council or TFC) is India's leading grassroots student startup ecosystem. We establish officially incorporated startup societies directly within top colleges (SRCC, IIT Delhi, DTU, NSUT, IIITD, Hansraj, and more) and run an intensive 2-month equity-free founder launchpad designed to take ambitious student builders from idea to venture-ready companies.
 
 **What is The Future Council Fellowship '26?**
-Fellowship '26 (Cohort 01) is an intensive 2-month equity-free launchpad for 20 select early-stage student founders. Admitted fellows receive 1-on-1 operator advisory, weekly strategy audits, recruitment pipelines from our 90+ campus chapters, and direct pitch access to venture capital and angel syndicates.
+Fellowship '26 (Cohort 01) is an intensive four-week, fully remote, 100% equity-free launchpad for early-stage student founders across all 90+ university chapters. Fellows are organized into dedicated 4–6 person builder pods and receive weekly live cohort labs, 1-on-1 operator advisory, strategy audits, and direct pitch access to venture capital and angel syndicates at our virtual demo day.
 
 **Who can join Future Council?**
 Future Council is open to all ambitious student builders, engineers, designers, and operators across universities. Whether you have an existing startup or are looking for a team and project, Join the Council for free access to mixers, builder vaults, and project squads.
