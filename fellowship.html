@@ -568,10 +568,28 @@
                   </div>
                 </div>
 
+                <!-- Registration Fee Notice Card -->
+                <div class="p-4 rounded-xl bg-gradient-to-r from-orange-50/90 to-amber-50/70 border border-orange-200/90 mb-4">
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-[#E2542A]/10 text-[#E2542A] flex items-center justify-center font-bold text-sm shrink-0 mt-0.5 font-mono-alt">
+                      ₹
+                    </div>
+                    <div class="flex-1">
+                      <div class="flex items-center justify-between flex-wrap gap-1.5 mb-1">
+                        <strong class="text-sm font-bold text-zinc-900 font-display">Fellowship Registration Pass: ₹999</strong>
+                        <span class="font-mono-alt text-[0.7rem] font-bold text-[#E2542A] bg-orange-100/90 border border-orange-200 px-2 py-0.5 rounded-full">100% Equity-Free</span>
+                      </div>
+                      <p class="text-xs text-zinc-600 leading-relaxed">
+                        To maintain a high-intent cohort and guarantee that every member in your 4–6 person build pod is committed with skin in the game, a one-time <strong>₹999 registration fee</strong> applies upon submission. This covers admissions review, mentor office hours, cohort onboarding, and virtual demo day access.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <label class="flex items-start gap-3 p-3 bg-white border border-zinc-300 rounded-lg cursor-pointer">
                   <input type="checkbox" id="fCommitmentCheck" class="w-4 h-4 mt-0.5 accent-[#E2542A]" required />
                   <span style="font-size: 0.88rem; font-weight: 600; color: var(--c-ink); line-height: 1.45;">
-                    I confirm I can commit roughly 6–8 hours a week for 4 weeks, fully remote. *
+                    I confirm I can commit roughly 6–8 hours a week for 4 weeks, fully remote, and understand the one-time ₹999 registration fee. *
                   </span>
                 </label>
               </div>
@@ -581,7 +599,7 @@
                   ← Back
                 </button>
                 <button type="submit" id="btnSubmitApp" class="tfc-btn tfc-btn-primary flex-1 min-h-[48px] font-bold" style="background: var(--accent); border-color: var(--accent);">
-                  Submit Application →
+                  Submit Application (₹999) →
                 </button>
               </div>
             </div>
@@ -1384,7 +1402,7 @@
           alert("Submission note: " + err.message);
         } finally {
           btn.disabled = false;
-          btn.textContent = 'Submit Application →';
+          btn.textContent = 'Submit Application (₹999) →';
         }
       });
     }
