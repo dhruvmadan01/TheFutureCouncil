@@ -1449,7 +1449,7 @@
             let actionHtml = '';
             
             // Check if there are onboarding questionnaire answers
-            const hasAnswers = rawCollege.includes(' | Q1: ') || rawCollege.includes(' | Q2: ') || rawCollege.includes(' | Q3: ') || rawCollege.includes(' | Q4: ');
+            const hasAnswers = rawCollege.includes(' | Q1: ') || rawCollege.includes(' | Q2: ') || rawCollege.includes(' | Q3: ') || rawCollege.includes(' | Q4: ') || rawCollege.includes(' | Venture: ') || (member.member_id && member.member_id.startsWith('TFC-FEL-'));
             if (hasAnswers) {
               actionHtml += `
                 <button onclick="viewApplication('${member.id}'); return false;" class="admin-edit-btn" style="background:#ff9e59; color:#000; margin-bottom:8px; display:block; width:100%; text-align:center; box-shadow: 2px 2px 0 var(--ink);">📋 View Application</button>
@@ -1587,29 +1587,62 @@
         let q2 = 'Not answered';
         let q3 = 'Not answered';
         let q4 = 'Not answered';
+        let venture = '';
+        let stage = '';
+        let teamSize = '';
+        let enrolled = '';
+        let collegeName = '';
+        let collegeYear = '';
+        let collegeCourse = '';
+        let paymentFee = '';
+        let paymentStatus = '';
+        let chapterRef = '';
+        let formSubmittedAt = '';
 
-        // Parse Q1, Q2, Q3, Q4 from college metadata string
+        // Parse fields from college metadata string
         const parts = collegeStr.split(' | ');
         const meta = {};
         parts.forEach(part => {
           if (part.startsWith('Phone: ')) {
-            meta.phone = part.replace('Phone: ', '');
+            meta.phone = part.replace('Phone: ', '').trim();
           } else if (part.startsWith('Fellowship: ')) {
-            meta.fellowship = part.replace('Fellowship: ', '');
+            meta.fellowship = part.replace('Fellowship: ', '').trim();
           } else if (part.startsWith('Society: ')) {
-            meta.society = part.replace('Society: ', '');
+            meta.society = part.replace('Society: ', '').trim();
           } else if (part.startsWith('RefBy: ')) {
-            meta.refBy = part.replace('RefBy: ', '');
+            meta.refBy = part.replace('RefBy: ', '').trim();
           } else if (part.startsWith('Source: ')) {
-            meta.source = part.replace('Source: ', '');
+            meta.source = part.replace('Source: ', '').trim();
+          } else if (part.startsWith('Venture: ')) {
+            venture = part.replace('Venture: ', '').trim();
+          } else if (part.startsWith('Stage: ')) {
+            stage = part.replace('Stage: ', '').trim();
+          } else if (part.startsWith('TeamSize: ')) {
+            teamSize = part.replace('TeamSize: ', '').trim();
+          } else if (part.startsWith('Enrolled: ')) {
+            enrolled = part.replace('Enrolled: ', '').trim();
+          } else if (part.startsWith('College: ')) {
+            collegeName = part.replace('College: ', '').trim();
+          } else if (part.startsWith('Year: ')) {
+            collegeYear = part.replace('Year: ', '').trim();
+          } else if (part.startsWith('Course: ')) {
+            collegeCourse = part.replace('Course: ', '').trim();
+          } else if (part.startsWith('PaymentFee: ')) {
+            paymentFee = part.replace('PaymentFee: ', '').trim();
+          } else if (part.startsWith('PaymentStatus: ')) {
+            paymentStatus = part.replace('PaymentStatus: ', '').trim();
+          } else if (part.startsWith('ChapterRef: ')) {
+            chapterRef = part.replace('ChapterRef: ', '').trim();
+          } else if (part.startsWith('FormSubmittedAt: ')) {
+            formSubmittedAt = part.replace('FormSubmittedAt: ', '').trim();
           } else if (part.startsWith('Q1: ')) {
-            q1 = part.replace('Q1: ', '');
+            q1 = part.replace('Q1: ', '').trim();
           } else if (part.startsWith('Q2: ')) {
-            q2 = part.replace('Q2: ', '');
+            q2 = part.replace('Q2: ', '').trim();
           } else if (part.startsWith('Q3: ')) {
-            q3 = part.replace('Q3: ', '');
+            q3 = part.replace('Q3: ', '').trim();
           } else if (part.startsWith('Q4: ')) {
-            q4 = part.replace('Q4: ', '');
+            q4 = part.replace('Q4: ', '').trim();
           }
         });
 
@@ -1680,36 +1713,47 @@
               ${(() => {
                 if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
                   return `
+                    <div style="background:#fff3e0; border:2px solid #ff9e59; padding:10px; border-radius:4px; font-size:0.85rem; font-weight:700;">
+                      <span style="color:#d9480f; font-size:0.75rem; text-transform:uppercase; font-weight:900; display:block; margin-bottom:4px;">🚀 Fellowship '26 Candidate</span>
+                      <div>Enrolled: <strong>${enrolled || 'Yes'}</strong> | Team Size: <strong>${teamSize || '1'}</strong> | Ref: <strong>${chapterRef || 'direct'}</strong></div>
+                      ${collegeName ? `<div>College: <strong>${collegeName}</strong> (Year: ${collegeYear || 'N/A'}, Course: ${collegeCourse || 'N/A'})</div>` : ''}
+                    </div>
+
                     <div>
                       <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                        Q1: What startup idea are you building/validating?
+                        Step 2: Venture Name & Stage
+                      </h4>
+                      <p style="margin:0; font-size:0.9rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:700;">
+                        ${venture || 'Untitled Venture'} <span style="font-size:0.78rem; font-weight:600; color:#666;">(Stage: ${stage || 'N/A'})</span>
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
+                        Step 2: One-Line Pitch / Problem Solved
                       </h4>
                       <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
                         ${q1}
                       </p>
                     </div>
+
                     <div>
                       <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                        Q2: What is your motivation to join the fellowship?
+                        Step 2: Prototype / Deck / Demo Link
                       </h4>
-                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                        ${q2}
+                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600; word-break:break-all;">
+                        ${q3 && q3 !== 'Not answered' ? (q3.startsWith('http') ? `<a href="${q3}" target="_blank" style="color:#ff6b00; text-decoration:underline;">${q3}</a>` : q3) : 'No link provided'}
                       </p>
                     </div>
+
                     <div>
                       <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                        Q3: Where are you based (your city/state)?
+                        Step 3: Program & Fee Commitment
                       </h4>
                       <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                        ${q3}
-                      </p>
-                    </div>
-                    <div>
-                      <h4 style="margin:0 0 4px 0; font-size:0.95rem; font-weight:900; text-transform:uppercase; color:#ff6b00;">
-                        Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?
-                      </h4>
-                      <p style="margin:0; font-size:0.85rem; background:#fff; border:2px solid #000; padding:10px; border-radius:4px; font-weight:600;">
-                        ${q4}
+                        Format: <strong>${q4 || '4-Week Online Cohort'}</strong><br/>
+                        Fee: <strong>₹${paymentFee || '999'}</strong> • Status: <strong>${paymentStatus || 'awaiting_payment_instructions'}</strong>
+                        ${formSubmittedAt ? `<br/><span style="font-size:0.75rem; color:#666;">Submitted: ${new Date(formSubmittedAt).toLocaleString()}</span>` : ''}
                       </p>
                     </div>
                   `;

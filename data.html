@@ -557,6 +557,17 @@
       let q4 = '';
       let payment = 'Pending';
       let resData = null;
+      let venture = '';
+      let stage = '';
+      let teamSize = '';
+      let enrolled = '';
+      let collegeName = '';
+      let collegeYear = '';
+      let collegeCourse = '';
+      let paymentFee = '999';
+      let paymentStatus = '';
+      let chapterRef = '';
+      let formSubmittedAt = '';
 
       const parts = college.split(' | ');
       let displayName = parts[0] ? parts[0].trim() : '';
@@ -577,6 +588,28 @@
           societyName = trimmed.replace(/^society:\s*/i, '').trim();
         } else if (/^source:\s*/i.test(trimmed)) {
           source = trimmed.replace(/^source:\s*/i, '').trim();
+        } else if (/^venture:\s*/i.test(trimmed)) {
+          venture = trimmed.replace(/^venture:\s*/i, '').trim();
+        } else if (/^stage:\s*/i.test(trimmed)) {
+          stage = trimmed.replace(/^stage:\s*/i, '').trim();
+        } else if (/^teamsize:\s*/i.test(trimmed)) {
+          teamSize = trimmed.replace(/^teamsize:\s*/i, '').trim();
+        } else if (/^enrolled:\s*/i.test(trimmed)) {
+          enrolled = trimmed.replace(/^enrolled:\s*/i, '').trim();
+        } else if (/^college:\s*/i.test(trimmed)) {
+          collegeName = trimmed.replace(/^college:\s*/i, '').trim();
+        } else if (/^year:\s*/i.test(trimmed)) {
+          collegeYear = trimmed.replace(/^year:\s*/i, '').trim();
+        } else if (/^course:\s*/i.test(trimmed)) {
+          collegeCourse = trimmed.replace(/^course:\s*/i, '').trim();
+        } else if (/^paymentfee:\s*/i.test(trimmed)) {
+          paymentFee = trimmed.replace(/^paymentfee:\s*/i, '').trim();
+        } else if (/^paymentstatus:\s*/i.test(trimmed)) {
+          paymentStatus = trimmed.replace(/^paymentstatus:\s*/i, '').trim();
+        } else if (/^chapterref:\s*/i.test(trimmed)) {
+          chapterRef = trimmed.replace(/^chapterref:\s*/i, '').trim();
+        } else if (/^formsubmittedat:\s*/i.test(trimmed)) {
+          formSubmittedAt = trimmed.replace(/^formsubmittedat:\s*/i, '').trim();
         } else if (/^q1:\s*/i.test(trimmed)) {
           q1 = trimmed.replace(/^q1:\s*/i, '').trim();
         } else if (/^q2:\s*/i.test(trimmed)) {
@@ -608,7 +641,7 @@
         const memTier = memberObj.tier || '';
         if (memId.startsWith('TFC-AMB-') || memTier === 'Campus Ambassador') {
           source = 'AmbassadorPage';
-        } else if (memId.startsWith('TFC-FEL-')) {
+        } else if (memId.startsWith('TFC-FEL-') || (memberObj.college && memberObj.college.includes('Source: FellowshipPage'))) {
           source = 'FellowshipPage';
         } else if (memId.startsWith('TFC-AID-')) {
           source = 'FinancialAid';
@@ -619,11 +652,25 @@
         }
       }
 
+      if (source === 'FellowshipPage' || (memberObj && memberObj.member_id && memberObj.member_id.startsWith('TFC-FEL-'))) {
+        fellowship = 'Yes';
+        if (paymentStatus === 'verified' || payment === 'Paid') {
+          payment = 'Paid';
+        } else {
+          payment = 'Pending';
+        }
+      }
+
       if (!displayName || displayName === 'Ecosystem Member') {
         displayName = isGoogleAuth ? 'Ecosystem Member (Google)' : (displayName || 'Not Specified');
       }
 
-      return { displayName, phone, country, refCode, refBy, fellowship, societyName, source, q1, q2, q3, q4, payment, resData, isGoogleAuth };
+      return {
+        displayName, phone, country, refCode, refBy, fellowship, societyName, source,
+        q1, q2, q3, q4, payment, resData, isGoogleAuth,
+        venture, stage, teamSize, enrolled, collegeName, collegeYear, collegeCourse,
+        paymentFee, paymentStatus, chapterRef, formSubmittedAt
+      };
     }
 
     // Helper: format seconds to '1m 24s' or '45s' or '1h 12m'
@@ -1077,8 +1124,8 @@
           return sorted.sort((a, b) => {
             const ma = parseCollegeField(a.college, a);
             const mb = parseCollegeField(b.college, b);
-            const hasA = (ma.q1 || ma.q2 || ma.q3 || ma.q4) ? 1 : 0;
-            const hasB = (mb.q1 || mb.q2 || mb.q3 || mb.q4) ? 1 : 0;
+            const hasA = (ma.q1 || ma.q2 || ma.q3 || ma.q4 || ma.venture) ? 1 : 0;
+            const hasB = (mb.q1 || mb.q2 || mb.q3 || mb.q4 || mb.venture) ? 1 : 0;
             return hasB - hasA;
           });
         default:
@@ -1209,7 +1256,7 @@
 
       currentFilteredMembers.forEach(m => {
         const meta = parseCollegeField(m.college, m);
-        const hasAnswers = meta.q1 || meta.q2 || meta.q3 || meta.q4;
+        const hasAnswers = meta.q1 || meta.q2 || meta.q3 || meta.q4 || meta.venture || (meta.source === 'FellowshipPage');
         const isGoogleUser = meta.isGoogleAuth || (m.password === 'google_oauth_verified') || (m.image && m.image.includes('googleusercontent.com'));
 
         // Handle empty or blank names cleanly
@@ -1337,23 +1384,49 @@
             
             <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-top: 16px;" class="space-y-3">
               ${(() => {
-                if (meta.source === 'FellowshipPage') {
+                if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
                   return `
+                    <div style="background: #FFF4E5; border: 1.5px solid #FFD8A8; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #D9480F; display: block; margin-bottom: 4px;">🚀 Fellowship '26 Candidate</span>
+                      <div style="font-size: 0.82rem; color: #495057; display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span><strong>Status:</strong> ${meta.enrolled === 'Yes' ? 'Enrolled Student' : (meta.enrolled === 'No' ? 'Not Currently Enrolled' : (meta.enrolled || 'Student'))}</span>
+                        <span><strong>Team:</strong> ${meta.teamSize || '1'} Member(s)</span>
+                        <span><strong>Ref:</strong> ${meta.chapterRef || 'direct'}</span>
+                      </div>
+                    </div>
+
                     <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q1: What startup idea are you building/validating?</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 1: Education & College</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">
+                        ${meta.collegeName || meta.displayName || 'Not Specified'}
+                        ${meta.collegeYear ? ` • Year: ${meta.collegeYear}` : ''}
+                        ${meta.collegeCourse ? ` • Course: ${meta.collegeCourse}` : ''}
+                      </p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: Venture Name & Stage</p>
+                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.venture || 'Untitled Venture'}</p>
+                      <p style="margin: 2px 0 0; font-size: 0.8rem; font-weight: 600; color: var(--ink-soft);">Stage: <strong>${meta.stage || 'Not specified'}</strong></p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: One-Line Pitch / Problem Solved</p>
                       <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q1 || 'Not Answered'}</p>
                     </div>
+
                     <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q2: What is your motivation to join the fellowship?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q2 || 'Not Answered'}</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: Prototype / Deck / Demo Link</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">
+                        ${meta.q3 ? (meta.q3.startsWith('http') ? `<a href="${meta.q3}" target="_blank" style="color:var(--primary-orange);text-decoration:underline;word-break:break-all;">${meta.q3}</a>` : meta.q3) : '<span style="color:var(--ink-soft);font-style:italic;">No link provided</span>'}
+                      </p>
                     </div>
+
                     <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q3: Where are you based (your city/state)?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q3 || 'Not Answered'}</p>
-                    </div>
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q4: Will you be present in Delhi NCR during the 2-month fellowship duration (Oct 19 – Dec 19)?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q4 || 'Not Answered'}</p>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 3: Program & Fee Commitment</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">Format: <strong>${meta.q4 || '4-Week Online Cohort'}</strong></p>
+                      <p style="margin: 2px 0 0; font-weight: 600; color: var(--ink);">Fee: <strong>₹${meta.paymentFee || '999'}</strong> • Status: <span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; background:${meta.payment === 'Paid' ? '#D3F9D8; color:#2B8A3E' : '#FFE3E3; color:#C92A2A'};">${meta.paymentStatus || meta.payment || 'awaiting_payment_instructions'}</span></p>
+                      ${meta.formSubmittedAt ? `<p style="margin: 4px 0 0; font-size: 0.75rem; color: var(--ink-soft);">Submitted: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
                     </div>
                   `;
                 } else if (meta.source === 'FinancialAid') {
@@ -1407,7 +1480,7 @@
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Q1,Q2,Q3,Q4\n";
+      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Enrolled,College_Name,Year,Course,Team_Size,Venture_Name,Stage,Pitch_Q1,Deck_Demo_Q3,Program_Format_Q4,Payment_Fee,Payment_Status,Chapter_Ref,Submitted_At\n";
 
       exportList.forEach(m => {
         const meta = parseCollegeField(m.college, m);
@@ -1426,10 +1499,20 @@
           meta.source || '',
           m.tier || '',
           meta.fellowship || '',
+          meta.enrolled || '',
+          `"${(meta.collegeName || meta.displayName || '').replace(/"/g, '""')}"`,
+          `"${(meta.collegeYear || '').replace(/"/g, '""')}"`,
+          `"${(meta.collegeCourse || '').replace(/"/g, '""')}"`,
+          `"${(meta.teamSize || '').replace(/"/g, '""')}"`,
+          `"${(meta.venture || '').replace(/"/g, '""')}"`,
+          `"${(meta.stage || '').replace(/"/g, '""')}"`,
           `"${(meta.q1 || '').replace(/"/g, '""')}"`,
-          `"${(meta.q2 || '').replace(/"/g, '""')}"`,
           `"${(meta.q3 || '').replace(/"/g, '""')}"`,
-          `"${(meta.q4 || '').replace(/"/g, '""')}"`
+          `"${(meta.q4 || '').replace(/"/g, '""')}"`,
+          meta.paymentFee || '',
+          meta.paymentStatus || meta.payment || '',
+          meta.chapterRef || '',
+          meta.formSubmittedAt || m.created_at || ''
         ];
         csvContent += row.join(",") + "\n";
       });

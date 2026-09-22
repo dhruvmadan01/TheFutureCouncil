@@ -642,7 +642,7 @@
                 <span id="dashApplicationId" class="font-mono-alt text-xs font-bold px-3 py-1.5 bg-zinc-100 border border-zinc-300 rounded-lg text-zinc-800">
                   ID: TFC-FEL-2026
                 </span>
-                <button type="button" onclick="clearFellowshipApplication()" class="tfc-btn tfc-btn-outline text-xs px-2.5 py-1 text-zinc-500">
+                <button type="button" id="btnNewApplication" onclick="clearFellowshipApplication()" class="tfc-btn tfc-btn-outline text-xs px-2.5 py-1 text-zinc-500">
                   New Application
                 </button>
               </div>
@@ -1243,21 +1243,56 @@
       restoreDraftLocally();
     }
 
-    function clearFellowshipApplication() {
-      if (confirm('Start a new fellowship application?')) {
-        const lastEmail = localStorage.getItem('tfc_fellowship_last_email');
-        if (lastEmail) {
-          localStorage.removeItem('tfc_fellowship_applicant_' + lastEmail);
-        }
-        localStorage.removeItem('tfc_fellowship_last_email');
-        localStorage.removeItem('tfc_fellowship_draft');
-        showFellowshipForm(null);
-        const applySec = document.getElementById('apply');
-        if (applySec) applySec.scrollIntoView({ behavior: 'smooth' });
+    window.clearFellowshipApplication = function() {
+      // 1. Clear all fellowship local caches
+      try {
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith('tfc_fellowship_')) {
+            localStorage.removeItem(key);
+          }
+        });
+      } catch (e) {}
+
+      // 2. Set session flag to prevent auto-fetching previous submitted record
+      try {
+        sessionStorage.setItem('tfc_force_new_app', 'true');
+      } catch (e) {}
+
+      // 3. Reset form and inputs
+      const form = document.getElementById('fellowshipDirectForm');
+      if (form) form.reset();
+
+      // 4. Return to Step 1
+      if (typeof goToStep === 'function') {
+        goToStep(1);
       }
-    }
+
+      // 5. Revert CTA buttons
+      document.querySelectorAll('a[href="#apply"]').forEach(btn => {
+        btn.innerHTML = `<span>Apply for Fellowship '26 →</span>`;
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const target = document.getElementById('apply');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        };
+      });
+
+      // 6. Switch view from dashboard to application form
+      showFellowshipForm(null);
+
+      // 7. Scroll to application section
+      const applySec = document.getElementById('apply');
+      if (applySec) {
+        applySec.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
     async function checkFellowshipStatus(user) {
+      if (sessionStorage.getItem('tfc_force_new_app') === 'true') {
+        showFellowshipForm(user);
+        return;
+      }
+
       // 1. Check local storage cache for last submitted application on this device
       const lastEmail = localStorage.getItem('tfc_fellowship_last_email') || (user ? user.email : null);
       if (lastEmail) {
@@ -1341,13 +1376,13 @@
               .maybeSingle();
 
             memberId = dbMember ? dbMember.member_id : null;
-            const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_payment_instructions | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
+            const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Fellowship: Yes | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_payment_instructions | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
 
             if (!dbMember) {
               const randomNum = Math.floor(1000 + Math.random() * 9000);
               memberId = `TFC-FEL-${randomNum}`;
 
-              await supabaseClient.from('members').insert([{
+              const { error: insErr } = await supabaseClient.from('members').insert([{
                 name: name,
                 email: email,
                 college: combinedCollege,
@@ -1356,11 +1391,13 @@
                 password: 'fellow2026',
                 image: ''
               }]);
+              if (insErr) console.warn('[Fellowship] Supabase insert warning:', insErr.message);
             } else {
-              await supabaseClient.from('members').update({
+              const { error: updErr } = await supabaseClient.from('members').update({
                 name: name,
                 college: combinedCollege
               }).eq('email', email);
+              if (updErr) console.warn('[Fellowship] Supabase update warning:', updErr.message);
             }
           }
 
@@ -1381,6 +1418,7 @@
           localStorage.setItem('tfc_fellowship_applicant_' + email, JSON.stringify(applicantData));
           localStorage.setItem('tfc_fellowship_last_email', email);
           localStorage.removeItem('tfc_fellowship_draft');
+          sessionStorage.removeItem('tfc_force_new_app');
 
           // Track application completed in Mixpanel
           if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationCompleted === 'function') {
@@ -1442,6 +1480,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       checkReferral();
+
+      const btnNewApp = document.getElementById('btnNewApplication');
+      if (btnNewApp) {
+        btnNewApp.addEventListener('click', window.clearFellowshipApplication);
+      }
 
       // Check if arriving directly to eligibility section
       if (window.location.hash === '#eligibility' || window.location.hash === '#structure') {
