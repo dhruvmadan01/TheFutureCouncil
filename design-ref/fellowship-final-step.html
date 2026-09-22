@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fellowship '26 — Final step</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ========== Design tokens ========== */
+:root {
+  --bg: #F5F1EA;
+  --surface: #FFFFFF;
+  --surface-soft: #FBF8F3;
+  --chip: #F5F1EA;
+  --border: #E9E2D5;
+  --border-soft: #EFE8DB;
+  --border-strong: #D6CFC2;
+  --ink: #1F1E1B;
+  --ink-2: #3F3C36;
+  --muted: #6B675F;
+  --accent: #B83A0E;       /* text/price */
+  --accent-btn: #C2410C;   /* primary button fill */
+  --accent-hover: #9A330B;
+  --success: #166534;
+  --success-bg: #EEF6EF;
+  --disabled-bg: #E7DFD2;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+
+/* ========== Layout ========== */
+.fs-page { padding: 40px 16px; }
+.fs-panel {
+  max-width: 784px; margin: 0 auto; padding: 40px;
+  display: flex; flex-direction: column; gap: 24px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+}
+
+/* Header */
+.fs-head { display: flex; flex-direction: column; gap: 10px; }
+.fs-head__row { display: flex; justify-content: space-between; align-items: center; }
+.fs-eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+.fs-progress { display: flex; gap: 6px; }
+.fs-progress span { width: 28px; height: 4px; border-radius: 2px; background: var(--border); }
+.fs-progress span.is-done { background: var(--accent); }
+.fs-title { margin: 0; font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; }
+.fs-lede { margin: 0; font-size: 16px; line-height: 1.55; color: #57534C; }
+
+/* Stats strip */
+.fs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; background: var(--surface-soft); border: 1px solid var(--border-soft); border-radius: var(--radius-md); }
+.fs-stat { padding: 14px 20px; display: flex; flex-direction: column-reverse; gap: 2px; margin: 0; }
+.fs-stat + .fs-stat { border-left: 1px solid var(--border-soft); }
+.fs-stat dt { font-size: 13px; color: var(--muted); }
+.fs-stat dd { margin: 0; font-family: var(--font-display); font-size: 20px; font-weight: 600; }
+
+/* Fee card */
+.fs-fee { display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.fs-fee__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.fs-price { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.fs-price__amount { font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1; color: var(--accent); }
+.fs-price__meta { font-size: 14px; color: var(--muted); }
+.fs-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--success-bg); color: var(--success); border-radius: 999px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.fs-why { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.fs-fee__bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 16px; flex-wrap: wrap; }
+.fs-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fs-chips li { padding: 5px 10px; background: var(--chip); border-radius: var(--radius-sm); font-size: 13px; color: var(--ink-2); }
+.fs-link { color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px; }
+.fs-link:hover { color: var(--accent-hover); text-decoration: underline; }
+.fs-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* Consents */
+.fs-consents { margin: 0; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; flex-direction: column; }
+.fs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.fs-check { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; font-size: 15px; font-weight: 500; line-height: 1.45; cursor: pointer; }
+.fs-check + .fs-check { border-top: 1px solid var(--border-soft); }
+.fs-check input { accent-color: var(--accent); width: 20px; height: 20px; margin: 1px 0 0; flex-shrink: 0; cursor: pointer; }
+.fs-check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fs-check .req { color: var(--accent); }
+
+/* Actions */
+.fs-actions { display: flex; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid var(--border-soft); }
+.fs-note { flex: 1; text-align: right; font-size: 13px; color: var(--muted); }
+.fs-btn { height: 52px; padding: 0 28px; border-radius: 999px; font: 600 16px/1 var(--font-body); cursor: pointer; transition: background .15s, box-shadow .15s, transform .05s; }
+.fs-btn:active:not(:disabled) { transform: translateY(1px); }
+.fs-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.fs-btn--ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border-strong); }
+.fs-btn--ghost:hover { background: var(--surface-soft); }
+.fs-btn--primary { background: var(--accent-btn); color: #fff; border: none; box-shadow: 0 6px 16px rgba(194,65,12,.25); }
+.fs-btn--primary:hover:not(:disabled) { background: var(--accent-hover); }
+.fs-btn--primary:disabled { background: var(--disabled-bg); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+.fs-back-icon { display: none; }
+
+/* ========== Mobile: sticky action bar ========== */
+@media (max-width: 640px) {
+  .fs-page { padding: 0; }
+  .fs-panel { padding: 28px 16px 140px; border: none; border-radius: 0; gap: 20px; }
+  .fs-title { font-size: 26px; }
+  .fs-lede { font-size: 15px; }
+  .fs-stat { padding: 12px 14px; }
+  .fs-stat dd { font-size: 17px; }
+  .fs-stat dt { font-size: 12px; }
+  .fs-fee { padding: 20px; gap: 14px; }
+  .fs-price__amount { font-size: 36px; }
+  .fs-price__meta { display: none; }           /* per-day moves into .fs-why on mobile */
+  .fs-why .fs-perday { display: inline; }
+  .fs-check { padding: 16px; font-size: 14px; }
+
+  .fs-actions {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    display: grid; grid-template-columns: 52px 1fr; gap: 10px 10px;
+    padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+    background: var(--surface); border-top: 1px solid var(--border-soft);
+    box-shadow: 0 -8px 20px rgba(31,30,27,.06);
+  }
+  .fs-note { grid-column: 1 / -1; grid-row: 2; text-align: center; font-size: 12px; }
+  .fs-btn--ghost { width: 52px; padding: 0; }
+  .fs-back-text { display: none; }
+  .fs-back-icon { display: inline; }
+  .fs-btn--primary { box-shadow: none; }
+}
+.fs-perday { display: none; }
+</style>
+</head>
+<body>
+
+<main class="fs-page">
+  <form class="fs-panel" id="fellowship-final-step" novalidate>
+
+    <header class="fs-head">
+      <div class="fs-head__row">
+        <span class="fs-eyebrow">Final step</span>
+        <!-- Set is-done on completed steps; adjust count to your form -->
+        <div class="fs-progress" aria-label="Step 4 of 4">
+          <span class="is-done"></span><span class="is-done"></span><span class="is-done"></span><span class="is-done"></span>
+        </div>
+      </div>
+      <h2 class="fs-title">Commitment &amp; fee</h2>
+      <p class="fs-lede">Fellowship '26 runs fully online. Weekly cohort labs, pod syncs and demo day are required.</p>
+    </header>
+
+    <dl class="fs-stats">
+      <div class="fs-stat"><dt>Fully remote</dt><dd>4 weeks</dd></div>
+      <div class="fs-stat"><dt>Per week</dt><dd>6–8 hrs</dd></div>
+      <div class="fs-stat"><dt>Zero dilution</dt><dd>0% equity</dd></div>
+    </dl>
+
+    <section class="fs-fee" aria-labelledby="fs-fee-label">
+      <div class="fs-fee__top">
+        <div class="fs-price">
+          <span class="fs-price__amount" id="fs-fee-label">₹999</span>
+          <span class="fs-price__meta">commitment fee · about ₹35 a day</span>
+        </div>
+        <span class="fs-pill">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Pay only if accepted
+        </span>
+      </div>
+      <p class="fs-why">Free cohorts lose half their members by week two. Your pod of 4–6 depends on everyone showing up — the fee keeps the people next to you as serious as you are.<span class="fs-perday"> About ₹35 a day.</span></p>
+      <div class="fs-fee__bottom">
+        <ul class="fs-chips" aria-label="What the fee covers">
+          <li>Mentor office hours</li>
+          <li>Weekly cohort lab</li>
+          <li>Pod syncs</li>
+          <li>Virtual demo day</li>
+        </ul>
+        <!-- TODO: point to your real fee-waiver flow -->
+        <a class="fs-link" href="#fee-waiver">Can't afford it? Request a fee waiver →</a>
+      </div>
+    </section>
+
+    <fieldset class="fs-consents">
+      <legend class="fs-sr">Confirm to submit</legend>
+      <label class="fs-check">
+        <input type="checkbox" name="commitHours" required>
+        <span>I can commit 6–8 hours a week for 4 weeks, fully remote <span class="req" aria-hidden="true">*</span></span>
+      </label>
+      <label class="fs-check">
+        <input type="checkbox" name="feeTerms" required>
+        <span>I understand ₹999 is charged only if I'm accepted and is non-refundable once paid <span class="req" aria-hidden="true">*</span></span>
+      </label>
+    </fieldset>
+
+    <div class="fs-actions">
+      <button type="button" class="fs-btn fs-btn--ghost" data-action="back" aria-label="Back">
+        <span class="fs-back-icon" aria-hidden="true">←</span><span class="fs-back-text">← Back</span>
+      </button>
+      <span class="fs-note" id="fs-note">No payment now</span>
+      <button type="submit" class="fs-btn fs-btn--primary" disabled aria-describedby="fs-note">Submit application →</button>
+    </div>
+
+  </form>
+</main>
+
+<script>
+(function () {
+  const form = document.getElementById('fellowship-final-step');
+  const boxes = form.querySelectorAll('.fs-consents input[type="checkbox"]');
+  const submit = form.querySelector('button[type="submit"]');
+
+  const sync = () => { submit.disabled = ![...boxes].every(b => b.checked); };
+  boxes.forEach(b => b.addEventListener('change', sync));
+  sync();
+
+  form.querySelector('[data-action="back"]').addEventListener('click', () => {
+    // TODO: hook into your step navigation
+    history.back();
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (submit.disabled) return;
+    submit.disabled = true;
+    submit.textContent = 'Submitting…';
+    // TODO: replace with your existing submit handler
+    console.log('submit', Object.fromEntries(new FormData(form)));
+  });
+})();
+</script>
+</body>
+</html>

@@ -57,6 +57,336 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="style.css" />
+    <!-- Fonts for Fellowship Application Step 3 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+  /* ========== Fellowship Final Step Design Tokens & Styles ========== */
+  :root {
+    --bg: #F5F1EA;
+    --surface: #FFFFFF;
+    --surface-soft: #FBF8F3;
+    --chip: #F5F1EA;
+    --border: #E9E2D5;
+    --border-soft: #EFE8DB;
+    --border-strong: #D6CFC2;
+    --ink: #1F1E1B;
+    --ink-2: #3F3C36;
+    --muted: #6B675F;
+    --accent: #B83A0E;       /* text/price */
+    --accent-btn: #C2410C;   /* primary button fill */
+    --accent-hover: #9A330B;
+    --success: #166534;
+    --success-bg: #EEF6EF;
+    --disabled-bg: #E7DFD2;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 6px;
+  }
+
+  /* Scoped layout for Step 3 */
+  #formStep3.fs-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  #formStep3.hidden {
+    display: none !important;
+  }
+
+  /* Header */
+  .fs-head { display: flex; flex-direction: column; gap: 10px; }
+  .fs-head__row { display: flex; justify-content: space-between; align-items: center; }
+  .fs-eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+  .fs-progress { display: flex; gap: 6px; }
+  .fs-progress span { width: 28px; height: 4px; border-radius: 2px; background: var(--border); }
+  .fs-progress span.is-done { background: var(--accent); }
+  .fs-title { margin: 0; font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; color: var(--ink); }
+  .fs-lede { margin: 0; font-size: 16px; line-height: 1.55; color: #57534C; }
+
+  /* Stats strip */
+  .fs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; background: var(--surface-soft); border: 1px solid var(--border-soft); border-radius: var(--radius-md); }
+  .fs-stat { padding: 14px 20px; display: flex; flex-direction: column-reverse; gap: 2px; margin: 0; }
+  .fs-stat + .fs-stat { border-left: 1px solid var(--border-soft); }
+  .fs-stat dt { font-size: 13px; color: var(--muted); margin: 0; }
+  .fs-stat dd { margin: 0; font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--ink); }
+
+  /* Fee card */
+  .fs-fee { display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-md); background: #ffffff; }
+  .fs-fee__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .fs-price { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .fs-price__amount { font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1; color: var(--accent); }
+  .fs-price__meta { font-size: 14px; color: var(--muted); }
+  .fs-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--success-bg); color: var(--success); border-radius: 999px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .fs-why { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .fs-fee__bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 16px; flex-wrap: wrap; }
+  .fs-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .fs-chips li { padding: 5px 10px; background: var(--chip); border-radius: var(--radius-sm); font-size: 13px; color: var(--ink-2); }
+  .fs-link { color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; }
+  .fs-link:hover { color: var(--accent-hover); text-decoration: underline; }
+  .fs-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* Consents */
+  .fs-consents { margin: 0; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; flex-direction: column; }
+  .fs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .fs-check { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; font-size: 15px; font-weight: 500; line-height: 1.45; cursor: pointer; color: var(--ink); margin: 0; }
+  .fs-check + .fs-check { border-top: 1px solid var(--border-soft); }
+  .fs-check input { accent-color: var(--accent); width: 20px; height: 20px; margin: 1px 0 0; flex-shrink: 0; cursor: pointer; }
+  .fs-check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fs-check .req { color: var(--accent); }
+
+  /* Actions */
+  .fs-actions { display: flex; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid var(--border-soft); }
+  .fs-note { flex: 1; text-align: right; font-size: 13px; color: var(--muted); }
+  .fs-btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 28px; border-radius: 999px; font: 600 16px/1 var(--font-body); cursor: pointer; transition: background .15s, box-shadow .15s, transform .05s; }
+  .fs-btn:active:not(:disabled) { transform: translateY(1px); }
+  .fs-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .fs-btn--ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border-strong); }
+  .fs-btn--ghost:hover { background: var(--surface-soft); }
+  .fs-btn--primary { background: var(--accent-btn); color: #fff; border: none; box-shadow: 0 6px 16px rgba(194,65,12,.25); }
+  .fs-btn--primary:hover:not(:disabled) { background: var(--accent-hover); }
+  .fs-btn--primary:disabled { background: var(--disabled-bg); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+  .fs-back-icon { display: none; }
+  .fs-perday { display: none; }
+
+  /* Smooth scroll margin for sticky header offset */
+  html {
+    scroll-behavior: smooth;
+  }
+  #apply, #why-online, #structure, #timeline, #eligibility, #faq {
+    scroll-margin-top: 76px;
+  }
+
+  /* Focus enhancement */
+  .tfc-input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(184, 58, 14, 0.12) !important;
+  }
+
+  /* ========== Enhanced Mobile Experience Overrides ========== */
+  @media (max-width: 640px) {
+    /* Safe viewport ergonomics */
+    html, body {
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Header Nav */
+    .tfc-header {
+      padding: 10px 0 !important;
+    }
+    .tfc-brand {
+      gap: 8px !important;
+    }
+    .tfc-brand-logo {
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .tfc-brand span {
+      font-size: 0.84rem !important;
+      letter-spacing: 0.02em !important;
+    }
+    #navActionBtn {
+      font-size: 0.8rem !important;
+      padding: 7px 12px !important;
+      border-radius: 999px !important;
+    }
+    .tfc-mobile-toggle {
+      font-size: 1.45rem !important;
+      padding: 4px !important;
+    }
+
+    /* Hero Section */
+    .tfc-stat-strip {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 8px !important;
+      padding: 10px 8px !important;
+      background: #FFFFFF !important;
+      border: 1px solid var(--border-soft) !important;
+      border-radius: 14px !important;
+      margin-top: 24px !important;
+    }
+    .tfc-stat-item {
+      padding: 10px 6px !important;
+      background: var(--surface-soft) !important;
+      border: 1px solid var(--border-soft) !important;
+      border-radius: 10px !important;
+      border-right: none !important;
+    }
+    .tfc-stat-num {
+      font-size: 1.35rem !important;
+    }
+    .tfc-stat-label {
+      font-size: 0.7rem !important;
+    }
+
+    /* Reason & Pillar Cards */
+    .tfc-reasons-grid {
+      gap: 12px !important;
+    }
+    .tfc-reason-card {
+      padding: 18px 16px !important;
+      border-radius: 12px !important;
+    }
+    .tfc-pillars-grid {
+      gap: 12px !important;
+    }
+    .tfc-pillar-card {
+      padding: 20px 16px !important;
+      border-radius: 12px !important;
+    }
+    .tfc-pillar-index {
+      font-size: 0.75rem !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* 4-Week Timeline Strip on Mobile */
+    .tfc-timeline-strip {
+      gap: 10px !important;
+    }
+    .tfc-timeline-card {
+      padding: 16px 14px !important;
+      border-radius: 12px !important;
+      border-left: 3px solid var(--accent) !important;
+      background: #FFFFFF !important;
+    }
+    .tfc-timeline-week {
+      font-size: 0.68rem !important;
+      padding: 3px 8px !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* FAQ Accordion */
+    .tfc-accordion-header {
+      padding: 15px 16px !important;
+      font-size: 0.95rem !important;
+    }
+    .tfc-accordion-body {
+      padding: 0 16px 14px !important;
+      font-size: 0.9rem !important;
+    }
+
+    /* Form Card & Stepper Segmented Bar */
+    #fellowshipApplyCard {
+      padding: 18px 14px !important;
+      border-radius: 16px !important;
+    }
+    .tfc-pill-stepper {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 6px !important;
+      overflow-x: visible !important;
+      margin-bottom: 20px !important;
+      padding-bottom: 0 !important;
+    }
+    .tfc-pill-step {
+      padding: 8px 4px !important;
+      font-size: 0.76rem !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      width: 100% !important;
+      border-radius: 10px !important;
+      white-space: nowrap !important;
+    }
+    .tfc-pill-step-num {
+      width: 20px !important;
+      height: 20px !important;
+      font-size: 0.72rem !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* Inputs on Mobile - Guarantee iOS Zoom Prevention */
+    .tfc-input,
+    #fName, #fEmail, #fPhone, #fTeamSize, #fCollegeName, #fCollegeYear, #fCollegeCourse,
+    #fVentureName, #fStage, #fQ1, #fQ3, #fWaiverReason {
+      font-size: 16px !important;
+      padding: 12px 14px !important;
+      border-radius: 10px !important;
+    }
+
+    /* Radio button touch targets */
+    .tfc-radio-pill {
+      min-height: 48px !important;
+      padding: 12px 10px !important;
+      font-size: 0.92rem !important;
+      border-radius: 10px !important;
+    }
+
+    /* Step 3: Commitment & Fee Mobile */
+    #formStep3.fs-panel { padding-bottom: 150px; gap: 18px; }
+    .fs-title { font-size: 24px; }
+    .fs-lede { font-size: 14.5px; }
+    .fs-stats {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .fs-stat {
+      padding: 10px 4px;
+      text-align: center;
+      align-items: center;
+    }
+    .fs-stat dd { font-size: 15px; }
+    .fs-stat dt { font-size: 10.5px; }
+    .fs-fee { padding: 18px 14px; gap: 14px; border-radius: 12px; }
+    .fs-price__amount { font-size: 34px; }
+    .fs-price__meta { display: none; }           /* per-day moves into .fs-why on mobile */
+    .fs-why .fs-perday { display: inline; }
+    .fs-chips { gap: 6px; }
+    .fs-chips li { font-size: 12px; padding: 4px 8px; }
+    .fs-check { padding: 14px 12px; font-size: 13.5px; gap: 12px; }
+    .fs-check input { width: 22px; height: 22px; min-width: 22px; }
+
+    #formStep3:not(.hidden) .fs-actions {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
+      display: grid; grid-template-columns: 52px 1fr; gap: 8px 10px;
+      padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-soft);
+      box-shadow: 0 -8px 24px rgba(31,30,27,.10);
+    }
+    .fs-note { grid-column: 1 / -1; grid-row: 2; text-align: center; font-size: 12px; }
+    .fs-btn--ghost { width: 52px; padding: 0; flex-shrink: 0; }
+    .fs-back-text { display: none; }
+    .fs-back-icon { display: inline; font-size: 18px; }
+    .fs-btn--primary { box-shadow: none; font-size: 15px; }
+
+    /* Hide sticky relaunch bar when Step 3 is active to prevent clashes */
+    body.step3-active .tfc-sticky-relaunch-bar {
+      display: none !important;
+    }
+
+    /* Dashboard Mobile ergonomics */
+    #fellowshipDashboardPanel .tfc-card {
+      padding: 18px 14px !important;
+      border-radius: 16px !important;
+    }
+    #dashPaymentHeading {
+      font-size: 0.95rem !important;
+      line-height: 1.5 !important;
+    }
+    #dashPaymentIcon {
+      width: 40px !important;
+      height: 40px !important;
+    }
+    #dashPaymentIcon svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+  </style>
   <script src="script.js" defer></script>
   <script src="tfc-auth.js" defer></script>
   <script src="tfc-analytics.js" defer></script>
@@ -78,8 +408,11 @@
         <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="#apply" class="tfc-btn tfc-btn-primary" id="navActionBtn" style="background: var(--accent); border-color: var(--accent);">Apply for Fellowship '26 →</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="#apply" class="tfc-btn tfc-btn-primary" id="navActionBtn" style="background: var(--accent); border-color: var(--accent);">
+          <span class="hidden sm:inline">Apply for Fellowship '26 →</span>
+          <span class="inline sm:hidden">Apply →</span>
+        </a>
         <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -298,12 +631,12 @@
     <!-- Eligibility Section (Build Brief §4, §6) -->
     <section class="tfc-section" id="eligibility" style="padding-top: 20px; padding-bottom: 40px;">
       <div class="tfc-container" style="max-width: 860px;">
-        <div class="tfc-card" style="padding: 36px 36px; border: 1px solid var(--c-sand); background: #FFFFFF; border-radius: 16px; text-align: center;">
+        <div class="tfc-card p-5 sm:p-9 md:p-10" style="border: 1px solid var(--c-sand); background: #FFFFFF; border-radius: 16px; text-align: center;">
           <span class="tfc-reason-tag">ELIGIBILITY</span>
           <h2 class="font-display" style="font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 800; margin-bottom: 14px;">
             Who should apply
           </h2>
-          <p style="font-size: 1.05rem; color: #3f3f46; line-height: 1.68; margin: 0; max-width: 720px; margin-left: auto; margin-right: auto;">
+          <p style="font-size: 1.02rem; color: #3f3f46; line-height: 1.68; margin: 0; max-width: 720px; margin-left: auto; margin-right: auto;">
             Open to any student founder building an early-stage venture, in or outside a Future Council chapter, who can commit roughly 6–8 hours a week for 4 weeks, fully remote. There's no competitive shortlist — anyone who meets these basics and completes registration is in the cohort.
           </p>
         </div>
@@ -415,15 +748,18 @@
           <div class="tfc-pill-stepper" id="formStepsNav">
             <div class="tfc-pill-step active" id="stepBadge1" onclick="goToStep(1)">
               <span class="tfc-pill-step-num">1</span>
-              <span>Founder & Team</span>
+              <span class="hidden sm:inline">Founder & Team</span>
+              <span class="inline sm:hidden">Founder</span>
             </div>
             <div class="tfc-pill-step" id="stepBadge2" onclick="goToStep(2)">
               <span class="tfc-pill-step-num">2</span>
-              <span>Venture Details</span>
+              <span class="hidden sm:inline">Venture Details</span>
+              <span class="inline sm:hidden">Venture</span>
             </div>
             <div class="tfc-pill-step" id="stepBadge3" onclick="goToStep(3)">
               <span class="tfc-pill-step-num">3</span>
-              <span>Commitment</span>
+              <span class="hidden sm:inline">Commitment</span>
+              <span class="inline sm:hidden">Terms</span>
             </div>
           </div>
 
@@ -501,8 +837,9 @@
               </div>
 
               <div class="pt-3">
-                <button type="button" onclick="nextStep(2)" class="tfc-btn tfc-btn-primary w-full sm:w-auto" style="background: var(--c-ember); border-color: var(--c-ember);">
-                  Continue to Venture Details →
+                <button type="button" onclick="nextStep(2)" class="tfc-btn tfc-btn-primary w-full sm:w-auto" style="background: var(--c-ember); border-color: var(--c-ember); height: 50px; font-weight: 700;">
+                  <span class="hidden sm:inline">Continue to Venture Details →</span>
+                  <span class="inline sm:hidden">Continue to Venture →</span>
                 </button>
               </div>
             </div>
@@ -533,135 +870,88 @@
                 <input type="url" id="fQ3" class="tfc-input" placeholder="https://..." />
               </div>
 
-              <div class="flex items-center gap-3 pt-3">
-                <button type="button" onclick="goToStep(1)" class="tfc-btn tfc-btn-outline">
+              <div class="flex items-center gap-2.5 sm:gap-3 pt-3">
+                <button type="button" onclick="goToStep(1)" class="tfc-btn tfc-btn-outline" style="min-width: 80px; height: 50px;">
                   ← Back
                 </button>
-                <button type="button" onclick="nextStep(3)" class="tfc-btn tfc-btn-primary" style="background: var(--c-ember); border-color: var(--c-ember);">
-                  Continue to Commitment →
+                <button type="button" onclick="nextStep(3)" class="tfc-btn tfc-btn-primary flex-1 sm:flex-initial" style="background: var(--c-ember); border-color: var(--c-ember); height: 50px; font-weight: 700;">
+                  <span class="hidden sm:inline">Continue to Commitment →</span>
+                  <span class="inline sm:hidden">Continue →</span>
                 </button>
               </div>
             </div>
 
-            <!-- STEP 3: Commitment Confirmation -->
-            <div id="formStep3" class="tfc-form-step hidden space-y-4 pb-12 sm:pb-6">
-              <div class="p-4 sm:p-5 rounded-xl border border-zinc-200 bg-zinc-50/80">
-                <h4 class="font-display" style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; color: var(--c-ink);">
-                  Program Format & Commitment Terms
-                </h4>
-                <p style="font-size: 0.88rem; color: #52525b; line-height: 1.6; margin-bottom: 14px;">
-                  Fellowship '26 runs 100% online across 4 weeks. To ensure every founder pod maintains high momentum, active participation in the weekly cohort lab, pod syncs, and virtual demo day is required.
-                </p>
-
-                <div class="space-y-2 text-xs text-zinc-600 font-mono-alt mb-4">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                    <span>4 weeks duration · Fully remote</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                    <span>Roughly 6–8 hours/week commitment</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                    <span>100% equity-free · Zero dilution</span>
+            <!-- STEP 3: Commitment & Fee -->
+            <div id="formStep3" class="tfc-form-step hidden fs-panel">
+              <header class="fs-head">
+                <div class="fs-head__row">
+                  <span class="fs-eyebrow">Final step</span>
+                  <!-- 3 steps total in Fellowship application -->
+                  <div class="fs-progress" aria-label="Step 3 of 3">
+                    <span class="is-done"></span><span class="is-done"></span><span class="is-done"></span>
                   </div>
                 </div>
+                <h2 class="fs-title">Commitment &amp; fee</h2>
+                <p class="fs-lede">Fellowship '26 runs fully online. Weekly cohort labs, pod syncs and demo day are required.</p>
+              </header>
 
-                <!-- Registration Fee Notice Card -->
-                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-orange-50/90 to-amber-50/70 border border-orange-200/90 mb-4">
-                  <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-[#E2542A]/10 text-[#E2542A] flex items-center justify-center font-bold text-sm shrink-0 mt-0.5 font-mono-alt">
-                      ₹
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center justify-between flex-wrap gap-1.5 mb-1.5">
-                        <strong class="text-sm sm:text-base font-bold text-zinc-900 font-display">Why there's a ₹999 fee</strong>
-                        <span class="font-mono-alt text-[0.7rem] font-bold text-[#E2542A] bg-orange-100/90 border border-orange-200 px-2 py-0.5 rounded-full">100% Equity-Free</span>
-                      </div>
-                      <p class="text-xs sm:text-sm text-zinc-700 leading-relaxed mb-3">
-                        Most free online cohorts lose half their members by week 2. Your pod of 4–6 depends on everyone showing up. The ₹999 makes sure the people next to you are as serious as you are.
-                      </p>
-                      
-                      <!-- Value list -->
-                      <ul class="text-xs text-zinc-700 space-y-1.5 mb-3 font-mono-alt list-none p-0">
-                        <li class="flex items-center gap-2">
-                          <span class="w-1.5 h-1.5 rounded-full bg-[#E2542A] shrink-0"></span>
-                          <span>Mentor office hours</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                          <span class="w-1.5 h-1.5 rounded-full bg-[#E2542A] shrink-0"></span>
-                          <span>Weekly cohort lab</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                          <span class="w-1.5 h-1.5 rounded-full bg-[#E2542A] shrink-0"></span>
-                          <span>Pod syncs</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                          <span class="w-1.5 h-1.5 rounded-full bg-[#E2542A] shrink-0"></span>
-                          <span>Virtual Demo Day</span>
-                        </li>
-                      </ul>
+              <dl class="fs-stats">
+                <div class="fs-stat"><dt>Fully remote</dt><dd>4 weeks</dd></div>
+                <div class="fs-stat"><dt>Per week</dt><dd>6–8 hrs</dd></div>
+                <div class="fs-stat"><dt>Zero dilution</dt><dd>0% equity</dd></div>
+              </dl>
 
-                      <p class="text-xs text-zinc-600 mb-2 font-mono-alt">
-                        That's about ₹35 a day for 4 weeks.
-                      </p>
-
-                      <div class="pt-2 border-t border-orange-200/80 mb-2">
-                        <p class="text-xs sm:text-sm text-zinc-900 font-bold m-0">
-                          You pay only if you're accepted.
-                        </p>
-                        <p class="text-xs text-zinc-600 font-normal m-0 mt-0.5">
-                          Once paid, the fee is non-refundable.
-                        </p>
-                      </div>
-
-                      <!-- Fee Waiver Link & Textarea -->
-                      <div class="mt-2.5 pt-2 border-t border-orange-200/50">
-                        <button type="button" id="btnToggleWaiver" onclick="toggleFeeWaiver()" class="text-[#E2542A] hover:underline font-semibold bg-transparent border-0 p-0 cursor-pointer inline-flex items-center gap-1 text-xs">
-                          Can't afford it? Request a fee waiver
-                        </button>
-                        <div id="feeWaiverContainer" class="hidden mt-2 pt-2 border-t border-orange-200/60">
-                          <label for="fWaiverReason" class="block font-bold text-zinc-800 text-xs mb-1">
-                            Fee Waiver Reason
-                          </label>
-                          <textarea id="fWaiverReason" class="tfc-input text-xs w-full" rows="2" style="min-height: 60px; font-size: 0.82rem; background: #ffffff;" placeholder="Briefly describe your situation and why you need a fee waiver..."></textarea>
-                          <p class="text-[0.68rem] text-zinc-500 mt-1 mb-0 font-mono-alt">We evaluate fee waivers on a case-by-case basis during admissions review.</p>
-                        </div>
-                      </div>
-                    </div>
+              <section class="fs-fee" aria-labelledby="fs-fee-label">
+                <div class="fs-fee__top">
+                  <div class="fs-price">
+                    <span class="fs-price__amount" id="fs-fee-label">₹999</span>
+                    <span class="fs-price__meta">commitment fee · about ₹35 a day</span>
                   </div>
+                  <span class="fs-pill">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Pay only if accepted
+                  </span>
+                </div>
+                <p class="fs-why">Free cohorts lose half their members by week two. Your pod of 4–6 depends on everyone showing up — the fee keeps the people next to you as serious as you are.<span class="fs-perday"> About ₹35 a day.</span></p>
+                <div class="fs-fee__bottom">
+                  <ul class="fs-chips" aria-label="What the fee covers">
+                    <li>Mentor office hours</li>
+                    <li>Weekly cohort lab</li>
+                    <li>Pod syncs</li>
+                    <li>Virtual demo day</li>
+                  </ul>
+                  <a class="fs-link" href="#fee-waiver" id="btnToggleWaiver" onclick="toggleFeeWaiver(); return false;">Can't afford it? Request a fee waiver →</a>
                 </div>
 
-                <!-- Two Required Checkboxes -->
-                <div class="space-y-2.5">
-                  <label class="flex items-start gap-3 p-3 bg-white border border-zinc-300 rounded-lg cursor-pointer hover:border-zinc-400 transition-colors">
-                    <input type="checkbox" id="fCommitHours" class="w-4 h-4 mt-0.5 accent-[#E2542A] shrink-0" required />
-                    <span style="font-size: 0.85rem; font-weight: 600; color: var(--c-ink); line-height: 1.45;">
-                      I can commit 6–8 hours a week for 4 weeks, fully remote *
-                    </span>
+                <!-- Fee Waiver Drawer -->
+                <div id="feeWaiverContainer" class="hidden" style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-soft);">
+                  <label for="fWaiverReason" style="display: block; font-weight: 600; font-size: 13px; color: var(--ink-2); margin-bottom: 6px;">
+                    Fee Waiver Reason
                   </label>
-
-                  <label class="flex items-start gap-3 p-3 bg-white border border-zinc-300 rounded-lg cursor-pointer hover:border-zinc-400 transition-colors">
-                    <input type="checkbox" id="fUnderstandFee" class="w-4 h-4 mt-0.5 accent-[#E2542A] shrink-0" required />
-                    <span style="font-size: 0.85rem; font-weight: 600; color: var(--c-ink); line-height: 1.45;">
-                      I understand ₹999 is charged only if I'm accepted, and is non-refundable once paid *
-                    </span>
-                  </label>
+                  <textarea id="fWaiverReason" class="tfc-input" rows="2" style="width: 100%; min-height: 60px; padding: 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-family: var(--font-body); background: var(--surface);" placeholder="Briefly describe your situation and why you need a fee waiver..."></textarea>
+                  <p style="font-size: 11px; color: var(--muted); font-family: var(--font-mono); margin: 6px 0 0 0;">We evaluate fee waivers on a case-by-case basis during admissions review.</p>
                 </div>
-              </div>
+              </section>
 
-              <div class="flex items-center gap-3 pt-3">
-                <button type="button" onclick="goToStep(2)" class="tfc-btn tfc-btn-outline">
-                  ← Back
+              <fieldset class="fs-consents">
+                <legend class="fs-sr">Confirm to submit</legend>
+                <label class="fs-check" for="fCommitHours">
+                  <input type="checkbox" id="fCommitHours" name="commitHours" required>
+                  <span>I can commit 6–8 hours a week for 4 weeks, fully remote <span class="req" aria-hidden="true">*</span></span>
+                </label>
+                <label class="fs-check" for="fUnderstandFee">
+                  <input type="checkbox" id="fUnderstandFee" name="feeTerms" required>
+                  <span>I understand ₹999 is charged only if I'm accepted and is non-refundable once paid <span class="req" aria-hidden="true">*</span></span>
+                </label>
+              </fieldset>
+
+              <div class="fs-actions">
+                <button type="button" id="btnBackToStep2" onclick="goToStep(2)" class="fs-btn fs-btn--ghost" data-action="back" aria-label="Back">
+                  <span class="fs-back-icon" aria-hidden="true">←</span><span class="fs-back-text">← Back</span>
                 </button>
-                <button type="submit" id="btnSubmitApp" class="tfc-btn tfc-btn-primary flex-1 min-h-[48px] font-bold" style="background: var(--accent); border-color: var(--accent);">
-                  Submit Application →
-                </button>
+                <span class="fs-note" id="fs-note">No payment now</span>
+                <button type="submit" id="btnSubmitApp" class="fs-btn fs-btn--primary" disabled aria-describedby="fs-note">Submit application →</button>
               </div>
-              <p class="text-center text-xs text-zinc-500 font-mono-alt mt-1.5 mb-0">
-                No payment now. ₹999 is due only if you're accepted.
-              </p>
             </div>
           </form>
         </div>
@@ -779,11 +1069,11 @@
                 <span class="text-xs text-zinc-500 block">October 19, 2026 · Online Cohort Lab</span>
               </div>
 
-              <div class="flex items-center gap-2 w-full sm:w-auto">
-                <a id="btnAddToCal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=The+Future+Council+Fellowship+%2726+Week+1+Kickoff&dates=20261019T123000Z/20261019T143000Z&details=Live+cohort+lab%2C+founder+pod+formation%2C+and+onboarding+for+The+Future+Council+Fellowship+%2726." target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2 text-zinc-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+                <a id="btnAddToCal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=The+Future+Council+Fellowship+%2726+Week+1+Kickoff&dates=20261019T123000Z/20261019T143000Z&details=Live+cohort+lab%2C+founder+pod+formation%2C+and+onboarding+for+The+Future+Council+Fellowship+%2726." target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2.5 text-zinc-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
                   <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Add Kickoff to Calendar
                 </a>
-                <a id="btnShareWhatsApp" href="https://api.whatsapp.com/send?text=I%20just%20registered%20for%20The%20Future%20Council%20Fellowship%20%2726%20%E2%80%94%20a%204-week%20online%20founder%20cohort!%20Check%20it%20out:%20https://thefuturecouncil.in/fellowship" target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2 text-emerald-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
+                <a id="btnShareWhatsApp" href="https://api.whatsapp.com/send?text=I%20just%20registered%20for%20The%20Future%20Council%20Fellowship%20%2726%20%E2%80%94%20a%204-week%20online%20founder%20cohort!%20Check%20it%20out:%20https://thefuturecouncil.in/fellowship" target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2.5 text-emerald-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
                   <i data-lucide="share-2" class="w-3.5 h-3.5"></i> Share with Chapter
                 </a>
               </div>
@@ -874,6 +1164,15 @@
     // =========================================================================
     let currentStep = 1;
 
+    function syncFinalStepSubmit() {
+      const commit = document.getElementById('fCommitHours');
+      const fee = document.getElementById('fUnderstandFee');
+      const submitBtn = document.getElementById('btnSubmitApp');
+      if (submitBtn) {
+        submitBtn.disabled = !(commit && commit.checked && fee && fee.checked);
+      }
+    }
+
     function goToStep(step) {
       if (step < 1 || step > 3) return;
 
@@ -886,6 +1185,12 @@
       }
 
       currentStep = step;
+      if (step === 3) {
+        document.body.classList.add('step3-active');
+      } else {
+        document.body.classList.remove('step3-active');
+      }
+
       if (window.TFCAnalytics) {
         if (step === 1) window.TFCAnalytics.setCurrentStep('start');
         else if (step === 2) window.TFCAnalytics.setCurrentStep('questions');
@@ -919,11 +1224,27 @@
           }
         }
       }
+      if (step === 2) {
+        syncLeadToSupabase(1);
+      } else if (step === 3) {
+        syncLeadToSupabase(2);
+        syncFinalStepSubmit();
+      }
       saveDraftLocally();
     }
 
     function nextStep(step) {
-      goToStep(step);
+      if (step === 2) {
+        if (!validateStep(1)) return;
+        goToStep(2);
+        syncLeadToSupabase(1);
+      } else if (step === 3) {
+        if (!validateStep(2)) return;
+        goToStep(3);
+        syncLeadToSupabase(2);
+      } else {
+        goToStep(step);
+      }
     }
 
     function toggleCollegeFields(isEnrolled) {
@@ -1150,6 +1471,7 @@
         } else if (d.waiverRequested && document.getElementById('feeWaiverContainer')) {
           document.getElementById('feeWaiverContainer').classList.remove('hidden');
         }
+        syncFinalStepSubmit();
       } catch(e) {}
     }
 
@@ -1174,11 +1496,87 @@
     // =========================================================================
     // SUPABASE INTEGRATION & STATUS VIEW
     // =========================================================================
-    const SUPABASE_URL = "https://gqrhgwphrkwryhgtubvt.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdxcmhnd3Bocmt3cnloZ3R1YnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAzNTQxMTgsImV4cCI6MjA1NTkzMDExOH0.Z0EZZ19w0z92wA-yQp6V6_x6mE1jG5rQc_2x0e9w0_0";
+    const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
     let supabaseClient = null;
     if (window.supabase) {
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    async function syncLeadToSupabase(step = currentStep) {
+      const email = document.getElementById('fEmail')?.value.trim().toLowerCase();
+      const name = document.getElementById('fName')?.value.trim();
+      const phone = document.getElementById('fPhone')?.value.trim();
+      if (!email || !email.includes('@') || !email.includes('.')) return null;
+
+      const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
+      const isEnrolled = enrolledRadio ? enrolledRadio.value === 'yes' : false;
+      const colName = document.getElementById('fCollegeName')?.value.trim() || '';
+      const colYear = document.getElementById('fCollegeYear')?.value || '';
+      const colCourse = document.getElementById('fCollegeCourse')?.value.trim() || '';
+      const collegeSummary = isEnrolled
+        ? [colName, colYear, colCourse].filter(Boolean).join(' - ')
+        : (enrolledRadio ? 'Independent / Not Currently Enrolled' : (colName || 'Applicant'));
+      const teamSize = document.getElementById('fTeamSize')?.value || 'Solo Founder';
+      const ventureName = document.getElementById('fVentureName')?.value.trim() || '';
+      const stage = document.getElementById('fStage')?.value || '';
+      const q1 = document.getElementById('fQ1')?.value.trim().replace(/\|/g, '/') || '';
+      const q3 = document.getElementById('fQ3')?.value.trim().replace(/\|/g, '/') || '';
+      const waiverReason = document.getElementById('fWaiverReason')?.value.trim().replace(/\|/g, '/') || '';
+      const waiverContainer = document.getElementById('feeWaiverContainer');
+      const waiverRequested = Boolean(waiverReason) || (waiverContainer && !waiverContainer.classList.contains('hidden'));
+      const waiverMeta = waiverRequested ? ` | WaiverRequested: Yes | WaiverReason: ${waiverReason}` : ` | WaiverRequested: No`;
+      const chapterRef = localStorage.getItem('tfc_chapter_ref') || 'direct';
+      const submittedAt = new Date().toISOString();
+
+      let stepProgress = `Step ${step} Completed`;
+      let paymentStatus = 'lead_in_progress';
+      if (step === 3 && document.getElementById('fCommitHours')?.checked && document.getElementById('fUnderstandFee')?.checked) {
+        stepProgress = 'Completed';
+        paymentStatus = 'awaiting_acceptance';
+      } else if (step >= 2 && (ventureName || q1)) {
+        stepProgress = 'Step 2 Completed';
+      } else if (step >= 1) {
+        stepProgress = 'Step 1 Completed';
+      }
+
+      const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Fellowship: Yes | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: ${paymentStatus}${waiverMeta} | ChapterRef: ${chapterRef} | StepProgress: ${stepProgress} | FormSubmittedAt: ${submittedAt}`;
+
+      try {
+        if (supabaseClient) {
+          const { data: dbMember } = await supabaseClient
+            .from('members')
+            .select('id, member_id, college')
+            .eq('email', email)
+            .maybeSingle();
+
+          let memberId = dbMember ? dbMember.member_id : null;
+          if (!dbMember) {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            memberId = `TFC-FEL-${randomNum}`;
+            const { error: insErr } = await supabaseClient.from('members').insert([{
+              name: name || email.split('@')[0],
+              email: email,
+              college: combinedCollege,
+              tier: 'Student',
+              member_id: memberId,
+              password: 'fellow2026',
+              image: ''
+            }]);
+            if (insErr) console.warn('[Fellowship CRM] Insert warning:', insErr.message);
+          } else {
+            const { error: updErr } = await supabaseClient.from('members').update({
+              name: name || dbMember.name || email.split('@')[0],
+              college: combinedCollege
+            }).eq('email', email);
+            if (updErr) console.warn('[Fellowship CRM] Update warning:', updErr.message);
+          }
+          return memberId;
+        }
+      } catch (err) {
+        console.warn('[Fellowship CRM] Sync exception:', err);
+      }
+      return null;
     }
 
     function parseFellowshipMemberData(member, user) {
@@ -1236,6 +1634,7 @@
     }
 
     function showFellowshipDashboard(applicantData) {
+      document.body.classList.remove('step3-active');
       const applyCard = document.getElementById('fellowshipApplyCard');
       const dashPanel = document.getElementById('fellowshipDashboardPanel');
       if (applyCard) applyCard.classList.add('hidden');
@@ -1349,6 +1748,7 @@
       // 3. Reset form and inputs
       const form = document.getElementById('fellowshipDirectForm');
       if (form) form.reset();
+      syncFinalStepSubmit();
 
       // 4. Return to Step 1
       if (typeof goToStep === 'function') {
@@ -1388,7 +1788,7 @@
         if (cachedStr) {
           try {
             const cachedData = JSON.parse(cachedStr);
-            if (cachedData && cachedData.source === 'FellowshipPage') {
+            if (cachedData && cachedData.source === 'FellowshipPage' && (cachedData.paymentStatus === 'awaiting_acceptance' || cachedData.paymentStatus === 'verified' || cachedData.paymentStatus === 'ref_submitted')) {
               showFellowshipDashboard(cachedData);
               return;
             }
@@ -1406,7 +1806,11 @@
 
             if (member) {
               const collegeStr = member.college || '';
-              if (collegeStr.includes('Source: FellowshipPage') || collegeStr.includes('UpiRef:') || collegeStr.includes('FormSubmittedAt:')) {
+              const isCompleted = collegeStr.includes('PaymentStatus: awaiting_acceptance') || 
+                                  collegeStr.includes('PaymentStatus: verified') || 
+                                  collegeStr.includes('PaymentStatus: ref_submitted') || 
+                                  collegeStr.includes('StepProgress: Completed');
+              if (isCompleted) {
                 const applicantData = parseFellowshipMemberData(member, user);
                 localStorage.setItem('tfc_fellowship_applicant_' + lastEmail, JSON.stringify(applicantData));
                 showFellowshipDashboard(applicantData);
@@ -1445,52 +1849,17 @@
         const collegeSummary = isEnrolled
           ? [colName, colYear, colCourse].filter(Boolean).join(' - ')
           : 'Independent / Not Currently Enrolled';
-        const teamSize = document.getElementById('fTeamSize').value;
         const ventureName = document.getElementById('fVentureName').value.trim();
-        const stage = document.getElementById('fStage').value;
         const q1 = document.getElementById('fQ1').value.trim().replace(/\|/g, '/');
-        const q3 = document.getElementById('fQ3').value.trim().replace(/\|/g, '/');
         const waiverReason = document.getElementById('fWaiverReason')?.value.trim().replace(/\|/g, '/') || '';
         const waiverContainer = document.getElementById('feeWaiverContainer');
         const waiverRequested = Boolean(waiverReason) || (waiverContainer && !waiverContainer.classList.contains('hidden'));
-        const chapterRef = localStorage.getItem('tfc_chapter_ref') || 'direct';
-        const submittedAt = new Date().toISOString();
 
         try {
-          let memberId = null;
-
-          if (supabaseClient) {
-            const { data: dbMember } = await supabaseClient
-              .from('members')
-              .select('id, member_id, college')
-              .eq('email', email)
-              .maybeSingle();
-
-            memberId = dbMember ? dbMember.member_id : null;
-            const waiverMeta = waiverRequested ? ` | WaiverRequested: Yes | WaiverReason: ${waiverReason}` : ` | WaiverRequested: No`;
-            const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Fellowship: Yes | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: awaiting_acceptance${waiverMeta} | ChapterRef: ${chapterRef} | FormSubmittedAt: ${submittedAt}`;
-
-            if (!dbMember) {
-              const randomNum = Math.floor(1000 + Math.random() * 9000);
-              memberId = `TFC-FEL-${randomNum}`;
-
-              const { error: insErr } = await supabaseClient.from('members').insert([{
-                name: name,
-                email: email,
-                college: combinedCollege,
-                tier: 'Student',
-                member_id: memberId,
-                password: 'fellow2026',
-                image: ''
-              }]);
-              if (insErr) console.warn('[Fellowship] Supabase insert warning:', insErr.message);
-            } else {
-              const { error: updErr } = await supabaseClient.from('members').update({
-                name: name,
-                college: combinedCollege
-              }).eq('email', email);
-              if (updErr) console.warn('[Fellowship] Supabase update warning:', updErr.message);
-            }
+          let memberId = await syncLeadToSupabase(3);
+          if (!memberId) {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            memberId = `TFC-FEL-${randomNum}`;
           }
 
           const applicantData = {
@@ -1498,7 +1867,7 @@
             email: email,
             phone: phone,
             college: collegeSummary,
-            orderId: memberId || 'TFC-FEL-2026',
+            orderId: memberId,
             submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
             q1: `${ventureName}: ${q1}`,
             q4: '4-Week Online Cohort',
@@ -1535,7 +1904,8 @@
           alert("Submission note: " + err.message);
         } finally {
           btn.disabled = false;
-          btn.textContent = 'Submit Application →';
+          btn.textContent = 'Submit application →';
+          syncFinalStepSubmit();
         }
       });
     }
@@ -1549,13 +1919,32 @@
       }
     }
 
-    // Auto-save form inputs on change & monitor first interaction
+    // Debounced CRM sync while typing
+    let crmDebounceTimer = null;
+    function queueCrmSync() {
+      clearTimeout(crmDebounceTimer);
+      crmDebounceTimer = setTimeout(() => {
+        const email = document.getElementById('fEmail')?.value.trim();
+        const phone = document.getElementById('fPhone')?.value.trim();
+        if (email && email.includes('@') && email.includes('.') && phone && phone.length >= 8) {
+          syncLeadToSupabase(currentStep);
+        }
+      }, 1500);
+    }
+
+    // Auto-save form inputs on change, queue CRM sync & monitor first interaction
     ['fName', 'fEmail', 'fPhone', 'fTeamSize', 'fCollegeName', 'fCollegeYear', 'fCollegeCourse', 'fVentureName', 'fStage', 'fQ1', 'fQ3', 'fWaiverReason'].forEach(id => {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('focus', handleAppInteraction, { once: true });
-        el.addEventListener('input', saveDraftLocally);
-        el.addEventListener('change', saveDraftLocally);
+        el.addEventListener('input', () => {
+          saveDraftLocally();
+          queueCrmSync();
+        });
+        el.addEventListener('change', () => {
+          saveDraftLocally();
+          queueCrmSync();
+        });
       }
     });
 
@@ -1565,6 +1954,8 @@
         el.addEventListener('change', () => {
           handleAppInteraction();
           saveDraftLocally();
+          syncFinalStepSubmit();
+          queueCrmSync();
         });
       }
     });
@@ -1575,6 +1966,7 @@
         el.addEventListener('change', () => {
           handleAppInteraction();
           saveDraftLocally();
+          queueCrmSync();
         });
       }
     });
@@ -1585,6 +1977,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       checkReferral();
+      syncFinalStepSubmit();
 
       const btnNewApp = document.getElementById('btnNewApplication');
       if (btnNewApp) {
