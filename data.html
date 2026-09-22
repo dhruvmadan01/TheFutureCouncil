@@ -568,6 +568,8 @@
       let paymentStatus = '';
       let chapterRef = '';
       let formSubmittedAt = '';
+      let waiverRequested = '';
+      let waiverReason = '';
 
       const parts = college.split(' | ');
       let displayName = parts[0] ? parts[0].trim() : '';
@@ -608,6 +610,10 @@
           paymentStatus = trimmed.replace(/^paymentstatus:\s*/i, '').trim();
         } else if (/^chapterref:\s*/i.test(trimmed)) {
           chapterRef = trimmed.replace(/^chapterref:\s*/i, '').trim();
+        } else if (/^waiverrequested:\s*/i.test(trimmed)) {
+          waiverRequested = trimmed.replace(/^waiverrequested:\s*/i, '').trim();
+        } else if (/^waiverreason:\s*/i.test(trimmed)) {
+          waiverReason = trimmed.replace(/^waiverreason:\s*/i, '').trim();
         } else if (/^formsubmittedat:\s*/i.test(trimmed)) {
           formSubmittedAt = trimmed.replace(/^formsubmittedat:\s*/i, '').trim();
         } else if (/^q1:\s*/i.test(trimmed)) {
@@ -669,7 +675,7 @@
         displayName, phone, country, refCode, refBy, fellowship, societyName, source,
         q1, q2, q3, q4, payment, resData, isGoogleAuth,
         venture, stage, teamSize, enrolled, collegeName, collegeYear, collegeCourse,
-        paymentFee, paymentStatus, chapterRef, formSubmittedAt
+        paymentFee, paymentStatus, chapterRef, formSubmittedAt, waiverRequested, waiverReason
       };
     }
 
@@ -1425,7 +1431,8 @@
                     <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
                       <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 3: Program & Fee Commitment</p>
                       <p style="margin: 0; font-weight: 600; color: var(--ink);">Format: <strong>${meta.q4 || '4-Week Online Cohort'}</strong></p>
-                      <p style="margin: 2px 0 0; font-weight: 600; color: var(--ink);">Fee: <strong>₹${meta.paymentFee || '999'}</strong> • Status: <span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; background:${meta.payment === 'Paid' ? '#D3F9D8; color:#2B8A3E' : '#FFE3E3; color:#C92A2A'};">${meta.paymentStatus || meta.payment || 'awaiting_payment_instructions'}</span></p>
+                      <p style="margin: 2px 0 0; font-weight: 600; color: var(--ink);">Fee: <strong>₹${meta.paymentFee || '999'} (due only after acceptance)</strong> • Status: <span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; background:${meta.payment === 'Paid' ? '#D3F9D8; color:#2B8A3E' : '#FFE3E3; color:#C92A2A'};">${meta.paymentStatus || meta.payment || 'awaiting_acceptance'}</span></p>
+                      ${meta.waiverRequested === 'Yes' ? `<div style="margin-top:6px; background:#FFF4E5; border:1px solid #FFD8A8; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#D9480F;"><strong>⚠️ Fee Waiver Requested:</strong> ${meta.waiverReason || 'Reason unspecified'}</div>` : ''}
                       ${meta.formSubmittedAt ? `<p style="margin: 4px 0 0; font-size: 0.75rem; color: var(--ink-soft);">Submitted: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
                     </div>
                   `;
@@ -1480,7 +1487,7 @@
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Enrolled,College_Name,Year,Course,Team_Size,Venture_Name,Stage,Pitch_Q1,Deck_Demo_Q3,Program_Format_Q4,Payment_Fee,Payment_Status,Chapter_Ref,Submitted_At\n";
+      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Enrolled,College_Name,Year,Course,Team_Size,Venture_Name,Stage,Pitch_Q1,Deck_Demo_Q3,Program_Format_Q4,Payment_Fee,Payment_Status,Waiver_Requested,Waiver_Reason,Chapter_Ref,Submitted_At\n";
 
       exportList.forEach(m => {
         const meta = parseCollegeField(m.college, m);
@@ -1511,6 +1518,8 @@
           `"${(meta.q4 || '').replace(/"/g, '""')}"`,
           meta.paymentFee || '',
           meta.paymentStatus || meta.payment || '',
+          meta.waiverRequested || 'No',
+          `"${(meta.waiverReason || '').replace(/"/g, '""')}"`,
           meta.chapterRef || '',
           meta.formSubmittedAt || m.created_at || ''
         ];
