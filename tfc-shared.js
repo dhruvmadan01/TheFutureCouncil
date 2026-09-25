@@ -59,16 +59,21 @@
   // Sticky bottom bar visibility
   const bar = document.getElementById('bar');
   if (bar) {
-    let lastY = window.scrollY;
+    const stepEl = document.getElementById('step');
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
-      // Show bar after scrolling down past the first 250px
+      if (stepEl) {
+        const sr = stepEl.getBoundingClientRect();
+        if (y < 250 || (sr.top <= 0 && sr.bottom > 0)) {
+          bar.classList.add('hide');
+          return;
+        }
+      }
       if (y > 250) {
         bar.classList.remove('hide');
       } else {
         bar.classList.add('hide');
       }
-      lastY = y;
     }, { passive: true });
   }
 

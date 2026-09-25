@@ -30,7 +30,7 @@ body {
   background: var(--dark-bg);
   color: var(--text-primary);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 

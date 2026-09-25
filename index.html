@@ -61,7 +61,7 @@
 
     /* Scene 3 · The Step (Sticky transition) */
     .step { height: 280vh; position: relative; }
-    .step-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; grid-template-rows: 1fr auto; background: var(--office); }
+    .step-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; grid-template-rows: 1fr auto; background: var(--office); z-index: 45; }
     .step-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
     .step-copy { position: relative; z-index: 2; align-self: start; padding-top: clamp(90px, 14vh, 150px); }
     .beat { position: absolute; left: var(--gut); right: var(--gut); max-width: 1180px; margin: 0 auto; transition: opacity 0.35s, transform 0.35s; }
@@ -377,7 +377,7 @@
             <aside class="stub">
               <span class="mono">Applications close</span>
               <div class="count" id="countdown">Sep 30, 7 PM IST<small>&nbsp;</small></div>
-              <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
+              <a class="btn solid" href="https://forms.gle/zPn7H2HgBepJTmzb7" target="_blank" rel="noopener">Apply to Launchpad</a>
               <span class="waiver">Fully online · 4 weeks · starts Oct 19 · Free upfront · Team contacts within 24h.</span>
             </aside>
           </div>
@@ -411,7 +411,7 @@
         <div class="doors">
           <a class="btn dark" href="/chapters">Join a chapter, free</a>
           <a class="btn" href="/school">Start Startup School</a>
-          <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
+          <a class="btn solid" href="https://forms.gle/zPn7H2HgBepJTmzb7" target="_blank" rel="noopener">Apply to Launchpad</a>
         </div>
       </div>
     </section>
@@ -476,7 +476,7 @@
   <!-- STICKY DEADLINE BAR (SPEC §2) -->
   <div class="bar hide" id="bar" role="region" aria-label="Launchpad deadline">
     <span class="t"><span class="long">Launchpad Cohort 01 · 20 seats · </span>closes in <b id="barCount">5d</b></span>
-    <a class="btn solid sm" href="/launchpad/fellowship">Apply</a>
+    <a class="btn solid sm" href="https://forms.gle/zPn7H2HgBepJTmzb7" target="_blank" rel="noopener">Apply</a>
   </div>
 
   <script src="tfc-shared.js"></script>

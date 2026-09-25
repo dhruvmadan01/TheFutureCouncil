@@ -63,7 +63,7 @@ body {
   background: var(--cream-bg);
   font-family: var(--font-body);
   color: var(--ink);
-  overflow-x: hidden;
+  overflow-x: clip;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
