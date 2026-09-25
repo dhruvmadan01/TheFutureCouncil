@@ -441,20 +441,24 @@
               <!-- STEP 3: COMMITMENT, TERMS & PAYMENT -->
               <div id="step3Group" style="display: none;">
                 
-                <!-- SPEC 5.6 FEE BOX -->
+                <!-- STEP 3 SUMMARY -->
                 <div class="fee-box">
-                  <div class="mono kick">Launchpad Single Source of Truth</div>
+                  <div class="mono kick">Application Review Protocol</div>
                   <div style="font-family: var(--display); font-size: 24px; font-weight: 800; margin-top: 6px;">
-                    ₹1,999 Application Fee
+                    Review &amp; Next Steps
                   </div>
                   <p style="color: var(--ink-soft); font-size: 14px; margin-top: 4px;">
-                    Includes written feedback for every applicant. About ₹70 a day.
+                    No payment is collected right now. Submit your details for preliminary review.
                   </p>
                   
                   <div style="margin-top: 16px;">
                     <div class="fee-row">
-                      <span>Selection Review &amp; Written Feedback</span>
-                      <span>✓ Included</span>
+                      <span>Application Submission</span>
+                      <span style="color: var(--orange-deep); font-weight: 700;">₹0 Due Today</span>
+                    </div>
+                    <div class="fee-row">
+                      <span>Team Review &amp; Contact</span>
+                      <span>Within 24 Hours (WhatsApp / Email)</span>
                     </div>
                     <div class="fee-row">
                       <span>4-Week Online Fellowship (if selected)</span>
@@ -468,25 +472,24 @@
                       <span>Success Fee (only if you raise from TFC intros)</span>
                       <span>2%</span>
                     </div>
-                    <div class="fee-row">
-                      <span>Total Due Today</span>
-                      <span style="color: var(--orange-deep); font-size: 17px;">₹1,999</span>
-                    </div>
-                  </div>
-
-                  <div style="margin-top: 14px; font-size: 13.5px; color: var(--ink-soft);">
-                    Can't afford ₹1,999? <a href="#" id="toggleWaiverLink" style="color: var(--orange-deep); font-weight: 600; text-decoration: underline;">Request a fee waiver</a>. We never want money to keep an exceptional student founder out.
-                  </div>
-
-                  <!-- Fee waiver container -->
-                  <div id="feeWaiverContainer" class="hidden" style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); display: none;">
-                    <label class="form-label" for="fWaiverReason">Why do you need a fee waiver?</label>
-                    <textarea class="form-textarea" id="fWaiverReason" name="waiverReason" placeholder="Tell us briefly about your financial situation. We approve genuine requests." style="min-height: 80px;"></textarea>
                   </div>
                 </div>
 
-                <!-- REQUIRED TERMS CHECKBOXES (SPEC 5.6) -->
-                <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
+                <!-- 24H CONTACT NOTICE -->
+                <div style="background: var(--warm-2); border: 1.5px solid #E3B79C; border-radius: 16px; padding: 20px; margin-top: 20px;">
+                  <div style="display: flex; gap: 14px; align-items: flex-start;">
+                    <span style="font-size: 26px; line-height: 1;">💬</span>
+                    <div>
+                      <strong style="font-size: 16px; color: var(--ink); display: block;">No application fee collected now</strong>
+                      <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-top: 6px;">
+                        Submit your project details first. Our team reviews every application individually. <b>Someone from our team will contact you directly on WhatsApp or Email within 24 hours</b> regarding your project, verification, and next steps.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- REQUIRED TERMS CHECKBOXES -->
+                <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start; margin-top: 24px;">
                   <input type="checkbox" id="fCommitHours" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
                   <label for="fCommitHours" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
                     I commit to spending <b>6–8 hours per week</b> for 4 weeks on cohort labs, founder pods, and mentor office hours if selected.
@@ -496,35 +499,13 @@
                 <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
                   <input type="checkbox" id="fUnderstandFee" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
                   <label for="fUnderstandFee" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
-                    I understand the <b>₹1,999 application fee is non-refundable</b>, and that TFC charges a <b>one-time 2% success fee</b> on funds raised from investors it introduces.
+                    I understand that The Future Council takes <b>0% equity</b> and charges a <b>one-time 2% success fee</b> only on funds raised from investors it directly introduces.
                   </label>
-                </div>
-
-                <!-- PAYMENT SECTION (EXISTING METHOD: UPI QR + UTR / REFERENCE) -->
-                <div class="upi-section" id="upiPaymentBox">
-                  <div class="mono" style="color: var(--orange-deep); font-weight: 600;">Payment Instructions · Instant UPI</div>
-                  <div class="upi-grid" style="margin-top: 14px;">
-                    <div class="qr-box">
-                      <img src="/payment-qr.jpg" alt="Scan to pay ₹1,999" onerror="this.parentNode.innerHTML='<span style=\'font-size:11px;padding:8px;text-align:center;\'>Scan UPI QR<br>₹1,999</span>'" />
-                    </div>
-                    <div>
-                      <div style="font-size: 14.5px; line-height: 1.5;">
-                        Scan the QR code or pay to UPI ID:<br>
-                        <b style="font-family: var(--mono); color: var(--ink); background: #eee; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-top: 4px;">dhruvmadan235@okhdfcbank</b><br>
-                        <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">Payee: Dhruv Madan · The Future Council</span>
-                      </div>
-                      <div style="margin-top: 12px;">
-                        <label class="form-label" for="fUpiRef" style="font-size: 13px;">UPI Reference / UTR Number (12 digits) *</label>
-                        <input class="form-input" id="fUpiRef" name="upiRef" type="text" placeholder="e.g. 427819283719" style="font-family: var(--mono);" />
-                        <div class="form-hint">Shown in Google Pay, PhonePe, Paytm, or BHIM receipt. (If applying for waiver, you may leave blank).</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; margin-top: 28px; gap: 12px;">
                   <button type="button" class="btn" id="btnBack3">← Back</button>
-                  <button type="submit" class="btn solid lg" id="btnSubmitApp" style="min-width: 220px;">Submit Application →</button>
+                  <button type="submit" class="btn solid lg" id="btnSubmitApp" style="min-width: 220px;">Submit Application for Review →</button>
                 </div>
               </div>
 
@@ -539,7 +520,7 @@
           </div>
           <h2 style="font-size: clamp(28px, 4vw, 42px);">Application Received.</h2>
           <p style="color: var(--ink-soft); font-size: 16px; margin-top: 10px; line-height: 1.5;">
-            Decisions and feedback go out by <b>October 07, 2026</b>. Selected founders get the founder agreement to sign before kickoff.
+            Thank you for applying. <b>Someone from our team will contact you on WhatsApp or Email within 24 hours</b> to discuss your project and next steps. Decisions and feedback for Cohort 01 go out by <b>October 07, 2026</b>.
           </p>
 
           <div class="dash-info-grid">
@@ -584,9 +565,9 @@
 
         <div class="faq-list">
           <details class="faq-item" open>
-            <summary>What does it cost to apply?</summary>
+            <summary>Do I have to pay when submitting my application?</summary>
             <div class="faq-body">
-              There is a one-time ₹1,999 application fee (about ₹70 a day). Fee waivers are always available if this amount is a financial barrier. There are no additional fees if you are accepted.
+              No payment is collected right now. Submit your application details first. Someone from our admissions team will review your project and contact you directly on WhatsApp or Email within 24 hours regarding application review, verification, and next steps.
             </div>
           </details>
 
@@ -785,7 +766,7 @@
           .eq('email', data.email)
           .maybeSingle();
 
-        const combinedInfo = `${data.college} | Phone: ${data.phone} | Venture: ${data.venture} | Stage: ${data.stage} | Q1: ${data.q1} | Q3: ${data.q3} | Fee: 1999 | UpiRef: ${data.upiRef || 'Waiver/Pending'} | Source: FellowshipPage | FormSubmittedAt: ${new Date().toISOString()}`;
+        const combinedInfo = `${data.college} | Phone: ${data.phone} | Venture: ${data.venture} | Stage: ${data.stage} | Q1: ${data.q1} | Q3: ${data.q3} | ReviewStatus: TeamContactPendingWithin24h | Source: FellowshipPage | FormSubmittedAt: ${new Date().toISOString()}`;
 
         let memberId = dbMember?.member_id;
         if (!memberId) {
@@ -842,7 +823,7 @@
       const commit = document.getElementById('fCommitHours').checked;
       const understand = document.getElementById('fUnderstandFee').checked;
       if (!commit || !understand) {
-        alert('Please accept the time commitment and fee understanding checkboxes to proceed.');
+        alert('Please accept the time commitment and program terms checkboxes to proceed.');
         return;
       }
 
@@ -865,8 +846,8 @@
         stage: document.getElementById('fStage').value,
         q1: document.getElementById('fQ1').value.trim(),
         q3: document.getElementById('fQ3').value.trim(),
-        upiRef: document.getElementById('fUpiRef')?.value.trim(),
-        waiverReason: document.getElementById('fWaiverReason')?.value.trim()
+        upiRef: 'ContactWithin24h',
+        waiverReason: 'NoFeeUpfront'
       };
 
       let orderId = await syncToSupabase(payload);
