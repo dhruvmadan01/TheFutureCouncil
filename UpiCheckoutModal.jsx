@@ -603,7 +603,7 @@ export default function UpiCheckoutModal({
               
               <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-1.5 max-w-md mx-auto">
                 <p className="text-sm sm:text-base font-bold text-emerald-300 leading-snug">
-                  Someone will reach you for further application within 24 hrs.
+                  Your ₹1,999 application fee has been recorded.
                 </p>
                 <p className="text-xs text-emerald-400 font-black uppercase tracking-wider">
                   Thank You!
@@ -630,8 +630,8 @@ export default function UpiCheckoutModal({
                 <span className="font-bold text-emerald-400">₹{order.amount?.toLocaleString('en-IN') || '1,999'}</span>
               </div>
               <div className="flex justify-between pt-1">
-                <span className="text-zinc-400">Next Step</span>
-                <span className="font-bold text-emerald-400 text-[0.72rem]">Team will contact within 24 hours</span>
+                <span className="text-zinc-400">Status</span>
+                <span className="font-bold text-emerald-400 text-[0.72rem]">Admissions Board Review</span>
               </div>
             </div>
 
