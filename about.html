@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · The Founders' Note, Vision &amp; Values | The Future Council</title>
+  <meta name="description" content="Why we started The Future Council: giving every college student in India the community, skills, and capital access to build while they study." />
+  <meta name="canonical" href="https://thefuturecouncil.in/about" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Supabase & Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    .about-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(36px, 6vw, 64px);
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .value-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .value-num {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--orange-deep);
+      background: var(--warm-2);
+      width: fit-content;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .value-card h3 {
+      font-size: 20px;
+    }
+    .value-card p {
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+    .council-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .council-person {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .hire-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 40px);
+      max-width: 640px;
+      box-shadow: 0 16px 40px -20px rgba(27,23,18,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/join">Join free</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/about/partners">Partners <span>→</span></a>
+  </div>
+
+  <main>
+    <!-- HERO: FOUNDERS' NOTE (SPEC 5.8 ITEM 1) -->
+    <header class="about-hero">
+      <div class="wrap letter">
+        <div>
+          <span class="mono kick">The Founders' Note</span>
+          <div class="faces" style="margin-top: 18px;">
+            <div class="face"><img src="/dhruv.jpeg" alt="Dhruv Madan" onerror="this.parentNode.textContent='Photo: Dhruv'"></div>
+            <div class="face"><img src="/aryaveer.jpeg" alt="Aryaveer Chauhan" onerror="this.parentNode.textContent='Photo: Aryaveer'"></div>
+          </div>
+          <p class="sig" style="margin-top: 16px;">
+            Dhruv Madan &amp; Aryaveer Chauhan<br>
+            <span style="font-size: 11.5px; color: var(--ink-soft);">Founders, The Future Council</span>
+          </p>
+        </div>
+        <div>
+          <h1 style="font-size: clamp(32px, 4.8vw, 64px); line-height: 1.15; margin-bottom: 24px;">
+            Why we started The Future Council.
+          </h1>
+          <div style="font-size: 17px; line-height: 1.65; color: var(--ink-soft); display: grid; gap: 16px;">
+            <p>
+              We're students too. We watched friends spend three years preparing for one placement season, and a handful spend the same years building something of their own.
+            </p>
+            <p>
+              The students in the placement queue were memorizing answers to mock interviews, stressing over CGPA cut-offs, and waiting for someone else to pick them. The handful who were building had real users, learned how to sell, and gained genuine confidence.
+            </p>
+            <p>
+              We started The Future Council so that the second path wouldn't depend on which college you got into. If you have the agency to build something real, you should have access to co-founders, operator mentorship, and investor capital from day one.
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- VISION & VALUES (SPEC 5.8 ITEM 2) -->
+    <section style="padding-block: clamp(64px, 9vw, 110px);">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <span class="mono kick">Principles</span>
+          <h2>Our Core Values</h2>
+          <p class="lede">How we make decisions, run cohorts, and treat student founders.</p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="value-num">Value 01</span>
+            <h3>Access Over Pedigree</h3>
+            <p>Fully online, generous fee waivers, and written feedback for every applicant. We evaluate what you have shipped, never your college brand or GPA.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-num">Value 02</span>
+            <h3>Build Over Talk</h3>
+            <p>No business plan competitions or theoretical pitch deck debates. We measure live prototypes, user interviews, and customer traction.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-num">Value 03</span>
+            <h3>We Win When You Win</h3>
+            <p>Zero percent equity, ever. Our real upside is a one-time 2% success fee only on capital raised from investors we personally introduce.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-num">Value 04</span>
+            <h3>Community Before Competition</h3>
+            <p>Campus chapters, peer pods of 4–5 founders, and an open alumni network. We help each other debug, test, and distribute.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-num">Value 05</span>
+            <h3>Honest About Risk</h3>
+            <p>Most startups fail. We don't sell illusions. We teach the fundamentals and highlight deferred placement safety nets so students build with confidence.</p>
+          </div>
+
+          <div class="value-card">
+            <span class="value-num">Value 06</span>
+            <h3>Builders Pay It Forward</h3>
+            <p>Today's student fellows become tomorrow's campus chapter leads, mentor operators, and angel investors for the next cohort.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW WE MAKE MONEY (SPEC 5.8 ITEM 3) -->
+    <section class="deal" style="padding-block: clamp(48px, 8vw, 96px); background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <span class="mono kick">Radical Transparency</span>
+          <h2>How The Future Council makes money.</h2>
+          <p class="lede">Being transparent about money is central to our brand. Here is our entire business model.</p>
+        </div>
+
+        <div class="ticket" style="margin-top: 24px;">
+          <div class="main">
+            <p class="mono kick">Revenue Streams · Single Source of Truth</p>
+            <h2>No hidden incentives.</h2>
+            <div class="terms">
+              <div><b>₹399</b><span>/mo Startup School</span></div>
+              <div><b>₹1,999</b><span>Launchpad app fee</span></div>
+              <div><b>0%</b><span>equity taken</span></div>
+              <div><b>2%</b><span>on money raised via TFC</span></div>
+            </div>
+            <p class="fine">
+              We charge ₹399/mo for Startup School, and ₹1,999 once for Launchpad applications (covering personalized written reviews). If you raise from an investor we introduced, we earn a 2% success fee. Raise independently or don't raise? You owe ₹0.
+            </p>
+          </div>
+          <aside class="stub">
+            <span class="mono">Admissions &amp; Terms</span>
+            <div class="count">0% Equity<small>100% Founder Owned</small></div>
+            <a class="btn solid" href="/launchpad#terms">Read Full Terms Table</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE COUNCIL (SPEC 5.8 ITEM 4 - PLACEHOLDERS) -->
+    <section style="padding-block: clamp(56px, 8vw, 96px);">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <span class="mono kick">People Behind the Council</span>
+          <h2>The Council Network</h2>
+          <p class="lede">Chapter leads, visiting mentors, and advisors across India.</p>
+        </div>
+
+        <!-- [PLACEHOLDER] Mentors & Advisors -->
+        <div class="council-grid">
+          <div class="council-person">
+            <div class="face" style="margin: 0 auto 12px;"><img src="/dhruv.jpeg" alt="Dhruv Madan" onerror="this.parentNode.textContent='Dhruv'"></div>
+            <strong>Dhruv Madan</strong>
+            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">Co-Founder · Strategy &amp; Ecosystem</span>
+          </div>
+          <div class="council-person">
+            <div class="face" style="margin: 0 auto 12px;"><img src="/aryaveer.jpeg" alt="Aryaveer Chauhan" onerror="this.parentNode.textContent='Aryaveer'"></div>
+            <strong>Aryaveer Chauhan</strong>
+            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">Co-Founder · Operations &amp; Growth</span>
+          </div>
+          <div class="council-person">
+            <div class="face" style="margin: 0 auto 12px;"><img src="/vaibhav.jpg" alt="Vaibhav Jamge" onerror="this.parentNode.textContent='Vaibhav'"></div>
+            <strong>Vaibhav Jamge</strong>
+            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">Chapter Lead · IIT Patna</span>
+          </div>
+          <div class="council-person">
+            <div class="face" style="margin: 0 auto 12px;"><span style="font-size:10px; color:var(--ink-soft);">[Placeholder: Mentor]</span></div>
+            <strong>Visiting Operator</strong>
+            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">[Placeholder: B2B SaaS Mentor]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIRE BUILDERS FORM (SPEC 5.8 ITEM 6) -->
+    <section style="padding-block: clamp(64px, 9vw, 110px); background: var(--warm-2); border-top: 1px solid #E3B79C;" id="hire">
+      <div class="wrap grid-split">
+        <div>
+          <span class="mono kick">For Companies &amp; Funds</span>
+          <h2 style="font-size: clamp(28px, 4vw, 44px); margin-top: 8px;">Hire high-agency student builders.</h2>
+          <p style="color: var(--ink-soft); font-size: 16px; margin-top: 14px; line-height: 1.6;">
+            The Future Council trains students who build real software, talk to customers, and solve difficult problems without waiting for instructions.
+          </p>
+          <div class="receipt" style="margin-top: 24px; background: #fff;">
+            <h3>What TFC Builders Bring</h3>
+            <ul>
+              <li><span>Production shipping speed</span><span>✓ Proven</span></li>
+              <li><span>Direct customer discovery</span><span>✓ Proven</span></li>
+              <li><span>Full stack &amp; AI tool proficiency</span><span>✓ Proven</span></li>
+              <li><span>Extreme ownership mindset</span><span>✓ Core trait</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hire-card">
+          <span class="mono kick">Talent Request</span>
+          <h3 style="font-size: 22px; margin-top: 6px;">Connect with TFC Founders</h3>
+          <p style="color: var(--ink-soft); font-size: 13.5px; margin-top: 4px;">Tell us what roles you are hiring for (founding engineers, product designers, growth interns).</p>
+
+          <form id="hireForm" style="margin-top: 20px;">
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 4px;" for="hCompany">Company / Venture Name *</label>
+              <input type="text" id="hCompany" required class="form-input" placeholder="e.g. Acme AI, Stripe, Seed Fund" />
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 4px;" for="hName">Your Name &amp; Role *</label>
+              <input type="text" id="hName" required class="form-input" placeholder="e.g. Ananya Roy, VP of Engineering" />
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 4px;" for="hEmail">Work Email *</label>
+              <input type="email" id="hEmail" required class="form-input" placeholder="name@company.com" />
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 4px;" for="hRole">What kind of builders are you looking for? *</label>
+              <textarea id="hRole" required class="form-textarea" placeholder="Role description, tech stack, location (remote/in-office), and stipend/compensation." style="min-height: 80px;"></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmitHire" class="btn solid lg" style="width: 100%;">Submit Talent Request →</button>
+          </form>
+
+          <div id="hireSuccessMsg" style="display: none; margin-top: 16px; padding: 18px; background: #E8F5E9; border: 1px solid #A5D6A7; border-radius: 12px; text-align: center;">
+            <strong style="color: #1B5E20; font-size: 16px; display: block;">Request Received!</strong>
+            <p style="color: #2E7D32; font-size: 13.5px; margin-top: 4px;">We will connect you directly with qualified builders from our national chapter pods.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-shared.js"></script>
+  <script>
+  (function(){
+    const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    let supabaseClient = null;
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    const form = document.getElementById('hireForm');
+    const successMsg = document.getElementById('hireSuccessMsg');
+    const btn = document.getElementById('btnSubmitHire');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Submitting Request...';
+
+      const company = document.getElementById('hCompany').value.trim();
+      const name = document.getElementById('hName').value.trim();
+      const email = document.getElementById('hEmail').value.trim().toLowerCase();
+      const roles = document.getElementById('hRole').value.trim();
+
+      const combined = `${company} | Recruiter: ${name} | Needs: ${roles} | Source: HireForm | FormSubmittedAt: ${new Date().toISOString()}`;
+
+      try {
+        if (supabaseClient) {
+          const rand = Math.floor(1000 + Math.random() * 9000);
+          await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combined,
+            tier: 'Employer',
+            member_id: `TFC-EMP-${rand}`,
+            password: 'hire2026'
+          }]);
+        }
+      } catch (err) {
+        console.warn('Hire form sync note:', err);
+      }
+
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    });
+  })();
+  </script>
+</body>
+</html>

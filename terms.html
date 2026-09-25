@@ -3,326 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms & Conditions | The Future Council</title>
-  <meta name="description" content="Terms and conditions, platform rules, and community guidelines for Future Council ecosystem and Fellowship." />
-  <meta name="keywords" content="Future Council terms, The Future Council terms and conditions, TFC rules" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://thefuturecouncil.in/terms" />
-  <link rel="manifest" href="site.webmanifest" />
+  <title>Terms &amp; Conditions | The Future Council</title>
+  <meta name="description" content="Official Terms &amp; Conditions for The Future Council, Startup School, and Launchpad Fellowship." />
+  <meta name="canonical" href="https://thefuturecouncil.in/terms" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
   <meta name="theme-color" content="#E2542A" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Future Council | The Future Council" />
-  <meta property="og:url" content="https://thefuturecouncil.in/terms" />
-  <meta property="og:title" content="Terms & Conditions | The Future Council" />
-  <meta property="og:description" content="Official terms and conditions for Future Council members and fellowship applicants." />
-  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
 
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
   <style>
-    .legal-toc-link {
-      display: block;
-      padding: 8px 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--ink-soft);
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.15s ease;
+    .legal-body {
+      padding-block: clamp(48px, 7vw, 96px);
+      max-width: 860px;
+      margin: 0 auto;
     }
-    .legal-toc-link:hover, .legal-toc-link.active {
-      color: var(--accent);
-      background: rgba(226, 84, 42, 0.08);
-      font-weight: 700;
-    }
-    .legal-section {
-      scroll-margin-top: 100px;
+    .legal-sec {
+      margin-bottom: 36px;
       padding-bottom: 28px;
-      border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 28px;
+      border-bottom: 1px solid var(--line);
     }
-    .legal-section:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    .legal-section h2 {
-      font-size: 1.3rem;
-      font-weight: 800;
+    .legal-sec h2 {
+      font-size: 22px;
       margin-bottom: 12px;
     }
-    .legal-section p, .legal-section li {
-      font-size: 0.95rem;
+    .legal-sec p, .legal-sec li {
       color: var(--ink-soft);
+      font-size: 15px;
       line-height: 1.65;
     }
-    @media (max-width: 768px) {
-      .legal-layout {
-        grid-template-columns: 1fr !important;
-      }
-      .legal-sidebar {
-        display: none;
-      }
+    .legal-review-note {
+      background: #FFF8E1;
+      border: 1.5px solid #FFE082;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: 14px;
+      color: #795548;
     }
   </style>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1763806951409454');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-  <script src="tfc-analytics.js" defer></script>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
-  <header class="tfc-header">
-    <div class="tfc-container tfc-nav-wrapper">
-      <a href="index.html" class="tfc-brand">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
       </a>
-
-      <ul class="tfc-nav-links">
-        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
-        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
-        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
-        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
       </ul>
-
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/join">Join free</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
-    </div>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/terms.html">Terms of Service <span>→</span></a>
   </div>
 
   <main>
-    <!-- Header Banner -->
-    <section class="tfc-section" style="padding-top: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container" style="max-width: 900px;">
-        <div class="tfc-badge tfc-badge-orange" style="margin-bottom: 14px;">LEGAL DOCUMENTATION</div>
-        <h1 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -1px;">
-          Terms & Conditions
-        </h1>
-        <p style="font-size: 0.95rem; color: var(--ink-soft); margin: 0;">
-          Last updated: August 29, 2026 · Official governance guidelines for The Future Council & Fellowship '26.
+    <div class="wrap legal-body">
+      <span class="mono kick">Legal Documentation</span>
+      <h1 style="font-size: clamp(34px, 5vw, 60px); margin-top: 10px; margin-bottom: 24px;">Terms of Service</h1>
+
+      <!-- NOTE FOR LEGAL REVIEW (SPEC 5.10) -->
+      <div class="legal-review-note">
+        <strong>[NOTE FOR LEGAL REVIEW]:</strong>
+        The terms below reflect The Future Council restructure brief (Spec Section 3 &amp; 5.10), including:
+        (1) The non-refundable ₹1,999 Launchpad application fee covering individualized written feedback;
+        (2) 50% discount on reapplication (₹999) and 1 month free Startup School for unselected applicants;
+        (3) The 2% cash success fee on funds raised strictly from TFC-introduced investors within 12 months of Demo Day, with 0% equity taken.
+      </div>
+
+      <div class="legal-sec">
+        <h2>1. Overview and Acceptance of Terms</h2>
+        <p>
+          These Terms of Service govern your access to and use of The Future Council (thefuturecouncil.in), including our campus chapters, Startup School subscription, and the Launchpad fellowship cohort. By submitting an application, registering an account, or participating in our programs, you agree to be bound by these terms.
         </p>
       </div>
-    </section>
 
-    <!-- Two Column Legal Layout (Ref Page 12 Wireframe) -->
-    <section class="tfc-section" style="padding-top: 40px; padding-bottom: 60px;">
-      <div class="tfc-container" style="max-width: 960px;">
-        <div style="display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: start;" class="legal-layout">
-          
-          <!-- Sticky Left Table of Contents (Desktop) -->
-          <aside class="legal-sidebar" style="position: sticky; top: 90px;">
-            <div class="tfc-card" style="padding: 20px;">
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: var(--ink-soft); letter-spacing: 0.5px; margin-bottom: 12px;">
-                TABLE OF CONTENTS
-              </div>
-              <nav style="display: flex; flex-direction: column; gap: 4px;">
-                <a href="#acceptance" class="legal-toc-link">1. Acceptance of Terms</a>
-                <a href="#application" class="legal-toc-link">2. Registration Fee</a>
-                <a href="#policy" class="legal-toc-link">3. Fee Policy</a>
-                <a href="#commitments" class="legal-toc-link">4. Commitments & Hubs</a>
-                <a href="#ip" class="legal-toc-link">5. Intellectual Property</a>
-                <a href="#liability" class="legal-toc-link">6. Liability Limits</a>
-                <a href="#contact" class="legal-toc-link">7. Contact Us</a>
-              </nav>
-            </div>
-          </aside>
-
-          <!-- Right Content Area -->
-          <div class="tfc-card" style="padding: 40px;">
-            
-            <section id="acceptance" class="legal-section">
-              <h2>1. Acceptance of Terms</h2>
-              <p>
-                By accessing, browsing, or using the website and registering for programs offered by The Future Council, you agree to comply with and be bound by these Terms & Conditions. If you do not agree to these terms, please do not use our services or submit applications for the programs.
-              </p>
-            </section>
-
-            <section id="application" class="legal-section">
-              <h2>2. Program Application & Registration Fee</h2>
-              <p style="margin-bottom: 10px;">
-                To apply for the Fellowship '26 cohort, applicants must complete the application form and pay a non-refundable <strong>Application Registration Fee of ₹1,999 (Rupees One Thousand Nine Hundred Ninety-Nine Only)</strong>.
-              </p>
-              <p>
-                Payment of the application fee does not guarantee admission or selection into the fellowship cohort. Selection is strictly merit-based, evaluating prototype viability, problem depth, and founder screening interviews.
-              </p>
-            </section>
-
-            <section id="policy" class="legal-section">
-              <h2>3. Program & Application Fee Policy</h2>
-              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
-                <li>
-                  <strong>Program Fee:</strong> The Fellowship program fee is ₹0 (100% equity-free; we do not charge the ₹1.5 Lakh program fee, and have made the program fee ₹0 for all 20 selected founders). Selected fellowship founders do not pay any tuition fees to participate in the cohort.
-                </li>
-                <li>
-                  <strong>Application Fee:</strong> The application registration fee of ₹1,999 is charged to ensure high-intent applications from serious builders and filter out spam. It is <strong>strictly non-refundable</strong> under any circumstances, including non-selection of your application, withdrawal, or scheduling conflicts. For full details on technical payment issues and candidate benefits, view our detailed <a href="refund.html" style="color: var(--accent); font-weight: 600;">Cancellation &amp; Refund Policy</a>.
-                </li>
-              </ul>
-            </section>
-
-            <section id="commitments" class="legal-section">
-              <h2>4. Program Commitments & Offline Attendance</h2>
-              <p>
-                Fellowship '26 is an offline intensive cohort. While it is not a residential program, selected members are required to visit designated partner hubs in Delhi NCR for workshops, pitch clinics, founder mixers, sprints, and Demo Day evaluations. Participants must ensure availability for these sessions. Accommodation location guidance is provided, but living costs are borne entirely by the participant.
-              </p>
-            </section>
-
-            <section id="ip" class="legal-section">
-              <h2>5. Intellectual Property</h2>
-              <p>
-                All startup pitches, slide decks, prototypes, and code submitted during the application or built during the cohort remain the exclusive intellectual property of the respective founders and builders. The Future Council does not claim any ownership or equity over your projects. By participating, you grant us a royalty-free license to display your project name, logo, and public descriptions in our media channels, marketing material, and portfolio listings.
-              </p>
-            </section>
-
-            <section id="liability" class="legal-section">
-              <h2>6. Limitation of Liability</h2>
-              <p>
-                The Future Council and its founders, mentors, sponsors, and campus branches shall not be liable for any direct, indirect, incidental, or consequential damages resulting from your participation in the programs, networking events, or usage of program resources.
-              </p>
-            </section>
-
-            <section id="contact" class="legal-section">
-              <h2>7. Contact Us</h2>
-              <p>
-                If you have any questions regarding these Terms & Conditions, please contact us at <strong>support@thefuturecouncil.in</strong> or write to our team directly.
-              </p>
-            </section>
-
-          </div>
-
-        </div>
+      <div class="legal-sec">
+        <h2>2. Community Membership &amp; Chapters</h2>
+        <p>
+          Collegiate chapter membership is free for enrolled students and early builders. Chapter members agree to conduct themselves with integrity, respect intellectual property of fellow builders, and uphold our community guidelines during local campus build nights. Verified chapter members receive 7 days of free access to Startup School.
+        </p>
       </div>
-    </section>
+
+      <div class="legal-sec">
+        <h2>3. Startup School Subscription Terms</h2>
+        <p>
+          Startup School is offered as a monthly recurring subscription at ₹399/month (inclusive of all applicable taxes). Subscribers receive access to all 9 curriculum modules, weekly live cohort office hours, and the resource library. You may cancel your subscription at any time with no cancellation penalties.
+        </p>
+      </div>
+
+      <div class="legal-sec">
+        <h2>4. Launchpad Fellowship Terms &amp; 0% Equity</h2>
+        <p>
+          Launchpad selects 20 student founders per cohort for a 4-week online accelerator ending in Demo Day.
+        </p>
+        <ul style="margin-top: 10px; padding-left: 20px; display: grid; gap: 8px;">
+          <li><b>0% Equity:</b> The Future Council does not take any equity, shares, warrant rights, or advisory shares in your startup. You retain 100% ownership of your venture and IP.</li>
+          <li><b>Application Fee:</b> There is a one-time, non-refundable application fee of ₹1,999. This fee covers dedicated evaluation and personalized written feedback from our review team. Fee waivers are available for applicants with financial hardship.</li>
+          <li><b>Unselected Applicant Guarantee:</b> If your application is not selected for the 20-founder cohort, you receive written evaluation notes, 1 free month of Startup School (worth ₹399), and a 50% discount code (₹999 fee) valid for your next Launchpad application.</li>
+        </ul>
+      </div>
+
+      <div class="legal-sec">
+        <h2>5. The 2% Success Fee Clause</h2>
+        <p>
+          In alignment with our "We win only when you win" principle, The Future Council charges a one-time cash success fee of 2% on capital raised by the founder's company, subject strictly to the following conditions:
+        </p>
+        <ul style="margin-top: 10px; padding-left: 20px; display: grid; gap: 8px;">
+          <li>The fee applies solely to capital raised directly from investors, funds, or angel syndicates that The Future Council personally introduced to the founder.</li>
+          <li>The capital must be officially committed and received within 12 (twelve) months following the cohort's Demo Day.</li>
+          <li>If the founder raises capital independently from their own contacts, or if the venture does not raise capital, <b>no success fee is owed</b>.</li>
+        </ul>
+      </div>
+
+      <div class="legal-sec">
+        <h2>6. Intellectual Property &amp; Project Ownership</h2>
+        <p>
+          You retain complete and exclusive ownership of all code, designs, business materials, and intellectual property developed during your participation in The Future Council programs. We do not claim any proprietary rights over student creations.
+        </p>
+      </div>
+
+      <div class="legal-sec">
+        <h2>7. Contact and Support</h2>
+        <p>
+          For legal inquiries, terms clarification, or fee waiver requests, contact our legal team at <a href="mailto:support@thefuturecouncil.in" style="color: var(--orange-deep); font-weight: 600;">support@thefuturecouncil.in</a>.
+        </p>
+      </div>
+    </div>
   </main>
 
-  <!-- Sticky Mobile Bar -->
-  <aside class="tfc-mobile-sticky-bar">
-    <div>
-      <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Fellowship '26</div>
-      <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Closes Sep 30, 7PM IST</div>
-    </div>
-    <a href="fellowship.html#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply for Fellowship '26 →</a>
-  </aside>
-
-  <!-- Global Footer (§2) -->
-  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 56px 0 32px;">
-    <div class="tfc-container">
-      <div class="tfc-footer-grid">
-        <div>
-          <a href="index.html" class="tfc-brand" style="color: #FFFFFF; text-decoration: none; margin-bottom: 12px; display: inline-flex;">
-            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span>THE FUTURE COUNCIL</span>
-          </a>
-          <p style="color: var(--paper-70); font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-top: 8px;">
-            Where student builders stop waiting for permission.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Program</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="fellowship.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Fellowship '26</a></li>
-            <li><a href="join-ambassador.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Apply as Ambassador</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Ecosystem</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="branches.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Branches</a></li>
-            <li><a href="resources.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Resources</a></li>
-            <li><a href="partners.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Partners</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Legal</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="terms.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Terms</a></li>
-            <li><a href="privacy.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Privacy</a></li>
-            <li><a href="refund.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Refunds</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--paper-70);">
-        <div>© 2026 The Future Council · thefuturecouncil.in</div>
-        <div style="display: flex; gap: 20px; align-items: center;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper-70); text-decoration: none;">support@thefuturecouncil.in</a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Active link highlighting on scroll
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('.legal-section');
-      const navLinks = document.querySelectorAll('.legal-toc-link');
-
-      window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - 140) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-          }
-        });
-      }, { passive: true });
-    });
-  </script>
+  <script src="/tfc-shared.js"></script>
 </body>
 </html>

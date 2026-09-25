@@ -3,1316 +3,340 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Future Council | Student Founders & Builders Network</title>
-  <meta name="description" content="Apply to join Future Council (The Future Council). Connect with ambitious student founders, engineers, designers, and operators across premier universities." />
-  <meta name="keywords" content="join Future Council, The Future Council, apply Future Council, student founder application, college builder network, startup society membership, TFC join" />
-  <meta name="author" content="Future Council" />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <link rel="canonical" href="https://thefuturecouncil.in/join" />
-  <link rel="manifest" href="site.webmanifest" />
+  <title>Step out of line · Join The Future Council | Free Student Membership</title>
+  <meta name="description" content="Step out of the placement queue. Join 90+ campus chapters across India, get 7 days of Startup School free, and build something real." />
+  <meta name="canonical" href="https://thefuturecouncil.in/join" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
   <meta name="theme-color" content="#E2542A" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Future Council | The Future Council" />
-  <meta property="og:url" content="https://thefuturecouncil.in/join" />
-  <meta property="og:title" content="Join Future Council | Student Founders & Builders Network" />
-  <meta property="og:description" content="Enter the world's biggest grassroots startup ecosystem. Apply now to unlock founder perks, mixers, and fellowship access." />
-  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Join Future Council" />
-  <meta property="og:locale" content="en_IN" />
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thefuturecouncil.in/join" />
-  <meta name="twitter:title" content="Join Future Council | Student Founders & Builders" />
-  <meta name="twitter:description" content="Apply to join the student startup ecosystem across top Indian universities." />
-  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "name": "Join Future Council",
-        "description": "Application and onboarding page for student founders, builders, and operators to join Future Council ecosystem.",
-        "url": "https://thefuturecouncil.in/join",
-        "publisher": {
-          "@type": ["Organization", "EducationalOrganization"],
-          "name": "Future Council",
-          "legalName": "The Future Council",
-          "alternateName": ["The Future Council", "TFC", "Future Council India"],
-          "url": "https://thefuturecouncil.in"
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://thefuturecouncil.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Join Council",
-            "item": "https://thefuturecouncil.in/join"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <!-- Supabase & Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
   <style>
-    :root {
-      color-scheme: dark;
+    .join-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(36px, 6vw, 64px);
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
     }
-    body {
-      background: #000000;
-      color: #f7f3ee;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    .join-container {
+      padding-block: clamp(48px, 8vw, 96px);
     }
-    ::selection {
-      background: rgba(226, 84, 42, 0.25);
+    .join-form-shell {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(24px, 4vw, 44px);
+      box-shadow: 0 16px 48px -20px rgba(27,23,18,0.1);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .perk-highlight {
+      background: var(--warm-2);
+      border: 1.5px solid #F1D4BE;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .perk-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--orange);
       color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      flex-shrink: 0;
     }
-    .dropdown-item:hover {
-      background-color: #fff7eb !important;
-      color: var(--accent) !important;
+    .skill-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .skill-pill {
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #FAFAFA;
+      transition: all 0.2s;
+    }
+    .skill-pill:has(input:checked) {
+      border-color: var(--orange);
+      background: var(--warm);
+      color: var(--orange-deep);
     }
   </style>
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-  <script src="tfc-auth.js" defer></script>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1763806951409454');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-  <script src="tfc-analytics.js" defer></script>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation (Spec §2) -->
-  <header class="tfc-header">
-    <div class="tfc-container tfc-nav-wrapper">
-      <a href="index.html" class="tfc-brand">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
       </a>
-
-      <ul class="tfc-nav-links">
-        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
-        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
-        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
-        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
       </ul>
-
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/chapters">Find Chapter</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link active">Join the Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join the Council →</a>
-    </div>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
   </div>
 
-  <main class="tfc-section-lg">
-    <div class="tfc-container">
-      
-      <!-- Split Layout (Page 09 Wireframe) -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 48px; align-items: start; margin-bottom: 48px;">
-        
-        <!-- Left Column: Value Prop Recap + Who Should Join -->
-        <div>
-          <span class="tfc-eyebrow">MEMBERSHIP · FREE, ALWAYS</span>
-          <h1 class="tfc-headline" style="font-size: clamp(2rem, 3.8vw, 3.2rem); margin-bottom: 18px;">
-            Free to join. Everything to gain.
-          </h1>
-          <p class="tfc-subheadline" style="margin-bottom: 28px;">
-            Joining the Council costs nothing and takes two minutes. You get into builder vaults, project squads, campus mixers, and first access to the Fellowship application — whether you already have a startup or you're still looking for the people to build one with.
-              <!-- WHAT MEMBERSHIP GETS YOU (Spec §6: 4 Benefit Cards) -->
-          <div style="margin-bottom: 16px;">
-            <span style="font-size: 0.76rem; font-weight: 800; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-utility);">WHAT MEMBERSHIP GETS YOU</span>
-          </div>
+  <main>
+    <header class="join-hero">
+      <div class="wrap" style="text-align: center; max-width: 760px; margin: 0 auto;">
+        <span class="mono kick">Free Community Access</span>
+        <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">Step out of line.</h1>
+        <p class="lede" style="font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 48ch; margin: 16px auto 0; line-height: 1.5;">
+          Join your university chapter, attend monthly campus build nights, and meet co-founders. 100% free for students.
+        </p>
+      </div>
+    </header>
 
-          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
-            <div class="tfc-benefit-card">
-              <div class="tfc-benefit-num">01</div>
-              <div>
-                <h4 class="tfc-benefit-title">Builder Vaults</h4>
-                <p class="tfc-benefit-desc">Digital spaces where student founders, engineers, and designers find each other before an idea even has a name.</p>
-              </div>
-            </div>
+    <section class="join-container">
+      <div class="wrap">
+        <div class="join-form-shell">
 
-            <div class="tfc-benefit-card">
-              <div class="tfc-benefit-num">02</div>
-              <div>
-                <h4 class="tfc-benefit-title">Project Squads</h4>
-                <p class="tfc-benefit-desc">Get matched into a working team instead of cold-messaging strangers on LinkedIn.</p>
-              </div>
-            </div>
-
-            <div class="tfc-benefit-card">
-              <div class="tfc-benefit-num">03</div>
-              <div>
-                <h4 class="tfc-benefit-title">Campus Mixers</h4>
-                <p class="tfc-benefit-desc">In-person events at your chapter, and access to Delhi NCR mixers even if your campus doesn't have one yet.</p>
-              </div>
-            </div>
-
-            <div class="tfc-benefit-card">
-              <div class="tfc-benefit-num">04</div>
-              <div>
-                <h4 class="tfc-benefit-title">Fellowship Priority</h4>
-                <p class="tfc-benefit-desc">Members get first access when Fellowship applications open each cohort.</p>
-              </div>
+          <!-- 7-DAY PERK HIGHLIGHT (SPEC 5.9) -->
+          <div class="perk-highlight">
+            <div class="perk-icon">★</div>
+            <div>
+              <strong style="display: block; font-size: 15px; color: var(--ink);">Automatic Member Perk</strong>
+              <span style="font-size: 13.5px; color: var(--ink-soft);">
+                Every member gets <b>7 days of Startup School free</b> upon joining.
+              </span>
             </div>
           </div>
 
-          <!-- WHO SHOULD JOIN Card -->
-          <div class="tfc-card" style="background: #FFFFFF; border-left: 4px solid var(--accent); padding: 22px;">
-            <span class="tfc-badge tfc-badge-neutral" style="margin-bottom: 8px;">WHO SHOULD JOIN</span>
-            <p style="font-size: 0.92rem; color: var(--ink); margin-bottom: 0; line-height: 1.55;">
-              Any student builder, engineer, designer, or operator — whether you've already got a startup running or you're still looking for your team. There's no minimum experience, no application fee, and no requirement that you already have an idea.
+          <!-- FORM -->
+          <form id="councilJoinForm">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+              <img src="/TFC.png" alt="TFC Logo" style="width:40px; height:40px; object-fit:contain; border-radius:8px; background:var(--ink); padding:4px;" />
+              <div>
+                <h2 style="font-size: 24px; margin:0; line-height:1.2;">Join The Council</h2>
+                <span style="font-size: 13px; color:var(--ink-soft);">Free membership · All colleges welcome</span>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jName">Full Name *</label>
+              <input type="text" id="jName" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. Aniket Sharma" />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jEmail">Email Address *</label>
+              <input type="email" id="jEmail" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="name@college.edu or gmail.com" />
+              <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">We send chapter invites and your 7-day Startup School access link here.</span>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jPhone">WhatsApp Phone *</label>
+              <input type="tel" id="jPhone" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="+91 98765 43210" />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jCollege">College / University Name *</label>
+              <input type="text" id="jCollege" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. IIT Delhi, SRCC, DTU, NSUT..." />
+            </div>
+
+            <div style="margin-bottom: 22px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;">Primary Skill / Interest *</label>
+              <div class="skill-pills">
+                <label class="skill-pill">
+                  <input type="checkbox" name="skills" value="Technical/Coding" style="display:none;" />
+                  <span>💻 Engineering &amp; Coding</span>
+                </label>
+                <label class="skill-pill">
+                  <input type="checkbox" name="skills" value="Product/Design" style="display:none;" />
+                  <span>🎨 Product &amp; Design</span>
+                </label>
+                <label class="skill-pill">
+                  <input type="checkbox" name="skills" value="Growth/Marketing" style="display:none;" />
+                  <span>📈 Growth &amp; Marketing</span>
+                </label>
+                <label class="skill-pill">
+                  <input type="checkbox" name="skills" value="Operations/Finance" style="display:none;" />
+                  <span>💼 Business &amp; Operations</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jIdea">What are you curious about or building? (Optional)</label>
+              <textarea id="jIdea" class="search-input" style="width: 100%; border-radius: 10px; min-height: 80px; resize: vertical;" placeholder="A rough idea, a side project, or technologies you want to explore with other students."></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmitJoin" class="btn solid lg" style="width: 100%;">Complete Free Registration →</button>
+          </form>
+
+          <!-- SUCCESS STATE -->
+          <div id="joinSuccessPanel" style="display: none; padding: 24px; text-align: center;">
+            <div class="pin" style="width: 56px; height: 56px; border-radius: 50%; background: #E8F5E9; border: 2px solid #2E7D32; display: grid; place-items: center; margin: 0 auto 16px; color: #1B5E20; font-size: 22px;">✓</div>
+            <h3 style="font-size: 26px;">You are officially in.</h3>
+            <p style="color: var(--ink-soft); font-size: 16px; margin: 12px auto 24px; max-width: 44ch;">
+              Welcome to The Future Council. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.
             </p>
-          </div>
-        </div>
-
-        <!-- Right Column: 3-Step Application Form (Page 09) -->
-        <div>
-          <div class="tfc-card" id="signupFormPanel" style="padding: 36px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
-            
-            <!-- 3-Step Pill Progress Stepper (Spec §1 & §6) -->
-            <div class="tfc-pill-stepper" id="joinPillStepper" style="margin-bottom: 24px; flex-wrap: wrap;">
-              <div class="tfc-pill-step active" id="pillStep1"><span class="tfc-pill-step-num">1</span> Basics</div>
-              <div class="tfc-pill-step" id="pillStep2"><span class="tfc-pill-step-num">2</span> College & Role</div>
-              <div class="tfc-pill-step" id="pillStep3"><span class="tfc-pill-step-num">3</span> Interests</div>
-            </div>
-            
-            <!-- Hidden elements for JS compatibility -->
-            <div style="display: none;">
-              <span id="stepLabel1"></span>
-              <span id="stepLabel2"></span>
-              <span id="stepLabel3"></span>
-              <div id="stepProgressBar"></div>
-            </div>
-
-            <div id="signupError" class="hidden mb-4 p-3 bg-red-100 border-2 border-red-500 text-red-700 font-bold text-sm rounded-lg" style="margin-bottom: 16px;">
-              Error occurred.
-            </div>
-
-            <form id="signupForm">
-              <!-- STEP 1: BASICS -->
-              <div id="step1Container">
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Personal Details</h3>
-
-                <!-- Google Mandatory Sign-In Card (when unauthenticated) -->
-                <div id="googleAuthMandatoryBox" style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: 16px; padding: 22px; text-align: center; margin-bottom: 20px; box-shadow: var(--shadow-sm);">
-                  <div class="tfc-mandatory-badge">
-                    <span>⚡ Step 1: Mandatory Google Sign-in</span>
-                  </div>
-                  <h4 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 6px; color: var(--ink);">Sign up with Google to Join</h4>
-                  <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.5;">
-                    Google verification is <strong>mandatory</strong> to join The Future Council. This links your student identity, issues your official membership card, and grants branch access.
-                  </p>
-                  <button type="button" id="btnJoinWithGoogle" class="tfc-google-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink: 0;">
-                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
-                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
-                    </svg>
-                    <span>Continue with Google</span>
-                  </button>
-                  <p class="tfc-auth-legal" style="font-size: 0.74rem; color: var(--ink-soft); margin-top: 10px; text-align: center;">
-                    By continuing you agree to Future Council's <a href="terms.html" target="_blank" style="color: var(--ink); font-weight: 600;">Terms</a> and <a href="privacy.html" target="_blank" style="color: var(--ink); font-weight: 600;">Privacy Policy</a>.
-                  </p>
-                </div>
-
-                <!-- Google Verified Account Card (when authenticated) -->
-                <div id="googleAuthVerifiedBox" class="tfc-google-verified-card" style="display: none;">
-                  <div class="tfc-google-verified-info">
-                    <div id="verifiedUserAvatar" style="width: 42px; height: 42px; border-radius: 50%; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; overflow: hidden; border: 2px solid #22c55e;">
-                      U
-                    </div>
-                    <div>
-                      <div style="display: flex; align-items: center; gap: 8px;">
-                        <strong id="verifiedUserName" style="font-size: 0.95rem; color: #14110f;">Student Name</strong>
-                        <span style="background: #22c55e; color: #fff; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">✓ GOOGLE VERIFIED</span>
-                      </div>
-                      <div id="verifiedUserEmail" style="font-size: 0.8rem; color: var(--ink-soft); margin-top: 1px;">student@example.com</div>
-                    </div>
-                  </div>
-                  <button type="button" id="btnSwitchGoogleAccount" class="tfc-btn tfc-btn-outline" style="font-size: 0.75rem; padding: 5px 12px; border-color: rgba(20,17,15,0.18); color: var(--ink-soft);">Switch</button>
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                  <div>
-                    <label for="studentName" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">
-                      <span>Full Name *</span>
-                      <span id="nameGoogleTag" style="font-size: 0.74rem; font-weight: 600; color: var(--ink-soft); display: none;">(Verified via Google)</span>
-                    </label>
-                    <input type="text" id="studentName" class="tfc-input" placeholder="Will be verified via Google" readonly style="background: rgba(20,17,15,0.03); cursor: not-allowed;" required />
-                  </div>
-                  <div>
-                    <label for="studentEmail" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">
-                      <span>Email Address *</span>
-                      <span id="emailGoogleTag" style="font-size: 0.74rem; font-weight: 600; color: var(--ink-soft); display: none;">(Verified via Google)</span>
-                    </label>
-                    <input type="email" id="studentEmail" class="tfc-input" placeholder="Will be verified via Google" readonly style="background: rgba(20,17,15,0.03); cursor: not-allowed;" required />
-                  </div>
-                  <div>
-                    <label for="studentPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">
-                      Phone Number * <span style="font-size: 0.76rem; font-weight: 500; color: var(--accent);">(Required for chapter WhatsApp invite)</span>
-                    </label>
-                    <input type="tel" id="studentPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
-                  </div>
-                  <div>
-                    <label for="studentCountry" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Country *</label>
-                    <input type="text" id="studentCountry" class="tfc-input" value="India" placeholder="e.g. India" required />
-                  </div>
-
-                  <button type="button" id="btnGoToStep2" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 10px;">
-                    Continue to Step 2 →
-                  </button>
-                </div>
-              </div>
-
-              <!-- STEP 2: COLLEGE & ROLE -->
-              <div id="step2Container" style="display: none;">
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Campus & Academic Standing</h3>
-                
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                  <div style="position: relative;">
-                    <label for="studentCollegeInput" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Select or Search Your College *</label>
-                    <div class="custom-select-wrapper" style="position: relative; width: 100%;">
-                      <input type="text" id="studentCollegeInput" class="tfc-input" placeholder="Search or type your college..." autocomplete="off" required />
-                      <div id="collegeDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1.5px solid var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,0.1); z-index: 1000; max-height: 220px; overflow-y: auto; margin-top: 4px; border-radius: 10px;">
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIT Delhi">IIT Delhi</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIT Patna (Hybrid)">IIT Patna (Hybrid)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IIIT Delhi">IIIT Delhi</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="IGDTUW">IGDTUW</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hansraj College">Hansraj College</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Hindu College">Hindu College</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="St. Stephen's College">St. Stephen's College</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Sri Venkateswara College (Venky)">Sri Venkateswara College (Venky)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Miranda House">Miranda House</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</div>
-                        <div class="dropdown-item" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.88rem; font-weight: 600;" data-value="SGTB Khalsa College">SGTB Khalsa College</div>
-                        <div id="dropdownItemManual" style="padding: 10px 14px; cursor: pointer; background: #fff0e6; font-weight: 800; color: var(--accent); text-align: center; font-size: 0.85rem;">✨ Type custom college name</div>
-                      </div>
-                    </div>
-                    <div id="manualCollegeToggleRow" style="margin-top: 6px; font-size: 0.78rem; display: flex; justify-content: space-between; color: var(--ink-soft);">
-                      <span>College not listed?</span>
-                      <a href="javascript:void(0)" id="btnManualCollege" style="color: var(--accent); font-weight: 700;">Type Manually ✎</a>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label for="studentYear" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Current Year of Study *</label>
-                    <select id="studentYear" class="tfc-input" required>
-                      <option value="1st Year">1st Year</option>
-                      <option value="2nd Year">2nd Year</option>
-                      <option value="3rd Year">3rd Year</option>
-                      <option value="4th Year">4th Year</option>
-                      <option value="Postgraduate">Postgraduate</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label for="fellowshipApply" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Are you interested in Fellowship '26?</label>
-                    <select id="fellowshipApply" class="tfc-input">
-                      <option value="no">No, general network access only</option>
-                      <option value="yes">Yes, interested in Fellowship '26 🚀</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label for="referralCode" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Ambassador Referral Code (Optional)</label>
-                    <input type="text" id="referralCode" class="tfc-input" placeholder="e.g. TFC-AMB-HANSRAJ" />
-                  </div>
-
-                  <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <button type="button" id="btnBackToStep1" class="tfc-btn tfc-btn-outline" style="flex: 1;">
-                      ← Back
-                    </button>
-                    <button type="button" id="nextStepBtn" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="flex: 2;">
-                      Continue to Interests →
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- STEP 3: INTEREST TAGS (MULTI-SELECT CHIPS) & ONBOARDING (Page 09) -->
-              <div id="step3Container" style="display: none;">
-                <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 6px;">Builder Interests & Questions</h3>
-                <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">Select all areas you want to explore or build in:</p>
-
-                <!-- Interest Chips (Page 09 Wireframe: DESIGN, GROWTH, ENGINEERING, PRODUCT, etc.) -->
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;" id="interestChipsContainer">
-                  <span class="tfc-chip active" data-interest="ENGINEERING">ENGINEERING</span>
-                  <span class="tfc-chip" data-interest="PRODUCT">PRODUCT</span>
-                  <span class="tfc-chip" data-interest="DESIGN">DESIGN</span>
-                  <span class="tfc-chip" data-interest="GROWTH">GROWTH</span>
-                  <span class="tfc-chip" data-interest="AI/ML">AI / ML</span>
-                  <span class="tfc-chip" data-interest="FINTECH">FINTECH</span>
-                  <span class="tfc-chip" data-interest="HARDWARE">HARDWARE</span>
-                  <span class="tfc-chip" data-interest="OPERATIONS">OPERATIONS</span>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                  <div>
-                    <label for="question1" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q1: Why are you interested in entrepreneurship? *</label>
-                    <textarea id="question1" class="tfc-input" style="min-height: 70px;" placeholder="Tell us what draws you to startup culture..." required></textarea>
-                  </div>
-
-                  <div>
-                    <label for="question2" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q2: Are you building anything right now? Tell us more. *</label>
-                    <textarea id="question2" class="tfc-input" style="min-height: 70px;" placeholder="Describe your concept or project..." required></textarea>
-                  </div>
-
-                  <div>
-                    <label for="question3" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Q3: What's your motivation to join The Future Council? *</label>
-                    <textarea id="question3" class="tfc-input" style="min-height: 70px;" placeholder="What do you hope to learn or contribute..." required></textarea>
-                  </div>
-
-                  <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <button type="button" id="btnBackToStep2" class="tfc-btn tfc-btn-outline" style="flex: 1;">
-                      ← Back
-                    </button>
-                    <button type="button" id="completeSignupBtn" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="flex: 2;">
-                      Complete & Get Badge ⚡
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-          </div>
-
-          <!-- Success View (Hidden by default) -->
-          <div id="successPanel" class="tfc-card hidden" style="padding: 36px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md); text-align: center;">
-            <div class="tfc-badge tfc-badge-lime" style="margin-bottom: 14px;">APPLICATION ACCEPTED</div>
-            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Welcome to Future Council!</h3>
-            <p style="font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 24px;">
-              Your student builder profile is now active. Here is your official verified Council Member Card:
-            </p>
-
-            <!-- Digital Member Card -->
-            <div style="background: var(--ink); color: #fff; border-radius: 16px; padding: 24px; text-align: left; margin-bottom: 24px; border: 2px solid var(--accent); box-shadow: 0 12px 30px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <img src="TFC.png" alt="TFC Logo" style="width: 28px; height: 28px; border-radius: 6px; background: #fff; padding: 2px; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />
-                  <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px;">THE FUTURE COUNCIL</span>
-                </div>
-                <span class="tfc-badge" style="background: rgba(226, 84, 42, 0.2); color: var(--accent); font-size: 0.7rem;">COUNCIL ID</span>
-              </div>
-
-              <div style="margin-bottom: 20px;">
-                <div style="font-size: 0.72rem; text-transform: uppercase; color: rgba(255,255,255,0.6); letter-spacing: 0.5px;">BUILDER NAME</div>
-                <div id="cardMemberName" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff; margin-top: 2px;">John Doe</div>
-              </div>
-
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px; background: rgba(255,255,255,0.06); border-radius: 10px; margin-bottom: 16px;">
-                <div>
-                  <div style="font-size: 0.68rem; text-transform: uppercase; color: rgba(255,255,255,0.6);">CAMPUS / YEAR</div>
-                  <div id="cardMemberCollege" style="font-size: 0.85rem; font-weight: 700; color: #fff; margin-top: 2px;">IIT Delhi</div>
-                </div>
-                <div>
-                  <div style="font-size: 0.68rem; text-transform: uppercase; color: rgba(255,255,255,0.6);">MEMBER ID</div>
-                  <div id="cardMemberId" style="font-size: 0.85rem; font-weight: 800; font-family: monospace; color: var(--accent-lime); margin-top: 2px;">TFC-2026-8921</div>
-                </div>
-              </div>
-
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 14px;">
-                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--accent-lime); font-weight: 700;">
-                  <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-lime); display: inline-block;"></span>
-                  Active Verified Member
-                </span>
-                <img id="cardMemberQr" src="" alt="Verification QR" style="width: 44px; height: 44px; border-radius: 6px; background: #fff; padding: 2px;" />
-              </div>
-            </div>
-
-            <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 20px; line-height: 1.5;">
-              Our campus chapter leaders will connect with you via WhatsApp/Email to onboard your team and introduce you to fellow builders.
-            </p>
-
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-              <a href="resources.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">
-                Access Founder Resources Library →
-              </a>
-              <a href="index.html" class="tfc-btn tfc-btn-outline" style="width: 100%;">Return to Home</a>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <a class="btn solid" href="/school">Explore Startup School →</a>
+              <a class="btn" href="/chapters">View Campus Chapters</a>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <!-- Sticky Mobile & Desktop CTA Bar -->
-  <aside class="tfc-sticky-relaunch-bar">
-    <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · Applications Open</div>
-    </div>
-    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
-  </aside>
-
-  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
-  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
-    <div class="tfc-container">
-      <div class="tfc-footer-grid">
-        <!-- Col 1: Brand -->
-        <div class="tfc-footer-col">
-          <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; text-decoration: none;">
-            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 6px;" />
-            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
           </a>
-          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
-            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
           </p>
-          <div style="font-size: 0.8rem; color: var(--paper-70);">
-            Admissions & Support: <br />
-            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
-          </div>
         </div>
-
-        <!-- Col 2: Navigation Columns -->
-        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="fellowship.html" style="color: var(--paper-70); transition: color 0.2s;">Fellowship '26</a></li>
-              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
-              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
-              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="branches.html" style="color: var(--paper-70); transition: color 0.2s;">Collegiate Branches</a></li>
-              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
-              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
-              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
-              <li><a href="join.html" style="color: var(--paper); font-weight: 600;">Join the Council</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Col 3: Legal & Status -->
-        <div class="tfc-footer-col">
-          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
-            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
-            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
           </ul>
-          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
-            Council Membership Free · Open to All Students
-          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
         </div>
       </div>
-
-      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <span>© 2026 The Future Council. All rights reserved.</span>
-        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
       </div>
     </div>
   </footer>
 
+  <script src="/tfc-shared.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Elements
-      const signupForm = document.getElementById('signupForm');
-      const signupFormPanel = document.getElementById('signupFormPanel');
-      const successPanel = document.getElementById('successPanel');
-      const signupError = document.getElementById('signupError');
+  (function(){
+    // Pre-fill chapter query param if available
+    const urlParams = new URLSearchParams(window.location.search);
+    const chParam = urlParams.get('chapter') || urlParams.get('college');
+    if (chParam && document.getElementById('jCollege')) {
+      document.getElementById('jCollege').value = chParam.toUpperCase();
+    }
 
-      // Containers & Buttons for 3-Step Form
-      const step1Container = document.getElementById('step1Container');
-      const step2Container = document.getElementById('step2Container');
-      const step3Container = document.getElementById('step3Container');
-
-      const btnGoToStep2 = document.getElementById('btnGoToStep2');
-      const btnBackToStep1 = document.getElementById('btnBackToStep1');
-      const nextStepBtn = document.getElementById('nextStepBtn');
-      const btnBackToStep2 = document.getElementById('btnBackToStep2');
-      const completeSignupBtn = document.getElementById('completeSignupBtn');
-
-      const stepProgressBar = document.getElementById('stepProgressBar');
-      const stepLabel1 = document.getElementById('stepLabel1');
-      const stepLabel2 = document.getElementById('stepLabel2');
-      const stepLabel3 = document.getElementById('stepLabel3');
-
-      // Initialize Supabase Client
-      const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
-      const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
-      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-      // EmailJS Configurations
-      const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-      const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-
-      if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-      }
-
-      // Custom search-select dropdown logic
-      const collegeInput = document.getElementById('studentCollegeInput');
-      const collegeDropdown = document.getElementById('collegeDropdown');
-      const dropdownItems = document.querySelectorAll('.dropdown-item');
-      const btnManualCollege = document.getElementById('btnManualCollege');
-      const dropdownItemManual = document.getElementById('dropdownItemManual');
-      let isManualCollege = false;
-
-      // URL Query params handling
-      const urlParams = new URLSearchParams(window.location.search);
-      let prefillCollege = urlParams.get('college');
-      if (prefillCollege) {
-        const lower = prefillCollege.toLowerCase().trim();
-        if (lower === 'iitp' || lower.includes('patna')) {
-          prefillCollege = 'IIT Patna (Hybrid)';
-        } else if (lower === 'fot') {
-          prefillCollege = 'Faculty of Technology (FoT), DU';
-        } else if (lower === 'srcc') {
-          prefillCollege = 'Shri Ram College of Commerce (SRCC)';
-        } else if (lower === 'iitd' || lower === 'iitdelhi') {
-          prefillCollege = 'IIT Delhi';
-        } else if (lower === 'iiitd') {
-          prefillCollege = 'IIIT Delhi';
-        } else if (lower === 'dtu') {
-          prefillCollege = 'Delhi Technological University (DTU)';
-        } else if (lower === 'nsut') {
-          prefillCollege = 'Netaji Subhas University of Technology (NSUT)';
-        } else if (lower === 'kmc') {
-          prefillCollege = 'Kirori Mal College (KMC)';
-        } else if (lower === 'ipcw') {
-          prefillCollege = 'Indraprastha College for Women (IPCW)';
-        } else if (lower === 'lsr') {
-          prefillCollege = 'Lady Shri Ram College (LSR)';
-        } else if (lower === 'venky') {
-          prefillCollege = 'Sri Venkateswara College (Venky)';
-        } else if (lower === 'mirandahouse' || lower === 'miranda') {
-          prefillCollege = 'Miranda House';
-        } else if (lower === 'drc') {
-          prefillCollege = 'Daulat Ram College (DRC)';
-        } else if (lower === 'khalsa') {
-          prefillCollege = 'SGTB Khalsa College';
-        } else if (lower === 'ststephens' || lower === 'stephens') {
-          prefillCollege = "St. Stephen's College";
-        } else if (lower === 'igdtuw') {
-          prefillCollege = 'IGDTUW';
+    // Toggle skill pill checkboxes
+    document.querySelectorAll('.skill-pill').forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        const cb = pill.querySelector('input');
+        if (e.target !== cb) {
+          cb.checked = !cb.checked;
         }
-        if (collegeInput) {
-          collegeInput.value = prefillCollege;
-        }
-      }
-      const prefillEmail = urlParams.get('email');
-      const emailInputEl = document.getElementById('studentEmail');
-      if (prefillEmail && emailInputEl) {
-        emailInputEl.value = prefillEmail;
-      }
-
-      function openCollegeDropdown() {
-        if (isManualCollege) return;
-        collegeDropdown.style.display = 'block';
-        const filter = (collegeInput.value || '').toLowerCase().trim();
-        dropdownItems.forEach(item => {
-          if (item === dropdownItemManual) {
-            item.style.display = 'block';
-            return;
-          }
-          const text = item.textContent.toLowerCase();
-          if (!filter || text.includes(filter)) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      }
-
-      function enableManualMode() {
-        isManualCollege = true;
-        collegeDropdown.style.display = 'none';
-        collegeInput.value = '';
-        collegeInput.placeholder = 'Type your college name manually...';
-        if (btnManualCollege) btnManualCollege.innerHTML = '← Select from list';
-        collegeInput.focus();
-      }
-
-      function disableManualMode() {
-        isManualCollege = false;
-        collegeInput.value = '';
-        collegeInput.placeholder = 'Search or type your college...';
-        if (btnManualCollege) btnManualCollege.innerHTML = 'Type Manually ✎';
-        openCollegeDropdown();
-        collegeInput.focus();
-      }
-
-      if (btnManualCollege) {
-        btnManualCollege.addEventListener('click', () => {
-          if (!isManualCollege) {
-            enableManualMode();
-          } else {
-            disableManualMode();
-          }
-        });
-      }
-
-      if (dropdownItemManual) {
-        dropdownItemManual.addEventListener('click', (e) => {
-          enableManualMode();
-          e.stopPropagation();
-        });
-      }
-
-      if (collegeInput && collegeDropdown) {
-        collegeInput.addEventListener('focus', () => {
-          openCollegeDropdown();
-        });
-        collegeInput.addEventListener('click', () => {
-          openCollegeDropdown();
-        });
-
-        collegeInput.addEventListener('input', () => {
-          if (isManualCollege) return;
-          collegeDropdown.style.display = 'block';
-          const filter = collegeInput.value.toLowerCase().trim();
-          dropdownItems.forEach(item => {
-            if (item === dropdownItemManual) {
-              item.style.display = 'block';
-              return;
-            }
-            const text = item.textContent.toLowerCase();
-            if (text.includes(filter)) {
-              item.style.display = 'block';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-
-        dropdownItems.forEach(item => {
-          if (item === dropdownItemManual) return;
-          item.addEventListener('click', (e) => {
-            collegeInput.value = item.getAttribute('data-value') || item.textContent.trim();
-            collegeDropdown.style.display = 'none';
-            e.stopPropagation();
-          });
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!e.target.closest('.custom-select-wrapper')) {
-            collegeDropdown.style.display = 'none';
-          }
-        });
-      }
-
-      // Auto-populate referral code or fellowship selection from URL parameter '?ref=XYZ'
-      const refParam = urlParams.get('ref');
-      const fellowshipSelect = document.getElementById('fellowshipApply');
-      if (refParam) {
-        const refField = document.getElementById('referralCode');
-        if (refField) {
-          refField.value = refParam.toUpperCase().trim();
-        }
-        if (refParam.toLowerCase() === 'fellowship') {
-          if (fellowshipSelect) {
-            fellowshipSelect.value = 'yes';
-          }
-        }
-      }
-
-      // Multi-Select Interest Chips Toggle
-      const interestChips = document.querySelectorAll('#interestChipsContainer .tfc-chip');
-      interestChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          chip.classList.toggle('active');
-        });
+        pill.classList.toggle('active', cb.checked);
       });
-
-      // State tracking variables
-      let currentEmail = '';
-      let currentName = '';
-      let currentCollegeText = '';
-      let currentCombinedCollegeBase = '';
-      let currentMemberId = '';
-      const defaultPassword = 'member2026';
-
-      // ==========================================
-      // STEP 1 -> STEP 2 (Mandatory Google Check)
-      // ==========================================
-      if (btnGoToStep2) {
-        btnGoToStep2.addEventListener('click', () => {
-          signupError.classList.add('hidden');
-          const nameInput = document.getElementById('studentName');
-          const emailInput = document.getElementById('studentEmail');
-          const phoneInput = document.getElementById('studentPhone');
-          const countryInput = document.getElementById('studentCountry');
-
-          // STRICT MANDATORY GOOGLE AUTH CHECK
-          const isAuthed = window.TFCAuth && window.TFCAuth.isAuthenticated() && !!emailInput.value.trim();
-          if (!isAuthed) {
-            signupError.innerHTML = "<strong>Google Sign-in Mandatory:</strong> Please click <em>'Continue with Google'</em> above to verify your student account before proceeding.";
-            signupError.classList.remove('hidden');
-            if (window.TFCAuth) {
-              window.TFCAuth.openLoginModal({
-                context: 'join',
-                onSuccess: (user) => {
-                  applyGoogleUserToJoinForm(user);
-                }
-              });
-            }
-            return;
-          }
-
-          if (!phoneInput.value.trim() || !countryInput.value.trim()) {
-            if (!phoneInput.value.trim()) {
-              phoneInput.focus();
-              phoneInput.reportValidity();
-            } else {
-              countryInput.reportValidity();
-            }
-            return;
-          }
-
-          currentName = nameInput.value.trim();
-          currentEmail = emailInput.value.trim().toLowerCase();
-
-          // Advance UI to Step 2
-          step1Container.style.display = 'none';
-          step2Container.style.display = 'block';
-          stepProgressBar.style.width = '66.66%';
-          stepLabel2.style.color = 'var(--accent)';
-          const p1 = document.getElementById('pillStep1');
-          const p2 = document.getElementById('pillStep2');
-          const p3 = document.getElementById('pillStep3');
-          if (p1 && p2) { p1.className = 'tfc-pill-step completed'; p2.className = 'tfc-pill-step active'; }
-          signupFormPanel.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-
-      // ==========================================
-      // STEP 2 -> STEP 1 (Back)
-      // ==========================================
-      if (btnBackToStep1) {
-        btnBackToStep1.addEventListener('click', () => {
-          step2Container.style.display = 'none';
-          step1Container.style.display = 'block';
-          stepProgressBar.style.width = '33.33%';
-          stepLabel2.style.color = 'var(--ink-soft)';
-          const p1 = document.getElementById('pillStep1');
-          const p2 = document.getElementById('pillStep2');
-          if (p1 && p2) { p1.className = 'tfc-pill-step active'; p2.className = 'tfc-pill-step'; }
-        });
-      }
-
-      // ==========================================
-      // STEP 2 -> STEP 3
-      // ==========================================
-      if (nextStepBtn) {
-        nextStepBtn.addEventListener('click', () => {
-          signupError.classList.add('hidden');
-          const collegeInputVal = collegeInput.value.trim();
-          const studentYearVal = document.getElementById('studentYear').value;
-
-          if (!collegeInputVal) {
-            collegeInput.reportValidity();
-            return;
-          }
-
-          // Ensure name and email are captured from DOM if skipped via Google direct step
-          const nameInput = document.getElementById('studentName');
-          const emailInput = document.getElementById('studentEmail');
-          if (!currentName && nameInput && nameInput.value.trim()) {
-            currentName = nameInput.value.trim();
-          }
-          if (!currentEmail && emailInput && emailInput.value.trim()) {
-            currentEmail = emailInput.value.trim().toLowerCase();
-          }
-
-          const phone = document.getElementById('studentPhone').value.trim();
-          const country = document.getElementById('studentCountry').value.trim() || 'India';
-          const refCode = document.getElementById('referralCode') ? document.getElementById('referralCode').value.trim() : '';
-          const fellowshipApply = document.getElementById('fellowshipApply') ? document.getElementById('fellowshipApply').value : 'no';
-
-          currentCollegeText = `${collegeInputVal}, ${studentYearVal}`;
-          currentCombinedCollegeBase = `${currentCollegeText} | Phone: ${phone} | Country: ${country} | Source: JoinPage`;
-          if (fellowshipApply === 'yes') {
-            currentCombinedCollegeBase += ` | Fellowship: Yes`;
-          }
-          if (refCode) {
-            currentCombinedCollegeBase += ` | RefBy: ${refCode.toUpperCase().trim()}`;
-          }
-
-          // Advance UI to Step 3
-          step2Container.style.display = 'none';
-          step3Container.style.display = 'block';
-          stepProgressBar.style.width = '100%';
-          stepLabel3.style.color = 'var(--accent)';
-          const p2 = document.getElementById('pillStep2');
-          const p3 = document.getElementById('pillStep3');
-          if (p2 && p3) { p2.className = 'tfc-pill-step completed'; p3.className = 'tfc-pill-step active'; }
-          signupFormPanel.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-
-      // ==========================================
-      // STEP 3 -> STEP 2 (Back)
-      // ==========================================
-      if (btnBackToStep2) {
-        btnBackToStep2.addEventListener('click', () => {
-          step3Container.style.display = 'none';
-          step2Container.style.display = 'block';
-          stepProgressBar.style.width = '66.66%';
-          stepLabel3.style.color = 'var(--ink-soft)';
-          const p2 = document.getElementById('pillStep2');
-          const p3 = document.getElementById('pillStep3');
-          if (p2 && p3) { p2.className = 'tfc-pill-step active'; p3.className = 'tfc-pill-step'; }
-        });
-      }
-
-      // ==========================================
-      // STEP 3 SUBMIT (Complete & Get Badge)
-      // ==========================================
-      if (completeSignupBtn) {
-        completeSignupBtn.addEventListener('click', async () => {
-          const q1Input = document.getElementById('question1');
-          const q2Input = document.getElementById('question2');
-          const q3Input = document.getElementById('question3');
-
-          if (!q1Input.value.trim() || !q2Input.value.trim() || !q3Input.value.trim()) {
-            if (!q1Input.value.trim()) q1Input.reportValidity();
-            else if (!q2Input.value.trim()) q2Input.reportValidity();
-            else q3Input.reportValidity();
-            return;
-          }
-
-          // Authoritative live input extraction
-          const nameInput = document.getElementById('studentName');
-          const emailInput = document.getElementById('studentEmail');
-          const phoneInput = document.getElementById('studentPhone');
-          const countryInput = document.getElementById('studentCountry');
-
-          const tfcUser = (window.TFCAuth && typeof window.TFCAuth.getUser === 'function') ? window.TFCAuth.getUser() : null;
-          const finalName = currentName || (nameInput ? nameInput.value.trim() : '') || (tfcUser ? tfcUser.name : '') || '';
-          const finalEmail = (currentEmail || (emailInput ? emailInput.value.trim() : '') || (tfcUser ? tfcUser.email : '') || '').toLowerCase();
-          const finalPhone = (phoneInput ? phoneInput.value.trim() : '') || (tfcUser ? tfcUser.phone : '') || '';
-          const finalCountry = (countryInput ? countryInput.value.trim() : '') || 'India';
-
-          if (!window.TFCAuth || !window.TFCAuth.isAuthenticated() || !finalEmail) {
-            signupError.innerHTML = "<strong>Google Sign-in Mandatory:</strong> Please sign in with Google to complete your Council registration.";
-            signupError.classList.remove('hidden');
-            step3Container.style.display = 'none';
-            step1Container.style.display = 'block';
-            stepProgressBar.style.width = '33.33%';
-            stepLabel2.style.color = 'var(--ink-soft)';
-            stepLabel3.style.color = 'var(--ink-soft)';
-            if (window.TFCAuth) {
-              window.TFCAuth.openLoginModal({
-                context: 'join',
-                onSuccess: (user) => {
-                  applyGoogleUserToJoinForm(user);
-                }
-              });
-            }
-            return;
-          }
-
-          currentName = finalName;
-          currentEmail = finalEmail;
-
-          completeSignupBtn.disabled = true;
-          completeSignupBtn.textContent = 'Creating Your Member Card...';
-          signupError.classList.add('hidden');
-
-          // Collect selected interests
-          const selectedInterests = Array.from(document.querySelectorAll('#interestChipsContainer .tfc-chip.active'))
-            .map(chip => chip.getAttribute('data-interest'))
-            .join(', ');
-
-          const q1 = q1Input.value.trim().replace(/\|/g, '/');
-          const q2 = q2Input.value.trim().replace(/\|/g, '/');
-          const q3 = q3Input.value.trim().replace(/\|/g, '/');
-
-          // Ensure base string has phone and country even if pre-filled via Google auth
-          if (!currentCombinedCollegeBase || !currentCombinedCollegeBase.includes('Phone:')) {
-            currentCombinedCollegeBase = `${currentCollegeText} | Phone: ${finalPhone} | Country: ${finalCountry} | Source: JoinPage`;
-          } else if (finalPhone && currentCombinedCollegeBase.includes('Phone:  |')) {
-            currentCombinedCollegeBase = currentCombinedCollegeBase.replace('Phone:  |', `Phone: ${finalPhone} |`);
-          }
-
-          // Build final combined college metadata string
-          const finalCollegeData = `${currentCombinedCollegeBase} | Interests: [${selectedInterests}] | Q1: ${q1} | Q2: ${q2} | Q3: ${q3}`;
-
-          // Generate unique ID
-          const randomIdNum = Math.floor(1000 + Math.random() * 9000);
-          currentMemberId = `TFC-2026-${randomIdNum}`;
-
-          try {
-            // Check if member already exists
-            const { data: dbMember } = await supabaseClient
-              .from('members')
-              .select('*')
-              .eq('email', currentEmail)
-              .maybeSingle();
-
-            if (dbMember) {
-              currentMemberId = dbMember.member_id || currentMemberId;
-              const updatePayload = {
-                name: currentName,
-                college: finalCollegeData
-              };
-              if (tfcUser && tfcUser.avatar) {
-                updatePayload.image = tfcUser.avatar;
-              }
-              const { error: updateError } = await supabaseClient
-                .from('members')
-                .update(updatePayload)
-                .eq('email', currentEmail);
-              if (updateError) throw updateError;
-            } else {
-              const memberData = {
-                email: currentEmail,
-                name: currentName,
-                college: finalCollegeData,
-                tier: 'Student',
-                member_id: currentMemberId,
-                password: (tfcUser && tfcUser.googleAuth) ? 'google_oauth_verified' : defaultPassword,
-                image: (tfcUser && tfcUser.avatar) || ''
-              };
-              const { error: insertError } = await supabaseClient
-                .from('members')
-                .insert([memberData]);
-              if (insertError) throw insertError;
-            }
-
-            // Real-time Push to Zoho CRM
-            try {
-              const zohoPayload = {
-                name: currentName,
-                email: currentEmail,
-                phone: currentPhone || '',
-                college: finalCollegeData,
-                tier: 'Student',
-                member_id: currentMemberId,
-                source: 'Join Council Page'
-              };
-              if (typeof window.syncToZoho === 'function') {
-                window.syncToZoho(zohoPayload, 'Join Council Application');
-              } else {
-                fetch('/api/zoho-sync', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(zohoPayload)
-                }).catch(e => console.warn('[Zoho] Push error:', e));
-              }
-            } catch(e) {}
-
-            // Populate Member Card
-            document.getElementById('cardMemberName').textContent = currentName;
-            document.getElementById('cardMemberCollege').textContent = currentCollegeText;
-            document.getElementById('cardMemberId').textContent = currentMemberId;
-            document.getElementById('cardMemberQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&color=14110F&bgcolor=ffffff&data=${encodeURIComponent(currentMemberId)}`;
-
-            // Send welcome email via EmailJS (if configured)
-            if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-              emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                to_name: currentName,
-                to_email: currentEmail,
-                member_id: currentMemberId,
-                college: currentCollegeText
-              }).catch(err => console.error("EmailJS dispatch:", err));
-            }
-
-            // Transition to Success Panel
-            signupFormPanel.classList.add('hidden');
-            successPanel.classList.remove('hidden');
-            successPanel.scrollIntoView({ behavior: 'smooth' });
-
-            // Set SessionStorage active state
-            sessionStorage.setItem('tfc_member_auth', 'true');
-            sessionStorage.setItem('tfc_member_name', currentName);
-            sessionStorage.setItem('tfc_member_college', finalCollegeData);
-            sessionStorage.setItem('tfc_member_tier', 'Student');
-            sessionStorage.setItem('tfc_member_id', currentMemberId);
-            sessionStorage.setItem('tfc_member_email', currentEmail);
-
-            // Update TFCAuth session immediately so entire site recognizes council membership
-            if (window.TFCAuth && typeof window.TFCAuth.updateUser === 'function') {
-              window.TFCAuth.updateUser({
-                name: currentName,
-                email: currentEmail,
-                college: finalCollegeData,
-                phone: finalPhone,
-                member_id: currentMemberId,
-                tier: 'Student',
-                isCouncilMember: true
-              });
-            }
-
-          } catch (err) {
-            console.error("Signup failed:", err);
-            signupError.textContent = "Submission error: " + (err.message || "Please check your network and try again.");
-            signupError.classList.remove('hidden');
-          } finally {
-            completeSignupBtn.disabled = false;
-            completeSignupBtn.textContent = 'Complete & Get Badge ⚡';
-          }
-        });
-      }
-
-      // Google Sign-in Trigger on Join Step 1
-      const btnJoinWithGoogle = document.getElementById('btnJoinWithGoogle');
-      if (btnJoinWithGoogle) {
-        btnJoinWithGoogle.addEventListener('click', () => {
-          if (window.TFCAuth) {
-            window.TFCAuth.openLoginModal({
-              context: 'join',
-              onSuccess: (user) => {
-                applyGoogleUserToJoinForm(user);
-              }
-            });
-          }
-        });
-      }
-
-      const btnSwitchGoogleAccount = document.getElementById('btnSwitchGoogleAccount');
-      if (btnSwitchGoogleAccount) {
-        btnSwitchGoogleAccount.addEventListener('click', () => {
-          if (window.TFCAuth) {
-            window.TFCAuth.logout();
-          }
-          resetJoinGoogleUI();
-        });
-      }
-
-      function resetJoinGoogleUI() {
-        const mandBox = document.getElementById('googleAuthMandatoryBox');
-        const verBox = document.getElementById('googleAuthVerifiedBox');
-        const nameInput = document.getElementById('studentName');
-        const emailInput = document.getElementById('studentEmail');
-        const nameGoogleTag = document.getElementById('nameGoogleTag');
-        const emailGoogleTag = document.getElementById('emailGoogleTag');
-
-        if (mandBox) mandBox.style.display = 'block';
-        if (verBox) verBox.style.display = 'none';
-        if (nameInput) {
-          nameInput.value = '';
-          nameInput.placeholder = 'Will be verified via Google';
-        }
-        if (emailInput) {
-          emailInput.value = '';
-          emailInput.placeholder = 'Will be verified via Google';
-        }
-        if (nameGoogleTag) nameGoogleTag.style.display = 'none';
-        if (emailGoogleTag) emailGoogleTag.style.display = 'none';
-        currentName = '';
-        currentEmail = '';
-      }
-
-      function showExistingMemberCard(user) {
-        if (!user) return;
-        signupFormPanel.classList.add('hidden');
-        successPanel.classList.remove('hidden');
-
-        document.getElementById('cardMemberName').textContent = user.name || 'Council Member';
-        const baseCollege = (user.college || '').split(' | ')[0].trim() || 'Council Member';
-        document.getElementById('cardMemberCollege').textContent = baseCollege;
-        const memberId = user.member_id || 'TFC-2026-ACTIVE';
-        document.getElementById('cardMemberId').textContent = memberId;
-        const qrEl = document.getElementById('cardMemberQr');
-        if (qrEl) {
-          qrEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&color=14110F&bgcolor=ffffff&data=${encodeURIComponent(memberId)}`;
-        }
-
-        // Add action buttons if not already injected
-        let actionLinks = document.getElementById('existingMemberActionLinks');
-        if (!actionLinks) {
-          actionLinks = document.createElement('div');
-          actionLinks.id = 'existingMemberActionLinks';
-          actionLinks.style.marginTop = '14px';
-          actionLinks.innerHTML = `
-            <a href="fellowship.html" class="tfc-btn tfc-btn-primary" style="width: 100%; margin-bottom: 8px;">
-              Explore Fellowship '26 →
-            </a>
-            <button type="button" id="btnEditJoinForm" class="tfc-btn tfc-btn-outline" style="width: 100%;">
-              Update / Re-edit Council Application Details ✎
-            </button>
-          `;
-          const actionsContainer = successPanel.querySelector('div[style*="flex-direction: column"]');
-          if (actionsContainer && actionsContainer.parentNode) {
-            actionsContainer.parentNode.insertBefore(actionLinks, actionsContainer);
-          }
-
-          const btnEdit = document.getElementById('btnEditJoinForm');
-          if (btnEdit) {
-            btnEdit.addEventListener('click', () => {
-              successPanel.classList.add('hidden');
-              signupFormPanel.classList.remove('hidden');
-              applyGoogleUserToJoinForm(user, true);
-            });
-          }
-        }
-      }
-
-      function applyGoogleUserToJoinForm(user, bypassExistingCardCheck = false) {
-        if (!user) {
-          resetJoinGoogleUI();
-          return;
-        }
-
-        // If user already completed the council form, show their verified Member Card
-        if (!bypassExistingCardCheck && window.TFCAuth && window.TFCAuth.isCouncilMember(user)) {
-          showExistingMemberCard(user);
-          return;
-        }
-
-        signupFormPanel.classList.remove('hidden');
-        successPanel.classList.add('hidden');
-
-        const mandBox = document.getElementById('googleAuthMandatoryBox');
-        const verBox = document.getElementById('googleAuthVerifiedBox');
-        const verAvatar = document.getElementById('verifiedUserAvatar');
-        const verName = document.getElementById('verifiedUserName');
-        const verEmail = document.getElementById('verifiedUserEmail');
-        const nameInput = document.getElementById('studentName');
-        const emailInput = document.getElementById('studentEmail');
-        const phoneInput = document.getElementById('studentPhone');
-        const nameGoogleTag = document.getElementById('nameGoogleTag');
-        const emailGoogleTag = document.getElementById('emailGoogleTag');
-        const signupError = document.getElementById('signupError');
-
-        if (signupError) signupError.classList.add('hidden');
-        if (mandBox) mandBox.style.display = 'none';
-        if (verBox) verBox.style.display = 'flex';
-
-        if (verName) verName.textContent = user.name || 'Student Member';
-        if (verEmail) verEmail.textContent = user.email || '';
-        if (verAvatar) {
-          if (user.avatar) {
-            verAvatar.innerHTML = `<img src="${user.avatar}" alt="${user.name}" style="width: 100%; height: 100%; object-fit: cover;" />`;
-          } else {
-            const initial = (user.name || 'U').charAt(0).toUpperCase();
-            verAvatar.textContent = initial;
-          }
-        }
-
-        if (nameInput) {
-          nameInput.value = user.name || '';
-          if (user.name) {
-            nameInput.readOnly = true;
-            nameInput.style.backgroundColor = 'rgba(20,17,15,0.03)';
-            nameInput.style.cursor = 'not-allowed';
-          } else {
-            nameInput.readOnly = false;
-            nameInput.style.backgroundColor = '';
-            nameInput.style.cursor = '';
-            nameInput.placeholder = 'Enter your full name';
-          }
-        }
-        if (emailInput) {
-          emailInput.value = user.email || '';
-          emailInput.readOnly = true;
-          emailInput.style.backgroundColor = 'rgba(20,17,15,0.03)';
-          emailInput.style.cursor = 'not-allowed';
-        }
-        if (nameGoogleTag) nameGoogleTag.style.display = 'inline';
-        if (emailGoogleTag) emailGoogleTag.style.display = 'inline';
-
-        if (phoneInput && user.phone) {
-          phoneInput.value = user.phone;
-        }
-
-        // Synchronize state variables immediately
-        currentName = (user.name || '').trim();
-        currentEmail = (user.email || '').trim().toLowerCase();
-
-        // Pre-fill college if present
-        if (user.college && user.college !== 'Ecosystem Member') {
-          const colInput = document.getElementById('studentCollegeInput');
-          if (colInput) colInput.value = user.college.split(' | ')[0].trim();
-        }
-
-        // Focus phone input if not filled so user enters contact
-        if (phoneInput && !phoneInput.value.trim()) {
-          setTimeout(() => phoneInput.focus(), 150);
-        }
-      }
-
-      // Check if already authenticated on load
-      if (window.TFCAuth) {
-        window.TFCAuth.onAuthStateChanged((user) => {
-          if (user) {
-            applyGoogleUserToJoinForm(user);
-          } else {
-            resetJoinGoogleUI();
-          }
-        });
-      }
     });
+
+    const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    let supabaseClient = null;
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    const form = document.getElementById('councilJoinForm');
+    const successPanel = document.getElementById('joinSuccessPanel');
+    const btn = document.getElementById('btnSubmitJoin');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Registering Membership...';
+
+      const name = document.getElementById('jName').value.trim();
+      const email = document.getElementById('jEmail').value.trim().toLowerCase();
+      const phone = document.getElementById('jPhone').value.trim();
+      const college = document.getElementById('jCollege').value.trim();
+      const idea = document.getElementById('jIdea')?.value.trim() || 'Curious Builder';
+
+      const selectedSkills = [...document.querySelectorAll('input[name="skills"]:checked')].map(c => c.value).join(', ');
+
+      const combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Idea: ${idea} | FreeMembership: Yes | SchoolPass: 7Days | Source: JoinPage | FormSubmittedAt: ${new Date().toISOString()}`;
+
+      try {
+        if (supabaseClient) {
+          const rand = Math.floor(1000 + Math.random() * 9000);
+          await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combinedData,
+            tier: 'Student',
+            member_id: `TFC-MBR-${rand}`,
+            password: 'member2026'
+          }]);
+        }
+      } catch (err) {
+        console.warn('Membership sync note:', err);
+      }
+
+      form.style.display = 'none';
+      successPanel.style.display = 'block';
+    });
+  })();
   </script>
 </body>
 </html>

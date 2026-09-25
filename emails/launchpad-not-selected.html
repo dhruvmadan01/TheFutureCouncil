@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Your Launchpad application: feedback and what's next</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background-color:#FFF4E8; font-family:'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#1B1712; line-height:1.6;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#FFF4E8; padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:580px; background-color:#FFFFFF; border:1px solid #EAD7C6; border-radius:16px; overflow:hidden; box-shadow:0 8px 24px rgba(27,23,18,0.06);">
+          <!-- Header -->
+          <tr>
+            <td style="padding:28px 32px; background-color:#FFF4E8; border-bottom:1px solid #EAD7C6;">
+              <span style="font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:#AE3D18;">Launchpad · The Future Council</span>
+              <h1 style="font-family:'Bricolage Grotesque', sans-serif; font-size:24px; font-weight:800; color:#1B1712; margin:8px 0 0 0; line-height:1.2;">Your Launchpad application: feedback &amp; what's next</h1>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding:32px;">
+              <p style="font-size:16px; margin:0 0 16px 0;">Hi <strong>{{first_name}}</strong>,</p>
+              
+              <p style="font-size:15px; margin:0 0 16px 0; color:#5A4E44;">
+                Thank you for applying to Launchpad <strong>{{cohort}}</strong>. We had {{n_applicants}} applications for 20 seats, and yours wasn't selected this time.
+              </p>
+              
+              <p style="font-size:15px; margin:0 0 20px 0; color:#5A4E44;">
+                Here's our honest read, so the ₹1,999 goes toward making your next attempt stronger:
+              </p>
+
+              <!-- Feedback Box -->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#FFF4E8; border-left:4px solid #E2542A; border-radius:0 12px 12px 0; margin-bottom:24px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <div style="margin-bottom:14px;">
+                      <strong style="color:#1B1712; font-size:14px; text-transform:uppercase; font-family:'IBM Plex Mono', monospace; letter-spacing:0.05em; display:block; margin-bottom:4px;">What's working:</strong>
+                      <span style="font-size:14.5px; color:#1B1712;">{{strengths}}</span>
+                    </div>
+                    <div>
+                      <strong style="color:#1B1712; font-size:14px; text-transform:uppercase; font-family:'IBM Plex Mono', monospace; letter-spacing:0.05em; display:block; margin-bottom:4px;">What to fix before you reapply:</strong>
+                      <ol style="margin:6px 0 0 0; padding-left:20px; font-size:14.5px; color:#1B1712;">
+                        <li style="margin-bottom:4px;">{{fix_1}}</li>
+                        <li style="margin-bottom:4px;">{{fix_2}}</li>
+                        <li>{{fix_3}}</li>
+                      </ol>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Next Steps -->
+              <h2 style="font-size:17px; font-weight:700; color:#1B1712; margin:0 0 12px 0;">Your next steps:</h2>
+              <ul style="margin:0 0 24px 0; padding-left:20px; font-size:15px; color:#5A4E44;">
+                <li style="margin-bottom:8px;">
+                  <strong>One month of Startup School, on us</strong> (normally ₹399). Start with {{recommended_modules}}: <a href="{{school_link}}" style="color:#E2542A; font-weight:600; text-decoration:underline;">Activate Free Month ↗</a>
+                </li>
+                <li>
+                  <strong>50% off your next Launchpad application</strong> (₹999 fee). Use code at checkout: <span style="font-family:'IBM Plex Mono', monospace; font-weight:700; background:#FAFAFA; border:1px dashed #E2542A; padding:2px 6px; border-radius:4px; color:#E2542A;">{{discount_code}}</span>
+                </li>
+              </ul>
+
+              <p style="font-size:14px; color:#5A4E44; margin:0 0 4px 0;">Reviewed by <strong>{{reviewer_name}}</strong>.</p>
+              <p style="font-size:15px; font-weight:600; color:#1B1712; margin:12px 0 0 0;">
+                Keep building,<br>
+                The Future Council
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px; background-color:#1B1712; color:#CDBFB2; font-size:12px; text-align:center;">
+              Where student builders stop waiting for permission.<br>
+              <a href="https://thefuturecouncil.in" style="color:#F5A07F; text-decoration:none;">thefuturecouncil.in</a> · support@thefuturecouncil.in
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

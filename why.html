@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Build · Read the notices. Then decide. | The Future Council</title>
+  <meta name="description" content="The placement line is breaking. Why building a startup in college teaches what no mock interview can: customers, selling, shipping, and real agency." />
+  <meta name="canonical" href="https://thefuturecouncil.in/why" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#D6DCD3" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    /* Starts in The Line (Cold office grey-green), transitions to Warm Builder World */
+    body {
+      background: var(--office);
+      color: var(--office-ink);
+    }
+    .why-board {
+      padding-block: clamp(48px, 8vw, 96px);
+    }
+    .manifesto-sec {
+      background: var(--warm);
+      color: var(--ink);
+      padding-block: clamp(72px, 10vw, 130px);
+      border-top: 1px solid var(--line);
+    }
+    .manifesto-text {
+      max-width: 820px;
+      margin: 0 auto;
+      display: grid;
+      gap: 32px;
+    }
+    .manifesto-para {
+      font-family: var(--display);
+      font-size: clamp(24px, 3.2vw, 40px);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .manifesto-para em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .manifesto-para strong {
+      font-weight: 800;
+    }
+
+    /* Comparison Table: Placement Prep vs Building */
+    .compare-sec {
+      padding-block: clamp(64px, 9vw, 110px);
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+    @media (max-width: 760px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+    .compare-col {
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 36px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .compare-col.line-side {
+      background: var(--office);
+      border: 1px solid var(--office-2);
+      color: var(--office-ink);
+    }
+    .compare-col.build-side {
+      background: var(--warm);
+      border: 1.5px solid #F1D4BE;
+      color: var(--ink);
+      box-shadow: 0 10px 30px -15px rgba(226,84,42,0.15);
+    }
+    .compare-item {
+      padding-block: 12px;
+      border-bottom: 1px dashed rgba(0,0,0,0.12);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .compare-item:last-child { border-bottom: 0; }
+    .compare-item b {
+      display: block;
+      font-family: var(--display);
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    /* Safety Nets (Forest Green) */
+    .safety-sec {
+      padding-block: clamp(64px, 9vw, 110px);
+      background: var(--forest-soft);
+      border-top: 1px solid #D4E3DC;
+      border-bottom: 1px solid #D4E3DC;
+    }
+    .policy-box {
+      background: #fff;
+      border-left: 5px solid var(--forest);
+      border-radius: 0 16px 16px 0;
+      padding: clamp(24px, 4vw, 36px);
+      margin-top: 32px;
+      box-shadow: 0 12px 30px -15px rgba(31,90,69,0.12);
+    }
+
+    /* Parents Section */
+    .parents-sec {
+      padding-block: clamp(64px, 9vw, 120px);
+      background: var(--warm);
+      color: var(--ink);
+    }
+    .parents-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(28px, 5vw, 56px);
+      box-shadow: 0 18px 48px -20px rgba(27,23,18,0.08);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav office-mode" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why" class="active">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/chapters">Find Chapter</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why" class="active">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="#parents">Note for Parents <span>→</span></a>
+  </div>
+
+  <main>
+    <!-- SCENE 1: THE NOTICE BOARD (LINE WORLD) -->
+    <header class="why-board">
+      <div class="wrap">
+        <span class="token mono">Placement Notice Board · Official Records</span>
+        <h1 style="font-size: clamp(38px, 6.8vw, 88px); margin-top: 18px; max-width: 14ch;">
+          Read the notices. <span>Then decide.</span>
+        </h1>
+        <p class="lede" style="font-size: clamp(17px, 1.6vw, 20px); color: var(--office-soft); max-width: 52ch; margin-top: 18px; line-height: 1.5;">
+          Every year, students are told to stay in line, keep their heads down, and clear the placement rounds. Here is what the official data shows about that line today.
+        </p>
+
+        <!-- 5 PINNED NOTICES (SPEC 5.2) -->
+        <div class="notices" style="margin-top: 48px;">
+          <article class="notice">
+            <span class="stamp">RTI 2024</span>
+            <div class="n">59%</div>
+            <p>of registered students at IIT Gandhinagar were still unplaced in 2023-24.</p>
+            <a class="src" href="https://news.careers360.com/iit-gandhinagar-placements-average-median-salary-package-40-pc-not-placed-jobs-2024" target="_blank" rel="noopener">Careers360, May 2024 ↗</a>
+          </article>
+
+          <article class="notice">
+            <span class="stamp">IIT RECORD</span>
+            <div class="n">30–40%</div>
+            <p>of registered students across several top-tier IITs were still without offers by late April 2024.</p>
+            <a class="src" href="https://news.careers360.com/iit-gandhinagar-placements-average-median-salary-package-40-pc-not-placed-jobs-2024" target="_blank" rel="noopener">Careers360 RTI, 2024 ↗</a>
+          </article>
+
+          <article class="notice">
+            <span class="stamp">5-YR DIP</span>
+            <div class="n">5–16%</div>
+            <p>drop in campus placement rates at IIT Kanpur, Kharagpur and Roorkee between 2018-19 and 2023-24.</p>
+            <a class="src" href="https://m.thewire.in/article/education/campus-placements-drop-at-most-first-gen-iits-except-iit-delhi-report" target="_blank" rel="noopener">The Wire / Indian Express RTI ↗</a>
+          </article>
+
+          <article class="notice">
+            <span class="stamp">REPORT</span>
+            <div class="n">54.8%</div>
+            <p>of Indian graduates overall are assessed employable for modern industry roles.</p>
+            <a class="src" href="https://taggd.in/industry-reports/isr/india-skills-report-2025/" target="_blank" rel="noopener">India Skills Report 2025 ↗</a>
+          </article>
+
+          <article class="notice">
+            <span class="stamp">AI IMPACT</span>
+            <div class="n">19%</div>
+            <p>gap in hiring of 22–25-year-olds in AI-exposed roles compared to historical trend. Driven by fewer junior hires.</p>
+            <a class="src" href="https://digitaleconomy.stanford.edu/news/canariesaug26/" target="_blank" rel="noopener">Stanford Digital Economy Lab, Aug 2026 ↗</a>
+          </article>
+        </div>
+      </div>
+    </header>
+
+    <!-- SCENE 2: THE MANIFESTO (WARM BUILDER WORLD) -->
+    <section class="manifesto-sec">
+      <div class="wrap">
+        <div class="manifesto-text">
+          <p class="mono kick">The Builder Manifesto</p>
+          <p class="manifesto-para">
+            We were told the plan was simple. Crack the exam, get the seat, clear the placement season, and life is set.
+          </p>
+          <p class="manifesto-para">
+            The plan is breaking. Seats are harder to fill with offers. Machines are learning the work that entry-level jobs were made of. And a degree on its own proves less every year.
+          </p>
+          <p class="manifesto-para">
+            We think there's a better way to spend four years. <strong>Build something.</strong> Find a problem you can't stop thinking about, find the people who care about it too, and ship.
+          </p>
+          <p class="manifesto-para">
+            You might fail. Most startups do. You'll still leave college having done what no mock interview can teach: made something real, for real people, with real stakes.
+          </p>
+          <p class="manifesto-para">
+            This shouldn't be a privilege of a few campuses with an incubator and an alumni network. It should be normal, in every college, in every city.
+          </p>
+          <p class="manifesto-para" style="font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: var(--ink);">
+            That's why The Future Council exists. <em>Don't queue. Build.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 3: WHAT A STARTUP TEACHES VS PLACEMENT PREP -->
+    <section class="compare-sec">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="mono kick">Skill Acquisition</p>
+            <h2>Placement prep vs. Building.</h2>
+          </div>
+          <p class="lede">What you actually learn from spending your college years shipping a real product.</p>
+        </div>
+
+        <div class="compare-grid">
+          <!-- Placement Prep -->
+          <div class="compare-col line-side">
+            <span class="mono" style="color: var(--office-soft);">The Placement Queue</span>
+            <h3 style="font-size: 26px;">Placement Prep</h3>
+            
+            <div class="compare-item">
+              <b>Solving artificial problems</b>
+              Practicing leetcode algorithmic puzzles with predetermined answers that no customer actually uses.
+            </div>
+            <div class="compare-item">
+              <b>Pleasing interviewers</b>
+              Crafting answers to fit a standard rubric where someone else decides if you are selected.
+            </div>
+            <div class="compare-item">
+              <b>Simulated stakes</b>
+              Mock interviews and theoretical case studies where nothing breaks if you get it wrong.
+            </div>
+            <div class="compare-item">
+              <b>Waiting for permission</b>
+              Waiting until final year placement drives to find out where your career begins.
+            </div>
+          </div>
+
+          <!-- Building -->
+          <div class="compare-col build-side">
+            <span class="mono" style="color: var(--orange);">The Builder World</span>
+            <h3 style="font-size: 26px; color: var(--orange-deep);">Building a Startup</h3>
+            
+            <div class="compare-item">
+              <b>Talking to real customers</b>
+              Uncovering painful problems, conducting 20+ user interviews, and understanding what people will pay for.
+            </div>
+            <div class="compare-item">
+              <b>Shipping working products</b>
+              Writing production code, using AI tooling, deploying live software, and iterating from user feedback.
+            </div>
+            <div class="compare-item">
+              <b>Selling, distribution &amp; revenue</b>
+              Convincing strangers to try your product, handling objections, and collecting your first rupee.
+            </div>
+            <div class="compare-item">
+              <b>Undeniable Proof of Work</b>
+              You graduate having founded a team, built software, and pitched investors. You are hired for what you shipped.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 4: THE SAFETY NETS (SPEC 5.2 ITEM 4) -->
+    <section class="safety-sec" id="safety-nets">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <span class="mono" style="color: var(--forest); font-weight: 700;">Institutional Support &amp; Policy</span>
+          <h2 style="color: #12382A;">The college safety nets you didn't know existed.</h2>
+          <p class="lede" style="color: #2D5244;">
+            You don't have to choose between a degree and building a startup. Many top institutions and national policy already protect student founders.
+          </p>
+        </div>
+
+        <div class="policy-box">
+          <h3 style="font-size: 24px; color: var(--forest);">Deferred Placement Policies</h3>
+          <p style="color: #2D5244; font-size: 16px; margin-top: 8px; line-height: 1.6;">
+            Institutions including <b>IIT Bombay, IIT Delhi, IIT Kanpur, IIT Guwahati, IIIT Bangalore, and several IIMs</b> formally allow graduating students who start companies to <b>defer campus placement for up to two years</b>. If your venture doesn't work out, you return to the placement drive with full alumni support.
+          </p>
+
+          <h3 style="font-size: 24px; color: var(--forest); margin-top: 28px;">National Innovation &amp; Startup Policy (NISP 2019)</h3>
+          <p style="color: #2D5244; font-size: 16px; margin-top: 8px; line-height: 1.6;">
+            Framed by the Ministry of Education (MHRD) and AICTE, the National Innovation and Startup Policy explicitly asks universities across India to allow:
+          </p>
+          <ul style="margin: 12px 0 0; padding-left: 20px; color: #2D5244; font-size: 15px; display: grid; gap: 6px;">
+            <li>Semester breaks and 1-year gap breaks for student founders.</li>
+            <li>Academic course credits for working on startup prototypes.</li>
+            <li>Attendance relaxation (up to 20%) for student founders pursuing customer validation and incubation.</li>
+          </ul>
+
+          <div style="margin-top: 24px;">
+            <a class="btn forest" href="https://nisp.mic.gov.in/assets/html/AboutNationalInnovationAndStartu.html" target="_blank" rel="noopener">Read the Official NISP Policy Document ↗</a>
+            <span style="font-size: 13.5px; color: #2D5244; margin-left: 14px;">Ask your dean or T&amp;P cell for these rights.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 5: A NOTE FOR PARENTS (SPEC 5.2 ITEM 5) -->
+    <section class="parents-sec" id="parents">
+      <div class="wrap">
+        <div class="parents-card">
+          <span class="mono kick">For Indian Parents</span>
+          <h2 style="font-size: clamp(28px, 4vw, 44px); margin-top: 10px;">A letter to parents.</h2>
+          
+          <div style="font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); margin-top: 20px; display: grid; gap: 16px;">
+            <p>
+              Dear parents,
+            </p>
+            <p>
+              We know how hard you worked to get your child into college. You want them to have financial security, dignity, and a clear path ahead.
+            </p>
+            <p>
+              When your child says they want to spend time building a startup, it is natural to worry. But building a startup in college is no longer a reckless gamble—it is the fastest way to become exceptionally capable.
+            </p>
+            <p>
+              <b>Here is how The Future Council protects your child:</b>
+            </p>
+            <ul style="padding-left: 20px; display: grid; gap: 8px;">
+              <li><b>Zero equity taken:</b> We do not take ownership shares in your student's work.</li>
+              <li><b>Safety nets exist:</b> Leading colleges allow students to defer placements for up to two years. Your child does not lose their college placement rights.</li>
+              <li><b>Real skills for a changing world:</b> Even if the startup fails, tech companies actively recruit founders because they know how to build real products, talk to customers, and solve problems independently.</li>
+            </ul>
+            <p>
+              College is the cheapest time in life to take an ambitious swing. Thank you for supporting their agency.
+            </p>
+            <p style="font-weight: 600; color: var(--ink); margin-top: 8px;">
+              Dhruv Madan &amp; Aryaveer Chauhan · Founders, The Future Council
+            </p>
+          </div>
+
+          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px dashed var(--line); display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+            <a class="btn solid" href="https://wa.me/?text=Read%20this%20note%20from%20The%20Future%20Council%20for%20parents%20about%20building%20startups%20in%20college:%20https://thefuturecouncil.in/why#parents" target="_blank" rel="noopener">
+              Share with your parents on WhatsApp ↗
+            </a>
+            <span style="font-size: 13.5px; color: var(--ink-soft);">Sends a calm explanation directly to their WhatsApp chat.</span>
+          </div>
+        </div>
+
+        <!-- SPEC 5.2 ITEM 6 CTA -->
+        <div style="margin-top: 64px; text-align: center;">
+          <h3 style="font-size: clamp(24px, 3.5vw, 38px);">Ready to find other builders on your campus?</h3>
+          <p style="color: var(--ink-soft); font-size: 16px; margin: 10px auto 24px; max-width: 44ch;">
+            Chapters are student-run on 90+ colleges. Free to join, no application.
+          </p>
+          <a class="btn solid lg" href="/chapters">Find your chapter →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-shared.js"></script>
+</body>
+</html>

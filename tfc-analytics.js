@@ -389,7 +389,7 @@
 
     /**
      * Event 6: fellowship_enrollment_started
-     * Selected applicant begins enrollment/payment steps for the fellowship (₹999).
+     * Selected applicant begins enrollment/payment steps for the fellowship (₹1,999).
      */
     trackFellowshipEnrollmentStarted: function (options = {}) {
       const channel = options.acquisition_channel || detectAcquisitionChannel();
@@ -412,7 +412,7 @@
     trackFellowshipEnrolled: function (options = {}) {
       const channel = options.acquisition_channel || detectAcquisitionChannel();
       const university = detectUniversity(options.university);
-      const fee = typeof options.fellowship_fee_amount === 'number' ? options.fellowship_fee_amount : 999;
+      const fee = typeof options.fellowship_fee_amount === 'number' ? options.fellowship_fee_amount : 1999;
       const status = options.payment_status || 'paid'; // paid | failed | refunded
       const batch = options.review_batch || DEFAULT_REVIEW_BATCH;
 

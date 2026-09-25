@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start a Chapter · Become a Chapter Lead | The Future Council</title>
+  <meta name="description" content="Bring The Future Council to your university. Become an official Chapter Lead: run campus build nights, curate founder pods, and connect your campus to national investors." />
+  <meta name="canonical" href="https://thefuturecouncil.in/chapters/start" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#1B1712" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Supabase & Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    .lead-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 64px);
+      background: var(--ink);
+      color: var(--warm);
+      border-bottom: 1px solid #332B24;
+    }
+    .lead-form-sec {
+      padding-block: clamp(48px, 8vw, 96px);
+      background: var(--warm);
+      color: var(--ink);
+    }
+    .grid-split {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .grid-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="nav night-mode" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage" style="color:var(--warm);">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters" class="active">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn sm" href="/ambassador.html" style="color:var(--warm);">Lead Login</a>
+        <a class="btn solid sm" href="#apply">Apply to Lead</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/ambassador.html">Chapter Lead Portal <span>→</span></a>
+  </div>
+
+  <main>
+    <header class="lead-hero">
+      <div class="wrap">
+        <span class="mono" style="color: #F5A07F;">Campus Leadership · Cohort 2026</span>
+        <h1 style="font-size: clamp(36px, 6vw, 76px); margin-top: 14px;">Start a Chapter on your campus.</h1>
+        <p class="lede" style="font-size: clamp(17px, 1.6vw, 20px); color: #CDBFB2; max-width: 48ch; margin-top: 16px; line-height: 1.5;">
+          Don't wait for your college to build an ecosystem. Step up, launch a student-run chapter, and connect your campus to India's most active student startup network.
+        </p>
+      </div>
+    </header>
+
+    <section class="lead-form-sec" id="apply">
+      <div class="wrap grid-split">
+        <div>
+          <span class="mono kick">Role Breakdown</span>
+          <h2 style="font-size: clamp(28px, 3.8vw, 44px); margin-top: 8px;">What a Chapter Lead does.</h2>
+          
+          <div style="display: grid; gap: 20px; margin-top: 28px;">
+            <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+              <strong style="font-size: 17px; display: block;">1. Host Monthly Build Nights</strong>
+              <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 6px;">
+                Organize low-friction evening sprints on your campus where students code, design, and validate prototypes together.
+              </p>
+            </div>
+            <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+              <strong style="font-size: 17px; display: block;">2. Facilitate Co-Founder Matches</strong>
+              <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 6px;">
+                Connect engineers with commercial talent, designers with researchers, turning individual projects into venture teams.
+              </p>
+            </div>
+            <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+              <strong style="font-size: 17px; display: block;">3. Run Semester Demo Days</strong>
+              <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 6px;">
+                Give your campus builders a stage to present their traction to local founders, alumni, and investors.
+              </p>
+            </div>
+          </div>
+
+          <div class="receipt" style="margin-top: 32px;">
+            <h3>Chapter Lead Privileges</h3>
+            <ul>
+              <li><span>Direct mentorship from Dhruv &amp; Aryaveer</span><span>✓ Guaranteed</span></li>
+              <li><span>Free Startup School membership</span><span>✓ Included</span></li>
+              <li><span>Priority founder review for Launchpad</span><span>✓ Yes</span></li>
+              <li><span>National Lead Council badge &amp; network</span><span>✓ Lifetime</span></li>
+            </ul>
+            <div class="tot">
+              <span>Cost to apply</span>
+              <span>₹0 Free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM CARD -->
+        <div style="background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: clamp(24px, 4vw, 36px); box-shadow: 0 16px 40px -20px rgba(27,23,18,0.1);">
+          <span class="mono kick">Application</span>
+          <h3 style="font-size: 24px; margin-top: 6px;">Apply to Lead Your College</h3>
+          <p style="color: var(--ink-soft); font-size: 14px; margin-top: 4px;">Applications are reviewed on rolling basis within 48 hours.</p>
+
+          <form id="chapterLeadForm" style="margin-top: 24px;">
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clName">Full Name *</label>
+              <input type="text" id="clName" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. Siddharth Verma" />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clEmail">Email Address *</label>
+              <input type="email" id="clEmail" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="name@college.edu or gmail.com" />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clPhone">WhatsApp Phone *</label>
+              <input type="tel" id="clPhone" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="+91 98765 43210" />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clCollege">College / University Name *</label>
+              <input type="text" id="clCollege" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. IIT Roorkee, BITS Pilani, Christ University..." />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+              <div>
+                <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clCity">City *</label>
+                <input type="text" id="clCity" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. Bengaluru, Pune" />
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clYear">Current Year *</label>
+                <select id="clYear" class="search-input" style="width: 100%; border-radius: 10px; cursor: pointer;">
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year" selected>2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                  <option value="Postgrad">Postgraduate</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 22px;">
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="clReason">Why do you want to launch a chapter at your college? *</label>
+              <textarea id="clReason" required class="search-input" style="width: 100%; border-radius: 10px; min-height: 90px; resize: vertical;" placeholder="Tell us about the current builder culture on your campus and what you want to change."></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmitLead" class="btn solid lg" style="width: 100%;">Submit Chapter Lead Application →</button>
+          </form>
+
+          <div id="leadSuccessMsg" style="display: none; margin-top: 20px; padding: 20px; background: #E8F5E9; border: 1px solid #A5D6A7; border-radius: 12px; text-align: center;">
+            <strong style="color: #1B5E20; font-size: 17px; display: block;">Application Received!</strong>
+            <p style="color: #2E7D32; font-size: 14px; margin-top: 6px;">
+              We have received your application to start a chapter. Our founders will contact you on WhatsApp within 48 hours for onboarding.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-shared.js"></script>
+  <script>
+  (function(){
+    const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    let supabaseClient = null;
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    const form = document.getElementById('chapterLeadForm');
+    const successMsg = document.getElementById('leadSuccessMsg');
+    const submitBtn = document.getElementById('btnSubmitLead');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting Application...';
+
+      const name = document.getElementById('clName').value.trim();
+      const email = document.getElementById('clEmail').value.trim().toLowerCase();
+      const phone = document.getElementById('clPhone').value.trim();
+      const college = document.getElementById('clCollege').value.trim();
+      const city = document.getElementById('clCity').value.trim();
+      const year = document.getElementById('clYear').value;
+      const reason = document.getElementById('clReason').value.trim();
+
+      const combinedData = `${college} (${city}, ${year}) | Phone: ${phone} | Role: ChapterLeadApplicant | Motivation: ${reason} | SubmittedAt: ${new Date().toISOString()}`;
+
+      try {
+        if (supabaseClient) {
+          const rand = Math.floor(1000 + Math.random() * 9000);
+          await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combinedData,
+            tier: 'Ambassador',
+            member_id: `TFC-LEAD-${rand}`,
+            password: 'lead2026'
+          }]);
+        }
+      } catch (err) {
+        console.warn('Lead application sync note:', err);
+      }
+
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    });
+  })();
+  </script>
+</body>
+</html>

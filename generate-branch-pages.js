@@ -1,552 +1,285 @@
 const fs = require('fs');
 const path = require('path');
 
-const branches = [
-  {
-    id: 'fot',
-    name: 'Faculty of Technology (FoT), DU',
-    location: 'Delhi University • North Campus',
-    logo: 'FOT',
-    badge: 'DU Chapter',
-    desc: 'Primary technical builder chapter. Hosts system architecture camps, hackathons, and software engineering cohorts.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'srcc',
-    name: 'Shri Ram College of Commerce (SRCC)',
-    location: 'Delhi University • North Campus',
-    logo: 'SRCC',
-    badge: 'DU Chapter',
-    desc: 'Leading branch for commerce-tech, fintech, corporate relations, and early business development.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'hansraj',
-    name: 'Hansraj College',
-    location: 'Delhi University • North Campus',
-    logo: 'HRC',
-    badge: 'DU Chapter',
-    desc: 'Focuses on student incubation support, startup mixers, and early product validation workshops.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'hindu',
-    name: 'Hindu College',
-    location: 'Delhi University • North Campus',
-    logo: 'HIN',
-    badge: 'DU Chapter',
-    desc: 'Centering on social tech ventures, policy integration, and product design sprints.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'stephens',
-    name: "St. Stephen's College",
-    location: 'Delhi University • North Campus',
-    logo: 'STE',
-    badge: 'DU Chapter',
-    desc: 'Focuses on liberal arts integrations in tech, creator economy projects, and research labs.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'kmc',
-    name: 'Kirori Mal College (KMC)',
-    location: 'Delhi University • North Campus',
-    logo: 'KMC',
-    badge: 'DU Chapter',
-    desc: 'Runs venture building workshops, operations cohorts, and peer mentoring networks.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'ipcw',
-    name: 'Indraprastha College for Women (IPCW)',
-    location: 'Delhi University • North Delhi',
-    logo: 'IPCW',
-    badge: 'DU Chapter',
-    desc: 'Focusing on media-tech, female entrepreneurship events, and consumer internet products.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'lsr',
-    name: 'Lady Shri Ram College (LSR)',
-    location: 'Delhi University • South Delhi',
-    logo: 'LSR',
-    badge: 'DU Chapter',
-    desc: 'Focusing on women-led venture networks, consulting masterclasses, and social startup incubators.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'venky',
-    name: 'Sri Venkateswara College (Venky)',
-    location: 'Delhi University • South Delhi',
-    logo: 'VEN',
-    badge: 'DU Chapter',
-    desc: 'Fostering bio-tech, logistics, and retail-tech initiatives across South Campus.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'miranda',
-    name: 'Miranda House',
-    location: 'Delhi University • North Campus',
-    logo: 'MH',
-    badge: 'DU Chapter',
-    desc: 'Chapter for science-tech, deep-tech research translation, and health-tech solutions.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'drc',
-    name: 'Daulat Ram College (DRC)',
-    location: 'Delhi University • North Campus',
-    logo: 'DRC',
-    badge: 'DU Chapter',
-    desc: 'Hosts marketing masterclasses, creative design sprints, and brand management cohorts.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'khalsa',
-    name: 'SGTB Khalsa College',
-    location: 'Delhi University • North Campus',
-    logo: 'KHAL',
-    badge: 'DU Chapter',
-    desc: 'Fostering web3 dev squads, fintech analytics, and local campus startup pilots.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'dtu',
-    name: 'Delhi Technological University (DTU)',
-    location: 'DTU • Bawana Road',
-    logo: 'DTU',
-    badge: 'National Chapter',
-    desc: 'Highly engineering-centric branch focusing on cloud infrastructure, SaaS, and robotics ventures.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'nsut',
-    name: 'Netaji Subhas University of Technology (NSUT)',
-    location: 'NSUT • Dwarka',
-    logo: 'NSUT',
-    badge: 'National Chapter',
-    desc: 'Focusing on mobile applications, AI/ML models, algorithmic trading bots, and developer tooling.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'igdtuw',
-    name: 'IGDTUW',
-    location: 'IGDTUW • Kashmiri Gate',
-    logo: 'IGD',
-    badge: 'National Chapter',
-    desc: 'Connecting engineering minds. Hosts women-led hackathons, cybersecurity projects, and web development clinics.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'iiitd',
-    name: 'IIIT Delhi (IIITD)',
-    location: 'IIITD • Okhla Phase III',
-    logo: 'IIITD',
-    badge: 'National Chapter',
-    desc: 'Pioneering computational design, data analytics, ML engineering research, and product design cohorts.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'iitd',
-    name: 'IIT Delhi',
-    location: 'IIT Delhi • Hauz Khas',
-    logo: 'IITD',
-    badge: 'National Chapter',
-    desc: 'Pioneering deep-tech, robotics, clean-tech, AI agent systems, and venture scale models.',
-    president: 'TFC Student Council',
-    role: 'Interim Committee',
-    photo: 'TFC.png'
-  },
-  {
-    id: 'iitp',
-    name: 'IIT Patna (Hybrid)',
-    location: 'IIT Patna • Bihta',
-    logo: 'IITP',
-    badge: 'Hybrid Chapter',
-    desc: 'Connecting regional builders via hybrid sprint cohorts. Focusing on distributed systems, AI applications, and hardware-software co-design.',
-    president: 'Vaibhav Jamge',
-    role: 'Interim President',
-    photo: 'vaibhav.jpg'
-  }
-];
+const chapters = JSON.parse(fs.readFileSync(path.join(__dirname, 'chapters-data.json'), 'utf8'));
 
-function generateHtml(branch) {
-  const isCustomPhoto = branch.photo === 'vaibhav.jpg';
-  
+function generateChapterHtml(ch) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${branch.name} Chapter | Future Council</title>
-  <meta name="description" content="Explore Future Council ${branch.name} Chapter (${branch.location}). Join the campus startup ecosystem, attend founder mixers, and access founder fellowships." />
-  <meta name="keywords" content="${branch.name}, Future Council ${branch.name}, Future Council chapter, The Future Council, TFC ${branch.id}, ${branch.location}, student startup cell, college founder society, Future Council" />
-  <meta name="author" content="Future Council" />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <link rel="canonical" href="https://thefuturecouncil.in/branch-${branch.id}" />
-  <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#E2542A" />
+  <title>${ch.name} · Campus Chapter | The Future Council</title>
+  <meta name="description" content="Official student startup chapter at ${ch.name} (${ch.location}) by The Future Council. Join build nights, co-founder matching, and Demo Days." />
+  <link rel="canonical" href="https://thefuturecouncil.in/chapters/${ch.id}" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#1B1712" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Future Council | The Future Council" />
-  <meta property="og:url" content="https://thefuturecouncil.in/branch-${branch.id}" />
-  <meta property="og:title" content="${branch.name} Chapter | Future Council" />
-  <meta property="og:description" content="Official student startup chapter at ${branch.name} by Future Council. ${branch.desc}" />
-  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="en_IN" />
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thefuturecouncil.in/branch-${branch.id}" />
-  <meta name="twitter:title" content="${branch.name} Chapter | Future Council" />
-  <meta name="twitter:description" content="Official student startup chapter at ${branch.name} by Future Council." />
-  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
 
-  <!-- Schema.org JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": ["Organization", "EducationalOrganization"],
-        "name": "${branch.name} - Future Council Chapter",
-        "legalName": "${branch.name} - The Future Council Chapter",
-        "alternateName": "TFC ${branch.logo}",
-        "url": "https://thefuturecouncil.in/branch-${branch.id}",
-        "logo": "https://thefuturecouncil.in/TFC.png",
-        "description": "${branch.desc.replace(/"/g, '\\"')}",
-        "location": {
-          "@type": "Place",
-          "name": "${branch.location}"
-        },
-        "parentOrganization": {
-          "@type": ["Organization", "EducationalOrganization"],
-          "name": "Future Council",
-          "legalName": "The Future Council",
-          "url": "https://thefuturecouncil.in"
-        }
-      }
-    ]
-  }
-  </script>
-
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-  <script src="tfc-analytics.js" defer></script>
-
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1763806951409454');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
+  <style>
+    .ch-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(36px, 6vw, 64px);
+      background: var(--ink);
+      color: var(--warm);
+      border-bottom: 1px solid #332B24;
+    }
+    .ch-layout {
+      padding-block: clamp(48px, 8vw, 96px);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 5vw, 64px);
+    }
+    @media (max-width: 860px) {
+      .ch-layout { grid-template-columns: 1fr; }
+    }
+    .lead-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .lead-card-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--warm-2);
+      border: 2px dashed #E3B79C;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .lead-card-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .event-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation (Spec §2) -->
-  <header class="tfc-header">
-    <div class="tfc-container tfc-nav-wrapper">
-      <a href="index.html" class="tfc-brand">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
+  <!-- NAVIGATION -->
+  <nav class="nav night-mode" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage" style="color:var(--warm);">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
       </a>
-
-      <ul class="tfc-nav-links">
-        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
-        <li><a href="branches.html" class="tfc-nav-link active">Branches</a></li>
-        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
-        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      <ul class="nav-links">
+        <li><a href="/chapters" class="active">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
       </ul>
-
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/join?chapter=${ch.id}">Join Chapter</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link active">Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join the Council →</a>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters" class="active">All Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <div style="margin-top: 20px;">
+      <a class="btn solid lg" href="/join?chapter=${ch.id}" style="width: 100%; text-align: center;">Join ${ch.name}</a>
     </div>
   </div>
 
   <main>
-    <!-- Header Section (Spec §5.1: Back link) -->
-    <section class="tfc-section" style="padding-top: 36px; padding-bottom: 24px;">
-      <div class="tfc-container">
-        <div style="margin-bottom: 20px;">
-          <a href="branches.html" style="font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
-            ← Back to Branches Directory
-          </a>
+    <header class="ch-hero">
+      <div class="wrap">
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 14px;">
+          <span class="mono" style="color: #F5A07F;">${ch.location}</span>
+          <span style="color: #6A5C4F;">•</span>
+          <span style="font-family: var(--mono); font-size: 11px; background: #2E7D32; color: #fff; padding: 2px 8px; border-radius: 999px;">${ch.status}</span>
+        </div>
+        <h1 style="font-size: clamp(34px, 5.5vw, 68px);">${ch.name}</h1>
+        <p class="lede" style="font-size: clamp(17px, 1.5vw, 20px); color: #CDBFB2; max-width: 52ch; margin-top: 14px; line-height: 1.5;">
+          ${ch.desc}
+        </p>
+
+        <div style="margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap;">
+          <a class="btn solid lg" href="/join?chapter=${ch.id}">Join this chapter, free →</a>
+          <a class="btn lg" href="/chapters" style="color: var(--warm);">← Back to all chapters</a>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- Branch Details (Spec §5: 5-Part Template) -->
-    <section class="tfc-section" style="padding-top: 0; padding-bottom: 60px;">
-      <div class="tfc-container">
-        <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 32px;" class="branch-grid">
-          
-          <!-- Left Column: What this chapter does & Live Activations -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-            <div class="tfc-card" style="padding: 36px;">
-              <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                <span class="tfc-badge" style="background: rgba(226, 84, 42, 0.1); color: var(--accent);">${branch.badge.toUpperCase()}</span>
-                <span class="tfc-badge tfc-badge-lime">ACTIVE CHAPTER</span>
-              </div>
-              
-              <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 8px; letter-spacing: -0.02em;">
-                ${branch.name}
-              </h1>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px;">
-                📍 ${branch.location}
-              </p>
-              <p style="font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 28px;">
-                ${branch.desc}
-              </p>
-
-              <!-- §5.3 What's active right now -->
-              <div style="border-top: 1px solid var(--border-subtle); padding-top: 24px;">
-                <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;">
-                  ⚡ Live Chapter Activations & Perks
-                </h3>
-                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
-                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Early-stage startup ideation clinics, customer discovery labs, and prototype validation sprints.</span>
-                  </li>
-                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Exclusive campus mixers with verified alumni founders, institutional angel investors, and operators.</span>
-                  </li>
-                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Council builder pass with verified member credentials and ecosystem directory listing.</span>
-                  </li>
-                  <li style="font-size: 0.92rem; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px;">
-                    <span style="color: var(--accent); font-weight: 800; font-size: 1.1rem;">✓</span>
-                    <span>Direct priority fast-track pipeline for Fellowship '26 (4-week online founder cohort, equity-free).</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- §5.5 CTA band with parameterized college -->
-            <div class="tfc-card" style="padding: 36px; text-align: center; border: 1.5px solid var(--ink);">
-              <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 8px;">
-                Ready to build at ${branch.name}?
-              </h2>
-              <p style="font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-                Join this chapter's builder circle to connect with peer founders, access curated tools, and ship real products on campus.
-              </p>
-              <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-                <a href="join.html?college=${encodeURIComponent(branch.name)}" class="tfc-btn tfc-btn-primary">
-                  Join Chapter Ecosystem →
-                </a>
-                <a href="fellowship.html" class="tfc-btn tfc-btn-outline">
-                  Apply for Fellowship '26 →
-                </a>
-              </div>
-            </div>
+    <div class="wrap ch-layout">
+      <!-- MAIN INFO -->
+      <div>
+        <span class="mono kick">On-Campus Activities</span>
+        <h2 style="font-size: clamp(26px, 3.5vw, 40px); margin-top: 8px;">What happens at ${ch.name}.</h2>
+        
+        <div style="display: grid; gap: 16px; margin-top: 24px;">
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+            <strong style="font-size: 17px; display: block;">Monthly Campus Build Night</strong>
+            <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 4px;">
+              Regular evening sprints on campus where students bring projects, code together, and exchange direct user feedback.
+            </p>
           </div>
-
-          <!-- Right Column: Leadership & Recruitment Status (§5.4) -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-            
-            <!-- Leadership Panel -->
-            <div class="tfc-card" style="padding: 28px; text-align: center;">
-              <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.08em; margin-bottom: 18px; font-family: var(--font-utility);">
-                Chapter Leadership
-              </div>
-
-              ${isCustomPhoto ? `
-                <div style="width: 110px; height: 110px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; border: 3px solid var(--accent); box-shadow: var(--shadow-sm);">
-                  <img src="${branch.photo}" alt="${branch.president}" style="width: 100%; height: 100%; object-fit: cover;" />
-                </div>
-              ` : `
-                <div style="width: 84px; height: 84px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-weight: 800; font-size: 1.5rem; border: 3px solid var(--accent);">
-                  ${branch.logo}
-                </div>
-              `}
-
-              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">
-                ${branch.president}
-              </h3>
-              <p style="font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.05em; font-family: var(--font-utility);">
-                ${branch.role}
-              </p>
-              <p style="font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; margin: 0;">
-                Responsible for coordinating founder sprint cycles, hackathons, and campus nodes.
-              </p>
-            </div>
-
-            <!-- Recruitment Status Banner -->
-            <div class="tfc-dark-banner" style="padding: 24px;">
-              <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: var(--accent); margin-bottom: 6px; font-family: var(--font-utility); letter-spacing: 0.08em;">
-                RECRUITMENT STATUS
-              </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;">
-                Cohort 1 Onboarding Open
-              </h3>
-              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0;">
-                Active student builder and ambassador roles are now reviewing applications. Apply to activate your official chapter status.
-              </p>
-            </div>
-
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+            <strong style="font-size: 17px; display: block;">Co-Founder &amp; Skill Matching</strong>
+            <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 4px;">
+              Looking for a technical co-founder or someone to handle business development? The chapter connects students across departments.
+            </p>
           </div>
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
+            <strong style="font-size: 17px; display: block;">Startup School Study Circles</strong>
+            <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 4px;">
+              Work through the 9 practical modules together, practice mock pitches, and review each other's deliverables.
+            </p>
+          </div>
+        </div>
 
+        <h3 style="font-size: 22px; margin-top: 40px;">Recent &amp; Upcoming Events</h3>
+        <div class="event-card">
+          <div>
+            <strong style="display: block; font-size: 16px;">${ch.lastEvent || 'Campus Build Night'}</strong>
+            <span style="font-size: 13px; color: var(--ink-soft);">In-Person Meetup · Campus Common Area</span>
+          </div>
+          <span style="font-family: var(--mono); font-size: 12px; color: var(--forest); font-weight: 600;">Completed</span>
+        </div>
+        <div class="event-card">
+          <div>
+            <strong style="display: block; font-size: 16px;">Semester Prototype Showcase</strong>
+            <span style="font-size: 13px; color: var(--ink-soft);">Demo day with peers and visiting operators</span>
+          </div>
+          <span style="font-family: var(--mono); font-size: 12px; color: var(--orange-deep); font-weight: 600;">Upcoming</span>
         </div>
       </div>
-    </section>
+
+      <!-- SIDEBAR -->
+      <div>
+        <span class="mono kick">Chapter Leadership</span>
+        <div class="lead-card">
+          <div class="lead-card-avatar">
+            <img src="/${ch.photo || 'TFC.png'}" alt="${ch.leadName}" onerror="this.src='/TFC.png'" />
+          </div>
+          <div>
+            <strong style="display: block; font-size: 17px;">${ch.leadName}</strong>
+            <span style="color: var(--ink-soft); font-size: 13px;">${ch.leadRole}</span>
+            <div style="font-size: 12px; color: var(--forest); margin-top: 6px; font-weight: 600;">● Active on Campus</div>
+          </div>
+        </div>
+
+        <div class="receipt" style="margin-top: 24px;">
+          <h3>Chapter Membership Perks</h3>
+          <ul>
+            <li><span>Access to campus build nights</span><span>✓ Free</span></li>
+            <li><span>7 Days Startup School access</span><span>✓ Free</span></li>
+            <li><span>Co-founder matchmaking</span><span>✓ Included</span></li>
+            <li><span>Priority Launchpad referral</span><span>✓ Included</span></li>
+          </ul>
+          <div class="tot">
+            <span>Membership Cost</span>
+            <span>₹0 Free</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <a class="btn solid lg" href="/join?chapter=${ch.id}" style="width: 100%; text-align: center;">Join ${ch.name} →</a>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <!-- Sticky Mobile & Desktop CTA Bar -->
-  <aside class="tfc-sticky-relaunch-bar">
-    <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · Applications Open</div>
-    </div>
-    <a href="fellowship.html" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
-  </aside>
-
-  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
-  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
-    <div class="tfc-container">
-      <div class="tfc-footer-grid">
-        <!-- Col 1: Brand -->
-        <div class="tfc-footer-col">
-          <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; text-decoration: none;">
-            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 6px;" />
-            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
           </a>
-          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
-            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
           </p>
-          <div style="font-size: 0.8rem; color: var(--paper-70);">
-            Admissions & Support: <br />
-            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
-          </div>
         </div>
-
-        <!-- Col 2: Navigation Columns -->
-        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="fellowship.html" style="color: var(--paper-70); transition: color 0.2s;">Fellowship '26</a></li>
-              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
-              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
-              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="branches.html" style="color: var(--paper); font-weight: 600;">Collegiate Branches</a></li>
-              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
-              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
-              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
-              <li><a href="join.html" style="color: var(--paper-70); transition: color 0.2s;">Join the Council</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Col 3: Legal & Status -->
-        <div class="tfc-footer-col">
-          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
-            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
-            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
           </ul>
-          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
-            ${branch.name} Active Collegiate Node
-          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
         </div>
       </div>
-
-      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <span>© 2026 The Future Council. All rights reserved.</span>
-        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
       </div>
     </div>
   </footer>
 
+  <script src="/tfc-shared.js"></script>
 </body>
-</html>`;
+</html>
+`;
 }
 
-branches.forEach(branch => {
-  const filePath = path.join(__dirname, `branch-${branch.id}.html`);
-  const content = generateHtml(branch);
-  fs.writeFileSync(filePath, content, 'utf8');
-  console.log(`Successfully generated: ${filePath}`);
+// Generate files for each chapter
+if (!fs.existsSync(path.join(__dirname, 'chapters'))) {
+  fs.mkdirSync(path.join(__dirname, 'chapters'), { recursive: true });
+}
+
+chapters.forEach(ch => {
+  const html = generateChapterHtml(ch);
+  // Write to branch-<id>.html (old URL compatibility)
+  fs.writeFileSync(path.join(__dirname, `branch-${ch.id}.html`), html, 'utf8');
+  // Write to chapters/<id>.html (new URL route)
+  fs.writeFileSync(path.join(__dirname, 'chapters', `${ch.id}.html`), html, 'utf8');
 });
-console.log('All branch pages generated successfully!');
+
+console.log(`Successfully generated ${chapters.length} chapter pages in both branch-*.html and chapters/*.html`);

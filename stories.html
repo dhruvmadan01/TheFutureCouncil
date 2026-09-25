@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stories · People who stepped out of line | The Future Council</title>
+  <meta name="description" content="Stories of student founders in India who stepped out of the placement queue to build real ventures." />
+  <meta name="canonical" href="https://thefuturecouncil.in/stories" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    .stories-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(36px, 6vw, 64px);
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
+    }
+    .stories-container {
+      padding-block: clamp(64px, 9vw, 120px);
+    }
+    .empty-state {
+      background: #fff;
+      border: 1.5px dashed var(--line);
+      border-radius: 24px;
+      padding: clamp(36px, 6vw, 72px) 24px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: 0 14px 34px -18px rgba(27,23,18,0.06);
+    }
+    .builder-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories" class="active">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/chapters">Find Chapter</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories" class="active">Stories <span>→</span></a>
+  </div>
+
+  <main>
+    <header class="stories-hero">
+      <div class="wrap">
+        <span class="mono kick">Builder Archive</span>
+        <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">People who stepped out of line.</h1>
+        <p class="lede" style="font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
+          Stories of students who decided to spend college building real products, serving actual customers, and creating their own future.
+        </p>
+      </div>
+    </header>
+
+    <section class="stories-container">
+      <div class="wrap">
+        <!-- SPEC 5.7: SHIP WITH NO CARDS, EXACT SPECIFIED COPY -->
+        <div class="empty-state">
+          <div class="pin" style="width: 56px; height: 56px; border-radius: 50%; background: var(--warm); border: 2.5px solid var(--orange); display: grid; place-items: center; margin: 0 auto 20px; font-size: 20px; color: var(--orange-deep);">
+            ✦
+          </div>
+          <h2 style="font-size: clamp(24px, 3.5vw, 36px);">First stories arrive after Cohort 01's Demo Day.</h2>
+          <p style="color: var(--ink-soft); font-size: 16.5px; margin: 14px auto 28px; max-width: 44ch; line-height: 1.55;">
+            We never invent testimonials or fake metrics. Real case studies from Launchpad Cohort 01 will be published here upon completion of Demo Day.
+          </p>
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <a class="btn solid lg" href="/chapters">Want yours here? Join a chapter →</a>
+            <a class="btn lg" href="/launchpad">Apply to Launchpad</a>
+          </div>
+        </div>
+
+        <div id="storiesGrid" style="display: none; margin-top: 40px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+          <!-- Template ready for dynamic injection when stories-data.json has records -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-shared.js"></script>
+  <script>
+  (function(){
+    fetch('/stories-data.json')
+      .then(r => r.json())
+      .then(stories => {
+        if (stories && stories.length > 0) {
+          const grid = document.getElementById('storiesGrid');
+          const emptyState = document.querySelector('.empty-state');
+          if (emptyState) emptyState.style.display = 'none';
+          if (grid) {
+            grid.style.display = 'grid';
+            grid.innerHTML = stories.map(s => `
+              <article class="builder-card">
+                <div style="display:flex; gap:14px; align-items:center;">
+                  <div class="face" style="width:54px; height:54px;"><img src="\${s.photo}" alt="\${s.name}" /></div>
+                  <div>
+                    <strong>\${s.name}</strong>
+                    <span style="display:block; font-size:12.5px; color:var(--ink-soft);">\${s.college} · \${s.year}</span>
+                  </div>
+                </div>
+                <div>
+                  <span class="mono kick">\${s.project}</span>
+                  <p style="margin-top:6px; font-size:14.5px;">\${s.oneLiner}</p>
+                </div>
+                <div style="background:var(--warm); padding:12px; border-radius:10px; font-size:13px;">
+                  <div><b>Before:</b> \${s.before}</div>
+                  <div style="margin-top:4px;"><b>After:</b> \${s.after}</div>
+                </div>
+                <blockquote>"\${s.quote}"</blockquote>
+              </article>
+            `).join('');
+          }
+        }
+      })
+      .catch(() => {});
+  })();
+  </script>
+</body>
+</html>

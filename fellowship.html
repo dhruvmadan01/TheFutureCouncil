@@ -3,1499 +3,759 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fellowship '26 | 4-Week Online Fellowship for Student Founders | The Future Council</title>
-  <meta name="description" content="A 4-week, equity-free fellowship for student founders — now fully online. 90+ university chapters, small founder pods, weekly live labs, and a virtual demo day. Applications open now." />
-  <meta name="keywords" content="Future Council Fellowship, The Future Council Fellowship 2026, online student founder fellowship, equity-free startup incubator, college builder cohort, TFC Fellowship, virtual demo day" />
-  <meta name="author" content="Future Council" />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <link rel="canonical" href="https://thefuturecouncil.in/fellowship" />
-  <link rel="manifest" href="site.webmanifest" />
+  <title>Fellowship '26 | Launchpad Cohort 01 · The Future Council</title>
+  <meta name="description" content="A 4-week, equity-free online fellowship for 20 student founders ending in Demo Day with vetted investors. 0% equity. 2% only if you raise." />
+  <meta name="canonical" href="https://thefuturecouncil.in/launchpad/fellowship" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
   <meta name="theme-color" content="#E2542A" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Future Council | The Future Council" />
-  <meta property="og:url" content="https://thefuturecouncil.in/fellowship" />
-  <meta property="og:title" content="Fellowship '26 | 4-Week Online Fellowship for Student Founders" />
-  <meta property="og:description" content="A 4-week, equity-free fellowship for student founders — now fully online. No relocation, no campus, no single city deciding who gets in. Applications open now." />
-  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="en_IN" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://thefuturecouncil.in/fellowship" />
-  <meta name="twitter:title" content="Fellowship '26 | 4-Week Online Fellowship for Student Founders" />
-  <meta name="twitter:description" content="A 4-week, equity-free fellowship for student founders — now fully online. 4-6 founder pods, weekly live labs, and virtual demo day." />
-  <meta name="twitter:image" content="https://thefuturecouncil.in/TFC.png" />
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "EducationalOccupationalProgram",
-        "name": "The Future Council Fellowship '26",
-        "description": "Equity-free 4-week online fellowship for student founders across 90+ university chapters. Applications open now.",
-        "url": "https://thefuturecouncil.in/fellowship",
-        "provider": {
-          "@type": ["Organization", "EducationalOrganization"],
-          "name": "Future Council",
-          "legalName": "The Future Council",
-          "url": "https://thefuturecouncil.in"
-        }
-      }
-    ]
-  }
-  </script>
-
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="style.css" />
-    <!-- Fonts for Fellowship Application Step 3 -->
+  <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Supabase & Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
 
   <style>
-  /* ========== Fellowship Final Step Design Tokens & Styles ========== */
-  :root {
-    --bg: #F5F1EA;
-    --surface: #FFFFFF;
-    --surface-soft: #FBF8F3;
-    --chip: #F5F1EA;
-    --border: #E9E2D5;
-    --border-soft: #EFE8DB;
-    --border-strong: #D6CFC2;
-    --ink: #1F1E1B;
-    --ink-2: #3F3C36;
-    --muted: #6B675F;
-    --accent: #B83A0E;       /* text/price */
-    --accent-btn: #C2410C;   /* primary button fill */
-    --accent-hover: #9A330B;
-    --success: #166534;
-    --success-bg: #EEF6EF;
-    --disabled-bg: #E7DFD2;
+    .fel-hero {
+      padding-block: clamp(44px, 7vw, 84px) clamp(32px, 5vw, 56px);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .stat-chip {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-family: var(--mono);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-chip b { color: var(--orange); }
 
-    --font-display: 'Fraunces', Georgia, serif;
-    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-
-    --radius-lg: 20px;
-    --radius-md: 12px;
-    --radius-sm: 6px;
-  }
-
-  /* Scoped layout for Step 3 */
-  #formStep3.fs-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    background: var(--surface);
-    color: var(--ink);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-  }
-  #formStep3.hidden {
-    display: none !important;
-  }
-
-  /* Header */
-  .fs-head { display: flex; flex-direction: column; gap: 10px; }
-  .fs-head__row { display: flex; justify-content: space-between; align-items: center; }
-  .fs-eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
-  .fs-progress { display: flex; gap: 6px; }
-  .fs-progress span { width: 28px; height: 4px; border-radius: 2px; background: var(--border); }
-  .fs-progress span.is-done { background: var(--accent); }
-  .fs-title { margin: 0; font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; color: var(--ink); }
-  .fs-lede { margin: 0; font-size: 16px; line-height: 1.55; color: #57534C; }
-
-  /* Stats strip */
-  .fs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; background: var(--surface-soft); border: 1px solid var(--border-soft); border-radius: var(--radius-md); }
-  .fs-stat { padding: 14px 20px; display: flex; flex-direction: column-reverse; gap: 2px; margin: 0; }
-  .fs-stat + .fs-stat { border-left: 1px solid var(--border-soft); }
-  .fs-stat dt { font-size: 13px; color: var(--muted); margin: 0; }
-  .fs-stat dd { margin: 0; font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--ink); }
-
-  /* Fee card */
-  .fs-fee { display: flex; flex-direction: column; gap: 16px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-md); background: #ffffff; }
-  .fs-fee__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .fs-price { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .fs-price__amount { font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1; color: var(--accent); }
-  .fs-price__meta { font-size: 14px; color: var(--muted); }
-  .fs-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--success-bg); color: var(--success); border-radius: 999px; font-size: 13px; font-weight: 500; white-space: nowrap; }
-  .fs-why { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
-  .fs-fee__bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 16px; flex-wrap: wrap; }
-  .fs-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .fs-chips li { padding: 5px 10px; background: var(--chip); border-radius: var(--radius-sm); font-size: 13px; color: var(--ink-2); }
-  .fs-link { color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; }
-  .fs-link:hover { color: var(--accent-hover); text-decoration: underline; }
-  .fs-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-
-  /* Consents */
-  .fs-consents { margin: 0; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; flex-direction: column; }
-  .fs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .fs-check { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; font-size: 15px; font-weight: 500; line-height: 1.45; cursor: pointer; color: var(--ink); margin: 0; }
-  .fs-check + .fs-check { border-top: 1px solid var(--border-soft); }
-  .fs-check input { accent-color: var(--accent); width: 20px; height: 20px; margin: 1px 0 0; flex-shrink: 0; cursor: pointer; }
-  .fs-check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .fs-check .req { color: var(--accent); }
-
-  /* Actions */
-  .fs-actions { display: flex; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid var(--border-soft); }
-  .fs-note { flex: 1; text-align: right; font-size: 13px; color: var(--muted); }
-  .fs-btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 28px; border-radius: 999px; font: 600 16px/1 var(--font-body); cursor: pointer; transition: background .15s, box-shadow .15s, transform .05s; }
-  .fs-btn:active:not(:disabled) { transform: translateY(1px); }
-  .fs-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .fs-btn--ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border-strong); }
-  .fs-btn--ghost:hover { background: var(--surface-soft); }
-  .fs-btn--primary { background: var(--accent-btn); color: #fff; border: none; box-shadow: 0 6px 16px rgba(194,65,12,.25); }
-  .fs-btn--primary:hover:not(:disabled) { background: var(--accent-hover); }
-  .fs-btn--primary:disabled { background: var(--disabled-bg); color: var(--muted); box-shadow: none; cursor: not-allowed; }
-  .fs-back-icon { display: none; }
-  .fs-perday { display: none; }
-
-  /* Smooth scroll margin for sticky header offset */
-  html {
-    scroll-behavior: smooth;
-  }
-  #apply, #why-online, #structure, #timeline, #eligibility, #faq {
-    scroll-margin-top: 76px;
-  }
-
-  /* Focus enhancement */
-  .tfc-input:focus {
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 3px rgba(184, 58, 14, 0.12) !important;
-  }
-
-  /* ========== Enhanced Mobile Experience Overrides ========== */
-  @media (max-width: 640px) {
-    /* Safe viewport ergonomics */
-    html, body {
-      overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent;
+    /* Application Section & Form Card */
+    .apply-sec {
+      padding-block: clamp(48px, 8vw, 96px);
+    }
+    .form-shell {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 48px -20px rgba(27,23,18,0.1);
+      overflow: hidden;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .form-header {
+      background: var(--warm);
+      padding: clamp(24px, 4vw, 36px);
+      border-bottom: 1px solid var(--line);
+    }
+    .form-header h2 {
+      font-size: clamp(26px, 3.4vw, 38px);
+    }
+    .form-body {
+      padding: clamp(24px, 4vw, 40px);
+    }
+    .step-indicator {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .step-pill {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--line);
+      transition: background 0.3s;
+    }
+    .step-pill.active {
+      background: var(--orange);
     }
 
-    /* Header Nav */
-    .tfc-header {
-      padding: 10px 0 !important;
+    .form-group {
+      margin-bottom: 22px;
     }
-    .tfc-brand {
-      gap: 8px !important;
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 14.5px;
+      margin-bottom: 8px;
+      color: var(--ink);
     }
-    .tfc-brand-logo {
-      width: 28px !important;
-      height: 28px !important;
+    .form-hint {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 4px;
     }
-    .tfc-brand span {
-      font-size: 0.84rem !important;
-      letter-spacing: 0.02em !important;
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      font-family: var(--body);
+      font-size: 15px;
+      background: #FAFAFA;
+      color: var(--ink);
+      transition: border-color 0.2s, background 0.2s;
     }
-    #navActionBtn {
-      font-size: 0.8rem !important;
-      padding: 7px 12px !important;
-      border-radius: 999px !important;
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+      background: #fff;
     }
-    .tfc-mobile-toggle {
-      font-size: 1.45rem !important;
-      padding: 4px !important;
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
     }
-
-    /* Hero Section */
-    .tfc-stat-strip {
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 8px !important;
-      padding: 10px 8px !important;
-      background: #FFFFFF !important;
-      border: 1px solid var(--border-soft) !important;
-      border-radius: 14px !important;
-      margin-top: 24px !important;
+    .radio-pill-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .tfc-stat-item {
-      padding: 10px 6px !important;
-      background: var(--surface-soft) !important;
-      border: 1px solid var(--border-soft) !important;
-      border-radius: 10px !important;
-      border-right: none !important;
+    .radio-pill {
+      flex: 1;
+      min-width: 140px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #FAFAFA;
+      transition: all 0.2s;
     }
-    .tfc-stat-num {
-      font-size: 1.35rem !important;
-    }
-    .tfc-stat-label {
-      font-size: 0.7rem !important;
-    }
-
-    /* Reason & Pillar Cards */
-    .tfc-reasons-grid {
-      gap: 12px !important;
-    }
-    .tfc-reason-card {
-      padding: 18px 16px !important;
-      border-radius: 12px !important;
-    }
-    .tfc-pillars-grid {
-      gap: 12px !important;
-    }
-    .tfc-pillar-card {
-      padding: 20px 16px !important;
-      border-radius: 12px !important;
-    }
-    .tfc-pillar-index {
-      font-size: 0.75rem !important;
-      margin-bottom: 8px !important;
+    .radio-pill:has(input:checked) {
+      border-color: var(--orange);
+      background: var(--warm);
+      color: var(--orange-deep);
     }
 
-    /* 4-Week Timeline Strip on Mobile */
-    .tfc-timeline-strip {
-      gap: 10px !important;
+    /* Fee breakdown box */
+    .fee-box {
+      background: var(--warm);
+      border: 1.5px solid #F1D4BE;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 24px;
     }
-    .tfc-timeline-card {
-      padding: 16px 14px !important;
-      border-radius: 12px !important;
-      border-left: 3px solid var(--accent) !important;
-      background: #FFFFFF !important;
+    .fee-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-block: 8px;
+      border-bottom: 1px dashed var(--line);
+      font-size: 14.5px;
     }
-    .tfc-timeline-week {
-      font-size: 0.68rem !important;
-      padding: 3px 8px !important;
-      margin-bottom: 8px !important;
-    }
-
-    /* FAQ Accordion */
-    .tfc-accordion-header {
-      padding: 15px 16px !important;
-      font-size: 0.95rem !important;
-    }
-    .tfc-accordion-body {
-      padding: 0 16px 14px !important;
-      font-size: 0.9rem !important;
+    .fee-row:last-child {
+      border-bottom: 0;
+      padding-top: 12px;
+      font-weight: 700;
     }
 
-    /* Form Card & Stepper Segmented Bar */
-    #fellowshipApplyCard {
-      padding: 18px 14px !important;
-      border-radius: 16px !important;
+    /* UPI QR Payment area */
+    .upi-section {
+      background: #FAFAFA;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin-block: 20px;
     }
-    .tfc-pill-stepper {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 6px !important;
-      overflow-x: visible !important;
-      margin-bottom: 20px !important;
-      padding-bottom: 0 !important;
-    }
-    .tfc-pill-step {
-      padding: 8px 2px !important;
-      font-size: 0.72rem !important;
-      justify-content: center !important;
-      gap: 5px !important;
-      width: 100% !important;
-      border-radius: 10px !important;
-      white-space: nowrap !important;
-      letter-spacing: -0.01em !important;
-    }
-    .tfc-pill-step-num {
-      width: 20px !important;
-      height: 20px !important;
-      font-size: 0.72rem !important;
-      flex-shrink: 0 !important;
-    }
-
-    /* Inputs on Mobile - Guarantee iOS Zoom Prevention */
-    .tfc-input,
-    #fName, #fEmail, #fPhone, #fTeamSize, #fCollegeName, #fCollegeYear, #fCollegeCourse,
-    #fVentureName, #fStage, #fQ1, #fQ3, #fWaiverReason {
-      font-size: 16px !important;
-      padding: 12px 14px !important;
-      border-radius: 10px !important;
-    }
-
-    /* Radio button touch targets */
-    .tfc-radio-pill {
-      min-height: 48px !important;
-      padding: 12px 10px !important;
-      font-size: 0.92rem !important;
-      border-radius: 10px !important;
-    }
-
-    /* Step 3: Commitment & Fee Mobile */
-    #formStep3.fs-panel { padding-bottom: 150px; gap: 18px; }
-    .fs-title { font-size: 24px; }
-    .fs-lede { font-size: 14.5px; }
-    .fs-stats {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-    .fs-stat {
-      padding: 10px 4px;
-      text-align: center;
+    .upi-grid {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
       align-items: center;
     }
-    .fs-stat dd { font-size: 15px; }
-    .fs-stat dt { font-size: 10.5px; }
-    .fs-fee { padding: 18px 14px; gap: 14px; border-radius: 12px; }
-    .fs-price__amount { font-size: 34px; }
-    .fs-price__meta { display: none; }           /* per-day moves into .fs-why on mobile */
-    .fs-why .fs-perday { display: inline; }
-    .fs-chips { gap: 6px; }
-    .fs-chips li { font-size: 12px; padding: 4px 8px; }
-    .fs-check { padding: 14px 12px; font-size: 13.5px; gap: 12px; }
-    .fs-check input { width: 22px; height: 22px; min-width: 22px; }
-
-    #formStep3:not(.hidden) .fs-actions {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
-      display: grid; grid-template-columns: 52px 1fr; gap: 8px 10px;
-      padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px));
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border-soft);
-      box-shadow: 0 -8px 24px rgba(31,30,27,.10);
+    .qr-box {
+      width: 140px;
+      height: 140px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      display: grid;
+      place-items: center;
     }
-    .fs-note { grid-column: 1 / -1; grid-row: 2; text-align: center; font-size: 12px; }
-    .fs-btn--ghost { width: 52px; padding: 0; flex-shrink: 0; }
-    .fs-back-text { display: none; }
-    .fs-back-icon { display: inline; font-size: 18px; }
-    .fs-btn--primary { box-shadow: none; font-size: 15px; }
-
-    /* Hide sticky relaunch bar when Step 3 is active to prevent clashes */
-    body.step3-active .tfc-sticky-relaunch-bar {
-      display: none !important;
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    @media (max-width: 580px) {
+      .upi-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
     }
 
-    /* Dashboard Mobile ergonomics */
-    #fellowshipDashboardPanel .tfc-card {
-      padding: 18px 14px !important;
-      border-radius: 16px !important;
+    /* Dashboard Panel */
+    .dash-panel {
+      padding: clamp(28px, 5vw, 44px);
     }
-    #dashPaymentHeading {
-      font-size: 0.95rem !important;
-      line-height: 1.5 !important;
+    .dash-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #A5D6A7;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 16px;
     }
-    #dashPaymentIcon {
-      width: 40px !important;
-      height: 40px !important;
+    .dash-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+      background: var(--warm);
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 14px;
     }
-    #dashPaymentIcon svg {
-      width: 20px !important;
-      height: 20px !important;
+    @media (max-width: 600px) {
+      .dash-info-grid { grid-template-columns: 1fr; }
     }
-  }
   </style>
-  <script src="script.js" defer></script>
-  <script src="tfc-auth.js" defer></script>
-  <script src="tfc-analytics.js" defer></script>
 </head>
-<body style="background: var(--c-paper); color: var(--c-ink); font-family: var(--font-public-body);">
+<body>
 
-  <!-- Sticky Top Navigation -->
-  <header class="tfc-header" style="background: rgba(243, 241, 234, 0.94); border-bottom: 1px solid var(--c-sand);">
-    <div class="tfc-container tfc-nav-wrapper">
-      <a href="index.html" class="tfc-brand">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span class="font-display font-bold">THE FUTURE COUNCIL</span>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
       </a>
-
-      <ul class="tfc-nav-links">
-        <li><a href="fellowship.html" class="tfc-nav-link active">Fellowship '26</a></li>
-        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
-        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
-        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad" class="active">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
       </ul>
-
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="#apply" class="tfc-btn tfc-btn-primary" id="navActionBtn" style="background: var(--accent); border-color: var(--accent);">
-          <span class="hidden sm:inline">Apply for Fellowship '26 →</span>
-          <span class="inline sm:hidden">Apply →</span>
-        </a>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="#apply">Apply now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer (§2) -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link active">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="#apply" class="tfc-btn tfc-btn-primary" style="background: var(--accent); border-color: var(--accent); width: 100%;">Apply for Fellowship '26 →</a>
-      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #888; padding-top: 8px; flex-wrap: wrap; gap: 8px;">
-        <a href="partners.html" style="color: #bbb; text-decoration: none;">Partners</a>
-        <a href="join-ambassador.html" style="color: #bbb; text-decoration: none;">Ambassadors</a>
-        <a href="terms.html" style="color: #bbb; text-decoration: none;">Terms</a>
-        <a href="privacy.html" style="color: #bbb; text-decoration: none;">Privacy</a>
-        <a href="refund.html" style="color: #bbb; text-decoration: none;">Refunds</a>
-      </div>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad" class="active">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/about">About TFC <span>→</span></a>
+    <div style="margin-top: 20px;">
+      <a class="btn solid lg" href="#apply" style="width: 100%; text-align: center;">Apply to Fellowship</a>
     </div>
   </div>
 
   <main>
-    <!-- Hero Section (Build Brief §4) -->
-    <section class="tfc-section" style="padding-top: 56px; padding-bottom: 36px;">
-      <div class="tfc-container" style="text-align: center; max-width: 920px;">
-        <div class="tfc-badge" style="background: rgba(226, 84, 42, 0.08); color: var(--accent); border: 1px solid rgba(226, 84, 42, 0.25); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-utility); font-size: 0.78rem;">
-          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block;"></span>
-          THE FUTURE COUNCIL · 90+ CHAPTERS
-        </div>
-        
-        <h1 class="font-display" style="font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 800; line-height: 1.08; margin-bottom: 18px; letter-spacing: -1.5px; color: var(--c-ink);">
-          Fellowship '26
-        </h1>
-        
-        <h2 class="font-display" style="font-size: clamp(1.25rem, 2.8vw, 1.85rem); font-weight: 600; line-height: 1.35; color: var(--accent); margin-bottom: 22px; max-width: 760px; margin-left: auto; margin-right: auto;">
-          A 4-week, equity-free fellowship for student founders — fully online.
-        </h2>
-
-        <p style="font-size: 1.12rem; color: #4A453F; line-height: 1.68; margin-bottom: 34px; max-width: 760px; margin-left: auto; margin-right: auto;">
-          No relocation, no campus, no single city deciding who gets in. Four weeks: a weekly cohort lab, small founder pods that meet every week, direct mentor office hours, and a virtual demo day in front of real investors and alumni.
+    <!-- HERO SECTION -->
+    <header class="fel-hero">
+      <div class="wrap">
+        <span class="mono kick">Launchpad · Cohort 01</span>
+        <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">Fellowship '26</h1>
+        <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
+          A selective 4-week online fellowship for student founders ending in Demo Day with vetted angels and seed funds. No relocation. Zero equity taken.
         </p>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-3.5 justify-center max-w-md sm:max-w-none mx-auto mb-10">
-          <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full sm:w-auto" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">
-            Apply for Fellowship '26 →
-          </a>
-          <a href="#structure" class="tfc-btn tfc-btn-outline tfc-btn-lg w-full sm:w-auto" style="border-color: var(--c-sand); color: var(--c-ink);">
-            See How It Runs →
-          </a>
+        <!-- SPEC 5.6 HERO STATS -->
+        <div class="hero-stats">
+          <div class="stat-chip"><b>4 Weeks</b> · Online</div>
+          <div class="stat-chip"><b>20 Founders</b> · Selected</div>
+          <div class="stat-chip"><b>0% Equity</b> · Forever</div>
+          <div class="stat-chip"><b>2% Success Fee</b> · Only if you raise</div>
         </div>
+      </div>
+    </header>
 
-        <!-- 4-Col Stat Strip (§4) -->
-        <div class="tfc-stat-strip" style="background: #FFFFFF; border-radius: 16px; border: 1px solid var(--c-sand); box-shadow: var(--shadow-sm);">
-          <div class="tfc-stat-item">
-            <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4 Weeks</span>
-            <span class="tfc-stat-label font-mono-alt">Fully Remote</span>
+    <!-- ELIGIBILITY CALLOUT (SPEC 5.6) -->
+    <section style="background: var(--warm); padding-block: 36px; border-bottom: 1px solid var(--line);">
+      <div class="wrap">
+        <div style="background: #fff; border: 1.5px solid var(--line); border-radius: 16px; padding: 24px 28px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+          <div class="pin" style="width:48px; height:48px; border-radius:50%; background:var(--warm); border:2px solid var(--orange); display:grid; place-items:center; font-family:var(--mono); color:var(--orange-deep); font-weight:700;">★</div>
+          <div style="flex: 1; min-width: 260px;">
+            <strong style="font-family: var(--display); font-size: 20px; display: block;">Selection Basis</strong>
+            <p style="color: var(--ink-soft); font-size: 15.5px; margin-top: 4px;">
+              We select 20 founders per cohort based on the problem, your progress and your team, never your college.
+            </p>
           </div>
-          <div class="tfc-stat-item">
-            <span class="tfc-stat-num font-display" style="color: var(--c-ink);">4–6 Pods</span>
-            <span class="tfc-stat-label font-mono-alt">Founder Pods</span>
-          </div>
-          <div class="tfc-stat-item">
-            <span class="tfc-stat-num font-display" style="color: var(--accent);">0%</span>
-            <span class="tfc-stat-label font-mono-alt">Zero Equity</span>
-          </div>
-          <div class="tfc-stat-item">
-            <span class="tfc-stat-num font-display" style="color: var(--c-teal);">Sep 30</span>
-            <span class="tfc-stat-label font-mono-alt">Closes 7PM IST</span>
-          </div>
+          <a class="btn solid sm" href="#apply">Jump to application ↓</a>
         </div>
       </div>
     </section>
 
-    <!-- Why Online (3-Reason Strip - Build Brief §4) -->
-    <section class="tfc-section" id="why-online" style="padding-top: 30px; padding-bottom: 40px;">
-      <div class="tfc-container" style="max-width: 980px;">
-        <div style="text-align: center; margin-bottom: 28px;">
-          <span class="tfc-eyebrow">WHY ONLINE</span>
-          <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
-            Lower barrier, higher speed, zero relocation.
-          </h2>
-        </div>
+    <!-- APPLICATION FORM SECTION -->
+    <section class="apply-sec" id="apply" aria-labelledby="h-form">
+      <div class="wrap">
 
-        <div class="tfc-reasons-grid">
-          <div class="tfc-reason-card">
-            <span class="tfc-reason-tag">REACH</span>
-            <h3 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">Every chapter, every city</h3>
-            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
-              No relocation required to join the cohort. Built for founders across all 90+ chapters.
+        <!-- CARD 1: FORM -->
+        <div class="form-shell" id="fellowshipApplyCard">
+          <div class="form-header">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <img src="/TFC.png" alt="TFC" style="width:28px; height:28px; object-fit:contain; border-radius:6px;" />
+              <span class="mono kick" id="stepBadge">Step 1 of 3</span>
+            </div>
+            <h2 id="h-form">Apply to Fellowship '26</h2>
+            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 6px;">
+              Cohort 01 kickoff: Oct 19, 2026 · Decisions announced by Oct 07, 2026.
             </p>
           </div>
 
-          <div class="tfc-reason-card">
-            <span class="tfc-reason-tag">SPEED</span>
-            <h3 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">No venue lead time</h3>
-            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Cohort starts on schedule without logistical friction. Applications open now.
-            </p>
-          </div>
-
-          <div class="tfc-reason-card">
-            <span class="tfc-reason-tag">DEPTH</span>
-            <h3 class="font-display" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">4–6 person pods</h3>
-            <p style="font-size: 0.92rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Pods meet weekly outside the main call — no one hides in a large group.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Program Structure (4 Pillars - Build Brief §4) -->
-    <section class="tfc-section" id="structure" style="padding-top: 30px; padding-bottom: 40px;">
-      <div class="tfc-container" style="max-width: 980px;">
-        <div style="text-align: center; margin-bottom: 32px;">
-          <span class="tfc-eyebrow">PROGRAM STRUCTURE</span>
-          <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
-            What Fellowship '26 actually gives you.
-          </h2>
-        </div>
-
-        <div class="tfc-pillars-grid">
-          <div class="tfc-pillar-card">
-            <div class="tfc-pillar-index">01 — WEEKLY COHORT LAB</div>
-            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Weekly Cohort Lab</h3>
-            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              One live session a week: mentor talks, workshops, peer feedback. The anchor everyone shows up for together.
-            </p>
-          </div>
-
-          <div class="tfc-pillar-card">
-            <div class="tfc-pillar-index">02 — FOUNDER PODS</div>
-            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Founder Pods</h3>
-            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              Groups of 4–6 meet weekly outside the main call — this is where the real depth and accountability happen.
-            </p>
-          </div>
-
-          <div class="tfc-pillar-card">
-            <div class="tfc-pillar-index">03 — MENTOR OFFICE HOURS</div>
-            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Mentor Office Hours</h3>
-            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              1:1 slots with operators and investors from the network, booked directly by you.
-            </p>
-          </div>
-
-          <div class="tfc-pillar-card">
-            <div class="tfc-pillar-index">04 — DEMO DAY</div>
-            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Virtual Demo Day</h3>
-            <p style="font-size: 0.9rem; color: #52525b; line-height: 1.55; margin: 0;">
-              A pitch event in front of real investors and alumni, closing the cohort as the flagship moment, not an afterthought.
-            </p>
-          </div>
-        </div>
-
-        <!-- 5th Line Value Proposition (§4) -->
-        <p style="text-align: center; margin-top: 24px; font-size: 1rem; color: var(--ink-soft); line-height: 1.6; max-width: 760px; margin-left: auto; margin-right: auto;">
-          Every fellow keeps everything they build — no equity taken, ever — and joins the permanent alumni network at the end of Week 4.
-        </p>
-      </div>
-    </section>
-
-    <!-- Timeline (4 Weeks - Build Brief §4) -->
-    <section class="tfc-section" id="timeline" style="padding-top: 20px; padding-bottom: 40px;">
-      <div class="tfc-container" style="max-width: 980px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <span class="tfc-reason-tag">TIMELINE (4 WEEKS)</span>
-          <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
-            A structured 4-week sprint
-          </h2>
-        </div>
-
-        <div class="tfc-timeline-strip">
-          <div class="tfc-timeline-card">
-            <span class="tfc-timeline-week">WEEK 1</span>
-            <h4 class="font-display" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Kickoff & Pods</h4>
-            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Kickoff & pod formation</p>
-          </div>
-
-          <div class="tfc-timeline-card">
-            <span class="tfc-timeline-week">WEEK 2</span>
-            <h4 class="font-display" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Live Labs</h4>
-            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Live labs, workshops & pod check-ins</p>
-          </div>
-
-          <div class="tfc-timeline-card">
-            <span class="tfc-timeline-week">WEEK 3</span>
-            <h4 class="font-display" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Demo Prep</h4>
-            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Demo prep & mock pitches</p>
-          </div>
-
-          <div class="tfc-timeline-card">
-            <span class="tfc-timeline-week">WEEK 4</span>
-            <h4 class="font-display" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;">Virtual Demo Day</h4>
-            <p style="font-size: 0.88rem; color: #52525b; margin: 0;">Virtual demo day in front of investors & alumni</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Eligibility Section (Build Brief §4, §6) -->
-    <section class="tfc-section" id="eligibility" style="padding-top: 20px; padding-bottom: 40px;">
-      <div class="tfc-container" style="max-width: 860px;">
-        <div class="tfc-card p-5 sm:p-9 md:p-10" style="border: 1px solid var(--c-sand); background: #FFFFFF; border-radius: 16px; text-align: center;">
-          <span class="tfc-reason-tag">ELIGIBILITY</span>
-          <h2 class="font-display" style="font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 800; margin-bottom: 14px;">
-            Who should apply
-          </h2>
-          <p style="font-size: 1.02rem; color: #3f3f46; line-height: 1.68; margin: 0; max-width: 720px; margin-left: auto; margin-right: auto;">
-            Open to any student founder building an early-stage venture, in or outside a Future Council chapter, who can commit roughly 6–8 hours a week for 4 weeks, fully remote. There's no competitive shortlist — anyone who meets these basics and completes registration is in the cohort.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section (Build Brief §4, §6, §7) -->
-    <section class="tfc-section" id="faq" style="padding-top: 20px; padding-bottom: 50px;">
-      <div class="tfc-container" style="max-width: 840px;">
-        <div style="text-align: center; margin-bottom: 32px;">
-          <span class="tfc-reason-tag">FAQ</span>
-          <h2 class="font-display" style="font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; margin-top: 4px;">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div class="tfc-accordion">
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>Is this fully remote?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              Yes — every session, pod meeting, and mentor slot happens online. Demo day is also virtual.
+          <div class="form-body">
+            <div class="step-indicator">
+              <div class="step-pill active" id="sp1"></div>
+              <div class="step-pill" id="sp2"></div>
+              <div class="step-pill" id="sp3"></div>
             </div>
-          </div>
 
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>What's the time commitment?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              About 6–8 hours a week across the live lab, your pod, and independent build time, for 4 weeks.
-            </div>
-          </div>
+            <form id="fellowshipDirectForm" autocomplete="on">
 
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>Do I need a registered company?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              No — early-stage and pre-registration ventures are welcome.
-            </div>
-          </div>
-
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>Is it free to apply?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              There is a one-time application fee of ₹999 upon submission. We implement this as a quality protection mechanism designed to protect your own fellowship experience: it ensures skin in the game, guaranteeing that every member of your assigned build pod is a serious, committed builder who won't abandon the project mid-way. In addition, this fee covers comprehensive application review, candidate verification, cohort onboarding, and access to mentorship, while Fellowship '26 remains 100% equity-free.
-            </div>
-          </div>
-
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>Is this equity-free?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              Yes — Fellowship '26 takes no equity in any venture.
-            </div>
-          </div>
-
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>When do applications close?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              30 September 2026, 7:00 PM IST.
-            </div>
-          </div>
-
-          <div class="tfc-accordion-item" style="border: 1px solid var(--c-sand); border-radius: 12px; margin-bottom: 12px; background: #FFFFFF;">
-            <button class="tfc-accordion-header" type="button" style="padding: 18px 20px; font-weight: 700; font-size: 1rem; color: var(--c-ink);">
-              <span>Is admission competitive?</span>
-              <span class="tfc-accordion-icon">+</span>
-            </button>
-            <div class="tfc-accordion-body" style="padding: 0 20px 18px; color: #52525b; line-height: 1.6;">
-              No — there's no shortlist or cap. Anyone who meets the eligibility basics and completes registration joins the cohort.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Multi-Step Application Form & UPI Payment Section (Build Brief §2, §6, §7) -->
-    <section class="tfc-section" id="apply" style="padding-top: 20px; padding-bottom: 80px;">
-      <div class="tfc-container" style="max-width: 780px;">
-        <div id="fellowshipApplyCard" class="tfc-card p-4 sm:p-8 md:p-9 shadow-md" style="background: #FFFFFF; border: 1px solid var(--c-sand); border-radius: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; border-bottom: 1px solid var(--c-sand); padding-bottom: 16px; flex-wrap: wrap; gap: 8px;">
-            <div>
-              <span class="tfc-reason-tag" style="margin-bottom: 4px;">FELLOWSHIP '26 ADMISSIONS</span>
-              <h2 class="font-display" style="font-size: clamp(1.35rem, 3.5vw, 1.7rem); font-weight: 800; margin: 0; color: var(--c-ink);">
-                Application & Founder Details
-              </h2>
-            </div>
-            <span class="font-mono-alt" style="font-size: 0.85rem; font-weight: 700; color: var(--c-ember); background: rgba(226, 84, 42, 0.08); padding: 4px 10px; border-radius: 999px;">
-              Closes Sep 30, 7:00 PM IST
-            </span>
-          </div>
-
-
-          <!-- Multi-Step Progress Header (§1, §4) -->
-          <div class="tfc-pill-stepper" id="formStepsNav">
-            <div class="tfc-pill-step active" id="stepBadge1" onclick="goToStep(1)">
-              <span class="tfc-pill-step-num">1</span>
-              <span class="hidden sm:inline">Founder & Team</span>
-              <span class="inline sm:hidden">Founder</span>
-            </div>
-            <div class="tfc-pill-step" id="stepBadge2" onclick="goToStep(2)">
-              <span class="tfc-pill-step-num">2</span>
-              <span class="hidden sm:inline">Venture Details</span>
-              <span class="inline sm:hidden">Venture</span>
-            </div>
-            <div class="tfc-pill-step" id="stepBadge3" onclick="goToStep(3)">
-              <span class="tfc-pill-step-num">3</span>
-              <span>Commitment</span>
-            </div>
-          </div>
-
-          <form id="fellowshipDirectForm">
-            <!-- STEP 1: Founder & Team Details -->
-            <div id="formStep1" class="tfc-form-step space-y-4">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label for="fName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Founder Full Name *</label>
-                  <input type="text" id="fName" class="tfc-input" placeholder="e.g. Dhruv Madan" required />
+              <!-- STEP 1: FOUNDER DETAILS -->
+              <div id="step1Group">
+                <div class="form-group">
+                  <label class="form-label" for="fName">Full Name *</label>
+                  <input class="form-input" id="fName" name="name" type="text" placeholder="e.g. Priyanshu Sharma" required />
                 </div>
-                <div>
-                  <label for="fEmail" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Email Address *</label>
-                  <input type="email" id="fEmail" class="tfc-input" placeholder="e.g. founder@example.com" required />
+
+                <div class="form-group">
+                  <label class="form-label" for="fEmail">Email Address *</label>
+                  <input class="form-input" id="fEmail" name="email" type="email" placeholder="name@college.edu or gmail.com" required />
+                  <div class="form-hint">We send review decisions and written feedback to this email.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fPhone">WhatsApp Phone Number *</label>
+                  <input class="form-input" id="fPhone" name="phone" type="tel" placeholder="+91 98765 43210" required />
+                  <div class="form-hint">Used for urgent cohort logistics and founder pod communications.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Are you currently enrolled in a college / university? *</label>
+                  <div class="radio-pill-group">
+                    <label class="radio-pill">
+                      <input type="radio" name="fEnrolled" id="fEnrolledYes" value="yes" checked />
+                      <span>Yes, enrolled</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="fEnrolled" id="fEnrolledNo" value="no" />
+                      <span>Independent / Gap Year</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div id="collegeDetailFields">
+                  <div class="form-group">
+                    <label class="form-label" for="fCollegeName">College / University Name *</label>
+                    <input class="form-input" id="fCollegeName" name="college" type="text" placeholder="e.g. IIT Delhi, SRCC, DTU, BITS..." />
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                    <div class="form-group">
+                      <label class="form-label" for="fCollegeYear">Current Year</label>
+                      <select class="form-select" id="fCollegeYear" name="year">
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year" selected>2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                        <option value="Postgraduate / Masters">Postgraduate</option>
+                        <option value="Recent Graduate">Recent Graduate (2025/2026)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="fCollegeCourse">Major / Course</label>
+                      <input class="form-input" id="fCollegeCourse" name="course" type="text" placeholder="e.g. B.Tech CS, B.Com, Design..." />
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 28px;">
+                  <button type="button" class="btn solid" id="btnNext1">Continue to Project Details →</button>
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label for="fPhone" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">WhatsApp Phone Number *</label>
-                  <input type="tel" id="fPhone" class="tfc-input" placeholder="e.g. +91 98765 43210" required />
-                </div>
-                <div>
-                  <label for="fTeamSize" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Team Size *</label>
-                  <select id="fTeamSize" class="tfc-input" required>
+              <!-- STEP 2: VENTURE DETAILS -->
+              <div id="step2Group" style="display: none;">
+                <div class="form-group">
+                  <label class="form-label" for="fTeamSize">Team Structure *</label>
+                  <select class="form-select" id="fTeamSize" name="teamSize">
                     <option value="Solo Founder">Solo Founder</option>
-                    <option value="2 Founders">2 Co-Founders</option>
-                    <option value="3+ Founders">3 or more Team Members</option>
+                    <option value="2 Co-founders" selected>2 Co-founders</option>
+                    <option value="3+ Builders">3 or more Builders</option>
                   </select>
                 </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fVentureName">Project / Startup Name *</label>
+                  <input class="form-input" id="fVentureName" name="ventureName" type="text" placeholder="Working title or project name" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fStage">Current Build Stage *</label>
+                  <select class="form-select" id="fStage" name="stage">
+                    <option value="Idea & Problem Research">Problem research &amp; user interviews</option>
+                    <option value="Prototype / MVP Built" selected>Working prototype / MVP built</option>
+                    <option value="Active Beta Users">Active early users / testing</option>
+                    <option value="Generating Revenue">Generating initial revenue</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fQ1">What problem are you solving, and who is it for? *</label>
+                  <textarea class="form-textarea" id="fQ1" name="q1" placeholder="Be direct and specific. What painful problem did you spot, and for whom?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fQ3">What have you built or shipped so far? (Include links if any) *</label>
+                  <textarea class="form-textarea" id="fQ3" name="q3" placeholder="Demo links, Figma mocks, user interview count, GitHub repo, or what you learned from customer conversations." required></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 28px; gap: 12px;">
+                  <button type="button" class="btn" id="btnBack2">← Back</button>
+                  <button type="button" class="btn solid" id="btnNext2">Continue to Terms &amp; Fee →</button>
+                </div>
               </div>
 
-              <!-- College Enrollment Selection -->
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">
-                  Are you currently enrolled in a college or university? *
-                </label>
-                <div class="grid grid-cols-2 gap-3" role="radiogroup" aria-label="College Enrollment Status">
-                  <label class="tfc-radio-pill flex items-center justify-center gap-2 p-3 rounded-xl border border-zinc-200 bg-zinc-50/70 hover:bg-white cursor-pointer transition-all duration-150 font-bold text-sm text-zinc-800" id="labelEnrolledYes">
-                    <input type="radio" name="fEnrolled" value="yes" id="fEnrolledYes" class="w-4 h-4 accent-[#E2542A]" onchange="toggleCollegeFields(true)" />
-                    <span>Yes</span>
+              <!-- STEP 3: COMMITMENT, TERMS & PAYMENT -->
+              <div id="step3Group" style="display: none;">
+                
+                <!-- SPEC 5.6 FEE BOX -->
+                <div class="fee-box">
+                  <div class="mono kick">Launchpad Single Source of Truth</div>
+                  <div style="font-family: var(--display); font-size: 24px; font-weight: 800; margin-top: 6px;">
+                    ₹1,999 Application Fee
+                  </div>
+                  <p style="color: var(--ink-soft); font-size: 14px; margin-top: 4px;">
+                    Includes written feedback for every applicant. About ₹70 a day.
+                  </p>
+                  
+                  <div style="margin-top: 16px;">
+                    <div class="fee-row">
+                      <span>Selection Review &amp; Written Feedback</span>
+                      <span>✓ Included</span>
+                    </div>
+                    <div class="fee-row">
+                      <span>4-Week Online Fellowship (if selected)</span>
+                      <span>₹0 additional fee</span>
+                    </div>
+                    <div class="fee-row">
+                      <span>Equity Taken</span>
+                      <span>0%</span>
+                    </div>
+                    <div class="fee-row">
+                      <span>Success Fee (only if you raise from TFC intros)</span>
+                      <span>2%</span>
+                    </div>
+                    <div class="fee-row">
+                      <span>Total Due Today</span>
+                      <span style="color: var(--orange-deep); font-size: 17px;">₹1,999</span>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 14px; font-size: 13.5px; color: var(--ink-soft);">
+                    Can't afford ₹1,999? <a href="#" id="toggleWaiverLink" style="color: var(--orange-deep); font-weight: 600; text-decoration: underline;">Request a fee waiver</a>. We never want money to keep an exceptional student founder out.
+                  </div>
+
+                  <!-- Fee waiver container -->
+                  <div id="feeWaiverContainer" class="hidden" style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); display: none;">
+                    <label class="form-label" for="fWaiverReason">Why do you need a fee waiver?</label>
+                    <textarea class="form-textarea" id="fWaiverReason" name="waiverReason" placeholder="Tell us briefly about your financial situation. We approve genuine requests." style="min-height: 80px;"></textarea>
+                  </div>
+                </div>
+
+                <!-- REQUIRED TERMS CHECKBOXES (SPEC 5.6) -->
+                <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
+                  <input type="checkbox" id="fCommitHours" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
+                  <label for="fCommitHours" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
+                    I commit to spending <b>6–8 hours per week</b> for 4 weeks on cohort labs, founder pods, and mentor office hours if selected.
                   </label>
-                  <label class="tfc-radio-pill flex items-center justify-center gap-2 p-3 rounded-xl border border-zinc-200 bg-zinc-50/70 hover:bg-white cursor-pointer transition-all duration-150 font-bold text-sm text-zinc-800" id="labelEnrolledNo">
-                    <input type="radio" name="fEnrolled" value="no" id="fEnrolledNo" class="w-4 h-4 accent-[#E2542A]" onchange="toggleCollegeFields(false)" />
-                    <span>No</span>
+                </div>
+
+                <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
+                  <input type="checkbox" id="fUnderstandFee" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
+                  <label for="fUnderstandFee" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
+                    I understand the <b>₹1,999 application fee is non-refundable</b>, and that TFC charges a <b>one-time 2% success fee</b> on funds raised from investors it introduces.
                   </label>
                 </div>
-              </div>
 
-              <!-- Conditional College Details (revealed if Yes) -->
-              <div id="collegeDetailsSection" class="hidden space-y-3.5 p-4 rounded-xl border border-zinc-200 bg-zinc-50/80 transition-all duration-200">
-                <div>
-                  <label for="fCollegeName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">College / University Name *</label>
-                  <input type="text" id="fCollegeName" class="tfc-input" placeholder="e.g. IIT Delhi, Delhi University, BITS Pilani" />
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <div>
-                    <label for="fCollegeYear" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Year of Study *</label>
-                    <select id="fCollegeYear" class="tfc-input">
-                      <option value="">Select year of study...</option>
-                      <option value="1st Year">1st Year</option>
-                      <option value="2nd Year">2nd Year</option>
-                      <option value="3rd Year">3rd Year</option>
-                      <option value="4th Year / Final Year">4th Year / Final Year</option>
-                      <option value="5th Year (Dual/Integrated)">5th Year (Dual / Integrated)</option>
-                      <option value="Postgraduate / Masters">Postgraduate / Masters</option>
-                      <option value="PhD / Research Scholar">PhD / Research Scholar</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label for="fCollegeCourse" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Course / Major *</label>
-                    <input type="text" id="fCollegeCourse" class="tfc-input" placeholder="e.g. B.Tech Computer Science, B.Com (Hons)" />
+                <!-- PAYMENT SECTION (EXISTING METHOD: UPI QR + UTR / REFERENCE) -->
+                <div class="upi-section" id="upiPaymentBox">
+                  <div class="mono" style="color: var(--orange-deep); font-weight: 600;">Payment Instructions · Instant UPI</div>
+                  <div class="upi-grid" style="margin-top: 14px;">
+                    <div class="qr-box">
+                      <img src="/payment-qr.jpg" alt="Scan to pay ₹1,999" onerror="this.parentNode.innerHTML='<span style=\'font-size:11px;padding:8px;text-align:center;\'>Scan UPI QR<br>₹1,999</span>'" />
+                    </div>
+                    <div>
+                      <div style="font-size: 14.5px; line-height: 1.5;">
+                        Scan the QR code or pay to UPI ID:<br>
+                        <b style="font-family: var(--mono); color: var(--ink); background: #eee; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-top: 4px;">dhruvmadan235@okhdfcbank</b><br>
+                        <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">Payee: Dhruv Madan · The Future Council</span>
+                      </div>
+                      <div style="margin-top: 12px;">
+                        <label class="form-label" for="fUpiRef" style="font-size: 13px;">UPI Reference / UTR Number (12 digits) *</label>
+                        <input class="form-input" id="fUpiRef" name="upiRef" type="text" placeholder="e.g. 427819283719" style="font-family: var(--mono);" />
+                        <div class="form-hint">Shown in Google Pay, PhonePe, Paytm, or BHIM receipt. (If applying for waiver, you may leave blank).</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="pt-3">
-                <button type="button" onclick="nextStep(2)" class="tfc-btn tfc-btn-primary w-full sm:w-auto" style="background: var(--c-ember); border-color: var(--c-ember); height: 50px; font-weight: 700;">
-                  <span class="hidden sm:inline">Continue to Venture Details →</span>
-                  <span class="inline sm:hidden">Continue to Venture →</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- STEP 2: Venture Details -->
-            <div id="formStep2" class="tfc-form-step hidden space-y-4">
-              <div>
-                <label for="fVentureName" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Venture / Project Name *</label>
-                <input type="text" id="fVentureName" class="tfc-input" placeholder="e.g. ApexAI, LedgerLoop" required />
-              </div>
-
-              <div>
-                <label for="fStage" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Current Venture Stage *</label>
-                <select id="fStage" class="tfc-input" required>
-                  <option value="Idea Stage">Idea Stage (Raw concept & problem validation)</option>
-                  <option value="Building Prototype">Building Prototype / MVP in progress</option>
-                  <option value="Live Product with Users">Live Product with Early Users / Revenue</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="fQ1" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">One-Line Pitch *</label>
-                <textarea id="fQ1" class="tfc-input" style="min-height: 70px;" placeholder="Describe what you are building, for whom, and what problem you solve in 1-2 sentences..." required></textarea>
-              </div>
-
-              <div>
-                <label for="fQ3" style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px;">Prototype / Deck / GitHub Link (Optional)</label>
-                <input type="url" id="fQ3" class="tfc-input" placeholder="https://..." />
-              </div>
-
-              <div class="flex items-center gap-2.5 sm:gap-3 pt-3">
-                <button type="button" onclick="goToStep(1)" class="tfc-btn tfc-btn-outline" style="min-width: 80px; height: 50px;">
-                  ← Back
-                </button>
-                <button type="button" onclick="nextStep(3)" class="tfc-btn tfc-btn-primary flex-1 sm:flex-initial" style="background: var(--c-ember); border-color: var(--c-ember); height: 50px; font-weight: 700;">
-                  <span class="hidden sm:inline">Continue to Commitment →</span>
-                  <span class="inline sm:hidden">Continue →</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- STEP 3: Commitment & Fee -->
-            <div id="formStep3" class="tfc-form-step hidden fs-panel">
-              <header class="fs-head">
-                <div class="fs-head__row">
-                  <span class="fs-eyebrow">Final step</span>
-                  <!-- 3 steps total in Fellowship application -->
-                  <div class="fs-progress" aria-label="Step 3 of 3">
-                    <span class="is-done"></span><span class="is-done"></span><span class="is-done"></span>
-                  </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 28px; gap: 12px;">
+                  <button type="button" class="btn" id="btnBack3">← Back</button>
+                  <button type="submit" class="btn solid lg" id="btnSubmitApp" style="min-width: 220px;">Submit Application →</button>
                 </div>
-                <h2 class="fs-title">Commitment &amp; fee</h2>
-                <p class="fs-lede">Fellowship '26 runs fully online. Weekly cohort labs, pod syncs and demo day are required.</p>
-              </header>
-
-              <dl class="fs-stats">
-                <div class="fs-stat"><dt>Fully remote</dt><dd>4 weeks</dd></div>
-                <div class="fs-stat"><dt>Per week</dt><dd>6–8 hrs</dd></div>
-                <div class="fs-stat"><dt>Zero dilution</dt><dd>0% equity</dd></div>
-              </dl>
-
-              <section class="fs-fee" aria-labelledby="fs-fee-label">
-                <div class="fs-fee__top">
-                  <div class="fs-price">
-                    <span class="fs-price__amount" id="fs-fee-label">₹999</span>
-                    <span class="fs-price__meta">commitment fee · about ₹35 a day</span>
-                  </div>
-                  <span class="fs-pill">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Pay only if accepted
-                  </span>
-                </div>
-                <p class="fs-why">Free cohorts lose half their members by week two. Your pod of 4–6 depends on everyone showing up — the fee keeps the people next to you as serious as you are.<span class="fs-perday"> About ₹35 a day.</span></p>
-                <div class="fs-fee__bottom">
-                  <ul class="fs-chips" aria-label="What the fee covers">
-                    <li>Mentor office hours</li>
-                    <li>Weekly cohort lab</li>
-                    <li>Pod syncs</li>
-                    <li>Virtual demo day</li>
-                  </ul>
-                  <a class="fs-link" href="#fee-waiver" id="btnToggleWaiver" onclick="toggleFeeWaiver(); return false;">Can't afford it? Request a fee waiver →</a>
-                </div>
-
-                <!-- Fee Waiver Drawer -->
-                <div id="feeWaiverContainer" class="hidden" style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-soft);">
-                  <label for="fWaiverReason" style="display: block; font-weight: 600; font-size: 13px; color: var(--ink-2); margin-bottom: 6px;">
-                    Fee Waiver Reason
-                  </label>
-                  <textarea id="fWaiverReason" class="tfc-input" rows="2" style="width: 100%; min-height: 60px; padding: 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-family: var(--font-body); background: var(--surface);" placeholder="Briefly describe your situation and why you need a fee waiver..."></textarea>
-                  <p style="font-size: 11px; color: var(--muted); font-family: var(--font-mono); margin: 6px 0 0 0;">We evaluate fee waivers on a case-by-case basis during admissions review.</p>
-                </div>
-              </section>
-
-              <fieldset class="fs-consents">
-                <legend class="fs-sr">Confirm to submit</legend>
-                <label class="fs-check" for="fCommitHours">
-                  <input type="checkbox" id="fCommitHours" name="commitHours" required>
-                  <span>I can commit 6–8 hours a week for 4 weeks, fully remote <span class="req" aria-hidden="true">*</span></span>
-                </label>
-                <label class="fs-check" for="fUnderstandFee">
-                  <input type="checkbox" id="fUnderstandFee" name="feeTerms" required>
-                  <span>I understand ₹999 is charged only if I'm accepted and is non-refundable once paid <span class="req" aria-hidden="true">*</span></span>
-                </label>
-              </fieldset>
-
-              <div class="fs-actions">
-                <button type="button" id="btnBackToStep2" onclick="goToStep(2)" class="fs-btn fs-btn--ghost" data-action="back" aria-label="Back">
-                  <span class="fs-back-icon" aria-hidden="true">←</span><span class="fs-back-text">← Back</span>
-                </button>
-                <span class="fs-note" id="fs-note">No payment now</span>
-                <button type="submit" id="btnSubmitApp" class="fs-btn fs-btn--primary" disabled aria-describedby="fs-note">Submit application →</button>
               </div>
-            </div>
-          </form>
+
+            </form>
+          </div>
         </div>
 
-        <!-- Confirmation State & Dashboard Panel (Build Brief §2, §3, §6) -->
-        <div id="fellowshipDashboardPanel" class="hidden">
-          <div class="tfc-card p-5 sm:p-8 md:p-9 shadow-lg border border-zinc-200" style="background: #ffffff; border-radius: 16px;">
-            
-            <!-- Application Received Confirmation Banner -->
-            <div id="dashConfirmationAlert" class="mb-6 p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3.5 shadow-sm">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
-                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h3 class="font-display text-sm sm:text-base font-extrabold text-emerald-950">Application Received ✓</h3>
-                <p class="text-xs sm:text-sm text-emerald-800 mt-0.5 leading-relaxed font-body-alt">
-                  Application received. We review every application within 24 hours. If you're accepted, our team will contact you on email or WhatsApp to confirm your seat with the ₹999 fee.
-                </p>
-              </div>
-            </div>
-
-            <!-- Top Header & Profile -->
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-zinc-200">
-              <div class="flex items-center gap-3.5">
-                <div id="dashUserAvatar" class="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center font-black text-lg border-2 border-orange-400 shadow-md overflow-hidden flex-shrink-0">
-                  U
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <h2 id="dashUserName" class="font-display text-lg sm:text-xl font-black text-zinc-900 leading-tight">Applicant Name</h2>
-                    <span class="tfc-badge font-mono-alt" style="background: rgba(226, 84, 42, 0.1); color: var(--c-ember); font-size: 0.72rem;">Cohort 01 Fellow</span>
-                  </div>
-                  <p id="dashUserEmail" class="text-xs sm:text-sm text-zinc-500 font-mono-alt">applicant@email.com</p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2 self-start sm:self-auto">
-                <span id="dashApplicationId" class="font-mono-alt text-xs font-bold px-3 py-1.5 bg-zinc-100 border border-zinc-300 rounded-lg text-zinc-800">
-                  ID: TFC-FEL-2026
-                </span>
-                <button type="button" id="btnNewApplication" onclick="clearFellowshipApplication()" class="tfc-btn tfc-btn-outline text-xs px-2.5 py-1 text-zinc-500">
-                  New Application
-                </button>
-              </div>
-            </div>
-
-            <!-- Application & Manual Payment Next Steps Status -->
-            <div class="my-6 p-5 rounded-2xl border bg-gradient-to-br from-amber-50/60 via-white to-orange-50/40 border-amber-200/80 shadow-sm" id="dashPaymentBanner">
-              <div class="flex items-start gap-4">
-                <div id="dashPaymentIcon" class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold shrink-0 shadow-md">
-                  <i data-lucide="clock" class="w-6 h-6"></i>
-                </div>
-                <div class="flex-1">
-                  <div class="flex items-center gap-2.5 flex-wrap">
-                    <span class="text-xs font-bold text-zinc-500 uppercase font-mono-alt">Application Status:</span>
-                    <span id="dashPaymentBadge" class="inline-flex items-center gap-1.5 text-xs font-black px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-mono-alt">
-                      <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Application Submitted — Review in Progress ⏳
-                    </span>
-                  </div>
-                  <p id="dashPaymentHeading" class="text-sm sm:text-base text-zinc-800 mt-2 font-bold leading-relaxed font-body-alt">
-                    Application received. We review every application within 24 hours. If you're accepted, our team will contact you on email or WhatsApp to confirm your seat with the ₹999 fee.
-                  </p>
-                  <p id="dashPaymentSubtext" class="text-xs text-zinc-600 mt-1">
-                    No payment is required right now. Submitting is free, and the ₹999 fee is only collected once you're accepted.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Application Summary -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div class="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 space-y-2">
-                <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wide flex items-center gap-1.5 font-mono-alt">
-                  <i data-lucide="user" class="w-3.5 h-3.5"></i>
-                  <span>Applicant Information</span>
-                </h4>
-                <div class="space-y-1.5 text-xs">
-                  <div class="flex justify-between py-1 border-b border-zinc-200/60">
-                    <span class="text-zinc-500">College / Affiliation:</span>
-                    <span id="dashCollege" class="font-bold text-zinc-800 text-right">-</span>
-                  </div>
-                  <div class="flex justify-between py-1 border-b border-zinc-200/60">
-                    <span class="text-zinc-500">WhatsApp Phone:</span>
-                    <span id="dashPhone" class="font-bold text-zinc-800 text-right">-</span>
-                  </div>
-                  <div class="flex justify-between py-1">
-                    <span class="text-zinc-500">Submitted At:</span>
-                    <span id="dashSubmittedAt" class="font-bold text-zinc-800 text-right">-</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="p-4 rounded-xl border border-zinc-200 bg-zinc-50/60 space-y-2">
-                <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wide flex items-center gap-1.5 font-mono-alt">
-                  <i data-lucide="rocket" class="w-3.5 h-3.5"></i>
-                  <span>Venture Concept</span>
-                </h4>
-                <div class="space-y-1.5 text-xs">
-                  <div>
-                    <span class="text-zinc-400 text-[0.7rem] uppercase font-bold block font-mono-alt">One-Line Pitch:</span>
-                    <p id="dashQ1" class="text-zinc-700 italic line-clamp-2 mt-0.5">"..."</p>
-                  </div>
-                  <div class="pt-1 border-t border-zinc-200/60 flex justify-between items-center">
-                    <span class="text-zinc-400 text-[0.7rem] uppercase font-bold font-mono-alt">Format:</span>
-                    <span id="dashQ4" class="font-bold text-zinc-800">4-Week Online Cohort</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Next Steps: Add-to-Calendar for Week 1 Kickoff & Social Share -->
-            <div class="pt-5 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div>
-                <strong class="text-sm text-zinc-900 block font-display">Next Step: Week 1 Kickoff</strong>
-                <span class="text-xs text-zinc-500 block">October 19, 2026 · Online Cohort Lab</span>
-              </div>
-
-              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
-                <a id="btnAddToCal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=The+Future+Council+Fellowship+%2726+Week+1+Kickoff&dates=20261019T123000Z/20261019T143000Z&details=Live+cohort+lab%2C+founder+pod+formation%2C+and+onboarding+for+The+Future+Council+Fellowship+%2726." target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2.5 text-zinc-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
-                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Add Kickoff to Calendar
-                </a>
-                <a id="btnShareWhatsApp" href="https://api.whatsapp.com/send?text=I%20just%20registered%20for%20The%20Future%20Council%20Fellowship%20%2726%20%E2%80%94%20a%204-week%20online%20founder%20cohort!%20Check%20it%20out:%20https://thefuturecouncil.in/fellowship" target="_blank" class="tfc-btn tfc-btn-outline text-xs px-3 py-2.5 text-emerald-700 flex items-center gap-1.5 w-full sm:w-auto justify-center">
-                  <i data-lucide="share-2" class="w-3.5 h-3.5"></i> Share with Chapter
-                </a>
-              </div>
-            </div>
-
+        <!-- CARD 2: CONFIRMATION DASHBOARD (SPEC 5.6) -->
+        <div class="form-shell dash-panel hidden" id="fellowshipDashboardPanel" style="display: none;">
+          <div class="dash-badge">
+            <span>●</span> Application Submitted · Under Review
           </div>
+          <h2 style="font-size: clamp(28px, 4vw, 42px);">Application Received.</h2>
+          <p style="color: var(--ink-soft); font-size: 16px; margin-top: 10px; line-height: 1.5;">
+            Decisions and feedback go out by <b>October 07, 2026</b>. Selected founders get the founder agreement to sign before kickoff.
+          </p>
+
+          <div class="dash-info-grid">
+            <div>
+              <span class="mono" style="color: var(--ink-soft); font-size: 11px;">Applicant Name</span>
+              <strong id="dashUserName" style="display: block; font-size: 16px; margin-top: 2px;">-</strong>
+            </div>
+            <div>
+              <span class="mono" style="color: var(--ink-soft); font-size: 11px;">Application ID</span>
+              <strong id="dashApplicationId" style="display: block; font-size: 16px; margin-top: 2px; font-family: var(--mono);">-</strong>
+            </div>
+            <div>
+              <span class="mono" style="color: var(--ink-soft); font-size: 11px;">Registered Email</span>
+              <span id="dashUserEmail" style="display: block; font-size: 14.5px; margin-top: 2px;">-</span>
+            </div>
+            <div>
+              <span class="mono" style="color: var(--ink-soft); font-size: 11px;">College / City</span>
+              <span id="dashCollege" style="display: block; font-size: 14.5px; margin-top: 2px;">-</span>
+            </div>
+            <div style="grid-column: 1 / -1; border-top: 1px dashed var(--line); padding-top: 12px;">
+              <span class="mono" style="color: var(--ink-soft); font-size: 11px;">Project Concept</span>
+              <p id="dashQ1" style="font-style: italic; color: var(--ink); margin-top: 4px;">-</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;">
+            <a class="btn solid" href="/school">Explore Startup School in the Meantime →</a>
+            <button type="button" class="btn" onclick="window.clearFellowshipApplication()">Submit Another Application</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ SECTION (UPDATED EXACTLY TO SECTION 3) -->
+    <section style="padding-block: clamp(48px, 7vw, 96px); background: #fff; border-top: 1px solid var(--line);">
+      <div class="wrap" style="max-width: 840px;">
+        <div class="sec-head stacked">
+          <p class="mono kick">Clear Answers</p>
+          <h2>Fellowship '26 FAQ</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>What does it cost to apply?</summary>
+            <div class="faq-body">
+              There is a one-time ₹1,999 application fee (about ₹70 a day). Fee waivers are always available if this amount is a financial barrier. There are no additional fees if you are accepted.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is admission competitive?</summary>
+            <div class="faq-body">
+              Yes. We select strictly 20 founders for Cohort 01 based on the problem, your progress and your team, never your college.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Does TFC take equity?</summary>
+            <div class="faq-body">
+              0% equity, ever. You own 100% of what you build.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How does the 2% success fee work?</summary>
+            <div class="faq-body">
+              We only charge a one-time 2% cash fee on funds raised from investors The Future Council introduces you to, within 12 months of Demo Day. If you raise independently or don't raise, you owe us nothing.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if I am not selected?</summary>
+            <div class="faq-body">
+              Every applicant receives written feedback on what's working and 2–3 specific things to fix, 1 month of Startup School free (worth ₹399), and 50% off your next Launchpad application (₹999).
+            </div>
+          </details>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Sticky Mobile & Desktop CTA Bar -->
-  <aside class="tfc-sticky-relaunch-bar">
-    <div>
-      <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; font-family: var(--font-utility); letter-spacing: 0.05em;">Fellowship '26 · Online Cohort</div>
-      <div style="font-size: 0.85rem; font-weight: 700;">Closes Sep 30, 7 PM IST · Applications Open</div>
-    </div>
-    <a href="#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm" style="background: var(--accent); border-color: var(--accent); font-weight: 700;">Apply for Fellowship '26 →</a>
-  </aside>
-
-  <!-- Clean Footer (Spec §2 Standard 3-Column Footer) -->
-  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 0 32px 0;">
-    <div class="tfc-container">
-      <div class="tfc-footer-grid">
-        <!-- Col 1: Brand -->
-        <div class="tfc-footer-col">
-          <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; text-decoration: none;">
-            <img src="TFC.png" alt="The Future Council Logo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 6px;" />
-            <span class="font-display font-bold" style="font-size: 1.1rem; letter-spacing: 0.08em; color: var(--paper);">THE FUTURE COUNCIL</span>
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
           </a>
-          <p style="font-size: 0.85rem; color: var(--paper-70); line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
-            Where student builders stop waiting for permission. 90+ collegiate chapters building ventures, research, and high-agency careers.
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
           </p>
-          <div style="font-size: 0.8rem; color: var(--paper-70);">
-            Admissions & Support: <br />
-            <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper); font-weight: 600; text-decoration: underline;">support@thefuturecouncil.in</a>
+          <div style="font-size:13px; color:#CDBFB2;">
+            Admissions &amp; questions:<br>
+            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
           </div>
         </div>
-
-        <!-- Col 2: Navigation Columns -->
-        <div class="tfc-footer-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Program</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="fellowship.html" style="color: var(--paper); font-weight: 600;">Fellowship '26</a></li>
-              <li><a href="fellowship.html#structure" style="color: var(--paper-70); transition: color 0.2s;">Program Structure</a></li>
-              <li><a href="fellowship.html#eligibility" style="color: var(--paper-70); transition: color 0.2s;">Who Should Apply</a></li>
-              <li><a href="fellowship.html#apply" style="color: var(--paper-70); transition: color 0.2s;">Application Form</a></li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Ecosystem</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-              <li><a href="branches.html" style="color: var(--paper-70); transition: color 0.2s;">Collegiate Branches</a></li>
-              <li><a href="resources.html" style="color: var(--paper-70); transition: color 0.2s;">Resource Library</a></li>
-              <li><a href="partners.html" style="color: var(--paper-70); transition: color 0.2s;">Partners</a></li>
-              <li><a href="ambassador.html" style="color: var(--paper-70); transition: color 0.2s;">Campus Ambassadors</a></li>
-              <li><a href="join.html" style="color: var(--paper-70); transition: color 0.2s;">Join the Council</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Col 3: Legal & Status -->
-        <div class="tfc-footer-col">
-          <div style="font-family: var(--font-utility); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 14px;">Legal</div>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-            <li><a href="terms.html" style="color: var(--paper-70); transition: color 0.2s;">Terms of Service</a></li>
-            <li><a href="privacy.html" style="color: var(--paper-70); transition: color 0.2s;">Privacy Policy</a></li>
-            <li><a href="refund.html" style="color: var(--paper-70); transition: color 0.2s;">Refund Policy</a></li>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
           </ul>
-          <div style="margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; font-size: 0.75rem; color: var(--paper-70);">
-            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--success); margin-right: 6px;"></span>
-            Cohort 01 Applications Open · 100% Equity-Free
-          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
+            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          </ul>
         </div>
       </div>
-
-      <div style="margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: var(--paper-70); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <span>© 2026 The Future Council. All rights reserved.</span>
-        <span>Delhi NCR · Bangalore · Mumbai · Hyderabad</span>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
       </div>
     </div>
   </footer>
 
+  <script src="/tfc-shared.js"></script>
   <script>
-    // =========================================================================
-    // MULTI-STEP NAVIGATION & AUTOSAVE LOGIC
-    // =========================================================================
+  (function(){
+    // Multi-step Form Navigation
     let currentStep = 1;
-
-    function syncFinalStepSubmit() {
-      const commit = document.getElementById('fCommitHours');
-      const fee = document.getElementById('fUnderstandFee');
-      const submitBtn = document.getElementById('btnSubmitApp');
-      if (submitBtn) {
-        submitBtn.disabled = !(commit && commit.checked && fee && fee.checked);
-      }
-    }
+    const s1 = document.getElementById('step1Group');
+    const s2 = document.getElementById('step2Group');
+    const s3 = document.getElementById('step3Group');
+    const sp1 = document.getElementById('sp1');
+    const sp2 = document.getElementById('sp2');
+    const sp3 = document.getElementById('sp3');
+    const stepBadge = document.getElementById('stepBadge');
 
     function goToStep(step) {
-      if (step < 1 || step > 3) return;
-
-      // Validate prior steps before moving forward
-      if (step > 1 && !validateStep(1)) {
-        return;
-      }
-      if (step > 2 && !validateStep(2)) {
-        return;
-      }
-
       currentStep = step;
-      if (step === 3) {
-        document.body.classList.add('step3-active');
-      } else {
-        document.body.classList.remove('step3-active');
-      }
+      s1.style.display = step === 1 ? 'block' : 'none';
+      s2.style.display = step === 2 ? 'block' : 'none';
+      s3.style.display = step === 3 ? 'block' : 'none';
 
-      if (window.TFCAnalytics) {
-        if (step === 1) window.TFCAnalytics.setCurrentStep('start');
-        else if (step === 2) window.TFCAnalytics.setCurrentStep('questions');
-        else if (step === 3) {
-          window.TFCAnalytics.setCurrentStep('eligibility');
-          window.TFCAnalytics.trackEligibilityFilterShown({
-            eligibility_check_entry_point: 'from_application_start',
-            university: getApplicantUniversity()
-          });
-        }
-      }
+      sp1.classList.toggle('active', step >= 1);
+      sp2.classList.toggle('active', step >= 2);
+      sp3.classList.toggle('active', step >= 3);
 
-      // Toggle step visibility
-      for (let i = 1; i <= 3; i++) {
-        const stepEl = document.getElementById('formStep' + i);
-        const badgeEl = document.getElementById('stepBadge' + i);
-        if (stepEl) {
-          if (i === step) {
-            stepEl.classList.remove('hidden');
-          } else {
-            stepEl.classList.add('hidden');
-          }
-        }
-        if (badgeEl) {
-          if (i === step) {
-            badgeEl.className = 'tfc-pill-step active';
-          } else if (i < step) {
-            badgeEl.className = 'tfc-pill-step active';
-          } else {
-            badgeEl.className = 'tfc-pill-step';
-          }
-        }
-      }
-      if (step === 2) {
-        syncLeadToSupabase(1);
-      } else if (step === 3) {
-        syncLeadToSupabase(2);
-        syncFinalStepSubmit();
-      }
-      saveDraftLocally();
+      if (stepBadge) stepBadge.textContent = `Step ${step} of 3`;
+      window.scrollTo({ top: document.getElementById('apply').offsetTop - 80, behavior: 'smooth' });
     }
 
-    function nextStep(step) {
-      if (step === 2) {
-        if (!validateStep(1)) return;
-        goToStep(2);
-        syncLeadToSupabase(1);
-      } else if (step === 3) {
-        if (!validateStep(2)) return;
-        goToStep(3);
-        syncLeadToSupabase(2);
-      } else {
-        goToStep(step);
+    // Step 1 Validation
+    document.getElementById('btnNext1')?.addEventListener('click', () => {
+      const name = document.getElementById('fName').value.trim();
+      const email = document.getElementById('fEmail').value.trim();
+      const phone = document.getElementById('fPhone').value.trim();
+      if (!name) { alert('Please enter your full name.'); return; }
+      if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+      if (!phone || phone.length < 8) { alert('Please enter your WhatsApp contact number.'); return; }
+      goToStep(2);
+    });
+
+    document.getElementById('btnBack2')?.addEventListener('click', () => goToStep(1));
+
+    // Step 2 Validation
+    document.getElementById('btnNext2')?.addEventListener('click', () => {
+      const vName = document.getElementById('fVentureName').value.trim();
+      const q1 = document.getElementById('fQ1').value.trim();
+      const q3 = document.getElementById('fQ3').value.trim();
+      if (!vName) { alert('Please enter your project or venture name.'); return; }
+      if (!q1) { alert('Please describe the problem you are solving.'); return; }
+      if (!q3) { alert('Please tell us what you have built or shipped so far.'); return; }
+      goToStep(3);
+    });
+
+    document.getElementById('btnBack3')?.addEventListener('click', () => goToStep(2));
+
+    // Toggle College Fields
+    const enrolledNo = document.getElementById('fEnrolledNo');
+    const enrolledYes = document.getElementById('fEnrolledYes');
+    const collegeBox = document.getElementById('collegeDetailFields');
+    function checkEnrolled() {
+      if (collegeBox) {
+        collegeBox.style.display = enrolledNo.checked ? 'none' : 'block';
       }
     }
+    enrolledNo?.addEventListener('change', checkEnrolled);
+    enrolledYes?.addEventListener('change', checkEnrolled);
 
-    function toggleCollegeFields(isEnrolled) {
-      const sec = document.getElementById('collegeDetailsSection');
-      const nameInput = document.getElementById('fCollegeName');
-      const yearInput = document.getElementById('fCollegeYear');
-      const courseInput = document.getElementById('fCollegeCourse');
-      const labelYes = document.getElementById('labelEnrolledYes');
-      const labelNo = document.getElementById('labelEnrolledNo');
-
-      if (labelYes && labelNo) {
-        if (isEnrolled) {
-          labelYes.classList.add('active');
-          labelNo.classList.remove('active');
-        } else {
-          labelNo.classList.add('active');
-          labelYes.classList.remove('active');
-        }
+    // Toggle Fee Waiver
+    const waiverLink = document.getElementById('toggleWaiverLink');
+    const waiverBox = document.getElementById('feeWaiverContainer');
+    waiverLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (waiverBox) {
+        const isHidden = waiverBox.style.display === 'none';
+        waiverBox.style.display = isHidden ? 'block' : 'none';
+        waiverLink.textContent = isHidden ? 'Hide waiver request' : 'Request a fee waiver';
       }
+    });
 
-      if (isEnrolled) {
-        if (sec) sec.classList.remove('hidden');
-        if (nameInput) nameInput.required = true;
-        if (yearInput) yearInput.required = true;
-        if (courseInput) courseInput.required = true;
-      } else {
-        if (sec) sec.classList.add('hidden');
-        if (nameInput) { nameInput.required = false; nameInput.value = ''; }
-        if (yearInput) { yearInput.required = false; yearInput.value = ''; }
-        if (courseInput) { courseInput.required = false; courseInput.value = ''; }
-      }
-      saveDraftLocally();
-    }
-
-    function getApplicantUniversity() {
-      const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
-      if (!enrolledRadio) return '';
-      if (enrolledRadio.value === 'yes') {
-        const col = document.getElementById('fCollegeName')?.value.trim() || '';
-        const yr = document.getElementById('fCollegeYear')?.value || '';
-        const crs = document.getElementById('fCollegeCourse')?.value.trim() || '';
-        const details = [yr, crs].filter(Boolean).join(', ');
-        return details ? `${col} (${details})` : (col || 'College Student');
-      } else {
-        return 'Independent / Not Enrolled in College';
-      }
-    }
-
-    function validateStep(step) {
-      if (step === 1) {
-        const name = document.getElementById('fName').value.trim();
-        const email = document.getElementById('fEmail').value.trim();
-        const phone = document.getElementById('fPhone').value.trim();
-        const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
-
-        if (!name) {
-          alert("Please enter your full name.");
-          document.getElementById('fName').focus();
-          return false;
-        }
-        if (!email || !email.includes('@') || !email.includes('.')) {
-          alert("Please enter a valid email address.");
-          document.getElementById('fEmail').focus();
-          return false;
-        }
-        if (!phone || phone.length < 8) {
-          alert("Please enter a valid WhatsApp phone number.");
-          document.getElementById('fPhone').focus();
-          return false;
-        }
-        if (!enrolledRadio) {
-          alert("Please indicate whether you are currently enrolled in a college or university.");
-          document.getElementById('fEnrolledYes')?.focus();
-          return false;
-        }
-        if (enrolledRadio.value === 'yes') {
-          const colName = document.getElementById('fCollegeName')?.value.trim();
-          const colYear = document.getElementById('fCollegeYear')?.value;
-          const colCourse = document.getElementById('fCollegeCourse')?.value.trim();
-          if (!colName) {
-            alert("Please enter your college or university name.");
-            document.getElementById('fCollegeName')?.focus();
-            return false;
-          }
-          if (!colYear) {
-            alert("Please select your current year of study.");
-            document.getElementById('fCollegeYear')?.focus();
-            return false;
-          }
-          if (!colCourse) {
-            alert("Please enter your course or major.");
-            document.getElementById('fCollegeCourse')?.focus();
-            return false;
-          }
-        }
-        return true;
-      } else if (step === 2) {
-        const ventureName = document.getElementById('fVentureName').value.trim();
-        const q1 = document.getElementById('fQ1').value.trim();
-        if (!ventureName) {
-          alert("Please enter your venture or project name.");
-          document.getElementById('fVentureName').focus();
-          return false;
-        }
-        if (!q1) {
-          alert("Please provide a one-line pitch of what you are building.");
-          document.getElementById('fQ1').focus();
-          return false;
-        }
-        return true;
-      } else if (step === 3) {
-        const commitHours = document.getElementById('fCommitHours')?.checked;
-        const understandFee = document.getElementById('fUnderstandFee')?.checked;
-        if (!commitHours || !understandFee) {
-          if (window.TFCAnalytics) {
-            window.TFCAnalytics.trackEligibilityCheckCompleted({
-              eligibility_result: 'ineligible',
-              eligibility_ineligibility_reason: !commitHours ? 'commitment_hours_unconfirmed' : 'fee_policy_unconfirmed',
-              university: getApplicantUniversity()
-            });
-          }
-          if (!commitHours) {
-            alert("Please confirm: I can commit 6–8 hours a week for 4 weeks, fully remote.");
-            document.getElementById('fCommitHours')?.focus();
-          } else {
-            alert("Please confirm: I understand ₹999 is charged only if I'm accepted, and is non-refundable once paid.");
-            document.getElementById('fUnderstandFee')?.focus();
-          }
-          return false;
-        } else {
-          if (window.TFCAnalytics) {
-            window.TFCAnalytics.trackEligibilityCheckCompleted({
-              eligibility_result: 'eligible',
-              eligibility_ineligibility_reason: '',
-              university: getApplicantUniversity()
-            });
-          }
-        }
-        return true;
-      }
-      return true;
-    }
-
-    function toggleFeeWaiver() {
-      const container = document.getElementById('feeWaiverContainer');
-      const textarea = document.getElementById('fWaiverReason');
-      if (container) {
-        container.classList.toggle('hidden');
-        if (!container.classList.contains('hidden') && textarea) {
-          textarea.focus();
-        }
-        saveDraftLocally();
-      }
-    }
-
-    function copyUpiId() {
-      const upi = document.getElementById('upiText').innerText;
-      navigator.clipboard.writeText(upi).then(() => {
-        alert("Copied UPI ID: " + upi);
-      }).catch(() => {
-        prompt("Copy UPI ID:", upi);
-      });
-    }
-
-    // Local Draft Autosave
-    function saveDraftLocally() {
-      const enrolledVal = document.querySelector('input[name="fEnrolled"]:checked')?.value || '';
-      const draft = {
-        name: document.getElementById('fName')?.value || '',
-        email: document.getElementById('fEmail')?.value || '',
-        phone: document.getElementById('fPhone')?.value || '',
-        enrolled: enrolledVal,
-        collegeName: document.getElementById('fCollegeName')?.value || '',
-        collegeYear: document.getElementById('fCollegeYear')?.value || '',
-        collegeCourse: document.getElementById('fCollegeCourse')?.value || '',
-        teamSize: document.getElementById('fTeamSize')?.value || '',
-        ventureName: document.getElementById('fVentureName')?.value || '',
-        stage: document.getElementById('fStage')?.value || '',
-        q1: document.getElementById('fQ1')?.value || '',
-        q3: document.getElementById('fQ3')?.value || '',
-        commitHours: document.getElementById('fCommitHours')?.checked || false,
-        understandFee: document.getElementById('fUnderstandFee')?.checked || false,
-        waiverReason: document.getElementById('fWaiverReason')?.value || '',
-        waiverRequested: !document.getElementById('feeWaiverContainer')?.classList.contains('hidden'),
-        step: currentStep
-      };
-      localStorage.setItem('tfc_fellowship_draft', JSON.stringify(draft));
-    }
-
-    function restoreDraftLocally() {
-      const draftStr = localStorage.getItem('tfc_fellowship_draft');
-      if (!draftStr) return;
-      try {
-        const d = JSON.parse(draftStr);
-        if (d.name && !document.getElementById('fName').value) document.getElementById('fName').value = d.name;
-        if (d.email && !document.getElementById('fEmail').value) document.getElementById('fEmail').value = d.email;
-        if (d.phone && !document.getElementById('fPhone').value) document.getElementById('fPhone').value = d.phone;
-        if (d.enrolled === 'yes') {
-          const rYes = document.getElementById('fEnrolledYes');
-          if (rYes) {
-            rYes.checked = true;
-            toggleCollegeFields(true);
-          }
-          if (d.collegeName && document.getElementById('fCollegeName')) document.getElementById('fCollegeName').value = d.collegeName;
-          if (d.collegeYear && document.getElementById('fCollegeYear')) document.getElementById('fCollegeYear').value = d.collegeYear;
-          if (d.collegeCourse && document.getElementById('fCollegeCourse')) document.getElementById('fCollegeCourse').value = d.collegeCourse;
-        } else if (d.enrolled === 'no') {
-          const rNo = document.getElementById('fEnrolledNo');
-          if (rNo) {
-            rNo.checked = true;
-            toggleCollegeFields(false);
-          }
-        }
-        if (d.teamSize) document.getElementById('fTeamSize').value = d.teamSize;
-        if (d.ventureName) document.getElementById('fVentureName').value = d.ventureName;
-        if (d.stage) document.getElementById('fStage').value = d.stage;
-        if (d.q1) document.getElementById('fQ1').value = d.q1;
-        if (d.q3) document.getElementById('fQ3').value = d.q3;
-        if (d.commitHours && document.getElementById('fCommitHours')) document.getElementById('fCommitHours').checked = d.commitHours;
-        if (d.understandFee && document.getElementById('fUnderstandFee')) document.getElementById('fUnderstandFee').checked = d.understandFee;
-        if (d.waiverReason && document.getElementById('fWaiverReason')) {
-          document.getElementById('fWaiverReason').value = d.waiverReason;
-          document.getElementById('feeWaiverContainer')?.classList.remove('hidden');
-        } else if (d.waiverRequested && document.getElementById('feeWaiverContainer')) {
-          document.getElementById('feeWaiverContainer').classList.remove('hidden');
-        }
-        syncFinalStepSubmit();
-      } catch(e) {}
-    }
-
-    // Capture referral query parameter
-    function checkReferral() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const ref = urlParams.get('ref') || urlParams.get('chapter');
-      if (ref) {
-        localStorage.setItem('tfc_chapter_ref', ref);
-        const colInput = document.getElementById('fCollegeName');
-        if (colInput && !colInput.value) {
-          colInput.value = ref;
-          const rYes = document.getElementById('fEnrolledYes');
-          if (rYes) {
-            rYes.checked = true;
-            toggleCollegeFields(true);
-          }
-        }
-      }
-    }
-
-    // =========================================================================
-    // SUPABASE INTEGRATION & STATUS VIEW
-    // =========================================================================
+    // Supabase Setup
     const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
     let supabaseClient = null;
@@ -1503,529 +763,134 @@
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    async function syncLeadToSupabase(step = currentStep) {
-      const email = document.getElementById('fEmail')?.value.trim().toLowerCase();
-      const name = document.getElementById('fName')?.value.trim();
-      const phone = document.getElementById('fPhone')?.value.trim();
-      if (!email || !email.includes('@') || !email.includes('.')) return null;
-
-      const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
-      const isEnrolled = enrolledRadio ? enrolledRadio.value === 'yes' : false;
-      const colName = document.getElementById('fCollegeName')?.value.trim() || '';
-      const colYear = document.getElementById('fCollegeYear')?.value || '';
-      const colCourse = document.getElementById('fCollegeCourse')?.value.trim() || '';
-      const collegeSummary = isEnrolled
-        ? [colName, colYear, colCourse].filter(Boolean).join(' - ')
-        : (enrolledRadio ? 'Independent / Not Currently Enrolled' : (colName || 'Applicant'));
-      const teamSize = document.getElementById('fTeamSize')?.value || 'Solo Founder';
-      const ventureName = document.getElementById('fVentureName')?.value.trim() || '';
-      const stage = document.getElementById('fStage')?.value || '';
-      const q1 = document.getElementById('fQ1')?.value.trim().replace(/\|/g, '/') || '';
-      const q3 = document.getElementById('fQ3')?.value.trim().replace(/\|/g, '/') || '';
-      const waiverReason = document.getElementById('fWaiverReason')?.value.trim().replace(/\|/g, '/') || '';
-      const waiverContainer = document.getElementById('feeWaiverContainer');
-      const waiverRequested = Boolean(waiverReason) || (waiverContainer && !waiverContainer.classList.contains('hidden'));
-      const waiverMeta = waiverRequested ? ` | WaiverRequested: Yes | WaiverReason: ${waiverReason}` : ` | WaiverRequested: No`;
-      const chapterRef = localStorage.getItem('tfc_chapter_ref') || 'direct';
-      const submittedAt = new Date().toISOString();
-
-      let stepProgress = `Step ${step} Completed`;
-      let paymentStatus = 'lead_in_progress';
-      if (step === 3 && document.getElementById('fCommitHours')?.checked && document.getElementById('fUnderstandFee')?.checked) {
-        stepProgress = 'Completed';
-        paymentStatus = 'awaiting_acceptance';
-      } else if (step >= 2 && (ventureName || q1)) {
-        stepProgress = 'Step 2 Completed';
-      } else if (step >= 1) {
-        stepProgress = 'Step 1 Completed';
-      }
-
-      const combinedCollege = `${collegeSummary} | Enrolled: ${isEnrolled ? 'Yes' : 'No'} | College: ${colName} | Year: ${colYear} | Course: ${colCourse} | Phone: ${phone} | Source: FellowshipPage | Fellowship: Yes | Venture: ${ventureName} | Stage: ${stage} | TeamSize: ${teamSize} | Q1: ${q1} | Q3: ${q3} | Q4: 4-Week Online | PaymentFee: 999 | PaymentStatus: ${paymentStatus}${waiverMeta} | ChapterRef: ${chapterRef} | StepProgress: ${stepProgress} | FormSubmittedAt: ${submittedAt}`;
-
+    async function syncToSupabase(data) {
+      if (!supabaseClient) return null;
       try {
-        if (supabaseClient) {
-          const { data: dbMember } = await supabaseClient
-            .from('members')
-            .select('id, member_id, college')
-            .eq('email', email)
-            .maybeSingle();
+        const { data: dbMember } = await supabaseClient
+          .from('members')
+          .select('id, member_id, college')
+          .eq('email', data.email)
+          .maybeSingle();
 
-          let memberId = dbMember ? dbMember.member_id : null;
-          if (!dbMember) {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            memberId = `TFC-FEL-${randomNum}`;
-            const { error: insErr } = await supabaseClient.from('members').insert([{
-              name: name || email.split('@')[0],
-              email: email,
-              college: combinedCollege,
-              tier: 'Student',
-              member_id: memberId,
-              password: 'fellow2026',
-              image: ''
-            }]);
-            if (insErr) console.warn('[Fellowship CRM] Insert warning:', insErr.message);
-          } else {
-            const { error: updErr } = await supabaseClient.from('members').update({
-              name: name || dbMember.name || email.split('@')[0],
-              college: combinedCollege
-            }).eq('email', email);
-            if (updErr) console.warn('[Fellowship CRM] Update warning:', updErr.message);
-          }
-          return memberId;
-        }
-      } catch (err) {
-        console.warn('[Fellowship CRM] Sync exception:', err);
-      }
-      return null;
-    }
+        const combinedInfo = `${data.college} | Phone: ${data.phone} | Venture: ${data.venture} | Stage: ${data.stage} | Q1: ${data.q1} | Q3: ${data.q3} | Fee: 1999 | UpiRef: ${data.upiRef || 'Waiver/Pending'} | Source: FellowshipPage | FormSubmittedAt: ${new Date().toISOString()}`;
 
-    function parseFellowshipMemberData(member, user) {
-      const collegeStr = member.college || '';
-      const name = member.name || (user ? user.name : 'Applicant');
-      const email = member.email || (user ? user.email : '');
-      const orderId = member.member_id || 'TFC-FEL-2026';
-      const avatar = user ? user.avatar : '';
-
-      let phone = '-';
-      const phoneMatch = collegeStr.match(/Phone:\s*([^|]+)/);
-      if (phoneMatch) phone = phoneMatch[1].trim();
-
-      let chapter = '';
-      if (collegeStr.includes(' | ')) {
-        chapter = collegeStr.split(' | ')[0].trim();
-      } else {
-        chapter = collegeStr || 'University Chapter';
-      }
-
-      let q1 = '';
-      const q1Match = collegeStr.match(/Q1:\s*([^|]+)/);
-      if (q1Match) q1 = q1Match[1].trim();
-
-      let upiRef = '';
-      const refMatch = collegeStr.match(/UpiRef:\s*([^|]+)/);
-      if (refMatch) upiRef = refMatch[1].trim();
-
-      let submittedAt = '';
-      const dateMatch = collegeStr.match(/FormSubmittedAt:\s*([^|]+)/);
-      if (dateMatch) {
-        try {
-          submittedAt = new Date(dateMatch[1].trim()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        } catch (e) {
-          submittedAt = dateMatch[1].trim();
-        }
-      } else {
-        submittedAt = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      }
-
-      return {
-        name,
-        email,
-        phone,
-        college: chapter,
-        orderId,
-        avatar,
-        q1: q1 || 'Early-stage tech venture application submitted.',
-        q4: '4-Week Online Cohort',
-        upiRef: upiRef || 'Pending Reconciliation',
-        submittedAt,
-        source: 'FellowshipPage',
-        paymentStatus: 'ref_submitted'
-      };
-    }
-
-    function showFellowshipDashboard(applicantData) {
-      document.body.classList.remove('step3-active');
-      const applyCard = document.getElementById('fellowshipApplyCard');
-      const dashPanel = document.getElementById('fellowshipDashboardPanel');
-      if (applyCard) applyCard.classList.add('hidden');
-      if (dashPanel) dashPanel.classList.remove('hidden');
-
-      const nameEl = document.getElementById('dashUserName');
-      const emailEl = document.getElementById('dashUserEmail');
-      const avatarEl = document.getElementById('dashUserAvatar');
-      const orderIdEl = document.getElementById('dashApplicationId');
-      const collegeEl = document.getElementById('dashCollege');
-      const phoneEl = document.getElementById('dashPhone');
-      const submittedAtEl = document.getElementById('dashSubmittedAt');
-      const q1El = document.getElementById('dashQ1');
-      const upiRefEl = document.getElementById('dashUpiRefDisplay');
-
-      if (nameEl) nameEl.textContent = applicantData.name || 'Applicant';
-      if (emailEl) emailEl.textContent = applicantData.email || '';
-      if (orderIdEl) orderIdEl.textContent = `ID: ${applicantData.orderId || 'TFC-FEL-2026'}`;
-      if (collegeEl) collegeEl.textContent = applicantData.college || 'Ecosystem Founder';
-      if (phoneEl) phoneEl.textContent = applicantData.phone || '-';
-      if (submittedAtEl) submittedAtEl.textContent = applicantData.submittedAt || 'Today';
-      if (q1El) q1El.textContent = `"${applicantData.q1 || 'Early-stage technology startup concept'}"`;
-      if (upiRefEl) upiRefEl.textContent = applicantData.upiRef || '-';
-
-      if (avatarEl) {
-        if (applicantData.avatar) {
-          avatarEl.innerHTML = `<img src="${applicantData.avatar}" alt="${applicantData.name}" class="w-full h-full object-cover" />`;
+        let memberId = dbMember?.member_id;
+        if (!memberId) {
+          const rand = Math.floor(1000 + Math.random() * 9000);
+          memberId = `TFC-FEL-${rand}`;
+          await supabaseClient.from('members').insert([{
+            name: data.name,
+            email: data.email,
+            college: combinedInfo,
+            tier: 'Student',
+            member_id: memberId,
+            password: 'fellow2026',
+            image: ''
+          }]);
         } else {
-          avatarEl.textContent = (applicantData.name || 'F').charAt(0).toUpperCase();
+          await supabaseClient.from('members').update({
+            name: data.name,
+            college: combinedInfo
+          }).eq('email', data.email);
         }
+        return memberId;
+      } catch (err) {
+        console.warn('Supabase sync warning:', err);
+        return null;
       }
-
-      // Update CTA buttons across the page
-      document.querySelectorAll('a[href="#apply"]').forEach(btn => {
-        btn.innerHTML = `<span>Fellowship Status ⚡</span>`;
-        btn.onclick = (e) => {
-          e.preventDefault();
-          const target = document.getElementById('apply');
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        };
-      });
-
-      // Track review decision viewed
-      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationReviewDecisionViewed === 'function') {
-        window.TFCAnalytics.trackApplicationReviewDecisionViewed({
-          university: applicantData.college,
-          selection_outcome: applicantData.paymentStatus === 'verified' ? 'selected' : (applicantData.paymentStatus === 'awaiting_payment_instructions' || applicantData.paymentStatus === 'ref_submitted' ? 'selected' : 'waitlisted'),
-          decision_page_variant: 'fellowship_dashboard_v1'
-        });
-      }
-
-      // Track enrollment started on payment instruction engagement
-      const dashPaymentBanner = document.getElementById('dashPaymentBanner');
-      if (dashPaymentBanner && !dashPaymentBanner.dataset.tracked) {
-        dashPaymentBanner.dataset.tracked = 'true';
-        dashPaymentBanner.addEventListener('click', () => {
-          if (window.TFCAnalytics && typeof window.TFCAnalytics.trackFellowshipEnrollmentStarted === 'function') {
-            window.TFCAnalytics.trackFellowshipEnrollmentStarted({
-              university: applicantData.college,
-              enrollment_step: 'payment_details',
-              review_batch: '2026Q3 Batch'
-            });
-          }
-        });
-      }
-
-      if (window.lucide) lucide.createIcons();
     }
 
-    function showFellowshipForm(user) {
-      const applyCard = document.getElementById('fellowshipApplyCard');
-      const dashPanel = document.getElementById('fellowshipDashboardPanel');
-      if (applyCard) applyCard.classList.remove('hidden');
-      if (dashPanel) dashPanel.classList.add('hidden');
+    function showDashboard(info) {
+      document.getElementById('fellowshipApplyCard').style.display = 'none';
+      const p = document.getElementById('fellowshipDashboardPanel');
+      p.style.display = 'block';
+      p.classList.remove('hidden');
 
-      const nameInput = document.getElementById('fName');
-      const emailInput = document.getElementById('fEmail');
-
-      if (nameInput) {
-        nameInput.readOnly = false;
-        nameInput.style.backgroundColor = '';
-        if (user && user.name && !nameInput.value) {
-          nameInput.value = user.name;
-        }
-      }
-      if (emailInput) {
-        emailInput.readOnly = false;
-        emailInput.style.backgroundColor = '';
-        if (user && user.email && !emailInput.value) {
-          emailInput.value = user.email;
-        }
-      }
-      restoreDraftLocally();
+      document.getElementById('dashUserName').textContent = info.name;
+      document.getElementById('dashApplicationId').textContent = info.orderId || 'TFC-FEL-2026';
+      document.getElementById('dashUserEmail').textContent = info.email;
+      document.getElementById('dashCollege').textContent = info.college || 'Ecosystem Founder';
+      document.getElementById('dashQ1').textContent = `"${info.venture}: ${info.q1}"`;
     }
 
     window.clearFellowshipApplication = function() {
-      // 1. Clear all fellowship local caches
-      try {
-        Object.keys(localStorage).forEach(key => {
-          if (key.startsWith('tfc_fellowship_')) {
-            localStorage.removeItem(key);
-          }
-        });
-      } catch (e) {}
-
-      // 2. Set session flag to prevent auto-fetching previous submitted record
-      try {
-        sessionStorage.setItem('tfc_force_new_app', 'true');
-      } catch (e) {}
-
-      // 3. Reset form and inputs
-      const form = document.getElementById('fellowshipDirectForm');
-      if (form) form.reset();
-      syncFinalStepSubmit();
-
-      // 4. Return to Step 1
-      if (typeof goToStep === 'function') {
-        goToStep(1);
-      }
-
-      // 5. Revert CTA buttons
-      document.querySelectorAll('a[href="#apply"]').forEach(btn => {
-        btn.innerHTML = `<span>Apply for Fellowship '26 →</span>`;
-        btn.onclick = (e) => {
-          e.preventDefault();
-          const target = document.getElementById('apply');
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        };
-      });
-
-      // 6. Switch view from dashboard to application form
-      showFellowshipForm(null);
-
-      // 7. Scroll to application section
-      const applySec = document.getElementById('apply');
-      if (applySec) {
-        applySec.scrollIntoView({ behavior: 'smooth' });
-      }
+      sessionStorage.setItem('tfc_force_new_app', 'true');
+      document.getElementById('fellowshipDirectForm').reset();
+      goToStep(1);
+      document.getElementById('fellowshipApplyCard').style.display = 'block';
+      document.getElementById('fellowshipDashboardPanel').style.display = 'none';
     };
 
-    async function checkFellowshipStatus(user) {
-      if (sessionStorage.getItem('tfc_force_new_app') === 'true') {
-        showFellowshipForm(user);
+    // Form Submission Handler
+    const form = document.getElementById('fellowshipDirectForm');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const commit = document.getElementById('fCommitHours').checked;
+      const understand = document.getElementById('fUnderstandFee').checked;
+      if (!commit || !understand) {
+        alert('Please accept the time commitment and fee understanding checkboxes to proceed.');
         return;
       }
 
-      // 1. Check local storage cache for last submitted application on this device
-      const lastEmail = localStorage.getItem('tfc_fellowship_last_email') || (user ? user.email : null);
-      if (lastEmail) {
-        const cachedStr = localStorage.getItem('tfc_fellowship_applicant_' + lastEmail);
-        if (cachedStr) {
-          try {
-            const cachedData = JSON.parse(cachedStr);
-            if (cachedData && cachedData.source === 'FellowshipPage' && (cachedData.paymentStatus === 'awaiting_acceptance' || cachedData.paymentStatus === 'verified' || cachedData.paymentStatus === 'ref_submitted')) {
-              showFellowshipDashboard(cachedData);
-              return;
-            }
-          } catch(e) {}
-        }
+      const btn = document.getElementById('btnSubmitApp');
+      btn.disabled = true;
+      btn.textContent = 'Submitting Application...';
 
-        // 2. Query Supabase for existing fellowship application
-        try {
-          if (supabaseClient) {
-            const { data: member } = await supabaseClient
-              .from('members')
-              .select('*')
-              .eq('email', lastEmail)
-              .maybeSingle();
+      const isEnrolled = enrolledYes.checked;
+      const colName = document.getElementById('fCollegeName')?.value.trim() || 'Independent';
+      const colYear = document.getElementById('fCollegeYear')?.value || '';
+      const colCourse = document.getElementById('fCollegeCourse')?.value.trim() || '';
+      const collegeSummary = isEnrolled ? `${colName} (${colYear}, ${colCourse})` : 'Independent / Gap Year';
 
-            if (member) {
-              const collegeStr = member.college || '';
-              const isCompleted = collegeStr.includes('PaymentStatus: awaiting_acceptance') || 
-                                  collegeStr.includes('PaymentStatus: verified') || 
-                                  collegeStr.includes('PaymentStatus: ref_submitted') || 
-                                  collegeStr.includes('StepProgress: Completed');
-              if (isCompleted) {
-                const applicantData = parseFellowshipMemberData(member, user);
-                localStorage.setItem('tfc_fellowship_applicant_' + lastEmail, JSON.stringify(applicantData));
-                showFellowshipDashboard(applicantData);
-                return;
-              }
-            }
-          }
-        } catch(err) {}
+      const payload = {
+        name: document.getElementById('fName').value.trim(),
+        email: document.getElementById('fEmail').value.trim().toLowerCase(),
+        phone: document.getElementById('fPhone').value.trim(),
+        college: collegeSummary,
+        venture: document.getElementById('fVentureName').value.trim(),
+        stage: document.getElementById('fStage').value,
+        q1: document.getElementById('fQ1').value.trim(),
+        q3: document.getElementById('fQ3').value.trim(),
+        upiRef: document.getElementById('fUpiRef')?.value.trim(),
+        waiverReason: document.getElementById('fWaiverReason')?.value.trim()
+      };
+
+      let orderId = await syncToSupabase(payload);
+      if (!orderId) {
+        orderId = `TFC-FEL-${Math.floor(1000 + Math.random() * 9000)}`;
+      }
+      payload.orderId = orderId;
+
+      // Track in Mixpanel
+      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationCompleted === 'function') {
+        window.TFCAnalytics.trackApplicationCompleted({
+          email: payload.email,
+          name: payload.name,
+          university: payload.college,
+          submission_status: 'submitted',
+          waiver_requested: Boolean(payload.waiverReason)
+        });
       }
 
-      showFellowshipForm(user);
+      // Cache locally
+      localStorage.setItem('tfc_fellowship_last_email', payload.email);
+      localStorage.setItem('tfc_fellowship_applicant_' + payload.email, JSON.stringify(payload));
+
+      showDashboard(payload);
+    });
+
+    // Check existing applicant
+    const lastEmail = localStorage.getItem('tfc_fellowship_last_email');
+    if (lastEmail && sessionStorage.getItem('tfc_force_new_app') !== 'true') {
+      try {
+        const cached = localStorage.getItem('tfc_fellowship_applicant_' + lastEmail);
+        if (cached) {
+          showDashboard(JSON.parse(cached));
+        }
+      } catch (err) {}
     }
-
-    // Form Submit Event (Decoupled Form Submission - Payment collected manually via WhatsApp/Email)
-    const fForm = document.getElementById('fellowshipDirectForm');
-    if (fForm) {
-      fForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (!validateStep(1) || !validateStep(2) || !validateStep(3)) {
-          return;
-        }
-
-        const btn = document.getElementById('btnSubmitApp');
-        btn.disabled = true;
-        btn.textContent = 'Submitting Application...';
-
-        const name = document.getElementById('fName').value.trim();
-        const email = document.getElementById('fEmail').value.trim().toLowerCase();
-        const phone = document.getElementById('fPhone').value.trim();
-        const enrolledRadio = document.querySelector('input[name="fEnrolled"]:checked');
-        const isEnrolled = enrolledRadio ? enrolledRadio.value === 'yes' : false;
-        const colName = document.getElementById('fCollegeName')?.value.trim() || '';
-        const colYear = document.getElementById('fCollegeYear')?.value || '';
-        const colCourse = document.getElementById('fCollegeCourse')?.value.trim() || '';
-        const collegeSummary = isEnrolled
-          ? [colName, colYear, colCourse].filter(Boolean).join(' - ')
-          : 'Independent / Not Currently Enrolled';
-        const ventureName = document.getElementById('fVentureName').value.trim();
-        const q1 = document.getElementById('fQ1').value.trim().replace(/\|/g, '/');
-        const waiverReason = document.getElementById('fWaiverReason')?.value.trim().replace(/\|/g, '/') || '';
-        const waiverContainer = document.getElementById('feeWaiverContainer');
-        const waiverRequested = Boolean(waiverReason) || (waiverContainer && !waiverContainer.classList.contains('hidden'));
-
-        try {
-          let memberId = await syncLeadToSupabase(3);
-          if (!memberId) {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            memberId = `TFC-FEL-${randomNum}`;
-          }
-
-          const applicantData = {
-            name: name,
-            email: email,
-            phone: phone,
-            college: collegeSummary,
-            orderId: memberId,
-            submittedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-            q1: `${ventureName}: ${q1}`,
-            q4: '4-Week Online Cohort',
-            source: 'FellowshipPage',
-            paymentStatus: 'awaiting_acceptance',
-            waiver_requested: waiverRequested,
-            waiver_reason: waiverReason
-          };
-
-          // Cache locally
-          localStorage.setItem('tfc_fellowship_applicant_' + email, JSON.stringify(applicantData));
-          localStorage.setItem('tfc_fellowship_last_email', email);
-          localStorage.removeItem('tfc_fellowship_draft');
-          sessionStorage.removeItem('tfc_force_new_app');
-
-          // Track application completed in Mixpanel
-          if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationCompleted === 'function') {
-            window.TFCAnalytics.trackApplicationCompleted({
-              email: email,
-              name: name,
-              university: collegeSummary,
-              submission_status: 'submitted',
-              waiver_requested: waiverRequested
-            });
-          }
-
-          fForm.reset();
-          showFellowshipDashboard(applicantData);
-
-          const applySec = document.getElementById('apply');
-          if (applySec) applySec.scrollIntoView({ behavior: 'smooth' });
-
-        } catch (err) {
-          alert("Submission note: " + err.message);
-        } finally {
-          btn.disabled = false;
-          btn.textContent = 'Submit application →';
-          syncFinalStepSubmit();
-        }
-      });
-    }
-
-    // Trigger application started on form interaction
-    function handleAppInteraction() {
-      if (window.TFCAnalytics && typeof window.TFCAnalytics.trackApplicationStarted === 'function') {
-        window.TFCAnalytics.trackApplicationStarted({
-          university: getApplicantUniversity()
-        });
-      }
-    }
-
-    // Debounced CRM sync while typing
-    let crmDebounceTimer = null;
-    function queueCrmSync() {
-      clearTimeout(crmDebounceTimer);
-      crmDebounceTimer = setTimeout(() => {
-        const email = document.getElementById('fEmail')?.value.trim();
-        const phone = document.getElementById('fPhone')?.value.trim();
-        if (email && email.includes('@') && email.includes('.') && phone && phone.length >= 8) {
-          syncLeadToSupabase(currentStep);
-        }
-      }, 1500);
-    }
-
-    // Auto-save form inputs on change, queue CRM sync & monitor first interaction
-    ['fName', 'fEmail', 'fPhone', 'fTeamSize', 'fCollegeName', 'fCollegeYear', 'fCollegeCourse', 'fVentureName', 'fStage', 'fQ1', 'fQ3', 'fWaiverReason'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('focus', handleAppInteraction, { once: true });
-        el.addEventListener('input', () => {
-          saveDraftLocally();
-          queueCrmSync();
-        });
-        el.addEventListener('change', () => {
-          saveDraftLocally();
-          queueCrmSync();
-        });
-      }
-    });
-
-    ['fCommitHours', 'fUnderstandFee'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('change', () => {
-          handleAppInteraction();
-          saveDraftLocally();
-          syncFinalStepSubmit();
-          queueCrmSync();
-        });
-      }
-    });
-
-    ['fEnrolledYes', 'fEnrolledNo'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('change', () => {
-          handleAppInteraction();
-          saveDraftLocally();
-          queueCrmSync();
-        });
-      }
-    });
-
-    document.querySelectorAll('a[href="#apply"]').forEach(anchor => {
-      anchor.addEventListener('click', handleAppInteraction);
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      checkReferral();
-      syncFinalStepSubmit();
-
-      const btnNewApp = document.getElementById('btnNewApplication');
-      if (btnNewApp) {
-        btnNewApp.addEventListener('click', window.clearFellowshipApplication);
-      }
-
-      // Check if arriving directly to eligibility section
-      if (window.location.hash === '#eligibility' || window.location.hash === '#structure') {
-        if (window.TFCAnalytics && typeof window.TFCAnalytics.trackEligibilityFilterShown === 'function') {
-          window.TFCAnalytics.trackEligibilityFilterShown({
-            eligibility_check_entry_point: 'direct_link'
-          });
-        }
-      }
-
-      const initialUser = (window.TFCAuth && typeof window.TFCAuth.getUser === 'function') ? window.TFCAuth.getUser() : null;
-      checkFellowshipStatus(initialUser);
-
-      if (window.TFCAuth && typeof window.TFCAuth.onAuthStateChanged === 'function') {
-        window.TFCAuth.onAuthStateChanged((user) => {
-          const dashPanel = document.getElementById('fellowshipDashboardPanel');
-          if (dashPanel && dashPanel.classList.contains('hidden') && user) {
-            const nameInput = document.getElementById('fName');
-            const emailInput = document.getElementById('fEmail');
-            if (nameInput && !nameInput.value) nameInput.value = user.name || '';
-            if (emailInput && !emailInput.value) emailInput.value = user.email || '';
-          }
-        });
-      }
-
-      // Smooth scroll for hero links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href && href !== '#') {
-            const target = document.querySelector(href);
-            if (target) {
-              e.preventDefault();
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
-      });
-
-      if (typeof window.initAccordions === 'function') {
-        window.initAccordions();
-      }
-    });
+  })();
   </script>
+</body>
 </html>
-

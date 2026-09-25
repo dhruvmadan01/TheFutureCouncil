@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup School · The Practical Course for Student Founders | The Future Council</title>
+  <meta name="description" content="A practical curriculum on starting a company as a student, from problem discovery to raising your first cheque. ₹399/month. Chapter members get 7 days free." />
+  <meta name="canonical" href="https://thefuturecouncil.in/school" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    .school-hero {
+      padding-block: clamp(48px, 8vw, 96px) clamp(36px, 6vw, 64px);
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
+    }
+    .price-card {
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 0 14px 34px -18px rgba(27,23,18,0.08);
+      max-width: 580px;
+      margin-top: 36px;
+    }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 22px;
+      margin-top: 40px;
+    }
+    .mod-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .mod-card:hover {
+      border-color: var(--orange);
+    }
+    .mod-num {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--orange);
+      background: var(--warm-2);
+      width: fit-content;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .mod-deliverable {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13.5px;
+    }
+    .mod-deliverable strong {
+      color: var(--forest);
+      font-family: var(--mono);
+      font-size: 12.5px;
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+    @media (max-width: 820px) {
+      .who-grid { grid-template-columns: 1fr; }
+    }
+    .who-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school" class="active">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="#subscribe">Join for ₹399</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school" class="active">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/school/library">Resource Library <span>→</span></a>
+  </div>
+
+  <main>
+    <!-- HERO (SPEC 5.4) -->
+    <header class="school-hero">
+      <div class="wrap">
+        <span class="mono kick">The Builder Workshop</span>
+        <h1 style="font-size: clamp(38px, 6.6vw, 84px); margin-top: 14px;">The course college doesn't offer.</h1>
+        <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
+          A practical curriculum on starting a company as a student, from finding a problem to raising your first cheque.
+        </p>
+
+        <!-- PRICE BLOCK (SPEC 5.4) -->
+        <div class="price-card" id="subscribe">
+          <div class="mono" style="color: var(--orange-deep); font-weight: 600;">Membership Plan</div>
+          <div style="font-family: var(--display); font-size: clamp(34px, 4.5vw, 48px); font-weight: 800; margin-top: 6px;">
+            ₹399 <small style="font-size: 16px; font-weight: 500; color: var(--ink-soft); font-family: var(--body);">a month · Cancel anytime</small>
+          </div>
+          <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 8px;">
+            Access all 9 curriculum modules, weekly live office hours, community project reviews, and the founder library.
+          </p>
+          <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn solid" href="/join?plan=school">Subscribe to Startup School</a>
+            <a class="btn" href="/chapters">Chapter member? Start 7 days free</a>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 14px;">
+            Not a member yet? <a href="/chapters" style="color: var(--orange-deep); font-weight: 600; text-decoration: underline;">Join a chapter free</a> and unlock 7 days.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- WHO IT'S FOR (SPEC 5.4) -->
+    <section style="padding-block: clamp(48px, 8vw, 88px);">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <p class="mono kick">Tailored Entry Points</p>
+          <h2>Who Startup School is for.</h2>
+          <p class="lede">Start wherever you are today. The curriculum adapts to your stage.</p>
+        </div>
+
+        <div class="who-grid">
+          <div class="who-card">
+            <span class="mono" style="color: var(--orange);">01 · Starting Point</span>
+            <h3 style="font-size: 22px; margin-top: 10px;">No idea yet</h3>
+            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 8px; line-height: 1.5;">
+              Learn how to observe inefficiencies in campus life, consumer behavior, and software tools. Turn genuine curiosity into a validated problem statement.
+            </p>
+          </div>
+          <div class="who-card">
+            <span class="mono" style="color: var(--orange);">02 · Starting Point</span>
+            <h3 style="font-size: 22px; margin-top: 10px;">Have an idea</h3>
+            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 8px; line-height: 1.5;">
+              Stop drafting 40-page decks. Learn how to conduct 20 user interviews without biasing answers, and build a live AI prototype in a single weekend.
+            </p>
+          </div>
+          <div class="who-card">
+            <span class="mono" style="color: var(--orange);">03 · Starting Point</span>
+            <h3 style="font-size: 22px; margin-top: 10px;">Already building</h3>
+            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 8px; line-height: 1.5;">
+              Acquire your first 10 paying customers, structure equity split agreements cleanly with co-founders, and build a concise investor pitch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRICULUM (SPEC 5.4: 9 MODULES WITH DELIVERABLES) -->
+    <section style="padding-block: clamp(48px, 8vw, 96px); background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="mono kick">The 9 Modules</p>
+            <h2>Every module ends with real proof.</h2>
+          </div>
+          <p class="lede">No passive video lectures. You leave every module with a concrete artifact in your hands.</p>
+        </div>
+
+        <div class="modules-grid">
+          <!-- Module 1 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 01</span>
+            <h3>Finding a problem worth solving</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Why "good ideas" often fail and painful problems win. Frameworks for evaluating hair-on-fire customer problems.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Problem statement</strong>
+            </div>
+          </article>
+
+          <!-- Module 2 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 02</span>
+            <h3>Talking to users</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              The Mom Test methodology. How to interview prospective users without asking if they like your idea.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>20 interview notes</strong>
+            </div>
+          </article>
+
+          <!-- Module 3 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 03</span>
+            <h3>Building an MVP with AI tools</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Using modern LLM coding agents, low-code databases, and rapid frontends to ship a functioning product in days.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Live prototype</strong>
+            </div>
+          </article>
+
+          <!-- Module 4 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 04</span>
+            <h3>Your first 10 customers</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Unscalable sales tactics: cold DMs, campus distribution hacks, and getting users to actually swipe their cards.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Traction log</strong>
+            </div>
+          </article>
+
+          <!-- Module 5 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 05</span>
+            <h3>Co-founders, equity &amp; teams</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              How to avoid co-founder blowups. Vesting schedules, equity allocation calculators, and founder agreements.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Founder agreement</strong>
+            </div>
+          </article>
+
+          <!-- Module 6 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 06</span>
+            <h3>Money: pricing, unit economics &amp; grants</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Pricing psychology, contribution margins, and accessing non-dilutive government student grants (NIDHI, BIRAC).
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Simple model</strong>
+            </div>
+          </article>
+
+          <!-- Module 7 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 07</span>
+            <h3>Company basics in India</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              When to incorporate (and when NOT to). DPIIT startup recognition, 80-IAC tax exemptions, and compliance basics.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Checklist</strong>
+            </div>
+          </article>
+
+          <!-- Module 8 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 08</span>
+            <h3>Startups &amp; your college</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Navigating deferred placement, attendance relaxations, academic credits, and NISP 2019 guidelines with your dean.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Your college's options</strong>
+            </div>
+          </article>
+
+          <!-- Module 9 -->
+          <article class="mod-card">
+            <span class="mod-num">Module 09</span>
+            <h3>Pitching &amp; fundraising</h3>
+            <p style="color: var(--ink-soft); font-size: 14.5px; line-height: 1.5;">
+              Distilling your progress into a sharp 10-slide deck and an unforgettable 2-minute pitch for angels and micro-VCs.
+            </p>
+            <div class="mod-deliverable">
+              <span>You leave with:</span>
+              <strong>Deck + 2-min pitch</strong>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAT & MENTORS (SPEC 5.4) -->
+    <section style="padding-block: clamp(48px, 8vw, 96px);">
+      <div class="wrap grid-split">
+        <div>
+          <span class="mono kick">Structure &amp; Sessions</span>
+          <h2 style="font-size: clamp(28px, 4vw, 42px); margin-top: 8px;">Learn on your time. Build live with peers.</h2>
+          <p style="color: var(--ink-soft); font-size: 16px; margin-top: 14px; line-height: 1.5;">
+            Modules are self-paced so you can study between lectures and exam seasons. Every Sunday, join our live cohort lab with visiting operators.
+          </p>
+          <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-top: 24px;">
+            <strong style="font-size: 16px; display: block;">Live Interactive Lab Timings</strong>
+            <span style="font-size: 14px; color: var(--ink-soft); margin-top: 4px; display: block;">
+              Every Sunday · 6:00 PM – 7:30 PM IST (Virtual video room)
+            </span>
+          </div>
+          <div style="margin-top: 24px;">
+            <a class="btn lg" href="/school/library">Browse Free Resource Library →</a>
+          </div>
+        </div>
+
+        <div class="receipt">
+          <h3>Startup School Outcome Guarantee</h3>
+          <ul>
+            <li><span>All 9 practical founder modules</span><span>✓ Unlimited</span></li>
+            <li><span>Weekly live operator critique</span><span>✓ Sundays</span></li>
+            <li><span>Public Proof-of-Work profile</span><span>✓ Generated</span></li>
+            <li><span>Priority review for Launchpad</span><span>✓ Granted</span></li>
+          </ul>
+          <div class="tot">
+            <span>Price</span>
+            <span>₹399 / month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION (SPEC 5.4 ITEM 8) -->
+    <section style="padding-block: clamp(48px, 8vw, 84px); background: var(--warm-2); border-top: 1px solid #E3B79C; text-align: center;">
+      <div class="wrap" style="max-width: 640px;">
+        <span class="mono kick">Next Level</span>
+        <h2 style="font-size: clamp(28px, 4vw, 44px); margin-top: 8px;">Already built something real?</h2>
+        <p style="color: var(--ink-soft); font-size: 16px; margin-top: 10px; line-height: 1.5;">
+          Launchpad picks 20 student founders for four weeks of intense building, ending in Demo Day with vetted angels. 0% equity.
+        </p>
+        <div style="margin-top: 24px;">
+          <a class="btn solid lg" href="/launchpad/fellowship">Apply to Launchpad Fellowship →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-shared.js"></script>
+</body>
+</html>

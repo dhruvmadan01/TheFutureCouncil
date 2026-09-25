@@ -4,329 +4,131 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy | The Future Council</title>
-  <meta name="description" content="Privacy policy, data protection, and user confidentiality terms for Future Council ecosystem." />
-  <meta name="keywords" content="Future Council privacy, The Future Council privacy policy, TFC data policy" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://thefuturecouncil.in/privacy" />
-  <link rel="manifest" href="site.webmanifest" />
+  <meta name="description" content="Official Privacy Policy for The Future Council ecosystem, platform members, and fellowship applicants." />
+  <meta name="canonical" href="https://thefuturecouncil.in/privacy" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
   <meta name="theme-color" content="#E2542A" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Future Council | The Future Council" />
-  <meta property="og:url" content="https://thefuturecouncil.in/privacy" />
-  <meta property="og:title" content="Privacy Policy | The Future Council" />
-  <meta property="og:description" content="Official privacy policy and user data protections for Future Council." />
-  <meta property="og:image" content="https://thefuturecouncil.in/TFC.png" />
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
 
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
   <style>
-    .legal-toc-link {
-      display: block;
-      padding: 8px 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--ink-soft);
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.15s ease;
+    .legal-body {
+      padding-block: clamp(48px, 7vw, 96px);
+      max-width: 860px;
+      margin: 0 auto;
     }
-    .legal-toc-link:hover, .legal-toc-link.active {
-      color: var(--accent);
-      background: rgba(226, 84, 42, 0.08);
-      font-weight: 700;
-    }
-    .legal-section {
-      scroll-margin-top: 100px;
+    .legal-sec {
+      margin-bottom: 36px;
       padding-bottom: 28px;
-      border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 28px;
+      border-bottom: 1px solid var(--line);
     }
-    .legal-section:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    .legal-section h2 {
-      font-size: 1.3rem;
-      font-weight: 800;
+    .legal-sec h2 {
+      font-size: 22px;
       margin-bottom: 12px;
     }
-    .legal-section p, .legal-section li {
-      font-size: 0.95rem;
+    .legal-sec p, .legal-sec li {
       color: var(--ink-soft);
+      font-size: 15px;
       line-height: 1.65;
     }
-    @media (max-width: 768px) {
-      .legal-layout {
-        grid-template-columns: 1fr !important;
-      }
-      .legal-sidebar {
-        display: none;
-      }
-    }
   </style>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1763806951409454');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-  <script src="tfc-analytics.js" defer></script>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
-  <header class="tfc-header">
-    <div class="tfc-container tfc-nav-wrapper">
-      <a href="index.html" class="tfc-brand">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
       </a>
-
-      <ul class="tfc-nav-links">
-        <li><a href="fellowship.html" class="tfc-nav-link">Fellowship '26</a></li>
-        <li><a href="branches.html" class="tfc-nav-link">Branches</a></li>
-        <li><a href="resources.html" class="tfc-nav-link">Resources</a></li>
-        <li><a href="partners.html" class="tfc-nav-link">Partners</a></li>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
       </ul>
-
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="join.html" class="tfc-btn tfc-btn-primary">Join the Council →</a>
-        <button class="tfc-mobile-toggle" aria-label="Open menu">☰</button>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/join">Join free</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Fullscreen Dark Mobile Menu Drawer -->
-  <div class="tfc-mobile-menu" id="mobileMenu">
-    <div class="tfc-mobile-menu-header">
-      <a href="index.html" class="tfc-brand" style="color: #fff;">
-        <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-        <span>THE FUTURE COUNCIL</span>
-      </a>
-      <button class="tfc-mobile-menu-close" style="background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;" aria-label="Close menu">✕</button>
-    </div>
-
-    <ul class="tfc-mobile-nav-links">
-      <li><a href="fellowship.html" class="tfc-mobile-nav-link">Fellowship '26</a></li>
-      <li><a href="branches.html" class="tfc-mobile-nav-link">Branches</a></li>
-      <li><a href="resources.html" class="tfc-mobile-nav-link">Resources</a></li>
-      <li><a href="partners.html" class="tfc-mobile-nav-link">Partners</a></li>
-      <li><a href="join.html" class="tfc-mobile-nav-link">Join the Council</a></li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;">
-      <a href="join.html" class="tfc-btn tfc-btn-primary" style="width: 100%;">Join Council →</a>
-    </div>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/privacy.html">Privacy Policy <span>→</span></a>
   </div>
 
   <main>
-    <!-- Header Banner -->
-    <section class="tfc-section" style="padding-top: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border-subtle);">
-      <div class="tfc-container" style="max-width: 900px;">
-        <div class="tfc-badge tfc-badge-orange" style="margin-bottom: 14px;">PRIVACY & DATA PROTECTION</div>
-        <h1 style="font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 12px; letter-spacing: -1px;">
-          Privacy Policy
-        </h1>
-        <p style="font-size: 0.95rem; color: var(--ink-soft); margin: 0;">
-          Last updated: August 29, 2026 · Transparent data security and privacy practices for all council participants.
+    <div class="wrap legal-body">
+      <span class="mono kick">Privacy &amp; Data Security</span>
+      <h1 style="font-size: clamp(34px, 5vw, 60px); margin-top: 10px; margin-bottom: 24px;">Privacy Policy</h1>
+
+      <div class="legal-sec">
+        <h2>1. Information We Collect</h2>
+        <p>
+          We collect personal information directly when you register for a chapter, apply for the Launchpad Fellowship, or subscribe to Startup School. This includes your name, email address, WhatsApp telephone number, college affiliation, academic major, year of study, and startup project concepts.
         </p>
       </div>
-    </section>
 
-    <!-- Two Column Legal Layout (Ref Page 12 Wireframe) -->
-    <section class="tfc-section" style="padding-top: 40px; padding-bottom: 60px;">
-      <div class="tfc-container" style="max-width: 960px;">
-        <div style="display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: start;" class="legal-layout">
-          
-          <!-- Sticky Left Table of Contents (Desktop) -->
-          <aside class="legal-sidebar" style="position: sticky; top: 90px;">
-            <div class="tfc-card" style="padding: 20px;">
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: var(--ink-soft); letter-spacing: 0.5px; margin-bottom: 12px;">
-                TABLE OF CONTENTS
-              </div>
-              <nav style="display: flex; flex-direction: column; gap: 4px;">
-                <a href="#collection" class="legal-toc-link">1. Information We Collect</a>
-                <a href="#usage" class="legal-toc-link">2. How We Use Data</a>
-                <a href="#sharing" class="legal-toc-link">3. Third-Party Sharing</a>
-                <a href="#security" class="legal-toc-link">4. Security & Retention</a>
-                <a href="#analytics" class="legal-toc-link">5. Cookies & Analytics</a>
-                <a href="#contact" class="legal-toc-link">6. Contact & Rights</a>
-              </nav>
-            </div>
-          </aside>
-
-          <!-- Right Content Area -->
-          <div class="tfc-card" style="padding: 40px;">
-            
-            <section id="collection" class="legal-section">
-              <h2>1. Information We Collect</h2>
-              <p style="margin-bottom: 10px;">
-                We collect information directly from you when you apply for our fellowship program, join a campus chapter, or register for builder updates. This includes:
-              </p>
-              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
-                <li><strong>Personal Identifiers:</strong> Full name, university email address, phone number, and social links.</li>
-                <li><strong>Academic Affiliation:</strong> College name, course, current year of study, and campus chapter interests.</li>
-                <li><strong>Founder & Project Details:</strong> Pitch descriptions, slide deck attachments, repo links, and teammate contacts.</li>
-                <li><strong>Application Intent:</strong> Answers to onboarding questions regarding startup motivations and building track record.</li>
-              </ul>
-            </section>
-
-            <section id="usage" class="legal-section">
-              <h2>2. How We Use Your Information</h2>
-              <p style="margin-bottom: 10px;">
-                The collected information is utilized solely to power your ecosystem experience:
-              </p>
-              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
-                <li>Evaluating project applications for the Fellowship '26 cohort.</li>
-                <li>Generating and issuing your official verified Council Member ID card.</li>
-                <li>Communicating interview invites, cohort acceptance letters, and campus meetup alerts via Email and WhatsApp.</li>
-                <li>Administering the campus ambassador leaderboard and referral incentives.</li>
-              </ul>
-            </section>
-
-            <section id="sharing" class="legal-section">
-              <h2>3. Data Sharing & Third-Party Payments</h2>
-              <p style="margin-bottom: 10px;">
-                We never sell, rent, or trade your personal data to third-party ad networks. We only process data with trusted infrastructure providers:
-              </p>
-              <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
-                <li>
-                  <strong>Payment Processing:</strong> Fellowship application payments are processed directly through secure UPI and payment partner gateways. We do not store sensitive UPI PINs or card numbers on our servers.
-                </li>
-                <li>
-                  <strong>Database Infrastructure:</strong> All applicant records and member card entries are securely encrypted and stored with Supabase.
-                </li>
-              </ul>
-            </section>
-
-            <section id="security" class="legal-section">
-              <h2>4. Security & Data Retention</h2>
-              <p>
-                We implement industry-standard database rules, SSL encryption, and strict role-based access to safeguard your information from unauthorized access. We retain registration records as long as your membership is active in our student startup network, or until you request account deletion.
-              </p>
-            </section>
-
-            <section id="analytics" class="legal-section">
-              <h2>5. Cookies & Analytics</h2>
-              <p>
-                Our platform uses privacy-friendly, cookieless analytics (such as Vercel Analytics) solely to aggregate page performance, error telemetry, and geographic traffic trends. We do not profile you across third-party websites or deploy tracking pixels.
-              </p>
-            </section>
-
-            <section id="contact" class="legal-section">
-              <h2>6. Contact & Rights</h2>
-              <p>
-                Under applicable Indian digital data protection standards, you have the right to review, update, or request the deletion of your personal records. For any inquiries, please write to our privacy officer at <strong>support@thefuturecouncil.in</strong>.
-              </p>
-            </section>
-
-          </div>
-
-        </div>
+      <div class="legal-sec">
+        <h2>2. How We Use Your Data</h2>
+        <p>
+          Your data is used strictly to:
+        </p>
+        <ul style="margin-top: 8px; padding-left: 20px; display: grid; gap: 8px;">
+          <li>Review and process your fellowship application and provide individualized written feedback.</li>
+          <li>Coordinate campus chapter build nights and match co-founder candidates.</li>
+          <li>Deliver cohort educational content and facilitate mentor office hours.</li>
+          <li>Facilitate direct intros to vetted angel investors (with your explicit consent).</li>
+        </ul>
+        <p style="margin-top: 10px;">
+          We <b>never sell</b> your personal data to external advertisers, recruiters, or data brokers.
+        </p>
       </div>
-    </section>
+
+      <div class="legal-sec">
+        <h2>3. Data Storage &amp; Security</h2>
+        <p>
+          All applicant data is encrypted in transit using industry-standard TLS encryption and stored securely in dedicated cloud infrastructure (Supabase with row-level security). Access to unredacted startup applications is restricted strictly to the founding partners and assigned mentor reviewers.
+        </p>
+      </div>
+
+      <div class="legal-sec">
+        <h2>4. Your Data Rights</h2>
+        <p>
+          You have the right to request a full copy of the data we hold regarding your profile or request complete deletion of your records from our systems at any time by emailing us at <a href="mailto:support@thefuturecouncil.in" style="color: var(--orange-deep); font-weight: 600;">support@thefuturecouncil.in</a>.
+        </p>
+      </div>
+    </div>
   </main>
 
-  <!-- Sticky Mobile Bar -->
-  <aside class="tfc-mobile-sticky-bar">
-    <div>
-      <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Fellowship '26</div>
-      <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">Closes Sep 30, 7PM IST</div>
-    </div>
-    <a href="fellowship.html#apply" class="tfc-btn tfc-btn-primary tfc-btn-sm">Apply for Fellowship '26 →</a>
-  </aside>
-
-  <!-- Global Footer (§2) -->
-  <footer class="tfc-footer" style="background: var(--ink); color: var(--paper); border-top: 1px solid rgba(255,255,255,0.08); padding: 56px 0 32px;">
-    <div class="tfc-container">
-      <div class="tfc-footer-grid">
-        <div>
-          <a href="index.html" class="tfc-brand" style="color: #FFFFFF; text-decoration: none; margin-bottom: 12px; display: inline-flex;">
-            <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-            <span>THE FUTURE COUNCIL</span>
-          </a>
-          <p style="color: var(--paper-70); font-size: 0.9rem; line-height: 1.6; max-width: 320px; margin-top: 8px;">
-            Where student builders stop waiting for permission.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Program</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="fellowship.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Fellowship '26</a></li>
-            <li><a href="join-ambassador.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Apply as Ambassador</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Ecosystem</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="branches.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Branches</a></li>
-            <li><a href="resources.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Resources</a></li>
-            <li><a href="partners.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Partners</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-utility" style="color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;">Legal</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-            <li><a href="terms.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Terms</a></li>
-            <li><a href="privacy.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Privacy</a></li>
-            <li><a href="refund.html" style="color: var(--paper-70); text-decoration: none; font-size: 0.88rem;">Refunds</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.82rem; color: var(--paper-70);">
-        <div>© 2026 The Future Council · thefuturecouncil.in</div>
-        <div style="display: flex; gap: 20px; align-items: center;">
-          <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">Instagram</a>
-          <a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener noreferrer" style="color: var(--paper-70); text-decoration: none;">LinkedIn</a>
-          <a href="mailto:support@thefuturecouncil.in" style="color: var(--paper-70); text-decoration: none;">support@thefuturecouncil.in</a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Active link highlighting on scroll
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('.legal-section');
-      const navLinks = document.querySelectorAll('.legal-toc-link');
-
-      window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - 140) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-          }
-        });
-      }, { passive: true });
-    });
-  </script>
+  <script src="/tfc-shared.js"></script>
 </body>
 </html>
