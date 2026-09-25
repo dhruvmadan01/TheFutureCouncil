@@ -18,8 +18,10 @@
 (function (window, document) {
   'use strict';
 
-  // 1. OFFICIAL ASYNC MIXPANEL STUB LOADER
-  (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"mixpanel.min.js";var s=e.getElementsByTagName("script")[0];if(s&&s.parentNode){s.parentNode.insertBefore(k,s)}else{e.head.appendChild(k)}}})(document,window.mixpanel||[]);
+  // 1. MIXPANEL LOADER GUARD: If mixpanel is already loaded on window, use it directly!
+  if (!window.mixpanel || typeof window.mixpanel.init !== 'function') {
+    (function(e,c){if(!c.__SV){var l,h;window.mixpanel=c;c._i=[];c.init=function(q,r,f){function t(d,a){var g=a.split(".");2==g.length&&(d=d[g[0]],a=g[1]);d[a]=function(){d.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";b.people=b.people||[];b.toString=function(d){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);d||(a+=" (stub)");return a};b.people.toString=function(){return b.toString(1)+".people (stub)"};l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders start_session_recording stop_session_recording people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");for(h=0;h<l.length;h++)t(b,l[h]);var n="set set_once union unset remove delete".split(" ");b.get_group=function(){function d(p){a[p]=function(){b.push([g,[p].concat(Array.prototype.slice.call(arguments,0))])}}for(var a={},g=["get_group"].concat(Array.prototype.slice.call(arguments,0)),m=0;m<n.length;m++)d(n[m]);return a};c._i.push([q,r,f])};c.__SV=1.2;var k=e.createElement("script");k.type="text/javascript";k.async=!0;k.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"/mixpanel.min.js";var s=e.getElementsByTagName("script")[0];if(s&&s.parentNode){s.parentNode.insertBefore(k,s)}else{e.head.appendChild(k)}}})(document,window.mixpanel||[]);
+  }
 
   // 2. MIXPANEL INITIALIZATION ON APP BOOT
   const MIXPANEL_TOKEN = 'f05da0bb13a820969c659b2508adb302';
@@ -28,12 +30,14 @@
   const ELIGIBILITY_VERSION = '2026.1';
 
   try {
-    window.mixpanel.init(MIXPANEL_TOKEN, {
-      debug: false,
-      track_pageview: false, // We explicitly fire landing_page_viewed with enriched attributes
-      persistence: 'localStorage',
-      ignore_dnt: true
-    });
+    if (window.mixpanel && typeof window.mixpanel.init === 'function') {
+      window.mixpanel.init(MIXPANEL_TOKEN, {
+        debug: false,
+        track_pageview: false, // We explicitly fire landing_page_viewed with enriched attributes
+        persistence: 'localStorage',
+        ignore_dnt: true
+      });
+    }
   } catch (err) {
     console.warn('[TFC Analytics] Mixpanel init warning:', err);
   }

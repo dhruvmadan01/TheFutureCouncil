@@ -275,11 +275,26 @@ if (!fs.existsSync(path.join(__dirname, 'chapters'))) {
 }
 
 chapters.forEach(ch => {
-  const html = generateChapterHtml(ch);
-  // Write to branch-<id>.html (old URL compatibility)
-  fs.writeFileSync(path.join(__dirname, `branch-${ch.id}.html`), html, 'utf8');
-  // Write to chapters/<id>.html (new URL route)
-  fs.writeFileSync(path.join(__dirname, 'chapters', `${ch.id}.html`), html, 'utf8');
+  const fullHtml = generateChapterHtml(ch);
+  // Write full page to chapters/<id>.html (canonical new route)
+  fs.writeFileSync(path.join(__dirname, 'chapters', `${ch.id}.html`), fullHtml, 'utf8');
+
+  // Write 301 redirect stub to branch-<id>.html (old URL compatibility)
+  const redirectStub = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>${ch.name} · Campus Chapter | The Future Council</title>
+  <meta http-equiv="refresh" content="0; url=/chapters/${ch.id}">
+  <link rel="canonical" href="https://thefuturecouncil.in/chapters/${ch.id}">
+  <script>window.location.replace('/chapters/${ch.id}' + window.location.search + window.location.hash);</script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 40px; text-align: center;">
+  <p>Redirecting to <a href="/chapters/${ch.id}" style="color: #E2542A; font-weight: 600;">${ch.name} Chapter</a>...</p>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(__dirname, `branch-${ch.id}.html`), redirectStub, 'utf8');
 });
 
 console.log(`Successfully generated ${chapters.length} chapter pages in both branch-*.html and chapters/*.html`);

@@ -341,7 +341,7 @@
         </div>
 
         <div style="font-family: var(--mono); font-size: 13px; color: var(--ink-soft); margin-top: 14px;" id="countLabel">
-          Showing 18 campus chapters
+          18 chapters listed here · 90+ campuses in the network
         </div>
 
         <!-- DYNAMIC CARDS CONTAINER -->
@@ -492,12 +492,16 @@
               <strong>${ch.leadName}</strong>
               <span>${ch.leadRole}</span>
             </div>
-            <a class="btn sm" href="/branch-${ch.id}.html" style="margin-left: auto;">View Chapter</a>
+            <a class="btn sm" href="/chapters/${ch.id}" style="margin-left: auto;">View Chapter</a>
           </div>
         </article>
       `).join('');
 
-      if (countLabel) countLabel.textContent = `Showing ${list.length} campus chapters`;
+      if (countLabel) {
+        countLabel.textContent = list.length === allChapters.length
+          ? '18 chapters listed here · 90+ campuses in the network'
+          : `Showing ${list.length} chapters`;
+      }
     }
 
     function filterData() {

@@ -1,4 +1,584 @@
-<!-- Serves /launchpad directory locally -->
-<script>
-  window.location.replace('/launchpad.html' + window.location.search + window.location.hash);
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launchpad · 4-Week Online Founder Fellowship | The Future Council</title>
+  <meta name="description" content="Launchpad selects 20 student founders for four weeks of fully online building with operators and investors, ending in Demo Day. 0% equity. 2% only if you raise." />
+  <meta name="canonical" href="https://thefuturecouncil.in/launchpad" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    /* Specific styles for Launchpad */
+    .hero-launchpad {
+      padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 64px);
+    }
+    .hero-launchpad h1 {
+      font-size: clamp(38px, 6.5vw, 84px);
+      max-width: 14ch;
+      margin-top: 18px;
+    }
+    .hero-launchpad .sub {
+      font-size: clamp(17px, 1.6vw, 21px);
+      color: var(--ink-soft);
+      max-width: 48ch;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--warm-2);
+      border: 1px solid #E3B79C;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--orange-deep);
+    }
+    .status-pill i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 8px var(--orange);
+    }
+
+    /* Comparison Table / Full Terms */
+    .terms-table-sec {
+      margin-top: 48px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(20px, 4vw, 44px);
+      box-shadow: 0 14px 34px -18px rgba(27,23,18,0.08);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .terms-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 15px;
+    }
+    .terms-table th, .terms-table td {
+      padding: 16px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    .terms-table th {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      background: var(--warm);
+    }
+    .terms-table td:first-child {
+      font-weight: 600;
+      color: var(--ink);
+      width: 28%;
+    }
+    .terms-table td:last-child {
+      color: var(--ink-soft);
+    }
+    @media (max-width: 640px) {
+      .terms-table th, .terms-table td {
+        padding: 12px 8px;
+        font-size: 13.5px;
+      }
+      .terms-table td:first-child { width: 38%; }
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .benefit-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .benefit-card .icon-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      background: var(--warm-2);
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .benefit-card h3 {
+      font-size: 22px;
+    }
+    .benefit-card p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school">Startup School</a></li>
+        <li><a href="/launchpad" class="active">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/launchpad/fellowship">Apply now</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school">Startup School <span>→</span></a>
+    <a href="/launchpad" class="active">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+    <a href="/about">About TFC <span>→</span></a>
+    <div style="margin-top: 20px;">
+      <a class="btn solid lg" href="/launchpad/fellowship" style="width: 100%; text-align: center;">Apply to Launchpad</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <header class="hero-launchpad">
+      <div class="wrap">
+        <div class="status-pill">
+          <i></i>
+          <span>Cohort 01 · Applications close Sep 30, 7 PM IST</span>
+        </div>
+        <h1>From student project to funded startup.</h1>
+        <p class="sub">
+          Launchpad picks 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. No equity, ever. 2% only if you raise.
+        </p>
+        <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+          <a class="btn solid lg" href="/launchpad/fellowship">Apply for Cohort 01 →</a>
+          <a class="btn lg" href="#terms">See full terms</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- THE DEAL TICKET -->
+    <section class="deal" id="terms" aria-labelledby="h-deal">
+      <div class="wrap">
+        <div class="ticket">
+          <div class="main">
+            <p class="mono kick">The Launchpad Agreement · Fellowship '26</p>
+            <h2 id="h-deal">We only win if you do.</h2>
+            <div class="terms">
+              <div><b>20</b><span>founders selected</span></div>
+              <div><b>₹1,999</b><span>to apply, once</span></div>
+              <div><b>0%</b><span>equity, ever</span></div>
+              <div><b>2%</b><span>only if you raise</span></div>
+            </div>
+            <p class="fine">
+              The 2% success fee applies only to money raised from investors we introduce you to, within 12 months of Demo Day. Raise on your own, or don't raise, and you owe us nothing. 
+              <b>Not selected?</b> You still get written feedback on what to fix, a month of Startup School free (worth ₹399), and 50% off your next application.
+            </p>
+          </div>
+          <aside class="stub">
+            <span class="mono">Cohort 01 Deadline</span>
+            <div class="count" id="countdown">Sep 30, 7 PM IST<small>&nbsp;</small></div>
+            <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
+            <span class="waiver">
+              About ₹70 a day. <a href="/launchpad/fellowship#apply" style="color:inherit; text-decoration:underline;">Request a fee waiver</a> if ₹1,999 is a barrier.
+            </span>
+          </aside>
+        </div>
+
+        <!-- FULL TERMS TABLE -->
+        <div class="terms-table-sec">
+          <div class="mono kick">Full Transparency · Single Source of Truth</div>
+          <h3 style="font-size: clamp(24px, 3vw, 36px); margin-top: 8px;">The rules of the table.</h3>
+          <table class="terms-table">
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cohort Size</td>
+                <td>20 founders per cohort, strictly selected.</td>
+              </tr>
+              <tr>
+                <td>Application Fee</td>
+                <td>₹1,999, one time, paid at application, non-refundable. About ₹70 a day.</td>
+              </tr>
+              <tr>
+                <td>Fee Waiver</td>
+                <td>Always available. A "Request a fee waiver" option sits directly beside every price tag.</td>
+              </tr>
+              <tr>
+                <td>Selection Basis</td>
+                <td>Selected entirely on the problem, your progress and your team. Never your college name or pedigree.</td>
+              </tr>
+              <tr>
+                <td>If Not Selected</td>
+                <td>Detailed written feedback (strengths + 2–3 specific points to fix), 1 month of Startup School free (worth ₹399), and 50% off your next Launchpad application (₹999).</td>
+              </tr>
+              <tr>
+                <td>Equity Taken</td>
+                <td>0%, ever. You keep 100% of your company.</td>
+              </tr>
+              <tr>
+                <td>Success Fee</td>
+                <td>2%, one time, cash, only on capital raised from investors TFC introduced, within 12 months of Demo Day.</td>
+              </tr>
+              <tr>
+                <td>Raise Alone or Don't Raise</td>
+                <td>You owe nothing. No hidden clauses, no warrant rights, no convertible notes.</td>
+              </tr>
+              <tr>
+                <td>Format &amp; Time</td>
+                <td>4 weeks, fully online, pods of 4–5 founders, weekly live lab, 1:1 mentor office hours, ending in Demo Day. Commitment: 6–8 hours/week.</td>
+              </tr>
+              <tr>
+                <td>Cohort 01 Dates</td>
+                <td>Applications close Sep 30, 2026 at 7 PM IST. Kickoff Oct 19, 2026.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS: 4 STOPS -->
+    <section class="path" style="padding-block: clamp(48px, 8vw, 96px); background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="mono kick">The 4-Week Journey</p>
+            <h2>How Launchpad works.</h2>
+          </div>
+          <p class="lede">From your initial submission to pitching vetted angel investors at Demo Day.</p>
+        </div>
+
+        <div class="stops">
+          <!-- Step 1 -->
+          <article class="stop">
+            <div class="pin">01</div>
+            <div class="stop-card">
+              <div>
+                <span class="who">Stage 1 · Week 0</span>
+                <h3>Apply<small>Submit what you've built.</small></h3>
+                <p>Fill out our short, straightforward application. Tell us what problem you're solving, who you've talked to, and your progress. ₹1,999 fee (fee waivers available).</p>
+              </div>
+              <ul>
+                <li><b>No Deck Needed</b>Just honest answers about your project</li>
+                <li><b>Any College</b>Open to students from any university in India</li>
+                <li><b>Waivers</b>Granted if the fee is a financial barrier</li>
+              </ul>
+              <div class="act">
+                <a class="btn solid sm" href="/launchpad/fellowship">Open Fellowship '26 Form</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="stop">
+            <div class="pin">02</div>
+            <div class="stop-card">
+              <div>
+                <span class="who">Stage 2 · Selection</span>
+                <h3>Review &amp; Feedback<small>20 in. Feedback for everyone.</small></h3>
+                <p>We review every application thoroughly. Twenty founders are admitted to Cohort 01. Every applicant not selected receives personalized written feedback and free Startup School access.</p>
+              </div>
+              <ul>
+                <li><b>20 Seats</b>Kept intimate so every team gets personal attention</li>
+                <li><b>Written Review</b>What worked and 2–3 actionable fixes</li>
+                <li><b>Free Perks</b>1 month Startup School + 50% discount for next cohort</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="stop">
+            <div class="pin">03</div>
+            <div class="stop-card">
+              <div>
+                <span class="who">Stage 3 · Weeks 1–3</span>
+                <h3>Build &amp; Refine<small>Pods, labs, and office hours.</small></h3>
+                <p>Fully online. You are placed in a pod of 4–5 peer founders. Attend weekly live labs, iterate on customer feedback, and meet 1:1 with operators who have scaled companies.</p>
+              </div>
+              <ul>
+                <li><b>Founder Pods</b>4–5 founders keeping each other accountable</li>
+                <li><b>Weekly Labs</b>Live sessions dissecting distribution and metrics</li>
+                <li><b>1:1 Mentors</b>Direct feedback from experienced operators</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Step 4 -->
+          <article class="stop last">
+            <div class="pin">04</div>
+            <div class="stop-card">
+              <div>
+                <span class="who">Stage 4 · Week 4</span>
+                <h3>Demo Day<small>Pitch to real investors.</small></h3>
+                <p>Present your 2-minute pitch and live product demo to angel investors and early-stage funds. Connect directly for follow-up diligence and fundraising.</p>
+              </div>
+              <ul>
+                <li><b>Virtual Demo</b>Live virtual stage with verified investors</li>
+                <li><b>Direct Intros</b>Warm introductions to relevant angels and micro-VCs</li>
+                <li><b>Fair Terms</b>2% success fee only on capital raised from TFC intros</li>
+              </ul>
+              <div class="act">
+                <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
+                <span>Kickoff is October 19.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section style="padding-block: clamp(64px, 9vw, 110px);">
+      <div class="wrap">
+        <div class="sec-head stacked">
+          <p class="mono kick">Core Program Components</p>
+          <h2>Everything built for momentum.</h2>
+          <p class="lede">No generic video lectures. Everything in Launchpad is focused on customer traction, product iteration, and investor readiness.</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <span class="icon-num">01</span>
+            <h3>Founder Pods</h3>
+            <p>You are matched into a private pod of 4–5 student founders at a similar build stage. Weekly check-ins keep you shipping on schedule.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon-num">02</span>
+            <h3>Weekly Live Cohort Labs</h3>
+            <p>Hands-on work sessions tackling user discovery, distribution playbooks, pricing psychology, and college startup policy navigation.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon-num">03</span>
+            <h3>Mentor Office Hours</h3>
+            <p>Book 1:1 time with founders and operators who give sharp, no-bullshit feedback on your product, marketing, and metrics.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon-num">04</span>
+            <h3>Virtual Demo Day</h3>
+            <p>A focused, invite-only pitch showcase where you present your traction to angels, scout funds, and early-stage investors looking for student builders.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon-num">05</span>
+            <h3>Targeted Investor Intros</h3>
+            <p>We match you directly with angels who invest in your specific sector (B2B SaaS, consumer, dev tools, AI, hardware, fintech).</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon-num">06</span>
+            <h3>Lifelong Builder Network</h3>
+            <p>Direct access to our national network of 90+ campus chapters and fellow alumni founders across India.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOT SELECTED RECEIPT -->
+    <section class="fails" style="background: var(--warm); border-top: 1px solid var(--line);">
+      <div class="wrap fails-grid">
+        <div>
+          <p class="mono kick">Guaranteed Return on Your Time</p>
+          <h2 style="margin-top:12px">Not selected? You still leave with something.</h2>
+          <p class="lede">
+            Most accelerators reject 99% of applicants with an automated email. We believe applying should make your startup stronger, even if you don't get in.
+          </p>
+          <p style="margin-top: 18px; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6;">
+            Every applicant receives a dedicated evaluation. If you don't make the 20-founder cohort, we give you the exact critique to fix your pitch, a month of Startup School to build your prototype, and a 50% discount for the next cohort.
+          </p>
+        </div>
+        <div class="receipt" aria-label="What you receive even if not selected">
+          <h3>Launchpad Application · Value Guarantee</h3>
+          <ul>
+            <li><span>Written Review by TFC Partners</span><span>✓ Included</span></li>
+            <li><span>3 Specific things to fix</span><span>✓ Included</span></li>
+            <li><span>1 Month Startup School (₹399 value)</span><span>✓ Free</span></li>
+            <li><span>50% off next application (₹999)</span><span>✓ Code Sent</span></li>
+            <li><span>Campus chapter co-founder network</span><span>✓ Free</span></li>
+          </ul>
+          <div class="tot">
+            <span>Guaranteed Feedback</span>
+            <span>Always</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [PLACEHOLDER] Mentors & Investors (Commented per Spec §5.5) -->
+    <!--
+    <section class="wrap" style="padding-block: 40px;">
+      [PLACEHOLDER] Mentor and Investor logos will be displayed here once publicly announced.
+    </section>
+    -->
+
+    <!-- FAQ SECTION -->
+    <section style="padding-block: clamp(64px, 9vw, 110px); background: #fff; border-top: 1px solid var(--line);">
+      <div class="wrap" style="max-width: 860px;">
+        <div class="sec-head stacked" style="margin-bottom: 32px;">
+          <p class="mono kick">Frequently Asked Questions</p>
+          <h2>Everything you need to know.</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>What does Launchpad cost?</summary>
+            <div class="faq-body">
+              There is a one-time application fee of ₹1,999 (about ₹70 a day for the 4-week program). If you are selected, there are no additional tuition or enrollment fees. We also offer fee waivers for anyone for whom ₹1,999 is a genuine financial barrier—you can request one directly on the application form.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is admission competitive?</summary>
+            <div class="faq-body">
+              Yes. Each cohort is strictly capped at 20 founders. We select based entirely on the problem you are solving, your tangible progress, and your team's agency. We never select based on college prestige or GPA.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is Launchpad really 100% equity-free?</summary>
+            <div class="faq-body">
+              Yes, 0% equity, forever. We never take shares, warrants, or advisory rights in your company.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How does the 2% success fee work?</summary>
+            <div class="faq-body">
+              If (and only if) you raise institutional funding or angel capital from investors that The Future Council personally introduced you to within 12 months of Demo Day, you pay a one-time 2% cash success fee on the money raised. If you raise independently from your own contacts, or if you don't raise, you owe us absolutely nothing.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What happens if I am not selected?</summary>
+            <div class="faq-body">
+              Every applicant receives personalized written feedback outlining what was strong and 2–3 actionable areas to improve. In addition, you get 1 free month of Startup School (worth ₹399) and a 50% discount code (₹999 fee) for your next Launchpad application.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is the weekly time commitment?</summary>
+            <div class="faq-body">
+              About 6 to 8 hours per week. This includes our weekly live cohort lab, mentor office hours, and pod check-ins. The schedule is designed specifically around student college classes and exams.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do I need a registered company or DPIIT recognition to apply?</summary>
+            <div class="faq-body">
+              No. You can apply with a working prototype, early user interviews, or an active side project. We help you with company incorporation and DPIIT recognition during the program if and when it makes sense.
+            </div>
+          </details>
+        </div>
+
+        <div style="margin-top: 48px; text-align: center;">
+          <a class="btn solid lg" href="/launchpad/fellowship">Apply to Fellowship '26 (Cohort 01) →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+          <div style="font-size:13px; color:#CDBFB2;">
+            Admissions &amp; questions:<br>
+            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/refund.html">Refund Policy</a></li>
+            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
+            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>Where student builders stop waiting for permission.</strong>
+        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY DEADLINE BAR -->
+  <div class="bar hide" id="bar" role="region" aria-label="Launchpad deadline">
+    <span class="t"><span class="long">Launchpad Cohort 01 · 20 seats · </span>closes in <b id="barCount">5d</b></span>
+    <a class="btn solid sm" href="/launchpad/fellowship">Apply</a>
+  </div>
+
+  <script src="/tfc-shared.js"></script>
+</body>
+</html>

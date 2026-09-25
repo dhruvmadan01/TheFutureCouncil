@@ -130,8 +130,15 @@
       <div class="wrap">
         <div class="join-form-shell">
 
-          <!-- 7-DAY PERK HIGHLIGHT (SPEC 5.9) -->
-          <div class="perk-highlight">
+          <!-- PLAN SELECTOR TABS -->
+          <div class="plan-tabs" style="display: flex; gap: 8px; margin-bottom: 24px; background: var(--warm-2); padding: 5px; border-radius: 12px; border: 1px solid #E3B79C;">
+            <button type="button" class="plan-tab active" id="tabMember" data-plan="member" style="flex: 1; padding: 10px 8px; border: 0; background: #fff; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.06);">Free Member</button>
+            <button type="button" class="plan-tab" id="tabSchool" data-plan="school" style="flex: 1; padding: 10px 8px; border: 0; background: transparent; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink-soft);">Startup School (₹399)</button>
+            <button type="button" class="plan-tab" id="tabTrial" data-plan="trial" style="flex: 1; padding: 10px 8px; border: 0; background: transparent; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink-soft);">7-Day Trial</button>
+          </div>
+
+          <!-- 7-DAY PERK HIGHLIGHT (FOR FREE MEMBERS) -->
+          <div class="perk-highlight" id="perkHighlight">
             <div class="perk-icon">★</div>
             <div>
               <strong style="display: block; font-size: 15px; color: var(--ink);">Automatic Member Perk</strong>
@@ -141,13 +148,24 @@
             </div>
           </div>
 
+          <!-- TRIAL HIGHLIGHT -->
+          <div class="perk-highlight" id="trialHighlight" style="display: none; background: #E8F5E9; border-color: #A5D6A7;">
+            <div class="perk-icon" style="background: #2E7D32; color: #fff;">✦</div>
+            <div>
+              <strong style="display: block; font-size: 15px; color: #1B5E20;">7-Day Chapter Member Pass</strong>
+              <span style="font-size: 13.5px; color: #2E7D32;">
+                Instant free access to all 9 modules and weekly Sunday labs. No payment required.
+              </span>
+            </div>
+          </div>
+
           <!-- FORM -->
           <form id="councilJoinForm">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
               <img src="/TFC.png" alt="TFC Logo" style="width:40px; height:40px; object-fit:contain; border-radius:8px; background:var(--ink); padding:4px;" />
               <div>
-                <h2 style="font-size: 24px; margin:0; line-height:1.2;">Join The Council</h2>
-                <span style="font-size: 13px; color:var(--ink-soft);">Free membership · All colleges welcome</span>
+                <h2 id="joinFormTitle" style="font-size: 24px; margin:0; line-height:1.2;">Join The Council</h2>
+                <span id="joinFormSubtitle" style="font-size: 13px; color:var(--ink-soft);">Free membership · All colleges welcome</span>
               </div>
             </div>
 
@@ -159,7 +177,7 @@
             <div style="margin-bottom: 18px;">
               <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jEmail">Email Address *</label>
               <input type="email" id="jEmail" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="name@college.edu or gmail.com" />
-              <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">We send chapter invites and your 7-day Startup School access link here.</span>
+              <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">We send chapter invites and your Startup School access link here.</span>
             </div>
 
             <div style="margin-bottom: 18px;">
@@ -194,9 +212,35 @@
               </div>
             </div>
 
-            <div style="margin-bottom: 24px;">
+            <div style="margin-bottom: 24px;" id="ideaFieldGroup">
               <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jIdea">What are you curious about or building? (Optional)</label>
               <textarea id="jIdea" class="search-input" style="width: 100%; border-radius: 10px; min-height: 80px; resize: vertical;" placeholder="A rough idea, a side project, or technologies you want to explore with other students."></textarea>
+            </div>
+
+            <!-- PAYMENT BOX FOR STARTUP SCHOOL (₹399/mo) -->
+            <div id="schoolPaymentBox" style="display: none; background: var(--warm); border: 1.5px solid #F1D4BE; border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--line); padding-bottom: 12px; margin-bottom: 14px;">
+                <strong style="font-size: 16px; color: var(--ink);">Startup School Monthly Pass</strong>
+                <span style="font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--orange-deep);">₹399 <small style="font-size: 12px; font-weight: 500; color: var(--ink-soft); font-family: var(--body);">/ month</small></span>
+              </div>
+              <p style="font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 16px;">
+                Scan with any UPI app (GPay, PhonePe, Paytm, BHIM) or pay to UPI ID <b>dhruvmadan235@okhdfcbank</b>, then enter your 12-digit UPI reference number below.
+              </p>
+              <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                <div style="width: 120px; height: 120px; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--line); background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <img src="/payment-qr.jpg" alt="Scan to pay ₹399" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.parentNode.innerHTML='<span style=\'font-size:11px;padding:8px;text-align:center;\'>Scan UPI QR<br>₹399</span>'" />
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                  <div style="font-size: 12px; color: var(--ink-soft);">Official UPI ID:</div>
+                  <div style="font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink); background: #fff; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); margin-top: 4px; display: inline-block;">
+                    dhruvmadan235@okhdfcbank
+                  </div>
+                  <div style="margin-top: 12px;">
+                    <label for="jUpiRef" style="display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px;">UPI Reference / UTR Number (12 digits) *</label>
+                    <input type="text" id="jUpiRef" class="search-input" style="width: 100%; border-radius: 8px; font-family: var(--mono); font-size: 13.5px;" placeholder="e.g. 427819283719" />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <button type="submit" id="btnSubmitJoin" class="btn solid lg" style="width: 100%;">Complete Free Registration →</button>
@@ -205,8 +249,8 @@
           <!-- SUCCESS STATE -->
           <div id="joinSuccessPanel" style="display: none; padding: 24px; text-align: center;">
             <div class="pin" style="width: 56px; height: 56px; border-radius: 50%; background: #E8F5E9; border: 2px solid #2E7D32; display: grid; place-items: center; margin: 0 auto 16px; color: #1B5E20; font-size: 22px;">✓</div>
-            <h3 style="font-size: 26px;">You are officially in.</h3>
-            <p style="color: var(--ink-soft); font-size: 16px; margin: 12px auto 24px; max-width: 44ch;">
+            <h3 id="joinSuccessTitle" style="font-size: 26px;">You are officially in.</h3>
+            <p id="joinSuccessMsg" style="color: var(--ink-soft); font-size: 16px; margin: 12px auto 24px; max-width: 44ch;">
               Welcome to The Future Council. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.
             </p>
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
@@ -273,8 +317,72 @@
   <script src="/tfc-shared.js"></script>
   <script>
   (function(){
-    // Pre-fill chapter query param if available
+    // Plan Switcher Logic
+    let currentPlan = 'member';
+    const tabMember = document.getElementById('tabMember');
+    const tabSchool = document.getElementById('tabSchool');
+    const tabTrial = document.getElementById('tabTrial');
+    const perkHighlight = document.getElementById('perkHighlight');
+    const trialHighlight = document.getElementById('trialHighlight');
+    const schoolPaymentBox = document.getElementById('schoolPaymentBox');
+    const ideaFieldGroup = document.getElementById('ideaFieldGroup');
+    const formTitle = document.getElementById('joinFormTitle');
+    const formSubtitle = document.getElementById('joinFormSubtitle');
+    const btn = document.getElementById('btnSubmitJoin');
+    const jUpiRef = document.getElementById('jUpiRef');
+
+    function setPlan(plan) {
+      currentPlan = plan;
+      [tabMember, tabSchool, tabTrial].forEach(t => {
+        if (!t) return;
+        const isActive = t.dataset.plan === plan;
+        t.style.background = isActive ? '#fff' : 'transparent';
+        t.style.color = isActive ? 'var(--ink)' : 'var(--ink-soft)';
+        t.style.boxShadow = isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none';
+      });
+
+      if (plan === 'school') {
+        formTitle.textContent = 'Subscribe to Startup School';
+        formSubtitle.textContent = '₹399 / month · Full 30-day builder pass to all 9 modules & live Sunday labs';
+        perkHighlight.style.display = 'none';
+        trialHighlight.style.display = 'none';
+        schoolPaymentBox.style.display = 'block';
+        if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
+        btn.textContent = 'Complete ₹399 Subscription →';
+      } else if (plan === 'trial') {
+        formTitle.textContent = 'Activate 7-Day Free Trial';
+        formSubtitle.textContent = 'Free for collegiate chapter members · Full access for 7 days';
+        perkHighlight.style.display = 'none';
+        trialHighlight.style.display = 'flex';
+        schoolPaymentBox.style.display = 'none';
+        if (ideaFieldGroup) ideaFieldGroup.style.display = 'none';
+        btn.textContent = 'Activate 7-Day Free Trial →';
+      } else {
+        formTitle.textContent = 'Join The Council';
+        formSubtitle.textContent = 'Free membership · All colleges welcome';
+        perkHighlight.style.display = 'flex';
+        trialHighlight.style.display = 'none';
+        schoolPaymentBox.style.display = 'none';
+        if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
+        btn.textContent = 'Complete Free Registration →';
+      }
+    }
+
+    tabMember?.addEventListener('click', () => setPlan('member'));
+    tabSchool?.addEventListener('click', () => setPlan('school'));
+    tabTrial?.addEventListener('click', () => setPlan('trial'));
+
+    // Pre-fill query params
     const urlParams = new URLSearchParams(window.location.search);
+    const planParam = (urlParams.get('plan') || '').toLowerCase();
+    if (planParam === 'school' || planParam === 'startup-school') {
+      setPlan('school');
+    } else if (planParam === 'trial' || planParam === 'free-trial') {
+      setPlan('trial');
+    } else {
+      setPlan('member');
+    }
+
     const chParam = urlParams.get('chapter') || urlParams.get('college');
     if (chParam && document.getElementById('jCollege')) {
       document.getElementById('jCollege').value = chParam.toUpperCase();
@@ -300,22 +408,45 @@
 
     const form = document.getElementById('councilJoinForm');
     const successPanel = document.getElementById('joinSuccessPanel');
-    const btn = document.getElementById('btnSubmitJoin');
+    const successTitle = document.getElementById('joinSuccessTitle');
+    const successMsg = document.getElementById('joinSuccessMsg');
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (currentPlan === 'school') {
+        const upiVal = jUpiRef?.value.trim();
+        if (!upiVal || upiVal.length < 6) {
+          alert('Please enter your UPI Reference / UTR Number to confirm your ₹399 payment.');
+          jUpiRef?.focus();
+          return;
+        }
+      }
+
       btn.disabled = true;
-      btn.textContent = 'Registering Membership...';
+      btn.textContent = currentPlan === 'school' ? 'Verifying Subscription...' : 'Activating Access...';
 
       const name = document.getElementById('jName').value.trim();
       const email = document.getElementById('jEmail').value.trim().toLowerCase();
       const phone = document.getElementById('jPhone').value.trim();
       const college = document.getElementById('jCollege').value.trim();
-      const idea = document.getElementById('jIdea')?.value.trim() || 'Curious Builder';
-
+      const idea = document.getElementById('jIdea')?.value.trim() || '';
       const selectedSkills = [...document.querySelectorAll('input[name="skills"]:checked')].map(c => c.value).join(', ');
+      const upiRef = jUpiRef?.value.trim() || '';
 
-      const combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Idea: ${idea} | FreeMembership: Yes | SchoolPass: 7Days | Source: JoinPage | FormSubmittedAt: ${new Date().toISOString()}`;
+      let tierName = 'Student';
+      let combinedData = '';
+
+      if (currentPlan === 'school') {
+        tierName = 'StartupSchool';
+        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Plan: StartupSchoolPaid | Fee: 399 | UpiRef: ${upiRef} | Source: SchoolSubscription | FormSubmittedAt: ${new Date().toISOString()}`;
+      } else if (currentPlan === 'trial') {
+        tierName = 'StartupSchoolTrial';
+        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Plan: 7DayTrial | Source: ChapterTrial | TrialStartedAt: ${new Date().toISOString()}`;
+      } else {
+        tierName = 'Student';
+        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Idea: ${idea} | FreeMembership: Yes | Source: JoinPage | FormSubmittedAt: ${new Date().toISOString()}`;
+      }
 
       try {
         if (supabaseClient) {
@@ -324,16 +455,31 @@
             name: name,
             email: email,
             college: combinedData,
-            tier: 'Student',
-            member_id: `TFC-MBR-${rand}`,
-            password: 'member2026'
+            tier: tierName,
+            member_id: `TFC-${currentPlan.toUpperCase()}-${rand}`,
+            password: 'builder2026'
           }]);
         }
       } catch (err) {
         console.warn('Membership sync note:', err);
       }
 
+      // Customize confirmation
+      if (currentPlan === 'school') {
+        successTitle.textContent = 'Startup School Subscription Confirmed.';
+        successMsg.innerHTML = `Thank you for subscribing, <b>${name}</b>. We have recorded your ₹399 payment reference (<b>${upiRef}</b>). Check your email (<b>${email}</b>) for your module access link and Sunday live lab invitation.`;
+      } else if (currentPlan === 'trial') {
+        successTitle.textContent = '7-Day Free Trial Activated!';
+        successMsg.innerHTML = `Welcome to Startup School, <b>${name}</b>. Your 7-day chapter pass is active. Check <b>${email}</b> for your direct curriculum link.`;
+      } else {
+        successTitle.textContent = 'You are officially in.';
+        successMsg.innerHTML = `Welcome to The Future Council, <b>${name}</b>. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.`;
+      }
+
       form.style.display = 'none';
+      if (perkHighlight) perkHighlight.style.display = 'none';
+      if (trialHighlight) trialHighlight.style.display = 'none';
+      document.querySelector('.plan-tabs').style.display = 'none';
       successPanel.style.display = 'block';
     });
   })();
