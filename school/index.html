@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Startup School · The Practical Course for Student Founders | The Future Council</title>
-  <meta name="description" content="A practical curriculum on starting a company as a student, from problem discovery to raising your first cheque. ₹399/month. Chapter members get 7 days free." />
+  <meta name="description" content="A practical curriculum on starting a company as a student, from problem discovery to raising your first cheque. ₹399/month. Chapter members get 7 days free. Coming soon, join the waitlist." />
   <meta name="canonical" href="https://thefuturecouncil.in/school" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
 
-  <!-- Analytics -->
+  <!-- Supabase & Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/mixpanel.min.js"></script>
   <script src="/tfc-analytics.js"></script>
 
@@ -26,6 +27,35 @@
       background: var(--warm);
       border-bottom: 1px solid var(--line);
     }
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: #FFEDD5;
+      border: 1px solid #FDBA74;
+      color: #C2410C;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 0 0 rgba(226, 84, 42, 0.7);
+      animation: badge-pulse 2s infinite;
+    }
+    @keyframes badge-pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(226, 84, 42, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(226, 84, 42, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(226, 84, 42, 0); }
+    }
     .price-card {
       background: #fff;
       border: 1.5px solid var(--line);
@@ -34,6 +64,123 @@
       box-shadow: 0 14px 34px -18px rgba(27,23,18,0.08);
       max-width: 580px;
       margin-top: 36px;
+    }
+    .interest-form-wrap {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .interest-form-wrap h3 {
+      font-size: 22px;
+      margin: 0;
+      line-height: 1.25;
+      font-family: var(--display);
+    }
+    .interest-form-wrap .sub-line {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-top: 6px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .interest-field {
+      margin-bottom: 16px;
+    }
+    .interest-field label {
+      display: block;
+      font-weight: 600;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .interest-field label .req {
+      color: var(--orange);
+    }
+    .interest-field label .opt {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+    .interest-input {
+      width: 100%;
+      padding: 11px 14px;
+      font-family: var(--body);
+      font-size: 14.5px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: #FAFAF8;
+      color: var(--ink);
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .interest-input:focus {
+      outline: none;
+      border-color: var(--orange);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(226, 84, 42, 0.12);
+    }
+    .interest-radio-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .interest-radio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #FAFAF8;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .interest-radio-pill:hover {
+      border-color: var(--orange);
+    }
+    .interest-radio-pill input[type="radio"] {
+      accent-color: var(--orange);
+      margin: 0;
+      cursor: pointer;
+    }
+    .interest-radio-pill.selected {
+      background: #FFF0EB;
+      border-color: var(--orange);
+      font-weight: 600;
+      color: var(--orange-deep);
+    }
+    .interest-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 560px) {
+      .interest-grid-2 {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+    .interest-error-box {
+      display: none;
+      background: #FEE2E2;
+      border: 1.5px solid #FCA5A5;
+      color: #991B1B;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .interest-success-box {
+      display: none;
+      background: #F0FDF4;
+      border: 1.5px solid #BBF7D0;
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+      margin-top: 14px;
     }
     .modules-grid {
       display: grid;
@@ -112,7 +259,7 @@
         <li><a href="/stories">Stories</a></li>
       </ul>
       <div class="nav-actions">
-        <a class="btn solid sm" href="/join">Join free</a>
+        <a class="btn solid sm" href="#interest">₹399 · Coming soon</a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
@@ -126,6 +273,7 @@
     <a href="/why">Why Build <span>→</span></a>
     <a href="/stories">Stories <span>→</span></a>
     <a href="/school/library">Resource Library <span>→</span></a>
+    <a href="#interest" style="color: var(--orange-deep);">₹399 · Coming soon <span>→</span></a>
   </div>
 
   <main>
@@ -133,27 +281,117 @@
     <header class="school-hero">
       <div class="wrap">
         <span class="mono kick">The Builder Workshop</span>
-        <h1 style="font-size: clamp(38px, 6.6vw, 84px); margin-top: 14px;">The course college doesn't offer.</h1>
+        <div style="margin-top: 10px; margin-bottom: 4px;">
+          <span class="coming-soon-badge"><span class="pulse-dot"></span> Coming soon</span>
+        </div>
+        <h1 style="font-size: clamp(38px, 6.6vw, 84px); margin-top: 10px;">The course college doesn't offer.</h1>
         <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
           A practical curriculum on starting a company as a student, from finding a problem to raising your first cheque.
         </p>
 
         <!-- PRICE BLOCK (SPEC 5.4) -->
         <div class="price-card" id="subscribe">
-          <div class="mono" style="color: var(--orange-deep); font-weight: 600;">Membership Plan</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div class="mono" style="color: var(--orange-deep); font-weight: 600;">Membership Plan</div>
+            <span class="coming-soon-badge" style="font-size: 11px; padding: 3px 9px;">Coming soon</span>
+          </div>
           <div style="font-family: var(--display); font-size: clamp(34px, 4.5vw, 48px); font-weight: 800; margin-top: 6px;">
             ₹399 <small style="font-size: 16px; font-weight: 500; color: var(--ink-soft); font-family: var(--body);">a month · Cancel anytime</small>
           </div>
           <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 8px;">
             Access all 9 curriculum modules, the weekly Sunday Live Lab, and peer project reviews.
           </p>
-          <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-            <a class="btn solid" href="/join?plan=school">Subscribe to Startup School</a>
-            <a class="btn" href="/join?plan=trial">Chapter member? Start 7 days free</a>
+
+          <!-- INTEREST FORM (SPECIFIED ID: interest) -->
+          <div class="interest-form-wrap" id="interest">
+            <h3>Get notified at launch</h3>
+            <p class="sub-line">Startup School opens soon. Chapter members will still get 7 days free.</p>
+
+            <div id="interestError" class="interest-error-box" role="alert"></div>
+
+            <form id="schoolInterestForm" novalidate>
+              <div class="interest-grid-2">
+                <div class="interest-field">
+                  <label for="intName">Full name <span class="req">*</span></label>
+                  <input type="text" id="intName" name="name" class="interest-input" placeholder="e.g. Ananya Sen" required />
+                </div>
+                <div class="interest-field">
+                  <label for="intEmail">Email address <span class="req">*</span></label>
+                  <input type="email" id="intEmail" name="email" class="interest-input" placeholder="name@college.edu or gmail.com" required />
+                </div>
+              </div>
+
+              <div class="interest-grid-2">
+                <div class="interest-field">
+                  <label for="intPhone">WhatsApp number <span class="opt">(optional)</span></label>
+                  <input type="tel" id="intPhone" name="phone" class="interest-input" placeholder="+91 98765 43210" />
+                </div>
+                <div class="interest-field">
+                  <label for="intCollege">College <span class="req">*</span></label>
+                  <input type="text" id="intCollege" name="college" class="interest-input" placeholder="e.g. IIT Delhi, Hansraj, DTU" required />
+                </div>
+              </div>
+
+              <div class="interest-field">
+                <label for="intYear">Year of study <span class="req">*</span></label>
+                <select id="intYear" name="year" class="interest-input" required>
+                  <option value="" disabled selected>Select your year of study...</option>
+                  <option value="1st">1st Year</option>
+                  <option value="2nd">2nd Year</option>
+                  <option value="3rd">3rd Year</option>
+                  <option value="4th">4th Year</option>
+                  <option value="5th">5th Year</option>
+                  <option value="Graduated">Graduated</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="interest-field">
+                <label>Your stage <span class="req">*</span></label>
+                <div class="interest-radio-group">
+                  <label class="interest-radio-pill">
+                    <input type="radio" name="stage" value="No idea yet" required />
+                    <span>No idea yet</span>
+                  </label>
+                  <label class="interest-radio-pill">
+                    <input type="radio" name="stage" value="Have an idea" />
+                    <span>Have an idea</span>
+                  </label>
+                  <label class="interest-radio-pill">
+                    <input type="radio" name="stage" value="Already building" />
+                    <span>Already building</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="interest-field">
+                <label>Chapter member? <span class="req">*</span></label>
+                <div class="interest-radio-group">
+                  <label class="interest-radio-pill">
+                    <input type="radio" name="chapterMember" value="Yes" required />
+                    <span>Yes</span>
+                  </label>
+                  <label class="interest-radio-pill">
+                    <input type="radio" name="chapterMember" value="No" />
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="interest-field">
+                <label for="intLearn">What do you most want to learn? <span class="opt">(optional)</span></label>
+                <textarea id="intLearn" name="learn" class="interest-input" rows="3" placeholder="e.g. Finding a validated problem, building with AI tools, finding a co-founder..."></textarea>
+              </div>
+
+              <button type="submit" id="btnNotifyMe" class="btn solid" style="width: 100%; justify-content: center; padding: 13px 20px; font-size: 15px; cursor: pointer; margin-top: 6px;">Notify me</button>
+            </form>
+
+            <div id="interestSuccess" class="interest-success-box" role="status">
+              <div style="width: 44px; height: 44px; border-radius: 50%; background: #DCFCE7; color: #166534; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 12px; margin-inline: auto;">✓</div>
+              <h4 style="font-size: 20px; color: #14532D; margin-bottom: 6px; font-family: var(--display); font-weight: 700;">You're on the list.</h4>
+              <p style="font-size: 15px; color: #166534; line-height: 1.5; margin: 0;">We'll email you the day it opens.</p>
+            </div>
           </div>
-          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 14px;">
-            Not a member yet? <a href="/chapters" style="color: var(--orange-deep); font-weight: 600; text-decoration: underline;">Join a chapter free</a> or <a href="/join?plan=trial" style="color: var(--orange-deep); font-weight: 600; text-decoration: underline;">activate your 7-day trial</a>.
-          </p>
         </div>
       </div>
     </header>
@@ -332,12 +570,12 @@
           <span class="mono kick">Structure &amp; Sessions</span>
           <h2 style="font-size: clamp(28px, 4vw, 42px); margin-top: 8px;">Learn on your time. Build live with peers.</h2>
           <p style="color: var(--ink-soft); font-size: 16px; margin-top: 14px; line-height: 1.5;">
-            Modules are self-paced so you can study between lectures and exam seasons. Every Sunday, join our Sunday Live Lab with visiting operators.
+            Modules are self-paced so you can study between lectures and exam seasons. Once we launch, every Sunday join our Sunday Live Lab with visiting operators.
           </p>
           <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-top: 24px;">
             <strong style="font-size: 16px; display: block;">Sunday Live Lab Timings</strong>
             <span style="font-size: 14px; color: var(--ink-soft); margin-top: 4px; display: block;">
-              Every Sunday · 6:00 PM – 7:30 PM IST (Virtual video room)
+              Once we launch, every Sunday · 6:00 PM – 7:30 PM IST (Virtual video room)
             </span>
           </div>
           <div style="margin-top: 24px;">
@@ -356,6 +594,10 @@
           <div class="tot">
             <span>Price</span>
             <span>₹399 / month</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-family: var(--mono); font-size: 12px; color: var(--orange-deep); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">
+            <span>Status</span>
+            <span>Launching soon</span>
           </div>
         </div>
       </div>
@@ -434,5 +676,164 @@
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>
+  <script>
+  (function(){
+    // Radio pill highlight helper
+    document.querySelectorAll('.interest-radio-pill input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const name = radio.name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+          r.closest('.interest-radio-pill')?.classList.toggle('selected', r.checked);
+        });
+      });
+    });
+
+    const form = document.getElementById('schoolInterestForm');
+    const submitBtn = document.getElementById('btnNotifyMe');
+    const errorBox = document.getElementById('interestError');
+    const successBox = document.getElementById('interestSuccess');
+
+    const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+    let supabaseClient = null;
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+      try {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      } catch(e) {
+        console.warn('Supabase client error:', e);
+      }
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errorBox) {
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+      }
+
+      const name = document.getElementById('intName')?.value.trim();
+      const email = document.getElementById('intEmail')?.value.trim().toLowerCase();
+      const phone = document.getElementById('intPhone')?.value.trim() || '';
+      const college = document.getElementById('intCollege')?.value.trim();
+      const year = document.getElementById('intYear')?.value;
+      const stageRadio = document.querySelector('input[name="stage"]:checked');
+      const stage = stageRadio ? stageRadio.value : '';
+      const chMemberRadio = document.querySelector('input[name="chapterMember"]:checked');
+      const chapterMember = chMemberRadio ? chMemberRadio.value : '';
+      const learn = document.getElementById('intLearn')?.value.trim() || '';
+
+      // Client-side validations
+      if (!name) {
+        showError('Please enter your full name.');
+        document.getElementById('intName')?.focus();
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        showError('Please enter a valid email address.');
+        document.getElementById('intEmail')?.focus();
+        return;
+      }
+      if (!college) {
+        showError('Please enter your college name.');
+        document.getElementById('intCollege')?.focus();
+        return;
+      }
+      if (!year) {
+        showError('Please select your year of study.');
+        document.getElementById('intYear')?.focus();
+        return;
+      }
+      if (!stage) {
+        showError('Please select your stage (No idea yet, Have an idea, or Already building).');
+        return;
+      }
+      if (!chapterMember) {
+        showError('Please indicate whether you are a chapter member.');
+        return;
+      }
+
+      // Disable button while submitting
+      submitBtn.disabled = true;
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Saving your spot...';
+
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const generatedWaitlistId = `TFC-WAIT-${randNum}`;
+      const combinedData = `${college} (${year}) | Phone: ${phone || 'N/A'} | Stage: ${stage} | ChapterMember: ${chapterMember} | WantsToLearn: ${learn || 'N/A'} | Plan: StartupSchoolWaitlist | SubmittedAt: ${new Date().toISOString()}`;
+
+      try {
+        // Save to Supabase members table if available
+        if (supabaseClient) {
+          const { error: sbError } = await supabaseClient.from('members').insert([{
+            name: name,
+            email: email,
+            college: combinedData,
+            tier: 'SchoolInterest',
+            member_id: generatedWaitlistId,
+            password: 'waitlist2026'
+          }]);
+          if (sbError) {
+            console.warn('[Supabase Interest Note]', sbError);
+          }
+        }
+
+        // Cache in localStorage as local fallback
+        try {
+          const waitlistData = {
+            name, email, phone, college, year, stage, chapterMember, learn, submittedAt: new Date().toISOString()
+          };
+          localStorage.setItem('tfc_school_interest_' + email, JSON.stringify(waitlistData));
+          const list = JSON.parse(localStorage.getItem('tfc_school_waitlist_all') || '[]');
+          list.push(waitlistData);
+          localStorage.setItem('tfc_school_waitlist_all', JSON.stringify(list));
+        } catch(e) {}
+
+        // Analytics tracking
+        if (window.mixpanel && typeof window.mixpanel.track === 'function') {
+          try {
+            window.mixpanel.identify(email);
+            window.mixpanel.people.set({
+              $name: name,
+              $email: email,
+              university: college,
+              whatsapp: phone,
+              year_of_study: year,
+              builder_stage: stage,
+              is_chapter_member: chapterMember,
+              learning_interest: learn,
+              school_waitlist_date: new Date().toISOString()
+            });
+            window.mixpanel.track('startup_school_interest_submitted', {
+              name, email, phone, college, year, stage, chapter_member: chapterMember, learn
+            });
+          } catch(mpErr) {
+            console.warn('Mixpanel tracking note:', mpErr);
+          }
+        }
+
+        // Success state
+        form.style.display = 'none';
+        if (successBox) successBox.style.display = 'block';
+
+      } catch (err) {
+        console.error('Submission error:', err);
+        showError('Something went wrong submitting your response. Please try again or email support@thefuturecouncil.in.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+
+      function showError(msg) {
+        if (errorBox) {
+          errorBox.textContent = msg;
+          errorBox.style.display = 'block';
+          errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          alert(msg);
+        }
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
