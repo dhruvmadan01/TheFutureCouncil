@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Step out of line · Join The Future Council | Free Student Membership</title>
-  <meta name="description" content="Step out of the placement queue. Join 90+ campus chapters across India, get 7 days of Startup School free, and build something real." />
+  <meta name="description" content="Step out of the placement queue. Join 18 campus chapters across India, get 7 days of Startup School free, and build something real." />
   <meta name="canonical" href="https://thefuturecouncil.in/join" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
 
+  <!-- Single Source of Truth Config -->
+  <script src="/tfc-config.js"></script>
   <!-- Supabase & Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/mixpanel.min.js"></script>
@@ -76,10 +78,21 @@
       background: #FAFAFA;
       transition: all 0.2s;
     }
-    .skill-pill:has(input:checked) {
+    .skill-pill:has(input:checked), .skill-pill.active {
       border-color: var(--orange);
       background: var(--warm);
       color: var(--orange-deep);
+    }
+    .member-pass-card {
+      background: linear-gradient(135deg, #1E2124 0%, #2B2420 100%);
+      color: var(--warm);
+      border-radius: 20px;
+      padding: 24px 26px;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
+      text-align: left;
+      border: 1px solid #4A3F35;
+      margin: 24px auto;
+      max-width: 440px;
     }
   </style>
 </head>
@@ -113,6 +126,7 @@
     <a href="/launchpad">Launchpad <span>→</span></a>
     <a href="/why">Why Build <span>→</span></a>
     <a href="/stories">Stories <span>→</span></a>
+    <a href="/about">About TFC <span>→</span></a>
   </div>
 
   <main>
@@ -154,10 +168,13 @@
             <div>
               <strong style="display: block; font-size: 15px; color: #1B5E20;">7-Day Chapter Member Pass</strong>
               <span style="font-size: 13.5px; color: #2E7D32;">
-                Instant free access to all 9 modules and weekly Sunday labs. No payment required.
+                Instant free access to all 9 modules and weekly Sunday Live Labs. No payment required.
               </span>
             </div>
           </div>
+
+          <!-- ERROR MESSAGE BOX (HIDDEN BY DEFAULT) -->
+          <div id="joinErrorMsg" style="display: none; background: #FFEBEE; border: 1.5px solid #FFCDD2; color: #C62828; padding: 12px 16px; border-radius: 10px; font-size: 13.5px; margin-bottom: 18px;"></div>
 
           <!-- FORM -->
           <form id="councilJoinForm">
@@ -186,8 +203,33 @@
             </div>
 
             <div style="margin-bottom: 18px;">
-              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jCollege">College / University Name *</label>
-              <input type="text" id="jCollege" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. IIT Delhi, SRCC, DTU, NSUT..." />
+              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jCollegeSelect">Campus Chapter / College *</label>
+              <select id="jCollegeSelect" required class="search-input" style="width: 100%; border-radius: 10px; padding: 12px 14px; background: #fff;">
+                <option value="" disabled selected>Select your campus chapter...</option>
+                <option value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</option>
+                <option value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</option>
+                <option value="Hansraj College">Hansraj College</option>
+                <option value="Hindu College">Hindu College</option>
+                <option value="St. Stephen's College">St. Stephen's College</option>
+                <option value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</option>
+                <option value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</option>
+                <option value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</option>
+                <option value="Miranda House">Miranda House</option>
+                <option value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</option>
+                <option value="Sri Guru Gobind Singh College of Commerce">Sri Guru Gobind Singh College of Commerce</option>
+                <option value="Shaheed Sukhdev College of Business Studies">Shaheed Sukhdev College of Business Studies</option>
+                <option value="SGTB Khalsa College">SGTB Khalsa College</option>
+                <option value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</option>
+                <option value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</option>
+                <option value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</option>
+                <option value="Indian Institute of Technology Delhi (IIT Delhi)">Indian Institute of Technology Delhi (IIT Delhi)</option>
+                <option value="Indian Institute of Technology Patna (IIT Patna)">Indian Institute of Technology Patna (IIT Patna)</option>
+                <option value="other">Other College / University</option>
+              </select>
+              <div id="otherCollegeWrap" style="display: none; margin-top: 10px;">
+                <label style="display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px;" for="jCollegeOther">Enter College Name &amp; City *</label>
+                <input type="text" id="jCollegeOther" class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. BITS Pilani, Goa Campus" />
+              </div>
             </div>
 
             <div style="margin-bottom: 22px;">
@@ -246,14 +288,50 @@
             <button type="submit" id="btnSubmitJoin" class="btn solid lg" style="width: 100%;">Complete Free Registration →</button>
           </form>
 
-          <!-- SUCCESS STATE -->
-          <div id="joinSuccessPanel" style="display: none; padding: 24px; text-align: center;">
+          <!-- SUCCESS STATE WITH DYNAMIC BUILDER CARD -->
+          <div id="joinSuccessPanel" style="display: none; padding: 12px; text-align: center;">
             <div class="pin" style="width: 56px; height: 56px; border-radius: 50%; background: #E8F5E9; border: 2px solid #2E7D32; display: grid; place-items: center; margin: 0 auto 16px; color: #1B5E20; font-size: 22px;">✓</div>
             <h3 id="joinSuccessTitle" style="font-size: 26px;">You are officially in.</h3>
-            <p id="joinSuccessMsg" style="color: var(--ink-soft); font-size: 16px; margin: 12px auto 24px; max-width: 44ch;">
+            <p id="joinSuccessMsg" style="color: var(--ink-soft); font-size: 15.5px; margin: 12px auto 20px; max-width: 48ch; line-height: 1.5;">
               Welcome to The Future Council. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.
             </p>
-            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+
+            <!-- DYNAMIC STUDENT BUILDER CARD -->
+            <div class="member-pass-card" id="memberPassCard">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 20px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <img src="/TFC.png" alt="TFC" style="width:32px; height:32px; object-fit:contain; border-radius:6px; background:#fff; padding:3px;" />
+                  <div>
+                    <div style="font-family:var(--display); font-size:16px; font-weight:700; color:#FFF4E8;">The Future Council</div>
+                    <div id="cardTierLabel" style="font-family:var(--mono); font-size:10px; color:#F5A07F; letter-spacing:0.08em; text-transform:uppercase;">Student Builder Pass</div>
+                  </div>
+                </div>
+                <div style="font-family:var(--mono); font-size:10.5px; background:rgba(226,84,42,0.25); color:#F5A07F; padding:4px 8px; border-radius:6px; border:1px solid rgba(226,84,42,0.4);">ACTIVE</div>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <div style="font-size:10px; font-family:var(--mono); text-transform:uppercase; color:#CDBFB2; letter-spacing:0.06em;">Member Name</div>
+                <div id="cardMemberName" style="font-family:var(--display); font-size:22px; font-weight:700; color:#FFF4E8; margin-top:2px;">—</div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:14px; margin-bottom: 18px;">
+                <div>
+                  <div style="font-size:10px; font-family:var(--mono); text-transform:uppercase; color:#CDBFB2; letter-spacing:0.06em;">Campus Chapter</div>
+                  <div id="cardMemberCollege" style="font-size:13px; font-weight:600; color:#FFF4E8; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">—</div>
+                </div>
+                <div>
+                  <div style="font-size:10px; font-family:var(--mono); text-transform:uppercase; color:#CDBFB2; letter-spacing:0.06em;">Council ID</div>
+                  <div id="cardMemberId" style="font-family:var(--mono); font-size:13px; font-weight:600; color:#F5A07F; margin-top:2px;">—</div>
+                </div>
+              </div>
+
+              <div style="border-top:1px dashed #4A3F35; padding-top:12px; display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:10.5px; color:#CDBFB2;">
+                <span>Monthly Build Nights · Circles</span>
+                <span>Cohort 2026</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
               <a class="btn solid" href="/school">Explore Startup School →</a>
               <a class="btn" href="/chapters">View Campus Chapters</a>
             </div>
@@ -276,6 +354,10 @@
           <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
             A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
           </p>
+          <div style="font-size:13px; color:#CDBFB2;">
+            Admissions &amp; questions:<br>
+            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Ecosystem</h4>
@@ -301,19 +383,25 @@
           <h4>Council &amp; Legal</h4>
           <ul>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/terms.html">Terms of Service</a></li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/refund.html">Refund Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/refund">Refund Policy</a></li>
+            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
+            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
           </ul>
         </div>
       </div>
-      <div class="footer-line">
-        <strong>Where student builders stop waiting for permission.</strong>
-        <span>© 2026 The Future Council · thefuturecouncil.in</span>
+      <div class="footer-line" style="flex-direction:column; gap:8px; align-items:flex-start;">
+        <div style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+          <strong>Where student builders stop waiting for permission.</strong>
+          <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+        </div>
+        <p style="font-size:12px; color:#9A8B7C; margin:0;">TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</p>
       </div>
     </div>
   </footer>
 
+  <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>
   <script>
   (function(){
@@ -330,6 +418,22 @@
     const formSubtitle = document.getElementById('joinFormSubtitle');
     const btn = document.getElementById('btnSubmitJoin');
     const jUpiRef = document.getElementById('jUpiRef');
+    const collegeSelect = document.getElementById('jCollegeSelect');
+    const otherWrap = document.getElementById('otherCollegeWrap');
+    const otherInput = document.getElementById('jCollegeOther');
+    const errorBox = document.getElementById('joinErrorMsg');
+
+    // Handle College Select 'other' toggle
+    collegeSelect?.addEventListener('change', () => {
+      if (collegeSelect.value === 'other') {
+        otherWrap.style.display = 'block';
+        otherInput.required = true;
+        otherInput.focus();
+      } else {
+        otherWrap.style.display = 'none';
+        otherInput.required = false;
+      }
+    });
 
     function setPlan(plan) {
       currentPlan = plan;
@@ -343,7 +447,7 @@
 
       if (plan === 'school') {
         formTitle.textContent = 'Subscribe to Startup School';
-        formSubtitle.textContent = '₹399 / month · Full 30-day builder pass to all 9 modules & live Sunday labs';
+        formSubtitle.textContent = '₹399 / month · Full 30-day builder pass to all 9 modules & Sunday Live Labs';
         perkHighlight.style.display = 'none';
         trialHighlight.style.display = 'none';
         schoolPaymentBox.style.display = 'block';
@@ -383,9 +487,14 @@
       setPlan('member');
     }
 
-    const chParam = urlParams.get('chapter') || urlParams.get('college');
-    if (chParam && document.getElementById('jCollege')) {
-      document.getElementById('jCollege').value = chParam.toUpperCase();
+    const chParam = (urlParams.get('chapter') || urlParams.get('college') || '').toLowerCase();
+    if (chParam && collegeSelect) {
+      for (let i = 0; i < collegeSelect.options.length; i++) {
+        if (collegeSelect.options[i].text.toLowerCase().includes(chParam) || collegeSelect.options[i].value.toLowerCase().includes(chParam)) {
+          collegeSelect.selectedIndex = i;
+          break;
+        }
+      }
     }
 
     // Toggle skill pill checkboxes
@@ -413,11 +522,17 @@
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (errorBox) { errorBox.style.display = 'none'; errorBox.textContent = ''; }
 
       if (currentPlan === 'school') {
         const upiVal = jUpiRef?.value.trim();
         if (!upiVal || upiVal.length < 6) {
-          alert('Please enter your UPI Reference / UTR Number to confirm your ₹399 payment.');
+          if (errorBox) {
+            errorBox.textContent = 'Please enter your UPI Reference / UTR Number (12 digits) to confirm your ₹399 payment.';
+            errorBox.style.display = 'block';
+          } else {
+            alert('Please enter your UPI Reference / UTR Number to confirm your ₹399 payment.');
+          }
           jUpiRef?.focus();
           return;
         }
@@ -429,10 +544,13 @@
       const name = document.getElementById('jName').value.trim();
       const email = document.getElementById('jEmail').value.trim().toLowerCase();
       const phone = document.getElementById('jPhone').value.trim();
-      const college = document.getElementById('jCollege').value.trim();
+      let college = collegeSelect.value === 'other' ? (otherInput.value.trim() || 'Other College') : collegeSelect.value;
       const idea = document.getElementById('jIdea')?.value.trim() || '';
       const selectedSkills = [...document.querySelectorAll('input[name="skills"]:checked')].map(c => c.value).join(', ');
       const upiRef = jUpiRef?.value.trim() || '';
+
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const generatedMemberId = `TFC-2026-${randNum}`;
 
       let tierName = 'Student';
       let combinedData = '';
@@ -450,13 +568,12 @@
 
       try {
         if (supabaseClient) {
-          const rand = Math.floor(1000 + Math.random() * 9000);
           await supabaseClient.from('members').insert([{
             name: name,
             email: email,
             college: combinedData,
             tier: tierName,
-            member_id: `TFC-${currentPlan.toUpperCase()}-${rand}`,
+            member_id: generatedMemberId,
             password: 'builder2026'
           }]);
         }
@@ -464,10 +581,23 @@
         console.warn('Membership sync note:', err);
       }
 
+      // Populate member card
+      const cardName = document.getElementById('cardMemberName');
+      const cardCollege = document.getElementById('cardMemberCollege');
+      const cardId = document.getElementById('cardMemberId');
+      const cardTier = document.getElementById('cardTierLabel');
+
+      if (cardName) cardName.textContent = name;
+      if (cardCollege) cardCollege.textContent = college;
+      if (cardId) cardId.textContent = generatedMemberId;
+      if (cardTier) {
+        cardTier.textContent = currentPlan === 'school' ? 'Startup School Builder Pass' : currentPlan === 'trial' ? '7-Day School Trial Pass' : 'Student Builder Pass';
+      }
+
       // Customize confirmation
       if (currentPlan === 'school') {
         successTitle.textContent = 'Startup School Subscription Confirmed.';
-        successMsg.innerHTML = `Thank you for subscribing, <b>${name}</b>. We have recorded your ₹399 payment reference (<b>${upiRef}</b>). Check your email (<b>${email}</b>) for your module access link and Sunday live lab invitation.`;
+        successMsg.innerHTML = `Thank you for subscribing, <b>${name}</b>. We have recorded your ₹399 payment reference (<b>${upiRef}</b>). Check your email (<b>${email}</b>) for your module access link and Sunday Live Lab invitation.`;
       } else if (currentPlan === 'trial') {
         successTitle.textContent = '7-Day Free Trial Activated!';
         successMsg.innerHTML = `Welcome to Startup School, <b>${name}</b>. Your 7-day chapter pass is active. Check <b>${email}</b> for your direct curriculum link.`;
@@ -479,7 +609,8 @@
       form.style.display = 'none';
       if (perkHighlight) perkHighlight.style.display = 'none';
       if (trialHighlight) trialHighlight.style.display = 'none';
-      document.querySelector('.plan-tabs').style.display = 'none';
+      const planTabs = document.querySelector('.plan-tabs');
+      if (planTabs) planTabs.style.display = 'none';
       successPanel.style.display = 'block';
     });
   })();

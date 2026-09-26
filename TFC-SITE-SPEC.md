@@ -66,12 +66,12 @@ Every page, FAQ, form, email and legal page must match this table exactly.
 | Term | Value |
 |---|---|
 | Seats | 20 founders per cohort, selected |
-| Application fee | ₹1,999, one time, paid at application, non-refundable. "About ₹70 a day." |
+| Application fee | ₹999, one time, paid at application, non-refundable. |
 | Fee waiver | Always available; the "Request a fee waiver" link sits next to every price |
 | Selection basis | The problem, progress and team. Never the college. |
-| If not selected | Written feedback (what's strong + 2–3 things to fix), 1 month of Startup School free (worth ₹399), 50% off the next application (₹999) |
+| If not selected | Written feedback (what's strong + 2–3 things to fix), 1 month of Startup School free (worth ₹399), 50% off the next application (₹499) |
 | Equity | 0%, ever |
-| Success fee | 2%, one time, cash, only on money raised from investors TFC introduced, within 12 months of Demo Day |
+| Success fee | 5%, one time, cash, only on money raised from investors TFC introduced, within 12 months of Demo Day |
 | Raised alone, or didn't raise | Owe nothing |
 | Format | 4 weeks, fully online, pods of 4–5, weekly live lab, mentor office hours, Demo Day |
 | Cohort 01 dates | Applications close Sep 30, 2026, 7 PM IST. Kickoff Oct 19, 2026. |
@@ -165,22 +165,22 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 8. CTA: "Built something? → Apply to Launchpad"
 
 ### 5.5 Launchpad `/launchpad`: "The ticket"
-1. **Hero:** "From student project to funded startup." Sub: "Launchpad picks 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. No equity, ever. 2% only if you raise." Status pill from ONE setting: "Cohort 01 · Applications close Sep 30, 7 PM IST" or, when closed, "Next cohort: join the waitlist".
+1. **Hero:** "From student project to funded startup." Sub: "Launchpad picks 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. No equity, ever. 5% only if you raise." Status pill from ONE setting: "Cohort 01 · Applications close Sep 30, 7 PM IST" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
-3. **How it works:** a path of 4 stops: Apply (₹1,999, fee waivers available) → Selection (20 founders; everyone else gets feedback, a month of Startup School and 50% off next time) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
+3. **How it works:** a path of 4 stops: Apply (₹999, fee waivers available) → Selection (20 founders; everyone else gets feedback, a month of Startup School and 50% off next time) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.
 5. **"Not selected? You still leave with something."** The feedback, the free month and the 50% code, shown as a receipt.
 6. **Investors & mentors / Results:** hidden until real names and results exist (leave commented placeholders).
-7. **FAQ:** What does it cost? · Is admission competitive? · Is it equity-free? · How does the 2% work? · What happens if I'm not selected? · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
+7. **FAQ:** What does it cost? · Is admission competitive? · Is it equity-free? · How does the 5% work? · What happens if I'm not selected? · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
 8. Link to the Cohort 01 page and application form: `/launchpad/fellowship`.
 
 ### 5.6 Fellowship '26 `/launchpad/fellowship`
 Keep the existing page and application form, but restyle it into the new world and update the text to section 3. Specifically:
-- Hero stats: 4 Weeks · 20 Founders · 0% Equity · 2% Only if you raise
+- Hero stats: 4 Weeks · 20 Founders · 0% Equity · 5% Only if you raise
 - Eligibility: "We select 20 founders per cohort based on the problem, your progress and your team, never your college."
-- FAQ answers updated to section 3 (cost, competitive, equity, 2%, not selected)
-- Form fee box: "₹1,999 application fee · includes written feedback for every applicant" + "2% success fee · only on money from investors we introduce" + fee-waiver link
-- Required checkbox: "I understand the ₹1,999 application fee is non-refundable, and that TFC charges a one-time 2% success fee on funds raised from investors it introduces."
+- FAQ answers updated to section 3 (cost, competitive, equity, 5%, not selected)
+- Form fee box: "₹999 application fee · includes written feedback for every applicant" + "5% success fee · only on money from investors we introduce" + fee-waiver link
+- Required checkbox: "I understand the ₹999 application fee is non-refundable, and that TFC charges a one-time 5% success fee on funds raised from investors it introduces."
 - Collect the fee at submission using the **same payment method the site already uses**. Don't add a new payment provider.
 - Confirmation: "Decisions and feedback go out by [date placeholder]. Selected founders get the founder agreement to sign before kickoff."
 - **The form must still submit correctly.** Test it.
@@ -195,7 +195,7 @@ Keep the existing page and application form, but restyle it into the new world a
 2. Vision, mission and values:
    - Access over pedigree: fully online, fee waivers, feedback for every applicant. We select on what you've built, never your college name.
    - Build over talk: we measure what you ship.
-   - We win when you win: no equity, ever. Our real upside is 2% when you raise.
+   - We win when you win: no equity, ever. Our real upside is 5% when you raise.
    - Community before competition: chapters, pods, alumni.
    - Honest about risk: most startups fail. We show you the safety nets.
    - Builders pay it forward: today's fellows become tomorrow's chapter leads, mentors and investors.
@@ -208,7 +208,7 @@ Keep the existing page and application form, but restyle it into the new world a
 Keep the existing join form. Restyle it into the warm world. Headline: "Step out of line." Mention the 7-day Startup School perk for members.
 
 ### 5.10 Terms, Privacy, Refunds
-Keep them. Add to Terms and Refunds: the non-refundable ₹1,999 application fee, the 50%-off reapplication, and the 2% success-fee clause. Mark these additions with a visible note for legal review.
+Keep them. Add to Terms and Refunds: the non-refundable ₹999 application fee, the 50%-off reapplication, and the 5% success-fee clause. Mark these additions with a visible note for legal review.
 
 ---
 
@@ -216,12 +216,12 @@ Keep them. Add to Terms and Refunds: the non-refundable ₹1,999 application fee
 
 **Not selected**, subject: "Your Launchpad application: feedback and what's next"
 > Hi {first_name},
-> Thank you for applying to Launchpad {cohort}. We had {n_applicants} applications for 20 seats, and yours wasn't selected this time. Here's our honest read, so the ₹1,999 goes toward making your next attempt stronger.
+> Thank you for applying to Launchpad {cohort}. We had {n_applicants} applications for 20 seats, and yours wasn't selected this time. Here's our honest read, so the ₹999 goes toward making your next attempt stronger.
 > **What's working:** {strengths}
 > **What to fix before you reapply:** 1. {fix_1} 2. {fix_2} 3. {fix_3}
 > **Your next steps:**
 > - One month of Startup School, on us (normally ₹399). Start with {recommended_modules}: {school_link}
-> - 50% off your next Launchpad application (₹999). Code: {discount_code}
+> - 50% off your next Launchpad application (₹499). Code: {discount_code}
 > Reviewed by {reviewer_name}. Keep building, The Future Council
 
 **Selected**, subject: "You're in: Launchpad {cohort}"

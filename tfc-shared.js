@@ -3,6 +3,14 @@
  * Handles Nav, Mobile Menu, Launchpad Countdown, and Sticky Bars
  */
 (function() {
+  const config = window.TFC_CONFIG || {
+    APPLY_URL: '/launchpad/fellowship',
+    LAUNCHPAD: {
+      DEADLINE_ISO: '2026-09-30T19:00:00+05:30',
+      DEADLINE_DISPLAY: 'Sep 30, 2026, 7 PM IST'
+    }
+  };
+
   // Mobile Nav Drawer Toggle
   const toggleBtn = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -22,8 +30,9 @@
     });
   }
 
-  // Countdown timer to Launchpad Cohort 01 deadline: Sep 30, 2026 19:00:00 IST (UTC+5:30)
-  const targetDate = new Date('2026-09-30T19:00:00+05:30').getTime();
+  // Countdown timer to Launchpad Cohort 01 deadline
+  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2026-09-30T19:00:00+05:30';
+  const targetDate = new Date(targetDateStr).getTime();
 
   function updateDeadlines() {
     const now = Date.now();
@@ -33,15 +42,25 @@
     const countdownEl = document.getElementById('countdown');
 
     if (diff <= 0) {
-      if (countdownEl) countdownEl.innerHTML = 'Applications closed<small>Join waitlist for Cohort 02</small>';
-      if (barCountEl) barCountEl.textContent = 'Closed';
+      if (countdownEl) {
+        countdownEl.innerHTML = 'Applications closed<small>Join waitlist for Cohort 02</small>';
+      }
+      if (barCountEl) {
+        barCountEl.textContent = 'Closed';
+      }
+      if (barEl) {
+        barEl.classList.add('hide');
+      }
       return;
     }
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
+    // Floor calculation
+    const totalSeconds = Math.floor(diff / 1000);
+    const d = Math.floor(totalSeconds / 86400);
+    const h = Math.floor((totalSeconds % 86400) / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
 
+    // Show "Xd Yh" when over 24h, switch to "Xh Ym" when under 24h
     const formattedShort = d > 0 ? `${d}d ${h}h` : `${h}h ${m}m`;
 
     if (barCountEl) {
@@ -49,7 +68,8 @@
     }
 
     if (countdownEl) {
-      countdownEl.innerHTML = `${d}d ${h}h ${m}m<small>Closes Sep 30, 7 PM IST</small>`;
+      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Sep 30, 7 PM IST';
+      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel}</small>`;
     }
   }
 
@@ -87,4 +107,11 @@
       a.classList.add('active');
     }
   });
+
+  // Global CTA unify to APPLY_URL where specified
+  if (config.APPLY_URL) {
+    document.querySelectorAll('[data-apply-cta]').forEach(cta => {
+      cta.setAttribute('href', config.APPLY_URL);
+    });
+  }
 })();

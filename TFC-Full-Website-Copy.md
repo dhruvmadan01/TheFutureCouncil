@@ -168,7 +168,7 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 ### If You're Not Selected (rewritten — no odds framing)
 **Section label:** Every Applicant Walks Away With Something Real
 **Headline:** Selection is limited to 20. What you get for applying isn't.
-**Body:** Your ₹1,999 was never just an entry ticket — it's what gets you inside the Council's actual infrastructure, whether Cohort 01 selects you or not.
+**Body:** Your ₹999 was never just an entry ticket — it's what gets you inside the Council's actual infrastructure, whether Cohort 01 selects you or not.
 
 **Every applicant gets:**
 - 📋 **A Real Evaluation, Not a Rejection Email** — A written scorecard against the exact rubric our selectors use: idea clarity, market, team, traction — with specific feedback on where you stood.
@@ -186,7 +186,7 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 
 ### 4-Step Application Process
 1. **Submit Application** — Fill the founder questionnaire and pitch details.
-2. **Confirm Slot (₹1,999)** — Registration pass, paid securely, to filter non-serious applicants.
+2. **Confirm Slot (₹999)** — Registration pass, paid securely, to filter non-serious applicants.
 3. **Admissions Interview** — 15-minute founder drill assessing ambition, technical depth, and velocity.
 4. **Cohort 01 Welcome** — Selected founders start offline sprints in Delhi NCR on October 1.
 
@@ -200,11 +200,11 @@ Yes — 100%. Zero equity taken. The standard ₹1,50,000 program fee has been r
 **What happens if I'm not selected?**
 You're still eligible to join the wider Council for free — mixers, builder vaults, and project squads stay open so you can keep building alongside the community.
 
-**What is the ₹1,999 application fee used for?** *(odds/count framing moved here, softened)*
+**What is the ₹999 application fee used for?** *(odds/count framing moved here, softened)*
 The registration pass keeps the applicant pool high-intent and directly funds admissions board review and 1-on-1 screening interviews. It's not just an entry fee — every applicant, selected or not, gets a real written evaluation, the full Fellowship Toolkit, every masterclass on-demand, and 3 months in Builder Vaults in return.
 
 **Is it refundable?**
-No — the ₹1,999 keeps the applicant pool serious and directly funds admissions review. If you're not selected, you still walk away with the Fellowship Toolkit, every masterclass on-demand, and 50% off your next application.
+No — the ₹999 keeps the applicant pool serious and directly funds admissions review. If you're not selected, you still walk away with the Fellowship Toolkit, every masterclass on-demand, and 50% off your next application.
 
 **What if I'm from outside Delhi NCR?**
 The cohort runs hybrid (Delhi NCR + remote). Outstation founders are welcome to join online sprints and travel for core weekend intensives and Demo Day.

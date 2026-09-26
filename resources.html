@@ -1,12 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting to Founder Library...</title>
-  <meta http-equiv="refresh" content="0; url=/school/library.html">
-  <script>window.location.replace('/school/library.html');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup Library · Frameworks, Swipe Files &amp; Decks | The Future Council</title>
+  <meta name="description" content="Free startup playbooks, outreach swipe files, pitch deck templates, and student founder policies curated by The Future Council, organized by module." />
+  <meta name="canonical" href="https://thefuturecouncil.in/school/library" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    .lib-hero {
+      padding-block: clamp(48px, 8vw, 84px) clamp(36px, 5vw, 56px);
+      background: var(--warm);
+      border-bottom: 1px solid var(--line);
+    }
+    .res-section {
+      padding-block: clamp(36px, 6vw, 64px);
+      border-bottom: 1px solid var(--line);
+    }
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .res-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .res-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--orange);
+    }
+    .res-card .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--warm-2);
+      color: var(--orange-deep);
+      width: fit-content;
+      font-weight: 600;
+    }
+    .res-card h4 {
+      font-size: 18px;
+    }
+    .res-card p {
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .res-card .down {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      color: var(--orange-deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting to <a href="/school/library.html">Startup School Library</a>...</p>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="The Future Council Homepage">
+        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/school" class="active">Startup School</a></li>
+        <li><a href="/launchpad">Launchpad</a></li>
+        <li><a href="/why">Why Build</a></li>
+        <li><a href="/stories">Stories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn solid sm" href="/school">Startup School</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/school" class="active">Startup School <span>→</span></a>
+    <a href="/launchpad">Launchpad <span>→</span></a>
+    <a href="/why">Why Build <span>→</span></a>
+    <a href="/stories">Stories <span>→</span></a>
+  </div>
+
+  <main>
+    <header class="lib-hero">
+      <div class="wrap">
+        <span class="mono kick">Open Source Founder Library</span>
+        <h1 style="font-size: clamp(34px, 5.5vw, 68px); margin-top: 12px;">The Founder Library</h1>
+        <p class="lede" style="font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-soft); max-width: 52ch; margin-top: 12px; line-height: 1.5;">
+          Battle-tested frameworks, cold outreach swipe files, equity calculators, and college startup policy guides. Free for all student builders.
+        </p>
+      </div>
+    </header>
+
+    <!-- SECTION 1: USER RESEARCH & VALIDATION -->
+    <section class="res-section">
+      <div class="wrap">
+        <div class="sec-head stacked" style="margin-bottom: 0;">
+          <span class="mono kick">Modules 01 &amp; 02</span>
+          <h2>Problem Discovery &amp; User Interviews</h2>
+          <p class="lede">How to find real problems and validate them without leading customer responses.</p>
+        </div>
+
+        <div class="res-grid">
+          <div class="res-card">
+            <span class="tag">Framework</span>
+            <h4>20-Question User Discovery Script</h4>
+            <p>Direct questions to uncover current customer workarounds, software budget, and genuine willingness to pay.</p>
+            <a class="down" href="/how-to-find-a-startup-idea.html">View Guide →</a>
+          </div>
+          <div class="res-card">
+            <span class="tag">Cheatsheet</span>
+            <h4>The Mom Test Condensed</h4>
+            <p>Rules of thumb for avoiding false positive compliments when pitching your college peers.</p>
+            <a class="down" href="/how-to-find-a-startup-idea.html">View Guide →</a>
+          </div>
+          <div class="res-card">
+            <span class="tag">Template</span>
+            <h4>Problem Hypothesis Document</h4>
+            <p>A 1-page template defining target persona, trigger event, and alternatives before writing any code.</p>
+            <a class="down" href="/how-to-find-a-startup-idea.html">View Guide →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SALES & OUTREACH SWIPE FILES -->
+    <section class="res-section" style="background: #fff;">
+      <div class="wrap">
+        <div class="sec-head stacked" style="margin-bottom: 0;">
+          <span class="mono kick">Module 04</span>
+          <h2>Sales, Cold DMs &amp; Distribution</h2>
+          <p class="lede">Actual cold messages and distribution workflows that secured first pilot customers.</p>
+        </div>
+
+        <div class="res-grid">
+          <div class="res-card">
+            <span class="tag">Swipe File</span>
+            <h4>Cold Email &amp; LinkedIn Swipe File</h4>
+            <p>15 copy-paste outreach messages tailored for student founders contacting founders and operators.</p>
+            <a class="down" href="/resource-networking-swipe-file.html">View Swipe File →</a>
+          </div>
+          <div class="res-card">
+            <span class="tag">Playbook</span>
+            <h4>Campus Guerrilla Distribution</h4>
+            <p>How to tap WhatsApp groups, hostel councils, and college societies for your first 100 beta testers.</p>
+            <a class="down" href="/resource-networking-swipe-file.html">View Playbook →</a>
+          </div>
+          <div class="res-card">
+            <span class="tag">Tracker</span>
+            <h4>Early Customer Pipeline Tracker</h4>
+            <p>Simple spreadsheet tracking lead status, demo dates, objections, and closed pilots.</p>
+            <a class="down" href="/resource-networking-swipe-file.html">View Tracker →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: EQUITY, POLICY & COLLEGE NETS -->
+    <section class="res-section">
+      <div class="wrap">
+        <div class="sec-head stacked" style="margin-bottom: 0;">
+          <span class="mono kick">Modules 05 &amp; 08</span>
+          <h2>Founder Agreements &amp; College Safety Nets</h2>
+          <p class="lede">Indian university policies, deferred placements, and clean founder splits.</p>
+        </div>
+
+        <div class="res-grid">
+          <div class="res-card">
+            <span class="tag">Coming Soon</span>
+            <h4>Standard Student Co-Founder Agreement</h4>
+            <p>4-year vesting, 1-year cliff, and IP assignment clauses written in plain language for students.</p>
+            <span style="font-size: 13px; color: var(--ink-soft); font-weight: 600; display: inline-block; margin-top: 8px;">Template releasing soon</span>
+          </div>
+          <div class="res-card">
+            <span class="tag">Government Policy</span>
+            <h4>National Innovation &amp; Startup Policy (NISP 2019)</h4>
+            <p>The official AICTE/MHRD document that asks colleges to allow student founders to take semester breaks and claim incubation credits.</p>
+            <a class="down" href="https://nisp.mic.gov.in/assets/html/AboutNationalInnovationAndStartu.html" target="_blank" rel="noopener">Read the NISP policy ↗</a>
+          </div>
+          <div class="res-card">
+            <span class="tag">Coming Soon</span>
+            <h4>Deferred Placement Application Letter</h4>
+            <p>How to formally request a 1–2 year deferred placement option from your Training &amp; Placement Cell.</p>
+            <span style="font-size: 13px; color: var(--ink-soft); font-weight: 600; display: inline-block; margin-top: 8px;">Template releasing soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PITCH DECKS & FUNDRAISING -->
+    <section class="res-section" style="background: #fff;">
+      <div class="wrap">
+        <div class="sec-head stacked" style="margin-bottom: 0;">
+          <span class="mono kick">Module 09</span>
+          <h2>Pitch Decks &amp; Investor Readiness</h2>
+          <p class="lede">Clean slide decks and metrics templates for presenting to angels and funds.</p>
+        </div>
+
+        <div class="res-grid">
+          <div class="res-card">
+            <span class="tag">Coming Soon</span>
+            <h4>The 10-Slide Seed Pitch Deck</h4>
+            <p>Clean structure covering problem, solution, early traction, unit economics, and ask.</p>
+            <span style="font-size: 13px; color: var(--ink-soft); font-weight: 600; display: inline-block; margin-top: 8px;">Deck releasing soon</span>
+          </div>
+          <div class="res-card">
+            <span class="tag">Coming Soon</span>
+            <h4>The 2-Minute Demo Day Pitch</h4>
+            <p>Word-for-word structure for delivering a fast, memorable demo day presentation.</p>
+            <span style="font-size: 13px; color: var(--ink-soft); font-weight: 600; display: inline-block; margin-top: 8px;">Guide releasing soon</span>
+          </div>
+          <div class="res-card">
+            <span class="tag">Coming Soon</span>
+            <h4>Seed Diligence Checklist for India</h4>
+            <p>Documents, cap tables, and legal items early-stage angel syndicates ask for before wiring funds.</p>
+            <span style="font-size: 13px; color: var(--ink-soft); font-weight: 600; display: inline-block; margin-top: 8px;">Checklist releasing soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tfc-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
+            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
+            <span>The Future Council</span>
+          </a>
+          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
+            A student startup ecosystem in India giving every builder the community, skills, and capital access to build while in college.
+          </p>
+          <div style="font-size:13px; color:#CDBFB2;">
+            Admissions &amp; questions:<br>
+            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="/chapters">Campus Chapters</a></li>
+            <li><a href="/school">Startup School</a></li>
+            <li><a href="/launchpad">Launchpad Fellowship</a></li>
+            <li><a href="/why">Why Build</a></li>
+            <li><a href="/stories">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
+            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/about/partners">Partners</a></li>
+            <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="/join">Join Free</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Council &amp; Legal</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/refund">Refund Policy</a></li>
+            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
+            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-line">
+        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
+        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/tfc-config.js"></script>
+  <script src="/tfc-shared.js"></script>
 </body>
 </html>
