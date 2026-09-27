@@ -67,7 +67,7 @@ Every page, FAQ, form, email and legal page must match this table exactly.
 |---|---|
 | Seats | 20 founders per cohort, selected |
 | Application fee | ₹999, one time, paid at application, non-refundable. |
-| Fee waiver | Always available; the "Request a fee waiver" link sits next to every price |
+| Fee filter | The ₹999 fee filters for serious candidates, avoids fake applications, and covers individualized written feedback |
 | Selection basis | The problem, progress and team. Never the college. |
 | If not selected | Written feedback (what's strong + 2–3 things to fix), 1 month of Startup School free (worth ₹399), 50% off the next application (₹499) |
 | Equity | 0%, ever |
@@ -167,7 +167,7 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 ### 5.5 Launchpad `/launchpad`: "The ticket"
 1. **Hero:** "From student project to funded startup." Sub: "Launchpad picks 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. No equity, ever. 5% only if you raise." Status pill from ONE setting: "Cohort 01 · Applications close Sep 30, 7 PM IST" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
-3. **How it works:** a path of 4 stops: Apply (₹999, fee waivers available) → Selection (20 founders; everyone else gets feedback, a month of Startup School and 50% off next time) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
+3. **How it works:** a path of 4 stops: Apply (₹999 one-time application fee) → Selection (20 founders; everyone else gets feedback, a month of Startup School and 50% off next time) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.
 5. **"Not selected? You still leave with something."** The feedback, the free month and the 50% code, shown as a receipt.
 6. **Investors & mentors / Results:** hidden until real names and results exist (leave commented placeholders).
@@ -179,7 +179,7 @@ Keep the existing page and application form, but restyle it into the new world a
 - Hero stats: 4 Weeks · 20 Founders · 0% Equity · 5% Only if you raise
 - Eligibility: "We select 20 founders per cohort based on the problem, your progress and your team, never your college."
 - FAQ answers updated to section 3 (cost, competitive, equity, 5%, not selected)
-- Form fee box: "₹999 application fee · includes written feedback for every applicant" + "5% success fee · only on money from investors we introduce" + fee-waiver link
+- Form fee box: "₹999 application fee · includes written feedback for every applicant" + "5% success fee · only on money from investors we introduce"
 - Required checkbox: "I understand the ₹999 application fee is non-refundable, and that TFC charges a one-time 5% success fee on funds raised from investors it introduces."
 - Collect the fee at submission using the **same payment method the site already uses**. Don't add a new payment provider.
 - Confirmation: "Decisions and feedback go out by [date placeholder]. Selected founders get the founder agreement to sign before kickoff."
@@ -193,7 +193,7 @@ Keep the existing page and application form, but restyle it into the new world a
 ### 5.8 About `/about`: "The letter"
 1. **Why we started:** the founders' letter from the homepage, longer, with photos (placeholders).
 2. Vision, mission and values:
-   - Access over pedigree: fully online, fee waivers, feedback for every applicant. We select on what you've built, never your college name.
+   - Access over pedigree: fully online, dedicated feedback for every applicant. We select on what you've built, never your college name.
    - Build over talk: we measure what you ship.
    - We win when you win: no equity, ever. Our real upside is 5% when you raise.
    - Community before competition: chapters, pods, alumni.

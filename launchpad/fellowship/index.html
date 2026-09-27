@@ -475,25 +475,6 @@
                   </div>
                 </div>
 
-                <!-- FINANCIAL HARDSHIP FEE WAIVER CHECKBOX -->
-                <div style="background: var(--warm-2); border: 1px solid #E3B79C; border-radius: 12px; padding: 16px; margin-top: 20px;">
-                  <div style="display: flex; gap: 10px; align-items: flex-start;">
-                    <input type="checkbox" id="fReqWaiver" style="margin-top: 3px; accent-color: var(--orange);" />
-                    <div>
-                      <label for="fReqWaiver" style="font-weight: 600; font-size: 14.5px; color: var(--ink); cursor: pointer;">
-                        Request a Fee Waiver
-                      </label>
-                      <p style="font-size: 13px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4;">
-                        If ₹999 is a genuine financial barrier for you, check this box. Money should never stand between a real builder and Launchpad.
-                      </p>
-                    </div>
-                  </div>
-                  <div id="waiverBox" style="display: none; margin-top: 14px;">
-                    <label class="form-label" for="fWaiverReason" style="font-size: 13px;">Reason for Waiver Request *</label>
-                    <textarea class="form-textarea" id="fWaiverReason" name="waiverReason" placeholder="Tell us briefly about your financial situation. We approve genuine requests." style="min-height: 80px;"></textarea>
-                  </div>
-                </div>
-
                 <!-- REQUIRED TERMS CHECKBOXES -->
                 <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start; margin-top: 24px;">
                   <input type="checkbox" id="fCommitHours" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
@@ -524,8 +505,8 @@
                       </div>
                       <div style="margin-top: 12px;">
                         <label class="form-label" for="fUpiRef" style="font-size: 13px;">UPI Reference / UTR Number (12 digits) *</label>
-                        <input class="form-input" id="fUpiRef" name="upiRef" type="text" placeholder="e.g. 427819283719" style="font-family: var(--mono);" />
-                        <div class="form-hint">Shown in Google Pay, PhonePe, Paytm, or BHIM receipt. (If applying for waiver, you may leave blank).</div>
+                        <input class="form-input" id="fUpiRef" name="upiRef" type="text" placeholder="e.g. 427819283719" style="font-family: var(--mono);" required />
+                        <div class="form-hint">12-digit transaction number shown in Google Pay, PhonePe, Paytm, or BHIM. Ensures immediate verification.</div>
                       </div>
                     </div>
                   </div>
@@ -595,7 +576,7 @@
           <details class="faq-item" open>
             <summary>What does it cost to apply?</summary>
             <div class="faq-body">
-              There is a one-time ₹999 application fee. Fee waivers are always available if this amount is a financial barrier. There are no additional fees if you are accepted.
+              There is a one-time ₹999 application fee to ensure high intent, filter out fake applications, and cover individualized written feedback for every applicant. If you are accepted, there are zero tuition or enrollment fees.
             </div>
           </details>
 
@@ -769,18 +750,6 @@
     enrolledNo?.addEventListener('change', checkEnrolled);
     enrolledYes?.addEventListener('change', checkEnrolled);
 
-    // Toggle Fee Waiver
-    const waiverLink = document.getElementById('toggleWaiverLink');
-    const waiverBox = document.getElementById('feeWaiverContainer');
-    waiverLink?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (waiverBox) {
-        const isHidden = waiverBox.style.display === 'none';
-        waiverBox.style.display = isHidden ? 'block' : 'none';
-        waiverLink.textContent = isHidden ? 'Hide waiver request' : 'Request a fee waiver';
-      }
-    });
-
     // Supabase Setup
     const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
@@ -798,7 +767,7 @@
           .eq('email', data.email)
           .maybeSingle();
 
-        const combinedInfo = `${data.college} | Phone: ${data.phone} | Venture: ${data.venture} | Stage: ${data.stage} | Q1: ${data.q1} | Q3: ${data.q3} | Fee: 999 | UpiRef: ${data.upiRef || 'Waiver/Pending'} | Source: FellowshipPage | FormSubmittedAt: ${new Date().toISOString()}`;
+        const combinedInfo = `${data.college} | Phone: ${data.phone} | Venture: ${data.venture} | Stage: ${data.stage} | Q1: ${data.q1} | Q3: ${data.q3} | Fee: 999 | UpiRef: ${data.upiRef || 'Pending'} | Source: FellowshipPage | FormSubmittedAt: ${new Date().toISOString()}`;
 
         let memberId = dbMember?.member_id;
         if (!memberId) {
@@ -859,6 +828,12 @@
         return;
       }
 
+      const upiRef = document.getElementById('fUpiRef')?.value.trim();
+      if (!upiRef) {
+        alert('Please complete the ₹999 UPI payment and enter your 12-digit UPI reference / UTR number.');
+        return;
+      }
+
       const btn = document.getElementById('btnSubmitApp');
       btn.disabled = true;
       btn.textContent = 'Submitting Application...';
@@ -878,8 +853,7 @@
         stage: document.getElementById('fStage').value,
         q1: document.getElementById('fQ1').value.trim(),
         q3: document.getElementById('fQ3').value.trim(),
-        upiRef: document.getElementById('fUpiRef')?.value.trim() || '',
-        waiverReason: document.getElementById('fWaiverReason')?.value.trim() || ''
+        upiRef: upiRef
       };
 
       let orderId = await syncToSupabase(payload);
@@ -894,8 +868,7 @@
           email: payload.email,
           name: payload.name,
           university: payload.college,
-          submission_status: 'submitted',
-          waiver_requested: Boolean(payload.waiverReason)
+          submission_status: 'submitted'
         });
       }
 
