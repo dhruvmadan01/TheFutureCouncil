@@ -279,14 +279,34 @@
       try {
         if (supabaseClient) {
           const rand = Math.floor(1000 + Math.random() * 9000);
-          await supabaseClient.from('members').insert([{
-            name: name,
-            email: email,
-            college: combinedData,
-            tier: 'Ambassador',
-            member_id: `TFC-LEAD-${rand}`,
-            password: 'lead2026'
-          }]);
+          const { data: existing } = await supabaseClient
+            .from('members')
+            .select('id, member_id')
+            .eq('email', email)
+            .limit(1);
+
+          if (existing && existing.length > 0) {
+            await supabaseClient
+              .from('members')
+              .update({
+                name: name,
+                college: combinedData,
+                tier: 'Ambassador'
+              })
+              .eq('email', email);
+          } else {
+            await supabaseClient.from('members').insert([{
+              name: name,
+              email: email,
+              college: combinedData,
+              tier: 'Ambassador',
+              member_id: `TFC-LEAD-${rand}`,
+              password: 'lead2026'
+            }]);
+          }
+        }
+        if (window.syncToZoho) {
+          window.syncToZoho({ name, email, phone, college: combinedData, tier: 'Ambassador' }, 'Chapter Lead Application');
         }
       } catch (err) {
         console.warn('Lead application sync note:', err);

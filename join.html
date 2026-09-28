@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/tfc-theme.css" />
 
   <!-- Single Source of Truth Config -->
@@ -22,6 +23,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/mixpanel.min.js"></script>
   <script src="/tfc-analytics.js"></script>
+  <!-- Google Authentication & User State Engine -->
+  <script src="/tfc-auth.js" defer></script>
 
   <style>
     .join-hero {
@@ -93,6 +96,68 @@
       border: 1px solid #4A3F35;
       margin: 24px auto;
       max-width: 440px;
+    }
+    .tfc-mandatory-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(226, 84, 42, 0.12);
+      color: var(--orange-deep);
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+    }
+    .tfc-google-verified-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #F0FDF4;
+      border: 1.5px solid #86EFAC;
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+    .tfc-google-verified-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .tfc-google-btn {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #3c4043;
+      border: 1.5px solid #dadce0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+    .tfc-google-btn:hover:not(:disabled) {
+      background-color: #f8fafd;
+      border-color: #c2c7cf;
+      box-shadow: 0 4px 12px rgba(60, 64, 67, 0.12);
+    }
+    .search-input:read-only {
+      background: #F8F9FA !important;
+      color: var(--ink);
+      cursor: not-allowed;
+      border-color: #E2E8F0;
     }
   </style>
 </head>
@@ -181,19 +246,65 @@
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
               <img src="/TFC.png" alt="TFC Logo" style="width:40px; height:40px; object-fit:contain; border-radius:8px; background:var(--ink); padding:4px;" />
               <div>
-                <h2 id="joinFormTitle" style="font-size: 24px; margin:0; line-height:1.2;">Join The Council</h2>
-                <span id="joinFormSubtitle" style="font-size: 13px; color:var(--ink-soft);">Free membership · All colleges welcome</span>
+                <h2 id="joinFormTitle" style="font-size: 24px; margin:0; line-height:1.2;">Join Your Campus Chapter</h2>
+                <span id="joinFormSubtitle" style="font-size: 13px; color:var(--ink-soft);">Free student builder membership · All 18 campus chapters</span>
               </div>
             </div>
 
-            <div style="margin-bottom: 18px;">
-              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jName">Full Name *</label>
-              <input type="text" id="jName" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="e.g. Aniket Sharma" />
+            <!-- GOOGLE MANDATORY SIGN-IN CARD (WHEN UNAUTHENTICATED) -->
+            <div id="joinGoogleMandatoryBox" style="background: #ffffff; border: 1.5px solid #F1D4BE; border-radius: 16px; padding: 22px; text-align: center; margin-bottom: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+              <div class="tfc-mandatory-badge">
+                <span>⚡ Mandatory Step: Continue with Google</span>
+              </div>
+              <h3 style="font-size: 18px; font-weight: 800; margin: 8px 0 6px; color: var(--ink);">Sign in with Google to Join Chapter</h3>
+              <p style="font-size: 13.5px; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.5;">
+                Google sign-in is <strong>compulsory</strong> to verify your student identity and issue your official Student Builder Pass.
+              </p>
+              <button type="button" id="btnJoinGoogle" class="tfc-google-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink: 0;">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                </svg>
+                <span>Continue with Google</span>
+              </button>
+              <p class="tfc-auth-legal" style="font-size: 11.5px; color: var(--ink-soft); margin-top: 10px; text-align: center;">
+                Fast, 1-click verification with your student or personal Google account.
+              </p>
+            </div>
+
+            <!-- GOOGLE VERIFIED CARD (WHEN AUTHENTICATED) -->
+            <div id="joinGoogleVerifiedBox" class="tfc-google-verified-card" style="display: none; margin-bottom: 22px;">
+              <div class="tfc-google-verified-info">
+                <div id="joinVerifiedAvatar" style="width: 42px; height: 42px; border-radius: 50%; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; overflow: hidden; border: 2px solid #22c55e;">
+                  U
+                </div>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <strong id="joinVerifiedName" style="font-size: 0.95rem; color: #14110f;">Student Name</strong>
+                    <span style="background: #22c55e; color: #fff; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">✓ GOOGLE VERIFIED</span>
+                  </div>
+                  <div id="joinVerifiedEmail" style="font-size: 0.8rem; color: var(--ink-soft); margin-top: 1px;">student@example.com</div>
+                </div>
+              </div>
+              <button type="button" id="btnSwitchJoinGoogle" class="btn sm" style="font-size: 0.75rem; padding: 5px 12px; background: transparent; border: 1px solid var(--line); color: var(--ink-soft); border-radius: 8px; cursor: pointer;">Switch</button>
             </div>
 
             <div style="margin-bottom: 18px;">
-              <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jEmail">Email Address *</label>
-              <input type="email" id="jEmail" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="name@college.edu or gmail.com" />
+              <label style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jName">
+                <span>Full Name *</span>
+                <span id="jNameGoogleTag" style="font-size: 11.5px; font-weight: 600; color: #2E7D32; display: none;">✓ Verified via Google</span>
+              </label>
+              <input type="text" id="jName" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="Sign in with Google above" readonly />
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <label style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jEmail">
+                <span>Email Address *</span>
+                <span id="jEmailGoogleTag" style="font-size: 11.5px; font-weight: 600; color: #2E7D32; display: none;">✓ Verified via Google</span>
+              </label>
+              <input type="email" id="jEmail" required class="search-input" style="width: 100%; border-radius: 10px;" placeholder="Sign in with Google above" readonly />
               <span style="font-size: 12px; color: var(--ink-soft); display: block; margin-top: 4px;">We send chapter invites and your Startup School access link here.</span>
             </div>
 
@@ -206,25 +317,25 @@
               <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;" for="jCollegeSelect">Campus Chapter / College *</label>
               <select id="jCollegeSelect" required class="search-input" style="width: 100%; border-radius: 10px; padding: 12px 14px; background: #fff;">
                 <option value="" disabled selected>Select your campus chapter...</option>
-                <option value="Faculty of Technology (FoT), DU">Faculty of Technology (FoT), DU</option>
-                <option value="Shri Ram College of Commerce (SRCC)">Shri Ram College of Commerce (SRCC)</option>
-                <option value="Hansraj College">Hansraj College</option>
-                <option value="Hindu College">Hindu College</option>
-                <option value="St. Stephen's College">St. Stephen's College</option>
-                <option value="Kirori Mal College (KMC)">Kirori Mal College (KMC)</option>
-                <option value="Indraprastha College for Women (IPCW)">Indraprastha College for Women (IPCW)</option>
-                <option value="Daulat Ram College (DRC)">Daulat Ram College (DRC)</option>
-                <option value="Miranda House">Miranda House</option>
-                <option value="Lady Shri Ram College (LSR)">Lady Shri Ram College (LSR)</option>
-                <option value="Sri Guru Gobind Singh College of Commerce">Sri Guru Gobind Singh College of Commerce</option>
-                <option value="Shaheed Sukhdev College of Business Studies">Shaheed Sukhdev College of Business Studies</option>
-                <option value="SGTB Khalsa College">SGTB Khalsa College</option>
-                <option value="Delhi Technological University (DTU)">Delhi Technological University (DTU)</option>
-                <option value="Netaji Subhas University of Technology (NSUT)">Netaji Subhas University of Technology (NSUT)</option>
-                <option value="Indraprastha Institute of Information Technology Delhi (IIITD)">Indraprastha Institute of Information Technology Delhi (IIITD)</option>
-                <option value="Indian Institute of Technology Delhi (IIT Delhi)">Indian Institute of Technology Delhi (IIT Delhi)</option>
-                <option value="Indian Institute of Technology Patna (IIT Patna)">Indian Institute of Technology Patna (IIT Patna)</option>
-                <option value="other">Other College / University</option>
+                <option value="Faculty of Technology (FoT), DU" data-id="fot">Faculty of Technology (FoT), DU</option>
+                <option value="Shri Ram College of Commerce (SRCC)" data-id="srcc">Shri Ram College of Commerce (SRCC)</option>
+                <option value="Hansraj College" data-id="hansraj">Hansraj College</option>
+                <option value="Hindu College" data-id="hindu">Hindu College</option>
+                <option value="St. Stephen's College" data-id="stephens">St. Stephen's College</option>
+                <option value="Kirori Mal College (KMC)" data-id="kmc">Kirori Mal College (KMC)</option>
+                <option value="Indraprastha College for Women (IPCW)" data-id="ipcw">Indraprastha College for Women (IPCW)</option>
+                <option value="Lady Shri Ram College (LSR)" data-id="lsr">Lady Shri Ram College (LSR)</option>
+                <option value="Sri Venkateswara College (Venky)" data-id="venky">Sri Venkateswara College (Venky)</option>
+                <option value="Miranda House" data-id="miranda">Miranda House</option>
+                <option value="Daulat Ram College (DRC)" data-id="drc">Daulat Ram College (DRC)</option>
+                <option value="SGTB Khalsa College" data-id="khalsa">SGTB Khalsa College</option>
+                <option value="Delhi Technological University (DTU)" data-id="dtu">Delhi Technological University (DTU)</option>
+                <option value="Netaji Subhas University of Technology (NSUT)" data-id="nsut">Netaji Subhas University of Technology (NSUT)</option>
+                <option value="IGDTUW" data-id="igdtuw">IGDTUW</option>
+                <option value="IIIT Delhi (IIITD)" data-id="iiitd">IIIT Delhi (IIITD)</option>
+                <option value="IIT Delhi" data-id="iitd">IIT Delhi</option>
+                <option value="IIT Patna (Hybrid)" data-id="iitp">IIT Patna (Hybrid)</option>
+                <option value="other" data-id="other">Other College / University</option>
               </select>
               <div id="otherCollegeWrap" style="display: none; margin-top: 10px;">
                 <label style="display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px;" for="jCollegeOther">Enter College Name &amp; City *</label>
@@ -403,11 +514,24 @@
     const formTitle = document.getElementById('joinFormTitle');
     const formSubtitle = document.getElementById('joinFormSubtitle');
     const btn = document.getElementById('btnSubmitJoin');
-    const jUpiRef = document.getElementById('jUpiRef');
     const collegeSelect = document.getElementById('jCollegeSelect');
     const otherWrap = document.getElementById('otherCollegeWrap');
     const otherInput = document.getElementById('jCollegeOther');
     const errorBox = document.getElementById('joinErrorMsg');
+
+    // Google Auth UI Elements
+    const mandGoogleBox = document.getElementById('joinGoogleMandatoryBox');
+    const verGoogleBox = document.getElementById('joinGoogleVerifiedBox');
+    const btnJoinGoogle = document.getElementById('btnJoinGoogle');
+    const btnSwitchJoinGoogle = document.getElementById('btnSwitchJoinGoogle');
+    const verAvatar = document.getElementById('joinVerifiedAvatar');
+    const verName = document.getElementById('joinVerifiedName');
+    const verEmail = document.getElementById('joinVerifiedEmail');
+    const nameInput = document.getElementById('jName');
+    const emailInput = document.getElementById('jEmail');
+    const phoneInput = document.getElementById('jPhone');
+    const nameTag = document.getElementById('jNameGoogleTag');
+    const emailTag = document.getElementById('jEmailGoogleTag');
 
     // Handle College Select 'other' toggle
     collegeSelect?.addEventListener('change', () => {
@@ -434,25 +558,25 @@
       if (plan === 'school') {
         formTitle.textContent = 'Subscribe to Startup School';
         formSubtitle.textContent = '₹399 / month · Full 30-day builder pass to all 9 modules & Sunday Live Labs';
-        perkHighlight.style.display = 'none';
-        trialHighlight.style.display = 'none';
-        schoolPaymentBox.style.display = 'block';
+        if (perkHighlight) perkHighlight.style.display = 'none';
+        if (trialHighlight) trialHighlight.style.display = 'none';
+        if (schoolPaymentBox) schoolPaymentBox.style.display = 'block';
         if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
         btn.textContent = 'Complete ₹399 Subscription →';
       } else if (plan === 'trial') {
         formTitle.textContent = 'Activate 7-Day Free Trial';
         formSubtitle.textContent = 'Free for collegiate chapter members · Full access for 7 days';
-        perkHighlight.style.display = 'none';
-        trialHighlight.style.display = 'flex';
-        schoolPaymentBox.style.display = 'none';
+        if (perkHighlight) perkHighlight.style.display = 'none';
+        if (trialHighlight) trialHighlight.style.display = 'flex';
+        if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';
         if (ideaFieldGroup) ideaFieldGroup.style.display = 'none';
         btn.textContent = 'Activate 7-Day Free Trial →';
       } else {
-        formTitle.textContent = 'Join The Council';
-        formSubtitle.textContent = 'Free membership · All colleges welcome';
-        perkHighlight.style.display = 'flex';
-        trialHighlight.style.display = 'none';
-        schoolPaymentBox.style.display = 'none';
+        formTitle.textContent = 'Join Your Campus Chapter';
+        formSubtitle.textContent = 'Free student builder membership · All 18 campus chapters';
+        if (perkHighlight) perkHighlight.style.display = 'flex';
+        if (trialHighlight) trialHighlight.style.display = 'none';
+        if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';
         if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
         btn.textContent = 'Complete Free Registration →';
       }
@@ -477,13 +601,25 @@
       setPlan('member');
     }
 
-    const chParam = (urlParams.get('chapter') || urlParams.get('college') || '').toLowerCase();
+    // Auto-select chapter from query params
+    const chParam = (urlParams.get('chapter') || urlParams.get('college') || '').toLowerCase().trim();
     if (chParam && collegeSelect) {
+      let matched = false;
       for (let i = 0; i < collegeSelect.options.length; i++) {
-        if (collegeSelect.options[i].text.toLowerCase().includes(chParam) || collegeSelect.options[i].value.toLowerCase().includes(chParam)) {
+        const opt = collegeSelect.options[i];
+        const optId = (opt.dataset.id || '').toLowerCase();
+        const optVal = opt.value.toLowerCase();
+        const optText = opt.text.toLowerCase();
+        if (optId === chParam || optVal.includes(chParam) || optText.includes(chParam)) {
           collegeSelect.selectedIndex = i;
+          matched = true;
           break;
         }
+      }
+      if (!matched && chParam !== 'other') {
+        collegeSelect.value = 'other';
+        otherWrap.style.display = 'block';
+        otherInput.value = urlParams.get('chapter') || urlParams.get('college') || '';
       }
     }
 
@@ -498,6 +634,7 @@
       });
     });
 
+    // Supabase Client Setup
     const SUPABASE_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
     let supabaseClient = null;
@@ -505,6 +642,118 @@
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
+    // --- Google Authentication State Handlers ---
+    function updateGoogleAuthUI(user) {
+      if (user && user.email) {
+        if (mandGoogleBox) mandGoogleBox.style.display = 'none';
+        if (verGoogleBox) verGoogleBox.style.display = 'flex';
+        if (errorBox) { errorBox.style.display = 'none'; errorBox.textContent = ''; }
+
+        if (verName) verName.textContent = user.name || 'Student Builder';
+        if (verEmail) verEmail.textContent = user.email || '';
+        if (verAvatar) {
+          if (user.avatar) {
+            verAvatar.innerHTML = `<img src="${user.avatar}" alt="${user.name}" style="width: 100%; height: 100%; object-fit: cover;" />`;
+          } else {
+            verAvatar.textContent = (user.name || 'U').charAt(0).toUpperCase();
+          }
+        }
+
+        if (nameInput) {
+          nameInput.value = user.name || '';
+          nameInput.readOnly = true;
+        }
+        if (emailInput) {
+          emailInput.value = user.email || '';
+          emailInput.readOnly = true;
+        }
+        if (nameTag) nameTag.style.display = 'inline';
+        if (emailTag) emailTag.style.display = 'inline';
+
+        if (phoneInput && !phoneInput.value && user.phone) {
+          phoneInput.value = user.phone;
+        }
+
+        // Pre-select college if known and not selected
+        if (collegeSelect && (!collegeSelect.value || collegeSelect.value === 'other') && user.college) {
+          const userCol = user.college.split(' | ')[0].toLowerCase().trim();
+          for (let i = 0; i < collegeSelect.options.length; i++) {
+            if (collegeSelect.options[i].value.toLowerCase().includes(userCol) || (collegeSelect.options[i].dataset.id && userCol.includes(collegeSelect.options[i].dataset.id))) {
+              collegeSelect.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      } else {
+        if (mandGoogleBox) mandGoogleBox.style.display = 'block';
+        if (verGoogleBox) verGoogleBox.style.display = 'none';
+        if (nameInput) {
+          nameInput.value = '';
+          nameInput.placeholder = 'Sign in with Google above';
+          nameInput.readOnly = true;
+        }
+        if (emailInput) {
+          emailInput.value = '';
+          emailInput.placeholder = 'Sign in with Google above';
+          emailInput.readOnly = true;
+        }
+        if (nameTag) nameTag.style.display = 'none';
+        if (emailTag) emailTag.style.display = 'none';
+      }
+    }
+
+    function triggerGoogleLogin() {
+      if (window.TFCAuth && typeof window.TFCAuth.openLoginModal === 'function') {
+        window.TFCAuth.openLoginModal({
+          context: 'join',
+          onSuccess: (user) => {
+            updateGoogleAuthUI(user);
+          }
+        });
+      } else {
+        console.warn('TFCAuth not loaded yet.');
+      }
+    }
+
+    btnJoinGoogle?.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerGoogleLogin();
+    });
+
+    btnSwitchJoinGoogle?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.TFCAuth) {
+        window.TFCAuth.logout();
+      }
+      triggerGoogleLogin();
+    });
+
+    // If unauthenticated user tries to focus name or email, guide them to Google Sign-In
+    [nameInput, emailInput].forEach(inp => {
+      inp?.addEventListener('click', () => {
+        const isAuthed = window.TFCAuth && window.TFCAuth.isAuthenticated();
+        if (!isAuthed) {
+          if (errorBox) {
+            errorBox.innerHTML = '<strong>⚡ Google Sign-in is Mandatory:</strong> Please sign in with Google to continue.';
+            errorBox.style.display = 'block';
+          }
+          triggerGoogleLogin();
+        }
+      });
+    });
+
+    // Check initial auth state and listen for changes
+    if (window.TFCAuth) {
+      if (typeof window.TFCAuth.onAuthStateChanged === 'function') {
+        window.TFCAuth.onAuthStateChanged((user) => {
+          updateGoogleAuthUI(user);
+        });
+      } else if (typeof window.TFCAuth.getUser === 'function') {
+        updateGoogleAuthUI(window.TFCAuth.getUser());
+      }
+    }
+
+    // Form Submission Logic
     const form = document.getElementById('councilJoinForm');
     const successPanel = document.getElementById('joinSuccessPanel');
     const successTitle = document.getElementById('joinSuccessTitle');
@@ -514,64 +763,159 @@
       e.preventDefault();
       if (errorBox) { errorBox.style.display = 'none'; errorBox.textContent = ''; }
 
-      if (currentPlan === 'school') {
-        const upiVal = jUpiRef?.value.trim();
-        if (!upiVal || upiVal.length < 6) {
-          if (errorBox) {
-            errorBox.textContent = 'Please enter your UPI Reference / UTR Number (12 digits) to confirm your ₹399 payment.';
-            errorBox.style.display = 'block';
-          } else {
-            alert('Please enter your UPI Reference / UTR Number to confirm your ₹399 payment.');
-          }
-          jUpiRef?.focus();
-          return;
+      // 1. STRICT COMPULSORY GOOGLE AUTH CHECK
+      const isAuthed = window.TFCAuth && window.TFCAuth.isAuthenticated();
+      const currentUser = window.TFCAuth ? window.TFCAuth.getUser() : null;
+
+      if (!isAuthed || !currentUser || !currentUser.email) {
+        if (errorBox) {
+          errorBox.innerHTML = '<strong>⚡ Google Sign-in is Mandatory:</strong> Please sign in with Google above to join your campus chapter.';
+          errorBox.style.display = 'block';
+          errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+        triggerGoogleLogin();
+        return;
       }
 
-      btn.disabled = true;
-      btn.textContent = currentPlan === 'school' ? 'Verifying Subscription...' : 'Activating Access...';
+      // 2. FORM VALIDATIONS
+      const name = (nameInput.value.trim() || currentUser.name || '').trim();
+      const email = (emailInput.value.trim().toLowerCase() || currentUser.email || '').trim().toLowerCase();
+      const phone = phoneInput.value.trim();
+      const phoneDigits = phone.replace(/\D/g, '');
 
-      const name = document.getElementById('jName').value.trim();
-      const email = document.getElementById('jEmail').value.trim().toLowerCase();
-      const phone = document.getElementById('jPhone').value.trim();
+      if (!phone || phoneDigits.length < 10) {
+        if (errorBox) {
+          errorBox.textContent = 'Please enter a valid 10-digit WhatsApp phone number.';
+          errorBox.style.display = 'block';
+        }
+        phoneInput.focus();
+        return;
+      }
+
       let college = collegeSelect.value === 'other' ? (otherInput.value.trim() || 'Other College') : collegeSelect.value;
-      const idea = document.getElementById('jIdea')?.value.trim() || '';
+      if (!college) {
+        if (errorBox) {
+          errorBox.textContent = 'Please select your campus chapter / college.';
+          errorBox.style.display = 'block';
+        }
+        collegeSelect.focus();
+        return;
+      }
+
       const selectedSkills = [...document.querySelectorAll('input[name="skills"]:checked')].map(c => c.value).join(', ');
-      const upiRef = jUpiRef?.value.trim() || '';
+      if (!selectedSkills) {
+        if (errorBox) {
+          errorBox.textContent = 'Please select at least one primary skill / interest.';
+          errorBox.style.display = 'block';
+        }
+        return;
+      }
 
-      const randNum = Math.floor(1000 + Math.random() * 9000);
-      const generatedMemberId = `TFC-2026-${randNum}`;
+      const idea = document.getElementById('jIdea')?.value.trim() || '';
 
+      btn.disabled = true;
+      btn.textContent = 'Joining Campus Chapter...';
+
+      // 3. COMPOSE MEMBERSHIP RECORD
+      let memberId = currentUser.member_id || `TFC-2026-${Math.floor(1000 + Math.random() * 9000)}`;
       let tierName = 'Student';
       let combinedData = '';
 
-      if (currentPlan === 'school') {
-        tierName = 'StartupSchool';
-        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Plan: StartupSchoolPaid | Fee: 399 | UpiRef: ${upiRef} | Source: SchoolSubscription | FormSubmittedAt: ${new Date().toISOString()}`;
-      } else if (currentPlan === 'trial') {
+      if (currentPlan === 'trial') {
         tierName = 'StartupSchoolTrial';
-        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Plan: 7DayTrial | Source: ChapterTrial | TrialStartedAt: ${new Date().toISOString()}`;
+        combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Plan: 7DayTrial | Source: JoinPage | TrialStartedAt: ${new Date().toISOString()}`;
       } else {
         tierName = 'Student';
         combinedData = `${college} | Phone: ${phone} | Skills: ${selectedSkills} | Idea: ${idea} | FreeMembership: Yes | Source: JoinPage | FormSubmittedAt: ${new Date().toISOString()}`;
       }
 
+      // 4. SUPABASE UPSERT (CHECKS EXISTING TO PREVENT DUPLICATE KEY CONFLICT)
       try {
         if (supabaseClient) {
-          await supabaseClient.from('members').insert([{
-            name: name,
-            email: email,
-            college: combinedData,
-            tier: tierName,
-            member_id: generatedMemberId,
-            password: 'builder2026'
-          }]);
+          const { data: existing, error: checkErr } = await supabaseClient
+            .from('members')
+            .select('id, member_id, college')
+            .eq('email', email)
+            .limit(1);
+
+          if (existing && existing.length > 0) {
+            memberId = existing[0].member_id || memberId;
+            const { error: updateErr } = await supabaseClient
+              .from('members')
+              .update({
+                name: name,
+                college: combinedData,
+                tier: tierName
+              })
+              .eq('email', email);
+
+            if (updateErr) console.warn('[JoinForm] Member update notice:', updateErr);
+          } else {
+            const { error: insertErr } = await supabaseClient
+              .from('members')
+              .insert([{
+                name: name,
+                email: email,
+                college: combinedData,
+                tier: tierName,
+                member_id: memberId,
+                password: 'builder2026'
+              }]);
+
+            if (insertErr) console.warn('[JoinForm] Member insert notice:', insertErr);
+          }
         }
       } catch (err) {
-        console.warn('Membership sync note:', err);
+        console.warn('[JoinForm] Membership sync exception:', err);
       }
 
-      // Populate member card
+      // 5. UPDATE LOCAL AUTH SESSION AND PERSIST
+      const updatedUserData = {
+        name: name,
+        email: email,
+        phone: phone,
+        college: combinedData,
+        tier: tierName,
+        member_id: memberId,
+        isCouncilMember: true
+      };
+
+      if (window.TFCAuth) {
+        window.TFCAuth.updateUser(updatedUserData);
+        if (typeof window.TFCAuth.syncToZoho === 'function') {
+          window.TFCAuth.syncToZoho(updatedUserData, 'Chapter Join - JoinPage');
+        }
+      }
+
+      // 6. TRACK VIA MIXPANEL & ANALYTICS
+      try {
+        if (window.mixpanel && typeof window.mixpanel.identify === 'function') {
+          window.mixpanel.identify(email);
+          window.mixpanel.people.set({
+            '$name': name,
+            '$email': email,
+            'university': college,
+            'phone': phone,
+            'skills': selectedSkills,
+            'tier': tierName,
+            'member_id': memberId,
+            'is_council_member': true,
+            'council_joined_at': new Date().toISOString()
+          });
+          window.mixpanel.track('application_completed', {
+            acquisition_channel: (window.detectAcquisitionChannel ? window.detectAcquisitionChannel() : 'chapter_page'),
+            university: college,
+            submission_status: 'success',
+            completion_time: new Date().toISOString(),
+            plan: currentPlan,
+            tier: tierName
+          });
+        }
+      } catch (analyticsErr) {
+        console.warn('[JoinForm] Analytics track notice:', analyticsErr);
+      }
+
+      // 7. POPULATE MEMBER PASS CARD
       const cardName = document.getElementById('cardMemberName');
       const cardCollege = document.getElementById('cardMemberCollege');
       const cardId = document.getElementById('cardMemberId');
@@ -579,29 +923,27 @@
 
       if (cardName) cardName.textContent = name;
       if (cardCollege) cardCollege.textContent = college;
-      if (cardId) cardId.textContent = generatedMemberId;
+      if (cardId) cardId.textContent = memberId;
       if (cardTier) {
-        cardTier.textContent = currentPlan === 'school' ? 'Startup School Builder Pass' : currentPlan === 'trial' ? '7-Day School Trial Pass' : 'Student Builder Pass';
+        cardTier.textContent = currentPlan === 'trial' ? '7-Day School Trial Pass' : 'Student Builder Pass';
       }
 
-      // Customize confirmation
-      if (currentPlan === 'school') {
-        successTitle.textContent = 'Startup School Subscription Confirmed.';
-        successMsg.innerHTML = `Thank you for subscribing, <b>${name}</b>. We have recorded your ₹399 payment reference (<b>${upiRef}</b>). Check your email (<b>${email}</b>) for your module access link and Sunday Live Lab invitation.`;
-      } else if (currentPlan === 'trial') {
+      if (currentPlan === 'trial') {
         successTitle.textContent = '7-Day Free Trial Activated!';
-        successMsg.innerHTML = `Welcome to Startup School, <b>${name}</b>. Your 7-day chapter pass is active. Check <b>${email}</b> for your direct curriculum link.`;
+        successMsg.innerHTML = `Welcome to Startup School, <b>${name}</b>. Your 7-day chapter pass is active. Check <b>${email}</b> for your curriculum link and build night invites.`;
       } else {
         successTitle.textContent = 'You are officially in.';
-        successMsg.innerHTML = `Welcome to The Future Council, <b>${name}</b>. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.`;
+        successMsg.innerHTML = `Welcome to The Future Council, <b>${name}</b>. Check your email (<b>${email}</b>) for your campus chapter invitation and your <b>7-day free Startup School pass</b>.`;
       }
 
+      // 8. TRANSITION TO SUCCESS SCREEN
       form.style.display = 'none';
       if (perkHighlight) perkHighlight.style.display = 'none';
       if (trialHighlight) trialHighlight.style.display = 'none';
       const planTabs = document.querySelector('.plan-tabs');
       if (planTabs) planTabs.style.display = 'none';
       successPanel.style.display = 'block';
+      successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   })();
   </script>

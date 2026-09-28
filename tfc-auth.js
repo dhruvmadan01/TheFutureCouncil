@@ -1420,6 +1420,9 @@
       persistSession(currentUser, true);
       return currentUser;
     },
+    setUser: function (userData) {
+      return this.updateUser(userData);
+    },
     openLoginModal: function (options) {
       openLoginModal(options);
     },
