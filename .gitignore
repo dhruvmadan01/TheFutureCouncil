@@ -5,4 +5,9 @@ android/build/
 .gradle/
 *.log
 .env
+.env*.local
 _old-site/
+tfc-connect/node_modules/
+tfc-connect/.next/
+tfc-connect/.env*
+tfc-connect/.vercel/

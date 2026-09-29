@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Trial Project Sprint Template · TFC Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;800&family=IBM+Plex+Mono:wght@500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FBFBEE;
+      --card: #FFFFFF;
+      --ink: #111110;
+      --ink-soft: #5C5C54;
+      --line: #E5E4D8;
+      --orange: #FF5A1F;
+      --orange-soft: rgba(255, 90, 31, 0.08);
+      --forest: #1F6F54;
+      --forest-soft: rgba(31, 111, 84, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+    .header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--orange-soft);
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .disclaimer-box {
+      background: #FFFBEB;
+      border: 1px dashed #D97706;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: #92400E;
+    }
+    .disclaimer-box strong {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 32px 0 12px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    p, ul {
+      margin-bottom: 16px;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 8px; }
+    .input-field {
+      border-bottom: 1px dashed var(--ink-soft);
+      display: inline-block;
+      min-width: 140px;
+      height: 18px;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .table th, .table td {
+      border: 1px solid var(--line);
+      padding: 12px;
+      text-align: left;
+    }
+    .table th {
+      background: #F8F8F0;
+      font-weight: 600;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+    }
+    .print-bar {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .btn {
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .container { border: none; box-shadow: none; padding: 0; }
+      .print-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">Founder Fit Kit · Framework 01</div>
+      <h1>2-Week Trial Project Sprint Template</h1>
+      <p>A structured, low-risk sandbox to test communication, commitment, code velocity, and working styles before committing equity.</p>
+    </div>
+
+    <div class="disclaimer-box">
+      <strong>⚠️ TEMPLATE ONLY — NOT LEGAL ADVICE</strong>
+      This document is provided free by The Future Council (TFC Connect) as a starter collaborative framework for prospective student co-founders. It is an operational alignment tool, not a legally binding contract.
+    </div>
+
+    <h2>1. Sprint Participants & Timeline</h2>
+    <p><strong>Prospective Co-Founders:</strong> <span class="input-field"></span> &amp; <span class="input-field"></span></p>
+    <p><strong>Sprint Duration:</strong> 14 Days (From <span class="input-field"></span> to <span class="input-field"></span>)</p>
+    <p><strong>Primary Objective:</strong> Build a tangible proof-of-concept or conduct 20 customer discovery interviews for the startup hypothesis: <span class="input-field" style="min-width: 280px;"></span></p>
+
+    <h2>2. Weekly Commitment & Working Rhythm</h2>
+    <ul>
+      <li><strong>Expected Hours:</strong> Each participant commits to a minimum of <span class="input-field" style="min-width: 60px;"></span> hours per week.</li>
+      <li><strong>Daily Asynchronous Check-in:</strong> 3-bullet Slack/WhatsApp update by 10:00 AM (What I did yesterday, what I'm doing today, blockers).</li>
+      <li><strong>Mid-Sprint Sync:</strong> Day 7 live demo of WIP assets (45 mins).</li>
+      <li><strong>Final Retrospective:</strong> Day 14 Founder Fit Kit review &amp; go/no-go decision on equity partnership.</li>
+    </ul>
+
+    <h2>3. Deliverables & Ownership Split</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Track</th>
+          <th>Lead</th>
+          <th>Expected Sprint Output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Product / Tech</strong></td>
+          <td><span class="input-field"></span></td>
+          <td>Working prototype, deployed staging environment, or interactive Figma clickable prototype.</td>
+        </tr>
+        <tr>
+          <td><strong>User Discovery / GTM</strong></td>
+          <td><span class="input-field"></span></td>
+          <td>15+ validated problem interview notes, waiting list landing page, or initial pilot commitments.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Sprint IP & Exit Protocol</h2>
+    <p>If at Day 14 either party decides not to proceed as co-founders:</p>
+    <ul>
+      <li>Each party retains full independent ownership of whatever pre-existing code, designs, or ideas they brought into the sprint.</li>
+      <li>Joint code or assets created during the sprint may not be commercialized by either party without mutual written consent or a standard release.</li>
+      <li>No hard feelings: the goal of the trial sprint is discovering misalignment early with zero downside.</li>
+    </ul>
+
+    <h2>5. Post-Sprint Decision Gates</h2>
+    <ul>
+      <li>[ ] <strong>Gate A:</strong> Did both participants reliably hit their committed hours?</li>
+      <li>[ ] <strong>Gate B:</strong> How did we handle conflict, differing opinions, or setbacks?</li>
+      <li>[ ] <strong>Gate C:</strong> Do both feel energized to work together for the next 4+ years?</li>
+    </ul>
+
+    <div class="print-bar">
+      <span>TFC Connect · Founder Fit Kit Resource</span>
+      <button class="btn" onclick="window.print()">Print or Save as PDF</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+/* TFC Connect design tokens (Tailwind CSS v4).
+   Copy into src/app/globals.css right after `@import "tailwindcss";`
+   Fonts are loaded with next/font in src/app/layout.tsx and exposed as CSS variables:
+   --font-bricolage, --font-instrument, --font-plex-mono */
+
+@theme {
+  --color-warm: #FFF4E8;
+  --color-warm-2: #FBE6D4;
+  --color-card: #FFFFFF;
+  --color-line: #EAD7C6;
+  --color-ink: #1B1712;
+  --color-ink-soft: #5A4E44;
+  --color-mute: #8C7D70;
+
+  --color-orange: #E2542A;
+  --color-orange-deep: #AE3D18;
+  --color-orange-soft: #FFE9DF;
+
+  --color-forest: #1F5A45;
+  --color-forest-soft: #E8F1ED;
+  --color-ballpoint: #2C4A9A;
+  --color-ballpoint-soft: #E6EBF7;
+  --color-amber: #9A6412;
+  --color-amber-soft: #FBEFD6;
+  --color-plum: #9C2F52;
+  --color-plum-soft: #F8E4EA;
+
+  --font-display: var(--font-bricolage), "Arial Narrow", system-ui, sans-serif;
+  --font-sans: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
+
+  --radius-card: 18px;
+  --shadow-card: 0 10px 30px -18px rgb(27 23 18 / 0.12);
+}
+
+@layer base {
+  html { background: var(--color-warm); color: var(--color-ink); }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; text-wrap: balance; }
+  :focus-visible { outline: 3px solid var(--color-orange); outline-offset: 3px; border-radius: 4px; }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-orange-deep);
+}
+@utility glow-dot {
+  display: inline-block;
+  width: 8px; height: 8px; border-radius: 9999px;
+  background: var(--color-orange);
+  box-shadow: 0 0 10px rgb(226 84 42 / 0.5);
+}
+@utility gutter {
+  padding-inline: clamp(16px, 4vw, 48px);
+}
