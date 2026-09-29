@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { AppShell } from "@/components/tfc/AppShell";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";

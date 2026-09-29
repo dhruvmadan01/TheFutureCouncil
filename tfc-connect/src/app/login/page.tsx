@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,14 +17,16 @@ export default function LoginPage() {
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const supabase = createClient();
+  // createClient() called lazily inside handlers — not at module/render level
+  // so it never runs during static prerendering
+  const getSupabase = () => createClient();
 
   const handleGoogleSignIn = async () => {
     try {
       setGoogleLoading(true);
       setErrorMsg(null);
       const redirectTo = `${window.location.origin}/auth/callback`;
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { error } = await getSupabase().auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo,
@@ -51,7 +55,7 @@ export default function LoginPage() {
       setLoading(true);
       setErrorMsg(null);
       const emailRedirectTo = `${window.location.origin}/auth/callback`;
-      const { error } = await supabase.auth.signInWithOtp({
+      const { error } = await getSupabase().auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: {
           emailRedirectTo,
@@ -241,7 +245,7 @@ export default function LoginPage() {
                   onClick={async () => {
                     setLoading(true);
                     setErrorMsg(null);
-                    const { error } = await supabase.auth.signInWithPassword({
+                    const { error } = await getSupabase().auth.signInWithPassword({
                       email: "demo_founder@tfc.internal",
                       password: "DemoFounderPass123!#",
                     });
