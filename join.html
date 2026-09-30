@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Step out of line · Join The Future Council | Free Student Membership</title>
-  <meta name="description" content="Step out of the placement queue. Join 18 campus chapters across India, get 7 days of Startup School free, and build something real." />
+  <meta name="description" content="Step out of the placement queue. Join 18 campus chapters across India and build something real." />
   <meta name="canonical" href="https://thefuturecouncil.in/join" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -336,10 +336,10 @@
       </a>
       <ul class="nav-links">
         <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/school">Startup School</a></li>
+        <li><a href="/connect">Connect</a></li>
         <li><a href="/launchpad">Launchpad</a></li>
         <li><a href="/why">Why Build</a></li>
-        <li><a href="/stories">Stories</a></li>
+        <li><a href="/about">About TFC</a></li>
       </ul>
       <div class="nav-actions">
         <a class="btn solid sm" href="/join">Join free</a>
@@ -351,10 +351,9 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="/chapters">Chapters <span>→</span></a>
-    <a href="/school">Startup School <span>→</span></a>
+    <a href="/connect">Connect <span>→</span></a>
     <a href="/launchpad">Launchpad <span>→</span></a>
     <a href="/why">Why Build <span>→</span></a>
-    <a href="/stories">Stories <span>→</span></a>
     <a href="/about">About TFC <span>→</span></a>
   </div>
 
@@ -373,34 +372,7 @@
       <div class="wrap">
         <div class="join-form-shell">
 
-          <!-- PLAN SELECTOR TABS -->
-          <div class="plan-tabs" style="display: flex; gap: 8px; margin-bottom: 24px; background: var(--warm-2); padding: 5px; border-radius: 12px; border: 1px solid #E3B79C;">
-            <button type="button" class="plan-tab active" id="tabMember" data-plan="member" style="flex: 1; padding: 10px 8px; border: 0; background: #fff; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.06);">Free Member</button>
-            <button type="button" class="plan-tab" id="tabSchool" data-plan="school" style="flex: 1; padding: 10px 8px; border: 0; background: transparent; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink-soft);">Startup School (Coming Soon)</button>
-            <button type="button" class="plan-tab" id="tabTrial" data-plan="trial" style="flex: 1; padding: 10px 8px; border: 0; background: transparent; border-radius: 8px; font-weight: 600; font-size: 13.5px; cursor: pointer; color: var(--ink-soft);">7-Day Trial</button>
-          </div>
 
-          <!-- 7-DAY PERK HIGHLIGHT (FOR FREE MEMBERS) -->
-          <div class="perk-highlight" id="perkHighlight">
-            <div class="perk-icon">★</div>
-            <div>
-              <strong style="display: block; font-size: 15px; color: var(--ink);">Automatic Member Perk</strong>
-              <span style="font-size: 13.5px; color: var(--ink-soft);">
-                Every member gets <b>7 days of Startup School free</b> upon joining.
-              </span>
-            </div>
-          </div>
-
-          <!-- TRIAL HIGHLIGHT -->
-          <div class="perk-highlight" id="trialHighlight" style="display: none; background: #E8F5E9; border-color: #A5D6A7;">
-            <div class="perk-icon" style="background: #2E7D32; color: #fff;">✦</div>
-            <div>
-              <strong style="display: block; font-size: 15px; color: #1B5E20;">7-Day Chapter Member Pass</strong>
-              <span style="font-size: 13.5px; color: #2E7D32;">
-                Instant free access to all 9 modules and weekly Sunday Live Labs. No payment required.
-              </span>
-            </div>
-          </div>
 
           <!-- FORM -->
           <form id="councilJoinForm">
@@ -466,7 +438,7 @@
                 <span id="jEmailGoogleTag" style="font-size: 11.5px; font-weight: 600; color: #2E7D32; display: none;">✓ Verified via Google</span>
               </label>
               <input type="email" id="jEmail" required placeholder="Filled automatically after Google sign-in" readonly />
-              <span class="field-hint">We send chapter invites and your Startup School access link here.</span>
+              <span class="field-hint">We send chapter invites and build night schedules here.</span>
             </div>
 
             <div class="form-group">
@@ -542,18 +514,6 @@
               <textarea id="jIdea" placeholder="A rough idea, a side project, or technologies you want to explore with other students."></textarea>
             </div>
 
-            <!-- NOTICE BOX FOR STARTUP SCHOOL (COMING SOON) -->
-            <div id="schoolPaymentBox" style="display: none; background: var(--warm); border: 1.5px solid #F1D4BE; border-radius: 16px; padding: 22px; margin-bottom: 24px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--line); padding-bottom: 12px; margin-bottom: 14px;">
-                <strong style="font-size: 16px; color: var(--ink);">Startup School (Coming Soon)</strong>
-                <span style="font-family: var(--display); font-size: 20px; font-weight: 800; color: var(--orange-deep);">₹399 <small style="font-size: 12px; font-weight: 500; color: var(--ink-soft); font-family: var(--body);">/ month</small></span>
-              </div>
-              <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 16px;">
-                Startup School isn't launched yet. Chapter members will still get 7 days free upon launch. Join the waitlist on the school page to get notified the day it opens.
-              </p>
-              <a class="btn solid" href="/school#interest" style="width: 100%; justify-content: center;">Join Waitlist on Startup School →</a>
-            </div>
-
             <!-- ERROR MESSAGE BOX (DIRECTLY ABOVE SUBMIT BUTTON) -->
             <div id="joinErrorMsg" style="display: none;"></div>
 
@@ -565,7 +525,7 @@
             <div class="pin" style="width: 56px; height: 56px; border-radius: 50%; background: #E8F5E9; border: 2px solid #2E7D32; display: grid; place-items: center; margin: 0 auto 16px; color: #1B5E20; font-size: 22px;">✓</div>
             <h3 id="joinSuccessTitle" style="font-size: 26px;">You are officially in.</h3>
             <p id="joinSuccessMsg" style="color: var(--ink-soft); font-size: 15.5px; margin: 12px auto 20px; max-width: 48ch; line-height: 1.5;">
-              Welcome to The Future Council. Check your email for your chapter invitation and your <b>7-day free Startup School pass</b>.
+              Welcome to The Future Council. Check your email for your chapter invitation and build night schedules.
             </p>
 
             <!-- DYNAMIC STUDENT BUILDER CARD -->
@@ -604,7 +564,7 @@
             </div>
 
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
-              <a class="btn solid" href="/school">Explore Startup School →</a>
+              <a class="btn solid" href="/launchpad">Explore Launchpad Fellowship →</a>
               <a class="btn" href="/chapters">View Campus Chapters</a>
             </div>
           </div>
@@ -635,17 +595,17 @@
           <h4>Ecosystem</h4>
           <ul>
             <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/school">Startup School</a></li>
+            <li><a href="/connect">TFC Connect</a></li>
             <li><a href="/launchpad">Launchpad Fellowship</a></li>
             <li><a href="/why">Why Build</a></li>
-            <li><a href="/stories">Stories</a></li>
+            <li><a href="/about">About TFC</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
           <ul>
             <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/resources">Resource Library</a></li>
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>
@@ -721,60 +681,16 @@
     });
 
     function setPlan(plan) {
-      currentPlan = plan;
-      [tabMember, tabSchool, tabTrial].forEach(t => {
-        if (!t) return;
-        const isActive = t.dataset.plan === plan;
-        t.style.background = isActive ? '#fff' : 'transparent';
-        t.style.color = isActive ? 'var(--ink)' : 'var(--ink-soft)';
-        t.style.boxShadow = isActive ? '0 2px 6px rgba(0,0,0,0.06)' : 'none';
-      });
-
-      if (plan === 'school') {
-        formTitle.textContent = 'Subscribe to Startup School';
-        formSubtitle.textContent = '₹399 / month · Full 30-day builder pass to all 9 modules & Sunday Live Labs';
-        if (perkHighlight) perkHighlight.style.display = 'none';
-        if (trialHighlight) trialHighlight.style.display = 'none';
-        if (schoolPaymentBox) schoolPaymentBox.style.display = 'block';
-        if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
-        btn.textContent = 'Complete ₹399 Subscription →';
-      } else if (plan === 'trial') {
-        formTitle.textContent = 'Activate 7-Day Free Trial';
-        formSubtitle.textContent = 'Free for collegiate chapter members · Full access for 7 days';
-        if (perkHighlight) perkHighlight.style.display = 'none';
-        if (trialHighlight) trialHighlight.style.display = 'flex';
-        if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';
-        if (ideaFieldGroup) ideaFieldGroup.style.display = 'none';
-        btn.textContent = 'Activate 7-Day Free Trial →';
-      } else {
-        formTitle.textContent = 'Join Your Campus Chapter';
-        formSubtitle.textContent = 'Free student builder membership · All 18 campus chapters';
-        if (perkHighlight) perkHighlight.style.display = 'flex';
-        if (trialHighlight) trialHighlight.style.display = 'none';
-        if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';
-        if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
-        btn.textContent = 'Complete Free Registration →';
-      }
+      currentPlan = 'member';
+      if (formTitle) formTitle.textContent = 'Join Your Campus Chapter';
+      if (formSubtitle) formSubtitle.textContent = 'Free student builder membership · All 18 campus chapters';
+      if (perkHighlight) perkHighlight.style.display = 'none';
+      if (trialHighlight) trialHighlight.style.display = 'none';
+      if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';
+      if (ideaFieldGroup) ideaFieldGroup.style.display = 'block';
+      if (btn) btn.textContent = 'Complete Free Registration →';
     }
-
-    tabMember?.addEventListener('click', () => setPlan('member'));
-    tabSchool?.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '/school#interest';
-    });
-    tabTrial?.addEventListener('click', () => setPlan('trial'));
-
-    // Pre-fill query params
-    const urlParams = new URLSearchParams(window.location.search);
-    const planParam = (urlParams.get('plan') || '').toLowerCase();
-    if (planParam === 'school' || planParam === 'startup-school') {
-      window.location.replace('/school#interest');
-      return;
-    } else if (planParam === 'trial' || planParam === 'free-trial') {
-      setPlan('trial');
-    } else {
-      setPlan('member');
-    }
+    setPlan('member');
 
     // Auto-select chapter from query params
     const chParam = (urlParams.get('chapter') || urlParams.get('college') || '').toLowerCase().trim();
@@ -1101,16 +1017,11 @@
       if (cardCollege) cardCollege.textContent = college;
       if (cardId) cardId.textContent = memberId;
       if (cardTier) {
-        cardTier.textContent = currentPlan === 'trial' ? '7-Day School Trial Pass' : 'Student Builder Pass';
+        cardTier.textContent = 'Student Builder Pass';
       }
 
-      if (currentPlan === 'trial') {
-        successTitle.textContent = '7-Day Free Trial Activated!';
-        successMsg.innerHTML = `Welcome to Startup School, <b>${name}</b>. Your 7-day chapter pass is active. Check <b>${email}</b> for your curriculum link and build night invites.`;
-      } else {
-        successTitle.textContent = 'You are officially in.';
-        successMsg.innerHTML = `Welcome to The Future Council, <b>${name}</b>. Check your email (<b>${email}</b>) for your campus chapter invitation and your <b>7-day free Startup School pass</b>.`;
-      }
+      successTitle.textContent = 'You are officially in.';
+      successMsg.innerHTML = `Welcome to The Future Council, <b>${name}</b>. Check your email (<b>${email}</b>) for your campus chapter invitation and build night updates.`;
 
       // 8. TRANSITION TO SUCCESS SCREEN
       form.style.display = 'none';

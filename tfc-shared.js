@@ -6,8 +6,8 @@
   const config = window.TFC_CONFIG || {
     APPLY_URL: '/launchpad/fellowship',
     LAUNCHPAD: {
-      DEADLINE_ISO: '2026-09-30T19:00:00+05:30',
-      DEADLINE_DISPLAY: 'Sep 30, 2026, 7 PM IST'
+      DEADLINE_ISO: '2026-10-15T23:59:59+05:30',
+      DEADLINE_DISPLAY: 'Oct 15, 2026, 11:59 PM IST'
     }
   };
 
@@ -31,7 +31,7 @@
   }
 
   // Countdown timer to Launchpad Cohort 01 deadline
-  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2026-09-30T19:00:00+05:30';
+  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2026-10-15T23:59:59+05:30';
   const targetDate = new Date(targetDateStr).getTime();
 
   function updateDeadlines() {
@@ -68,8 +68,8 @@
     }
 
     if (countdownEl) {
-      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Sep 30, 7 PM IST';
-      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel}</small>`;
+      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Oct 15, 11:59 PM IST';
+      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel} · Final deadline</small>`;
     }
   }
 

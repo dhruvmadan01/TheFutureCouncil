@@ -90,10 +90,10 @@ function generateChapterHtml(ch) {
       </a>
       <ul class="nav-links">
         <li><a href="/chapters" class="active">Chapters</a></li>
-        <li><a href="/school">Startup School</a></li>
+        <li><a href="/connect">Connect</a></li>
         <li><a href="/launchpad">Launchpad</a></li>
         <li><a href="/why">Why Build</a></li>
-        <li><a href="/stories">Stories</a></li>
+        <li><a href="/about">About TFC</a></li>
       </ul>
       <div class="nav-actions">
         <a class="btn solid sm" href="/join?chapter=${ch.id}">Join Chapter</a>
@@ -105,10 +105,10 @@ function generateChapterHtml(ch) {
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="/chapters" class="active">All Chapters <span>→</span></a>
-    <a href="/school">Startup School <span>→</span></a>
+    <a href="/connect">Connect <span>→</span></a>
     <a href="/launchpad">Launchpad <span>→</span></a>
     <a href="/why">Why Build <span>→</span></a>
-    <a href="/stories">Stories <span>→</span></a>
+    <a href="/about">About TFC <span>→</span></a>
     <div style="margin-top: 20px;">
       <a class="btn solid lg" href="/join?chapter=${ch.id}" style="width: 100%; text-align: center;">Join ${ch.name}</a>
     </div>
@@ -154,9 +154,9 @@ function generateChapterHtml(ch) {
             </p>
           </div>
           <div style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px;">
-            <strong style="font-size: 17px; display: block;">Startup School Study Circles</strong>
+            <strong style="font-size: 17px; display: block;">Founder Pitch &amp; MVP Sprints</strong>
             <p style="color: var(--ink-soft); font-size: 14.5px; margin-top: 4px;">
-              Work through the 9 practical modules together, practice mock pitches, and review each other's deliverables.
+              Peer co-working sprints to iterate on MVPs, practice mock pitches, and get candid feedback before demo day.
             </p>
           </div>
         </div>
@@ -196,7 +196,7 @@ function generateChapterHtml(ch) {
           <h3>Chapter Membership Perks</h3>
           <ul>
             <li><span>Access to campus build nights</span><span>✓ Free</span></li>
-            <li><span>7 Days Startup School access</span><span>✓ Free</span></li>
+            <li><span>Demo Day showcase participation</span><span>✓ Included</span></li>
             <li><span>Co-founder matchmaking</span><span>✓ Included</span></li>
             <li><span>Direct chapter mentor access</span><span>✓ Included</span></li>
           </ul>
@@ -234,17 +234,17 @@ function generateChapterHtml(ch) {
           <h4>Ecosystem</h4>
           <ul>
             <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/school">Startup School</a></li>
+            <li><a href="/connect">TFC Connect</a></li>
             <li><a href="/launchpad">Launchpad Fellowship</a></li>
             <li><a href="/why">Why Build</a></li>
-            <li><a href="/stories">Stories</a></li>
+            <li><a href="/about">About TFC</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
           <ul>
             <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/school/library">Resource Library</a></li>
+            <li><a href="/resources">Resource Library</a></li>
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>

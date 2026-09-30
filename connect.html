@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TFC Connect · Co-Founder Matching & Campus Startup Directory</title>
+  <meta name="description" content="India's premier campus co-founder matching portal and startup directory. Connect with verified student founders across 90+ university chapters. Free forever." />
+  <link rel="canonical" href="https://thefuturecouncil.in/connect" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#FBF7F0" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Don't build alone. Find your co-founder · TFC Connect" />
+  <meta property="og:description" content="India's premier campus co-founder matching portal and startup directory. Connect with verified student founders across 90+ university chapters. Free forever." />
+  <meta property="og:image" content="/TFC.png" />
+  <meta property="og:url" content="https://thefuturecouncil.in/connect" />
+  <meta property="og:type" content="website" />
+
+  <!-- Instant Meta Refresh -->
+  <meta http-equiv="refresh" content="0; url=https://connect.thefuturecouncil.in" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    body {
+      background: var(--warm);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .connect-redirect-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(32px, 5vw, 64px) var(--gut);
+    }
+    .connect-card {
+      max-width: 580px;
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(32px, 5vw, 48px);
+      text-align: center;
+      box-shadow: 0 16px 40px -12px rgba(27,23,18,0.08);
+      position: relative;
+    }
+    .connect-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--warm-2);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--orange-deep);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .connect-badge span.pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--orange);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+    .connect-card h1 {
+      font-size: clamp(28px, 4.2vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .connect-card p {
+      margin-top: 14px;
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .connect-features {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: var(--warm);
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      text-align: left;
+      font-size: 13.5px;
+    }
+    .connect-features div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .connect-features div svg {
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .connect-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .connect-actions .btn {
+      width: 100%;
+      padding: 14px 24px;
+      font-size: 16px;
+    }
+    .connect-sublinks {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .connect-sublinks a {
+      color: var(--ink-soft);
+      text-decoration: underline;
+    }
+    .connect-sublinks a:hover {
+      color: var(--orange);
+    }
+  </style>
+
+  <script>
+    // Preserve subpaths, query parameters and hash upon transfer
+    try {
+      var currentPath = window.location.pathname.replace(/^\/connect(\.html)?/, '');
+      var dest = 'https://connect.thefuturecouncil.in' + currentPath + window.location.search + window.location.hash;
+      window.location.replace(dest);
+    } catch (e) {
+      window.location.href = 'https://connect.thefuturecouncil.in';
+    }
+  </script>
+</head>
+<body>
+
+  <!-- SIMPLE BRAND HEADER -->
+  <header style="padding: 20px var(--gut); border-bottom: 1px solid var(--line); background: #fff;">
+    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center;">
+      <a class="brand" href="/" style="color:var(--ink);">
+        <img src="/TFC.png" alt="The Future Council" class="brand-logo" />
+        <span>The Future Council</span>
+      </a>
+      <a href="/" class="mono" style="font-size:13px; color:var(--ink-soft);">← thefuturecouncil.in</a>
+    </div>
+  </header>
+
+  <main class="connect-redirect-box">
+    <div class="connect-card">
+      <div class="connect-badge">
+        <span class="pulse-dot"></span>
+        <span>TFC CONNECT PORTAL</span>
+      </div>
+
+      <h1>Don't build alone.<br><span style="color:var(--orange);">Find your co-founder.</span></h1>
+      
+      <p>
+        Connecting you to India's premier campus co-founder matching portal and verified student startup directory across 90+ university chapters.
+      </p>
+
+      <div class="connect-features">
+        <div>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          5 daily curated matches
+        </div>
+        <div>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Founder Fit Kit
+        </div>
+        <div>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Campus Startup Directory
+        </div>
+        <div>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Free forever (₹0 fee)
+        </div>
+      </div>
+
+      <div class="connect-actions">
+        <a class="btn solid" href="https://connect.thefuturecouncil.in" id="openConnectBtn">
+          Open TFC Connect Now <span>→</span>
+        </a>
+        <span class="mono" style="font-size:12px; color:var(--ink-soft);">Opening connect.thefuturecouncil.in...</span>
+      </div>
+
+      <div class="connect-sublinks">
+        <a href="/">Home</a>
+        <span>•</span>
+        <a href="/chapters">Chapters</a>
+        <span>•</span>
+        <a href="/launchpad">Launchpad</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-line" style="border-top: 1px solid var(--line); background:#fff; text-align:center; padding:18px var(--gut); font-size:12.5px; color:var(--ink-soft);">
+    <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+  </footer>
+
+</body>
+</html>

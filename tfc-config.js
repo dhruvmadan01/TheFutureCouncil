@@ -6,7 +6,7 @@
   var TFC_CONFIG = {
     // Primary routing & CTAs
     APPLY_URL: '/launchpad/fellowship',
-    GOOGLE_FORM_URL: 'https://forms.gle/zPn7H2HgBepJTmzb7',
+    GOOGLE_FORM_URL: '/launchpad/fellowship',
 
     // Ecosystem statistics
     CHAPTER_COUNT: 18,
@@ -21,21 +21,20 @@
       FEE_FORMATTED: '₹999',
       FEE_TERMS: '₹999 application fee, one time, non-refundable',
       FEE_INTENT_TEXT: 'Application fee filters for serious candidates and funds individualized written feedback.',
-      EQUITY: '0%',
-      EQUITY_TERMS: '0% equity taken',
-      SUCCESS_FEE: '5%',
-      SUCCESS_FEE_TERMS: '5% cash success fee ONLY on capital from TFC-introduced investors within 12 months of Demo Day',
+      EQUITY: '2%',
+      EQUITY_TERMS: '2% equity taken in selected cohort ventures',
+      SUCCESS_FEE: '0%',
+      SUCCESS_FEE_TERMS: 'No success fee on capital raised',
       DURATION: '4 weeks fully online',
       POD_SIZE: 'pods of 4–5',
       TIME_COMMITMENT: '6–8 hrs/week',
-      DEADLINE_ISO: '2026-09-30T19:00:00+05:30',
-      DEADLINE_DISPLAY: 'Sep 30, 2026, 7 PM IST',
-      KICKOFF_DISPLAY: 'Oct 19, 2026',
+      DEADLINE_ISO: '2026-10-15T23:59:59+05:30',
+      DEADLINE_DISPLAY: 'Oct 15, 2026, 11:59 PM IST',
+      KICKOFF_DISPLAY: 'Nov 1, 2026',
       AUDIENCE: 'Student founders and early-stage builders from any college or university across India',
       UNSELECTED_BENEFITS: {
-        FEEDBACK: 'Written feedback with 2–3 specific fixes',
-        STARTUP_SCHOOL: '1 month Startup School free (worth ₹399)',
-        REAPPLY_DISCOUNT: '50% off next application (₹499)'
+        FEEDBACK: 'Written feedback with specific actionable fixes',
+        MENTOR_SESSIONS: 'Full access to all virtual leader & mentor sessions (founder pods, 1:1 office hours, investor intros & Demo Day remain exclusive to the 20 selected fellows)'
       },
       WEEKLY_STRUCTURE: [
         { week: 'Week 1', title: 'Kickoff & founder pods' },
@@ -45,16 +44,8 @@
       ]
     },
 
-    // Startup School Facts
-    STARTUP_SCHOOL: {
-      PRICE: 399,
-      PRICE_FORMATTED: '₹399/month',
-      PRICE_TERMS: '₹399/month, cancel anytime',
-      MODULE_COUNT: 9,
-      CHAPTER_TRIAL: '7 days free',
-      SESSION_NAME: 'Sunday Live Lab',
-      SESSION_TIMING: 'Sundays 6:00–7:30 PM IST'
-    },
+    // Startup School: Discontinued
+    STARTUP_SCHOOL: null,
 
     // Legal Entity & Brand Footer
     ENTITY: {

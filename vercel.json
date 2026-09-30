@@ -5,8 +5,14 @@
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/join.html", "destination": "/join", "permanent": true },
     { "source": "/about.html", "destination": "/about", "permanent": true },
-    { "source": "/school.html", "destination": "/school", "permanent": true },
+    { "source": "/school.html", "destination": "/chapters", "permanent": true },
+    { "source": "/school", "destination": "/chapters", "permanent": true },
+    { "source": "/school/library", "destination": "/resources", "permanent": true },
+    { "source": "/school/library.html", "destination": "/resources", "permanent": true },
     { "source": "/launchpad.html", "destination": "/launchpad", "permanent": true },
+    { "source": "/connect.html", "destination": "https://connect.thefuturecouncil.in", "permanent": false },
+    { "source": "/connect", "destination": "https://connect.thefuturecouncil.in", "permanent": false },
+    { "source": "/connect/:path*", "destination": "https://connect.thefuturecouncil.in/:path*", "permanent": false },
     { "source": "/terms.html", "destination": "/terms", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/refund.html", "destination": "/refund", "permanent": true },
@@ -22,12 +28,10 @@
     { "source": "/branch-:college", "destination": "/chapters/:college", "permanent": true },
     { "source": "/join-ambassador.html", "destination": "/chapters/start", "permanent": true },
     { "source": "/join-ambassador", "destination": "/chapters/start", "permanent": true },
-    { "source": "/resources.html", "destination": "/school/library", "permanent": true },
-    { "source": "/resources", "destination": "/school/library", "permanent": true },
+    { "source": "/stories.html", "destination": "/chapters", "permanent": true },
+    { "source": "/stories", "destination": "/chapters", "permanent": true },
     { "source": "/fellowship.html", "destination": "/launchpad/fellowship", "permanent": true },
     { "source": "/fellowship", "destination": "/launchpad/fellowship", "permanent": true },
-    { "source": "/launchpad/fellowship", "destination": "https://forms.gle/zPn7H2HgBepJTmzb7", "permanent": false },
-    { "source": "/launchpad/fellowship/", "destination": "https://forms.gle/zPn7H2HgBepJTmzb7", "permanent": false },
     { "source": "/partners.html", "destination": "/about/partners", "permanent": true },
     { "source": "/partners", "destination": "/about/partners", "permanent": true }
   ],
@@ -40,7 +44,7 @@
           "value": "fellowship.thefuturecouncil.in"
         }
       ],
-      "destination": "https://forms.gle/zPn7H2HgBepJTmzb7"
+      "destination": "/launchpad/fellowship"
     },
     {
       "source": "/chapters/:college",
