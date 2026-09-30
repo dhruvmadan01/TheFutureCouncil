@@ -9,8 +9,6 @@ import { Chip } from "@/components/ui/badge";
 import { LandingFAQ } from "./LandingFAQ";
 import { ArrowRight, Flame } from "lucide-react";
 
-export const revalidate = 300;
-
 export const metadata: Metadata = {
   title: "Don't build alone. Find your co-founder · TFC Connect",
   description:
@@ -24,39 +22,67 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Graceful fallback if Supabase is unavailable or views don't exist yet
+  let user = null;
+  let foundersCount = "2,400+";
+  let startupsCount = "380+";
+  let teamsCount = "120+";
 
-  // Fetch real counts and featured startups in parallel
-  const [profilesRes, startupsRes, teamsRes, featuredRes] = await Promise.all([
-    supabase.from("profiles").select("*", { count: "exact", head: true }),
-    supabase.from("startups").select("*", { count: "exact", head: true }),
-    supabase
-      .from("connections")
-      .select("*", { count: "exact", head: true })
-      .not("teamed_up_at", "is", null),
-    supabase
-      .from("startups_trending")
-      .select(
-        "id, slug, name, logo_url, one_liner, stage, industry, city, verification_tier, status_tags, follows_count, upvotes_count"
-      )
-      .eq("is_hidden", false)
-      .order("trending_score", { ascending: false })
-      .limit(4),
-  ]);
+  interface FeaturedStartup {
+    id: string | null;
+    slug: string | null;
+    name: string | null;
+    logo_url: string | null;
+    one_liner: string | null;
+    stage: string | null;
+    industry: string | null;
+    city: string | null;
+    verification_tier: string | null;
+    status_tags: string[] | null;
+    follows_count: number | null;
+    upvotes_count: number | null;
+  }
+  let featuredStartups: FeaturedStartup[] = [];
 
-  const rawProfiles = profilesRes.count || 0;
-  const foundersCount = rawProfiles > 2400 ? `${rawProfiles.toLocaleString()}+` : "2,400+";
+  try {
+    const supabase = await createClient();
+    const { data: { user: u } } = await supabase.auth.getUser();
+    user = u;
 
-  const rawStartups = startupsRes.count || 0;
-  const startupsCount = rawStartups > 380 ? `${rawStartups.toLocaleString()}+` : "380+";
+    // Fetch real counts and featured startups in parallel
+    const [profilesRes, startupsRes, teamsRes, featuredRes] = await Promise.all([
+      supabase.from("profiles").select("*", { count: "exact", head: true }),
+      supabase.from("startups").select("*", { count: "exact", head: true }),
+      supabase
+        .from("connections")
+        .select("*", { count: "exact", head: true })
+        .not("teamed_up_at", "is", null),
+      supabase
+        .from("startups_trending")
+        .select(
+          "id, slug, name, logo_url, one_liner, stage, industry, city, verification_tier, status_tags, follows_count, upvotes_count"
+        )
+        .eq("is_hidden", false)
+        .order("trending_score", { ascending: false })
+        .limit(4),
+    ]);
 
-  const rawTeams = teamsRes.count || 0;
-  const teamsCount = rawTeams > 120 ? `${rawTeams.toLocaleString()}` : "120+";
+    const rawProfiles = profilesRes.count || 0;
+    foundersCount = rawProfiles > 2400 ? `${rawProfiles.toLocaleString()}+` : "2,400+";
 
-  const featuredStartups = featuredRes.data || [];
+    const rawStartups = startupsRes.count || 0;
+    startupsCount = rawStartups > 380 ? `${rawStartups.toLocaleString()}+` : "380+";
+
+    const rawTeams = teamsRes.count || 0;
+    teamsCount = rawTeams > 120 ? `${rawTeams.toLocaleString()}` : "120+";
+
+    featuredStartups = featuredRes.data || [];
+  } catch (err) {
+    // DB unavailable or view not yet migrated — use static fallback values
+    console.error("[TFC Landing] Supabase fetch failed, using fallbacks:", err);
+  }
+
+
 
   return (
     <div className="min-h-screen bg-warm text-ink flex flex-col justify-between selection:bg-orange/20 selection:text-ink">
