@@ -16,7 +16,7 @@ import {
 export const revalidate = 0; // Dynamic server component for live admin data
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard · TFC Connect",
+  title: "Admin Dashboard",
   description: "Administrator controls for verification, reports, collections, and campus chapters.",
 };
 
@@ -88,17 +88,17 @@ export default async function AdminPage() {
   const rawStartups = startupsCountRes.count || 0;
   const acceptedConns = connectionsAcceptedRes.count || 0;
   const totalConns = connectionsTotalRes.count || 1;
-  const acceptanceRate = Math.round((acceptedConns / Math.max(1, totalConns)) * 100) || 38;
+  const acceptanceRate = Math.round((acceptedConns / Math.max(1, totalConns)) * 100);
   const rawTeams = teamsCountRes.count || 0;
 
   const kpis: AdminKPIs = {
-    profilesCount: Math.max(2418, rawProfiles),
-    profilesWeeklyDelta: profilesWkRes.count || 182,
-    startupsCount: Math.max(384, rawStartups),
-    startupsWeeklyDelta: startupsWkRes.count || 27,
+    profilesCount: rawProfiles,
+    profilesWeeklyDelta: profilesWkRes.count || 0,
+    startupsCount: rawStartups,
+    startupsWeeklyDelta: startupsWkRes.count || 0,
     requestAcceptanceRate: acceptanceRate,
-    teamsFormedCount: Math.max(121, rawTeams),
-    teamsFormedWeeklyDelta: teamsWkRes.count || 9,
+    teamsFormedCount: rawTeams,
+    teamsFormedWeeklyDelta: teamsWkRes.count || 0,
   };
 
   // 3. Fetch Verification Queue

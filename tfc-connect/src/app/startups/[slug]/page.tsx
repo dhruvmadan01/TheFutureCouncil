@@ -34,12 +34,12 @@ export async function generateMetadata({
 
   if (!startup) {
     return {
-      title: "Startup Not Found · TFC Connect",
+      title: "Startup Not Found",
     };
   }
 
   return {
-    title: `${startup.name} · TFC Connect`,
+    title: startup.name,
     description: startup.one_liner,
     openGraph: {
       title: `${startup.name} — ${startup.one_liner}`,

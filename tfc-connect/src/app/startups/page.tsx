@@ -7,7 +7,7 @@ import { StartupsDirectoryClient } from "./StartupsDirectoryClient";
 import { CollectionItem, StartupItem } from "./types";
 
 export const metadata: Metadata = {
-  title: "Campus Startups Directory · TFC Connect",
+  title: "Campus Startups Directory",
   description:
     "Discover, support, and join top startups built by student founders across Delhi University, NSUT, DTU, SRCC, IIT Madras and beyond.",
   openGraph: {

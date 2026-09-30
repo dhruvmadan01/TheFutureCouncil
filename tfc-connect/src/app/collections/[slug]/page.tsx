@@ -24,10 +24,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .eq("is_published", true)
     .maybeSingle();
 
-  if (!col) return { title: "Collection — TFC Connect" };
+  if (!col) return { title: "Collection" };
 
   return {
-    title: `${col.title} — Curated Campus Startups | TFC Connect`,
+    title: `${col.title} — Curated Campus Startups`,
     description: col.description || `Browse student startups in ${col.title} on TFC Connect.`,
   };
 }

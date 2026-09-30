@@ -1,27 +1,40 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "600", "800"],
+
+// Fonts are self-hosted (from @fontsource, OFL licence) so builds never depend on Google Fonts.
+const bricolage = localFont({
+  src: [
+    { path: "./fonts/bricolage-grotesque-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/bricolage-grotesque-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/bricolage-grotesque-latin-800-normal.woff2", weight: "800", style: "normal" },
+  ],
   variable: "--font-bricolage",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const instrument = Instrument_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const instrument = localFont({
+  src: [
+    { path: "./fonts/instrument-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/instrument-sans-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/instrument-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-instrument",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["500", "600"],
+const ibmPlexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-plex-mono",
   display: "swap",
+  fallback: ["ui-monospace", "monospace"],
 });
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://connect.thefuturecouncil.in";

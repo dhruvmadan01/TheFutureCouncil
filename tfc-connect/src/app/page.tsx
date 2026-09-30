@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Chip } from "@/components/ui/badge";
 import { LandingFAQ } from "./LandingFAQ";
+import { LandingMobileNav } from "./LandingMobileNav";
 import { ArrowRight, Flame } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -24,8 +25,10 @@ export const metadata: Metadata = {
 export default async function Home() {
   // Graceful fallback if Supabase is unavailable or views don't exist yet
   let user = null;
-  let foundersCount = "2,400+";
-  let startupsCount = "380+";
+  // Only show real numbers, and only once they're meaningful (>= 50).
+  const MIN_PUBLIC_COUNT = 50;
+  let foundersCount: string | null = null;
+  let startupsCount: string | null = null;
 
   interface FeaturedStartup {
     id: string | null;
@@ -63,10 +66,10 @@ export default async function Home() {
     ]);
 
     const rawProfiles = profilesRes.count || 0;
-    foundersCount = rawProfiles > 2400 ? `${rawProfiles.toLocaleString()}+` : "2,400+";
+    foundersCount = rawProfiles >= MIN_PUBLIC_COUNT ? rawProfiles.toLocaleString("en-IN") : null;
 
     const rawStartups = startupsRes.count || 0;
-    startupsCount = rawStartups > 380 ? `${rawStartups.toLocaleString()}+` : "380+";
+    startupsCount = rawStartups >= MIN_PUBLIC_COUNT ? rawStartups.toLocaleString("en-IN") : null;
 
     featuredStartups = featuredRes.data || [];
   } catch (err) {
@@ -142,7 +145,7 @@ export default async function Home() {
               </>
             ) : (
               <>
-                <Link href="/login">
+                <Link href="/login" className="hidden sm:inline-block">
                   <Button variant="ghost" size="sm">
                     Log in
                   </Button>
@@ -154,6 +157,7 @@ export default async function Home() {
                 </Link>
               </>
             )}
+            <LandingMobileNav signedIn={!!user} />
           </div>
         </div>
       </header>
@@ -207,24 +211,32 @@ export default async function Home() {
             {/* Live Stat Counters — only shown if counts are meaningful or DB unavailable (shows static fallback) */}
             <div className="pt-6 border-t border-line/60">
               <div className="flex items-center gap-8 sm:gap-12">
-                <div>
-                  <div className="font-display font-black text-2xl sm:text-3xl text-ink">
-                    {foundersCount}
-                  </div>
-                  <div className="font-sans text-xs text-ink-soft font-medium uppercase tracking-wider">
-                    Founders
-                  </div>
-                </div>
-                <div className="w-[1px] h-8 bg-line" />
-                <div>
-                  <div className="font-display font-black text-2xl sm:text-3xl text-ink">
-                    {startupsCount}
-                  </div>
-                  <div className="font-sans text-xs text-ink-soft font-medium uppercase tracking-wider">
-                    Startups
-                  </div>
-                </div>
-                <div className="w-[1px] h-8 bg-line" />
+                {foundersCount && (
+                  <>
+                    <div>
+                      <div className="font-display font-black text-2xl sm:text-3xl text-ink">
+                        {foundersCount}
+                      </div>
+                      <div className="font-sans text-xs text-ink-soft font-medium uppercase tracking-wider">
+                        Founders
+                      </div>
+                    </div>
+                    <div className="w-[1px] h-8 bg-line" />
+                  </>
+                )}
+                {startupsCount && (
+                  <>
+                    <div>
+                      <div className="font-display font-black text-2xl sm:text-3xl text-ink">
+                        {startupsCount}
+                      </div>
+                      <div className="font-sans text-xs text-ink-soft font-medium uppercase tracking-wider">
+                        Startups
+                      </div>
+                    </div>
+                    <div className="w-[1px] h-8 bg-line" />
+                  </>
+                )}
                 <div>
                   <div className="font-display font-black text-2xl sm:text-3xl text-ink">
                     90+
@@ -516,7 +528,7 @@ export default async function Home() {
                     Be one of the first 50 startups listed
                   </h3>
                   <p className="font-sans text-sm text-ink-soft max-w-sm">
-                    TFC Connect just launched. List your campus startup and get seen by 2,400+ verified student founders across India.
+                    TFC Connect just launched. List your campus startup and get seen by student founders across 90+ campus chapters.
                   </p>
                   <Link
                     href={user ? "/startups/new" : "/login?next=/startups/new"}
