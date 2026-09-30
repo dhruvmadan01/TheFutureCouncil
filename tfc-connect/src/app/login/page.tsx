@@ -90,10 +90,12 @@ export default function LoginPage() {
           </span>
         </Link>
         <Link
-          href="/styleguide"
+          href="https://thefuturecouncil.in"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-xs font-mono uppercase tracking-wider text-ink-soft hover:text-ink transition-colors"
         >
-          Styleguide
+          thefuturecouncil.in ↗
         </Link>
       </div>
 
@@ -238,29 +240,32 @@ export default function LoginPage() {
                 </Button>
               </form>
 
-              {/* Demo Sign-in Option for Quick Preview */}
-              <div className="pt-2 text-center">
-                <button
-                  type="button"
-                  onClick={async () => {
-                    setLoading(true);
-                    setErrorMsg(null);
-                    const { error } = await getSupabase().auth.signInWithPassword({
-                      email: "demo_founder@tfc.internal",
-                      password: "DemoFounderPass123!#",
-                    });
-                    setLoading(false);
-                    if (error) {
-                      setErrorMsg(error.message);
-                    } else {
-                      window.location.href = "/me";
-                    }
-                  }}
-                  className="font-mono text-[11px] text-orange-deep hover:underline uppercase tracking-wider font-semibold"
-                >
-                  ⚡ Quick Demo: Sign in as Ananya Kapoor (Founder)
-                </button>
-              </div>
+              {/* Demo Sign-in — DEV ONLY, never shown in production */}
+              {process.env.NODE_ENV !== "production" &&
+                process.env.NEXT_PUBLIC_ENABLE_DEMO === "true" && (
+                  <div className="pt-2 text-center">
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        setLoading(true);
+                        setErrorMsg(null);
+                        const { error } = await getSupabase().auth.signInWithPassword({
+                          email: "demo_founder@tfc.internal",
+                          password: "DemoFounderPass123!#",
+                        });
+                        setLoading(false);
+                        if (error) {
+                          setErrorMsg(error.message);
+                        } else {
+                          window.location.href = "/me";
+                        }
+                      }}
+                      className="font-mono text-[11px] text-orange-deep hover:underline uppercase tracking-wider font-semibold"
+                    >
+                      ⚡ Quick Demo: Sign in as Ananya Kapoor (Founder)
+                    </button>
+                  </div>
+                )}
             </div>
           )}
 

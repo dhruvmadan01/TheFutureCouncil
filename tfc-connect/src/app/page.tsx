@@ -26,7 +26,6 @@ export default async function Home() {
   let user = null;
   let foundersCount = "2,400+";
   let startupsCount = "380+";
-  let teamsCount = "120+";
 
   interface FeaturedStartup {
     id: string | null;
@@ -50,13 +49,9 @@ export default async function Home() {
     user = u;
 
     // Fetch real counts and featured startups in parallel
-    const [profilesRes, startupsRes, teamsRes, featuredRes] = await Promise.all([
+    const [profilesRes, startupsRes, featuredRes] = await Promise.all([
       supabase.from("profiles").select("*", { count: "exact", head: true }),
       supabase.from("startups").select("*", { count: "exact", head: true }),
-      supabase
-        .from("connections")
-        .select("*", { count: "exact", head: true })
-        .not("teamed_up_at", "is", null),
       supabase
         .from("startups_trending")
         .select(
@@ -72,9 +67,6 @@ export default async function Home() {
 
     const rawStartups = startupsRes.count || 0;
     startupsCount = rawStartups > 380 ? `${rawStartups.toLocaleString()}+` : "380+";
-
-    const rawTeams = teamsRes.count || 0;
-    teamsCount = rawTeams > 120 ? `${rawTeams.toLocaleString()}` : "120+";
 
     featuredStartups = featuredRes.data || [];
   } catch (err) {
@@ -105,12 +97,12 @@ export default async function Home() {
             </Link>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Site navigation">
             <Link
               href="/match"
               className="font-sans text-sm font-medium text-ink-soft hover:text-ink transition-colors"
             >
-              Co-founder Match
+              Co&#8209;founder Match
             </Link>
             <Link
               href="/startups"
@@ -119,17 +111,11 @@ export default async function Home() {
               Startups
             </Link>
             <Link
-              href="/startups"
-              className="font-sans text-sm font-medium text-ink-soft hover:text-ink transition-colors"
-            >
-              Collections
-            </Link>
-            <a
-              href="#how-it-works"
+              href="/#how-it-works"
               className="font-sans text-sm font-medium text-ink-soft hover:text-ink transition-colors"
             >
               How it works
-            </a>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -149,6 +135,7 @@ export default async function Home() {
                   href="/me"
                   className="size-8 rounded-full bg-forest text-warm flex items-center justify-center font-display font-bold text-xs shadow-sm hover:opacity-90 transition-opacity"
                   title="My Profile"
+                  aria-label="My Profile"
                 >
                   Me
                 </Link>
@@ -160,7 +147,7 @@ export default async function Home() {
                     Log in
                   </Button>
                 </Link>
-                <Link href="/login">
+                <Link href="/login?mode=signup">
                   <Button variant="solid" size="sm" className="shadow-sm">
                     Join free
                   </Button>
@@ -189,7 +176,7 @@ export default async function Home() {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-display font-black tracking-tight leading-[1.03] text-ink">
                 Don&apos;t build alone. <br />
-                <span className="text-orange">Find your co-founder.</span>
+                <span className="text-orange">Find your co&#8209;founder.</span>
               </h1>
               <p className="font-sans text-ink-soft text-lg sm:text-xl max-w-xl leading-relaxed">
                 Someone on your campus is looking for exactly you. Match with
@@ -200,13 +187,13 @@ export default async function Home() {
 
             {/* Two Pill CTAs */}
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <Link href={user ? "/match" : "/login"}>
+              <Link href={user ? "/match" : "/login?mode=signup"}>
                 <Button size="lg" variant="solid" className="gap-2 shadow-md px-6 text-sm font-semibold">
-                  Find a co-founder
+                  Find a co&#8209;founder
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>
-              <Link href="/startups/new">
+              <Link href={user ? "/startups/new" : "/login?next=/startups/new"}>
                 <Button
                   size="lg"
                   variant="ghost"
@@ -217,7 +204,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* Live Stat Counters */}
+            {/* Live Stat Counters — only shown if counts are meaningful or DB unavailable (shows static fallback) */}
             <div className="pt-6 border-t border-line/60">
               <div className="flex items-center gap-8 sm:gap-12">
                 <div>
@@ -240,15 +227,15 @@ export default async function Home() {
                 <div className="w-[1px] h-8 bg-line" />
                 <div>
                   <div className="font-display font-black text-2xl sm:text-3xl text-ink">
-                    {teamsCount}
+                    90+
                   </div>
                   <div className="font-sans text-xs text-ink-soft font-medium uppercase tracking-wider">
-                    Teams Formed
+                    Campus Chapters
                   </div>
                 </div>
               </div>
               <p className="font-mono text-[10px] text-ink-soft/80 mt-2 uppercase tracking-wider">
-                Live across 90+ university chapters
+                Across 90+ university chapters in India
               </p>
             </div>
           </div>
@@ -343,7 +330,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. DARK "FOUNDERS FROM" STRIP (THE NIGHT SKY - PDF Page 6) */}
+      {/* 3. DARK "FOUNDERS FROM" STRIP */}
       <section className="bg-ink text-warm py-6 border-y border-line/20 overflow-hidden">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
           <div className="font-mono text-xs font-semibold uppercase tracking-widest text-[#B5A596] shrink-0 flex items-center gap-2">
@@ -362,7 +349,7 @@ export default async function Home() {
               "Ashoka",
               "BITS Pilani",
               "IIT Delhi",
-              "+ 80 chapters",
+              "+ 81 more chapters",
             ].map((college, i) => (
               <span
                 key={i}
@@ -376,8 +363,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 4. "HOW IT WORKS" DASHED PATH IN 3 STEPS (PDF Page 6) */}
-      <section id="how-it-works" className="py-20 max-w-[1240px] mx-auto px-4 sm:px-8">
+      {/* 4. "HOW IT WORKS" DASHED PATH IN 3 STEPS */}
+      <section id="how-it-works" className="py-20 max-w-[1240px] mx-auto px-4 sm:px-8" style={{ scrollMarginTop: "80px" }}>
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
           <div className="inline-flex items-center gap-2">
             <span className="glow-dot" />
@@ -504,7 +491,7 @@ export default async function Home() {
                           {s.name || "Campus Startup"}
                         </h3>
                         <p className="font-sans text-xs text-ink-soft">
-                          {s.industry || "Tech"} · {s.city || "India"}
+                          {s.industry || "Tech"} &middot; {s.city || "India"}
                         </p>
                       </div>
 
@@ -514,170 +501,51 @@ export default async function Home() {
                     </div>
 
                     <div className="pt-4 border-t border-line/50 mt-4 flex items-center justify-between text-[11px] font-mono text-ink-soft">
-                      <span>♥ {s.follows_count || 0} follows</span>
+                      <span>&hearts; {s.follows_count || 0} follows</span>
                       <span className="capitalize">{s.stage || "building"}</span>
                     </div>
                   </Link>
                 ))
               : (
-                  // Fallback Mock items if DB query is empty
-                  [
-                    {
-                      name: "KisanLink",
-                      slug: "kisanlink",
-                      one_liner: "Market access for farmers with direct mandi bidding.",
-                      industry: "AgriTech",
-                      city: "Delhi",
-                      tier: "backed",
-                    },
-                    {
-                      name: "Campus Neural Lab",
-                      slug: "campus-neural-lab",
-                      one_liner: "P2P GPU pooling across dorm rooms and university engineering labs.",
-                      industry: "AI/ML",
-                      city: "New Delhi",
-                      tier: "backed",
-                    },
-                    {
-                      name: "GreenBin",
-                      slug: "greenbin",
-                      one_liner: "Turning campus canteen waste into high-grade organic compost.",
-                      industry: "Climate",
-                      city: "DU",
-                      tier: "verified",
-                    },
-                    {
-                      name: "FeeFlow",
-                      slug: "feeflow",
-                      one_liner: "UPI automated fee collection and reconciliation for offline coaching.",
-                      industry: "FinTech",
-                      city: "Delhi",
-                      tier: "neutral",
-                    },
-                  ].map((s, idx) => (
-                    <Link
-                      key={idx}
-                      href={`/startups`}
-                      className="rounded-2xl border border-line bg-card p-5 flex flex-col justify-between hover:border-ink/20 hover:shadow-md transition-all group"
-                    >
-                      <div className="space-y-3">
-                        <div className="size-11 rounded-xl bg-orange-soft text-orange-deep flex items-center justify-center font-display font-black text-base border border-orange/15">
-                          {s.name.slice(0, 2).toUpperCase()}
-                        </div>
-                        <div>
-                          <h3 className="font-display font-bold text-base text-ink group-hover:text-orange transition-colors">
-                            {s.name}
-                          </h3>
-                          <p className="font-sans text-xs text-ink-soft">
-                            {s.industry} · {s.city}
-                          </p>
-                        </div>
-                        <p className="font-sans text-xs text-ink line-clamp-2">
-                          {s.one_liner}
-                        </p>
-                      </div>
-                      <div className="pt-4 border-t border-line/50 mt-4 flex items-center justify-between text-[11px] font-mono text-ink-soft">
-                        <span>View profile ↗</span>
-                      </div>
-                    </Link>
-                  ))
-                )}
+                // Empty state — no fake data in production
+                <div className="col-span-full flex flex-col items-center justify-center py-16 text-center space-y-4">
+                  <div className="size-14 rounded-2xl bg-orange-soft border border-orange/20 flex items-center justify-center font-display font-black text-2xl text-orange-deep">
+                    🚀
+                  </div>
+                  <h3 className="font-display font-bold text-xl text-ink">
+                    Be one of the first 50 startups listed
+                  </h3>
+                  <p className="font-sans text-sm text-ink-soft max-w-sm">
+                    TFC Connect just launched. List your campus startup and get seen by 2,400+ verified student founders across India.
+                  </p>
+                  <Link
+                    href={user ? "/startups/new" : "/login?next=/startups/new"}
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-orange text-white font-sans font-semibold text-sm hover:bg-orange-deep transition-colors shadow-sm"
+                  >
+                    List your startup
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              )}
           </div>
         </div>
       </section>
 
-      {/* 6. "TEAMED UP ON TFC" STORIES */}
-      <section className="py-20 max-w-[1240px] mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
-          <div className="inline-flex items-center gap-2">
-            <span className="glow-dot" />
-            <span className="eyebrow">COMMUNITY PROOF</span>
+      {/* 6. TESTIMONIALS — hidden until real ones exist */}
+      {process.env.NEXT_PUBLIC_SHOW_TESTIMONIALS === "true" && (
+        <section className="py-20 max-w-[1240px] mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+            <div className="inline-flex items-center gap-2">
+              <span className="glow-dot" />
+              <span className="eyebrow">COMMUNITY PROOF</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-display font-black tracking-tight text-ink">
+              They stopped building alone
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-display font-black tracking-tight text-ink">
-            They stopped building alone
-          </h2>
-          <p className="font-sans text-ink-soft text-base sm:text-lg">
-            Real student founders who found their match, built through the Fit Kit, and shipped.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Story 1 */}
-          <div className="rounded-2xl border border-line bg-card p-6 flex flex-col justify-between space-y-5 shadow-sm">
-            <div className="space-y-3">
-              <span className="font-mono text-xs font-semibold text-orange-deep tracking-wider uppercase">
-                KisanLink · AgriTech
-              </span>
-              <p className="font-sans text-sm text-ink leading-relaxed italic">
-                &ldquo;We met on TFC Connect in week 2 of the semester. Ananya had already built two React Native apps and I had relationships with 40 grain mandis. In 3 weeks we had our first live farmer transaction.&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-line/50 flex items-center gap-3">
-              <div className="size-9 rounded-full bg-forest text-warm flex items-center justify-center font-display font-bold text-xs">
-                RM
-              </div>
-              <div>
-                <div className="font-display font-bold text-xs text-ink">
-                  Rohan Mehta &amp; Ananya Kapoor
-                </div>
-                <div className="font-sans text-[11px] text-ink-soft">
-                  DU &amp; NSUT · Met on TFC Connect 🤝
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Story 2 */}
-          <div className="rounded-2xl border border-line bg-card p-6 flex flex-col justify-between space-y-5 shadow-sm">
-            <div className="space-y-3">
-              <span className="font-mono text-xs font-semibold text-orange-deep tracking-wider uppercase">
-                FeeFlow · FinTech
-              </span>
-              <p className="font-sans text-sm text-ink leading-relaxed italic">
-                &ldquo;Engineers often build without talking to users; commerce folks sell without product. We went through the 10 Fit Kit questions in our first call and agreed on an equal equity split before writing line one.&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-line/50 flex items-center gap-3">
-              <div className="size-9 rounded-full bg-amber-soft text-amber-deep flex items-center justify-center font-display font-bold text-xs">
-                KA
-              </div>
-              <div>
-                <div className="font-display font-bold text-xs text-ink">
-                  Kabir Anand &amp; Siddharth Joshi
-                </div>
-                <div className="font-sans text-[11px] text-ink-soft">
-                  DTU &amp; SRCC · Met on TFC Connect 🤝
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Story 3 */}
-          <div className="rounded-2xl border border-line bg-card p-6 flex flex-col justify-between space-y-5 shadow-sm">
-            <div className="space-y-3">
-              <span className="font-mono text-xs font-semibold text-orange-deep tracking-wider uppercase">
-                Campus Neural Lab · AI/ML
-              </span>
-              <p className="font-sans text-sm text-ink leading-relaxed italic">
-                &ldquo;Both of us wanted to build distributed GPU computing but our college labs were siloed. TFC matched us on skills and working speed within 24 hours. Now we have 48 student nodes pooled.&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-line/50 flex items-center gap-3">
-              <div className="size-9 rounded-full bg-ink text-warm flex items-center justify-center font-display font-bold text-xs">
-                TS
-              </div>
-              <div>
-                <div className="font-display font-bold text-xs text-ink">
-                  Tanvi Saxena &amp; Rahul Verma
-                </div>
-                <div className="font-sans text-[11px] text-ink-soft">
-                  IIT Madras BS &amp; IIIT-D · Met on TFC Connect 🤝
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          {/* Testimonial cards — add real ones here */}
+        </section>
+      )}
 
       {/* 7. FAQ SECTION */}
       <section className="py-20 bg-card/30 border-t border-line">
@@ -715,12 +583,12 @@ export default async function Home() {
               Your co-founder is probably in the library across the lawn. Find them today.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
-              <Link href={user ? "/match" : "/login"}>
+              <Link href={user ? "/match" : "/login?mode=signup"}>
                 <Button size="lg" variant="solid" className="shadow-md px-7 font-semibold">
-                  Find your co-founder →
+                  Find your co&#8209;founder &rarr;
                 </Button>
               </Link>
-              <Link href="/startups/new">
+              <Link href={user ? "/startups/new" : "/login?next=/startups/new"}>
                 <Button
                   size="lg"
                   variant="ghost"
@@ -752,25 +620,35 @@ export default async function Home() {
 
             <div className="flex flex-wrap items-center gap-6 font-sans text-xs text-ink-soft font-medium">
               <Link href="/match" className="hover:text-ink transition-colors">
-                Co-founder Match
+                Co&#8209;founder Match
               </Link>
               <Link href="/startups" className="hover:text-ink transition-colors">
                 Startups Directory
               </Link>
-              <Link
-                href="/templates/trial-project-sprint.html"
+              <a
+                href="https://thefuturecouncil.in"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-ink transition-colors"
               >
-                Sprint Template
-              </Link>
-              <Link
-                href="/templates/cofounder-agreement.html"
+                The Future Council
+              </a>
+              <a
+                href="https://instagram.com/thefuturecouncil.in"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-ink transition-colors"
               >
-                Co-founder Agreement
+                Instagram
+              </a>
+              <a href="mailto:support@thefuturecouncil.in" className="hover:text-ink transition-colors">
+                support@thefuturecouncil.in
+              </a>
+              <Link href="/privacy" className="hover:text-ink transition-colors">
+                Privacy
               </Link>
-              <Link href="/styleguide" className="hover:text-ink transition-colors">
-                Styleguide
+              <Link href="/terms" className="hover:text-ink transition-colors">
+                Terms
               </Link>
             </div>
 
