@@ -359,7 +359,7 @@
                     </label>
                     <label class="radio-pill">
                       <input type="radio" name="fEnrolled" id="fEnrolledNo" value="no" />
-                      <span>Independent / Gap Year</span>
+                      <span>No</span>
                     </label>
                   </div>
                 </div>
@@ -790,10 +790,10 @@
     // Gather form payload across all steps
     function gatherFormData() {
       const isEnrolled = enrolledYes.checked;
-      const colName = (document.getElementById('fCollegeName')?.value || '').trim() || (isEnrolled ? 'College Student' : 'Independent');
+      const colName = (document.getElementById('fCollegeName')?.value || '').trim() || (isEnrolled ? 'College Student' : 'No');
       const colYear = document.getElementById('fCollegeYear')?.value || '';
       const colCourse = (document.getElementById('fCollegeCourse')?.value || '').trim();
-      const collegeSummary = isEnrolled ? `${colName}${colYear ? ' (' + colYear + (colCourse ? ', ' + colCourse : '') + ')' : ''}` : 'Independent / Gap Year';
+      const collegeSummary = isEnrolled ? `${colName}${colYear ? ' (' + colYear + (colCourse ? ', ' + colCourse : '') + ')' : ''}` : 'No';
 
       return {
         name: (document.getElementById('fName')?.value || '').trim(),
