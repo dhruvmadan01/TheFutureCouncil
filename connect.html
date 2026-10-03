@@ -18,7 +18,7 @@
   <meta property="og:type" content="website" />
 
   <!-- Instant Meta Refresh -->
-  <meta http-equiv="refresh" content="0; url=https://connect.thefuturecouncil.in" />
+  <meta http-equiv="refresh" content="0; url=/" />
 
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,13 +145,10 @@
   </style>
 
   <script>
-    // Preserve subpaths, query parameters and hash upon transfer
     try {
-      var currentPath = window.location.pathname.replace(/^\/connect(\.html)?/, '');
-      var dest = 'https://connect.thefuturecouncil.in' + currentPath + window.location.search + window.location.hash;
-      window.location.replace(dest);
+      window.location.replace('/');
     } catch (e) {
-      window.location.href = 'https://connect.thefuturecouncil.in';
+      window.location.href = '/';
     }
   </script>
 </head>

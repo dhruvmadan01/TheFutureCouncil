@@ -90,7 +90,6 @@ function generateChapterHtml(ch) {
       </a>
       <ul class="nav-links">
         <li><a href="/chapters" class="active">Chapters</a></li>
-        <li><a href="/connect">Connect</a></li>
         <li><a href="/launchpad">Launchpad</a></li>
         <li><a href="/why">Why Build</a></li>
         <li><a href="/about">About TFC</a></li>
@@ -105,7 +104,6 @@ function generateChapterHtml(ch) {
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="/chapters" class="active">All Chapters <span>→</span></a>
-    <a href="/connect">Connect <span>→</span></a>
     <a href="/launchpad">Launchpad <span>→</span></a>
     <a href="/why">Why Build <span>→</span></a>
     <a href="/about">About TFC <span>→</span></a>
@@ -234,7 +232,6 @@ function generateChapterHtml(ch) {
           <h4>Ecosystem</h4>
           <ul>
             <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/connect">TFC Connect</a></li>
             <li><a href="/launchpad">Launchpad Fellowship</a></li>
             <li><a href="/why">Why Build</a></li>
             <li><a href="/about">About TFC</a></li>
