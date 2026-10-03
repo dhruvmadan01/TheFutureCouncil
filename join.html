@@ -214,14 +214,16 @@
       margin-right: 4px;
     }
 
-    .skill-pill.active {
+    .skill-pill.active,
+    .skill-pill:has(input:checked) {
       border-color: #E2542A;
       background: #FFF4E8;
       color: #0F172A;
       font-weight: 700;
     }
 
-    .skill-pill.active::before {
+    .skill-pill.active::before,
+    .skill-pill:has(input:checked)::before {
       display: inline-block;
     }
 
@@ -634,6 +636,8 @@
   <script src="/tfc-shared.js"></script>
   <script>
   (function(){
+    const urlParams = new URLSearchParams(window.location.search);
+
     // Plan Switcher Logic
     let currentPlan = 'member';
     const tabMember = document.getElementById('tabMember');
@@ -712,10 +716,14 @@
     }
 
     // Toggle skill pill checkboxes via change listener (syncs visual state)
-    document.querySelectorAll('.skill-pill input[name="skills"]').forEach(cb => {
-      const pill = cb.closest('.skill-pill');
+    document.querySelectorAll('.skill-pill').forEach(pill => {
+      const cb = pill.querySelector('input[name="skills"]');
+      if (!cb) return;
       const sync = () => pill.classList.toggle('active', cb.checked);
       cb.addEventListener('change', sync);
+      pill.addEventListener('click', () => {
+        setTimeout(sync, 10);
+      });
       sync();
     });
 
