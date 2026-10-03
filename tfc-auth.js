@@ -360,10 +360,11 @@
   }
 
   // --- Execute Google Sign-in Flow ---
-  async function executeGoogleFlow({ context, onSuccess, container }) {
-    const googleBtn = container.querySelector('#tfcGoogleAuthBtn');
-    const btnText = container.querySelector('#tfcGoogleBtnText');
-    const alertContainer = container.querySelector('#tfcAuthAlertContainer');
+  async function executeGoogleFlow({ context, onSuccess, container, buttonElement, alertElement }) {
+    const googleBtn = buttonElement || (container ? container.querySelector('#tfcGoogleAuthBtn') : null);
+    const btnText = googleBtn ? (googleBtn.querySelector('#tfcGoogleBtnText') || googleBtn.querySelector('span') || googleBtn) : null;
+    const alertContainer = alertElement || (container ? container.querySelector('#tfcAuthAlertContainer') : null);
+    const originalBtnHtml = googleBtn ? googleBtn.innerHTML : '';
 
     if (googleBtn) {
       googleBtn.disabled = true;
@@ -377,6 +378,7 @@
     }
     if (alertContainer) {
       alertContainer.innerHTML = '';
+      alertContainer.style.display = 'none';
     }
 
     try {
@@ -399,37 +401,42 @@
       persistSession(existingUser, true);
       syncToZohoCrm(existingUser, 'Google Auth Sign-in');
       closeModal();
+      if (googleBtn) {
+        googleBtn.disabled = false;
+        googleBtn.classList.remove('loading');
+        if (originalBtnHtml) googleBtn.innerHTML = originalBtnHtml;
+      }
       if (typeof onSuccess === 'function') onSuccess(existingUser);
     } catch (err) {
       console.error('[TFCAuth] Auth failure:', err);
       if (googleBtn) {
         googleBtn.disabled = false;
         googleBtn.classList.remove('loading');
-      }
-      if (btnText) {
-        btnText.textContent = 'Continue with Google';
+        if (originalBtnHtml) googleBtn.innerHTML = originalBtnHtml;
       }
 
       if (alertContainer) {
+        alertContainer.style.display = 'block';
         if (err.isCancelled) {
           // User intentionally closed or cancelled the popup - cleanly reset
           alertContainer.innerHTML = '';
+          alertContainer.style.display = 'none';
         } else if (err.isPopupBlocked) {
           alertContainer.innerHTML = `
-            <div class="tfc-auth-alert tfc-auth-alert-blocked">
-              <span>⚠️ Popup blocked — <button type="button" class="tfc-auth-retry-btn" id="tfcRetryPopupBtn">click here to continue</button></span>
+            <div class="tfc-auth-alert tfc-auth-alert-blocked" style="background:#FFFBEB; border:1px solid #FCD34D; color:#92400E; padding:10px 14px; border-radius:8px; font-size:13px; margin-top:10px;">
+              <span>⚠️ Popup blocked — <button type="button" class="tfc-auth-retry-btn" id="tfcRetryPopupBtn" style="background:none; border:none; color:#C2410C; font-weight:700; text-decoration:underline; cursor:pointer;">click here to continue</button></span>
             </div>
           `;
           const retryBtn = alertContainer.querySelector('#tfcRetryPopupBtn');
           if (retryBtn) {
             retryBtn.addEventListener('click', () => {
-              executeGoogleFlow({ context, onSuccess, container });
+              executeGoogleFlow({ context, onSuccess, container, buttonElement, alertElement });
             });
           }
         } else {
           alertContainer.innerHTML = `
-            <div class="tfc-auth-alert tfc-auth-alert-error">
-              <span>Something went wrong — try again.</span>
+            <div class="tfc-auth-alert tfc-auth-alert-error" style="background:#FEF2F2; border:1px solid #FECACA; color:#991B1B; padding:10px 14px; border-radius:8px; font-size:13px; margin-top:10px;">
+              <span>${err.message || 'Something went wrong — try again.'}</span>
             </div>
           `;
         }
@@ -489,6 +496,9 @@
   function isLocalEnvironment() {
     return window.location.hostname === 'localhost' || 
            window.location.hostname === '127.0.0.1' || 
+           window.location.hostname.endsWith('.vercel.app') ||
+           window.location.hostname.includes('192.168.') ||
+           window.location.hostname.includes('10.0.') ||
            window.location.protocol === 'file:';
   }
 
@@ -1387,6 +1397,7 @@
     syncToZoho: syncToZohoCrm,
     init: function () {
       loadStoredSession();
+      loadGoogleSDK();
       updateNavUI();
       notifyListeners();
     },
@@ -1425,6 +1436,15 @@
     },
     openLoginModal: function (options) {
       openLoginModal(options);
+    },
+    signInWithGoogle: function (options = {}) {
+      return executeGoogleFlow({
+        context: options.context || 'join',
+        onSuccess: options.onSuccess,
+        container: null,
+        buttonElement: options.buttonElement || null,
+        alertElement: options.alertElement || null
+      });
     },
     closeModal: function () {
       closeModal();

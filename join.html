@@ -19,12 +19,14 @@
 
   <!-- Single Source of Truth Config -->
   <script src="/tfc-config.js"></script>
+  <!-- Google Identity Services SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <!-- Supabase & Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/mixpanel.min.js"></script>
   <script src="/tfc-analytics.js"></script>
   <!-- Google Authentication & User State Engine -->
-  <script src="/tfc-auth.js" defer></script>
+  <script src="/tfc-auth.js"></script>
 
   <style>
     .join-hero {
@@ -796,7 +798,16 @@
     }
 
     function triggerGoogleLogin() {
-      if (window.TFCAuth && typeof window.TFCAuth.openLoginModal === 'function') {
+      if (window.TFCAuth && typeof window.TFCAuth.signInWithGoogle === 'function') {
+        window.TFCAuth.signInWithGoogle({
+          context: 'join',
+          buttonElement: btnJoinGoogle,
+          alertElement: errorBox,
+          onSuccess: (user) => {
+            updateGoogleAuthUI(user);
+          }
+        });
+      } else if (window.TFCAuth && typeof window.TFCAuth.openLoginModal === 'function') {
         window.TFCAuth.openLoginModal({
           context: 'join',
           onSuccess: (user) => {
