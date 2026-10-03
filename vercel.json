@@ -57,6 +57,14 @@
     {
       "source": "/cancellation-and-refund",
       "destination": "/refund.html"
+    },
+    {
+      "source": "/public/logos/:path*",
+      "destination": "/logos/:path*"
+    },
+    {
+      "source": "/public/:path*",
+      "destination": "/:path*"
     }
   ]
 }

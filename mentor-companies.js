@@ -11,21 +11,21 @@
   }
 })(typeof self !== 'undefined' ? self : this, function() {
   const companies = [
-    { name: 'Google', logo: '/public/logos/google.svg' },
-    { name: 'Microsoft', logo: '/public/logos/microsoft.svg' },
-    { name: 'Amazon', logo: '/public/logos/amazon.svg' },
-    { name: 'Flipkart', logo: '/public/logos/flipkart.svg' },
-    { name: 'IBM', logo: '/public/logos/ibm.svg' },
-    { name: 'Uber', logo: '/public/logos/uber.svg' },
-    { name: 'Zomato', logo: '/public/logos/zomato.svg' },
-    { name: 'Swiggy', logo: '/public/logos/swiggy.svg' },
-    { name: 'Razorpay', logo: '/public/logos/razorpay.svg' }
+    { name: 'Google', logo: '/logos/google.svg' },
+    { name: 'Microsoft', logo: '/logos/microsoft.svg' },
+    { name: 'Amazon', logo: '/logos/amazon.svg' },
+    { name: 'Flipkart', logo: '/logos/flipkart.svg' },
+    { name: 'IBM', logo: '/logos/ibm.svg' },
+    { name: 'Uber', logo: '/logos/uber.svg' },
+    { name: 'Zomato', logo: '/logos/zomato.svg' },
+    { name: 'Swiggy', logo: '/logos/swiggy.svg' },
+    { name: 'Razorpay', logo: '/logos/razorpay.svg' }
   ];
 
   function createItemHTML(company) {
     return `
       <div class="marquee-item">
-        <img src="${company.logo}" alt="${company.name} logo" class="marquee-logo" loading="lazy" onerror="if(!this.dataset.retried){this.dataset.retried='true';if(this.src.indexOf('/public/logos/')!==-1){this.src=this.src.replace('/public/logos/','/logos/');}else if(this.src.indexOf('/logos/')!==-1){this.src=this.src.replace('/logos/','/public/logos/');}}" />
+        <img src="${company.logo}" alt="${company.name} logo" class="marquee-logo" loading="lazy" />
         <span class="marquee-name">${company.name}</span>
       </div>
     `.trim();
