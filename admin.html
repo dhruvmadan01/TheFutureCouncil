@@ -146,7 +146,7 @@
           🎓 Ambassador Milestones
         </button>
         <button id="tabBtnFellowship" onclick="switchAdminSubTab('fellowship')" class="tfc-subtab-pill">
-          ⚡ Fellowship '26 Queue
+          ⚡ Launchpad Queue
         </button>
       </div>
 
@@ -551,7 +551,7 @@
             <div>
               <span class="text-xs font-black uppercase tracking-wider text-orange-600 bg-orange-100 px-2.5 py-1 rounded-full border border-orange-300 inline-block mb-2">Admissions Pipeline</span>
               <h2 class="text-2xl font-black uppercase tracking-tight text-zinc-900">
-                ⚡ Fellowship '26 Manual Verification Queue
+                ⚡ Launchpad Manual Verification Queue
               </h2>
               <p class="text-sm text-zinc-600 font-medium mt-1 max-w-2xl">
                 Manual substitute for payment gateway webhooks. Cross-reference 12-digit UTRs and screenshot proofs against your bank statement/UPI app, mark payments as verified, and trigger interview scheduling confirmations.
@@ -1714,7 +1714,7 @@
                 if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
                   return `
                     <div style="background:#fff3e0; border:2px solid #ff9e59; padding:10px; border-radius:4px; font-size:0.85rem; font-weight:700;">
-                      <span style="color:#d9480f; font-size:0.75rem; text-transform:uppercase; font-weight:900; display:block; margin-bottom:4px;">🚀 Fellowship '26 Candidate</span>
+                      <span style="color:#d9480f; font-size:0.75rem; text-transform:uppercase; font-weight:900; display:block; margin-bottom:4px;">🚀 Launchpad Candidate</span>
                       <div>Enrolled: <strong>${enrolled || 'Yes'}</strong> | Team Size: <strong>${teamSize || '1'}</strong> | Ref: <strong>${chapterRef || 'direct'}</strong></div>
                       ${collegeName ? `<div>College: <strong>${collegeName}</strong> (Year: ${collegeYear || 'N/A'}, Course: ${collegeCourse || 'N/A'})</div>` : ''}
                     </div>
@@ -2309,10 +2309,10 @@
         const applicant = cachedFellowshipApplicants.find(a => a.email === email);
         if (!applicant) return;
 
-        const subject = `Fellowship '26 Application Confirmed — Next Steps | The Future Council`;
+        const subject = `Launchpad Application Confirmed — Next Steps | The Future Council`;
         const body = `Hi ${applicant.name},
 
-Congratulations! We have received and verified your ₹999 Fellowship '26 registration pass (UTR: ${applicant.utr || 'Verified'}).
+Congratulations! We have received and verified your ₹999 Launchpad registration pass (UTR: ${applicant.utr || 'Verified'}).
 
 Your application is now officially under admissions board review. You will receive your 1-on-1 interview slot details within 24 hours.
 

@@ -219,9 +219,9 @@
   // --- Context-Specific Titles and Copy ---
   const CONTEXT_CONFIG = {
     fellowship: {
-      headline: 'Sign in to Fellowship',
-      subtext: 'Google sign-in is required to save your fellowship application and access your status dashboard.',
-      role: 'Fellowship Applicant'
+      headline: 'Sign in to Launchpad',
+      subtext: 'Google sign-in is required to save your Launchpad application and access your status dashboard.',
+      role: 'Launchpad Applicant'
     },
     ambassador: {
       headline: 'Ambassador Sign-in',
@@ -968,7 +968,7 @@
           ${fieldsHtml}
 
           <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg" style="width: 100%; margin-top: 8px;">
-            Continue to ${context === 'fellowship' ? 'Fellowship Application' : context === 'ambassador' ? 'Ambassador Portal' : 'Council'} →
+            Continue to ${context === 'fellowship' ? 'Launchpad Application' : context === 'ambassador' ? 'Ambassador Portal' : 'Council'} →
           </button>
         </div>
       </form>
@@ -1161,8 +1161,8 @@
                 ${currentUser.member_id ? `<div class="tfc-user-dropdown-id">ID: ${currentUser.member_id}</div>` : ''}
               </div>
               <div class="tfc-user-dropdown-divider"></div>
-              <a href="fellowship.html#apply" class="tfc-user-dropdown-link" role="menuitem">
-                <span>🚀 Fellowship Application</span>
+              <a href="/launchpad/fellowship" class="tfc-user-dropdown-link" role="menuitem">
+                <span>🚀 Launchpad Application</span>
               </a>
               <a href="ambassador.html" class="tfc-user-dropdown-link" role="menuitem">
                 <span>🎓 Ambassador Console</span>
@@ -1210,7 +1210,7 @@
           primaryBtn.className = 'tfc-btn tfc-btn-primary';
           if (isFellowshipPage) {
             primaryBtn.href = '#apply';
-            primaryBtn.innerHTML = `Apply for Fellowship '26 →`;
+            primaryBtn.innerHTML = `Apply to Launchpad →`;
             primaryBtn.onclick = (e) => {
               const applySec = document.getElementById('apply');
               if (applySec) {
@@ -1221,8 +1221,8 @@
           } else {
             const hasJoinedCouncil = window.TFCAuth.isCouncilMember(currentUser);
             if (hasJoinedCouncil) {
-              primaryBtn.href = 'fellowship.html';
-              primaryBtn.innerHTML = `Fellowship '26`;
+              primaryBtn.href = '/launchpad';
+              primaryBtn.innerHTML = `Launchpad`;
               primaryBtn.onclick = null;
             } else {
               primaryBtn.href = 'join.html';
@@ -1242,7 +1242,7 @@
           if (isFellowshipPage) {
             primaryBtn.className = 'tfc-btn tfc-btn-primary';
             primaryBtn.href = '#apply';
-            primaryBtn.innerHTML = `Apply for Fellowship '26 →`;
+            primaryBtn.innerHTML = `Apply to Launchpad →`;
             primaryBtn.onclick = (e) => {
               const applySec = document.getElementById('apply');
               if (applySec) {
@@ -1306,7 +1306,7 @@
           mobileActionBtn.style.width = '100%';
           if (isFellowshipPage) {
             mobileActionBtn.href = '#apply';
-            mobileActionBtn.innerHTML = "Apply for Fellowship '26 →";
+            mobileActionBtn.innerHTML = "Apply to Launchpad →";
             mobileActionBtn.onclick = () => {
               const closeBtn = menu.querySelector('.tfc-mobile-menu-close');
               if (closeBtn) closeBtn.click();
@@ -1314,8 +1314,8 @@
           } else {
             const hasJoinedCouncil = window.TFCAuth.isCouncilMember(currentUser);
             if (hasJoinedCouncil) {
-              mobileActionBtn.href = 'fellowship.html';
-              mobileActionBtn.innerHTML = "Fellowship '26 →";
+              mobileActionBtn.href = '/launchpad';
+              mobileActionBtn.innerHTML = "Launchpad →";
               mobileActionBtn.onclick = null;
             } else {
               mobileActionBtn.href = 'join.html';
@@ -1333,7 +1333,7 @@
             mobileActionBtn.className = 'tfc-btn tfc-btn-primary';
             mobileActionBtn.style.width = '100%';
             mobileActionBtn.href = '#apply';
-            mobileActionBtn.innerHTML = "Apply for Fellowship '26 →";
+            mobileActionBtn.innerHTML = "Apply to Launchpad →";
             mobileActionBtn.onclick = () => {
               const closeBtn = menu.querySelector('.tfc-mobile-menu-close');
               if (closeBtn) closeBtn.click();

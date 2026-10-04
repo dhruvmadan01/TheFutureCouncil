@@ -46,7 +46,7 @@ async function runTests() {
       kind: "startup",
       target_id: startup.id,
       submitted_by: adminProfile.id,
-      evidence: "Official Launchpad fellowship admission letter & registered trademark.",
+      evidence: "Official Launchpad admission letter & registered trademark.",
       status: "pending",
     })
     .select()

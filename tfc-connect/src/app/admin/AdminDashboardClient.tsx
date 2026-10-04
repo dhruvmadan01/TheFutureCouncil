@@ -1008,11 +1008,11 @@ export function AdminDashboardClient({
             <div className="rounded-2xl border-2 border-orange/20 bg-gradient-to-br from-card to-orange-soft/30 p-6 space-y-2">
               <h2 className="font-display font-black text-2xl text-ink flex items-center gap-2">
                 <Sparkles className="size-5 text-orange" />
-                Launchpad Fellowship Signal
+                Launchpad Signal
               </h2>
               <p className="font-sans text-sm text-ink-soft max-w-2xl leading-relaxed">
                 Teams formed on TFC Connect in the last 30 days that have actively shipped 3+ updates.
-                These are top candidates for early access admission into The Future Council Launchpad Fellowship &apos;27.
+                These are top candidates for early access admission into The Future Council Launchpad &apos;27.
               </p>
             </div>
 

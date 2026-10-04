@@ -5,6 +5,8 @@
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/join.html", "destination": "/join", "permanent": true },
     { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/team", "destination": "/about#team", "permanent": false },
+    { "source": "/team.html", "destination": "/about#team", "permanent": true },
     { "source": "/school.html", "destination": "/chapters", "permanent": true },
     { "source": "/school", "destination": "/chapters", "permanent": true },
     { "source": "/school/library", "destination": "/resources", "permanent": true },
