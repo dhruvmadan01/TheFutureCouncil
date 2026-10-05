@@ -76,29 +76,8 @@
   updateDeadlines();
   setInterval(updateDeadlines, 30000);
 
-  // Sticky bottom bar & Chatbot scroll coordination
+  // Sticky bottom bar visibility
   const bar = document.getElementById('bar');
-  let isChatOpen = false;
-
-  function updateChatPosition() {
-    if (isChatOpen) {
-      document.documentElement.style.setProperty('--tfc-chat-bottom', '8px');
-      return;
-    }
-    const isBarVisible = bar && !bar.classList.contains('hide');
-    const isMobile = window.innerWidth <= 640;
-    let bottomVal;
-    if (isBarVisible) {
-      bottomVal = isMobile ? 'calc(58px + env(safe-area-inset-bottom, 0px) + 8px)' : '72px';
-    } else {
-      bottomVal = isMobile ? 'calc(16px + env(safe-area-inset-bottom, 0px))' : '20px';
-    }
-    document.documentElement.style.setProperty('--tfc-chat-bottom', bottomVal);
-    document.body.classList.toggle('tfc-bar-visible', isBarVisible);
-  }
-
-  window.addEventListener('resize', updateChatPosition, { passive: true });
-
   if (bar) {
     const stepEl = document.getElementById('step');
     window.addEventListener('scroll', () => {
@@ -107,7 +86,6 @@
         const sr = stepEl.getBoundingClientRect();
         if (y < 250 || (sr.top <= 0 && sr.bottom > 0)) {
           bar.classList.add('hide');
-          updateChatPosition();
           return;
         }
       }
@@ -116,11 +94,8 @@
       } else {
         bar.classList.add('hide');
       }
-      updateChatPosition();
     }, { passive: true });
   }
-
-  updateChatPosition();
 
   // Active link highlighter
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
@@ -139,98 +114,4 @@
       cta.setAttribute('href', config.APPLY_URL);
     });
   }
-
-  // Zapier Interfaces Chatbot Embed - Clean positioning & fluid transitions
-  (function initZapierChatbot() {
-    function enhanceBot(bot) {
-      if (!bot) return;
-
-      bot.setAttribute('style-override', 'bottom: var(--tfc-chat-bottom, 20px) !important; right: var(--tfc-chat-right, 20px) !important;');
-
-      function injectShadowStyle() {
-        if (!bot.shadowRoot) return false;
-        if (bot.shadowRoot.getElementById('tfc-chatbot-style')) return true;
-
-        const style = document.createElement('style');
-        style.id = 'tfc-chatbot-style';
-        style.textContent = `
-          iframe.is-zpopup {
-            transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            transform-origin: bottom right !important;
-          }
-          iframe.is-zpopup.is-zpopup__closed {
-            bottom: var(--tfc-chat-bottom, 20px) !important;
-            right: var(--tfc-chat-right, 20px) !important;
-            transform: scale(var(--tfc-chat-scale, 1)) !important;
-          }
-          iframe.is-zpopup.is-zpopup__closed:hover {
-            transform: scale(calc(var(--tfc-chat-scale, 1) * 1.05)) !important;
-          }
-          iframe.is-zpopup.is-zpopup__closed:active {
-            transform: scale(calc(var(--tfc-chat-scale, 1) * 0.96)) !important;
-          }
-          iframe.is-zpopup.is-zpopup__opened {
-            bottom: 8px !important;
-            right: 8px !important;
-            transform: none !important;
-          }
-        `;
-        bot.shadowRoot.appendChild(style);
-        return true;
-      }
-
-      if (!injectShadowStyle()) {
-        const obs = new MutationObserver(() => {
-          if (injectShadowStyle()) obs.disconnect();
-        });
-        obs.observe(bot, { childList: true, subtree: true });
-        const timer = setInterval(() => {
-          if (injectShadowStyle()) clearInterval(timer);
-        }, 80);
-        setTimeout(() => clearInterval(timer), 6000);
-      }
-    }
-
-    // Listen to Zapier iframe open/close control messages
-    window.addEventListener('message', (e) => {
-      if (e.data === 'zChatbotOpened') {
-        isChatOpen = true;
-        updateChatPosition();
-      } else if (e.data === 'zChatbotClosed') {
-        isChatOpen = false;
-        updateChatPosition();
-      }
-    });
-
-    function inject() {
-      let bot = document.querySelector('zapier-interfaces-chatbot-embed');
-
-      if (!document.querySelector('script[src*="zapier-interfaces"]')) {
-        const s = document.createElement('script');
-        s.async = true;
-        s.type = 'module';
-        s.src = 'https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js';
-        document.head.appendChild(s);
-      }
-
-      if (!bot) {
-        bot = document.createElement('zapier-interfaces-chatbot-embed');
-        bot.setAttribute('is-popup', 'true');
-        bot.setAttribute('chatbot-id', 'cmuvqje8m007k12f7521a40ah');
-        bot.setAttribute('tracked-params', 'utm_source,utm_medium,utm_campaign,gclid,fbclid');
-        document.body.appendChild(bot);
-      }
-
-      enhanceBot(bot);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject);
-    } else {
-      inject();
-    }
-  })();
 })();
-
-
-
