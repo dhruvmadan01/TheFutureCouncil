@@ -114,4 +114,32 @@
       cta.setAttribute('href', config.APPLY_URL);
     });
   }
+
+  // Zapier Interfaces Chatbot Embed
+  (function initZapierChatbot() {
+    function inject() {
+      if (document.querySelector('zapier-interfaces-chatbot-embed')) return;
+
+      if (!document.querySelector('script[src*="zapier-interfaces"]')) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.type = 'module';
+        s.src = 'https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js';
+        document.head.appendChild(s);
+      }
+
+      const bot = document.createElement('zapier-interfaces-chatbot-embed');
+      bot.setAttribute('is-popup', 'true');
+      bot.setAttribute('chatbot-id', 'cmuvqje8m007k12f7521a40ah');
+      bot.setAttribute('tracked-params', 'utm_source,utm_medium,utm_campaign,gclid,fbclid');
+      document.body.appendChild(bot);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', inject);
+    } else {
+      inject();
+    }
+  })();
 })();
+
