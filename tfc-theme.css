@@ -813,19 +813,21 @@ p { margin: 0; }
   .bar .t .long { display: none; }
 }
 
-/* Ensure sticky deadline bar has breathing room on narrow screens */
-@media (max-width: 640px) {
-  .bar {
-    padding-right: calc(var(--gut) + 72px);
-  }
-}
-
 /* ==========================================================================
-   ZAPIER CHATBOT CLEAN DYNAMIC POSITIONING
+   ZAPIER CHATBOT DYNAMIC POSITIONING
    ========================================================================== */
 :root {
   --tfc-chat-bottom: 20px;
   --tfc-chat-right: 20px;
+  --tfc-chat-scale: 1;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --tfc-chat-bottom: 16px;
+    --tfc-chat-right: 14px;
+    --tfc-chat-scale: 0.88;
+  }
 }
 
 

@@ -86,10 +86,18 @@
       return;
     }
     const isBarVisible = bar && !bar.classList.contains('hide');
-    const bottomVal = isBarVisible ? '74px' : '20px';
+    const isMobile = window.innerWidth <= 640;
+    let bottomVal;
+    if (isBarVisible) {
+      bottomVal = isMobile ? 'calc(58px + env(safe-area-inset-bottom, 0px) + 8px)' : '72px';
+    } else {
+      bottomVal = isMobile ? 'calc(16px + env(safe-area-inset-bottom, 0px))' : '20px';
+    }
     document.documentElement.style.setProperty('--tfc-chat-bottom', bottomVal);
     document.body.classList.toggle('tfc-bar-visible', isBarVisible);
   }
+
+  window.addEventListener('resize', updateChatPosition, { passive: true });
 
   if (bar) {
     const stepEl = document.getElementById('step');
@@ -148,16 +156,18 @@
         style.textContent = `
           iframe.is-zpopup {
             transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transform-origin: bottom right !important;
           }
           iframe.is-zpopup.is-zpopup__closed {
             bottom: var(--tfc-chat-bottom, 20px) !important;
             right: var(--tfc-chat-right, 20px) !important;
+            transform: scale(var(--tfc-chat-scale, 1)) !important;
           }
           iframe.is-zpopup.is-zpopup__closed:hover {
-            transform: scale(1.05) !important;
+            transform: scale(calc(var(--tfc-chat-scale, 1) * 1.05)) !important;
           }
           iframe.is-zpopup.is-zpopup__closed:active {
-            transform: scale(0.96) !important;
+            transform: scale(calc(var(--tfc-chat-scale, 1) * 0.96)) !important;
           }
           iframe.is-zpopup.is-zpopup__opened {
             bottom: 8px !important;
