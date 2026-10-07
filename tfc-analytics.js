@@ -555,6 +555,86 @@
     // Step state helper
     setCurrentStep: function (step) {
       appSession.currentStep = step;
+    },
+
+    /**
+     * Event: investor_application_started
+     */
+    trackInvestorApplicationStarted: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      safeTrack('investor_application_started', {
+        acquisition_channel: channel,
+        firm: options.firm || '',
+        page_path: window.location.pathname
+      });
+    },
+
+    /**
+     * Event: investor_application_completed
+     */
+    trackInvestorApplicationCompleted: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      if (options.email && window.mixpanel) {
+        try {
+          window.mixpanel.identify(options.email);
+          if (window.mixpanel.people) {
+            window.mixpanel.people.set({
+              $name: options.name || '',
+              $email: options.email,
+              firm: options.firm || '',
+              cheque_size: options.cheque_size || '',
+              tier: 'Investor'
+            });
+          }
+        } catch (e) {}
+      }
+      safeTrack('investor_application_completed', {
+        acquisition_channel: channel,
+        firm: options.firm || '',
+        cheque_size: options.cheque_size || '',
+        stage: options.stage || '',
+        page_path: window.location.pathname
+      });
+    },
+
+    /**
+     * Event: mentor_application_started
+     */
+    trackMentorApplicationStarted: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      safeTrack('mentor_application_started', {
+        acquisition_channel: channel,
+        company: options.company || '',
+        page_path: window.location.pathname
+      });
+    },
+
+    /**
+     * Event: mentor_application_completed
+     */
+    trackMentorApplicationCompleted: function (options = {}) {
+      const channel = options.acquisition_channel || detectAcquisitionChannel();
+      if (options.email && window.mixpanel) {
+        try {
+          window.mixpanel.identify(options.email);
+          if (window.mixpanel.people) {
+            window.mixpanel.people.set({
+              $name: options.name || '',
+              $email: options.email,
+              company: options.company || '',
+              expertise: options.expertise || '',
+              tier: 'Mentor'
+            });
+          }
+        } catch (e) {}
+      }
+      safeTrack('mentor_application_completed', {
+        acquisition_channel: channel,
+        company: options.company || '',
+        expertise: options.expertise || '',
+        commitment: options.commitment || '',
+        page_path: window.location.pathname
+      });
     }
   };
 

@@ -35,7 +35,11 @@
     { "source": "/fellowship.html", "destination": "/launchpad/fellowship", "permanent": true },
     { "source": "/fellowship", "destination": "/launchpad/fellowship", "permanent": true },
     { "source": "/partners.html", "destination": "/about/partners", "permanent": true },
-    { "source": "/partners", "destination": "/about/partners", "permanent": true }
+    { "source": "/partners", "destination": "/about/partners", "permanent": true },
+    { "source": "/investors.html", "destination": "/investors", "permanent": true },
+    { "source": "/investor", "destination": "/investors", "permanent": true },
+    { "source": "/mentors.html", "destination": "/mentors", "permanent": true },
+    { "source": "/mentor", "destination": "/mentors", "permanent": true }
   ],
   "rewrites": [
     {

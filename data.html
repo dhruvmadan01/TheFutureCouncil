@@ -177,8 +177,16 @@
       <!-- SUB-NAVIGATION PILL TABS -->
       <div class="flex gap-3 mb-6 overflow-x-auto pb-1">
         <button id="tabBtnLeads" class="tfc-subtab-pill active" onclick="switchCrmSubTab('leads')">
-          <span>📋 CRM Contacts & Leads</span>
+          <span>📋 All Leads & Contacts</span>
           <span class="subtab-badge" id="tabBadgeLeads">0</span>
+        </button>
+        <button id="tabBtnInvestors" class="tfc-subtab-pill" onclick="switchCrmSubTab('investors')">
+          <span>💼 Investors Network</span>
+          <span class="subtab-badge" id="tabBadgeInvestors" style="background: rgba(217, 119, 6, 0.15); color: #B45309;">0</span>
+        </button>
+        <button id="tabBtnMentors" class="tfc-subtab-pill" onclick="switchCrmSubTab('mentors')">
+          <span>🧠 Mentor Council</span>
+          <span class="subtab-badge" id="tabBadgeMentors" style="background: rgba(5, 150, 105, 0.15); color: #047857;">0</span>
         </button>
         <button id="tabBtnResources" class="tfc-subtab-pill" onclick="switchCrmSubTab('resources')">
           <span>📚 Resource Readers & Engagement</span>
@@ -191,18 +199,26 @@
            ===================================================================== -->
       <div id="subTabContentLeads">
         <!-- METRICS CARDS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
           <div class="tfc-portal-metric-card" style="border-left: 4px solid var(--primary-orange);">
             <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-[#ff7a3d]" id="totalRegistrants">0</span>
             <span class="tfc-filter-label mt-1">Total Leads</span>
           </div>
           <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
             <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="fellowshipCount">0</span>
-            <span class="tfc-filter-label mt-1">Fellowship Interested</span>
+            <span class="tfc-filter-label mt-1">Fellowship</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="investorMetricCount">0</span>
+            <span class="tfc-filter-label mt-1">💼 Investors</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #059669;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="mentorMetricCount">0</span>
+            <span class="tfc-filter-label mt-1">🧠 Mentors</span>
           </div>
           <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="ambassadorCount">0</span>
-            <span class="tfc-filter-label mt-1">Campus Ambassadors</span>
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-teal-600" id="ambassadorCount">0</span>
+            <span class="tfc-filter-label mt-1">Ambassadors</span>
           </div>
           <div class="tfc-portal-metric-card" style="border-left: 4px solid #9333ea;">
             <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-purple-600" id="activeReferrals">0</span>
@@ -219,16 +235,19 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 pt-1">
             <div class="tfc-filter-control">
               <label class="tfc-filter-label">Query Search</label>
-              <input type="text" id="crmSearchInput" placeholder="Name, email, phone..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
+              <input type="text" id="crmSearchInput" placeholder="Name, email, phone, firm..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
             </div>
             <div class="tfc-filter-control">
               <label class="tfc-filter-label">Filter Tier</label>
               <select id="crmTierFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Tiers</option>
-                <option value="student">Student</option>
+                <option value="investor">💼 Investor</option>
+                <option value="mentor">🧠 Mentor</option>
                 <option value="student founder">Student Founder</option>
-                <option value="verified builder">Verified Builder</option>
+                <option value="student">Student</option>
                 <option value="campus ambassador">Campus Ambassador</option>
+                <option value="verified builder">Verified Builder</option>
+                <option value="employer">Employer / Recruiter</option>
                 <option value="unverified">Unverified</option>
               </select>
             </div>
@@ -247,8 +266,10 @@
               <label class="tfc-filter-label">Lead Origin Source</label>
               <select id="crmSourceFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
                 <option value="all">All Sources</option>
-                <option value="joinpage">General Join Page</option>
+                <option value="investorpage">💼 Investor Application</option>
+                <option value="mentorpage">🧠 Mentor Application</option>
                 <option value="fellowshippage">Fellowship Form</option>
+                <option value="joinpage">General Join Page</option>
                 <option value="ambassadorpage">Ambassador Form</option>
                 <option value="financialaid">Financial Aid Request</option>
               </select>
@@ -310,7 +331,190 @@
       </div>
 
       <!-- =====================================================================
-           TAB 2: RESOURCE READERS & TELEMETRY CRM
+           TAB 2: INVESTORS SYNDICATE & DEMO DAY ACCESS
+           ===================================================================== -->
+      <div id="subTabContentInvestors" class="hidden">
+        <!-- INVESTOR METRICS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="invTotalCount">0</span>
+            <span class="tfc-filter-label mt-1">Total Investors</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="invVcCount">0</span>
+            <span class="tfc-filter-label mt-1">VC Funds & Syndicates</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="invAngelCount">0</span>
+            <span class="tfc-filter-label mt-1">Individual Angels</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #e11d48;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-rose-600" id="invDemoDayCount">0</span>
+            <span class="tfc-filter-label mt-1">Demo Day Requests</span>
+          </div>
+        </div>
+
+        <!-- SEARCH & FILTER INVESTORS -->
+        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
+            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Investor Syndicate</h3>
+            <span class="text-xs font-bold text-zinc-400">Capital & Dealflow Directory</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Search</label>
+              <input type="text" id="invSearchInput" placeholder="Name, firm, email, sectors..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
+            </div>
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Cheque Size</label>
+              <select id="invChequeFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
+                <option value="all">All Cheque Sizes</option>
+                <option value="₹2L – ₹10L">₹2L – ₹10L (Micro)</option>
+                <option value="₹10L – ₹25L">₹10L – ₹25L</option>
+                <option value="₹25L – ₹1Cr">₹25L – ₹1 Crore</option>
+                <option value="₹1Cr – ₹5Cr">₹1 Crore – ₹5 Crore</option>
+                <option value="₹5Cr+">₹5 Crore+</option>
+              </select>
+            </div>
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Stage</label>
+              <select id="invStageFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
+                <option value="all">All Stages</option>
+                <option value="pre-seed">Pre-Seed</option>
+                <option value="seed">Seed</option>
+                <option value="pre-series a">Pre-Series A</option>
+                <option value="agnostic">Stage Agnostic</option>
+              </select>
+            </div>
+            <div class="flex flex-col justify-end">
+              <button onclick="exportInvestorsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
+                📊 Export Investors CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
+            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">💼 Registered Investors & Funds</h3>
+            <span class="tfc-badge tfc-badge-orange text-xs" id="invFilteredCount">0 shown</span>
+          </div>
+          <div class="tfc-portal-table-wrapper">
+            <table class="tfc-portal-table" id="investorsTable">
+              <thead>
+                <tr>
+                  <th>Investor Name & Contact</th>
+                  <th>Firm / Entity Type</th>
+                  <th>Cheque Size</th>
+                  <th>Target Stage</th>
+                  <th>Focus Sectors</th>
+                  <th>Engagement</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading investor directory...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 3: MENTOR COUNCIL & OPERATORS
+           ===================================================================== -->
+      <div id="subTabContentMentors" class="hidden">
+        <!-- MENTOR METRICS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #059669;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="mtrTotalCount">0</span>
+            <span class="tfc-filter-label mt-1">Total Mentors</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="mtrFounderCount">0</span>
+            <span class="tfc-filter-label mt-1">Founders & C-Suite</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="mtrTechProductCount">0</span>
+            <span class="tfc-filter-label mt-1">Product & Tech Leads</span>
+          </div>
+          <div class="tfc-portal-metric-card" style="border-left: 4px solid #9333ea;">
+            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-purple-600" id="mtrOfficeHoursCount">0</span>
+            <span class="tfc-filter-label mt-1">Office Hours Mentors</span>
+          </div>
+        </div>
+
+        <!-- SEARCH & FILTER MENTORS -->
+        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
+            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Mentor Council</h3>
+            <span class="text-xs font-bold text-zinc-400">Operator & Advisory Roster</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Search</label>
+              <input type="text" id="mtrSearchInput" placeholder="Name, company, role, expertise..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
+            </div>
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Domain Expertise</label>
+              <select id="mtrExpertiseFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
+                <option value="all">All Domains</option>
+                <option value="product">Product Strategy</option>
+                <option value="tech">Tech & AI Architecture</option>
+                <option value="gtm">GTM & Distribution</option>
+                <option value="fundraising">Fundraising & Pitching</option>
+                <option value="sales">B2B Sales</option>
+                <option value="design">UI/UX Design</option>
+              </select>
+            </div>
+            <div class="tfc-filter-control">
+              <label class="tfc-filter-label">Experience</label>
+              <select id="mtrExpFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
+                <option value="all">All Levels</option>
+                <option value="founder">Venture Founder</option>
+                <option value="10+">10+ Years</option>
+                <option value="5–10">5–10 Years</option>
+                <option value="3–5">3–5 Years</option>
+              </select>
+            </div>
+            <div class="flex flex-col justify-end">
+              <button onclick="exportMentorsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
+                📊 Export Mentors CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
+            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">🧠 Mentor Council Members</h3>
+            <span class="tfc-badge tfc-badge-orange text-xs" id="mtrFilteredCount">0 shown</span>
+          </div>
+          <div class="tfc-portal-table-wrapper">
+            <table class="tfc-portal-table" id="mentorsTable">
+              <thead>
+                <tr>
+                  <th>Mentor Name & Contact</th>
+                  <th>Current Organization & Role</th>
+                  <th>Experience & Background</th>
+                  <th>Domain Expertise</th>
+                  <th>Monthly Commitment</th>
+                  <th>Format</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading mentor roster...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           TAB 4: RESOURCE READERS & TELEMETRY CRM
            ===================================================================== -->
       <div id="subTabContentResources" class="hidden">
         <!-- RESOURCE METRICS CARDS -->
@@ -523,20 +727,33 @@
     // Sub-Tab Switcher
     window.switchCrmSubTab = (tab) => {
       const tabBtnLeads = document.getElementById('tabBtnLeads');
+      const tabBtnInvestors = document.getElementById('tabBtnInvestors');
+      const tabBtnMentors = document.getElementById('tabBtnMentors');
       const tabBtnResources = document.getElementById('tabBtnResources');
+
       const subTabContentLeads = document.getElementById('subTabContentLeads');
+      const subTabContentInvestors = document.getElementById('subTabContentInvestors');
+      const subTabContentMentors = document.getElementById('subTabContentMentors');
       const subTabContentResources = document.getElementById('subTabContentResources');
 
+      [tabBtnLeads, tabBtnInvestors, tabBtnMentors, tabBtnResources].forEach(b => b?.classList.remove('active'));
+      [subTabContentLeads, subTabContentInvestors, subTabContentMentors, subTabContentResources].forEach(c => c?.classList.add('hidden'));
+
       if (tab === 'leads') {
-        tabBtnLeads.classList.add('active');
-        tabBtnResources.classList.remove('active');
-        subTabContentLeads.classList.remove('hidden');
-        subTabContentResources.classList.add('hidden');
-      } else {
-        tabBtnLeads.classList.remove('active');
-        tabBtnResources.classList.add('active');
-        subTabContentLeads.classList.add('hidden');
-        subTabContentResources.classList.remove('hidden');
+        tabBtnLeads?.classList.add('active');
+        subTabContentLeads?.classList.remove('hidden');
+        renderCrmTable();
+      } else if (tab === 'investors') {
+        tabBtnInvestors?.classList.add('active');
+        subTabContentInvestors?.classList.remove('hidden');
+        renderInvestorsTable();
+      } else if (tab === 'mentors') {
+        tabBtnMentors?.classList.add('active');
+        subTabContentMentors?.classList.remove('hidden');
+        renderMentorsTable();
+      } else if (tab === 'resources') {
+        tabBtnResources?.classList.add('active');
+        subTabContentResources?.classList.remove('hidden');
         renderResourceTable();
       }
     };
@@ -571,6 +788,23 @@
       let waiverRequested = '';
       let waiverReason = '';
       let stepProgress = '';
+
+      // Investor and Mentor specific fields
+      let entityType = '';
+      let firm = '';
+      let chequeSize = '';
+      let sectors = '';
+      let engagement = '';
+      let company = '';
+      let role = '';
+      let expertise = '';
+      let experience = '';
+      let pastCompanies = '';
+      let commitment = '';
+      let bio = '';
+      let notes = '';
+      let linkedin = '';
+      let format = '';
 
       const parts = college.split(' | ');
       let displayName = parts[0] ? parts[0].trim() : '';
@@ -633,6 +867,36 @@
           try {
             resData = JSON.parse(trimmed.replace(/^resdata:\s*/i, '').trim());
           } catch(e) {}
+        } else if (/^entitytype:\s*/i.test(trimmed)) {
+          entityType = trimmed.replace(/^entitytype:\s*/i, '').trim();
+        } else if (/^firm:\s*/i.test(trimmed)) {
+          firm = trimmed.replace(/^firm:\s*/i, '').trim();
+        } else if (/^chequesize:\s*/i.test(trimmed)) {
+          chequeSize = trimmed.replace(/^chequesize:\s*/i, '').trim();
+        } else if (/^sectors:\s*/i.test(trimmed)) {
+          sectors = trimmed.replace(/^sectors:\s*/i, '').trim();
+        } else if (/^engagement:\s*/i.test(trimmed)) {
+          engagement = trimmed.replace(/^engagement:\s*/i, '').trim();
+        } else if (/^company:\s*/i.test(trimmed)) {
+          company = trimmed.replace(/^company:\s*/i, '').trim();
+        } else if (/^role:\s*/i.test(trimmed)) {
+          role = trimmed.replace(/^role:\s*/i, '').trim();
+        } else if (/^expertise:\s*/i.test(trimmed)) {
+          expertise = trimmed.replace(/^expertise:\s*/i, '').trim();
+        } else if (/^exp:\s*/i.test(trimmed) || /^experience:\s*/i.test(trimmed)) {
+          experience = trimmed.replace(/^(exp|experience):\s*/i, '').trim();
+        } else if (/^pastcompanies:\s*/i.test(trimmed)) {
+          pastCompanies = trimmed.replace(/^pastcompanies:\s*/i, '').trim();
+        } else if (/^commitment:\s*/i.test(trimmed)) {
+          commitment = trimmed.replace(/^commitment:\s*/i, '').trim();
+        } else if (/^bio:\s*/i.test(trimmed)) {
+          bio = trimmed.replace(/^bio:\s*/i, '').trim();
+        } else if (/^notes:\s*/i.test(trimmed)) {
+          notes = trimmed.replace(/^notes:\s*/i, '').trim();
+        } else if (/^linkedin:\s*/i.test(trimmed)) {
+          linkedin = trimmed.replace(/^linkedin:\s*/i, '').trim();
+        } else if (/^format:\s*/i.test(trimmed)) {
+          format = trimmed.replace(/^format:\s*/i, '').trim();
         }
       });
 
@@ -648,7 +912,11 @@
       if (!source && memberObj) {
         const memId = memberObj.member_id || '';
         const memTier = memberObj.tier || '';
-        if (memId.startsWith('TFC-AMB-') || memTier === 'Campus Ambassador') {
+        if (memId.startsWith('TFC-INV-') || memTier === 'Investor') {
+          source = 'InvestorPage';
+        } else if (memId.startsWith('TFC-MTR-') || memTier === 'Mentor') {
+          source = 'MentorPage';
+        } else if (memId.startsWith('TFC-AMB-') || memTier === 'Campus Ambassador') {
           source = 'AmbassadorPage';
         } else if (memId.startsWith('TFC-FEL-') || (memberObj.college && memberObj.college.includes('Source: FellowshipPage'))) {
           source = 'FellowshipPage';
@@ -679,7 +947,9 @@
         q1, q2, q3, q4, payment, resData, isGoogleAuth,
         venture, stage, teamSize, enrolled, collegeName, collegeYear, collegeCourse,
         paymentFee, paymentStatus, chapterRef, formSubmittedAt, waiverRequested, waiverReason,
-        stepProgress
+        stepProgress,
+        entityType, firm, chequeSize, sectors, engagement,
+        company, role, expertise, experience, pastCompanies, commitment, bio, notes, linkedin, format
       };
     }
 
@@ -719,6 +989,8 @@
         cachedMembers = data || [];
         calculateMetrics();
         renderCrmTable();
+        renderInvestorsTable();
+        renderMentorsTable();
         processResourceAnalytics();
       } catch (err) {
         console.error("CRM loading failed:", err);
@@ -728,24 +1000,74 @@
 
     // Calculate core metrics for Leads Tab
     function calculateMetrics() {
-      document.getElementById('totalRegistrants').textContent = cachedMembers.length;
-      document.getElementById('tabBadgeLeads').textContent = cachedMembers.length;
-
       let fsCount = 0;
       let ambCount = 0;
       let dropoffCount = 0;
+      let invCount = 0;
+      let mtrCount = 0;
+
+      let invVc = 0;
+      let invAngel = 0;
+      let invDemoDay = 0;
+
+      let mtrFounders = 0;
+      let mtrTech = 0;
+      let mtrOffice = 0;
 
       cachedMembers.forEach(m => {
         const meta = parseCollegeField(m.college, m);
         const isFellowship = meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
+        const isInvestor = m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
+        const isMentor = m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
+
         if (isFellowship) fsCount++;
+        if (isInvestor) {
+          invCount++;
+          const eType = (meta.entityType || '').toLowerCase();
+          if (eType.includes('vc') || eType.includes('syndicate') || eType.includes('fund')) invVc++;
+          if (eType.includes('angel')) invAngel++;
+          if ((meta.engagement || '').includes('Demo Day')) invDemoDay++;
+        }
+        if (isMentor) {
+          mtrCount++;
+          const r = (meta.role || '').toLowerCase();
+          const exp = (meta.experience || '').toLowerCase();
+          if (exp.includes('founder') || r.includes('founder') || r.includes('ceo') || r.includes('co-founder')) mtrFounders++;
+          const expDomain = (meta.expertise || '').toLowerCase();
+          if (expDomain.includes('product') || expDomain.includes('tech') || expDomain.includes('ai')) mtrTech++;
+          if ((meta.format || '').includes('Office Hours')) mtrOffice++;
+        }
         if (m.tier === 'Campus Ambassador') ambCount++;
-        if ((isFellowship && meta.stepProgress && meta.stepProgress !== 'Completed') || !(meta.q1 || meta.q2 || meta.q3 || meta.q4 || meta.venture)) dropoffCount++;
+        if (!isInvestor && !isMentor && ((isFellowship && meta.stepProgress && meta.stepProgress !== 'Completed') || !(meta.q1 || meta.q2 || meta.q3 || meta.q4 || meta.venture))) dropoffCount++;
       });
 
+      document.getElementById('totalRegistrants').textContent = cachedMembers.length;
+      document.getElementById('tabBadgeLeads').textContent = cachedMembers.length;
       document.getElementById('fellowshipCount').textContent = fsCount;
       document.getElementById('ambassadorCount').textContent = ambCount;
       document.getElementById('activeReferrals').textContent = dropoffCount;
+
+      const invBadge = document.getElementById('tabBadgeInvestors');
+      if (invBadge) invBadge.textContent = invCount;
+      const invMetric = document.getElementById('investorMetricCount');
+      if (invMetric) invMetric.textContent = invCount;
+
+      const mtrBadge = document.getElementById('tabBadgeMentors');
+      if (mtrBadge) mtrBadge.textContent = mtrCount;
+      const mtrMetric = document.getElementById('mentorMetricCount');
+      if (mtrMetric) mtrMetric.textContent = mtrCount;
+
+      // Investor tab metrics
+      if (document.getElementById('invTotalCount')) document.getElementById('invTotalCount').textContent = invCount;
+      if (document.getElementById('invVcCount')) document.getElementById('invVcCount').textContent = invVc;
+      if (document.getElementById('invAngelCount')) document.getElementById('invAngelCount').textContent = invAngel;
+      if (document.getElementById('invDemoDayCount')) document.getElementById('invDemoDayCount').textContent = invDemoDay;
+
+      // Mentor tab metrics
+      if (document.getElementById('mtrTotalCount')) document.getElementById('mtrTotalCount').textContent = mtrCount;
+      if (document.getElementById('mtrFounderCount')) document.getElementById('mtrFounderCount').textContent = mtrFounders;
+      if (document.getElementById('mtrTechProductCount')) document.getElementById('mtrTechProductCount').textContent = mtrTech;
+      if (document.getElementById('mtrOfficeHoursCount')) document.getElementById('mtrOfficeHoursCount').textContent = mtrOffice;
     }
 
     // Process Resource Analytics (from Supabase members + local storage telemetry)
@@ -1289,21 +1611,48 @@
 
         const displayEmail = (m.email || '').trim() || '<span class="text-red-500 italic text-xs">No email provided</span>';
 
+        const isInvestor = m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
+        const isMentor = m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
+
         let waUrl = '';
         if (meta.phone) {
           let cleanPhone = meta.phone.replace(/[^0-9]/g, '');
           if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
           const firstName = displayName.split(' ')[0] || 'there';
-          const msg = `Hey ${firstName}! This is Brahmleen from The Future Council. Great to see you registered on our ecosystem. Let's hop on a call to review your Fellowship/Builder details!`;
+          let msg = `Hey ${firstName}! This is Brahmleen from The Future Council. Great to see you registered on our ecosystem.`;
+          if (isInvestor) {
+            msg = `Hey ${firstName}! This is Dhruv from The Future Council. Thank you for registering with our investor syndicate. Would love to share our upcoming Launchpad Demo Day cohort brief!`;
+          } else if (isMentor) {
+            msg = `Hey ${firstName}! This is Aryaveer from The Future Council. Thank you for applying to mentor collegiate founders. Excited to connect and match you with our founder pods!`;
+          }
           waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
         }
 
-        const actionsHtml = `
-          <div class="flex flex-col gap-1.5">
-            ${(hasAnswers || isFellowship) ? `<button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded hover:bg-amber-200">📋 Answers</button>` : ''}
-            ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-          </div>
-        `;
+        let actionsHtml = '';
+        if (isInvestor) {
+          actionsHtml = `
+            <div class="flex flex-col gap-1">
+              <button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">💼 Dossier</button>
+              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
+            </div>
+          `;
+        } else if (isMentor) {
+          actionsHtml = `
+            <div class="flex flex-col gap-1">
+              <button onclick="openModal('${m.id}')" class="bg-emerald-100 border border-emerald-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-emerald-200">🧠 Profile</button>
+              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
+            </div>
+          `;
+        } else {
+          actionsHtml = `
+            <div class="flex flex-col gap-1.5">
+              ${(hasAnswers || isFellowship) ? `<button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded hover:bg-amber-200">📋 Answers</button>` : ''}
+              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+            </div>
+          `;
+        }
 
         const googleBadge = isGoogleUser
           ? `<span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 border border-blue-200 text-[0.6rem] font-black uppercase px-1.5 py-0.5 rounded ml-1" title="Authenticated via Google OAuth">
@@ -1313,7 +1662,11 @@
           : '';
 
         let sourceBadge = '';
-        if (meta.source === 'JoinPage') {
+        if (isInvestor || meta.source === 'InvestorPage') {
+          sourceBadge = `<span class="bg-amber-100 text-amber-900 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-amber-300 ml-1">Investor Form</span>`;
+        } else if (isMentor || meta.source === 'MentorPage') {
+          sourceBadge = `<span class="bg-emerald-100 text-emerald-900 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-emerald-300 ml-1">Mentor Form</span>`;
+        } else if (meta.source === 'JoinPage') {
           sourceBadge = `<span class="bg-green-100 text-green-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-green-300 ml-1">Join Portal</span>`;
         } else if (meta.source === 'FellowshipPage') {
           sourceBadge = `<span class="bg-orange-100 text-orange-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-orange-300 ml-1">Fellowship Form</span>`;
@@ -1325,8 +1678,40 @@
           sourceBadge = `<span class="bg-blue-100 text-blue-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-blue-300 ml-1">Google Auth</span>`;
         }
 
+        let collegeCellContent = `<strong>${meta.displayName}</strong>`;
         let fellowshipStatusCell = '';
-        if (isFellowship) {
+
+        if (isInvestor) {
+          collegeCellContent = `
+            <div>
+              <strong class="text-amber-950 font-bold">${meta.firm || meta.displayName}</strong>
+              <div class="text-[0.68rem] text-zinc-500 font-semibold">${meta.entityType || 'Angel / Syndicate'}</div>
+            </div>
+          `;
+          fellowshipStatusCell = `
+            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-[0.65rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">
+              💰 ${meta.chequeSize || 'Cheque N/A'}
+            </span>
+            <span class="text-[0.65rem] text-zinc-500 font-bold block text-center mt-1">
+              ${meta.stage || 'Stage Agnostic'}
+            </span>
+          `;
+        } else if (isMentor) {
+          collegeCellContent = `
+            <div>
+              <strong class="text-emerald-950 font-bold">${meta.company || meta.displayName}</strong>
+              <div class="text-[0.68rem] text-zinc-500 font-semibold">${meta.role || 'Operator'} • ${meta.experience || ''}</div>
+            </div>
+          `;
+          fellowshipStatusCell = `
+            <span class="bg-emerald-100 text-emerald-900 border border-emerald-300 text-[0.65rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">
+              ⏱️ ${meta.commitment || '1-2 hrs/mo'}
+            </span>
+            <span class="text-[0.65rem] text-zinc-500 font-bold block text-center mt-1 truncate" title="${meta.expertise}">
+              ${(meta.expertise || 'Advisory').split(',')[0]}
+            </span>
+          `;
+        } else if (isFellowship) {
           let stepBadge = '';
           if (meta.stepProgress === 'Completed' || meta.paymentStatus === 'awaiting_acceptance' || (meta.formSubmittedAt && hasAnswers)) {
             stepBadge = '<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">✅ App Submitted</span>';
@@ -1355,10 +1740,25 @@
           }
         }
 
-        const row = document.createElement('tr');
-        if (!hasAnswers && !isFellowship) {
-          row.style.background = '#fff8f8';
+        let tierDisplay = m.tier || 'Student';
+        let tierStyle = 'bg-gray-100 text-gray-800';
+        if (isInvestor) {
+          tierDisplay = '💼 Investor';
+          tierStyle = 'bg-amber-100 text-amber-900 border border-amber-300';
+        } else if (isMentor) {
+          tierDisplay = '🧠 Mentor';
+          tierStyle = 'bg-emerald-100 text-emerald-900 border border-emerald-300';
         }
+
+        const row = document.createElement('tr');
+        if (!hasAnswers && !isFellowship && !isInvestor && !isMentor) {
+          row.style.background = '#fff8f8';
+        } else if (isInvestor) {
+          row.style.background = '#fffdf7';
+        } else if (isMentor) {
+          row.style.background = '#f7faf8';
+        }
+
         row.innerHTML = `
           <td>
             <div class="flex items-center gap-1 flex-wrap">
@@ -1370,9 +1770,9 @@
             <div class="text-xs text-gray-500 font-semibold font-mono">${displayEmail}</div>
             ${meta.country ? `<div class="text-[0.68rem] text-orange-600 font-extrabold mt-0.5">🌐 ${meta.country.toUpperCase()}</div>` : ''}
           </td>
-          <td><span class="font-bold">${meta.displayName}</span></td>
+          <td>${collegeCellContent}</td>
           <td><span class="font-mono text-xs font-bold ${meta.phone ? 'text-gray-900' : 'text-gray-400'}">${meta.phone || 'No Phone'}</span></td>
-          <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded bg-gray-100">${m.tier}</span></td>
+          <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded ${tierStyle}">${tierDisplay}</span></td>
           <td>
             ${fellowshipStatusCell}
           </td>
@@ -1382,11 +1782,224 @@
       });
     }
 
-    // Modal view for Leads Questionnaire
+    // Render Dedicated Investors Table
+    function renderInvestorsTable() {
+      const tableBody = document.querySelector('#investorsTable tbody');
+      if (!tableBody) return;
+
+      const query = (document.getElementById('invSearchInput')?.value || '').toLowerCase().trim();
+      const chequeVal = document.getElementById('invChequeFilter')?.value || 'all';
+      const stageVal = (document.getElementById('invStageFilter')?.value || 'all').toLowerCase();
+
+      let investors = cachedMembers.filter(m => {
+        const meta = parseCollegeField(m.college, m);
+        return m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
+      });
+
+      if (query) {
+        investors = investors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (m.name || '').toLowerCase().includes(query) ||
+                 (m.email || '').toLowerCase().includes(query) ||
+                 (meta.firm || '').toLowerCase().includes(query) ||
+                 (meta.sectors || '').toLowerCase().includes(query) ||
+                 (meta.phone || '').includes(query);
+        });
+      }
+
+      if (chequeVal !== 'all') {
+        investors = investors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (meta.chequeSize || '').includes(chequeVal);
+        });
+      }
+
+      if (stageVal !== 'all') {
+        investors = investors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (meta.stage || '').toLowerCase().includes(stageVal);
+        });
+      }
+
+      const countEl = document.getElementById('invFilteredCount');
+      if (countEl) countEl.textContent = `${investors.length} shown`;
+
+      tableBody.innerHTML = '';
+      if (investors.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-8 text-zinc-500 font-semibold">
+              <span class="text-2xl block mb-2">💼</span>
+              No investors found matching the current search or filters.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      investors.forEach(m => {
+        const meta = parseCollegeField(m.college, m);
+        let cleanPhone = (meta.phone || '').replace(/[^0-9]/g, '');
+        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+        const firstName = (m.name || '').split(' ')[0] || 'there';
+        const msg = `Hey ${firstName}! This is Dhruv from The Future Council. Great to have you on our investor network. Sharing our upcoming Demo Day cohort portfolio!`;
+        const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : '';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="font-extrabold text-black text-sm">${m.name || 'Investor'}</div>
+            <div class="text-xs text-gray-500 font-mono">${m.email}</div>
+            <div class="text-[0.68rem] font-mono text-zinc-400 mt-0.5">${meta.phone || 'No phone'} • ${m.member_id || 'TFC-INV'}</div>
+          </td>
+          <td>
+            <strong class="text-sm font-bold">${meta.firm || 'Independent Angel'}</strong>
+            <div class="text-xs text-zinc-500 font-medium">${meta.entityType || 'Angel Investor'}</div>
+          </td>
+          <td>
+            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black px-2 py-0.5 rounded font-mono">
+              ${meta.chequeSize || 'Not Specified'}
+            </span>
+          </td>
+          <td>
+            <span class="text-xs font-bold text-zinc-700">${meta.stage || 'Stage Agnostic'}</span>
+          </td>
+          <td>
+            <div class="text-xs font-medium text-zinc-700 max-w-xs truncate" title="${meta.sectors || ''}">
+              ${meta.sectors || 'All Sectors'}
+            </div>
+          </td>
+          <td>
+            <div class="text-[0.72rem] text-zinc-600 font-medium">
+              ${meta.engagement || 'Demo Day Invite'}
+            </div>
+          </td>
+          <td>
+            <div class="flex flex-col gap-1">
+              <button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">🔍 Dossier</button>
+              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Render Dedicated Mentors Table
+    function renderMentorsTable() {
+      const tableBody = document.querySelector('#mentorsTable tbody');
+      if (!tableBody) return;
+
+      const query = (document.getElementById('mtrSearchInput')?.value || '').toLowerCase().trim();
+      const domainVal = (document.getElementById('mtrExpertiseFilter')?.value || 'all').toLowerCase();
+      const expVal = (document.getElementById('mtrExpFilter')?.value || 'all').toLowerCase();
+
+      let mentors = cachedMembers.filter(m => {
+        const meta = parseCollegeField(m.college, m);
+        return m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
+      });
+
+      if (query) {
+        mentors = mentors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (m.name || '').toLowerCase().includes(query) ||
+                 (m.email || '').toLowerCase().includes(query) ||
+                 (meta.company || '').toLowerCase().includes(query) ||
+                 (meta.role || '').toLowerCase().includes(query) ||
+                 (meta.expertise || '').toLowerCase().includes(query) ||
+                 (meta.phone || '').includes(query);
+        });
+      }
+
+      if (domainVal !== 'all') {
+        mentors = mentors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (meta.expertise || '').toLowerCase().includes(domainVal);
+        });
+      }
+
+      if (expVal !== 'all') {
+        mentors = mentors.filter(m => {
+          const meta = parseCollegeField(m.college, m);
+          return (meta.experience || '').toLowerCase().includes(expVal) || (meta.role || '').toLowerCase().includes(expVal);
+        });
+      }
+
+      const countEl = document.getElementById('mtrFilteredCount');
+      if (countEl) countEl.textContent = `${mentors.length} shown`;
+
+      tableBody.innerHTML = '';
+      if (mentors.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-8 text-zinc-500 font-semibold">
+              <span class="text-2xl block mb-2">🧠</span>
+              No mentors found matching the current search or filters.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      mentors.forEach(m => {
+        const meta = parseCollegeField(m.college, m);
+        let cleanPhone = (meta.phone || '').replace(/[^0-9]/g, '');
+        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+        const firstName = (m.name || '').split(' ')[0] || 'there';
+        const msg = `Hey ${firstName}! This is Aryaveer from The Future Council. Great to have you on our mentor council. Excited to connect you with our founder pods!`;
+        const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : '';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="font-extrabold text-black text-sm">${m.name || 'Mentor'}</div>
+            <div class="text-xs text-gray-500 font-mono">${m.email}</div>
+            <div class="text-[0.68rem] font-mono text-zinc-400 mt-0.5">${meta.phone || 'No phone'} • ${m.member_id || 'TFC-MTR'}</div>
+          </td>
+          <td>
+            <strong class="text-sm font-bold">${meta.company || 'Organization'}</strong>
+            <div class="text-xs text-zinc-600 font-medium">${meta.role || 'Operator / Leader'}</div>
+          </td>
+          <td>
+            <span class="text-xs font-bold text-zinc-800">${meta.experience || 'Experienced'}</span>
+            ${meta.pastCompanies && meta.pastCompanies !== 'None' ? `<div class="text-[0.68rem] text-zinc-500">${meta.pastCompanies}</div>` : ''}
+          </td>
+          <td>
+            <div class="text-xs font-medium text-zinc-700 max-w-xs truncate" title="${meta.expertise || ''}">
+              ${meta.expertise || 'Advisory'}
+            </div>
+          </td>
+          <td>
+            <span class="bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black px-2 py-0.5 rounded font-mono">
+              ${meta.commitment || '1-2 hrs/mo'}
+            </span>
+          </td>
+          <td>
+            <div class="text-[0.72rem] text-zinc-600 font-medium">
+              ${meta.format || '1:1 Office Hours'}
+            </div>
+          </td>
+          <td>
+            <div class="flex flex-col gap-1">
+              <button onclick="openModal('${m.id}')" class="bg-emerald-100 border border-emerald-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-emerald-200">🔍 Profile</button>
+              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
+              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Modal view for Leads Questionnaire & Profiles
     window.openModal = (id) => {
       const member = cachedMembers.find(m => m.id === id);
       if (!member) return;
       const meta = parseCollegeField(member.college, member);
+
+      const isInvestor = member.tier === 'Investor' || meta.source === 'InvestorPage' || (member.member_id && member.member_id.startsWith('TFC-INV-'));
+      const isMentor = member.tier === 'Mentor' || meta.source === 'MentorPage' || (member.member_id && member.member_id.startsWith('TFC-MTR-'));
 
       const modalDiv = document.createElement('div');
       modalDiv.id = 'crmDetailOverlay';
@@ -1395,33 +2008,109 @@
         display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
       `;
 
+      let badgeText = '📋 Lead Application Profile';
+      if (isInvestor) badgeText = '💼 Accredited Investor Profile';
+      else if (isMentor) badgeText = '🧠 Mentor & Operator Profile';
+
       modalDiv.innerHTML = `
         <div style="background: #FFFFFF; border: 1.5px solid var(--border-subtle); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 28px; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; color: var(--ink);">
           <button onclick="document.getElementById('crmDetailOverlay').remove()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;">✕</button>
           
           <div style="margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 16px;">
-            <span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem; margin-bottom: 8px;">📋 Lead Application Profile</span>
+            <span class="tfc-badge ${isInvestor ? 'tfc-badge-orange' : (isMentor ? 'tfc-badge-lime' : 'tfc-badge-neutral')}" style="font-size: 0.68rem; margin-bottom: 8px;">${badgeText}</span>
             <h2 style="font-size: 1.4rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: -0.5px;">
-              ${member.name}
+              ${member.name || 'Member Profile'}
             </h2>
-            <div style="font-size: 0.85rem; color: var(--ink-soft);">${meta.displayName}</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft); font-weight:600;">
+              ${isInvestor ? (meta.firm || 'Angel Investor') : (isMentor ? `${meta.role || 'Operator'} at ${meta.company || 'Tech Org'}` : meta.displayName)}
+            </div>
+            <div class="text-xs text-zinc-500 font-mono mt-1">${member.email} • ID: ${member.member_id || member.id}</div>
           </div>
 
           <div style="font-size: 0.88rem; line-height: 1.6;" class="space-y-4">
             <div class="grid grid-cols-2 gap-3">
               <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Phone</span>
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Phone / WhatsApp</span>
                 <span style="font-weight: 700;">${meta.phone || 'No Phone'}</span>
               </div>
               <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Country</span>
-                <span style="font-weight: 700;">${meta.country || 'India'}</span>
+                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">LinkedIn Profile</span>
+                <span style="font-weight: 700;">
+                  ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" style="color:var(--primary-orange);text-decoration:underline;">View LinkedIn ↗</a>` : 'Not provided'}
+                </span>
               </div>
             </div>
             
             <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-top: 16px;" class="space-y-3">
               ${(() => {
-                if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
+                if (isInvestor) {
+                  return `
+                    <div style="background: #FFF8E6; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #B45309; display: block; margin-bottom: 4px;">💼 Investor Syndicate Details</span>
+                      <div style="font-size: 0.84rem; color: #78350F; display: flex; flex-wrap: wrap; gap: 12px;">
+                        <span><strong>Entity:</strong> ${meta.entityType || 'Angel'}</span>
+                        <span><strong>Cheque:</strong> <span style="font-weight:800; color:#B45309;">${meta.chequeSize || 'N/A'}</span></span>
+                        <span><strong>Stage:</strong> ${meta.stage || 'Stage Agnostic'}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Firm / Fund Name</p>
+                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.firm || 'Independent Angel'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Target Sectors & Verticals</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.sectors || 'All Sectors'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Preferred Engagement</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.engagement || 'Demo Day Invite'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Investment Thesis & Notes</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.notes || 'No specific thesis notes provided.'}</p>
+                    </div>
+
+                    ${meta.formSubmittedAt ? `<p style="margin: 10px 0 0; font-size: 0.72rem; color: var(--ink-soft); font-family: monospace;">Applied on: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
+                  `;
+                } else if (isMentor) {
+                  return `
+                    <div style="background: #ECFDF5; border: 1.5px solid #10B981; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #047857; display: block; margin-bottom: 4px;">🧠 Mentor Council Track</span>
+                      <div style="font-size: 0.84rem; color: #065F46; display: flex; flex-wrap: wrap; gap: 12px;">
+                        <span><strong>Org:</strong> ${meta.company || 'Tech Org'}</span>
+                        <span><strong>Role:</strong> ${meta.role || 'Operator'}</span>
+                        <span><strong>Experience:</strong> ${meta.experience || 'Senior'}</span>
+                        <span><strong>Commitment:</strong> ${meta.commitment || '1-2 hrs/mo'}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Functional Domain Expertise</p>
+                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.expertise || 'Advisory'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Past Organizations / Background</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.pastCompanies || 'None provided'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Preferred Mentorship Format</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.format || '1:1 Office Hours'}</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Why Mentor / Bio</p>
+                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.bio || 'No bio provided'}</p>
+                    </div>
+
+                    ${meta.formSubmittedAt ? `<p style="margin: 10px 0 0; font-size: 0.72rem; color: var(--ink-soft); font-family: monospace;">Applied on: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
+                  `;
+                } else if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
                   return `
                     <div style="background: #FFF4E5; border: 1.5px solid #FFD8A8; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
                       <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #D9480F; display: block; margin-bottom: 4px;">🚀 Launchpad Candidate</span>
@@ -1499,10 +2188,105 @@
               })()}
             </div>
           </div>
+          
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <a href="mailto:${member.email}?subject=${encodeURIComponent(isInvestor ? 'The Future Council — Investor Syndicate Welcome' : (isMentor ? 'The Future Council — Mentor Onboarding' : 'The Future Council — Follow-up'))}" class="tfc-btn tfc-btn-primary w-full justify-center" style="padding: 10px; font-size: 0.88rem; text-decoration: none;">
+              ✉️ Send Email Outreach
+            </a>
+          </div>
         </div>
       `;
 
       document.body.appendChild(modalDiv);
+    };
+
+    // CSV Export for Investors
+    window.exportInvestorsCSV = () => {
+      const investors = cachedMembers.filter(m => {
+        const meta = parseCollegeField(m.college, m);
+        return m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
+      });
+
+      if (investors.length === 0) {
+        alert("No investors to export!");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "ID,Name,Email,Phone,Firm,EntityType,ChequeSize,Stage,Sectors,Engagement,LinkedIn,Notes,SubmittedAt\n";
+
+      investors.forEach(m => {
+        const meta = parseCollegeField(m.college, m);
+        const row = [
+          m.member_id || m.id,
+          `"${(m.name || '').replace(/"/g, '""')}"`,
+          m.email || '',
+          meta.phone || '',
+          `"${(meta.firm || '').replace(/"/g, '""')}"`,
+          `"${(meta.entityType || '').replace(/"/g, '""')}"`,
+          `"${(meta.chequeSize || '').replace(/"/g, '""')}"`,
+          `"${(meta.stage || '').replace(/"/g, '""')}"`,
+          `"${(meta.sectors || '').replace(/"/g, '""')}"`,
+          `"${(meta.engagement || '').replace(/"/g, '""')}"`,
+          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
+          `"${(meta.notes || '').replace(/"/g, '""')}"`,
+          meta.formSubmittedAt || m.created_at || ''
+        ];
+        csvContent += row.join(",") + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `TFC_Investors_${investors.length}_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    // CSV Export for Mentors
+    window.exportMentorsCSV = () => {
+      const mentors = cachedMembers.filter(m => {
+        const meta = parseCollegeField(m.college, m);
+        return m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
+      });
+
+      if (mentors.length === 0) {
+        alert("No mentors to export!");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "ID,Name,Email,Phone,Company,Role,Experience,PastCompanies,Expertise,Commitment,Format,LinkedIn,Bio,SubmittedAt\n";
+
+      mentors.forEach(m => {
+        const meta = parseCollegeField(m.college, m);
+        const row = [
+          m.member_id || m.id,
+          `"${(m.name || '').replace(/"/g, '""')}"`,
+          m.email || '',
+          meta.phone || '',
+          `"${(meta.company || '').replace(/"/g, '""')}"`,
+          `"${(meta.role || '').replace(/"/g, '""')}"`,
+          `"${(meta.experience || '').replace(/"/g, '""')}"`,
+          `"${(meta.pastCompanies || '').replace(/"/g, '""')}"`,
+          `"${(meta.expertise || '').replace(/"/g, '""')}"`,
+          `"${(meta.commitment || '').replace(/"/g, '""')}"`,
+          `"${(meta.format || '').replace(/"/g, '""')}"`,
+          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
+          `"${(meta.bio || '').replace(/"/g, '""')}"`,
+          meta.formSubmittedAt || m.created_at || ''
+        ];
+        csvContent += row.join(",") + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `TFC_Mentors_${mentors.length}_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     };
 
     // CSV Export for Leads (exports only the sorted, filtered entries currently visible in the CRM)
@@ -1519,7 +2303,7 @@
       }
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Fellowship,Enrolled,College_Name,Year,Course,Team_Size,Venture_Name,Stage,Pitch_Q1,Deck_Demo_Q3,Program_Format_Q4,Payment_Fee,Payment_Status,Waiver_Requested,Waiver_Reason,Chapter_Ref,Submitted_At\n";
+      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Firm_or_Company,Role_or_Title,Cheque_or_Commitment,Stage_or_Exp,Sectors_or_Expertise,LinkedIn,Fellowship,Submitted_At\n";
 
       exportList.forEach(m => {
         const meta = parseCollegeField(m.college, m);
@@ -1537,22 +2321,13 @@
           meta.country || '',
           meta.source || '',
           m.tier || '',
+          `"${(meta.firm || meta.company || '').replace(/"/g, '""')}"`,
+          `"${(meta.role || meta.entityType || '').replace(/"/g, '""')}"`,
+          `"${(meta.chequeSize || meta.commitment || '').replace(/"/g, '""')}"`,
+          `"${(meta.stage || meta.experience || '').replace(/"/g, '""')}"`,
+          `"${(meta.sectors || meta.expertise || '').replace(/"/g, '""')}"`,
+          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
           meta.fellowship || '',
-          meta.enrolled || '',
-          `"${(meta.collegeName || meta.displayName || '').replace(/"/g, '""')}"`,
-          `"${(meta.collegeYear || '').replace(/"/g, '""')}"`,
-          `"${(meta.collegeCourse || '').replace(/"/g, '""')}"`,
-          `"${(meta.teamSize || '').replace(/"/g, '""')}"`,
-          `"${(meta.venture || '').replace(/"/g, '""')}"`,
-          `"${(meta.stage || '').replace(/"/g, '""')}"`,
-          `"${(meta.q1 || '').replace(/"/g, '""')}"`,
-          `"${(meta.q3 || '').replace(/"/g, '""')}"`,
-          `"${(meta.q4 || '').replace(/"/g, '""')}"`,
-          meta.paymentFee || '',
-          meta.paymentStatus || meta.payment || '',
-          meta.waiverRequested || 'No',
-          `"${(meta.waiverReason || '').replace(/"/g, '""')}"`,
-          meta.chapterRef || '',
           meta.formSubmittedAt || m.created_at || ''
         ];
         csvContent += row.join(",") + "\n";
@@ -1573,6 +2348,14 @@
     document.getElementById('crmFellowshipFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmSourceFilter').addEventListener('change', renderCrmTable);
     document.getElementById('crmSortSelect')?.addEventListener('change', renderCrmTable);
+
+    document.getElementById('invSearchInput')?.addEventListener('input', renderInvestorsTable);
+    document.getElementById('invChequeFilter')?.addEventListener('change', renderInvestorsTable);
+    document.getElementById('invStageFilter')?.addEventListener('change', renderInvestorsTable);
+
+    document.getElementById('mtrSearchInput')?.addEventListener('input', renderMentorsTable);
+    document.getElementById('mtrExpertiseFilter')?.addEventListener('change', renderMentorsTable);
+    document.getElementById('mtrExpFilter')?.addEventListener('change', renderMentorsTable);
 
     document.getElementById('resSearchInput')?.addEventListener('input', renderResourceTable);
     document.getElementById('resResourceFilter')?.addEventListener('change', renderResourceTable);
