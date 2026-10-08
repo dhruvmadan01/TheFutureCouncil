@@ -39,7 +39,15 @@
     { "source": "/investors.html", "destination": "/investors", "permanent": true },
     { "source": "/investor", "destination": "/investors", "permanent": true },
     { "source": "/mentors.html", "destination": "/mentors", "permanent": true },
-    { "source": "/mentor", "destination": "/mentors", "permanent": true }
+    { "source": "/mentor", "destination": "/mentors", "permanent": true },
+    { "source": "/fundatabase", "destination": "/funddatabase", "permanent": true },
+    { "source": "/fundatabase.html", "destination": "/funddatabase", "permanent": true },
+    { "source": "/resources/fundatabase", "destination": "/resources/funddatabase", "permanent": true },
+    { "source": "/resources/fundatabase.html", "destination": "/resources/funddatabase", "permanent": true },
+    { "source": "/grants", "destination": "/resources/grants", "permanent": false },
+    { "source": "/grants.html", "destination": "/resources/grants", "permanent": true },
+    { "source": "/whats-actually-open", "destination": "/resources/grants", "permanent": false },
+    { "source": "/whats-actually-open.html", "destination": "/resources/grants", "permanent": true }
   ],
   "rewrites": [
     {
@@ -55,6 +63,22 @@
     {
       "source": "/chapters/:college",
       "destination": "/chapters/:college.html"
+    },
+    {
+      "source": "/funddatabase",
+      "destination": "/resources/funddatabase.html"
+    },
+    {
+      "source": "/resources/funddatabase",
+      "destination": "/resources/funddatabase.html"
+    },
+    {
+      "source": "/resources/grants",
+      "destination": "/resources/grants.html"
+    },
+    {
+      "source": "/resources",
+      "destination": "/resources/index.html"
     },
     {
       "source": "/refund-policy",

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>What's Actually Open · Indian Student Founder Grants &amp; Incubators (Oct 2026) | The Future Council</title>
+  <meta name="description" content="What Indian student founders can actually apply to right now: grants that are still running (NIDHI-PRAYAS, MeitY TIDE, GENESIS, BIRAC), incubators that take any college, and free cloud credits." />
+  <link rel="canonical" href="https://thefuturecouncil.in/resources/grants" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#D6DCD3" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, one orange Launchpad deal band, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
+:root {
+  --office: #D6DCD3;
+  --office-2: #C6CDC2;
+  --office-ink: #1E2124;
+  --office-soft: #4E555A;
+  --ink: #1B1712;
+  --ink-soft: #5A4E44;
+  --warm: #FFF4E8;
+  --warm-2: #FBE6D4;
+  --line: #EAD7C6;
+  --slip: #F7F6EF;
+  --slip-line: #DCDAD0;
+  --paper: #FFFFFF;
+  --orange: #E2542A;
+  --orange-deep: #AE3D18;
+  --peach: #F5A07F;
+  --forest: #1F5A45;
+  --forest-soft: #E8F1ED;
+  --ballpoint: #2C4A9A;
+  --dark-muted: #CDBFB2;
+
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, -apple-system, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut: clamp(16px, 4vw, 48px);
+  --wrap: 72rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; padding: 0;
+  background: var(--office); color: var(--office-ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+img { max-width: 100%; }
+[hidden]:not([hidden=until-found i]) { display: none !important; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: var(--ballpoint); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gut); }
+.mono { font-family: var(--mono); }
+.label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--office-soft); }
+.lede { font-size: 1.0625rem; color: var(--office-soft); max-width: 38rem; }
+section { scroll-margin-top: 72px; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--body); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+  padding: 12px 22px; border-radius: 999px; border: 1px solid var(--orange);
+  background: var(--orange); color: #FFFFFF; cursor: pointer; transition: background-color .15s ease, transform .15s ease;
+}
+.btn:hover { background: var(--orange-deep); border-color: var(--orange-deep); }
+.btn-ink { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.btn-ink:hover { background: #000; border-color: #000; }
+.btn-line { background: transparent; color: var(--office-ink); border-color: var(--office-ink); }
+.btn-line:hover { background: var(--office-ink); color: var(--office); }
+.btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+
+/* header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--office) 92%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--office-2);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1rem; color: var(--office-ink); text-decoration: none; letter-spacing: -0.01em; }
+.logo { width: 28px; height: 28px; border-radius: 6px; display: block; }
+.mark { width: 22px; height: 22px; border-radius: 5px; background: var(--orange); display: grid; place-items: center; color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 0.8rem; }
+.navlinks { display: flex; align-items: center; gap: 22px; }
+.navlinks a { color: var(--office-ink); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+.navlinks a:hover { color: var(--orange-deep); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.token {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--slip); border: 1px solid var(--slip-line); padding: 6px 12px; transform: rotate(-1.2deg);
+  box-shadow: 0 1px 0 rgba(27,23,18,.08);
+}
+.token b { color: var(--ballpoint); font-weight: 600; }
+.hero h1 { font-size: clamp(2.5rem, 1.3rem + 5.2vw, 4.75rem); margin-block: 22px 20px; }
+.hero h1 span { color: var(--office-soft); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* pinned slip */
+.slip {
+  position: relative; background: var(--slip); border: 1px solid var(--slip-line);
+  padding: 30px 22px 22px;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 27px, var(--slip-line) 27px 28px);
+  background-position: 0 58px;
+  box-shadow: 0 10px 24px -14px rgba(27,23,18,.35), 0 2px 0 rgba(27,23,18,.05);
+}
+.slip::before {
+  content: ""; position: absolute; top: -8px; left: 50%; width: 16px; height: 16px; margin-left: -8px;
+  border-radius: 50%; background: var(--ballpoint); box-shadow: inset -2px -3px 0 rgba(0,0,0,.25), 0 2px 3px rgba(0,0,0,.25);
+}
+.slip .tag { position: absolute; top: 12px; right: 12px; font-family: var(--mono); font-size: 0.65rem; border: 1px solid var(--slip-line); padding: 2px 6px; color: var(--office-soft); background: var(--paper); }
+.hero .slip { transform: rotate(1.4deg); }
+.stamp {
+  display: inline-block; font-family: var(--mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange-deep); border: 2px solid var(--orange-deep); padding: 4px 10px; transform: rotate(-6deg); margin-bottom: 14px; background: color-mix(in srgb, var(--slip) 70%, transparent);
+}
+.slip h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.slip dl { display: grid; grid-template-columns: auto 1fr; gap: 0 14px; margin: 0; font-size: 0.93rem; line-height: 28px; }
+.slip dt { font-family: var(--mono); font-size: 0.72rem; color: var(--office-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+.slip dd { margin: 0; color: var(--office-ink); }
+.slip .note { font-size: 0.85rem; color: var(--office-soft); margin-top: 10px; line-height: 1.5; }
+
+/* notice board */
+.board { padding-block: clamp(48px, 7vw, 80px); border-top: 1px solid var(--office-2); }
+.board h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); margin-block: 10px 12px; }
+.slips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+.slips .slip { padding-top: 34px; }
+.slips .slip:nth-child(odd) { transform: rotate(-1deg); }
+.slips .slip:nth-child(even) { transform: rotate(0.8deg); }
+.slips h3 { font-family: var(--body); font-weight: 700; font-size: 1rem; letter-spacing: 0; line-height: 1.35; margin-bottom: 8px; }
+.slips p { font-size: 0.92rem; color: var(--office-soft); line-height: 28px; }
+
+/* warm sections */
+.warm { background: var(--warm); color: var(--ink); padding-block: clamp(56px, 8vw, 96px); }
+.warm .label { color: var(--ink-soft); }
+.warm .lede { color: var(--ink-soft); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 30px; }
+.sec-head h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); }
+.step-dot {
+  width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--orange); color: var(--orange-deep);
+  display: grid; place-items: center; font-family: var(--mono); font-size: 0.8rem; font-weight: 600; background: var(--warm);
+}
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
+.filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.filter span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
+.filter button {
+  font-family: var(--body); font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--warm); color: var(--ink);
+}
+.filter button[aria-pressed="true"] { background: var(--ink); color: var(--warm); border-color: var(--ink); }
+
+.row {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.75fr) minmax(0, 1.9fr) auto;
+  gap: 8px 24px; padding-block: 20px; border-top: 1px solid var(--line); align-items: start; transition: opacity .2s ease;
+}
+.row:first-of-type { border-top: 0; }
+.filter + .row { border-top: 1px solid var(--line); margin-top: 12px; }
+.row.dim { opacity: 0.3; }
+.row h3 { font-family: var(--display); font-size: 1.2rem; letter-spacing: -0.01em; }
+.row small { display: block; color: var(--ink-soft); font-size: 0.82rem; margin-top: 3px; font-family: var(--body); }
+.amt { font-family: var(--mono); font-weight: 600; color: var(--orange-deep); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.amt small { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; }
+.desc { display: grid; gap: 6px; color: var(--ink-soft); font-size: 0.94rem; }
+.desc strong { color: var(--ink); font-weight: 600; }
+.desc a { font-family: var(--mono); font-size: 0.78rem; }
+.status { justify-self: end; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor;
+}
+.chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.c-open { color: var(--forest); background: var(--forest-soft); }
+.c-round { color: var(--ballpoint); background: #EEF1FA; }
+.c-wait { color: var(--orange-deep); background: var(--warm-2); }
+.fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin-top: 16px; }
+.subhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 40px 0 14px; }
+.subhead h3 { font-size: 1.35rem; }
+.subhead p { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ink strip */
+.ink { background: var(--ink); color: var(--warm); padding-block: 40px; }
+.ink .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.ink .label { color: var(--peach); }
+.ink h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); margin-top: 8px; max-width: 26ch; }
+.ink p.sub { color: var(--dark-muted); margin-top: 8px; max-width: 40rem; }
+
+/* launchpad deal */
+.deal-sec { padding-block: clamp(56px, 8vw, 96px); background: var(--warm); }
+.deal { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
+.deal-main { background: var(--orange); color: #FFFFFF; padding: clamp(24px, 4vw, 48px); display: grid; gap: 26px; align-content: start; }
+.deal-main .label { color: #FFE3D6; }
+.deal-main h2 { font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.25rem); }
+.deal-main p { color: #FFE9DF; max-width: 36rem; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; border-top: 1px solid rgba(255,255,255,.35); padding-top: 20px; }
+.stats b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 0.82rem; color: #FFE3D6; line-height: 1.35; display: block; margin-top: 6px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid rgba(255,255,255,.35); }
+.path li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 14px; padding-block: 12px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.path .when { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); padding-top: 3px; font-weight: 600; }
+.path h3 { font-family: var(--body); font-size: 1rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.path p { font-size: 0.9rem; color: #FFE9DF; }
+.deal-side { background: var(--paper); color: var(--ink); padding: clamp(24px, 4vw, 40px); display: grid; gap: 16px; align-content: start; }
+.deal-side .label { color: var(--ink-soft); }
+.big-clock { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 1.8rem + 3vw, 3.75rem); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.deal-side .when-line { font-size: 0.92rem; color: var(--ink-soft); }
+.deal-side .btn { width: 100%; }
+.deal-side .facts { font-size: 0.88rem; color: var(--ink-soft); }
+.receipt { border-top: 1px dashed var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 0.9rem; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; }
+.receipt .k { color: var(--ink-soft); }
+.receipt .v { font-family: var(--mono); font-weight: 600; color: var(--forest); text-align: right; }
+.receipt .v.no { color: var(--ink-soft); font-weight: 400; }
+
+/* credits on sage */
+.sage { padding-block: clamp(56px, 8vw, 96px); }
+.sage .sec-head h2 { color: var(--office-ink); }
+.tbl-wrap { overflow-x: auto; background: var(--slip); border: 1px solid var(--slip-line); box-shadow: 0 10px 24px -16px rgba(27,23,18,.35); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 0.93rem; }
+th { text-align: left; font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--office-soft); font-weight: 600; padding: 14px 18px; border-bottom: 1.5px solid var(--office-ink); }
+td { padding: 14px 18px; border-bottom: 1px solid var(--slip-line); vertical-align: top; color: var(--office-soft); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--office-ink); font-weight: 600; }
+td:first-child a { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; margin-top: 2px; }
+td.worth { font-family: var(--mono); color: var(--forest); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sage .fine { color: var(--office-soft); }
+
+/* plan */
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.plan li { display: grid; grid-template-columns: 44px 8.5rem minmax(0, 1fr); gap: 18px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; }
+.plan .when { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--orange-deep); font-weight: 600; }
+.plan h3 { font-family: var(--body); font-size: 1.02rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.plan p { color: var(--ink-soft); font-size: 0.93rem; }
+.plan li.hot { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.plan li.hot .step-dot { background: var(--orange); border-color: var(--orange); color: #FFFFFF; }
+.plan li.hot .when { color: var(--peach); }
+.plan li.hot p { color: var(--dark-muted); }
+.plan li.hot a { color: var(--peach); font-weight: 600; }
+
+/* faq */
+.faq { border-top: 1.5px solid var(--office-ink); }
+details { border-bottom: 1px solid var(--office-2); padding-block: 18px; }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--orange-deep); font-weight: 600; }
+details[open] summary::after { content: "−"; }
+details p { color: var(--office-soft); margin-top: 10px; max-width: 46rem; }
+
+/* closing */
+.closing { background: var(--ink); color: var(--warm); padding-block: clamp(64px, 9vw, 112px); }
+.closing .label { color: var(--peach); }
+.closing h2 { font-size: clamp(2.2rem, 1.3rem + 4vw, 4rem); margin-block: 12px 16px; max-width: 18ch; }
+.closing p { color: var(--dark-muted); max-width: 34rem; }
+.closing .hero-actions { margin-top: 28px; }
+footer { background: var(--ink); color: var(--dark-muted); border-top: 1px solid #3A3129; padding-block: 24px 32px; font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 8px; }
+.foot-brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo-lg { width: 36px; height: 36px; }
+footer strong { color: var(--warm); font-family: var(--display); }
+footer a { color: var(--peach); }
+
+/* sticky bar */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  background: var(--ink); color: var(--warm);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top: 1px solid #3A3129;
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.bar p { font-size: 0.88rem; min-width: 0; }
+.bar b { color: var(--peach); font-family: var(--mono); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .hero-grid, .deal { grid-template-columns: 1fr; }
+  .slips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row > div:first-child { grid-column: 1; }
+  .status { grid-column: 2; grid-row: 1; }
+  .amt, .desc { grid-column: 1 / -1; }
+  .navlinks a:not(.btn) { display: none; }
+}
+@media (max-width: 600px) {
+  .slips { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path li { grid-template-columns: 1fr; gap: 2px; }
+  .plan li { grid-template-columns: 44px minmax(0, 1fr); }
+  .plan li > div { grid-column: 2; }
+  .plan .when { grid-column: 2; }
+  .bar .hide-sm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img class="logo" src="/TFC.png" alt="The Future Council Logo" width="28" height="28">The Future Council</a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#grants">Grants</a>
+      <a href="#incubators">Incubators</a>
+      <a href="#credits">Credits</a>
+      <a href="/resources/funddatabase">Fund Database</a>
+      <a href="#launchpad">Launchpad</a>
+      <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="token">Grants desk · Free founder guide · <b>Checked Oct 2026</b></span>
+        <h1>The ₹20 lakh grant everyone shares <span>is closed.</span></h1>
+        <p class="lede">Here's what Indian student founders can actually apply to right now: grants that are still running, incubators that take any college, free credits you can claim this week, and the fastest route to real investors.</p>
+        <div class="hero-actions">
+          <a class="btn btn-ink" href="#grants">See what's open</a>
+          <a class="btn btn-line" href="#launchpad">Skip to the fastest route</a>
+        </div>
+      </div>
+      <aside class="slip" aria-label="Startup India Seed Fund status">
+        <span class="tag">SISFS</span>
+        <span class="stamp">Closed</span>
+        <h2>Startup India Seed Fund</h2>
+        <dl>
+          <dt>Was worth</dt><dd class="mono">₹20L grant + ₹50L debt</dd>
+          <dt>Closed</dt><dd class="mono">31 May 2026</dd>
+          <dt>Next round</dt><dd>None announced</dd>
+        </dl>
+        <p class="note">The scheme most lists still lead with. If someone says they can get you this money today, be careful.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="board" aria-labelledby="board-h">
+    <div class="wrap">
+      <p class="label">Notice board · Please read carefully</p>
+      <h2 id="board-h">Four things that save you weeks.</h2>
+      <p class="lede">Most "startup grant" lists are outdated. Read these before you fill a single form.</p>
+      <div class="slips">
+        <div class="slip"><span class="tag">01</span><h3>Most grants don't come from the government directly.</h3><p>You apply through an approved incubator, so getting into one is often step one.</p></div>
+        <div class="slip"><span class="tag">02</span><h3>Many grants exclude pure software.</h3><p>NIDHI-PRAYAS won't fund apps or e-commerce. Software founders should look at MeitY schemes.</p></div>
+        <div class="slip"><span class="tag">03</span><h3>Grants are slow.</h3><p>Paperwork, a registered company and months of waiting. And none of them introduce you to investors.</p></div>
+        <div class="slip"><span class="tag">04</span><h3>Credits are the fastest win.</h3><p>Thousands of dollars in cloud and tools within a week. No pitch, no equity.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" id="grants" aria-labelledby="grants-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot">01</span>
+        <p class="label">Government money · Non-dilutive</p>
+        <h2 id="grants-h">Grants that are still running</h2>
+        <p class="lede">Money you don't pay back and don't give equity for. Pick what you're building to see what fits.</p>
+      </div>
+
+      <div class="card">
+        <div class="filter" role="group" aria-label="Filter by what you're building">
+          <span>I'm building</span>
+          <button type="button" id="f-all" data-filter="all" aria-pressed="true">Anything</button>
+          <button type="button" id="f-software" data-filter="software" aria-pressed="false">Software or AI</button>
+          <button type="button" id="f-hardware" data-filter="hardware" aria-pressed="false">Hardware</button>
+          <button type="button" id="f-biotech" data-filter="biotech" aria-pressed="false">Biotech</button>
+        </div>
+
+        <article class="row" data-fit="hardware">
+          <div><h3>NIDHI-PRAYAS 2.0</h3><small>Dept. of Science &amp; Technology</small></div>
+          <div class="amt">Up to ₹20L<small>₹40L at Advance centres</small></div>
+          <div class="desc"><p><strong>For</strong> students and individuals (18+) building a physical prototype. No company needed. Not for pure software, apps or e-commerce.</p><p><strong>Apply</strong> through a PRAYAS Centre. Each one runs its own intake.</p><a href="https://nidhi.dst.gov.in/prayas2-0/" target="_blank" rel="noopener">nidhi.dst.gov.in ↗</a></div>
+          <div class="status"><span class="chip c-round">By centre</span></div>
+        </article>
+        <article class="row" data-fit="software hardware">
+          <div><h3>MeitY TIDE 2.0</h3><small>Ministry of Electronics &amp; IT</small></div>
+          <div class="amt">₹4L–₹7L<small>₹4L EIR · ₹7L grant</small></div>
+          <div class="desc"><p><strong>For</strong> tech startups in AI, IoT, blockchain and robotics. The EIR track takes students validating an idea; the grant track needs a working proof of concept.</p><p><strong>Apply</strong> through incubators like IIIT-Delhi, IISc and KIIT.</p><a href="https://msh.meity.gov.in" target="_blank" rel="noopener">msh.meity.gov.in ↗</a></div>
+          <div class="status"><span class="chip c-round">By incubator</span></div>
+        </article>
+        <article class="row" data-fit="software hardware">
+          <div><h3>MeitY GENESIS</h3><small>MeitY Startup Hub</small></div>
+          <div class="amt">Up to ₹10L<small>EIR track</small></div>
+          <div class="desc"><p><strong>For</strong> tech founders in Tier 2 and Tier 3 cities, including students at the idea stage.</p><p><strong>Note</strong> the EIR 3.0 call closed on 3 September 2026. Watch for the next round.</p><a href="https://mshportal.meity.gov.in" target="_blank" rel="noopener">mshportal.meity.gov.in ↗</a></div>
+          <div class="status"><span class="chip c-wait">Next round</span></div>
+        </article>
+        <article class="row" data-fit="biotech">
+          <div><h3>BIRAC BIG</h3><small>Dept. of Biotechnology</small></div>
+          <div class="amt">Up to ₹50L</div>
+          <div class="desc"><p><strong>For</strong> early-stage biotech in health, agri, climate and bio-based materials. Individuals and startups can apply.</p><p><strong>Apply</strong> when a call opens, usually twice a year.</p><a href="https://birac.nic.in/big.php" target="_blank" rel="noopener">birac.nic.in ↗</a></div>
+          <div class="status"><span class="chip c-round">Calls</span></div>
+        </article>
+        <article class="row" data-fit="software hardware biotech">
+          <div><h3>DPIIT Recognition</h3><small>Startup India · not a grant</small></div>
+          <div class="amt">Free<small>no government fee</small></div>
+          <div class="desc"><p><strong>Why</strong> it unlocks a 3-year tax holiday (80-IAC), 80% off patent fees and eligibility for many schemes.</p><p><strong>Needs</strong> a private limited company, LLP or registered partnership.</p><a href="https://www.startupindia.gov.in" target="_blank" rel="noopener">startupindia.gov.in ↗</a></div>
+          <div class="status"><span class="chip c-open">Open</span></div>
+        </article>
+      </div>
+      <p class="fine">Amounts and status checked October 2026. Schemes change often, so confirm on the official page before applying.</p>
+    </div>
+  </section>
+
+  <section class="ink" aria-label="Launchpad">
+    <div class="wrap">
+      <div>
+        <p class="label">Grants fund the build. They don't fund the company.</p>
+        <h2>Launchpad ends with a Demo Day in front of real investors.</h2>
+        <p class="sub">Cohort 01 · 20 seats · applications close October 15.</p>
+      </div>
+      <a class="btn" href="#launchpad">See the Launchpad deal</a>
+    </div>
+  </section>
+
+  <section class="warm" id="incubators" aria-labelledby="inc-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot">02</span>
+        <p class="label">Mentors · Space · Grant access</p>
+        <h2 id="inc-h">Incubators that take any college</h2>
+        <p class="lede">Incubators give you mentors, space and access to grants that only flow through them. You don't need to study at an IIT or IIM for these.</p>
+      </div>
+      <div class="card">
+        <article class="row">
+          <div><h3>NSRCEL Launchpad</h3><small>IIM Bangalore</small></div>
+          <div class="amt">Free<small>up to ₹5L for top teams</small></div>
+          <div class="desc"><p>About 5 months, mostly online, with two short bootcamps in Bengaluru. Solo founders welcome.</p><a href="https://nsrcel.org" target="_blank" rel="noopener">nsrcel.org ↗</a></div>
+          <div class="status"><span class="chip c-round">Cohorts</span></div>
+        </article>
+        <article class="row">
+          <div><h3>SINE</h3><small>IIT Bombay</small></div>
+          <div class="amt">Incubation</div>
+          <div class="desc"><p>Tech and deep-tech startups, including outside founders. Also runs the national NIDHI-PRAYAS programme.</p><a href="https://sineiitb.org" target="_blank" rel="noopener">sineiitb.org ↗</a></div>
+          <div class="status"><span class="chip c-round">Intakes</span></div>
+        </article>
+        <article class="row">
+          <div><h3>Atal Incubation Centres</h3><small>Atal Innovation Mission</small></div>
+          <div class="amt">Varies</div>
+          <div class="desc"><p>Centres at universities across India, so there's probably one near you. Many are also channels for government grants.</p><a href="https://aim.gov.in" target="_blank" rel="noopener">aim.gov.in ↗</a></div>
+          <div class="status"><span class="chip c-open">Many open</span></div>
+        </article>
+      </div>
+
+      <div class="subhead"><h3>Campus incubators</h3><p>These mainly support their own students.</p></div>
+      <div class="card">
+        <article class="row">
+          <div><h3>Udhmodya Foundation</h3><small>University of Delhi</small></div>
+          <div class="amt">Mentorship</div>
+          <div class="desc"><p>The natural first stop for DU students. Online proposal form.</p><a href="https://udhmodyadu.in" target="_blank" rel="noopener">udhmodyadu.in ↗</a></div>
+          <div class="status"><span class="chip c-open">Open</span></div>
+        </article>
+        <article class="row">
+          <div><h3>Nirmaan</h3><small>IIT Madras</small></div>
+          <div class="amt">Pre-incubation</div>
+          <div class="desc"><p>For IIT Madras student founders. BS programme students should check eligibility with Nirmaan.</p><a href="https://nirmaan.iitm.ac.in" target="_blank" rel="noopener">nirmaan.iitm.ac.in ↗</a></div>
+          <div class="status"><span class="chip c-round">Check</span></div>
+        </article>
+        <article class="row">
+          <div><h3>FITT</h3><small>IIT Delhi</small></div>
+          <div class="amt">Incubation</div>
+          <div class="desc"><p>IIT Delhi students and researchers, plus outside deep-tech founders.</p><a href="https://fitt-iitd.in" target="_blank" rel="noopener">fitt-iitd.in ↗</a></div>
+          <div class="status"><span class="chip c-round">Intakes</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="deal-sec" id="launchpad" aria-labelledby="lp-h">
+    <div class="wrap">
+      <div class="deal">
+        <div class="deal-main">
+          <p class="label">Launchpad · Cohort 01 · Startup accelerator</p>
+          <h2 id="lp-h">We only win if you do.</h2>
+          <p>Grants and incubators help you build. Launchpad gets you funded. A fully online accelerator for student founders and early-stage builders across India, backed by a network of 90+ campus chapters.</p>
+          <div class="stats">
+            <div><b>20</b><span>founders selected</span></div>
+            <div><b>₹999</b><span>to apply, once</span></div>
+            <div><b>2%</b><span>equity taken</span></div>
+            <div><b>0%</b><span>success fee on what you raise</span></div>
+          </div>
+          <ol class="path" aria-label="How the cohort runs">
+            <li><span class="when">By Oct 15</span><div><h3>Apply</h3><p>No registered company or DPIIT recognition needed.</p></div></li>
+            <li><span class="when">Nov 1</span><div><h3>Kickoff and founder pods</h3><p>You join a small pod of founders building alongside you.</p></div></li>
+            <li><span class="when">Weekly</span><div><h3>Live Labs and office hours</h3><p>Sunday Live Labs, mentor office hours and pod check-ins. About 6–8 hours a week.</p></div></li>
+            <li><span class="when">Before demo</span><div><h3>Mock pitches</h3><p>Sharpen your deck and story until it's investor-ready.</p></div></li>
+            <li><span class="when">Finale</span><div><h3>Demo Day</h3><p>Pitch your startup to real investors.</p></div></li>
+          </ol>
+        </div>
+        <aside class="deal-side" aria-label="Deadline">
+          <p class="label">Final deadline</p>
+          <p class="big-clock" data-big>Oct 15</p>
+          <p class="when-line">Closes Oct 15, 2026, 11:59 PM IST. No further extension.</p>
+          <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+          <p class="facts">Fully online · Starts Nov 1 · Strictly 20 founders</p>
+          <div class="receipt" aria-label="What you get">
+            <p class="label">What you get</p>
+            <div><span class="k">Founder pod</span><span class="v">Selected 20</span></div>
+            <div><span class="k">1:1 office hours</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Investor intros &amp; Demo Day</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Written feedback</span><span class="v">Every applicant</span></div>
+            <div><span class="k">All mentor sessions</span><span class="v">Every applicant</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sage" id="credits" aria-labelledby="cr-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot" style="background:var(--office)">03</span>
+        <p class="label">No pitch · No equity</p>
+        <h2 id="cr-h">Free credits you can claim this week</h2>
+        <p class="lede">Most only need a live website and an email on your own domain, so set those up first.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Program</th><th scope="col">Worth</th><th scope="col">Who can get it</th></tr></thead>
+          <tbody>
+            <tr><td>GitHub Student Pack<a href="https://education.github.com/pack" target="_blank" rel="noopener">education.github.com/pack ↗</a></td><td class="worth">Free bundle</td><td>Any student. Verify your college email.</td></tr>
+            <tr><td>Azure for Students<a href="https://azure.microsoft.com/free/students" target="_blank" rel="noopener">azure.microsoft.com ↗</a></td><td class="worth">$100</td><td>Any student. No credit card needed.</td></tr>
+            <tr><td>AWS Activate Founders<a href="https://aws.amazon.com/startups" target="_blank" rel="noopener">aws.amazon.com/startups ↗</a></td><td class="worth">$1K–$5K</td><td>Self-funded startups. Up to $200K with a partner investor or accelerator.</td></tr>
+            <tr><td>Google for Startups Cloud<a href="https://cloud.google.com/startup" target="_blank" rel="noopener">cloud.google.com/startup ↗</a></td><td class="worth">$2,000</td><td>Pre-funded startups. Funded ones can get $200K, or $350K if AI-first.</td></tr>
+            <tr><td>Microsoft for Startups<a href="https://www.microsoft.com/startups" target="_blank" rel="noopener">microsoft.com/startups ↗</a></td><td class="worth">Up to $150K</td><td>Depends on your stage and funding.</td></tr>
+            <tr><td>Cloudflare for Startups<a href="https://www.cloudflare.com/forstartups/" target="_blank" rel="noopener">cloudflare.com/forstartups ↗</a></td><td class="worth">$10,000</td><td>Bootstrapped, under $1M raised, with a live site and business email.</td></tr>
+            <tr><td>Notion for Startups<a href="https://www.notion.com/startups" target="_blank" rel="noopener">notion.com/startups ↗</a></td><td class="worth">3–6 months</td><td>Business plan with Notion AI. Needs a company domain email.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">The biggest credit tiers need a partner accelerator or investor behind you.</p>
+    </div>
+  </section>
+
+  <section class="warm" id="plan" aria-labelledby="plan-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot">04</span>
+        <p class="label">Your next 30 days</p>
+        <h2 id="plan-h">The order to do it in</h2>
+      </div>
+      <ol class="plan">
+        <li><span class="step-dot">01</span><span class="when">Today</span><div><h3>Claim the student credits</h3><p>GitHub Student Pack and Azure for Students take minutes.</p></div></li>
+        <li class="hot"><span class="step-dot">02</span><span class="when">By Oct 15</span><div><h3>Apply to Launchpad</h3><p>The only step here with a hard deadline, and the one that puts you in front of investors. <a href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply now ↗</a></p></div></li>
+        <li><span class="step-dot">03</span><span class="when">Week 2</span><div><h3>Set up a domain and site</h3><p>Then apply to AWS, Google Cloud, Cloudflare and Notion with your new email.</p></div></li>
+        <li><span class="step-dot">04</span><span class="when">Week 2–3</span><div><h3>Pick your grant path</h3><p>Hardware or deep tech: NIDHI-PRAYAS or BIRAC. Software or AI: TIDE 2.0 and GENESIS.</p></div></li>
+        <li><span class="step-dot">05</span><span class="when">Week 3–4</span><div><h3>Apply to one or two incubators</h3><p>Start with your own campus, then a national program like NSRCEL.</p></div></li>
+        <li><span class="step-dot">06</span><span class="when">When ready</span><div><h3>Register the company</h3><p>Do it when you're about to take grant money, then apply for DPIIT recognition.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sage" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Launchpad questions</p>
+        <h2 id="faq-h">Before you apply</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Do I need a registered company?</summary><p>No. You don't need a company or DPIIT recognition to apply.</p></details>
+        <details><summary>Is it only for college students?</summary><p>No. It's open to student founders and early-stage builders across India.</p></details>
+        <details><summary>How much time does it take?</summary><p>About 6–8 hours a week, built around Sunday Live Labs, mentor office hours and pod check-ins. Everything is online.</p></details>
+        <details><summary>What does it cost?</summary><p>A one-time ₹999 application fee. If you're selected, Launchpad takes 2% equity in your venture under a standard founder agreement, with no success fee on anything you raise.</p></details>
+        <details><summary>What if I'm not selected?</summary><p>You still get personal written feedback on your application and access to every virtual leader and mentor session during the cohort. Founder pods, 1:1 office hours, investor intros and Demo Day are for the 20 selected founders.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-h">
+    <div class="wrap">
+      <p class="label">Find your people. Fund your startup.</p>
+      <h2 id="close-h">Grants take months. Cohort 01 starts November 1.</h2>
+      <p>20 seats. Applications close October 15 at 11:59 PM IST, with no extensions.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-brand"><img class="logo logo-lg" src="/TFC.png" alt="The Future Council Logo" width="36" height="36"><span><strong>The Future Council</strong> · India's student startup accelerator · <a href="https://www.thefuturecouncil.in" target="_blank" rel="noopener">thefuturecouncil.in</a> · Instagram <a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">@thefuturecouncil.in</a></span></p>
+    <p>Scheme details checked against official and public sources in October 2026. Amounts, eligibility and deadlines change, so always confirm on the official page.</p>
+  </div>
+</footer>
+
+<div class="bar" role="region" aria-label="Launchpad deadline">
+  <div class="wrap">
+    <p>Launchpad Cohort 01<span class="hide-sm"> · 20 seats</span> · <span data-clock>closes <b>Oct 15</b></span></p>
+    <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var deadline = new Date("2026-10-15T23:59:00+05:30").getTime();
+  function parts() {
+    var ms = deadline - Date.now();
+    if (ms <= 0) return null;
+    return { d: Math.floor(ms / 86400000), h: Math.floor((ms % 86400000) / 3600000), m: Math.floor((ms % 3600000) / 60000) };
+  }
+  function tick() {
+    var p = parts();
+    var small = p ? "closes in <b>" + (p.d ? p.d + "d " + p.h + "h" : p.h + "h " + p.m + "m") + "</b>" : "applications <b>closed</b>";
+    var big = p ? (p.d ? p.d + "d " + p.h + "h" : p.h + "h " + p.m + "m") : "Closed";
+    document.querySelectorAll("[data-clock]").forEach(function (el) { el.innerHTML = small; });
+    document.querySelectorAll("[data-big]").forEach(function (el) { el.textContent = big; });
+  }
+  tick();
+  setInterval(tick, 30000);
+
+  var card = document.getElementById("grants");
+  if (card) {
+    var buttons = card.querySelectorAll(".filter button");
+    var rows = card.querySelectorAll(".row");
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var f = b.getAttribute("data-filter");
+        buttons.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        rows.forEach(function (r) {
+          var fit = (r.getAttribute("data-fit") || "").split(" ");
+          r.classList.toggle("dim", f !== "all" && fit.indexOf(f) === -1);
+        });
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
