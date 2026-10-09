@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Funded Pitch Deck Library · 17 Original Pitch Decks &amp; Framework | The Future Council</title>
+  <meta name="description" content="The original pitch decks behind Swiggy, Razorpay, Freshworks, Meesho and more Indian startups. Free founder library curated by The Future Council." />
+  <link rel="canonical" href="https://thefuturecouncil.in/resources/decks" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#D6DCD3" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, one orange Launchpad deal band, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
+:root {
+  --office: #D6DCD3;
+  --office-2: #C6CDC2;
+  --office-ink: #1E2124;
+  --office-soft: #4E555A;
+  --ink: #1B1712;
+  --ink-soft: #5A4E44;
+  --warm: #FFF4E8;
+  --warm-2: #FBE6D4;
+  --line: #EAD7C6;
+  --slip: #F7F6EF;
+  --slip-line: #DCDAD0;
+  --paper: #FFFFFF;
+  --orange: #E2542A;
+  --orange-deep: #AE3D18;
+  --peach: #F5A07F;
+  --forest: #1F5A45;
+  --forest-soft: #E8F1ED;
+  --ballpoint: #2C4A9A;
+  --dark-muted: #CDBFB2;
+
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, -apple-system, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut: clamp(16px, 4vw, 48px);
+  --wrap: 72rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; padding: 0;
+  background: var(--office); color: var(--office-ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: var(--ballpoint); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gut); }
+.mono { font-family: var(--mono); }
+.label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--office-soft); }
+.lede { font-size: 1.0625rem; color: var(--office-soft); max-width: 38rem; }
+section { scroll-margin-top: 72px; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--body); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+  padding: 12px 22px; border-radius: 999px; border: 1px solid var(--orange);
+  background: var(--orange); color: #FFFFFF; cursor: pointer; transition: background-color .15s ease, transform .15s ease;
+}
+.btn:hover { background: var(--orange-deep); border-color: var(--orange-deep); }
+.btn-ink { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.btn-ink:hover { background: #000; border-color: #000; }
+.btn-line { background: transparent; color: var(--office-ink); border-color: var(--office-ink); }
+.btn-line:hover { background: var(--office-ink); color: var(--office); }
+.btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+
+/* header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--office) 92%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--office-2);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1rem; color: var(--office-ink); text-decoration: none; letter-spacing: -0.01em; }
+.logo { width: 28px; height: 28px; border-radius: 6px; display: block; }
+.mark { width: 22px; height: 22px; border-radius: 5px; background: var(--orange); display: grid; place-items: center; color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 0.8rem; }
+.navlinks { display: flex; align-items: center; gap: 22px; }
+.navlinks a { color: var(--office-ink); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+.navlinks a:hover { color: var(--orange-deep); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.token {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--slip); border: 1px solid var(--slip-line); padding: 6px 12px; transform: rotate(-1.2deg);
+  box-shadow: 0 1px 0 rgba(27,23,18,.08);
+}
+.token b { color: var(--ballpoint); font-weight: 600; }
+.hero h1 { font-size: clamp(2.5rem, 1.3rem + 5.2vw, 4.75rem); margin-block: 22px 20px; }
+.hero h1 span { color: var(--office-soft); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* pinned slip */
+.slip {
+  position: relative; background: var(--slip); border: 1px solid var(--slip-line);
+  padding: 30px 22px 22px;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 27px, var(--slip-line) 27px 28px);
+  background-position: 0 58px;
+  box-shadow: 0 10px 24px -14px rgba(27,23,18,.35), 0 2px 0 rgba(27,23,18,.05);
+}
+.slip::before {
+  content: ""; position: absolute; top: -8px; left: 50%; width: 16px; height: 16px; margin-left: -8px;
+  border-radius: 50%; background: var(--ballpoint); box-shadow: inset -2px -3px 0 rgba(0,0,0,.25), 0 2px 3px rgba(0,0,0,.25);
+}
+.slip .tag { position: absolute; top: 12px; right: 12px; font-family: var(--mono); font-size: 0.65rem; border: 1px solid var(--slip-line); padding: 2px 6px; color: var(--office-soft); background: var(--paper); }
+.hero .slip { transform: rotate(1.4deg); }
+.stamp {
+  display: inline-block; font-family: var(--mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange-deep); border: 2px solid var(--orange-deep); padding: 4px 10px; transform: rotate(-6deg); margin-bottom: 14px; background: color-mix(in srgb, var(--slip) 70%, transparent);
+}
+.slip h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.slip dl { display: grid; grid-template-columns: auto 1fr; gap: 0 14px; margin: 0; font-size: 0.93rem; line-height: 28px; }
+.slip dt { font-family: var(--mono); font-size: 0.72rem; color: var(--office-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+.slip dd { margin: 0; color: var(--office-ink); }
+.slip .note { font-size: 0.85rem; color: var(--office-soft); margin-top: 10px; line-height: 1.5; }
+
+/* notice board */
+.board { padding-block: clamp(48px, 7vw, 80px); border-top: 1px solid var(--office-2); }
+.board h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); margin-block: 10px 12px; }
+.slips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+.slips .slip { padding-top: 34px; }
+.slips .slip:nth-child(odd) { transform: rotate(-1deg); }
+.slips .slip:nth-child(even) { transform: rotate(0.8deg); }
+.slips h3 { font-family: var(--body); font-weight: 700; font-size: 1rem; letter-spacing: 0; line-height: 1.35; margin-bottom: 8px; }
+.slips p { font-size: 0.92rem; color: var(--office-soft); line-height: 28px; }
+
+/* warm sections */
+.warm { background: var(--warm); color: var(--ink); padding-block: clamp(56px, 8vw, 96px); }
+.warm .label { color: var(--ink-soft); }
+.warm .lede { color: var(--ink-soft); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 30px; }
+.sec-head h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); }
+.step-dot {
+  width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--orange); color: var(--orange-deep);
+  display: grid; place-items: center; font-family: var(--mono); font-size: 0.8rem; font-weight: 600; background: var(--warm);
+}
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
+.filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.filter span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
+.filter button {
+  font-family: var(--body); font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--warm); color: var(--ink);
+}
+.filter button[aria-pressed="true"] { background: var(--ink); color: var(--warm); border-color: var(--ink); }
+
+.row {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.75fr) minmax(0, 1.9fr) auto;
+  gap: 8px 24px; padding-block: 20px; border-top: 1px solid var(--line); align-items: start; transition: opacity .2s ease;
+}
+.row:first-of-type { border-top: 0; }
+.filter + .row { border-top: 1px solid var(--line); margin-top: 12px; }
+.row.dim { opacity: 0.3; }
+.row h3 { font-family: var(--display); font-size: 1.2rem; letter-spacing: -0.01em; }
+.row small { display: block; color: var(--ink-soft); font-size: 0.82rem; margin-top: 3px; font-family: var(--body); }
+.amt { font-family: var(--mono); font-weight: 600; color: var(--orange-deep); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.amt small { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; }
+.desc { display: grid; gap: 6px; color: var(--ink-soft); font-size: 0.94rem; }
+.desc strong { color: var(--ink); font-weight: 600; }
+.desc a { font-family: var(--mono); font-size: 0.78rem; }
+.status { justify-self: end; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor;
+}
+.chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.c-open { color: var(--forest); background: var(--forest-soft); }
+.c-round { color: var(--ballpoint); background: #EEF1FA; }
+.c-wait { color: var(--orange-deep); background: var(--warm-2); }
+.fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin-top: 16px; }
+.subhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 40px 0 14px; }
+.subhead h3 { font-size: 1.35rem; }
+.subhead p { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ink strip */
+.ink { background: var(--ink); color: var(--warm); padding-block: 40px; }
+.ink .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.ink .label { color: var(--peach); }
+.ink h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); margin-top: 8px; max-width: 26ch; }
+.ink p.sub { color: var(--dark-muted); margin-top: 8px; max-width: 40rem; }
+
+/* launchpad deal */
+.deal-sec { padding-block: clamp(56px, 8vw, 96px); background: var(--warm); }
+.deal { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
+.deal-main { background: var(--orange); color: #FFFFFF; padding: clamp(24px, 4vw, 48px); display: grid; gap: 26px; align-content: start; }
+.deal-main .label { color: #FFE3D6; }
+.deal-main h2 { font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.25rem); }
+.deal-main p { color: #FFE9DF; max-width: 36rem; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; border-top: 1px solid rgba(255,255,255,.35); padding-top: 20px; }
+.stats b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 0.82rem; color: #FFE3D6; line-height: 1.35; display: block; margin-top: 6px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid rgba(255,255,255,.35); }
+.path li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 14px; padding-block: 12px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.path .when { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); padding-top: 3px; font-weight: 600; }
+.path h3 { font-family: var(--body); font-size: 1rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.path p { font-size: 0.9rem; color: #FFE9DF; }
+.deal-side { background: var(--paper); color: var(--ink); padding: clamp(24px, 4vw, 40px); display: grid; gap: 16px; align-content: start; }
+.deal-side .label { color: var(--ink-soft); }
+.big-clock { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 1.8rem + 3vw, 3.75rem); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.deal-side .when-line { font-size: 0.92rem; color: var(--ink-soft); }
+.deal-side .btn { width: 100%; }
+.deal-side .facts { font-size: 0.88rem; color: var(--ink-soft); }
+.receipt { border-top: 1px dashed var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 0.9rem; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; }
+.receipt .k { color: var(--ink-soft); }
+.receipt .v { font-family: var(--mono); font-weight: 600; color: var(--forest); text-align: right; }
+.receipt .v.no { color: var(--ink-soft); font-weight: 400; }
+
+/* credits on sage */
+.sage { padding-block: clamp(56px, 8vw, 96px); }
+.sage .sec-head h2 { color: var(--office-ink); }
+.tbl-wrap { overflow-x: auto; background: var(--slip); border: 1px solid var(--slip-line); box-shadow: 0 10px 24px -16px rgba(27,23,18,.35); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 0.93rem; }
+th { text-align: left; font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--office-soft); font-weight: 600; padding: 14px 18px; border-bottom: 1.5px solid var(--office-ink); }
+td { padding: 14px 18px; border-bottom: 1px solid var(--slip-line); vertical-align: top; color: var(--office-soft); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--office-ink); font-weight: 600; }
+td:first-child a { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; margin-top: 2px; }
+td.worth { font-family: var(--mono); color: var(--forest); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sage .fine { color: var(--office-soft); }
+
+/* plan */
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.plan li { display: grid; grid-template-columns: 44px 8.5rem minmax(0, 1fr); gap: 18px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; }
+.plan .when { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--orange-deep); font-weight: 600; }
+.plan h3 { font-family: var(--body); font-size: 1.02rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.plan p { color: var(--ink-soft); font-size: 0.93rem; }
+.plan li.hot { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.plan li.hot .step-dot { background: var(--orange); border-color: var(--orange); color: #FFFFFF; }
+.plan li.hot .when { color: var(--peach); }
+.plan li.hot p { color: var(--dark-muted); }
+.plan li.hot a { color: var(--peach); font-weight: 600; }
+
+/* faq */
+.faq { border-top: 1.5px solid var(--office-ink); }
+details { border-bottom: 1px solid var(--office-2); padding-block: 18px; }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--orange-deep); font-weight: 600; }
+details[open] summary::after { content: "−"; }
+details p { color: var(--office-soft); margin-top: 10px; max-width: 46rem; }
+
+/* closing */
+.closing { background: var(--ink); color: var(--warm); padding-block: clamp(64px, 9vw, 112px); }
+.closing .label { color: var(--peach); }
+.closing h2 { font-size: clamp(2.2rem, 1.3rem + 4vw, 4rem); margin-block: 12px 16px; max-width: 18ch; }
+.closing p { color: var(--dark-muted); max-width: 34rem; }
+.closing .hero-actions { margin-top: 28px; }
+footer { background: var(--ink); color: var(--dark-muted); border-top: 1px solid #3A3129; padding-block: 24px 32px; font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 8px; }
+.foot-brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo-lg { width: 36px; height: 36px; }
+footer strong { color: var(--warm); font-family: var(--display); }
+footer a { color: var(--peach); }
+
+/* sticky bar */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  background: var(--ink); color: var(--warm);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top: 1px solid #3A3129;
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.bar p { font-size: 0.88rem; min-width: 0; }
+.bar b { color: var(--peach); font-family: var(--mono); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .hero-grid, .deal { grid-template-columns: 1fr; }
+  .slips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row > div:first-child { grid-column: 1; }
+  .status { grid-column: 2; grid-row: 1; }
+  .amt, .desc { grid-column: 1 / -1; }
+  .navlinks a:not(.btn) { display: none; }
+}
+@media (max-width: 600px) {
+  .slips { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path li { grid-template-columns: 1fr; gap: 2px; }
+  .plan li { grid-template-columns: 44px minmax(0, 1fr); }
+  .plan li > div { grid-column: 2; }
+  .plan .when { grid-column: 2; }
+  .bar .hide-sm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Deck-library additions: 16:9 title-slide thumbnails for each deck, a deck "spine" of 8 slides, and a send-ready checklist. Same TFC tokens as above. */
+.mock {
+  aspect-ratio: 16 / 9; max-width: 100%; background: var(--ink); color: var(--warm);
+  padding: clamp(14px, 2.4vw, 22px); display: grid; align-content: space-between; gap: 8px;
+  border-radius: 6px; position: relative; overflow: hidden;
+}
+.mock .m-top { display: flex; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--peach); }
+.mock .m-name { font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.6rem); line-height: 1; letter-spacing: -0.02em; }
+.mock .m-line { font-size: 0.85rem; color: var(--dark-muted); }
+.mock .m-bar { height: 4px; width: 38%; background: var(--orange); border-radius: 2px; }
+.hero .slip .mock { margin-top: 4px; }
+.hero .slip .stamp { position: absolute; right: 18px; bottom: 74px; z-index: 2; background: var(--slip); }
+
+.spine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.spine li { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
+.spine .n { font-family: var(--mono); font-size: 0.7rem; color: var(--orange-deep); font-weight: 600; letter-spacing: 0.08em; }
+.spine h3 { font-family: var(--body); font-size: 1rem; font-weight: 700; letter-spacing: 0; line-height: 1.3; }
+.spine p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.45; }
+
+.decks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+.deck { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 14px; display: grid; gap: 14px; align-content: start; transition: opacity .2s ease; }
+.deck.dim { opacity: 0.3; }
+.deck-body { display: grid; gap: 8px; padding: 0 6px 6px; }
+.deck-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.deck-meta .sector { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+.deck-body .k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange-deep); font-weight: 600; }
+.deck-body p { color: var(--ink); font-size: 0.97rem; }
+.deck-body a { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; }
+
+.checklist { display: grid; gap: 10px; }
+.check { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; cursor: pointer; }
+.check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--forest); cursor: pointer; }
+.check strong { display: block; font-weight: 600; }
+.check span { color: var(--ink-soft); font-size: 0.92rem; }
+.check.done { background: var(--forest-soft); border-color: transparent; }
+.check.cta-row { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.check.cta-row span { color: var(--dark-muted); }
+.check.cta-row a { color: var(--peach); font-weight: 600; }
+.check.cta-row.done { background: var(--forest); }
+.progress { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.progress .track { flex: 1 1 200px; height: 8px; border-radius: 999px; background: var(--warm-2); overflow: hidden; }
+.progress .fill { height: 100%; width: 0; background: var(--forest); transition: width .25s ease; }
+.progress .count { font-family: var(--mono); font-size: 0.85rem; font-weight: 600; color: var(--forest); }
+
+@media (max-width: 900px) { .spine { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .decks { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .spine { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img class="logo" src="/TFC.png" alt="The Future Council Logo" width="28" height="28">The Future Council</a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#decks">The 10 decks</a>
+      <a href="#bonus">Bonus</a>
+      <a href="#checklist">Checklist</a>
+      <a href="/resources">Library</a>
+      <a href="#launchpad">Launchpad</a>
+      <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="token">Deck library · Free founder resource · <b>10 + 7 decks</b></span>
+        <h1>Swiggy's first pitch deck wasn't pretty. <span>It got funded anyway.</span></h1>
+        <p class="lede">The original decks behind Swiggy, Razorpay, Freshworks, Meesho and six more Indian startups. Shared by the investors who backed them, with one thing from each you can copy into your own deck.</p>
+        <div class="hero-actions">
+          <a class="btn btn-ink" href="#decks">Open the 10 decks</a>
+          <a class="btn btn-line" href="#launchpad">Pitch to real investors</a>
+        </div>
+      </div>
+      <aside class="slip" aria-label="Swiggy first deck">
+        <span class="tag">DECK 01</span>
+        <div class="mock" aria-hidden="true">
+          <div class="m-top"><span>First deck</span><span>2014–15</span></div>
+          <div><div class="m-name">Swiggy</div><div class="m-line">Food delivery, built function-first</div></div>
+          <div class="m-bar"></div>
+        </div>
+        <span class="stamp">Funded</span>
+        <dl style="margin-top:14px">
+          <dt>Backed by</dt><dd>Accel, 2015</dd>
+          <dt>Shared on</dt><dd>Accel's PitchCraft series</dd>
+          <dt>The lesson</dt><dd>Clear thinking beats design</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="board" aria-labelledby="board-h">
+    <div class="wrap">
+      <p class="label">Notice board · Read before you open a deck</p>
+      <h2 id="board-h">How to use this library.</h2>
+      <p class="lede">These aren't templates or redesigns. They're the decks founders actually sent to investors.</p>
+      <div class="slips">
+        <div class="slip"><span class="tag">01</span><h3>Every link opens the official source.</h3><p>Each page has a free "Download Pitch Deck" button and the founder explaining it.</p></div>
+        <div class="slip"><span class="tag">02</span><h3>Listen to the episode, not just the slides.</h3><p>Why the deck worked is worth more than how it looks.</p></div>
+        <div class="slip"><span class="tag">03</span><h3>Notice how plain they are.</h3><p>Clarity and insight won the money. Fancy design didn't.</p></div>
+        <div class="slip"><span class="tag">04</span><h3>Copy the structure, not the content.</h3><p>Each deck below has one move worth putting in yours.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" aria-labelledby="spine-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">The order almost every funded deck follows</p>
+        <h2 id="spine-h">Eight slides, in this order</h2>
+        <p class="lede">Check your own deck against this before you open any of the ten.</p>
+      </div>
+      <ol class="spine">
+        <li><span class="n">SLIDE 01</span><h3>Problem</h3><p>Who has it, and how painful it is.</p></li>
+        <li><span class="n">SLIDE 02</span><h3>Why now</h3><p>What changed that makes this possible today.</p></li>
+        <li><span class="n">SLIDE 03</span><h3>Solution</h3><p>What you built, in one plain sentence.</p></li>
+        <li><span class="n">SLIDE 04</span><h3>Proof</h3><p>Users, revenue, pilots or a waitlist. One real number.</p></li>
+        <li><span class="n">SLIDE 05</span><h3>Market</h3><p>How big this gets if it works.</p></li>
+        <li><span class="n">SLIDE 06</span><h3>Business model</h3><p>Who pays, how much, and how often.</p></li>
+        <li><span class="n">SLIDE 07</span><h3>Team</h3><p>Why you are the people who win this.</p></li>
+        <li><span class="n">SLIDE 08</span><h3>The ask</h3><p>How much you're raising and what it gets done.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="warm" id="decks" aria-labelledby="decks-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot">10</span>
+        <p class="label">Original decks · Shared by Accel</p>
+        <h2 id="decks-h">The 10 decks</h2>
+        <p class="lede">All ten are from Accel's PitchCraft series on SeedToScale. Open the link and scroll to "Download Pitch Deck".</p>
+      </div>
+      <div class="filter" role="group" aria-label="Filter by sector">
+        <span>Show</span>
+        <button type="button" id="f-all" data-filter="all" aria-pressed="true">All 10</button>
+        <button type="button" id="f-consumer" data-filter="consumer" aria-pressed="false">Consumer</button>
+        <button type="button" id="f-fintech" data-filter="fintech" aria-pressed="false">Fintech</button>
+        <button type="button" id="f-b2b" data-filter="b2b" aria-pressed="false">B2B &amp; SaaS</button>
+      </div>
+      <div class="decks" data-decks></div>
+      <p class="fine">Decks belong to their companies and are hosted by Accel's SeedToScale. Links checked October 2026.</p>
+    </div>
+  </section>
+
+  <section class="ink" aria-label="Launchpad">
+    <div class="wrap">
+      <div>
+        <p class="label">A deck gets you a meeting</p>
+        <h2>Launchpad gets you a Demo Day in front of real investors.</h2>
+        <p class="sub">Cohort 01 · 20 seats · mock pitches before Demo Day · applications close October 15.</p>
+      </div>
+      <a class="btn" href="#launchpad">See the Launchpad deal</a>
+    </div>
+  </section>
+
+  <section class="sage" id="bonus" aria-labelledby="bonus-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot" style="background:var(--office)">+7</span>
+        <p class="label">Bonus decks</p>
+        <h2 id="bonus-h">Seven more worth opening</h2>
+        <p class="lede">Elevation Capital shared the first decks of several portfolio companies as free downloads. One more classic is on Best Pitch Deck.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Startup</th><th scope="col">What they do</th><th scope="col">Where to find it</th></tr></thead>
+          <tbody>
+            <tr><td>Urban Company</td><td>Home services</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>Blissclub</td><td>Women's activewear</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>Atlys</td><td>Visa tech</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>PlaySimple</td><td>Mobile games</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>Comet</td><td>Footwear</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>Swiggy &amp; Meesho slides</td><td>Never-seen-before first-deck slides</td><td><a href="https://www.elevationcapital.com/perspectives/the-no-bs-guide-to-crafting-the-perfect-pitch-deck-swiggy-meesho" target="_blank" rel="noopener">Elevation Capital ↗</a></td></tr>
+            <tr><td>Slice</td><td>Fintech · Series A, $6M (2018)</td><td><a href="https://bestpitchdeck.com/slice" target="_blank" rel="noopener">Best Pitch Deck ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="deal-sec" id="launchpad" aria-labelledby="lp-h">
+    <div class="wrap">
+      <div class="deal">
+        <div class="deal-main">
+          <p class="label">Launchpad · Cohort 01 · Startup accelerator</p>
+          <h2 id="lp-h">We only win if you do.</h2>
+          <p>You've studied the decks. Now pitch yours. Launchpad is a fully online accelerator for student founders and early-stage builders from any college in India, ending in a Demo Day with real investors.</p>
+          <div class="stats">
+            <div><b>20</b><span>founders selected</span></div>
+            <div><b>₹999</b><span>to apply, once</span></div>
+            <div><b>2%</b><span>equity taken</span></div>
+            <div><b>0%</b><span>success fee on what you raise</span></div>
+          </div>
+          <ol class="path" aria-label="How the cohort runs">
+            <li><span class="when">By Oct 15</span><div><h3>Apply</h3><p>No registered company needed. Selection is on your problem, progress and team, not your college or GPA.</p></div></li>
+            <li><span class="when">Nov 1</span><div><h3>Kickoff and founder pods</h3><p>You join a pod of 4–5 founders building alongside you.</p></div></li>
+            <li><span class="when">Weekly</span><div><h3>Live Labs and office hours</h3><p>Sunday Live Labs and 1:1 mentor office hours. About 6–8 hours a week.</p></div></li>
+            <li><span class="when">Before demo</span><div><h3>Mock pitches</h3><p>Rebuild your deck with mentors until it's investor-ready.</p></div></li>
+            <li><span class="when">Finale</span><div><h3>Demo Day</h3><p>Pitch your startup to real investors.</p></div></li>
+          </ol>
+        </div>
+        <aside class="deal-side" aria-label="Deadline">
+          <p class="label">Final deadline</p>
+          <p class="big-clock" data-big>Oct 15</p>
+          <p class="when-line">Closes Oct 15, 2026, 11:59 PM IST. No extensions.</p>
+          <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+          <p class="facts">Fully online · Starts Nov 1 · Strictly 20 founders · 90+ campus chapters</p>
+          <div class="receipt" aria-label="What you get">
+            <p class="label">What you get</p>
+            <div><span class="k">Founder pod</span><span class="v">Selected 20</span></div>
+            <div><span class="k">1:1 office hours</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Investor intros &amp; Demo Day</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Written feedback</span><span class="v">Every applicant</span></div>
+            <div><span class="k">All mentor sessions</span><span class="v">Every applicant</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" id="checklist" aria-labelledby="ck-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Before you hit send</p>
+        <h2 id="ck-h">Is your deck ready?</h2>
+        <p class="lede">Tick off each one. Your progress stays on this device.</p>
+      </div>
+      <div class="progress"><div class="track"><div class="fill" data-fill></div></div><span class="count" data-count>0 / 6 ready</span></div>
+      <div class="checklist">
+        <label class="check"><input type="checkbox" id="c1"><div><strong>Slide 2 explains what you do on its own.</strong><span>Someone should get it without you talking.</span></div></label>
+        <label class="check"><input type="checkbox" id="c2"><div><strong>There's at least one real number.</strong><span>Users, revenue, a waitlist or pilots.</span></div></label>
+        <label class="check"><input type="checkbox" id="c3"><div><strong>You've said why your team wins.</strong><span>Your right to build this, in one slide.</span></div></label>
+        <label class="check"><input type="checkbox" id="c4"><div><strong>It's under 15 slides.</strong><span>And it opens as a PDF on a phone.</span></div></label>
+        <label class="check"><input type="checkbox" id="c5"><div><strong>It goes out with a short, personal email.</strong><span>One person, one email, one small ask.</span></div></label>
+        <label class="check cta-row"><input type="checkbox" id="c6"><div><strong>You've applied to Launchpad.</strong><span>The fastest way to put this deck in front of real investors. <a href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply by Oct 15 ↗</a></span></div></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="sage" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Launchpad questions</p>
+        <h2 id="faq-h">Before you apply</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Do I need a finished deck to apply?</summary><p>No. Mock pitches during the cohort help you build it. You need a real problem, some progress and the will to build.</p></details>
+        <details><summary>Do I need a registered company?</summary><p>No. You don't need a company or DPIIT recognition to apply.</p></details>
+        <details><summary>Is it only for college students?</summary><p>No. It's open to student founders and early-stage builders from any college in India.</p></details>
+        <details><summary>What does it cost?</summary><p>A one-time ₹999 application fee. If you're selected, there's no tuition. Launchpad takes 2% equity under a standard founder agreement, with no success fee on anything you raise.</p></details>
+        <details><summary>What if I'm not selected?</summary><p>You still get personal written feedback and access to every virtual leader and mentor session during the cohort. Pods, 1:1 office hours, investor intros and Demo Day are for the 20 selected founders.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-h">
+    <div class="wrap">
+      <p class="label">Find your people. Fund your startup.</p>
+      <h2 id="close-h">These founders pitched. Your turn is November 1.</h2>
+      <p>20 seats in Cohort 01. Applications close October 15 at 11:59 PM IST, with no extensions.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-brand"><img class="logo logo-lg" src="/TFC.png" alt="The Future Council Logo" width="36" height="36"><span><strong>The Future Council</strong> · India's student startup accelerator · <a href="https://www.thefuturecouncil.in" target="_blank" rel="noopener">thefuturecouncil.in</a> · Instagram @thefuturecouncil.in</span></p>
+    <p>Pitch decks belong to their companies and are linked from the investors' own pages. TFC is not affiliated with these startups or funds.</p>
+  </div>
+</footer>
+
+<div class="bar" role="region" aria-label="Launchpad deadline">
+  <div class="wrap">
+    <p>Launchpad Cohort 01<span class="hide-sm"> · 20 seats</span> · <span data-clock>closes <b>Oct 15</b></span></p>
+    <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ST = "https://www.seedtoscale.com/podcast/";
+  var DECKS = [
+    { n: "01", name: "Swiggy", sector: "Food delivery", cat: "consumer", stage: "First deck", line: "Backed by Accel, 2015", steal: "Built function-first around a deep customer insight. A plain deck with clear thinking beats a pretty one.", url: ST + "inside-swiggys-first-ever-pitch-deck-with-sriharsha-majety" },
+    { n: "02", name: "Razorpay", sector: "Payments", cat: "fintech", stage: "Seed pitch", line: "Two engineers, 2014", steal: "Framed a crowded market as a technology problem instead of a finance one. Find your own angle on a busy space.", url: ST + "breaking-down-razorpays-original-pitch-with-harshil-mathur" },
+    { n: "03", name: "Freshworks", sector: "SaaS", cat: "b2b", stage: "First deck", line: "Now a listed global company", steal: "Reads as a story: the problem, how they'll execute, and why this team is the one to win.", url: ST + "freshworks-the-deck-has-to-tell-a-story" },
+    { n: "04", name: "Meesho", sector: "Social commerce", cat: "consumer", stage: "Early deck", line: "Reselling, rebuilt for India", steal: "Uses the deck to build trust with investors, not just to share information.", url: ST + "meesho-deck-is-a-tool-to-build-trust-with-potential-investors" },
+    { n: "05", name: "Zetwerk", sector: "Manufacturing", cat: "b2b", stage: "First deck", line: "B2B manufacturing marketplace", steal: "Simple words, no jargon, no lazy “X for Y” positioning. Clarity shows on every slide.", url: ST + "zetwerk-simplicity-in-storytelling-makes-for-an-effective-pitch-deck" },
+    { n: "06", name: "Mamaearth", sector: "D2C personal care", cat: "consumer", stage: "Early deck", line: "Toxin-free, direct to consumer", steal: "Includes a clear roadmap for execution, so investors see how the plan actually happens.", url: ST + "mamaearth-the-deck-should-include-your-roadmap-for-execution" },
+    { n: "07", name: "Acko", sector: "Digital insurance", cat: "fintech", stage: "Early deck", line: "Insurance, online-first", steal: "Spends real space on why these founders have the right to win this market.", url: ST + "acko-the-deck-should-have-deep-insight-on-the-founders-right-to-win" },
+    { n: "08", name: "Spinny", sector: "Used cars", cat: "consumer", stage: "Early deck", line: "Buying a used car, made trustworthy", steal: "Puts the customer at the center of every slide, not the product.", url: ST + "spinny-put-the-customer-at-the-center-of-the-deck" },
+    { n: "09", name: "BlueStone", sector: "Online jewellery", cat: "consumer", stage: "Original deck", line: "Jewellery for the digital age", steal: "Shows how to pitch a traditional, offline category as a digital opportunity.", url: ST + "pitching-jewelry-for-the-digital-age-inside-bluestones-original-deck" },
+    { n: "10", name: "ixigo", sector: "Travel", cat: "consumer", stage: "Series B deck", line: "Later stage, real scale", steal: "A later-stage deck. See how the story changes once you have real numbers.", url: ST + "powering-indias-travel-ecosystem-inside-ixigos-series-b-pitch-deck" }
+  ];
+
+  var grid = document.querySelector("[data-decks]");
+  grid.innerHTML = DECKS.map(function (d) {
+    return '<article class="deck" data-cat="' + d.cat + '">' +
+      '<div class="mock" role="img" aria-label="' + d.name + ' title slide"><div class="m-top"><span>Deck ' + d.n + '</span><span>' + d.stage + '</span></div>' +
+      '<div><div class="m-name">' + d.name + '</div><div class="m-line">' + d.line + '</div></div><div class="m-bar"></div></div>' +
+      '<div class="deck-body"><div class="deck-meta"><span class="sector">' + d.sector + '</span><span class="chip c-round">' + d.stage + '</span></div>' +
+      '<span class="k">Steal this</span><p>' + d.steal + '</p>' +
+      '<a href="' + d.url + '" target="_blank" rel="noopener">Open the ' + d.name + ' deck ↗</a></div></article>';
+  }).join("");
+
+  var buttons = document.querySelectorAll("#decks .filter button");
+  buttons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var f = b.getAttribute("data-filter");
+      buttons.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      grid.querySelectorAll(".deck").forEach(function (el) {
+        el.classList.toggle("dim", f !== "all" && el.getAttribute("data-cat") !== f);
+      });
+    });
+  });
+
+  var deadline = new Date("2026-10-15T23:59:00+05:30").getTime();
+  function parts() {
+    var ms = deadline - Date.now();
+    if (ms <= 0) return null;
+    return { d: Math.floor(ms / 86400000), h: Math.floor((ms % 86400000) / 3600000), m: Math.floor((ms % 3600000) / 60000) };
+  }
+  function tick() {
+    var p = parts();
+    var small = p ? "closes in <b>" + (p.d ? p.d + "d " + p.h + "h" : p.h + "h " + p.m + "m") + "</b>" : "applications <b>closed</b>";
+    var big = p ? (p.d ? p.d + "d " + p.h + "h" : p.h + "h " + p.m + "m") : "Closed";
+    document.querySelectorAll("[data-clock]").forEach(function (el) { el.innerHTML = small; });
+    document.querySelectorAll("[data-big]").forEach(function (el) { el.textContent = big; });
+  }
+  tick();
+  setInterval(tick, 30000);
+
+  var KEY = "tfc-deck-checklist";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
+  var boxes = document.querySelectorAll(".check input");
+  function render() {
+    var done = 0;
+    boxes.forEach(function (b) { b.closest(".check").classList.toggle("done", b.checked); if (b.checked) done++; });
+    document.querySelector("[data-count]").textContent = done + " / " + boxes.length + " ready";
+    document.querySelector("[data-fill]").style.width = (done / boxes.length * 100) + "%";
+  }
+  boxes.forEach(function (b) {
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener("change", function () {
+      saved[b.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>

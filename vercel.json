@@ -47,7 +47,14 @@
     { "source": "/grants", "destination": "/resources/grants", "permanent": false },
     { "source": "/grants.html", "destination": "/resources/grants", "permanent": true },
     { "source": "/whats-actually-open", "destination": "/resources/grants", "permanent": false },
-    { "source": "/whats-actually-open.html", "destination": "/resources/grants", "permanent": true }
+    { "source": "/whats-actually-open.html", "destination": "/resources/grants", "permanent": true },
+    { "source": "/decks", "destination": "/resources/decks", "permanent": false },
+    { "source": "/decks.html", "destination": "/resources/decks", "permanent": true },
+    { "source": "/pitch-decks", "destination": "/resources/decks", "permanent": false },
+    { "source": "/pitch-decks.html", "destination": "/resources/decks", "permanent": true },
+    { "source": "/resources/decks.html", "destination": "/resources/decks", "permanent": true },
+    { "source": "/resources/pitch-decks", "destination": "/resources/decks", "permanent": false },
+    { "source": "/resources/pitch-decks.html", "destination": "/resources/decks", "permanent": true }
   ],
   "rewrites": [
     {
@@ -75,6 +82,10 @@
     {
       "source": "/resources/grants",
       "destination": "/resources/grants.html"
+    },
+    {
+      "source": "/resources/decks",
+      "destination": "/resources/decks.html"
     },
     {
       "source": "/resources",
