@@ -54,7 +54,14 @@
     { "source": "/pitch-decks.html", "destination": "/resources/decks", "permanent": true },
     { "source": "/resources/decks.html", "destination": "/resources/decks", "permanent": true },
     { "source": "/resources/pitch-decks", "destination": "/resources/decks", "permanent": false },
-    { "source": "/resources/pitch-decks.html", "destination": "/resources/decks", "permanent": true }
+    { "source": "/resources/pitch-decks.html", "destination": "/resources/decks", "permanent": true },
+    { "source": "/funding-rounds", "destination": "/resources/funding-rounds", "permanent": false },
+    { "source": "/funding-rounds.html", "destination": "/resources/funding-rounds", "permanent": true },
+    { "source": "/resources/funding-rounds.html", "destination": "/resources/funding-rounds", "permanent": true },
+    { "source": "/funding", "destination": "/resources/funding-rounds", "permanent": false },
+    { "source": "/funding.html", "destination": "/resources/funding-rounds", "permanent": true },
+    { "source": "/every-funding-round", "destination": "/resources/funding-rounds", "permanent": false },
+    { "source": "/every-funding-round.html", "destination": "/resources/funding-rounds", "permanent": true }
   ],
   "rewrites": [
     {
@@ -86,6 +93,10 @@
     {
       "source": "/resources/decks",
       "destination": "/resources/decks.html"
+    },
+    {
+      "source": "/resources/funding-rounds",
+      "destination": "/resources/funding-rounds.html"
     },
     {
       "source": "/resources",

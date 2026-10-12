@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Every Funding Round · From First Rupee to IPO | The Future Council</title>
+  <meta name="description" content="Every funding round explained: bootstrapping, pre-seed, seed, Series A to D, pre-IPO and IPO. What each one means, how much Indian startups raise, who writes the cheque, and how much of your company you keep." />
+  <link rel="canonical" href="https://thefuturecouncil.in/resources/funding-rounds" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#D6DCD3" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, one orange Launchpad deal band, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
+:root {
+  --office: #D6DCD3;
+  --office-2: #C6CDC2;
+  --office-ink: #1E2124;
+  --office-soft: #4E555A;
+  --ink: #1B1712;
+  --ink-soft: #5A4E44;
+  --warm: #FFF4E8;
+  --warm-2: #FBE6D4;
+  --line: #EAD7C6;
+  --slip: #F7F6EF;
+  --slip-line: #DCDAD0;
+  --paper: #FFFFFF;
+  --orange: #E2542A;
+  --orange-deep: #AE3D18;
+  --peach: #F5A07F;
+  --forest: #1F5A45;
+  --forest-soft: #E8F1ED;
+  --ballpoint: #2C4A9A;
+  --dark-muted: #CDBFB2;
+
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, -apple-system, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gut: clamp(16px, 4vw, 48px);
+  --wrap: 72rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--office); color: var(--office-ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: var(--ballpoint); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gut); }
+.mono { font-family: var(--mono); }
+.label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--office-soft); }
+.lede { font-size: 1.0625rem; color: var(--office-soft); max-width: 38rem; }
+section { scroll-margin-top: 72px; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--body); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+  padding: 12px 22px; border-radius: 999px; border: 1px solid var(--orange);
+  background: var(--orange); color: #FFFFFF; cursor: pointer; transition: background-color .15s ease, transform .15s ease;
+}
+.btn:hover { background: var(--orange-deep); border-color: var(--orange-deep); }
+.btn-ink { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.btn-ink:hover { background: #000; border-color: #000; }
+.btn-line { background: transparent; color: var(--office-ink); border-color: var(--office-ink); }
+.btn-line:hover { background: var(--office-ink); color: var(--office); }
+.btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+
+/* header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--office) 92%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--office-2);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1rem; color: var(--office-ink); text-decoration: none; letter-spacing: -0.01em; }
+.logo { width: 28px; height: 28px; border-radius: 6px; display: block; }
+.mark { width: 22px; height: 22px; border-radius: 5px; background: var(--orange); display: grid; place-items: center; color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 0.8rem; }
+.navlinks { display: flex; align-items: center; gap: 22px; }
+.navlinks a { color: var(--office-ink); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+.navlinks a:hover { color: var(--orange-deep); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.token {
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--slip); border: 1px solid var(--slip-line); padding: 6px 12px; transform: rotate(-1.2deg);
+  box-shadow: 0 1px 0 rgba(27,23,18,.08);
+}
+.token b { color: var(--ballpoint); font-weight: 600; }
+.hero h1 { font-size: clamp(2.5rem, 1.3rem + 5.2vw, 4.75rem); margin-block: 22px 20px; }
+.hero h1 span { color: var(--office-soft); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* pinned slip */
+.slip {
+  position: relative; background: var(--slip); border: 1px solid var(--slip-line);
+  padding: 30px 22px 22px;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 27px, var(--slip-line) 27px 28px);
+  background-position: 0 58px;
+  box-shadow: 0 10px 24px -14px rgba(27,23,18,.35), 0 2px 0 rgba(27,23,18,.05);
+}
+.slip::before {
+  content: ""; position: absolute; top: -8px; left: 50%; width: 16px; height: 16px; margin-left: -8px;
+  border-radius: 50%; background: var(--ballpoint); box-shadow: inset -2px -3px 0 rgba(0,0,0,.25), 0 2px 3px rgba(0,0,0,.25);
+}
+.slip .tag { position: absolute; top: 12px; right: 12px; font-family: var(--mono); font-size: 0.65rem; border: 1px solid var(--slip-line); padding: 2px 6px; color: var(--office-soft); background: var(--paper); }
+.hero .slip { transform: rotate(1.4deg); }
+.stamp {
+  display: inline-block; font-family: var(--mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange-deep); border: 2px solid var(--orange-deep); padding: 4px 10px; transform: rotate(-6deg); margin-bottom: 14px; background: color-mix(in srgb, var(--slip) 70%, transparent);
+}
+.slip h2 { font-size: 1.5rem; margin-bottom: 10px; }
+.slip dl { display: grid; grid-template-columns: auto 1fr; gap: 0 14px; margin: 0; font-size: 0.93rem; line-height: 28px; }
+.slip dt { font-family: var(--mono); font-size: 0.72rem; color: var(--office-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+.slip dd { margin: 0; color: var(--office-ink); }
+.slip .note { font-size: 0.85rem; color: var(--office-soft); margin-top: 10px; line-height: 1.5; }
+
+/* notice board */
+.board { padding-block: clamp(48px, 7vw, 80px); border-top: 1px solid var(--office-2); }
+.board h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); margin-block: 10px 12px; }
+.slips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+.slips .slip { padding-top: 34px; }
+.slips .slip:nth-child(odd) { transform: rotate(-1deg); }
+.slips .slip:nth-child(even) { transform: rotate(0.8deg); }
+.slips h3 { font-family: var(--body); font-weight: 700; font-size: 1rem; letter-spacing: 0; line-height: 1.35; margin-bottom: 8px; }
+.slips p { font-size: 0.92rem; color: var(--office-soft); line-height: 28px; }
+
+/* warm sections */
+.warm { background: var(--warm); color: var(--ink); padding-block: clamp(56px, 8vw, 96px); }
+.warm .label { color: var(--ink-soft); }
+.warm .lede { color: var(--ink-soft); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 30px; }
+.sec-head h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); }
+.step-dot {
+  width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--orange); color: var(--orange-deep);
+  display: grid; place-items: center; font-family: var(--mono); font-size: 0.8rem; font-weight: 600; background: var(--warm);
+}
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
+.filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.filter span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-right: 6px; }
+.filter button {
+  font-family: var(--body); font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--warm); color: var(--ink);
+}
+.filter button[aria-pressed="true"] { background: var(--ink); color: var(--warm); border-color: var(--ink); }
+
+.row {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.75fr) minmax(0, 1.9fr) auto;
+  gap: 8px 24px; padding-block: 20px; border-top: 1px solid var(--line); align-items: start; transition: opacity .2s ease;
+}
+.row:first-of-type { border-top: 0; }
+.filter + .row { border-top: 1px solid var(--line); margin-top: 12px; }
+.row.dim { opacity: 0.3; }
+.row h3 { font-family: var(--display); font-size: 1.2rem; letter-spacing: -0.01em; }
+.row small { display: block; color: var(--ink-soft); font-size: 0.82rem; margin-top: 3px; font-family: var(--body); }
+.amt { font-family: var(--mono); font-weight: 600; color: var(--orange-deep); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.amt small { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; }
+.desc { display: grid; gap: 6px; color: var(--ink-soft); font-size: 0.94rem; }
+.desc strong { color: var(--ink); font-weight: 600; }
+.desc a { font-family: var(--mono); font-size: 0.78rem; }
+.status { justify-self: end; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor;
+}
+.chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.c-open { color: var(--forest); background: var(--forest-soft); }
+.c-round { color: var(--ballpoint); background: #EEF1FA; }
+.c-wait { color: var(--orange-deep); background: var(--warm-2); }
+.fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin-top: 16px; }
+.subhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 40px 0 14px; }
+.subhead h3 { font-size: 1.35rem; }
+.subhead p { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ink strip */
+.ink { background: var(--ink); color: var(--warm); padding-block: 40px; }
+.ink .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.ink .label { color: var(--peach); }
+.ink h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); margin-top: 8px; max-width: 26ch; }
+.ink p.sub { color: var(--dark-muted); margin-top: 8px; max-width: 40rem; }
+
+/* launchpad deal */
+.deal-sec { padding-block: clamp(56px, 8vw, 96px); background: var(--warm); }
+.deal { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
+.deal-main { background: var(--orange); color: #FFFFFF; padding: clamp(24px, 4vw, 48px); display: grid; gap: 26px; align-content: start; }
+.deal-main .label { color: #FFE3D6; }
+.deal-main h2 { font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.25rem); }
+.deal-main p { color: #FFE9DF; max-width: 36rem; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; border-top: 1px solid rgba(255,255,255,.35); padding-top: 20px; }
+.stats b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 0.82rem; color: #FFE3D6; line-height: 1.35; display: block; margin-top: 6px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid rgba(255,255,255,.35); }
+.path li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 14px; padding-block: 12px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.path .when { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); padding-top: 3px; font-weight: 600; }
+.path h3 { font-family: var(--body); font-size: 1rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.path p { font-size: 0.9rem; color: #FFE9DF; }
+.deal-side { background: var(--paper); color: var(--ink); padding: clamp(24px, 4vw, 40px); display: grid; gap: 16px; align-content: start; }
+.deal-side .label { color: var(--ink-soft); }
+.big-clock { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 1.8rem + 3vw, 3.75rem); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.deal-side .when-line { font-size: 0.92rem; color: var(--ink-soft); }
+.deal-side .btn { width: 100%; }
+.deal-side .facts { font-size: 0.88rem; color: var(--ink-soft); }
+.receipt { border-top: 1px dashed var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 0.9rem; }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; }
+.receipt .k { color: var(--ink-soft); }
+.receipt .v { font-family: var(--mono); font-weight: 600; color: var(--forest); text-align: right; }
+.receipt .v.no { color: var(--ink-soft); font-weight: 400; }
+
+/* credits on sage */
+.sage { padding-block: clamp(56px, 8vw, 96px); }
+.sage .sec-head h2 { color: var(--office-ink); }
+.tbl-wrap { overflow-x: auto; background: var(--slip); border: 1px solid var(--slip-line); box-shadow: 0 10px 24px -16px rgba(27,23,18,.35); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 0.93rem; }
+th { text-align: left; font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--office-soft); font-weight: 600; padding: 14px 18px; border-bottom: 1.5px solid var(--office-ink); }
+td { padding: 14px 18px; border-bottom: 1px solid var(--slip-line); vertical-align: top; color: var(--office-soft); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--office-ink); font-weight: 600; }
+td:first-child a { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; margin-top: 2px; }
+td.worth { font-family: var(--mono); color: var(--forest); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sage .fine { color: var(--office-soft); }
+
+/* plan */
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.plan li { display: grid; grid-template-columns: 44px 8.5rem minmax(0, 1fr); gap: 18px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; }
+.plan .when { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--orange-deep); font-weight: 600; }
+.plan h3 { font-family: var(--body); font-size: 1.02rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
+.plan p { color: var(--ink-soft); font-size: 0.93rem; }
+.plan li.hot { background: var(--ink); border-color: var(--ink); color: var(--warm); }
+.plan li.hot .step-dot { background: var(--orange); border-color: var(--orange); color: #FFFFFF; }
+.plan li.hot .when { color: var(--peach); }
+.plan li.hot p { color: var(--dark-muted); }
+.plan li.hot a { color: var(--peach); font-weight: 600; }
+
+/* faq */
+.faq { border-top: 1.5px solid var(--office-ink); }
+details { border-bottom: 1px solid var(--office-2); padding-block: 18px; }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--orange-deep); font-weight: 600; }
+details[open] summary::after { content: "−"; }
+details p { color: var(--office-soft); margin-top: 10px; max-width: 46rem; }
+
+/* closing */
+.closing { background: var(--ink); color: var(--warm); padding-block: clamp(64px, 9vw, 112px); }
+.closing .label { color: var(--peach); }
+.closing h2 { font-size: clamp(2.2rem, 1.3rem + 4vw, 4rem); margin-block: 12px 16px; max-width: 18ch; }
+.closing p { color: var(--dark-muted); max-width: 34rem; }
+.closing .hero-actions { margin-top: 28px; }
+footer { background: var(--ink); color: var(--dark-muted); border-top: 1px solid #3A3129; padding-block: 24px 32px; font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 8px; }
+.foot-brand { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo-lg { width: 36px; height: 36px; }
+footer strong { color: var(--warm); font-family: var(--display); }
+footer a { color: var(--peach); }
+
+/* sticky bar */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  background: var(--ink); color: var(--warm);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top: 1px solid #3A3129;
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.bar p { font-size: 0.88rem; min-width: 0; }
+.bar b { color: var(--peach); font-family: var(--mono); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .hero-grid, .deal { grid-template-columns: 1fr; }
+  .slips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row > div:first-child { grid-column: 1; }
+  .status { grid-column: 2; grid-row: 1; }
+  .amt, .desc { grid-column: 1 / -1; }
+  .navlinks a:not(.btn) { display: none; }
+}
+@media (max-width: 600px) {
+  .slips { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path li { grid-template-columns: 1fr; gap: 2px; }
+  .plan li { grid-template-columns: 44px minmax(0, 1fr); }
+  .plan li > div { grid-column: 2; }
+  .plan .when { grid-column: 2; }
+  .bar .hide-sm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Funding-ladder additions: a rung list with a "you are here" rung, a 3-question stage finder, and a dilution calculator that answers the reel's question. Same TFC tokens. */
+.ladder { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1.5px solid var(--ink); }
+.rung { display: grid; grid-template-columns: 2.6rem minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: 8px 22px; padding-block: 18px; border-bottom: 1px solid var(--line); align-items: start; }
+.rung .n { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); padding-top: 4px; }
+.rung h3 { font-family: var(--display); font-size: 1.3rem; letter-spacing: -0.01em; }
+.rung .who { display: block; font-size: 0.84rem; color: var(--ink-soft); margin-top: 3px; }
+.rung p { color: var(--ink-soft); font-size: 0.96rem; }
+.rung .sz { font-family: var(--mono); font-weight: 600; color: var(--orange-deep); font-size: 0.9rem; text-align: right; font-variant-numeric: tabular-nums; }
+.rung .sz small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 0.72rem; }
+.rung.here { background: var(--ink); color: var(--warm); border-radius: 16px; border-bottom-color: transparent; padding: 20px 18px; margin-block: 6px; }
+.rung.here .n, .rung.here .who { color: var(--dark-muted); }
+.rung.here p { color: var(--warm); }
+.rung.here .sz { color: var(--peach); }
+.rung.here .sz small { color: var(--dark-muted); }
+.rung .here-tag { display: inline-flex; margin-top: 10px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; background: var(--orange); color: #FFFFFF; padding: 4px 10px; border-radius: 999px; text-decoration: none; }
+.zone-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.zone-row div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.zone-row b { display: block; font-family: var(--display); font-size: 1.15rem; }
+.zone-row span { font-size: 0.88rem; color: var(--ink-soft); }
+
+.finder { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.qs { display: grid; gap: 12px; }
+.q { background: var(--slip); border: 1px solid var(--slip-line); padding: 16px 18px; display: grid; gap: 10px; }
+.q p { font-weight: 600; color: var(--office-ink); }
+.q .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.q button { font-family: var(--body); font-weight: 600; font-size: 0.88rem; padding: 7px 18px; border-radius: 999px; border: 1px solid var(--office-ink); background: transparent; color: var(--office-ink); cursor: pointer; }
+.q button[aria-pressed="true"] { background: var(--office-ink); color: var(--office); }
+.q.off { opacity: 0.4; }
+.result { position: relative; background: var(--ink); color: var(--warm); border-radius: 18px; padding: 22px; display: grid; gap: 12px; }
+.result .label { color: var(--peach); }
+.result h3 { font-size: 2rem; }
+.result p { color: var(--dark-muted); }
+
+.calc { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.sliders { display: grid; gap: 8px; }
+.sl { display: grid; grid-template-columns: 22px 6.5rem minmax(0, 1fr) 3.2rem; gap: 10px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+.sl input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--orange); margin: 0; }
+.sl label { font-weight: 600; font-size: 0.93rem; }
+.sl input[type="range"] { width: 100%; accent-color: var(--orange); }
+.sl output { font-family: var(--mono); font-weight: 600; font-size: 0.85rem; text-align: right; color: var(--orange-deep); font-variant-numeric: tabular-nums; }
+.sl.skip { opacity: 0.45; }
+.stake { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 14px; }
+.stake .big { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 2rem + 4vw, 4.5rem); line-height: 1; color: var(--orange-deep); font-variant-numeric: tabular-nums; }
+.bars { display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 3rem; gap: 10px; align-items: center; font-size: 0.82rem; }
+.bar-row .t { height: 12px; background: var(--warm-2); border-radius: 999px; overflow: hidden; }
+.bar-row .f { height: 100%; background: var(--orange); border-radius: 999px; transition: width .2s ease; }
+.bar-row span:last-child { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+
+.special-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 8px; }
+.special-grid .slip { padding-top: 30px; }
+.special-grid .slip:nth-child(odd) { transform: rotate(-0.8deg); }
+.special-grid .slip:nth-child(even) { transform: rotate(0.7deg); }
+.special-grid h3 { font-family: var(--body); font-weight: 700; font-size: 1rem; letter-spacing: 0; margin-bottom: 6px; }
+.special-grid p { font-size: 0.9rem; color: var(--office-soft); line-height: 1.5; }
+.special-grid .k { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange-deep); font-weight: 600; display: block; margin-bottom: 6px; }
+
+.dict { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; border-top: 1.5px solid var(--ink); margin: 0; }
+.dict div { padding-block: 14px; border-bottom: 1px solid var(--line); }
+.dict dt { font-family: var(--display); font-weight: 800; font-size: 1.05rem; }
+.dict dd { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+@media (max-width: 900px) {
+  .finder, .calc { grid-template-columns: 1fr; }
+  .special-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dict { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rung { grid-template-columns: 2.2rem minmax(0, 1fr) auto; }
+  .rung > p { grid-column: 2 / -1; }
+}
+@media (max-width: 600px) {
+  .zone-row, .special-grid, .dict { grid-template-columns: 1fr; }
+  .sl { grid-template-columns: 22px minmax(0, 1fr) 3rem; }
+  .sl input[type="range"] { grid-column: 1 / -1; }
+}
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img class="logo" src="/TFC.png" alt="The Future Council Logo" width="28" height="28">The Future Council</a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#ladder">The ladder</a>
+      <a href="#finder">Your stage</a>
+      <a href="#dilution">Your stake</a>
+      <a href="/resources">Library</a>
+      <a href="#launchpad">Launchpad</a>
+      <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="token">Founder guide · Every funding round · <b>Checked Oct 2026</b></span>
+        <h1>From your first rupee <span>to IPO.</span></h1>
+        <p class="lede">Every funding round explained: bootstrapping, pre-seed, seed, Series A to D, pre-IPO and IPO. What each one means, how much Indian startups raise, who writes the cheque, and how much of your company you keep.</p>
+        <div class="hero-actions">
+          <a class="btn btn-ink" href="#ladder">Climb the ladder</a>
+          <a class="btn btn-line" href="#finder">Find your stage</a>
+        </div>
+      </div>
+      <aside class="slip" aria-label="Cap table teaser">
+        <span class="tag">CAP TABLE</span>
+        <h2>Your stake, round by round</h2>
+        <dl>
+          <dt>Day one</dt><dd class="mono">100%</dd>
+          <dt>After pre-seed</dt><dd class="mono">~90%</dd>
+          <dt>After Series A</dt><dd class="mono">~61%</dd>
+          <dt>At IPO</dt><dd class="mono" style="color:var(--orange-deep);font-weight:600">?</dd>
+        </dl>
+        <p class="note">Example numbers. <a href="#dilution">Work out your own below.</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="board" aria-labelledby="board-h">
+    <div class="wrap">
+      <p class="label">Notice board · The whole guide in three lines</p>
+      <h2 id="board-h">Every round is a bet on something different.</h2>
+      <p class="lede">Investors at each stage are buying a different kind of proof. Know which one you're selling.</p>
+      <div class="slips" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+        <div class="slip"><span class="tag">EARLY</span><h3>Early rounds back the people.</h3><p>Bootstrapping to pre-seed. There's little data, so investors judge you.</p></div>
+        <div class="slip"><span class="tag">MIDDLE</span><h3>Middle rounds back the proof.</h3><p>Seed and Series A. People use it, and it's starting to grow.</p></div>
+        <div class="slip"><span class="tag">LATE</span><h3>Later rounds back the scale.</h3><p>Series B to IPO. Money goes into new cities, products and markets.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" id="ladder" aria-labelledby="ladder-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">The full ladder · Rough sizes for Indian startups</p>
+        <h2 id="ladder-h">Every funding round, in order</h2>
+        <p class="lede">Not every company climbs every rung. Zerodha became a unicorn without raising a single round.</p>
+      </div>
+      <ol class="ladder">
+        <li class="rung"><span class="n">00</span><div><h3>Bootstrapping</h3><span class="who">You</span></div><p>Building with your own savings or early revenue. You keep all the equity.</p><span class="sz">Your money</span></li>
+        <li class="rung"><span class="n">01</span><div><h3>Friends &amp; family</h3><span class="who">People who trust you</span></div><p>A first small cheque from people who know you, before there's much to show.</p><span class="sz">A few lakh</span></li>
+        <li class="rung here"><span class="n">02</span><div><h3>Pre-seed</h3><span class="who">Angels, pre-seed funds, accelerators</span></div><p>Idea, team and maybe a prototype. Investors bet on the founders. Most student founders are here.<br><a class="here-tag" href="#launchpad">Launchpad is built for this rung</a></p><span class="sz">$150K–$500K<small>≈ ₹1.25–4 Cr</small></span></li>
+        <li class="rung"><span class="n">03</span><div><h3>Seed</h3><span class="who">Seed funds, micro-VCs, syndicates</span></div><p>A live product with early users and first revenue. Investors bet that people want it.</p><span class="sz">~$1.3M avg<small>≈ ₹12 Cr · H1 2026</small></span></li>
+        <li class="rung"><span class="n">04</span><div><h3>Series A</h3><span class="who">Venture capital firms</span></div><p>Repeatable revenue and steady growth. Investors bet that it can scale.</p><span class="sz">$5M–$15M</span></li>
+        <li class="rung"><span class="n">05</span><div><h3>Series B</h3><span class="who">Larger VCs, growth funds</span></div><p>A proven model growing fast. Money goes into new cities, customers and teams.</p><span class="sz">~$15M–$50M</span></li>
+        <li class="rung"><span class="n">06</span><div><h3>Series C</h3><span class="who">Growth funds, private equity</span></div><p>Market leadership. Money for new products, new markets and acquisitions.</p><span class="sz">~$50M+</span></li>
+        <li class="rung"><span class="n">07</span><div><h3>Series D and beyond</h3><span class="who">Late-stage and crossover funds</span></div><p>A large company, often preparing to go public or buying more time to get there.</p><span class="sz">$100M+</span></li>
+        <li class="rung"><span class="n">08</span><div><h3>Pre-IPO</h3><span class="who">Late-stage funds, wealthy investors</span></div><p>The last private round, a few months before listing.</p><span class="sz">Varies</span></li>
+        <li class="rung"><span class="n">09</span><div><h3>IPO</h3><span class="who">The public</span></div><p>The company lists on the NSE or BSE and anyone can buy shares.</p><span class="sz">Varies widely</span></li>
+      </ol>
+      <p class="fine">Pre-seed and Series A ranges: Indian deal trackers via The Founder Nation (Jul 2026). Seed average: Tracxn India Tech H1 2026 via StartupFeed. Series B onwards: broad rules of thumb. Rupee figures are rough conversions.</p>
+    </div>
+  </section>
+
+  <section class="ink" aria-label="Launchpad">
+    <div class="wrap">
+      <div>
+        <p class="label">Stuck on the first rung?</p>
+        <h2>Launchpad takes pre-seed founders to a Demo Day with real investors.</h2>
+        <p class="sub">Cohort 01 · 20 seats · applications close October 15.</p>
+      </div>
+      <a class="btn" href="#launchpad">See the Launchpad deal</a>
+    </div>
+  </section>
+
+  <section class="sage" id="finder" aria-labelledby="finder-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Three questions · 10 seconds</p>
+        <h2 id="finder-h">Which round are you ready for?</h2>
+        <p class="lede">Answer honestly. Investors will ask the same things.</p>
+      </div>
+      <div class="finder">
+        <div class="qs">
+          <div class="q" data-q="0"><p>Are people using your product today?</p><div class="opts"><button type="button" id="q0-y" data-a="y" aria-pressed="false">Yes</button><button type="button" id="q0-n" data-a="n" aria-pressed="false">Not yet</button></div></div>
+          <div class="q off" data-q="1"><p>Is someone paying you every month?</p><div class="opts"><button type="button" id="q1-y" data-a="y" aria-pressed="false">Yes</button><button type="button" id="q1-n" data-a="n" aria-pressed="false">Not yet</button></div></div>
+          <div class="q off" data-q="2"><p>Is that revenue growing steadily month on month?</p><div class="opts"><button type="button" id="q2-y" data-a="y" aria-pressed="false">Yes</button><button type="button" id="q2-n" data-a="n" aria-pressed="false">Not yet</button></div></div>
+        </div>
+        <div class="result" aria-live="polite">
+          <p class="label" data-r-label>Your stage</p>
+          <h3 data-r-title>Answer the questions</h3>
+          <p data-r-text>Most student founders land on pre-seed. That's a good place to start.</p>
+          <a class="btn" data-r-cta href="#launchpad" hidden>See Launchpad</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" aria-labelledby="early-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Side by side · The early rounds</p>
+        <h2 id="early-h">Pre-seed, seed and Series A at a glance</h2>
+      </div>
+      <div class="tbl-wrap" style="background:var(--paper);border-color:var(--line)">
+        <table>
+          <thead><tr><th scope="col"></th><th scope="col">Pre-seed</th><th scope="col">Seed</th><th scope="col">Series A</th></tr></thead>
+          <tbody>
+            <tr><td>What you have</td><td>Idea, team, maybe a prototype</td><td>Live product, early users, first revenue</td><td>Repeatable revenue and growth</td></tr>
+            <tr><td>Investors bet on</td><td>The founders and the problem</td><td>Proof that people want it</td><td>Proof that it can scale</td></tr>
+            <tr><td>Who invests</td><td>Angels, angel networks, pre-seed funds, accelerators</td><td>Seed funds, micro-VCs, angel syndicates</td><td>Venture capital firms</td></tr>
+            <tr><td>Equity given up</td><td class="worth">Often 5–15%</td><td class="worth">Often 10–20%</td><td class="worth">Often 15–25%</td></tr>
+            <tr><td>Common instrument</td><td>iSAFE note or CCPS</td><td>CCPS, sometimes notes</td><td>CCPS with a full term sheet</td></tr>
+            <tr><td>What to show</td><td>Why this problem, why you, a working demo</td><td>Usage, retention, early revenue</td><td>Growth rate, unit economics, a plan for the money</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">Equity ranges are common rules of thumb, not fixed rules.</p>
+    </div>
+  </section>
+
+  <section class="warm" id="dilution" aria-labelledby="dil-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="step-dot">%</span>
+        <p class="label">The question nobody answers</p>
+        <h2 id="dil-h">How much of your company is left at IPO?</h2>
+        <p class="lede">Every round, you give investors a slice. Move the sliders, or untick rounds you'd skip, and watch your stake change.</p>
+      </div>
+      <div class="calc">
+        <div class="sliders" data-sliders></div>
+        <div class="stake" aria-live="polite">
+          <p class="label">Founders' combined stake at the end</p>
+          <p class="big" data-final>37%</p>
+          <div class="bars" data-bars></div>
+          <p class="fine" style="margin-top:0">Example numbers using common rules of thumb. Real dilution depends on your valuation and terms. Employee stock pools reduce founder stakes further. This is general information, not financial advice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sage" aria-labelledby="sp-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Not every raise is a new letter</p>
+        <h2 id="sp-h">Special rounds you'll hear about</h2>
+      </div>
+      <div class="special-grid">
+        <div class="slip"><span class="k">Between rounds</span><h3>Bridge round</h3><p>A small raise to buy time until the next big round.</p></div>
+        <div class="slip"><span class="k">Same round, more money</span><h3>Extension (A+, B+)</h3><p>Extra money added to the last round, usually on the same terms.</p></div>
+        <div class="slip"><span class="k">Warning sign</span><h3>Down round</h3><p>Raising at a lower valuation than last time.</p></div>
+        <div class="slip"><span class="k">Good sign</span><h3>Up round</h3><p>Raising at a higher valuation than last time.</p></div>
+        <div class="slip"><span class="k">A loan, not equity</span><h3>Venture debt</h3><p>Loans to funded startups. Little or no equity, but you pay it back.</p></div>
+        <div class="slip"><span class="k">Free money</span><h3>Grants</h3><p>Non-dilutive money from schemes like NIDHI-PRAYAS. Slow, with conditions.</p></div>
+        <div class="slip"><span class="k">Many small cheques</span><h3>Crowdfunding</h3><p>Lots of people put in small amounts. Limited by regulation in India.</p></div>
+        <div class="slip"><span class="k">No new money</span><h3>Secondary sale</h3><p>Existing shareholders sell to new investors. The company gets nothing.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="deal-sec" id="launchpad" aria-labelledby="lp-h">
+    <div class="wrap">
+      <div class="deal">
+        <div class="deal-main">
+          <p class="label">Launchpad · Cohort 01 · Startup accelerator</p>
+          <h2 id="lp-h">We only win if you do.</h2>
+          <p>Built for founders on the first rung. A fully online accelerator for student founders and early-stage builders from any college in India, ending in a Demo Day with real investors.</p>
+          <div class="stats">
+            <div><b>20</b><span>founders selected</span></div>
+            <div><b>₹999</b><span>to apply, once</span></div>
+            <div><b>2%</b><span>equity taken</span></div>
+            <div><b>0%</b><span>success fee on what you raise</span></div>
+          </div>
+          <ol class="path" aria-label="How the cohort runs">
+            <li><span class="when">By Oct 15</span><div><h3>Apply</h3><p>No registered company needed. Selection is on your problem, progress and team, not your college or GPA.</p></div></li>
+            <li><span class="when">Nov 1</span><div><h3>Kickoff and founder pods</h3><p>You join a pod of 4–5 founders building alongside you.</p></div></li>
+            <li><span class="when">Weekly</span><div><h3>Live Labs and office hours</h3><p>Sunday Live Labs and 1:1 mentor office hours. About 6–8 hours a week.</p></div></li>
+            <li><span class="when">Before demo</span><div><h3>Mock pitches</h3><p>Get your deck and your ask ready for a pre-seed round.</p></div></li>
+            <li><span class="when">Finale</span><div><h3>Demo Day</h3><p>Pitch your startup to real investors.</p></div></li>
+          </ol>
+        </div>
+        <aside class="deal-side" aria-label="Deadline">
+          <p class="label">Final deadline</p>
+          <p class="big-clock" data-big>Oct 15</p>
+          <p class="when-line">Closes Oct 15, 2026, 11:59 PM IST. No extensions.</p>
+          <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+          <p class="facts">Fully online · Starts Nov 1 · Four cohorts a year · 90+ campus chapters</p>
+          <div class="receipt" aria-label="What you get">
+            <p class="label">What you get</p>
+            <div><span class="k">Founder pod</span><span class="v">Selected 20</span></div>
+            <div><span class="k">1:1 office hours</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Investor intros &amp; Demo Day</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Written feedback</span><span class="v">Every applicant</span></div>
+            <div><span class="k">All mentor sessions</span><span class="v">Every applicant</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="warm" aria-labelledby="dict-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Words you'll hear in every pitch meeting</p>
+        <h2 id="dict-h">The funding dictionary</h2>
+      </div>
+      <dl class="dict">
+        <div><dt>Valuation</dt><dd>What investors agree your company is worth.</dd></div>
+        <div><dt>Pre-money / post-money</dt><dd>Your valuation before the new money comes in, and after.</dd></div>
+        <div><dt>Dilution</dt><dd>How much your ownership shrinks when new shares go to investors.</dd></div>
+        <div><dt>Cap table</dt><dd>The list of who owns what percentage of your company.</dd></div>
+        <div><dt>iSAFE</dt><dd>An India-adapted SAFE: money now, shares later at the next priced round.</dd></div>
+        <div><dt>CCPS</dt><dd>Compulsorily convertible preference shares, the usual way investors hold Indian startup shares.</dd></div>
+        <div><dt>Term sheet</dt><dd>A short document with the key deal terms before the legal paperwork.</dd></div>
+        <div><dt>Due diligence</dt><dd>The investor checking your numbers and legal setup before investing.</dd></div>
+        <div><dt>Burn rate</dt><dd>How much money you spend each month.</dd></div>
+        <div><dt>Runway</dt><dd>How many months you can last before the money runs out.</dd></div>
+        <div><dt>Unicorn</dt><dd>A private startup valued at $1 billion or more.</dd></div>
+        <div><dt>Exit</dt><dd>When investors get their money out, through an IPO or an acquisition.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sage" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Launchpad questions</p>
+        <h2 id="faq-h">Before you apply</h2>
+      </div>
+      <div class="faq">
+        <details><summary>I'm at the idea stage. Is that too early?</summary><p>No. Launchpad is built for the first rung. Selection looks at the problem you've picked, the progress you've made and your team.</p></details>
+        <details><summary>Do I need a registered company?</summary><p>No. You don't need a company or DPIIT recognition to apply.</p></details>
+        <details><summary>Is it only for college students?</summary><p>No. It's open to student founders and early-stage builders from any college in India.</p></details>
+        <details><summary>What does it cost?</summary><p>A one-time ₹999 application fee. If you're selected, there's no tuition. Launchpad takes 2% equity under a standard founder agreement, with no success fee on anything you raise.</p></details>
+        <details><summary>What if I'm not selected?</summary><p>You still get personal written feedback and access to every virtual leader and mentor session during the cohort. Pods, 1:1 office hours, investor intros and Demo Day are for the 20 selected founders.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-h">
+    <div class="wrap">
+      <p class="label">Find your people. Fund your startup.</p>
+      <h2 id="close-h">Every IPO started with someone on the first rung.</h2>
+      <p>20 seats in Cohort 01. Applications close October 15 at 11:59 PM IST, with no extensions.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-brand"><img class="logo logo-lg" src="/TFC.png" alt="The Future Council Logo" width="36" height="36"><span><strong>The Future Council</strong> · India's student startup accelerator · <a href="https://www.thefuturecouncil.in" target="_blank" rel="noopener">thefuturecouncil.in</a> · Instagram @thefuturecouncil.in</span></p>
+    <p>Sources: <a href="https://startupfeed.in/seed-funding-2026-india-bigger-cheques/" target="_blank" rel="noopener">Tracxn India Tech H1 2026 via StartupFeed</a> · <a href="https://www.thefoundernation.com/average-ticket-size-by-funding-stage-the-2026-data/" target="_blank" rel="noopener">The Founder Nation (Jul 2026)</a>. Figures change quickly. This guide is general information, not financial or legal advice.</p>
+  </div>
+</footer>
+
+<div class="bar" role="region" aria-label="Launchpad deadline">
+  <div class="wrap">
+    <p>Launchpad Cohort 01<span class="hide-sm"> · 20 seats</span> · <span data-clock>closes <b>Oct 15</b></span></p>
+    <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* countdown */
+  var deadline = new Date("2026-10-15T23:59:00+05:30").getTime();
+  function tick() {
+    var ms = deadline - Date.now(), txt = "Closed";
+    if (ms > 0) {
+      var d = Math.floor(ms / 86400000), h = Math.floor((ms % 86400000) / 3600000), m = Math.floor((ms % 3600000) / 60000);
+      txt = d ? d + "d " + h + "h" : h + "h " + m + "m";
+    }
+    document.querySelectorAll("[data-clock]").forEach(function (el) { el.innerHTML = ms > 0 ? "closes in <b>" + txt + "</b>" : "applications <b>closed</b>"; });
+    document.querySelectorAll("[data-big]").forEach(function (el) { el.textContent = txt; });
+  }
+  tick(); setInterval(tick, 30000);
+
+  /* stage finder */
+  var answers = [null, null, null];
+  var qs = document.querySelectorAll(".q");
+  var RESULTS = {
+    idea: { t: "Pre-seed", x: "Investors at this stage back the founders. Show a sharp problem, why you, and a rough demo. This is exactly where Launchpad helps.", cta: true },
+    users: { t: "Pre-seed, moving to seed", x: "You have users, which is your best pitch. Get one monthly paying customer and you're seed-ready. Launchpad's Demo Day puts this in front of investors.", cta: true },
+    revenue: { t: "Seed", x: "Paying users means people want it. Seed investors will look at usage, retention and how fast revenue grows.", cta: true },
+    growth: { t: "Series A conversations", x: "Steady revenue growth is what VCs look for at Series A. You may be past Launchpad's stage, which is built for earlier founders.", cta: false }
+  };
+  function stage() {
+    if (answers[0] === "n") return "idea";
+    if (answers[0] === "y" && answers[1] === "n") return "users";
+    if (answers[1] === "y" && answers[2] === "n") return "revenue";
+    if (answers[2] === "y") return "growth";
+    return null;
+  }
+  function renderFinder() {
+    qs.forEach(function (q, i) {
+      var active = i === 0 || (answers[i - 1] === "y");
+      q.classList.toggle("off", !active);
+      q.querySelectorAll("button").forEach(function (b) {
+        b.disabled = !active;
+        b.setAttribute("aria-pressed", answers[i] === b.getAttribute("data-a") ? "true" : "false");
+      });
+    });
+    var s = stage(), r = s && RESULTS[s];
+    document.querySelector("[data-r-title]").textContent = r ? r.t : "Answer the questions";
+    document.querySelector("[data-r-text]").textContent = r ? r.x : "Most student founders land on pre-seed. That's a good place to start.";
+    document.querySelector("[data-r-cta]").hidden = !(r && r.cta);
+  }
+  qs.forEach(function (q, i) {
+    q.querySelectorAll("button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        answers[i] = b.getAttribute("data-a");
+        for (var j = i + 1; j < answers.length; j++) answers[j] = answers[i] === "y" ? answers[j] : null;
+        renderFinder();
+      });
+    });
+  });
+  renderFinder();
+
+  /* dilution calculator */
+  var ROUNDS = [
+    ["preseed", "Pre-seed", 10], ["seed", "Seed", 15], ["a", "Series A", 20], ["b", "Series B", 15],
+    ["c", "Series C", 12], ["d", "Series D", 10], ["ipo", "IPO", 10]
+  ];
+  var wrap = document.querySelector("[data-sliders]");
+  wrap.innerHTML = ROUNDS.map(function (r) {
+    return '<div class="sl" data-row="' + r[0] + '"><input type="checkbox" id="on-' + r[0] + '" checked aria-label="Include ' + r[1] + '">' +
+      '<label for="dil-' + r[0] + '">' + r[1] + '</label>' +
+      '<input type="range" id="dil-' + r[0] + '" min="0" max="35" step="1" value="' + r[2] + '">' +
+      '<output id="out-' + r[0] + '">' + r[2] + '%</output></div>';
+  }).join("");
+  function renderCalc() {
+    var own = 100, rows = ['<div class="bar-row"><span>Day one</span><div class="t"><div class="f" style="width:100%"></div></div><span>100%</span></div>'];
+    ROUNDS.forEach(function (r) {
+      var on = document.getElementById("on-" + r[0]).checked;
+      var v = +document.getElementById("dil-" + r[0]).value;
+      document.getElementById("out-" + r[0]).textContent = v + "%";
+      document.querySelector('[data-row="' + r[0] + '"]').classList.toggle("skip", !on);
+      if (!on) return;
+      own = own * (1 - v / 100);
+      rows.push('<div class="bar-row"><span>' + r[1] + '</span><div class="t"><div class="f" style="width:' + own.toFixed(1) + '%"></div></div><span>' + Math.round(own) + '%</span></div>');
+    });
+    document.querySelector("[data-final]").textContent = Math.round(own) + "%";
+    document.querySelector("[data-bars]").innerHTML = rows.join("");
+  }
+  wrap.addEventListener("input", renderCalc);
+  wrap.addEventListener("change", renderCalc);
+  renderCalc();
+})();
+</script>
+
+</body>
+</html>
