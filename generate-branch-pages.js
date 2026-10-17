@@ -64,44 +64,34 @@ function generateChapterHtml(ch) {
   </div>
 
   <main>
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">${ch.region} · ${ch.city} · TFC Chapter</p>
-          <h1 style="font-size: clamp(48px, 8vw, 110px);">${ch.name}</h1>
-          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
-          <p class="pm-lede">Join the TFC Chapter at ${ch.name}. Find co-founders on your campus, build real products and get a direct path to the Launchpad Fellowship. Free to join.</p>
-          <div class="pm-actions">
-            <a class="btn solid lg" href="/join?chapter=${ch.id}">Join this Chapter, free</a>
-            <a class="btn lg" href="/chapters">All Chapters</a>
-          </div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
+    <section class="pv-page-hero">
+      <div class="pv-wrap">
+        <p class="pv-label pv-muted" style="margin-bottom: 28px">${ch.region} &middot; ${ch.city} &middot; TFC Chapter</p>
+        <h1 class="pv-display">${ch.name}</h1>
+        <p class="pv-lede">Join the TFC Chapter at ${ch.name}. Find co-founders on your campus, build real products and get a direct path to the Launchpad Fellowship. Free to join.</p>
+        <div class="pv-actions"><a class="pv-btn" href="/join?chapter=${ch.id}">Join this Chapter, free</a><a class="pv-btn pv-btn-ghost" href="/chapters">All Chapters</a></div>
       </div>
-    </header>
-
-    <section class="pm-band pm-ink" aria-labelledby="h-does">
-      <div class="wrap">
-        <p class="pm-label">What a Chapter does</p>
-        <h2 class="pm-display pm-big" id="h-does" style="margin-top:28px">Build next to <span class="accent">people.</span></h2>
-        <div class="pm-rows">
-          <div class="pm-row"><h3 class="pm-display">Monthly build night</h3><p>Evening sprints where students bring projects, build together and trade direct user feedback.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Co-founder matching</h3><p>Looking for a technical co-founder or someone for business? The Chapter connects students across departments.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Build and pitch sprints</h3><p>Co-working sprints to iterate on your MVP, practise pitches and get candid feedback before demo day.</p></div>
+    </section>
+    <section class="pv-section pv-ink-band">
+      <div class="pv-wrap">
+        <div class="pv-section-head"><h2 class="pv-display">What a Chapter does</h2><p>Monthly build nights, co-founder matching and build sprints, run by students on your campus.</p></div>
+        <div class="pv-rows">
+          <div class="pv-row"><h3>Monthly build night</h3><p>Evening sprints where students bring projects, build together and trade direct user feedback.</p></div>
+          <div class="pv-row"><h3>Co-founder matching</h3><p>Looking for a technical co-founder or someone for business? The Chapter connects students across departments.</p></div>
+          <div class="pv-row"><h3>Build and pitch sprints</h3><p>Co-working sprints to iterate on your MVP, practise pitches and get candid feedback before demo day.</p></div>
         </div>
       </div>
     </section>
-
-    <section class="pm-band pm-sun" aria-labelledby="h-join">
-      <div class="wrap pm-grid">
+    <section class="pv-section pv-sun-band">
+      <div class="pv-wrap pv-lp-grid">
         <div>
-          <p class="pm-label" style="margin-bottom:24px">Membership</p>
-          <h2 class="pm-display" id="h-join">Free to <span class="accent" style="color:var(--ink)">join.</span></h2>
-          ${ch.leadName ? '<p style="max-width:48ch;margin-top:28px">Chapter lead: <b>' + ch.leadName + '</b>' + (ch.leadRole ? ', ' + ch.leadRole : '') + '.</p>' : ''}
-          <div class="pm-actions"><a class="btn dark lg" href="/join?chapter=${ch.id}">Join ${ch.name}</a></div>
+          <p class="pv-label" style="margin-bottom: 24px">Membership</p>
+          <h2 class="pv-display">Free to <span class="pv-accent">join.</span></h2>
+          ${ch.leadName ? '<p style="max-width:48ch;margin:24px 0 0">Chapter lead: <b>' + ch.leadName + '</b>' + (ch.leadRole ? ', ' + ch.leadRole : '') + '.</p>' : ''}
+          <div class="pv-actions"><a class="pv-btn" href="/join?chapter=${ch.id}">Join ${ch.name}</a></div>
         </div>
-        <ul class="pm-table">
-          <li><span>Membership cost</span><b>₹0</b></li>
+        <ul class="pv-table">
+          <li><span>Membership cost</span><b>&#8377;0</b></li>
           <li><span>Campus build nights</span><b>Included</b></li>
           <li><span>Co-founder matching</span><b>Included</b></li>
           <li><span>Launchpad Fellowship</span><b>Open to anyone</b></li>

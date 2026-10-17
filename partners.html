@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Single Source of Truth Config -->
   <script src="/tfc-config.js"></script>
@@ -46,29 +47,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- NAVIGATION -->
-  <nav class="nav" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li class="nav-extra"><a href="/investors">Investors</a></li>
-        <li class="nav-extra"><a href="/mentors">Mentors</a></li>
-        <li><a href="/why">Why Build</a></li>
-        <li><a href="/about">About TFC</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="/join">Join free</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why">Why Build</a><a href="/investors">Investors</a><a href="/mentors">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -130,65 +117,28 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Admissions &amp; questions:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/investors">For Investors</a></li>
-            <li><a href="/mentors">For Mentors</a></li>
-            <li><a href="/why">Why Build</a></li>
-            <li><a href="/about">About TFC</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="/join">Join Free</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/refund">Refund Policy</a></li>
-            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line" style="flex-direction:column; gap:8px; align-items:flex-start;">
-        <div style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
-          <strong>Where student builders stop waiting for permission.</strong>
-          <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
-        </div>
-        <p style="font-size:12px; color:#9A8B7C; margin:0;">TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</p>
-      </div>
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
     </div>
-  </footer>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>

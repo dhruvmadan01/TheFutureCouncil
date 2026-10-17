@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Supabase & Mixpanel Telemetry -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -604,28 +605,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- TOP NAVIGATION -->
-  <nav class="nav" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/investors">For Investors</a></li>
-        <li><a href="/mentors" class="active">For Mentors</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="#apply">Apply as Mentor</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why">Why Build</a><a href="/investors">Investors</a><a href="/mentors" aria-current="page">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -640,140 +628,39 @@
   </div>
 
   <main>
-    <!-- HERO -->
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">Mentor Council</p>
-          <h1>Guide India's highest-potential <span class="accent">founders.</span></h1>
-          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
-          <p class="pm-lede">Join operators from Google, Razorpay, Swiggy and Microsoft helping collegiate founders build and launch. 1–2 hours a month: 1:1 office hours, Sunday Live Labs and founder pod advising.</p>
-          <div class="pm-actions"><a class="btn solid lg" href="#apply">Join the Mentor Council</a><a class="btn lg" href="#charter">See the charter</a></div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">For mentors</p>
+      <h1 class="pv-display">Guide India's highest-potential student <span class="pv-accent">founders.</span></h1>
+      <p class="pv-lede">Operators from companies like Google, Razorpay, Swiggy and Microsoft help founders build, launch and avoid scaling traps. One to two hours a month.</p>
+      <div class="pv-actions"><a class="pv-btn" href="#mentor-apply">Join the Mentor Council</a></div>
+    </div>
+  </section>
+  <section class="pv-facts" aria-label="At a glance">
+    <div class="pv-wrap">
+      <div class="pv-fact"><b>1-2</b><span>hours a month, flexible</span></div>
+      <div class="pv-fact"><b>20</b><span>high-intent founders per cohort</span></div>
+      <div class="pv-fact"><b>0</b><span>bureaucracy</span></div>
+      <div class="pv-fact"><b>90+</b><span>campus Chapters</span></div>
+    </div>
+  </section>
+  <section class="pv-section pv-ink-band">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Six ways to guide founders</h2><p>Pick the format that fits your calendar.</p></div>
+      <div class="pv-rows">
+        <div class="pv-row"><h3>One-to-one office hours</h3><p>Thirty-minute drop-in sessions on tactical problems.</p></div>
+        <div class="pv-row"><h3>Founder pod advisor</h3><p>Advise a pod of 4 to 5 founders through the cohort.</p></div>
+        <div class="pv-row"><h3>Sunday Live Labs</h3><p>Forty-five-minute masterclasses or teardowns.</p></div>
+        <div class="pv-row"><h3>Pitch and deck roasts</h3><p>Get founders ready for Demo Day.</p></div>
+        <div class="pv-row"><h3>Angel co-investment</h3><p>First-look opportunities with zero platform fees.</p></div>
+        <div class="pv-row"><h3>Council network</h3><p>A community of operators and founders.</p></div>
       </div>
-    </header>
-
-    <!-- OPERATOR TICKER MARQUEE -->
-    <section class="operator-marquee-sec" aria-label="Operators and Mentors Network">
-      <div class="wrap">
-        <div class="marquee-label">OPERATORS &amp; MENTORS GUIDING FOUNDERS FROM LEADING TECH HUBS</div>
-      </div>
-      <div class="marquee-wrapper">
-        <div class="marquee-track">
-          <div class="marquee-group">
-            <div class="marquee-item"><span class="item-badge">TECH</span><span class="marquee-name">Google</span></div>
-            <div class="marquee-item"><span class="item-badge">CLOUD</span><span class="marquee-name">Microsoft</span></div>
-            <div class="marquee-item"><span class="item-badge">FINTECH</span><span class="marquee-name">Razorpay</span></div>
-            <div class="marquee-item"><span class="item-badge">ECOMM</span><span class="marquee-name">Amazon</span></div>
-            <div class="marquee-item"><span class="item-badge">LOGISTICS</span><span class="marquee-name">Swiggy</span></div>
-            <div class="marquee-item"><span class="item-badge">CONSUMER</span><span class="marquee-name">Zomato</span></div>
-            <div class="marquee-item"><span class="item-badge">RETAIL</span><span class="marquee-name">Flipkart</span></div>
-            <div class="marquee-item"><span class="item-badge">MOBILITY</span><span class="marquee-name">Uber</span></div>
-            <div class="marquee-item"><span class="item-badge">PAYMENTS</span><span class="marquee-name">Stripe Alumni</span></div>
-            <div class="marquee-item"><span class="item-badge">SAAS</span><span class="marquee-name">Postman</span></div>
-          </div>
-          <!-- Duplicate group for seamless infinite animation -->
-          <div class="marquee-group" aria-hidden="true">
-            <div class="marquee-item"><span class="item-badge">TECH</span><span class="marquee-name">Google</span></div>
-            <div class="marquee-item"><span class="item-badge">CLOUD</span><span class="marquee-name">Microsoft</span></div>
-            <div class="marquee-item"><span class="item-badge">FINTECH</span><span class="marquee-name">Razorpay</span></div>
-            <div class="marquee-item"><span class="item-badge">ECOMM</span><span class="marquee-name">Amazon</span></div>
-            <div class="marquee-item"><span class="item-badge">LOGISTICS</span><span class="marquee-name">Swiggy</span></div>
-            <div class="marquee-item"><span class="item-badge">CONSUMER</span><span class="marquee-name">Zomato</span></div>
-            <div class="marquee-item"><span class="item-badge">RETAIL</span><span class="marquee-name">Flipkart</span></div>
-            <div class="marquee-item"><span class="item-badge">MOBILITY</span><span class="marquee-name">Uber</span></div>
-            <div class="marquee-item"><span class="item-badge">PAYMENTS</span><span class="marquee-name">Stripe Alumni</span></div>
-            <div class="marquee-item"><span class="item-badge">SAAS</span><span class="marquee-name">Postman</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE CHARTER TICKET -->
-    <section class="deal-sec" id="charter" aria-labelledby="h-charter">
-      <div class="wrap">
-        <div class="ticket">
-          <div class="ticket-main">
-            <p class="kick">The Mentor Council Charter · Launchpad Accelerator</p>
-            <h2 id="h-charter">High leverage. Zero fluff. 2 hours a month.</h2>
-            <p>
-              Student founders don't need academic lectures or textbook theory. They need battle-tested operators who tell them why their code won't scale, how to close their first 10 paying customers, and how to price without fear.
-            </p>
-            <div class="ticket-terms">
-              <div><b>1:1</b><span>tactical office hours</span></div>
-              <div><b>4–5</b><span>founders per private pod</span></div>
-              <div><b>Live Labs</b><span>Sunday masterclasses</span></div>
-              <div><b>Direct</b><span>impact on collegiate startups</span></div>
-            </div>
-          </div>
-          <aside class="ticket-stub">
-            <div>
-              <span class="stub-head">Cohort 01 Induction</span>
-              <div class="stub-highlight">Mentor Council</div>
-              <p class="stub-sub">Match directly with high-conviction student founders building in your functional area.</p>
-            </div>
-            <div class="receipt-box">
-              <div class="receipt-row"><span>Time Commitment</span><span>1–2 hrs / mo</span></div>
-              <div class="receipt-row"><span>Session Format</span><span>Virtual 1:1</span></div>
-              <div class="receipt-row"><span>Angel Co-Invest</span><span>Optional Access</span></div>
-            </div>
-            <a class="btn solid" href="#apply">Apply as Mentor</a>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS GRID -->
-    <section class="benefits-sec">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="kick">How You Can Engage</p>
-          <h2>Six high-impact ways to guide founders.</h2>
-          <p class="lede">
-            Pick the format that fits your busy schedule. We handle scheduling, agendas, and pod coordination.
-          </p>
-        </div>
-
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <span class="icon-num">01</span>
-            <h3>1:1 Tactical Office Hours</h3>
-            <p>Host 30-minute drop-in problem-solving sessions with founders facing concrete architecture, distribution, or hiring roadblocks.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">02</span>
-            <h3>Founder Pod Advisor</h3>
-            <p>Serve as a sounding board for an intimate pod of 4–5 founders building in your vertical throughout the cohort.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">03</span>
-            <h3>Sunday Live Labs</h3>
-            <p>Lead a 45-minute interactive masterclass or live teardown on product discovery, GTM playbooks, or cloud infrastructure.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">04</span>
-            <h3>Pitch &amp; Deck Roasts</h3>
-            <p>Sharpen founder storytelling, metric clarity, and unit economic defenses before they pitch live angels at Demo Day.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">05</span>
-            <h3>Angel Co-Investment</h3>
-            <p>Get a direct first-look opportunity to angel invest early in breakout founders you've mentored with zero platform fees.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">06</span>
-            <h3>Council Network</h3>
-            <p>Connect with a curated community of fellow VPs, senior engineering managers, product leaders, and exited startup founders.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPLICATION FORM -->
-    <section class="apply-sec" id="apply">
-      <div class="wrap">
-        <div class="form-shell">
+    </div>
+  </section>
+  <section class="pv-section pv-sun-band" id="mentor-apply">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Apply to join the Mentor Council</h2><p>We'll follow up with pod matching and portal access.</p></div>
+      <div class="real-form"><div class="form-shell">
           <div class="form-header">
             <span class="badge">Mentor Council Onboarding</span>
             <h2>Apply to Join The Future Council Mentors</h2>
@@ -897,10 +784,10 @@
             </div>
 
           </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </div></div>
+    </div>
+  </section>
+</main>
 
   <!-- STICKY BOTTOM BAR -->
   <div class="bar" role="region" aria-label="Mentor Induction Notice">
@@ -914,58 +801,28 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Admissions &amp; mentor desk:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/investors">For Investors</a></li>
-            <li><a href="/mentors">For Mentors</a></li>
-            <li><a href="/why">Why Build</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
-      </div>
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
     </div>
-  </footer>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>

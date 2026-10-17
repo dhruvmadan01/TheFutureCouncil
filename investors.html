@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Supabase & Mixpanel Telemetry -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -525,28 +526,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- TOP NAVIGATION -->
-  <nav class="nav" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/investors" class="active">For Investors</a></li>
-        <li><a href="/mentors">For Mentors</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="#apply">Apply as Investor</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why">Why Build</a><a href="/investors" aria-current="page">Investors</a><a href="/mentors">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -561,104 +549,39 @@
   </div>
 
   <main>
-    <!-- HERO -->
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">Investor network · Demo Day access</p>
-          <h1>Back India's sharpest student founders <span class="accent">first.</span></h1>
-          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
-          <p class="pm-lede">TFC scouts collegiate builders through Chapters at 90+ colleges. Get Demo Day invitations, private 1:1 intros and zero-fee co-investment access. Top 20 vetted founders per cohort, 0% syndicate or carry fees.</p>
-          <div class="pm-actions"><a class="btn solid lg" href="#apply">Join the investor network</a><a class="btn lg" href="#deal">See syndicate terms</a></div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">For investors</p>
+      <h1 class="pv-display">Back India's sharpest student founders <span class="pv-accent">first.</span></h1>
+      <p class="pv-lede">We scout builders across 90+ campus Chapters, including IITs, BITS, SRCC, DTU and the IIITs. You get Demo Day invitations, one-to-one introductions and zero-fee co-investment access.</p>
+      <div class="pv-actions"><a class="pv-btn" href="#investor-apply">Join the investor network</a></div>
+    </div>
+  </section>
+  <section class="pv-facts" aria-label="At a glance">
+    <div class="pv-wrap">
+      <div class="pv-fact"><b>20</b><span>vetted founders per cohort</span></div>
+      <div class="pv-fact"><b>0%</b><span>syndicate fees or carry</span></div>
+      <div class="pv-fact"><b>Pre-seed</b><span>first-cheque valuations</span></div>
+      <div class="pv-fact"><b>90+</b><span>active campus Chapters</span></div>
+    </div>
+  </section>
+  <section class="pv-section pv-ink-band">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Direct dealflow. Zero fees. Zero carry.</h2><p>TFC takes 2% equity in the 20 ventures selected each cohort. There are no finder's fees, retainers or carry for investors.</p></div>
+      <div class="pv-rows">
+        <div class="pv-row"><h3>Demo Day invites</h3><p>A virtual event with live product demos and traction metrics, free to attend.</p></div>
+        <div class="pv-row"><h3>Ground-floor dealflow</h3><p>See founders months before the mainstream accelerators do.</p></div>
+        <div class="pv-row"><h3>Tailored introductions</h3><p>One-to-one intros matched to your sector focus and cheque size.</p></div>
+        <div class="pv-row"><h3>Skin in the game</h3><p>TFC holds its own 2% stake and takes no referral cuts.</p></div>
+        <div class="pv-row"><h3>Mock pitch panels</h3><p>Optionally judge practice pitch sessions before Demo Day.</p></div>
+        <div class="pv-row"><h3>Diligence folders</h3><p>Data rooms with GitHub links, prototypes, customer feedback and unit metrics.</p></div>
       </div>
-    </header>
-
-    <!-- THE DEAL TICKET -->
-    <section class="deal-sec" id="deal" aria-labelledby="h-deal">
-      <div class="wrap">
-        <div class="ticket">
-          <div class="ticket-main">
-            <p class="kick">Investor Syndicate Charter · Launchpad Cohorts</p>
-            <h2 id="h-deal">Direct dealflow. Zero syndicate fees. Zero carry.</h2>
-            <p>
-              TFC takes a standard 2% equity stake in the 20 selected cohort ventures. We are completely aligned with our founders—we charge no finder's fees, platform retainers, or carry cuts to angels and funds who invest alongside us.
-            </p>
-            <div class="ticket-terms">
-              <div><b>Top 20</b><span>founders selected per cohort</span></div>
-              <div><b>0%</b><span>carry or broker fee taken</span></div>
-              <div><b>1:1</b><span>warm founder intros on thesis</span></div>
-              <div><b>Demo Day</b><span>private virtual pitch access</span></div>
-            </div>
-          </div>
-          <aside class="ticket-stub">
-            <div>
-              <span class="stub-head">Next Intake Showcase</span>
-              <div class="stub-highlight">Demo Day Cohort 01</div>
-              <p class="stub-sub">Private showcase for verified angels, scout funds, and early-stage VC partners.</p>
-            </div>
-            <div class="receipt-box">
-              <div class="receipt-row"><span>Launchpad Pitch Slots</span><span>20 Ventures</span></div>
-              <div class="receipt-row"><span>Cheque Sizes</span><span>₹10L – ₹1 Cr+</span></div>
-              <div class="receipt-row"><span>Syndicate Fee</span><span>₹0 Free</span></div>
-            </div>
-            <a class="btn solid" href="#apply">Apply to Join Syndicate</a>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS GRID -->
-    <section class="benefits-sec">
-      <div class="wrap">
-        <div class="sec-head">
-          <p class="kick">Why Angel Investors &amp; VCs Partner With TFC</p>
-          <h2>Everything built for unfair deal advantage.</h2>
-          <p class="lede">
-            Accelerators wait for companies to apply. We scout technical talent directly on campus before they have pitch decks.
-          </p>
-        </div>
-
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <span class="icon-num">01</span>
-            <h3>Demo Day Invites</h3>
-            <p>Attend our fast-paced virtual Demo Day where the 20 selected founders pitch with live product demos and customer traction metrics.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">02</span>
-            <h3>Ground-Floor Dealflow</h3>
-            <p>Access technical founders from IIT Delhi, IIT Bombay, SRCC, BITS Pilani, and 90+ universities 6–12 months before mainstream accelerators.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">03</span>
-            <h3>Tailored 1:1 Intros</h3>
-            <p>We match your sector focus (AI, B2B SaaS, DevTools, FinTech, D2C) and cheque appetite with founders actively looking for smart capital.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">04</span>
-            <h3>Skin in the Game</h3>
-            <p>TFC holds 2% equity in every selected cohort venture. We don't take referral cuts—we only succeed when the startup builds lasting value.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">05</span>
-            <h3>Simulated Pitch Panels</h3>
-            <p>Option to sit as a guest judge on simulated Mock Pitch scrimmages to stress-test unit economics and preview founders early.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">06</span>
-            <h3>Direct Diligence Folders</h3>
-            <p>Receive clean data rooms with founder GitHub links, prototype URLs, verified customer feedback, and unit metrics without noise.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPLICATION FORM -->
-    <section class="apply-sec" id="apply">
-      <div class="wrap">
-        <div class="form-shell">
+    </div>
+  </section>
+  <section class="pv-section pv-sun-band" id="investor-apply">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Apply to join the investor network</h2><p>The investments desk reviews every profile within 48 hours.</p></div>
+      <div class="real-form"><div class="form-shell">
           <div class="form-header">
             <span class="badge">Accreditation &amp; Dealflow Portal</span>
             <h2>Apply to Join the TFC Investor Network</h2>
@@ -789,10 +712,10 @@
             </div>
 
           </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </div></div>
+    </div>
+  </section>
+</main>
 
   <!-- STICKY BOTTOM BAR -->
   <div class="bar" role="region" aria-label="Demo Day Notice">
@@ -806,58 +729,28 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Investments &amp; syndicate desk:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/investors">For Investors</a></li>
-            <li><a href="/mentors">For Mentors</a></li>
-            <li><a href="/why">Why Build</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
-      </div>
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
     </div>
-  </footer>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>

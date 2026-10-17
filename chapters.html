@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Analytics -->
   <script src="/mixpanel.min.js"></script>
@@ -238,29 +239,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- NAVIGATION -->
-  <nav class="nav night-mode" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage" style="color:var(--warm);">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/chapters" class="active">Chapters</a></li>
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li class="nav-extra"><a href="/investors">Investors</a></li>
-        <li class="nav-extra"><a href="/mentors">Mentors</a></li>
-        <li><a href="/why">Why Build</a></li>
-        <li><a href="/about">About TFC</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="/join">Join free</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters" aria-current="page">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why">Why Build</a><a href="/investors">Investors</a><a href="/mentors">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -274,237 +261,105 @@
   </div>
 
   <main>
-    <!-- HERO (CAMPUS AT NIGHT) -->
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">Chapters at 90+ colleges · Free to join</p>
-          <h1>Every startup starts with the people next to <span class="accent">you.</span></h1>
-          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
-          <p class="pm-lede">Student-run Chapters are the grassroots pipeline for India's student startup accelerator. Monthly build nights, co-founder matching and semester demo days on your own campus.</p>
-          <div class="pm-actions"><a class="btn solid lg" href="#directory">Find your Chapter</a><a class="btn lg" href="#start">Start one</a></div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
-      </div>
-    </header>
-
-    <section class="pm-band pm-ink" aria-labelledby="h-does">
-      <div class="wrap">
-        <p class="pm-label">What a Chapter does</p>
-        <h2 class="pm-display pm-big" id="h-does" style="margin-top:28px">Build next to <span class="accent">people.</span></h2>
-        <div class="pm-rows">
-          <div class="pm-row"><h3 class="pm-display">Monthly build night</h3><p>Work sprints where engineers, designers and domain thinkers build prototypes side by side.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Co-founder matching</h3><p>Meet peers on your campus with complementary skills who want to start something real.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Semester demo day</h3><p>Show working products to your campus, alumni founders and visiting operators.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Build and pitch sprints</h3><p>Co-working sprints to iterate on your MVP and practise pitches before demo day.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHAPTERS DIRECTORY -->
-    <section class="dir-sec" id="directory">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <p class="mono kick">Directory</p>
-            <h2>Explore Live Campus Chapters.</h2>
-          </div>
-          <p class="lede">Search for your university or filter by region to join build nights and local groups.</p>
-        </div>
-
-        <!-- SEARCH & FILTER -->
-        <div class="search-bar-wrap">
-          <input type="search" id="dirSearch" class="search-input" placeholder="Search by college name, abbreviation, or city..." />
-          <select id="stateFilter" class="filter-select">
-            <option value="all">All Locations</option>
-            <option value="Delhi">Delhi NCR</option>
-            <option value="Bihar">Bihar</option>
-          </select>
-        </div>
-
-        <div style="font-family: var(--mono); font-size: 13px; color: var(--ink-soft); margin-top: 14px;" id="countLabel">
-          95 Live Chapters
-        </div>
-
-        <!-- DYNAMIC CARDS CONTAINER -->
-        <div class="chapters-grid" id="chaptersGrid">
-          <!-- Populated from chapters-data.json -->
-        </div>
-
-        <!-- START A CHAPTER CALLOUT (CHAPTER LEAD) -->
-        <div class="lead-callout" id="start">
-          <div>
-            <span class="mono" style="color: #F5A07F;">Leadership Opportunity</span>
-            <h2 style="font-size: clamp(28px, 4vw, 42px); margin-top: 10px;">No chapter at your college? Start one.</h2>
-            <p style="color: #CDBFB2; font-size: 16px; margin-top: 12px; line-height: 1.5;">
-              Lead the builder movement on your campus as an official <b>Chapter Lead</b>. Host monthly build nights, curate co-founder squads, and connect your campus to national investors.
-            </p>
-            <div style="margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap;">
-              <a class="btn solid" href="/chapters/start">Apply as Chapter Lead →</a>
-              <a class="btn" href="/ambassador.html" style="color:var(--warm);">Lead Portal Login</a>
-            </div>
-          </div>
-          <div class="receipt" style="background:#fff; color:var(--ink);">
-            <h3>Chapter Lead Pack · What You Get</h3>
-            <ul>
-              <li><span>Direct mentorship from TFC founders</span><span>✓ Yes</span></li>
-              <li><span>Priority access to Launchpad cohort</span><span>✓ Included</span></li>
-              <li><span>Event playbooks &amp; sponsorship kits</span><span>✓ Provided</span></li>
-              <li><span>Direct access to TFC investor network</span><span>✓ Yes</span></li>
-              <li><span>National Lead Council network</span><span>✓ Lifetime</span></li>
-            </ul>
-            <div class="tot">
-              <span>Campus Impact</span>
-              <span>Yours</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SPEC 5.3 CTA TO NEXT STEP -->
-        <div style="margin-top: 64px; text-align: center;">
-          <p class="mono kick">Next Stop on the Path</p>
-          <h3 style="font-size: clamp(24px, 3.4vw, 36px); margin-top: 8px;">Building a venture on campus?</h3>
-          <p style="color: var(--ink-soft); font-size: 16px; max-width: 44ch; margin: 10px auto 24px;">
-            Apply to Launchpad, open to anyone. Fully online in small pods with operators and investors, ending at Demo Day. 2% equity in selected ventures. Zero success fees.
-          </p>
-          <a class="btn solid lg" href="/launchpad">Explore Launchpad →</a>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Admissions &amp; questions:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/why">Why Build</a></li>
-            <li><a href="/about">About TFC</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="/join">Join Free</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/refund">Refund Policy</a></li>
-            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">Chapters · free to join</p>
+      <h1 class="pv-display">Every startup starts with the <span class="pv-accent">people</span> next to you.</h1>
+      <p class="pv-lede">Student-run Chapters at 90+ colleges. Come to monthly build nights, find a co-founder, and show your product at a semester Demo Day.</p>
+      <div class="pv-actions"><a class="pv-btn" href="/join">Join free</a><a class="pv-btn pv-btn-ghost" href="/chapters/start">Start a Chapter</a></div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">What a Chapter gives you</h2><p>Verified members get direct access to local build nights, co-founders and Demo Days.</p></div>
+      <div class="pv-cells pv-c2">
+        <div class="pv-cell"><p class="pv-label">Every month</p><h3>Build Night</h3><p>Prototyping sprints for students across disciplines. Bring an idea or join a team.</p></div>
+        <div class="pv-cell"><p class="pv-label">Always on</p><h3>Co-founder matching</h3><p>Meet campus peers with the skills you're missing.</p></div>
+        <div class="pv-cell"><p class="pv-label">Every semester</p><h3>Demo Day</h3><p>Show what you built to your campus, alumni founders and operators.</p></div>
+        <div class="pv-cell"><p class="pv-label">Hands-on</p><h3>Build and pitch sprints</h3><p>Co-working, mock pitches and feedback on your MVP.</p></div>
       </div>
     </div>
-  </footer>
+  </section>
+  <section class="pv-section" id="directory">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Find your Chapter</h2><p>Search by college or city, or filter by region. Chapters at 90+ colleges.</p></div>
+      <div class="pv-dir-tools">
+        <input type="search" id="dirSearch" placeholder="Search by college name or city" aria-label="Search chapters">
+        <select id="stateFilter" aria-label="Filter by region">
+          <option value="all">All regions</option><option value="Delhi NCR">Delhi NCR</option><option value="North">North</option>
+          <option value="North East">North East</option><option value="East">East</option><option value="West">West</option>
+          <option value="South">South</option><option value="Central">Central</option>
+        </select>
+      </div>
+      <p class="pv-label pv-muted" id="countLabel" style="margin:20px 0 24px"></p>
+      <div class="pv-cells pv-c3" id="chaptersGrid"></div>
+    </div>
+  </section>
+  <section class="pv-section pv-ink-band" id="lead-block">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Lead a Chapter at your college</h2><p>Apply as a Chapter Lead and run your campus's startup community with TFC behind you.</p></div>
+      <div class="pv-rows">
+        <div class="pv-row"><h3>Mentorship</h3><p>Direct mentorship from TFC founders.</p></div>
+        <div class="pv-row"><h3>Launchpad priority</h3><p>Priority access to the Launchpad cohort.</p></div>
+        <div class="pv-row"><h3>Playbooks</h3><p>Event playbooks and sponsorship kits.</p></div>
+        <div class="pv-row"><h3>Investor network</h3><p>Access to the TFC investor network.</p></div>
+        <div class="pv-row"><h3>Lead Council</h3><p>Lifetime membership in the National Lead Council network.</p></div>
+      </div>
+      <div class="pv-actions"><a class="pv-btn pv-btn-sun" href="/join">Apply as Chapter Lead</a></div>
+    </div>
+  </section>
+  <section class="pv-section pv-cta-band pv-sun-band">
+    <div class="pv-wrap"><h2 class="pv-display">Ready to go further?</h2><div><p style="margin: 0 0 20px; max-width: 36ch">Launchpad is open to anyone, Chapter or not.</p><a class="pv-btn" href="/launchpad">Explore Launchpad</a></div></div>
+  </section>
+</main>
+
+  <!-- FOOTER -->
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
+    </div>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>
   <script>
-  (function(){
-    let allChapters = [];
-    const grid = document.getElementById('chaptersGrid');
-    const searchInput = document.getElementById('dirSearch');
-    const stateFilter = document.getElementById('stateFilter');
-    const countLabel = document.getElementById('countLabel');
-
-    function renderChapters(list) {
-      if (!grid) return;
-      if (list.length === 0) {
-        grid.innerHTML = `
-          <div style="grid-column: 1/-1; padding: 48px 24px; text-align: center; background: #fff; border: 1px dashed var(--line); border-radius: 16px;">
-            <p style="font-size: 18px; font-weight: 600;">No chapter found matching your query.</p>
-            <p style="color: var(--ink-soft); margin-top: 6px; font-size: 14.5px;">Want to launch The Future Council on your campus?</p>
-            <a class="btn solid sm" href="/chapters/start" style="margin-top: 16px;">Apply as Chapter Lead →</a>
-          </div>
-        `;
-        if (countLabel) countLabel.textContent = '0 chapters found';
-        return;
-      }
-
-      grid.innerHTML = list.map(ch => `
-        <article class="chapter-box">
-          <div class="chapter-top">
-            <span class="status-tag">${ch.status}</span>
-            <span class="chapter-loc">${ch.location}</span>
-          </div>
-          <div>
-            <h3>${ch.name}</h3>
-            <p style="color: var(--ink-soft); font-size: 14px; margin-top: 8px; line-height: 1.5;">${ch.desc}</p>
-          </div>
-          <div style="font-size: 12.5px; color: var(--ink-soft); margin-top: 4px;">
-            ${ch.lastEvent ? '<b>Recent:</b> ' + ch.lastEvent : ''}
-          </div>
-          <div class="chapter-lead-row">
-            ${ch.leadName ? `<div class="lead-avatar"><img src="/${ch.photo || 'TFC.png'}" alt="${ch.leadName}" onerror="this.src='/TFC.png'" /></div>
-            <div class="lead-meta"><strong>${ch.leadName}</strong><span>${ch.leadRole}</span></div>` : ''}
-            <a class="btn sm" href="${ch.hasPage ? '/chapters/' + ch.id : '/join'}" style="margin-left: auto;">${ch.hasPage ? 'View Chapter' : 'Join this Chapter'}</a>
-          </div>
-        </article>
-      `).join('');
-
-      if (countLabel) {
-        countLabel.textContent = list.length === allChapters.length
-          ? list.length + ' Live Chapters across India'
-          : `Showing ${list.length} chapters`;
-      }
-    }
-
-    function filterData() {
-      const q = searchInput.value.trim().toLowerCase();
-      const state = stateFilter.value;
-
-      const filtered = allChapters.filter(ch => {
-        const matchesQ = !q || ch.name.toLowerCase().includes(q) || ch.college.toLowerCase().includes(q) || ch.city.toLowerCase().includes(q);
-        const matchesState = state === 'all' || ch.region === state;
-        return matchesQ && matchesState;
-      });
-      renderChapters(filtered);
-    }
-
-    fetch('/chapters-data.json')
-      .then(res => res.json())
-      .then(data => {
-        allChapters = data;
-        renderChapters(allChapters);
-      })
-      .catch(err => console.error('Failed to load chapters:', err));
-
-    searchInput?.addEventListener('input', filterData);
-    stateFilter?.addEventListener('change', filterData);
-  })();
-  </script>
+(function(){
+  var all = [], grid = document.getElementById('chaptersGrid'), q = document.getElementById('dirSearch'),
+      reg = document.getElementById('stateFilter'), count = document.getElementById('countLabel');
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function render(list){
+    count.textContent = list.length === all.length ? list.length + ' Chapters across India' : 'Showing ' + list.length + ' of ' + all.length + ' Chapters';
+    if (!list.length) { grid.innerHTML = '<div class="pv-cell" style="grid-column:1/-1"><h3>No Chapter found</h3><p>Want to launch TFC on your campus?</p><a class="pv-btn" href="/chapters/start">Start a Chapter</a></div>'; return; }
+    grid.innerHTML = list.map(function(c){
+      return '<a class="pv-cell pv-cell-link" href="/chapters/' + esc(c.id) + '"><p class="pv-label">' + esc(c.region) + ' &middot; ' + esc(c.city) + '</p><h3>' + esc(c.name) + '</h3><p>Join the Chapter</p></a>';
+    }).join('');
+  }
+  function filter(){
+    var t = q.value.trim().toLowerCase(), r = reg.value;
+    render(all.filter(function(c){
+      return (!t || c.name.toLowerCase().indexOf(t) > -1 || c.college.toLowerCase().indexOf(t) > -1 || c.city.toLowerCase().indexOf(t) > -1) && (r === 'all' || c.region === r);
+    }));
+  }
+  fetch('/chapters-data.json').then(function(r){ return r.json(); }).then(function(d){ all = d; render(all); }).catch(function(){ count.textContent = 'Could not load Chapters.'; });
+  q.addEventListener('input', filter); reg.addEventListener('change', filter);
+})();
+</script>
 </body>
 </html>

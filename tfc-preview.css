@@ -171,3 +171,42 @@
 .pv-site .pv-lockup span { display: none; }
 .pv-site .pv-tag-row p { font-size: 17px; }
 }
+/* ===== Real-content adapters: forms, directory, library cards ===== */
+.pv-site .pv-dir-tools { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+.pv-site .pv-dir-tools input, .pv-site .pv-dir-tools select { font: inherit; font-size: 17px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 12px 0; min-height: 48px; min-width: 0; flex: 1 1 260px; }
+.pv-site .pv-dir-tools select { flex: 0 1 240px; }
+.pv-site .pv-cell-link { text-decoration: none; transition: background .15s; }
+.pv-site .pv-cell-link:hover { background: rgba(11,11,11,.05); }
+.pv-site .pv-cell-cta { margin-top: auto; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; text-decoration: underline; text-decoration-color: var(--sunrise); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.pv-site .pv-soon { text-decoration: none; color: var(--smoke); }
+.pv-site .pv-cell[hidden] { display: none; }
+
+.pv-site .real-form { max-width: 880px; }
+.pv-site .real-form .form-shell, .pv-site .real-form .join-form-shell, .pv-site .real-form .hire-card { background: transparent; border: 0; box-shadow: none; padding: 0; margin: 0; max-width: none; }
+.pv-site .real-form .form-header { display: none; }
+.pv-site .real-form .form-body { padding: 0; }
+.pv-site .real-form .form-label, .pv-site .real-form label.form-label, .pv-site .real-form .field-hint { font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.pv-site .real-form .field-hint { font-weight: 500; letter-spacing: 0; text-transform: none; }
+.pv-site .real-form input[type=text], .pv-site .real-form input[type=email], .pv-site .real-form input[type=tel], .pv-site .real-form input[type=url], .pv-site .real-form input[type=number],
+.pv-site .real-form .form-input, .pv-site .real-form .form-select, .pv-site .real-form select { font: inherit; font-size: 17px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 12px 0; min-height: 48px; width: 100%; box-shadow: none; }
+.pv-site .real-form textarea, .pv-site .real-form .form-textarea { font: inherit; font-size: 17px; color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 0; padding: 12px; min-height: 112px; width: 100%; box-shadow: none; }
+.pv-site .real-form input:focus, .pv-site .real-form select:focus, .pv-site .real-form textarea:focus { outline: 3px solid var(--ember); outline-offset: 3px; }
+.pv-site .real-form .chip-label, .pv-site .real-form .skill-pill { border: 1px solid var(--ink); background: transparent; border-radius: 0; color: var(--ink); font-size: 14px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.pv-site .real-form .skill-pill.active, .pv-site .real-form input:checked + span, .pv-site .real-form .chip-label:has(input:checked) { background: var(--ink); color: var(--ivory); }
+.pv-site .real-form .btn, .pv-site .real-form .btn-submit, .pv-site .real-form button[type=submit] { background: var(--ink); border: 1px solid var(--ink); color: var(--ivory) !important; border-radius: 0; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; min-height: 52px; box-shadow: none; }
+.pv-site .real-form .success-card, .pv-site .real-form .member-pass-card, .pv-site .real-form .tfc-google-verified-card { background: var(--ivory); border: 1px solid var(--ink); border-radius: 0; box-shadow: none; color: var(--ink); }
+.pv-site .real-form .badge, .pv-site .real-form .tfc-mandatory-badge { border-radius: 0; background: transparent; border: 1px solid var(--ink); color: var(--ink); }
+.pv-site .real-form .req { color: var(--ember); }
+.pv-site .real-form .receipt { background: transparent; border: 1px solid var(--ink); }
+
+/* Legacy leftovers inside rebuilt pages */
+.pv-site .bar { z-index: 40; }
+.pv-site .pv-site-header { z-index: 50; }
+
+/* Force legacy form controls into the brand style */
+.pv-site .real-form input:not([type=checkbox]):not([type=radio]):not([type=submit]), .pv-site .real-form select { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; border-width: 0 0 1px 0 !important; border-style: solid !important; border-color: var(--ink) !important; color: var(--ink) !important; }
+.pv-site .real-form textarea { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; border: 1px solid var(--ink) !important; color: var(--ink) !important; }
+.pv-site .real-form button[type=submit], .pv-site .real-form .btn-submit, .pv-site .real-form .btn.solid { background: var(--ink) !important; border-color: var(--ink) !important; color: var(--ivory) !important; border-radius: 0 !important; box-shadow: none !important; }
+.pv-site .real-form .tfc-google-btn { border-radius: 0 !important; box-shadow: none !important; border: 1px solid var(--ink) !important; background: var(--ivory) !important; }
+.pv-site .real-form .join-form-shell > div:first-child { display: none; }
+@media (min-width: 900px) { .pv-site .real-form { max-width: 760px; } }

@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Supabase & Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -84,29 +85,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- NAVIGATION -->
-  <nav class="nav" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li class="nav-extra"><a href="/investors">Investors</a></li>
-        <li class="nav-extra"><a href="/mentors">Mentors</a></li>
-        <li><a href="/why">Why Build</a></li>
-        <li><a href="/about" class="active">About TFC</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="/join">Join free</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why">Why Build</a><a href="/investors">Investors</a><a href="/mentors">Mentors</a><a href="/about" aria-current="page">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -118,109 +105,52 @@
   </div>
 
   <main>
-    <!-- HERO: FOUNDERS' NOTE (SPEC 5.8 ITEM 1) -->
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">The founders' note</p>
-          <h1>Why we started <span class="accent">TFC.</span></h1>
-          <div class="pm-tagrow"><span class="rule"></span><p>Dhruv Madan &amp; Aryaveer Chauhan</p></div>
-          <div class="pm-lede">
-            <p style="margin:0 0 16px">We are students too. We watched friends spend three years preparing for one placement season, and a handful spend the same years building something of their own.</p>
-            <p style="margin:0 0 16px">The students in the queue memorized mock-interview answers, stressed over CGPA cut-offs and waited for someone else to pick them. The handful who built had real users, learned to sell and gained genuine confidence.</p>
-            <p style="margin:0">We started The Future Council so the second path would not depend on which college you got into. If you have the agency to build something real, you should have co-founders, operator mentorship and investors from day one.</p>
-          </div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">The founders' note</p>
+      <h1 class="pv-display">Why we started The Future <span class="pv-accent">Council.</span></h1>
+      <p class="pv-lede">We are students. We watched friends spend years preparing for placements while a few others built their own companies. We started TFC so the builder path is open to everyone, whichever college they attend, with co-founders, operator mentorship and investor capital from day one.</p>
+      <p class="pv-sign" style="margin: 24px 0 0">Dhruv Madan and Aryaveer Chauhan</p>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">How we work</h2><p>The values behind how we make decisions, run cohorts and treat student founders.</p></div>
+      <div class="pv-cells pv-c3">
+        <div class="pv-cell"><h3>Access over pedigree</h3><p>Fully online, with written feedback for every applicant. We judge what you've shipped, not your college or GPA.</p></div>
+        <div class="pv-cell"><h3>Build over talk</h3><p>Live prototypes, user interviews and traction count. Business plan contests don't.</p></div>
+        <div class="pv-cell"><h3>We win when you win</h3><p>2% equity in selected ventures and zero success fee. Our incentives follow yours.</p></div>
+        <div class="pv-cell"><h3>Community before competition</h3><p>Campus Chapters, peer pods of 4 to 5 founders and an alumni network.</p></div>
+        <div class="pv-cell"><h3>Honest about risk</h3><p>Most startups fail. We teach the fundamentals and point to the deferred-placement safety nets.</p></div>
+        <div class="pv-cell"><h3>Builders pay it forward</h3><p>Today's fellows become tomorrow's Chapter leads, mentors and angels.</p></div>
       </div>
-    </header>
-
-    <section class="pm-band pm-ink" aria-labelledby="h-values">
-      <div class="wrap">
-        <p class="pm-label">Principles</p>
-        <h2 class="pm-display pm-big" id="h-values" style="margin-top:28px">Our core <span class="accent">values.</span></h2>
-        <div class="pm-rows">
-          <div class="pm-row"><h3 class="pm-display">Access over pedigree</h3><p>Launchpad is fully online, with written feedback for every applicant. We evaluate what you have shipped, never your college brand or GPA.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Build over talk</h3><p>No business plan competitions or pitch deck debates. We measure live prototypes, user interviews and customer traction.</p></div>
-          <div class="pm-row"><h3 class="pm-display">We win when you win</h3><p>We take 2% equity in selected Launchpad companies and no success fee, so our incentives sit with your long-term success.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Community before competition</h3><p>Chapters, pods of 4–5 founders and fellow builders across India. We help each other debug, test and distribute.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Honest about risk</h3><p>Most startups fail. We do not sell illusions. We teach the fundamentals and point to the deferred-placement safety nets.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Builders pay it forward</h3><p>Founders from one cohort become mentors and angel investors for the next cohort.</p></div>
-        </div>
+    </div>
+  </section>
+  <section class="pv-section pv-ink-band">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Radical transparency on money</h2><p>You should know exactly what TFC earns, before you apply.</p></div>
+      <div class="pv-cells pv-c3">
+        <div class="pv-cell"><b class="pv-big">₹999</b><p>One-time Launchpad application fee.</p></div>
+        <div class="pv-cell"><b class="pv-big">2%</b><p>Equity in selected ventures.</p></div>
+        <div class="pv-cell"><b class="pv-big">0%</b><p>Success fee on money you raise.</p></div>
       </div>
-    </section>
-
-    <section class="pm-band pm-sun" aria-labelledby="h-money">
-      <div class="wrap pm-grid">
-        <div>
-          <p class="pm-label" style="margin-bottom:24px">Radical transparency</p>
-          <h2 class="pm-display" id="h-money">How we make <span class="accent" style="color:var(--ink)">money.</span></h2>
-          <p style="max-width:48ch;margin-top:28px">No hidden incentives. Chapters are free for every student. Launchpad takes a one-time ₹999 application fee and 2% equity in the 20 selected ventures, so founders keep 98%. There is no success fee.</p>
-          <div class="pm-actions"><a class="btn dark lg" href="/launchpad#terms">Read the full terms</a></div>
-        </div>
-        <ul class="pm-table">
-          <li><span>Chapters</span><b>Free</b></li>
-          <li><span>Launchpad application</span><b>₹999, one time</b></li>
-          <li><span>Equity in selected ventures</span><b>2%</b></li>
-          <li><span>Success fee</span><b>Zero</b></li>
-        </ul>
+      <div class="pv-actions"><a class="pv-btn pv-btn-sun" href="/launchpad">Read the full terms</a></div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">The Council network</h2><p>Chapter leads, visiting mentors and advisors across India.</p></div>
+      <div class="pv-cells pv-c3">
+        <div class="pv-cell"><p class="pv-label">Co-founder</p><h3>Dhruv Madan</h3><p>Strategy and ecosystem.</p></div>
+        <div class="pv-cell"><p class="pv-label">Co-founder</p><h3>Aryaveer Chauhan</h3><p>Operations and growth.</p></div>
+        <div class="pv-cell"><p class="pv-label">Chapter President</p><h3>Vaibhav Jamge</h3><p>IIT Patna Hybrid Chapter.</p></div>
       </div>
-    </section>
-
-    <section class="pm-band" aria-labelledby="h-partner">
-      <div class="wrap">
-        <div class="pm-head">
-          <div><p class="pm-label pm-muted" style="margin-bottom:24px">Career partner</p><h2 class="pm-display" id="h-partner">Building and your <span class="accent">career.</span></h2></div>
-          <p>We have partnered with <a href="https://www.ftbhustle.com/" target="_blank" rel="noopener" style="text-decoration:underline;text-decoration-color:var(--sunrise);text-decoration-thickness:2px;text-underline-offset:4px"><b>Fire in the Belly (FTB)</b></a> to help you in your career too, with internship support for TFC builders.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE TEAM -->
-    <section style="padding-block: clamp(56px, 8vw, 96px);" id="team">
-      <div class="wrap">
-        <div class="sec-head stacked">
-          <span class="mono kick">Leadership</span>
-          <h2>The Team</h2>
-          <p class="lede">Founders and operators backing India's student builders.</p>
-        </div>
-
-        <div class="council-grid" style="max-width: 560px; margin-inline: auto;">
-          <div class="council-person">
-            <div class="face" style="margin: 0 auto 12px;"><img src="/dhruv.jpeg" alt="Dhruv Madan" onerror="this.parentNode.textContent='Dhruv'"></div>
-            <strong>Dhruv Madan</strong>
-            <span style="display:block; font-size:13px; color:var(--ink-soft); margin-top:2px;">Founder · CEO, CTO &amp; CMO</span>
-          </div>
-          <div class="council-person">
-            <div class="face" style="margin: 0 auto 12px;"><img src="/aryaveer.jpeg" alt="Aryaveer Chauhan" onerror="this.parentNode.textContent='Aryaveer'"></div>
-            <strong>Aryaveer Chauhan</strong>
-            <span style="display:block; font-size:13px; color:var(--ink-soft); margin-top:2px;">Co-Founder · Partnerships &amp; Operations</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HIRE BUILDERS FORM (SPEC 5.8 ITEM 6) -->
-    <section style="padding-block: clamp(64px, 9vw, 110px); background: var(--warm-2); border-top: 1px solid #E3B79C;" id="hire">
-      <div class="wrap grid-split">
-        <div>
-          <span class="mono kick">For Companies &amp; Funds</span>
-          <h2 style="font-size: clamp(28px, 4vw, 44px); margin-top: 8px;">Hire high-agency student builders.</h2>
-          <p style="color: var(--ink-soft); font-size: 16px; margin-top: 14px; line-height: 1.6;">
-            The Future Council trains students who build real software, talk to customers, and solve difficult problems without waiting for instructions.
-          </p>
-          <div class="receipt" style="margin-top: 24px; background: #fff;">
-            <h3>What TFC Builders Bring</h3>
-            <ul>
-              <li><span>Production shipping speed</span><span>✓ Proven</span></li>
-              <li><span>Direct customer discovery</span><span>✓ Proven</span></li>
-              <li><span>Full stack &amp; AI tool proficiency</span><span>✓ Proven</span></li>
-              <li><span>Extreme ownership mindset</span><span>✓ Core trait</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="hire-card">
+    </div>
+  </section>
+  <section class="pv-section pv-sun-band" id="hire-block">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Hire high-agency student builders</h2><p>TFC builders ship real software, talk to customers and solve hard problems on their own.</p></div>
+      <div class="real-form hire-real"><div class="hire-card">
           <span class="mono kick">Talent Request</span>
           <h3 style="font-size: 22px; margin-top: 6px;">Connect with TFC Founders</h3>
           <p style="color: var(--ink-soft); font-size: 13.5px; margin-top: 4px;">Tell us what roles you are hiring for (founding engineers, product designers, growth interns).</p>
@@ -253,68 +183,34 @@
             <strong style="color: #1B5E20; font-size: 16px; display: block;">Request Received!</strong>
             <p style="color: #2E7D32; font-size: 13.5px; margin-top: 4px;">We will connect you directly with qualified builders from our national chapter pods.</p>
           </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </div></div>
+    </div>
+  </section>
+</main>
 
   <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Admissions &amp; questions:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/investors">For Investors</a></li>
-            <li><a href="/mentors">For Mentors</a></li>
-            <li><a href="/why">Why Build</a></li>
-            <li><a href="/about">About TFC</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="/join">Join Free</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/refund">Refund Policy</a></li>
-            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
-      </div>
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
     </div>
-  </footer>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>

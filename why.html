@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
   <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
 
   <!-- Analytics -->
   <script src="/mixpanel.min.js"></script>
@@ -138,29 +139,15 @@
     }
   </style>
 </head>
-<body>
+<body class="pv-site">
 
   <!-- NAVIGATION -->
-  <nav class="nav office-mode" id="nav">
-    <div class="wrap">
-      <a class="brand" href="/" aria-label="The Future Council Homepage">
-        <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-        <span>The Future Council</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/launchpad">Launchpad</a></li>
-        <li class="nav-extra"><a href="/investors">Investors</a></li>
-        <li class="nav-extra"><a href="/mentors">Mentors</a></li>
-        <li><a href="/why" class="active">Why Build</a></li>
-        <li><a href="/about">About TFC</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a class="btn solid sm" href="/join">Join free</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad">Launchpad</a><a href="/why" aria-current="page">Why Build</a><a href="/investors">Investors</a><a href="/mentors">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -172,152 +159,91 @@
   </div>
 
   <main>
-    <header class="pm-hero">
-      <div class="wrap">
-        <div>
-          <p class="pm-label pm-muted" style="margin-bottom:28px">Why build · What the data shows</p>
-          <h1>Read the notices. <span class="accent">Then decide.</span></h1>
-          <p class="pm-lede">Every year, students are told to stay in line and clear the placement rounds. Here is what the official data shows about that line today.</p>
-          <div class="pm-actions"><a class="btn solid lg" href="/chapters">Find your Chapter</a><a class="btn lg" href="#parents">A note for parents</a></div>
-        </div>
-        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
-      </div>
-    </header>
-
-    <section class="pm-band pm-ink" aria-labelledby="h-data">
-      <div class="wrap">
-        <p class="pm-label">The numbers</p>
-        <h2 class="pm-display pm-big" id="h-data" style="margin-top:28px">The line is getting longer, and <span class="accent">slower.</span></h2>
-        <div class="pm-rows"><div class="pm-row"><h3 class="pm-display" style="font-size:clamp(48px,6vw,84px)">59%</h3><p>of registered students at IIT Gandhinagar were still unplaced in 2023-24 (RTI).<br><a href="https://news.careers360.com/iit-gandhinagar-placements-average-median-salary-package-40-pc-not-placed-jobs-2024" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">Careers360, May 2024 ↗</a></p></div><div class="pm-row"><h3 class="pm-display" style="font-size:clamp(48px,6vw,84px)">30–40%</h3><p>of registered students at several IITs, including Kharagpur, BHU, Hyderabad and Indore, were still without offers by late April 2024.<br><a href="https://news.careers360.com/iit-gandhinagar-placements-average-median-salary-package-40-pc-not-placed-jobs-2024" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">Careers360, May 2024 ↗</a></p></div><div class="pm-row"><h3 class="pm-display" style="font-size:clamp(48px,6vw,84px)">5–16%</h3><p>drop in campus placement rates at IIT Kanpur, Kharagpur and Roorkee between 2018-19 and 2023-24.<br><a href="https://m.thewire.in/article/education/campus-placements-drop-at-most-first-gen-iits-except-iit-delhi-report" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">The Wire / Indian Express RTI ↗</a></p></div><div class="pm-row"><h3 class="pm-display" style="font-size:clamp(48px,6vw,84px)">54.8%</h3><p>of Indian graduates overall are assessed employable for modern industry roles.<br><a href="https://taggd.in/industry-reports/isr/india-skills-report-2025/" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">India Skills Report 2025 ↗</a></p></div><div class="pm-row"><h3 class="pm-display" style="font-size:clamp(48px,6vw,84px)">19%</h3><p>gap in hiring of 22–25-year-olds in AI-exposed roles compared with the historical trend, driven by fewer junior hires (US data).<br><a href="https://digitaleconomy.stanford.edu/news/canariesaug26/" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">Stanford Digital Economy Lab, Aug 2026 ↗</a></p></div></div>
-      </div>
-    </section>
-
-    <section class="pm-band manifesto-sec" aria-labelledby="h-manifesto">
-      <div class="wrap">
-        <div class="pm-head">
-          <div><p class="pm-label pm-muted" style="margin-bottom:24px">The builder manifesto</p><h2 class="pm-display" id="h-manifesto">There is a better way to spend <span class="accent">four years.</span></h2></div>
-          <div>
-            <p>We were told the plan was simple. Crack the exam, get the seat, clear the placement season, and life is set.</p>
-            <p>The plan is breaking. Offers are harder to come by. Machines are learning the work that entry-level jobs were made of. A degree on its own proves less every year.</p>
-            <p><b>Build something.</b> Find a problem you cannot stop thinking about, find the people who care about it too, and ship.</p>
-            <p>You might fail. Most startups do. You will still leave college having made something real, for real people, with real stakes. That should be normal in every college, in every city. That is why The Future Council exists.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pm-band pm-sun" aria-labelledby="h-compare">
-      <div class="wrap">
-        <p class="pm-label">Placement prep vs. building</p>
-        <h2 class="pm-display pm-big" id="h-compare" style="margin-top:28px">What you actually <span class="accent" style="color:var(--ink)">learn.</span></h2>
-        <div class="pm-rows" style="border-color:var(--ink)">
-          <div class="pm-row"><h3 class="pm-display">Customers, not puzzles</h3><p>Placement prep: leetcode puzzles with predetermined answers. Building: 20+ user interviews and learning what people will pay for.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Shipping, not rehearsing</h3><p>Placement prep: mock interviews where nothing breaks. Building: live software, real users and iteration from feedback.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Revenue, not rubrics</h3><p>Placement prep: answers fitted to a rubric someone else wrote. Building: convincing strangers to try your product and collecting your first rupee.</p></div>
-          <div class="pm-row"><h3 class="pm-display">Proof of work</h3><p>You graduate having founded a team, built software and pitched investors. You are hired for what you shipped.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pm-band safety-sec" id="safety-nets" aria-labelledby="h-safety">
-      <div class="wrap">
-        <div class="pm-head">
-          <div><p class="pm-label pm-muted" style="margin-bottom:24px">Institutional support and policy</p><h2 class="pm-display" id="h-safety">The safety nets you did not know <span class="accent">existed.</span></h2></div>
-          <p>You do not have to choose between a degree and building a startup. Many institutions and national policy already protect student founders.</p>
-        </div>
-        <div class="pm-rows">
-          <div class="pm-row"><h3 class="pm-display">Deferred placement</h3><p>Several IITs and IIMs formally allow graduating students who start companies to defer campus placement for up to two years. If your venture does not work out, you return to the placement drive.</p></div>
-          <div class="pm-row"><h3 class="pm-display">NISP 2019</h3><p>The National Innovation and Startup Policy, framed by the Ministry of Education and AICTE, asks universities to allow semester and 1-year gap breaks, course credits for startup prototypes, and attendance relaxation for student founders. <a href="https://nisp.mic.gov.in/assets/html/AboutNationalInnovationAndStartu.html" target="_blank" rel="noopener" style="font-weight:700;text-decoration:underline;text-decoration-color:var(--sunrise);text-underline-offset:4px">Read the policy ↗</a> Ask your dean or T&amp;P cell for these rights.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pm-band pm-ink parents-sec" id="parents" aria-labelledby="h-parents">
-      <div class="wrap">
-        <div class="pm-head">
-          <div><p class="pm-label">For Indian parents</p><h2 class="pm-display" id="h-parents" style="margin-top:24px">A letter to <span class="accent">parents.</span></h2></div>
-          <div style="color:var(--ivory)">
-            <p>Dear parents,</p>
-            <p>We know how hard you worked to get your child into college. You want them to have financial security, dignity and a clear path ahead.</p>
-            <p>When your child says they want to build a startup, it is natural to worry. But building in college is no longer a reckless gamble. It is the fastest way to become exceptionally capable.</p>
-            <p><b>How The Future Council protects your child:</b></p>
-            <ul style="padding-left:20px;display:grid;gap:8px">
-              <li><b>Founder-first terms.</b> Chapters and community membership are free with zero equity. For the selective Launchpad Fellowship we take 2% equity in the 20 selected ventures, founders keep 98%, and there is no success fee on funds raised. Applying costs a one-time ₹999.</li>
-              <li><b>Safety nets exist.</b> Many colleges let students defer placements for up to two years. Check your college's policy.</li>
-              <li><b>Real skills.</b> Even if the startup fails, companies recruit founders because they know how to build, talk to customers and solve problems alone.</li>
-            </ul>
-            <p>College is the cheapest time in life to take an ambitious swing. Thank you for supporting their agency.</p>
-            <p style="font-weight:700">Dhruv Madan &amp; Aryaveer Chauhan · Founders, The Future Council</p>
-            <div class="pm-actions"><a class="btn solid" href="https://wa.me/?text=Read%20this%20note%20from%20The%20Future%20Council%20for%20parents%20about%20building%20startups%20in%20college:%20https://thefuturecouncil.in/why#parents" target="_blank" rel="noopener">Share on WhatsApp ↗</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pm-band" aria-labelledby="h-cta">
-      <div class="wrap">
-        <h2 class="pm-display pm-big" id="h-cta">Ready to find other <span class="accent">builders?</span></h2>
-        <p class="pm-lede">Chapters at 90+ colleges. Free to join, no application. Or skip straight to the Launchpad, which is open to anyone.</p>
-        <div class="pm-actions"><a class="btn solid lg" href="/chapters">Find your Chapter</a><a class="btn lg" href="/launchpad">Explore the Launchpad</a></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="tfc-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a class="brand" href="/" style="color:var(--warm); margin-bottom:14px; display:inline-flex;">
-            <img src="/TFC.png" alt="The Future Council Logo" class="brand-logo" />
-            <span>The Future Council</span>
-          </a>
-          <p style="font-size:14px; line-height:1.6; color:#9A8B7C; max-width:32ch; margin-bottom:18px;">
-            India's student startup accelerator backing collegiate founders with campus chapters, operator mentorship, and Demo Day investment access.
-          </p>
-          <div style="font-size:13px; color:#CDBFB2;">
-            Admissions &amp; questions:<br>
-            <a href="mailto:support@thefuturecouncil.in" style="color:var(--warm); font-weight:600;">support@thefuturecouncil.in</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Accelerator</h4>
-          <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
-            <li><a href="/chapters">Campus Chapters</a></li>
-            <li><a href="/why">Why Build</a></li>
-            <li><a href="/about">About TFC</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="/chapters/start">Become a Chapter Lead</a></li>
-            <li><a href="/resources">Resource Library</a></li>
-            <li><a href="/about/partners">Partners</a></li>
-            <li><a href="/about#hire">Hire Builders</a></li>
-            <li><a href="/join">Join Free</a></li>
-            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Council &amp; Legal</h4>
-          <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/refund">Refund Policy</a></li>
-            <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram ↗</a></li>
-            <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">The case for building</p>
+      <h1 class="pv-display">Read the notices. Then <span class="pv-accent">decide.</span></h1>
+      <p class="pv-lede">Placement season pushes every student the same way. Here is what the official numbers say about it, and what the alternative looks like.</p>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">What the data says</h2><p>Each figure is from a public source. Check them yourself.</p></div>
+      <div class="pv-cells pv-c3">
+        <div class="pv-cell"><b class="pv-big">59%</b><p>of registered students at IIT Gandhinagar were unplaced in 2023-24.</p><span class="pv-stat-source">Source: RTI, via Careers360</span></div>
+        <div class="pv-cell"><b class="pv-big">30-40%</b><p>of registered students at several top IITs had no offer by late April 2024.</p><span class="pv-stat-source">Source: institute placement data</span></div>
+        <div class="pv-cell"><b class="pv-big">5-16%</b><p>drop in placement rates at IIT Kanpur, Kharagpur and Roorkee from 2018-19 to 2023-24.</p><span class="pv-stat-source">Source: institute placement data</span></div>
+        <div class="pv-cell"><b class="pv-big">54.8%</b><p>of Indian graduates were assessed as employable for modern industry roles.</p><span class="pv-stat-source">Source: India Skills Report 2025</span></div>
+        <div class="pv-cell"><b class="pv-big">19%</b><p>hiring gap for 22 to 25 year olds in AI-exposed roles versus the historical trend.</p><span class="pv-stat-source">Source: Stanford Digital Economy Lab, Aug 2026</span></div>
       </div>
     </div>
-  </footer>
+  </section>
+  <section class="pv-section pv-ink-band">
+    <div class="pv-wrap">
+      <p class="pv-label" style="margin-bottom: 28px">The Builder Manifesto</p>
+      <h2 class="pv-display pv-big-h2">Don't queue. Build.</h2>
+      <div class="pv-rows" style="margin-top: 64px">
+        <div class="pv-row"><h3>The old path is failing</h3><p>Exam, seat, placements. For a growing share of students it no longer ends in a job.</p></div>
+        <div class="pv-row"><h3>A product beats a queue</h3><p>Building something is a better use of college years, even if it fails.</p></div>
+        <div class="pv-row"><h3>Normal everywhere</h3><p>This should be the norm at every college, not only at campuses with an incubator.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Two ways to spend four years</h2><p>The skills are different. So is the proof you leave with.</p></div>
+      <div class="pv-vs">
+        <div><h3>Placement prep</h3><ul><li>Solving artificial problems</li><li>Pleasing interviewers</li><li>Simulated stakes</li><li>Waiting for permission</li></ul></div>
+        <div><h3>Building a startup</h3><ul><li>Talking to real customers</li><li>Shipping working products</li><li>Selling and distribution</li><li>Proof of work</li></ul></div>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Your college may already back you</h2><p>Ask your dean or your T&amp;P cell about these rights.</p></div>
+      <div class="pv-cells pv-c2">
+        <div class="pv-cell"><p class="pv-label">Deferred placement</p><h3>Up to two years</h3><p>Several IITs, IIIT Bangalore and several IIMs let graduating founders defer placement.</p></div>
+        <div class="pv-cell"><p class="pv-label">NISP 2019</p><h3>Breaks and credit</h3><p>The national policy asks universities for semester or year breaks, credit for startup prototypes, and up to 20% attendance relaxation for student founders.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap pv-letter">
+      <p class="pv-label" style="margin-bottom: 20px">A note for parents</p>
+      <h2 class="pv-display" style="font-size: clamp(40px, 5vw, 64px); margin-bottom: 28px">Building is a serious way to learn</h2>
+      <p>We know placements feel safe. We would like to show you why building a product while in college is a sound bet, whether or not the startup works.</p>
+      <p>Chapters are free to join. Several institutes have deferral safety nets, so a student who builds can still sit placements later. And the skills a founder picks up, from selling to shipping, carry into any job.</p>
+      <p class="pv-sign">Dhruv Madan and Aryaveer Chauhan, Co-founders</p>
+    </div>
+  </section>
+  <section class="pv-section pv-cta-band pv-sun-band">
+    <div class="pv-wrap"><h2 class="pv-display">Ready to find other builders on your campus?</h2><div><p style="margin: 0 0 20px; max-width: 36ch">Chapters at 90+ colleges. Free to join, no application.</p><a class="pv-btn" href="/chapters">Find your Chapter</a></div></div>
+  </section>
+</main>
+
+  <!-- FOOTER -->
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
+    </div>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>
