@@ -260,6 +260,8 @@
                 <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
                 <option value="paid">💳 Fellowship Paid Only</option>
                 <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
+                <option value="winter">❄️ Winter Cohort 01 Applicants</option>
+                <option value="spring">🌱 Spring Cohort 02 Applicants</option>
               </select>
             </div>
             <div class="tfc-filter-control">
@@ -788,6 +790,7 @@
       let waiverRequested = '';
       let waiverReason = '';
       let stepProgress = '';
+      let cohort = '';
 
       // Investor and Mentor specific fields
       let entityType = '';
@@ -823,6 +826,8 @@
           fellowship = trimmed.replace(/^fellowship:\s*/i, '').trim();
         } else if (/^society:\s*/i.test(trimmed)) {
           societyName = trimmed.replace(/^society:\s*/i, '').trim();
+        } else if (/^cohort:\s*/i.test(trimmed)) {
+          cohort = trimmed.replace(/^cohort:\s*/i, '').trim();
         } else if (/^source:\s*/i.test(trimmed)) {
           source = trimmed.replace(/^source:\s*/i, '').trim();
         } else if (/^venture:\s*/i.test(trimmed)) {
@@ -931,6 +936,7 @@
 
       if (source === 'FellowshipPage' || (memberObj && memberObj.member_id && memberObj.member_id.startsWith('TFC-FEL-'))) {
         fellowship = 'Yes';
+        if (!cohort) cohort = 'Winter01'; // applications before the Spring form carry no cohort tag
         if (paymentStatus === 'verified' || payment === 'Paid') {
           payment = 'Paid';
         } else {
@@ -947,7 +953,7 @@
         q1, q2, q3, q4, payment, resData, isGoogleAuth,
         venture, stage, teamSize, enrolled, collegeName, collegeYear, collegeCourse,
         paymentFee, paymentStatus, chapterRef, formSubmittedAt, waiverRequested, waiverReason,
-        stepProgress,
+        stepProgress, cohort,
         entityType, firm, chequeSize, sectors, engagement,
         company, role, expertise, experience, pastCompanies, commitment, bio, notes, linkedin, format
       };
@@ -1552,6 +1558,8 @@
           if (fellowshipVal === 'dropoff') return (isFellowship && meta.stepProgress && meta.stepProgress !== 'Completed') || !(meta.q1 || meta.q2 || meta.q3 || meta.q4);
           if (fellowshipVal === 'paid') return isFellowship && meta.payment === 'Paid';
           if (fellowshipVal === 'unpaid') return isFellowship && meta.payment !== 'Paid';
+          if (fellowshipVal === 'winter') return isFellowship && meta.cohort === 'Winter01';
+          if (fellowshipVal === 'spring') return isFellowship && meta.cohort === 'Spring02';
           return true;
         });
       }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Launchpad Spring Cohort | The Future Council</title>
-  <meta name="description" content="A selective 4-week online startup accelerator cohort for 20 student founders ending in Demo Day with vetted investors. 2% equity. No success fee." />
+  <meta name="description" content="A selective online startup accelerator cohort for 20 student founders ending in Demo Day with vetted investors. 2% equity. No success fee." />
   <meta name="canonical" href="https://thefuturecouncil.in/launchpad/fellowship" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -276,12 +276,12 @@
         <span class="mono kick">Launchpad · Spring Cohort 02</span>
         <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">The Student Startup Accelerator</h1>
         <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
-          A selective 4-week online startup accelerator cohort for student founders ending in Demo Day with vetted angels and seed funds. No relocation. 2% equity in selected cohort ventures. Zero success fee.
+          A selective online startup accelerator cohort for student founders ending in Demo Day with vetted angels and seed funds. No relocation. 2% equity in selected cohort ventures. Zero success fee.
         </p>
 
         <!-- SPEC 5.6 HERO STATS -->
         <div class="hero-stats">
-          <div class="stat-chip"><b>4 Weeks</b> · Online</div>
+          <div class="stat-chip"><b>Fully Online</b> · No relocation</div>
           <div class="stat-chip"><b>20 Founders</b> · Selected</div>
           <div class="stat-chip"><b>2% Equity</b> · Selected Cohort</div>
           <div class="stat-chip"><b>All Applicants</b> · Virtual Mentor Sessions</div>
@@ -454,7 +454,7 @@
                       <span>₹999</span>
                     </div>
                     <div class="fee-row">
-                      <span>4-Week Online Program (if selected)</span>
+                      <span>Online Program (if selected)</span>
                       <span>₹0 additional fee</span>
                     </div>
                     <div class="fee-row">
@@ -833,6 +833,7 @@
         `Country: India`,
         `Fellowship: Yes`,
         `Source: FellowshipPage`,
+        `Cohort: Spring02`,
         `StepProgress: ${stageStatus}`,
         `Enrolled: ${payload.enrolled}`,
         `College: ${payload.collegeName}`,
@@ -843,7 +844,7 @@
         `Stage: ${payload.stage}`,
         `Q1: ${payload.q1}`,
         `Q3: ${payload.q3}`,
-        `Q4: 4-Week Online Cohort`,
+        `Q4: Online Cohort`,
         `PaymentFee: 999`,
         `PaymentStatus: ${isCompleted ? 'pending_verification' : (stageStatus === 'Step 2 Completed' ? 'awaiting_payment' : 'awaiting_step2')}`,
         `Payment: ${isCompleted ? 'Paid' : 'Pending'}`,
@@ -876,9 +877,18 @@
             }]);
             if (insErr) throw insErr;
           } else {
+            // Keep any Winter Cohort 01 record: archive it inside the new Spring record instead of overwriting it
+            let finalInfo = combinedInfo;
+            const prior = dbMember.college || '';
+            if (prior.includes('Source: FellowshipPage') && !prior.includes('Cohort: Spring02')) {
+              finalInfo += ' | PrevCohort01: ' + encodeURIComponent(prior);
+            } else {
+              const carried = prior.match(/PrevCohort01: ([^ |]+)/);
+              if (carried) finalInfo += ' | PrevCohort01: ' + carried[1];
+            }
             const { error: updErr } = await supabaseClient.from('members').update({
               name: payload.name,
-              college: combinedInfo,
+              college: finalInfo,
               tier: 'Student Founder'
             }).eq('email', payload.email);
             if (updErr) throw updErr;
@@ -907,7 +917,7 @@
           college: `${payload.collegeSummary} | StepProgress: ${stageStatus} | Venture: ${payload.venture || 'N/A'} | UTR: ${payload.upiRef || 'Pending'}`,
           tier: 'Student Founder',
           member_id: memberId,
-          source: `Fellowship Application (${stageStatus})`
+          source: `Spring Cohort 02 Fellowship Application (${stageStatus})`
         };
         if (typeof window.syncToZoho === 'function') {
           window.syncToZoho(zohoData, `Fellowship Application - ${stageStatus}`);
@@ -933,7 +943,7 @@
       const payload = gatherFormData();
 
       // Save draft in localStorage immediately
-      try { localStorage.setItem('tfc_fellowship_draft', JSON.stringify(payload)); } catch(e) {}
+      try { localStorage.setItem('tfc_fellowship_spring02_draft', JSON.stringify(payload)); } catch(e) {}
 
       // AUTO-SAVE LEAD TO SUPABASE: Step 1 Lead recorded immediately so no lead is lost!
       syncLeadToSupabase(payload, 'Step 1 Lead');
@@ -965,7 +975,7 @@
       const payload = gatherFormData();
 
       // Update draft
-      try { localStorage.setItem('tfc_fellowship_draft', JSON.stringify(payload)); } catch(e) {}
+      try { localStorage.setItem('tfc_fellowship_spring02_draft', JSON.stringify(payload)); } catch(e) {}
 
       // AUTO-SAVE LEAD TO SUPABASE: Step 2 Completed
       syncLeadToSupabase(payload, 'Step 2 Completed');
@@ -1053,8 +1063,8 @@
       sessionStorage.setItem('tfc_force_new_app', 'true');
       isPaymentMarkedDone = false;
       try {
-        localStorage.removeItem('tfc_fellowship_draft');
-        localStorage.removeItem('tfc_fellowship_last_email');
+        localStorage.removeItem('tfc_fellowship_spring02_draft');
+        localStorage.removeItem('tfc_fellowship_spring02_last_email');
       } catch(e) {}
       document.getElementById('fellowshipDirectForm').reset();
       if (paymentVerifiedBox) paymentVerifiedBox.style.display = 'none';
@@ -1128,9 +1138,9 @@
 
       // Cache locally
       try {
-        localStorage.removeItem('tfc_fellowship_draft');
-        localStorage.setItem('tfc_fellowship_last_email', payload.email);
-        localStorage.setItem('tfc_fellowship_applicant_' + payload.email, JSON.stringify(payload));
+        localStorage.removeItem('tfc_fellowship_spring02_draft');
+        localStorage.setItem('tfc_fellowship_spring02_last_email', payload.email);
+        localStorage.setItem('tfc_fellowship_spring02_applicant_' + payload.email, JSON.stringify(payload));
       } catch(e) {}
 
       showDashboard(payload);
@@ -1138,7 +1148,7 @@
 
     // Populate Draft if available
     try {
-      const draftStr = localStorage.getItem('tfc_fellowship_draft');
+      const draftStr = localStorage.getItem('tfc_fellowship_spring02_draft');
       if (draftStr) {
         const draft = JSON.parse(draftStr);
         if (draft.name && document.getElementById('fName')) document.getElementById('fName').value = draft.name;
@@ -1161,9 +1171,9 @@
 
     // Check existing applicant
     try {
-      const lastEmail = localStorage.getItem('tfc_fellowship_last_email');
+      const lastEmail = localStorage.getItem('tfc_fellowship_spring02_last_email');
       if (lastEmail && sessionStorage.getItem('tfc_force_new_app') !== 'true') {
-        const cached = localStorage.getItem('tfc_fellowship_applicant_' + lastEmail);
+        const cached = localStorage.getItem('tfc_fellowship_spring02_applicant_' + lastEmail);
         if (cached) {
           showDashboard(JSON.parse(cached));
         }
