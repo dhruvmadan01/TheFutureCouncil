@@ -494,7 +494,7 @@
     const views = { overview: viewOverview, apps: viewApps, chapters: viewChapters, network: viewNetwork, people: viewPeople };
     const keepFocus = document.activeElement && document.activeElement.id;
     const sel = keepFocus && document.activeElement.selectionStart;
-    v.innerHTML = (views[S.tab] || viewOverview)() + '<div class="foot">Resource-reader analytics live in the <a href="data-legacy.html">legacy view</a>.</div>';
+    v.innerHTML = (views[S.tab] || viewOverview)();
     if (keepFocus && $(keepFocus)) { const el = $(keepFocus); el.focus(); try { el.setSelectionRange(sel, sel); } catch (e) {} }
   }
 
@@ -665,7 +665,7 @@
   /* ------------------------------------------------------------------ *
    * Detail drawer
    * ------------------------------------------------------------------ */
-  const HIDE_KEYS = new Set(['phone', 'source', 'fellowship', 'country', 'formsubmittedat', 'submittedat', 'paymentfee', 'prevcohort01', 'cohort', 'stepprogress', 'enrolled']);
+  const HIDE_KEYS = new Set(['phone', 'source', 'fellowship', 'country', 'formsubmittedat', 'submittedat', 'paymentfee', 'prevcohort01', 'cohort', 'stepprogress', 'enrolled', 'resdata']);
   const LABELS = { venture: 'Venture', stage: 'Startup stage', teamsize: 'Team size', college: 'College', year: 'Year', course: 'Course', q1: 'Problem', q3: 'Traction / why', q4: 'Format', chapterref: 'Via chapter', paymentstatus: 'Payment status', payment: 'Payment', utr: 'UTR / reference', entitytype: 'Entity type', firm: 'Firm', chequesize: 'Cheque size', sectors: 'Sectors', engagement: 'Engagement', linkedin: 'LinkedIn', company: 'Company', role: 'Role', expertise: 'Expertise', exp: 'Experience', pastcompanies: 'Past companies', format: 'Format', commitment: 'Commitment', bio: 'Bio', notes: 'Notes', motivation: 'Motivation', refcode: 'Referral code', refby: 'Referred by', waiverrequested: 'Waiver asked', waiverreason: 'Waiver reason' };
 
   function detailKV(r) {

@@ -5,7 +5,6 @@ Allow: /
 # Disallow admin, internal CRMs, analytics and scratch endpoints
 Disallow: /data
 Disallow: /data.html
-Disallow: /data-legacy
 Disallow: /ambassador
 Disallow: /ambassador.html
 Disallow: /api/
