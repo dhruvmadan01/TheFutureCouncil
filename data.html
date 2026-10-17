@@ -990,9 +990,17 @@
     async function loadCrmData() {
       const tableBody = document.querySelector('#crmTable tbody');
       try {
-        const { data, error } = await supabaseClient.from('members').select('*');
-        if (error) throw error;
-        cachedMembers = data || [];
+        // Supabase returns at most 1000 rows per request, so page through the whole table
+        let allMembers = [];
+        const PAGE = 1000;
+        for (let from = 0; ; from += PAGE) {
+          const { data: page, error: pageErr } = await supabaseClient
+            .from('members').select('*').order('id', { ascending: true }).range(from, from + PAGE - 1);
+          if (pageErr) throw pageErr;
+          allMembers = allMembers.concat(page || []);
+          if (!page || page.length < PAGE) break;
+        }
+        cachedMembers = allMembers;
         calculateMetrics();
         renderCrmTable();
         renderInvestorsTable();

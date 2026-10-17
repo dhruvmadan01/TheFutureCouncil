@@ -815,6 +815,21 @@
       };
     }
 
+    // If saving to the database fails (network, policy, etc.) keep the application in this browser and retry on the next visit
+    const PENDING_KEY = 'tfc_fellowship_spring02_pending';
+    function queuePendingSync(payload, stageStatus) {
+      try { localStorage.setItem(PENDING_KEY, JSON.stringify({ payload: payload, stageStatus: stageStatus, at: Date.now() })); } catch(e) {}
+    }
+    async function flushPendingSync() {
+      try {
+        const raw = localStorage.getItem(PENDING_KEY);
+        if (!raw) return;
+        const item = JSON.parse(raw);
+        localStorage.removeItem(PENDING_KEY);
+        if (item && item.payload) await syncLeadToSupabase(item.payload, item.stageStatus || 'Step 1 Lead', 2);
+      } catch(e) {}
+    }
+
     // Resilient Sync to Supabase with schema matching data.html parseCollegeField
     async function syncLeadToSupabase(payload, stageStatus, retries = 3) {
       if (!supabaseClient) {
@@ -899,8 +914,9 @@
 
           return memberId;
         } catch (err) {
-          console.warn(`[TFC Fellowship] Supabase sync attempt ${attempt} failed:`, err);
-          if (attempt === retries) return null;
+          console.error(`[TFC Fellowship] Supabase sync attempt ${attempt} failed:`, err && (err.code || ''), err && (err.message || err), err && (err.details || ''));
+          window.__tfcLastSyncError = err;
+          if (attempt === retries) { queuePendingSync(payload, stageStatus); return null; }
           await new Promise(r => setTimeout(r, 600));
         }
       }
@@ -1168,6 +1184,8 @@
         if (draft.q3 && document.getElementById('fQ3')) document.getElementById('fQ3').value = draft.q3;
       }
     } catch(e) {}
+
+    setTimeout(flushPendingSync, 1500);
 
     // Check existing applicant
     try {
