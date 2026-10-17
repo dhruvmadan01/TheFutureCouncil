@@ -914,6 +914,10 @@
               const carried = prior.match(/PrevCohort01: ([^ |]+)/);
               if (carried) finalInfo += ' | PrevCohort01: ' + carried[1];
             }
+            // Keep the team's CRM notes, owner, score and stage if the applicant re-submits
+            prior.split(' | ').slice(1).forEach(function (part) {
+              if (/^Crm[A-Za-z]*:/.test(part.trim())) finalInfo += ' | ' + part.trim();
+            });
             const { error: updErr } = await supabaseClient.from('members').update({
               name: payload.name,
               college: finalInfo,
@@ -921,9 +925,6 @@
             }).eq('email', payload.email);
             if (updErr) throw updErr;
           }
-
-          // Push asynchronously to Zoho CRM
-          syncToZohoCrm(payload, memberId, stageStatus);
 
           return memberId;
         } catch (err) {
@@ -934,29 +935,6 @@
         }
       }
       return null;
-    }
-
-    // Push Lead to Zoho CRM endpoint
-    function syncToZohoCrm(payload, memberId, stageStatus) {
-      try {
-        const zohoData = {
-          name: payload.name,
-          email: payload.email,
-          phone: payload.phone,
-          college: `${payload.collegeSummary} | StepProgress: ${stageStatus} | Venture: ${payload.venture || 'N/A'} | UTR: ${payload.upiRef || 'Pending'}`,
-          tier: 'Student Founder',
-          member_id: memberId,
-          source: `Spring Cohort 02 Fellowship Application (${stageStatus})`
-        };
-        if (typeof window.syncToZoho === 'function') {
-          window.syncToZoho(zohoData, `Fellowship Application - ${stageStatus}`);
-        }
-        fetch('/api/zoho-sync', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(zohoData)
-        }).catch(err => console.warn('[ZohoSync] Async push note:', err));
-      } catch(e) {}
     }
 
     // Step 1 Validation & Lead Auto-Save

@@ -3,2417 +3,853 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Growth & Resources CRM | The Future Council</title>
+  <title>TFC CRM | The Future Council</title>
   <meta name="robots" content="noindex, nofollow, noarchive" />
-  <link rel="icon" href="TFC.png" type="image/png">
-  <link rel="apple-touch-icon" href="TFC.png">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="TFC.png" />
+  <meta name="theme-color" content="#14110F" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="style.css" />
   <style>
-    .tfc-filter-control {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    :root {
+      --ink: #14110F; --soft: #6B645C; --faint: #A39B90;
+      --bg: #FAF7F2; --card: #FFFFFF; --line: #E9E3D9; --wash: #F3EEE6;
+      --orange: #E2542A; --orange-wash: #FDEDE6;
+      --green: #15803D; --green-wash: #E8F6EC;
+      --amber: #B45309; --amber-wash: #FEF3E2;
+      --blue: #1D4ED8; --blue-wash: #E8EFFE;
+      --red: #B91C1C; --red-wash: #FDECEC;
+      --violet: #6D28D9; --violet-wash: #F1EAFD;
+      --radius: 14px;
     }
-    .tfc-filter-label {
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ink-soft);
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.45; }
+    h1, h2, h3 { font-family: 'Bricolage Grotesque', 'Instrument Sans', sans-serif; margin: 0; letter-spacing: -0.02em; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    .hidden { display: none !important; }
+    a { color: inherit; }
+
+    /* Login */
+    .login { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
+    .login-card { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: 0 10px 40px rgba(20,17,15,.06); }
+    .login-card img { width: 44px; height: 44px; border-radius: 10px; }
+    .login-card h1 { font-size: 26px; margin: 14px 0 4px; }
+    .login-card p { color: var(--soft); margin: 0 0 18px; font-size: 14px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .field label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--soft); }
+    .in { width: 100%; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; font-size: 16px; }
+    .in:focus { outline: none; border-color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 10px; border: 1.5px solid var(--ink); background: var(--ink); color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn.ghost:hover { border-color: var(--ink); }
+    .btn.orange { background: var(--orange); border-color: var(--orange); }
+    .btn.sm { padding: 7px 12px; font-size: 13px; }
+    .btn.block { width: 100%; }
+    .err { background: var(--red-wash); color: var(--red); border: 1px solid #F5C2C2; border-radius: 10px; padding: 10px 12px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+
+    /* Shell */
+    .top { position: sticky; top: 0; z-index: 30; background: var(--ink); color: #fff; }
+    .top-in { max-width: 1240px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; }
+    .brand { display: flex; align-items: center; gap: 9px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -.01em; text-decoration: none; }
+    .brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .brand small { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 11px; background: var(--orange); border-radius: 99px; padding: 2px 8px; letter-spacing: .04em; }
+    .spacer { flex: 1; }
+    .who { font-size: 13px; color: #D9D2C7; display: flex; align-items: center; gap: 10px; }
+    .who b { color: #fff; }
+    .top .btn.ghost { color: #fff; border-color: #44403C; }
+    .tabs { background: var(--ink); border-top: 1px solid #2A2622; }
+    .tabs-in { max-width: 1240px; margin: 0 auto; padding: 0 12px; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+    .tabs-in::-webkit-scrollbar { display: none; }
+    .tab { background: none; border: none; color: #A8A094; padding: 11px 14px; font-weight: 700; font-size: 14px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; display: flex; gap: 7px; align-items: center; }
+    .tab.on { color: #fff; border-bottom-color: var(--orange); }
+    .tab .n { font-size: 11px; background: #2F2A26; border-radius: 99px; padding: 1px 7px; color: #D9D2C7; }
+    .tab.on .n { background: var(--orange); color: #fff; }
+    main { max-width: 1240px; margin: 0 auto; padding: 20px 16px 80px; }
+    .page-h { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .page-h h2 { font-size: clamp(24px, 4vw, 32px); }
+    .page-h p { margin: 4px 0 0; color: var(--soft); font-size: 14px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Cards, stats */
+    .grid { display: grid; gap: 12px; }
+    .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 18px; }
+    @media (min-width: 720px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+    .stat b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; line-height: 1.1; }
+    .stat span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--soft); }
+    .stat small { display: block; color: var(--faint); font-size: 12px; margin-top: 2px; }
+    .stat.hot b { color: var(--orange); }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .panel-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+    .panel-h h3 { font-size: 16px; }
+    .two { grid-template-columns: 1fr; }
+    @media (min-width: 900px) { .two { grid-template-columns: 1fr 1fr; } }
+    .empty { padding: 28px 16px; text-align: center; color: var(--faint); font-size: 14px; }
+
+    /* Controls */
+    .bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+    .bar .in { max-width: 320px; padding: 9px 12px; font-size: 15px; }
+    .seg { display: inline-flex; background: var(--wash); border-radius: 10px; padding: 3px; }
+    .seg button { border: none; background: none; padding: 7px 13px; border-radius: 8px; font-weight: 700; font-size: 13px; color: var(--soft); cursor: pointer; }
+    .seg button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+    .chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; scrollbar-width: none; }
+    .chips::-webkit-scrollbar { display: none; }
+    .fchip { border: 1.5px solid var(--line); background: #fff; border-radius: 99px; padding: 6px 12px; font-size: 13px; font-weight: 700; color: var(--soft); cursor: pointer; white-space: nowrap; display: flex; gap: 6px; align-items: center; }
+    .fchip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .fchip i { font-style: normal; font-size: 11px; opacity: .75; }
+    .seats { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .seats .track { flex: 1; min-width: 140px; height: 8px; background: var(--wash); border-radius: 99px; overflow: hidden; }
+    .seats .fill { height: 100%; background: var(--orange); border-radius: 99px; }
+
+    /* Rows */
+    .rows { display: flex; flex-direction: column; }
+    .row { display: grid; grid-template-columns: 38px 1fr; gap: 12px; align-items: center; padding: 12px 16px; border: none; border-bottom: 1px solid var(--line); background: var(--card); text-align: left; width: 100%; cursor: pointer; }
+    .row:last-child { border-bottom: none; }
+    .row:hover { background: #FDFBF7; }
+    .panel > .rows > .row:first-child { border-top: none; }
+    .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--wash); display: grid; place-items: center; font-weight: 800; font-size: 14px; color: var(--soft); }
+    .nm { font-weight: 700; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .sub { color: var(--soft); font-size: 13px; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+    .ago { color: var(--faint); font-size: 12px; }
+    @media (min-width: 900px) {
+      .row { grid-template-columns: 38px minmax(0,1.6fr) minmax(0,1.2fr); }
+      .meta { margin-top: 0; justify-content: flex-end; }
     }
-    .tfc-subtab-pill {
-      padding: 10px 18px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      border-radius: 9999px;
-      border: 1.5px solid var(--border-subtle);
-      background: #FFFFFF;
-      color: var(--ink-soft);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.15s ease;
-    }
-    .tfc-subtab-pill:hover {
-      border-color: var(--ink);
-      color: var(--ink);
-    }
-    .tfc-subtab-pill.active {
-      background: var(--ink);
-      color: #FFFFFF;
-      border-color: var(--ink);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    }
-    .tfc-subtab-pill.active .subtab-badge {
-      background: var(--primary-orange);
-      color: #FFFFFF;
-    }
-    .subtab-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 9999px;
-      background: rgba(20, 17, 15, 0.08);
-      color: var(--ink);
-    }
+    .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: var(--wash); color: var(--soft); white-space: nowrap; }
+    .pill.green { background: var(--green-wash); color: var(--green); }
+    .pill.amber { background: var(--amber-wash); color: var(--amber); }
+    .pill.blue { background: var(--blue-wash); color: var(--blue); }
+    .pill.red { background: var(--red-wash); color: var(--red); }
+    .pill.orange { background: var(--orange-wash); color: var(--orange); }
+    .pill.violet { background: var(--violet-wash); color: var(--violet); }
+
+    /* Chapter cards */
+    .cards { grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+    .card h3 { font-size: 16px; margin-bottom: 2px; }
+    .card p { margin: 6px 0 0; color: var(--soft); font-size: 13px; }
+    .section-t { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 800; margin: 24px 0 10px; }
+
+    /* Drawer */
+    .scrim { position: fixed; inset: 0; background: rgba(20,17,15,.45); z-index: 50; }
+    .drawer { position: fixed; z-index: 60; background: var(--bg); display: flex; flex-direction: column; inset: 0; }
+    @media (min-width: 900px) { .drawer { inset: 0 0 0 auto; width: 520px; box-shadow: -10px 0 40px rgba(0,0,0,.15); } }
+    .d-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 16px; background: #fff; border-bottom: 1px solid var(--line); }
+    .d-h h2 { font-size: 22px; }
+    .d-b { overflow-y: auto; padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 60px; }
+    .x { border: none; background: var(--wash); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 18px; flex-shrink: 0; }
+    .blk { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+    .blk h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--soft); }
+    .kv { display: grid; grid-template-columns: 112px 1fr; gap: 6px 10px; font-size: 14px; }
+    .kv dt { color: var(--soft); }
+    .kv dd { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .kv a { color: var(--blue); }
+    .contact { display: flex; gap: 8px; flex-wrap: wrap; }
+    .stagepick { display: flex; gap: 6px; flex-wrap: wrap; }
+    .stagepick button { border: 1.5px solid var(--line); background: #fff; border-radius: 99px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; color: var(--soft); }
+    .stagepick button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .stagepick button:disabled { opacity: .4; cursor: not-allowed; }
+    .stars { display: flex; gap: 4px; }
+    .stars button { border: none; background: none; font-size: 24px; cursor: pointer; color: #D6CFC3; padding: 0 2px; }
+    .stars button.on { color: var(--orange); }
+    .notes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+    .note { background: var(--wash); border-radius: 10px; padding: 8px 11px; font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .note small { display: block; color: var(--soft); font-size: 12px; margin-bottom: 2px; }
+    textarea.in { min-height: 70px; resize: vertical; }
+    .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 12px; font-weight: 600; font-size: 14px; z-index: 100; max-width: 92vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+    .toast.bad { background: var(--red); }
+    .foot { text-align: center; color: var(--faint); font-size: 13px; margin-top: 30px; }
+    .foot a { color: var(--soft); }
+    .loading { padding: 60px 16px; text-align: center; color: var(--soft); }
   </style>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1763806951409454');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1763806951409454&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-  <script src="tfc-analytics.js" defer></script>
 </head>
-<body class="tfc-portal-body">
+<body>
 
-  <!-- AUTH PORTAL GATE (Centered on Cream Canvas) -->
-  <div class="min-h-screen flex items-center justify-center p-4" id="loginContainer">
-    <div class="tfc-card w-full max-w-sm text-center" style="padding: 40px 32px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-md);">
-      <img src="TFC.png" alt="The Future Council Logo" class="w-14 h-14 object-contain rounded-xl mx-auto mb-4 p-1 bg-white border border-zinc-200 shadow-sm" />
-      <span class="tfc-badge tfc-badge-orange" style="margin-bottom: 10px; font-size: 0.68rem;">INTERNAL PORTAL SUITE</span>
-      <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px;">
-        Growth CRM & Telemetry
-      </h1>
-      <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 24px;">
-        Authorized ecosystem console for member data and reading analytics.
-      </p>
+<!-- LOGIN -->
+<div class="login" id="loginView">
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <img src="TFC.png" alt="TFC" />
+    <h1>TFC CRM</h1>
+    <p>Team sign-in. Authorised staff only.</p>
+    <div class="err hidden" id="loginErr">Incorrect ID or password.</div>
+    <div class="field"><label for="lu">ID</label><input class="in" id="lu" autocomplete="username" autocapitalize="none" required /></div>
+    <div class="field"><label for="lp">Password</label><input class="in" id="lp" type="password" autocomplete="current-password" required /></div>
+    <button class="btn block orange" type="submit">Sign in</button>
+  </form>
+</div>
 
-      <form id="loginForm" class="space-y-4 text-left">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Username / Admin ID</label>
-          <input type="text" id="loginUsername" required placeholder="Enter authorized ID" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1.5">Console Password</label>
-          <input type="password" id="loginPassword" required placeholder="••••••••" class="tfc-input" style="padding: 10px 14px; font-size: 0.9rem;" />
-        </div>
-        <div id="loginError" class="hidden p-3 bg-red-50 border border-red-300 text-red-700 font-bold text-xs rounded-xl">
-          ⚠️ Invalid credentials! Please check your access codes.
-        </div>
-        <button type="submit" class="tfc-btn tfc-btn-primary tfc-btn-lg w-full justify-center" style="margin-top: 8px;">
-          Unlock CRM Console ⚡
-        </button>
-      </form>
+<!-- APP -->
+<div class="hidden" id="appView">
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="/"><img src="TFC.png" alt="" /> TFC <small>CRM</small></a>
+      <div class="spacer"></div>
+      <div class="who"><span id="whoLabel"></span><button class="btn ghost sm" id="btnRefresh" title="Reload data">↻</button><button class="btn ghost sm" id="btnLogout">Log out</button></div>
     </div>
-  </div>
+    <nav class="tabs"><div class="tabs-in" id="tabs"></div></nav>
+  </header>
+  <main id="view"><div class="loading">Loading…</div></main>
+</div>
 
-  <!-- MAIN CRM INTERFACE -->
-  <div class="hidden min-h-screen flex flex-col" id="crmContent">
-    
-    <!-- Top Sticky Portal Header -->
-    <header class="tfc-portal-nav-bar">
-      <div class="tfc-portal-container">
-        <div class="tfc-portal-header-row">
-          <div class="flex items-center gap-3 flex-wrap">
-            <a href="index.html" class="tfc-brand">
-              <img src="TFC.png" alt="The Future Council Logo" class="tfc-brand-logo" />
-              <span>THE FUTURE COUNCIL</span>
-            </a>
-            <span class="text-zinc-300">|</span>
-            <span class="tfc-badge tfc-badge-orange text-[0.68rem]">GROWTH CRM</span>
-          </div>
+<div id="overlay"></div>
+<div id="toastHost"></div>
 
-          <!-- Suite Links -->
-          <nav class="tfc-portal-tabs">
-            <a href="data.html" class="tfc-portal-tab active">📊 Growth CRM</a>
-            <a href="admin.html" class="tfc-portal-tab">⚙️ Admin Console</a>
-            <a href="society.html" class="tfc-portal-tab">🏛️ Society Leads</a>
-            <a href="marketing.html" class="tfc-portal-tab">📣 Marketing</a>
-            <a href="sales.html" class="tfc-portal-tab">💼 Sales & Sponsors</a>
-          </nav>
+<script>
+(function () {
+  'use strict';
 
-          <!-- User Meta & Logout -->
-          <div class="flex items-center gap-2.5">
-            <span class="tfc-badge tfc-badge-neutral text-xs" id="currentUserLabel">User: Admin</span>
-            <a href="resources.html" target="_blank" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Vault ↗</a>
-            <button onclick="handleLogout()" class="tfc-btn tfc-btn-outline" style="padding: 6px 12px; font-size: 0.78rem;">Logout 🚪</button>
-          </div>
-        </div>
-      </div>
-    </header>
+  /* ------------------------------------------------------------------ *
+   * Config
+   * ------------------------------------------------------------------ */
+  const SB_URL = 'https://fwwbybbjvchrhozzzigp.supabase.co';
+  const SB_KEY = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
+  const SEATS = 20;
+  const SESSION_KEY = 'tfc_crm2_session';
 
-    <!-- Workspace Body -->
-    <main class="tfc-portal-container py-8 flex-1">
-      
-      <!-- Welcome Hero Banner -->
-      <div class="mb-8">
-        <div class="flex justify-between items-end flex-wrap gap-4">
-          <div>
-            <span class="tfc-eyebrow">INTERNAL OPERATIONAL CONSOLE</span>
-            <h1 style="font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; margin-bottom: 6px; letter-spacing: -0.8px;">
-              Growth CRM & Reader Telemetry
-            </h1>
-            <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0; max-width: 760px;">
-              Manage student builder registrations, founder questionnaire responses, resource engagement rates, and live session duration analytics powered by Supabase.
-            </p>
-          </div>
+  // Staff accounts. Passwords are stored only as salted SHA-256 hashes.
+  // Add or change a person with:  node scripts/crm-staff.js <id> <role> "<Display name>" "<password>"
+  // Roles: admin | manager | intern.   NOTE: this gate is a front-end convenience, see README note in scripts/crm-staff.js.
+  const STAFF = [
+    { u: 'admin', role: 'admin', name: 'Admin', hash: 'c77e75e8aaf44a3ff6a727fb919bbbef61e9e24ba90b48e22531653d61773a88' },
+    { u: 'brahmleen', role: 'manager', name: 'Brahmleen', hash: '982eb5d9e06e86d9c32bfc180556a299dfa85f13bc8ba74ee98054dd31f80af0', alias: ['brahmleen1314@gmail.com'] }
+  ];
 
-          <div class="flex items-center gap-2">
-            <button onclick="triggerZohoSync()" id="btnZohoSync" class="tfc-btn tfc-btn-primary flex items-center gap-1.5" style="padding: 8px 16px; font-size: 0.82rem; background: #e04a2f; border-color: #e04a2f;">
-              <span id="zohoSyncIcon">⚡</span> <span id="zohoSyncText">Sync to Zoho CRM</span>
-            </button>
-            <a href="index.html" class="tfc-btn tfc-btn-outline" style="padding: 8px 16px; font-size: 0.82rem;">
-              ← Back to Website
-            </a>
-          </div>
-        </div>
-      </div>
+  const PERMS = {
+    admin:   { export: true,  verify: true,  decide: true,  payments: true },
+    manager: { export: true,  verify: true,  decide: true,  payments: true },
+    intern:  { export: false, verify: false, decide: false, payments: false }
+  };
 
-      <!-- SUB-NAVIGATION PILL TABS -->
-      <div class="flex gap-3 mb-6 overflow-x-auto pb-1">
-        <button id="tabBtnLeads" class="tfc-subtab-pill active" onclick="switchCrmSubTab('leads')">
-          <span>📋 All Leads & Contacts</span>
-          <span class="subtab-badge" id="tabBadgeLeads">0</span>
-        </button>
-        <button id="tabBtnInvestors" class="tfc-subtab-pill" onclick="switchCrmSubTab('investors')">
-          <span>💼 Investors Network</span>
-          <span class="subtab-badge" id="tabBadgeInvestors" style="background: rgba(217, 119, 6, 0.15); color: #B45309;">0</span>
-        </button>
-        <button id="tabBtnMentors" class="tfc-subtab-pill" onclick="switchCrmSubTab('mentors')">
-          <span>🧠 Mentor Council</span>
-          <span class="subtab-badge" id="tabBadgeMentors" style="background: rgba(5, 150, 105, 0.15); color: #047857;">0</span>
-        </button>
-        <button id="tabBtnResources" class="tfc-subtab-pill" onclick="switchCrmSubTab('resources')">
-          <span>📚 Resource Readers & Engagement</span>
-          <span class="subtab-badge" id="tabBadgeResources">0</span>
-        </button>
-      </div>
+  const sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SB_URL, SB_KEY) : null;
 
-      <!-- =====================================================================
-           TAB 1: GROWTH LEADS & ONBOARDING CRM
-           ===================================================================== -->
-      <div id="subTabContentLeads">
-        <!-- METRICS CARDS -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid var(--primary-orange);">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-[#ff7a3d]" id="totalRegistrants">0</span>
-            <span class="tfc-filter-label mt-1">Total Leads</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="fellowshipCount">0</span>
-            <span class="tfc-filter-label mt-1">Fellowship</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="investorMetricCount">0</span>
-            <span class="tfc-filter-label mt-1">💼 Investors</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #059669;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="mentorMetricCount">0</span>
-            <span class="tfc-filter-label mt-1">🧠 Mentors</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-teal-600" id="ambassadorCount">0</span>
-            <span class="tfc-filter-label mt-1">Ambassadors</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #9333ea;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-purple-600" id="activeReferrals">0</span>
-            <span class="tfc-filter-label mt-1">Step 1 Dropoffs ⚠️</span>
-          </div>
-        </div>
+  /* ------------------------------------------------------------------ *
+   * Stage definitions per record type. "decide" stages need the decide permission.
+   * ------------------------------------------------------------------ */
+  const STAGES = {
+    application: [
+      { k: 'incomplete', label: 'Incomplete', tone: '' },
+      { k: 'applied', label: 'Applied', tone: 'blue' },
+      { k: 'review', label: 'In review', tone: 'amber' },
+      { k: 'shortlisted', label: 'Shortlisted', tone: 'violet' },
+      { k: 'selected', label: 'Selected', tone: 'green', decide: true },
+      { k: 'rejected', label: 'Not selected', tone: 'red', decide: true }
+    ],
+    chapterlead: [
+      { k: 'new', label: 'New', tone: 'blue' },
+      { k: 'contacted', label: 'Contacted', tone: 'amber' },
+      { k: 'interview', label: 'Interview', tone: 'violet' },
+      { k: 'approved', label: 'Approved', tone: 'green', decide: true },
+      { k: 'declined', label: 'Declined', tone: 'red', decide: true }
+    ],
+    investor: [
+      { k: 'new', label: 'New', tone: 'blue' },
+      { k: 'contacted', label: 'Contacted', tone: 'amber' },
+      { k: 'talking', label: 'In conversation', tone: 'violet' },
+      { k: 'active', label: 'Active', tone: 'green' },
+      { k: 'declined', label: 'Not a fit', tone: 'red' }
+    ],
+    mentor: [
+      { k: 'new', label: 'New', tone: 'blue' },
+      { k: 'contacted', label: 'Contacted', tone: 'amber' },
+      { k: 'onboarded', label: 'Onboarded', tone: 'green' },
+      { k: 'declined', label: 'Not a fit', tone: 'red' }
+    ],
+    ambassador: [
+      { k: 'new', label: 'New', tone: 'blue' },
+      { k: 'contacted', label: 'Contacted', tone: 'amber' },
+      { k: 'active', label: 'Active', tone: 'green' },
+      { k: 'closed', label: 'Closed', tone: '' }
+    ],
+    lead: [
+      { k: 'new', label: 'New', tone: 'blue' },
+      { k: 'contacted', label: 'Contacted', tone: 'amber' },
+      { k: 'active', label: 'Active', tone: 'green' },
+      { k: 'closed', label: 'Closed', tone: '' }
+    ]
+  };
+  const TYPE_LABEL = { application: 'Applicant', chapterlead: 'Chapter lead', investor: 'Investor', mentor: 'Mentor', ambassador: 'Ambassador', lead: 'Lead' };
 
-        <!-- SEARCH & ADVANCED FILTER PANEL -->
-        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
-            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Search & Advanced Filtering</h3>
-            <span class="text-xs font-bold text-zinc-400">Real-time dynamic query</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 pt-1">
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Query Search</label>
-              <input type="text" id="crmSearchInput" placeholder="Name, email, phone, firm..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Filter Tier</label>
-              <select id="crmTierFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Tiers</option>
-                <option value="investor">💼 Investor</option>
-                <option value="mentor">🧠 Mentor</option>
-                <option value="student founder">Student Founder</option>
-                <option value="student">Student</option>
-                <option value="campus ambassador">Campus Ambassador</option>
-                <option value="verified builder">Verified Builder</option>
-                <option value="employer">Employer / Recruiter</option>
-                <option value="unverified">Unverified</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Fellowship Application</label>
-              <select id="crmFellowshipFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Applications</option>
-                <option value="yes">Fellowship Interested Only</option>
-                <option value="no">General Network Only</option>
-                <option value="dropoff">⚠️ Step 1 Dropoffs Only</option>
-                <option value="paid">💳 Fellowship Paid Only</option>
-                <option value="unpaid">⚠️ Fellowship Unpaid Only</option>
-                <option value="winter">❄️ Winter Cohort 01 Applicants</option>
-                <option value="spring">🌱 Spring Cohort 02 Applicants</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Lead Origin Source</label>
-              <select id="crmSourceFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Sources</option>
-                <option value="investorpage">💼 Investor Application</option>
-                <option value="mentorpage">🧠 Mentor Application</option>
-                <option value="fellowshippage">Fellowship Form</option>
-                <option value="joinpage">General Join Page</option>
-                <option value="ambassadorpage">Ambassador Form</option>
-                <option value="financialaid">Financial Aid Request</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Sort Order</label>
-              <select id="crmSortSelect" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="date_desc" selected>Newest First (Registration)</option>
-                <option value="date_asc">Oldest First (Registration)</option>
-                <option value="name_asc">Name: A → Z</option>
-                <option value="name_desc">Name: Z → A</option>
-                <option value="college_asc">College: A → Z</option>
-                <option value="tier_asc">Network Tier: A → Z</option>
-                <option value="paid_first">💳 Paid Fellowship First</option>
-                <option value="answers_first">📋 Answers Provided First</option>
-              </select>
-            </div>
-            <div class="flex flex-col justify-end">
-              <button onclick="exportToCSV()" id="crmExportBtn" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
-                📊 Export to CSV
-              </button>
-            </div>
-          </div>
-        </div>
+  /* ------------------------------------------------------------------ *
+   * State
+   * ------------------------------------------------------------------ */
+  const S = {
+    user: null, perms: PERMS.intern,
+    tab: 'overview',
+    records: [], chapters: [], loaded: false, loadError: null,
+    app: { cohort: 'Spring02', stage: 'all', q: '', sort: 'new' },
+    chap: { q: '', stage: 'all' },
+    net: { kind: 'investor', stage: 'all', q: '' },
+    people: { type: 'all', q: '' },
+    openId: null
+  };
 
-        <!-- MAIN CRM TABLE -->
-        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
-            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">📋 CRM Contact Entries</h3>
-            <span class="tfc-badge tfc-badge-orange text-xs" id="filteredCount">0 shown</span>
-          </div>
+  /* ------------------------------------------------------------------ *
+   * Helpers
+   * ------------------------------------------------------------------ */
+  const $ = (id) => document.getElementById(id);
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const initials = (n) => (String(n || '?').trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join('') || '?').toUpperCase();
+  const clean = (v) => { const s = String(v == null ? '' : v).trim(); return (s === 'None' || s === 'Pending' || s === 'N/A') ? '' : s; };
 
-          <div class="tfc-portal-table-wrapper">
-            <table class="tfc-portal-table" id="crmTable">
-              <thead>
-                <tr>
-                  <th onclick="toggleCrmSort('name')" style="cursor: pointer; user-select: none;" title="Click to sort by Name">
-                    Lead Info <span id="sortCol_name" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
-                  </th>
-                  <th onclick="toggleCrmSort('college')" style="cursor: pointer; user-select: none;" title="Click to sort by College">
-                    College / Campuses <span id="sortCol_college" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
-                  </th>
-                  <th>Phone</th>
-                  <th onclick="toggleCrmSort('tier')" style="cursor: pointer; user-select: none;" title="Click to sort by Network Tier">
-                    Network Tier <span id="sortCol_tier" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
-                  </th>
-                  <th onclick="toggleCrmSort('fellowship')" style="cursor: pointer; user-select: none;" title="Click to sort by Fellowship Status">
-                    Fellowship Status <span id="sortCol_fellowship" style="font-size: 0.72rem; opacity: 0.6;">↕</span>
-                  </th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="6" class="text-center py-8 text-zinc-400 font-semibold">Loading data pipelines...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+  function toast(msg, bad) {
+    const t = document.createElement('div');
+    t.className = 'toast' + (bad ? ' bad' : '');
+    t.textContent = msg;
+    $('toastHost').appendChild(t);
+    setTimeout(() => t.remove(), bad ? 6000 : 2200);
+  }
 
-      <!-- =====================================================================
-           TAB 2: INVESTORS SYNDICATE & DEMO DAY ACCESS
-           ===================================================================== -->
-      <div id="subTabContentInvestors" class="hidden">
-        <!-- INVESTOR METRICS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="invTotalCount">0</span>
-            <span class="tfc-filter-label mt-1">Total Investors</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="invVcCount">0</span>
-            <span class="tfc-filter-label mt-1">VC Funds & Syndicates</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="invAngelCount">0</span>
-            <span class="tfc-filter-label mt-1">Individual Angels</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #e11d48;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-rose-600" id="invDemoDayCount">0</span>
-            <span class="tfc-filter-label mt-1">Demo Day Requests</span>
-          </div>
-        </div>
+  function ago(iso) {
+    const d = new Date(iso);
+    if (!iso || isNaN(d)) return '';
+    const s = Math.round((Date.now() - d) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    if (s < 86400 * 30) return Math.floor(s / 86400) + 'd ago';
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+  }
 
-        <!-- SEARCH & FILTER INVESTORS -->
-        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
-            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Investor Syndicate</h3>
-            <span class="text-xs font-bold text-zinc-400">Capital & Dealflow Directory</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Search</label>
-              <input type="text" id="invSearchInput" placeholder="Name, firm, email, sectors..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Cheque Size</label>
-              <select id="invChequeFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Cheque Sizes</option>
-                <option value="₹2L – ₹10L">₹2L – ₹10L (Micro)</option>
-                <option value="₹10L – ₹25L">₹10L – ₹25L</option>
-                <option value="₹25L – ₹1Cr">₹25L – ₹1 Crore</option>
-                <option value="₹1Cr – ₹5Cr">₹1 Crore – ₹5 Crore</option>
-                <option value="₹5Cr+">₹5 Crore+</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Stage</label>
-              <select id="invStageFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Stages</option>
-                <option value="pre-seed">Pre-Seed</option>
-                <option value="seed">Seed</option>
-                <option value="pre-series a">Pre-Series A</option>
-                <option value="agnostic">Stage Agnostic</option>
-              </select>
-            </div>
-            <div class="flex flex-col justify-end">
-              <button onclick="exportInvestorsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
-                📊 Export Investors CSV
-              </button>
-            </div>
-          </div>
-        </div>
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
 
-        <!-- TABLE -->
-        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
-            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">💼 Registered Investors & Funds</h3>
-            <span class="tfc-badge tfc-badge-orange text-xs" id="invFilteredCount">0 shown</span>
-          </div>
-          <div class="tfc-portal-table-wrapper">
-            <table class="tfc-portal-table" id="investorsTable">
-              <thead>
-                <tr>
-                  <th>Investor Name & Contact</th>
-                  <th>Firm / Entity Type</th>
-                  <th>Cheque Size</th>
-                  <th>Target Stage</th>
-                  <th>Focus Sectors</th>
-                  <th>Engagement</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading investor directory...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+  function phoneDigits(p) {
+    const d = String(p || '').replace(/\D/g, '');
+    if (d.length === 10) return '91' + d;
+    if (d.length === 12 && d.startsWith('91')) return d;
+    return d.length >= 10 ? d : '';
+  }
+  const waLink = (p, msg) => { const d = phoneDigits(p); return d ? 'https://wa.me/' + d + (msg ? '?text=' + encodeURIComponent(msg) : '') : ''; };
+  const first = (n) => String(n || '').trim().split(/\s+/)[0] || 'there';
 
-      <!-- =====================================================================
-           TAB 3: MENTOR COUNCIL & OPERATORS
-           ===================================================================== -->
-      <div id="subTabContentMentors" class="hidden">
-        <!-- MENTOR METRICS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #059669;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="mtrTotalCount">0</span>
-            <span class="tfc-filter-label mt-1">Total Mentors</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="mtrFounderCount">0</span>
-            <span class="tfc-filter-label mt-1">Founders & C-Suite</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #d97706;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-amber-600" id="mtrTechProductCount">0</span>
-            <span class="tfc-filter-label mt-1">Product & Tech Leads</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #9333ea;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-purple-600" id="mtrOfficeHoursCount">0</span>
-            <span class="tfc-filter-label mt-1">Office Hours Mentors</span>
-          </div>
-        </div>
-
-        <!-- SEARCH & FILTER MENTORS -->
-        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
-            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Mentor Council</h3>
-            <span class="text-xs font-bold text-zinc-400">Operator & Advisory Roster</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Search</label>
-              <input type="text" id="mtrSearchInput" placeholder="Name, company, role, expertise..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Domain Expertise</label>
-              <select id="mtrExpertiseFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Domains</option>
-                <option value="product">Product Strategy</option>
-                <option value="tech">Tech & AI Architecture</option>
-                <option value="gtm">GTM & Distribution</option>
-                <option value="fundraising">Fundraising & Pitching</option>
-                <option value="sales">B2B Sales</option>
-                <option value="design">UI/UX Design</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Experience</label>
-              <select id="mtrExpFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Levels</option>
-                <option value="founder">Venture Founder</option>
-                <option value="10+">10+ Years</option>
-                <option value="5–10">5–10 Years</option>
-                <option value="3–5">3–5 Years</option>
-              </select>
-            </div>
-            <div class="flex flex-col justify-end">
-              <button onclick="exportMentorsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 12px; font-size: 0.8rem; justify-content: center; width: 100%;">
-                📊 Export Mentors CSV
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- TABLE -->
-        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
-            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">🧠 Mentor Council Members</h3>
-            <span class="tfc-badge tfc-badge-orange text-xs" id="mtrFilteredCount">0 shown</span>
-          </div>
-          <div class="tfc-portal-table-wrapper">
-            <table class="tfc-portal-table" id="mentorsTable">
-              <thead>
-                <tr>
-                  <th>Mentor Name & Contact</th>
-                  <th>Current Organization & Role</th>
-                  <th>Experience & Background</th>
-                  <th>Domain Expertise</th>
-                  <th>Monthly Commitment</th>
-                  <th>Format</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading mentor roster...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- =====================================================================
-           TAB 4: RESOURCE READERS & TELEMETRY CRM
-           ===================================================================== -->
-      <div id="subTabContentResources" class="hidden">
-        <!-- RESOURCE METRICS CARDS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid var(--primary-orange);">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-[#ff7a3d]" id="resMetricTotalOpens">0</span>
-            <span class="tfc-filter-label mt-1">Total Resource Opens 📖</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #10b981;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-emerald-600" id="resMetricUniqueReaders">0</span>
-            <span class="tfc-filter-label mt-1">Unique Readers 👥</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #2563eb;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-blue-600" id="resMetricTotalTime">0m</span>
-            <span class="tfc-filter-label mt-1">Total Read Time ⏱️</span>
-          </div>
-          <div class="tfc-portal-metric-card" style="border-left: 4px solid #ec4899;">
-            <span class="text-2xl sm:text-3xl font-black font-['Space_Grotesk'] text-pink-600" id="resMetricAvgTime">0s</span>
-            <span class="tfc-filter-label mt-1">Avg Time / Reader ⏳</span>
-          </div>
-        </div>
-
-        <!-- RESOURCE CATALOG BREAKDOWN CARDS -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <!-- Card 1 -->
-          <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="tfc-badge tfc-badge-orange text-[0.68rem]">🔒 Member Exclusive</span>
-                <span class="text-xs font-bold text-zinc-500" id="swipeStatsSummary">0 Opens</span>
-              </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">Cold-to-Warm Networking Swipe File</h3>
-              <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">7 battle-tested outreach templates, founder asks, and psychology breakdown.</p>
-            </div>
-            <div class="bg-zinc-50 rounded-xl p-3 flex justify-between text-xs font-bold border border-zinc-200/60">
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Readers</span>
-                <strong id="swipeUniqueReaders" class="text-sm">0</strong>
-              </div>
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Time</span>
-                <strong id="swipeTotalTime" class="text-sm">0m</strong>
-              </div>
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Avg Time</span>
-                <strong id="swipeAvgTime" class="text-sm">0s</strong>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="tfc-badge tfc-badge-lime text-[0.68rem]">🔓 Open Access</span>
-                <span class="text-xs font-bold text-zinc-500" id="valStatsSummary">0 Opens</span>
-              </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;">Zero-to-One Idea Validation Framework</h3>
-              <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 16px;">5-question customer litmus test and 48-hour demand validation checklist.</p>
-            </div>
-            <div class="bg-zinc-50 rounded-xl p-3 flex justify-between text-xs font-bold border border-zinc-200/60">
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Readers</span>
-                <strong id="valUniqueReaders" class="text-sm">0</strong>
-              </div>
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Total Time</span>
-                <strong id="valTotalTime" class="text-sm">0m</strong>
-              </div>
-              <div>
-                <span class="text-zinc-400 block text-[0.65rem] uppercase">Avg Time</span>
-                <strong id="valAvgTime" class="text-sm">0s</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEARCH & FILTER FOR RESOURCES -->
-        <div class="tfc-card mb-6" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex items-center justify-between mb-3 border-b border-zinc-100 pb-2">
-            <h3 style="font-size: 1rem; font-weight: 800; margin: 0;">🔍 Filter Resource Readers & Telemetry</h3>
-            <span class="text-xs font-bold text-zinc-400">Live engagement tracking</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-1">
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Search Reader</label>
-              <input type="text" id="resSearchInput" placeholder="Name, email, college..." class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem;" />
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Filter Resource</label>
-              <select id="resResourceFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Resources</option>
-                <option value="swipe_file">Cold-to-Warm Swipe File</option>
-                <option value="how_to_find_startup_idea">How to Find a Startup Idea</option>
-                <option value="zero_to_one_validation">Idea Validation Framework</option>
-              </select>
-            </div>
-            <div class="tfc-filter-control">
-              <label class="tfc-filter-label">Engagement / Read Duration</label>
-              <select id="resEngagementFilter" class="tfc-input" style="padding: 8px 12px; font-size: 0.82rem; cursor: pointer;">
-                <option value="all">All Engagement Levels</option>
-                <option value="high">🔥 High Intent (> 2 mins)</option>
-                <option value="moderate">📖 Moderate (30s - 2m)</option>
-                <option value="quick">⚡ Quick Glance (< 30s)</option>
-              </select>
-            </div>
-            <div class="flex flex-col justify-end">
-              <button onclick="exportResourceAnalyticsCSV()" class="tfc-btn tfc-btn-primary" style="padding: 9px 14px; font-size: 0.8rem; justify-content: center; width: 100%;">
-                📊 Export Telemetry CSV
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RESOURCE READER ACTIVITY TABLE -->
-        <div class="tfc-card" style="padding: 24px; border: 1.5px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-          <div class="flex justify-between items-center pb-3 mb-3 border-b border-zinc-100">
-            <h3 style="font-size: 1.05rem; font-weight: 800; margin: 0;">👥 Reader Activity & Telemetry Stream</h3>
-            <span class="tfc-badge tfc-badge-orange text-xs" id="resFilteredCount">0 shown</span>
-          </div>
-
-          <div class="tfc-portal-table-wrapper">
-            <table class="tfc-portal-table" id="resourceTable">
-              <thead>
-                <tr>
-                  <th>Reader Profile</th>
-                  <th>College / Campus</th>
-                  <th>Resource Accessed</th>
-                  <th>Times Opened</th>
-                  <th>Time Spent</th>
-                  <th>Last Active</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="7" class="text-center py-8 text-zinc-400 font-semibold">Loading resource engagement telemetry...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
-    </main>
-
-    <!-- Clean Footer -->
-    <footer class="py-6 border-t border-zinc-200/80 text-center text-xs text-zinc-500 font-medium bg-white">
-      The Future Council Internal Suite • Authorized Operational Environment • © 2026
-    </footer>
-
-  </div>
-
-  <script>
-    // Initialize Supabase Client
-    const supabaseUrl = 'https://fwwbybbjvchrhozzzigp.supabase.co';
-    const supabaseKey = 'sb_publishable_f5qK_eS6qXGm5I7Em59aPQ_HvEH45h5';
-    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-    const AUTH_KEY = 'tfc_crm_auth';
-    const USER_ROLE_KEY = 'tfc_crm_user';
-    let cachedMembers = [];
-    let aggregatedResourceLogs = [];
-    let currentFilteredMembers = [];
-    let currentFilteredResources = [];
-    let crmSortCriterion = 'date_desc';
-
-    // Session Management
-    const checkAuth = () => {
-      const isAuth = sessionStorage.getItem(AUTH_KEY) === 'true';
-      if (isAuth) {
-        document.getElementById('loginContainer').classList.add('hidden');
-        document.getElementById('crmContent').classList.remove('hidden');
-        const user = sessionStorage.getItem(USER_ROLE_KEY) || 'Admin';
-        document.getElementById('currentUserLabel').textContent = `User: ${user}`;
-        loadCrmData();
-      } else {
-        document.getElementById('loginContainer').classList.remove('hidden');
-        document.getElementById('crmContent').classList.add('hidden');
-      }
-    };
-
-    // Login logic
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const u = document.getElementById('loginUsername').value.trim().toLowerCase();
-      const p = document.getElementById('loginPassword').value.trim();
-      const loginError = document.getElementById('loginError');
-
-      if (u === 'admin' && p === 'Thefuturecouncil0101@#&') {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        sessionStorage.setItem(USER_ROLE_KEY, 'Admin ⚡');
-        loginError.classList.add('hidden');
-        checkAuth();
-      } else if ((u === 'brahmleen' || u === 'brahmleen1314@gmail.com') && p === 'Brahmleen@TFC2026') {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        sessionStorage.setItem(USER_ROLE_KEY, 'Brahmleen 🎓');
-        loginError.classList.add('hidden');
-        checkAuth();
-      } else {
-        loginError.classList.remove('hidden');
+  /* ------------------------------------------------------------------ *
+   * Parsing the pipe-delimited "college" column into a clean record
+   * ------------------------------------------------------------------ */
+  function parseMember(m) {
+    const raw = m.college || '';
+    const parts = raw.split(' | ');
+    const kv = {};
+    parts.slice(1).forEach((p) => {
+      const i = p.indexOf(':');
+      if (i > 0) {
+        const key = p.slice(0, i).trim();
+        if (/^[A-Za-z0-9_ ]{1,30}$/.test(key)) kv[key.toLowerCase().replace(/\s+/g, '')] = p.slice(i + 1).trim();
       }
     });
+    const id = m.member_id || '';
+    const src = kv.source || '';
+    let type = 'lead';
+    if (src === 'FellowshipPage' || id.startsWith('TFC-FEL-') || kv.fellowship === 'Yes') type = 'application';
+    else if (m.tier === 'Investor' || src === 'InvestorPage' || id.startsWith('TFC-INV-')) type = 'investor';
+    else if (m.tier === 'Mentor' || src === 'MentorPage' || id.startsWith('TFC-MTR-')) type = 'mentor';
+    else if (kv.role === 'ChapterLeadApplicant' || id.startsWith('TFC-LEAD-') || m.tier === 'Ambassador') type = 'chapterlead';
+    else if (m.tier === 'Campus Ambassador' || src === 'AmbassadorPage' || id.startsWith('TFC-AMB-')) type = 'ambassador';
 
-    window.handleLogout = () => {
-      sessionStorage.removeItem(AUTH_KEY);
-      sessionStorage.removeItem(USER_ROLE_KEY);
-      checkAuth();
+    const display = (parts[0] || '').trim();
+    const rec = {
+      id: m.id, memberId: id, name: (m.name || '').trim() || 'Unnamed', email: (m.email || '').trim(), tier: m.tier || '',
+      raw, kv, type, display: display === 'Ecosystem Member' ? '' : display,
+      phone: clean(kv.phone) || clean(m.phone),
+      created: m.created_at || kv.formsubmittedat || kv.submittedat || ''
     };
+    rec.cohort = type === 'application' ? (kv.cohort || 'Winter01') : '';
+    rec.stage = stageOf(rec);
+    rec.score = parseInt(kv.crmscore, 10) || 0;
+    rec.owner = kv.crmowner ? decodeSafe(kv.crmowner) : '';
+    rec.notes = kv.crmnote ? decodeSafe(kv.crmnote).split('\n').filter(Boolean) : [];
+    rec.payment = paymentOf(rec);
+    rec.updated = kv.crmupdated || '';
+    rec.updatedBy = kv.crmby ? decodeSafe(kv.crmby) : '';
+    rec.hadWinter = !!kv.prevcohort01;
+    return rec;
+  }
+  function decodeSafe(v) { try { return decodeURIComponent(v); } catch (e) { return v; } }
 
-    // Sub-Tab Switcher
-    window.switchCrmSubTab = (tab) => {
-      const tabBtnLeads = document.getElementById('tabBtnLeads');
-      const tabBtnInvestors = document.getElementById('tabBtnInvestors');
-      const tabBtnMentors = document.getElementById('tabBtnMentors');
-      const tabBtnResources = document.getElementById('tabBtnResources');
+  function paymentOf(r) {
+    if (r.type !== 'application') return '';
+    const ps = (r.kv.paymentstatus || '').toLowerCase();
+    if (ps === 'verified') return 'verified';
+    if (r.kv.payment === 'Paid' || ps === 'pending_verification') return 'claimed';
+    return 'none';
+  }
 
-      const subTabContentLeads = document.getElementById('subTabContentLeads');
-      const subTabContentInvestors = document.getElementById('subTabContentInvestors');
-      const subTabContentMentors = document.getElementById('subTabContentMentors');
-      const subTabContentResources = document.getElementById('subTabContentResources');
-
-      [tabBtnLeads, tabBtnInvestors, tabBtnMentors, tabBtnResources].forEach(b => b?.classList.remove('active'));
-      [subTabContentLeads, subTabContentInvestors, subTabContentMentors, subTabContentResources].forEach(c => c?.classList.add('hidden'));
-
-      if (tab === 'leads') {
-        tabBtnLeads?.classList.add('active');
-        subTabContentLeads?.classList.remove('hidden');
-        renderCrmTable();
-      } else if (tab === 'investors') {
-        tabBtnInvestors?.classList.add('active');
-        subTabContentInvestors?.classList.remove('hidden');
-        renderInvestorsTable();
-      } else if (tab === 'mentors') {
-        tabBtnMentors?.classList.add('active');
-        subTabContentMentors?.classList.remove('hidden');
-        renderMentorsTable();
-      } else if (tab === 'resources') {
-        tabBtnResources?.classList.add('active');
-        subTabContentResources?.classList.remove('hidden');
-        renderResourceTable();
-      }
-    };
-
-    // Metadata Parser
-    function parseCollegeField(collegeStr, memberObj = null) {
-      let college = collegeStr || '';
-      let phone = '';
-      let country = '';
-      let refCode = '';
-      let refBy = '';
-      let fellowship = 'No';
-      let societyName = '';
-      let source = '';
-      let q1 = '';
-      let q2 = '';
-      let q3 = '';
-      let q4 = '';
-      let payment = 'Pending';
-      let resData = null;
-      let venture = '';
-      let stage = '';
-      let teamSize = '';
-      let enrolled = '';
-      let collegeName = '';
-      let collegeYear = '';
-      let collegeCourse = '';
-      let paymentFee = '999';
-      let paymentStatus = '';
-      let chapterRef = '';
-      let formSubmittedAt = '';
-      let waiverRequested = '';
-      let waiverReason = '';
-      let stepProgress = '';
-      let cohort = '';
-
-      // Investor and Mentor specific fields
-      let entityType = '';
-      let firm = '';
-      let chequeSize = '';
-      let sectors = '';
-      let engagement = '';
-      let company = '';
-      let role = '';
-      let expertise = '';
-      let experience = '';
-      let pastCompanies = '';
-      let commitment = '';
-      let bio = '';
-      let notes = '';
-      let linkedin = '';
-      let format = '';
-
-      const parts = college.split(' | ');
-      let displayName = parts[0] ? parts[0].trim() : '';
-
-      parts.forEach(part => {
-        const trimmed = part.trim();
-        if (/^phone:\s*/i.test(trimmed)) {
-          phone = trimmed.replace(/^phone:\s*/i, '').trim();
-        } else if (/^country:\s*/i.test(trimmed)) {
-          country = trimmed.replace(/^country:\s*/i, '').trim();
-        } else if (/^refcode:\s*/i.test(trimmed)) {
-          refCode = trimmed.replace(/^refcode:\s*/i, '').trim();
-        } else if (/^refby:\s*/i.test(trimmed)) {
-          refBy = trimmed.replace(/^refby:\s*/i, '').trim();
-        } else if (/^fellowship:\s*/i.test(trimmed)) {
-          fellowship = trimmed.replace(/^fellowship:\s*/i, '').trim();
-        } else if (/^society:\s*/i.test(trimmed)) {
-          societyName = trimmed.replace(/^society:\s*/i, '').trim();
-        } else if (/^cohort:\s*/i.test(trimmed)) {
-          cohort = trimmed.replace(/^cohort:\s*/i, '').trim();
-        } else if (/^source:\s*/i.test(trimmed)) {
-          source = trimmed.replace(/^source:\s*/i, '').trim();
-        } else if (/^venture:\s*/i.test(trimmed)) {
-          venture = trimmed.replace(/^venture:\s*/i, '').trim();
-        } else if (/^stage:\s*/i.test(trimmed)) {
-          stage = trimmed.replace(/^stage:\s*/i, '').trim();
-        } else if (/^teamsize:\s*/i.test(trimmed)) {
-          teamSize = trimmed.replace(/^teamsize:\s*/i, '').trim();
-        } else if (/^enrolled:\s*/i.test(trimmed)) {
-          enrolled = trimmed.replace(/^enrolled:\s*/i, '').trim();
-        } else if (/^college:\s*/i.test(trimmed)) {
-          collegeName = trimmed.replace(/^college:\s*/i, '').trim();
-        } else if (/^year:\s*/i.test(trimmed)) {
-          collegeYear = trimmed.replace(/^year:\s*/i, '').trim();
-        } else if (/^course:\s*/i.test(trimmed)) {
-          collegeCourse = trimmed.replace(/^course:\s*/i, '').trim();
-        } else if (/^paymentfee:\s*/i.test(trimmed)) {
-          paymentFee = trimmed.replace(/^paymentfee:\s*/i, '').trim();
-        } else if (/^paymentstatus:\s*/i.test(trimmed)) {
-          paymentStatus = trimmed.replace(/^paymentstatus:\s*/i, '').trim();
-        } else if (/^chapterref:\s*/i.test(trimmed)) {
-          chapterRef = trimmed.replace(/^chapterref:\s*/i, '').trim();
-        } else if (/^waiverrequested:\s*/i.test(trimmed)) {
-          waiverRequested = trimmed.replace(/^waiverrequested:\s*/i, '').trim();
-        } else if (/^waiverreason:\s*/i.test(trimmed)) {
-          waiverReason = trimmed.replace(/^waiverreason:\s*/i, '').trim();
-        } else if (/^formsubmittedat:\s*/i.test(trimmed)) {
-          formSubmittedAt = trimmed.replace(/^formsubmittedat:\s*/i, '').trim();
-        } else if (/^stepprogress:\s*/i.test(trimmed)) {
-          stepProgress = trimmed.replace(/^stepprogress:\s*/i, '').trim();
-        } else if (/^q1:\s*/i.test(trimmed)) {
-          q1 = trimmed.replace(/^q1:\s*/i, '').trim();
-        } else if (/^q2:\s*/i.test(trimmed)) {
-          q2 = trimmed.replace(/^q2:\s*/i, '').trim();
-        } else if (/^q3:\s*/i.test(trimmed)) {
-          q3 = trimmed.replace(/^q3:\s*/i, '').trim();
-        } else if (/^q4:\s*/i.test(trimmed)) {
-          q4 = trimmed.replace(/^q4:\s*/i, '').trim();
-        } else if (/^payment:\s*/i.test(trimmed)) {
-          payment = trimmed.replace(/^payment:\s*/i, '').trim();
-        } else if (/^resdata:\s*/i.test(trimmed)) {
-          try {
-            resData = JSON.parse(trimmed.replace(/^resdata:\s*/i, '').trim());
-          } catch(e) {}
-        } else if (/^entitytype:\s*/i.test(trimmed)) {
-          entityType = trimmed.replace(/^entitytype:\s*/i, '').trim();
-        } else if (/^firm:\s*/i.test(trimmed)) {
-          firm = trimmed.replace(/^firm:\s*/i, '').trim();
-        } else if (/^chequesize:\s*/i.test(trimmed)) {
-          chequeSize = trimmed.replace(/^chequesize:\s*/i, '').trim();
-        } else if (/^sectors:\s*/i.test(trimmed)) {
-          sectors = trimmed.replace(/^sectors:\s*/i, '').trim();
-        } else if (/^engagement:\s*/i.test(trimmed)) {
-          engagement = trimmed.replace(/^engagement:\s*/i, '').trim();
-        } else if (/^company:\s*/i.test(trimmed)) {
-          company = trimmed.replace(/^company:\s*/i, '').trim();
-        } else if (/^role:\s*/i.test(trimmed)) {
-          role = trimmed.replace(/^role:\s*/i, '').trim();
-        } else if (/^expertise:\s*/i.test(trimmed)) {
-          expertise = trimmed.replace(/^expertise:\s*/i, '').trim();
-        } else if (/^exp:\s*/i.test(trimmed) || /^experience:\s*/i.test(trimmed)) {
-          experience = trimmed.replace(/^(exp|experience):\s*/i, '').trim();
-        } else if (/^pastcompanies:\s*/i.test(trimmed)) {
-          pastCompanies = trimmed.replace(/^pastcompanies:\s*/i, '').trim();
-        } else if (/^commitment:\s*/i.test(trimmed)) {
-          commitment = trimmed.replace(/^commitment:\s*/i, '').trim();
-        } else if (/^bio:\s*/i.test(trimmed)) {
-          bio = trimmed.replace(/^bio:\s*/i, '').trim();
-        } else if (/^notes:\s*/i.test(trimmed)) {
-          notes = trimmed.replace(/^notes:\s*/i, '').trim();
-        } else if (/^linkedin:\s*/i.test(trimmed)) {
-          linkedin = trimmed.replace(/^linkedin:\s*/i, '').trim();
-        } else if (/^format:\s*/i.test(trimmed)) {
-          format = trimmed.replace(/^format:\s*/i, '').trim();
-        }
-      });
-
-      if (!phone && memberObj && memberObj.phone) {
-        phone = memberObj.phone.trim();
-      }
-
-      const isGoogleAuth = memberObj && (
-        memberObj.password === 'google_oauth_verified' || 
-        (memberObj.image && memberObj.image.includes('googleusercontent.com'))
-      );
-
-      if (!source && memberObj) {
-        const memId = memberObj.member_id || '';
-        const memTier = memberObj.tier || '';
-        if (memId.startsWith('TFC-INV-') || memTier === 'Investor') {
-          source = 'InvestorPage';
-        } else if (memId.startsWith('TFC-MTR-') || memTier === 'Mentor') {
-          source = 'MentorPage';
-        } else if (memId.startsWith('TFC-AMB-') || memTier === 'Campus Ambassador') {
-          source = 'AmbassadorPage';
-        } else if (memId.startsWith('TFC-FEL-') || (memberObj.college && memberObj.college.includes('Source: FellowshipPage'))) {
-          source = 'FellowshipPage';
-        } else if (memId.startsWith('TFC-AID-')) {
-          source = 'FinancialAid';
-        } else if (isGoogleAuth) {
-          source = 'GoogleAuth';
-        } else {
-          source = 'JoinPage';
-        }
-      }
-
-      if (source === 'FellowshipPage' || (memberObj && memberObj.member_id && memberObj.member_id.startsWith('TFC-FEL-'))) {
-        fellowship = 'Yes';
-        if (!cohort) cohort = 'Winter01'; // applications before the Spring form carry no cohort tag
-        if (paymentStatus === 'verified' || payment === 'Paid') {
-          payment = 'Paid';
-        } else {
-          payment = 'Pending';
-        }
-      }
-
-      if (!displayName || displayName === 'Ecosystem Member') {
-        displayName = isGoogleAuth ? 'Ecosystem Member (Google)' : (displayName || 'Not Specified');
-      }
-
-      return {
-        displayName, phone, country, refCode, refBy, fellowship, societyName, source,
-        q1, q2, q3, q4, payment, resData, isGoogleAuth,
-        venture, stage, teamSize, enrolled, collegeName, collegeYear, collegeCourse,
-        paymentFee, paymentStatus, chapterRef, formSubmittedAt, waiverRequested, waiverReason,
-        stepProgress, cohort,
-        entityType, firm, chequeSize, sectors, engagement,
-        company, role, expertise, experience, pastCompanies, commitment, bio, notes, linkedin, format
-      };
+  function stageOf(r) {
+    const list = STAGES[r.type] || STAGES.lead;
+    const saved = r.kv.crmstage;
+    if (saved && list.some((s) => s.k === saved)) return saved;
+    if (r.type === 'application') {
+      const sp = (r.kv.stepprogress || '').toLowerCase();
+      const ps = (r.kv.paymentstatus || '').toLowerCase();
+      if (ps === 'verified') return 'review';
+      if (sp === 'completed' || sp.includes('payment done') || r.kv.payment === 'Paid') return 'applied';
+      return 'incomplete';
     }
+    return list[0].k;
+  }
+  const stageMeta = (r) => (STAGES[r.type] || STAGES.lead).find((s) => s.k === r.stage) || { label: r.stage, tone: '' };
 
-    // Helper: format seconds to '1m 24s' or '45s' or '1h 12m'
-    function formatDuration(totalSec) {
-      const s = Math.max(0, Math.round(totalSec || 0));
-      if (s < 60) return `${s}s`;
-      const m = Math.floor(s / 60);
-      const remainingSec = s % 60;
-      if (m < 60) {
-        return remainingSec > 0 ? `${m}m ${remainingSec}s` : `${m}m`;
-      }
-      const h = Math.floor(m / 60);
-      const remainingMin = m % 60;
-      return `${h}h ${remainingMin}m`;
+  /* Update (or add / remove) "Key: value" parts inside the pipe-delimited string */
+  function setKV(raw, updates) {
+    const parts = (raw || '').split(' | ');
+    Object.keys(updates).forEach((key) => {
+      const val = updates[key];
+      const idx = parts.findIndex((p, i) => i > 0 && p.trim().toLowerCase().startsWith(key.toLowerCase() + ':'));
+      if (val === null || val === undefined || val === '') { if (idx > -1) parts.splice(idx, 1); return; }
+      const line = key + ': ' + String(val).replace(/ \| /g, ' / ');
+      if (idx > -1) parts[idx] = line; else parts.push(line);
+    });
+    return parts.join(' | ');
+  }
+
+  async function saveRecord(rec, updates, okMsg) {
+    if (!sb) { toast('Database not connected', true); return false; }
+    const withMeta = Object.assign({}, updates, { CrmUpdated: new Date().toISOString(), CrmBy: encodeURIComponent(S.user.name) });
+    const next = setKV(rec.raw, withMeta);
+    try {
+      const res = await sb.from('members').update({ college: next }).eq('id', rec.id).select('id');
+      if (res.error) throw res.error;
+      if (!res.data || !res.data.length) { toast('Not saved: the database rejected the update (permissions).', true); return false; }
+      const idx = S.records.findIndex((r) => r.id === rec.id);
+      const fresh = parseMember(Object.assign({}, S.records[idx].src, { college: next }));
+      fresh.src = S.records[idx].src; fresh.src.college = next;
+      S.records[idx] = fresh;
+      toast(okMsg || 'Saved');
+      return true;
+    } catch (e) {
+      toast('Save failed: ' + (e.message || e), true);
+      return false;
     }
+  }
 
-    // Helper: relative time formatter
-    function timeAgo(dateStr) {
-      if (!dateStr) return 'Recently';
-      const date = new Date(dateStr);
-      const now = new Date();
-      const diffSec = Math.round((now - date) / 1000);
-      if (isNaN(diffSec)) return 'Recently';
-      if (diffSec < 60) return 'Just now';
-      if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
-      if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}h ago`;
-      return `${Math.floor(diffSec / 86400)}d ago`;
+  /* ------------------------------------------------------------------ *
+   * Data loading
+   * ------------------------------------------------------------------ */
+  async function loadAll() {
+    S.loaded = false; S.loadError = null; render();
+    try {
+      if (!sb) throw new Error('Could not load the database library. Check your connection and refresh.');
+      let rows = [];
+      const PAGE = 1000;
+      for (let from = 0; ; from += PAGE) {
+        const { data, error } = await sb.from('members').select('*').order('id', { ascending: true }).range(from, from + PAGE - 1);
+        if (error) throw error;
+        rows = rows.concat(data || []);
+        if (!data || data.length < PAGE) break;
+      }
+      S.records = rows.map((m) => { const r = parseMember(m); r.src = m; return r; });
+      try { const c = await fetch('chapters-data.json', { cache: 'no-cache' }); S.chapters = c.ok ? await c.json() : []; } catch (e) { S.chapters = []; }
+      S.loaded = true;
+    } catch (e) {
+      S.loadError = e.message || String(e);
     }
+    render();
+  }
 
-    // Fetch leads & aggregate resource data
-    async function loadCrmData() {
-      const tableBody = document.querySelector('#crmTable tbody');
-      try {
-        // Supabase returns at most 1000 rows per request, so page through the whole table
-        let allMembers = [];
-        const PAGE = 1000;
-        for (let from = 0; ; from += PAGE) {
-          const { data: page, error: pageErr } = await supabaseClient
-            .from('members').select('*').order('id', { ascending: true }).range(from, from + PAGE - 1);
-          if (pageErr) throw pageErr;
-          allMembers = allMembers.concat(page || []);
-          if (!page || page.length < PAGE) break;
-        }
-        cachedMembers = allMembers;
-        calculateMetrics();
-        renderCrmTable();
-        renderInvestorsTable();
-        renderMentorsTable();
-        processResourceAnalytics();
-      } catch (err) {
-        console.error("CRM loading failed:", err);
-        tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-red-500 font-bold">Failed to connect database pipeline: ${err.message}</td></tr>`;
+  /* ------------------------------------------------------------------ *
+   * Selectors
+   * ------------------------------------------------------------------ */
+  const byType = (t) => S.records.filter((r) => r.type === t);
+  const newestFirst = (a, b) => new Date(b.created || 0) - new Date(a.created || 0);
+  function matchQ(r, q) {
+    if (!q) return true;
+    const hay = [r.name, r.email, r.phone, r.display, r.kv.venture, r.kv.firm, r.kv.company, r.kv.college, r.kv.chapterref, r.kv.expertise, r.kv.sectors].join(' ').toLowerCase();
+    return q.toLowerCase().split(/\s+/).every((w) => hay.includes(w));
+  }
+  const appsFor = (cohort) => byType('application').filter((r) => cohort === 'all' || r.cohort === cohort);
+  const cohortLabel = (c) => c === 'Spring02' ? 'Spring · Cohort 02' : c === 'Winter01' ? 'Winter · Cohort 01' : c;
+
+  /* ------------------------------------------------------------------ *
+   * Rendering: shell
+   * ------------------------------------------------------------------ */
+  function tabsDef() {
+    const apps = appsFor('Spring02').length;
+    return [
+      { k: 'overview', label: 'Overview' },
+      { k: 'apps', label: 'Applications', n: apps },
+      { k: 'chapters', label: 'Chapters', n: S.chapters.length || '' },
+      { k: 'network', label: 'Investors & mentors', n: byType('investor').length + byType('mentor').length },
+      { k: 'people', label: 'All people', n: S.records.length }
+    ];
+  }
+  function renderTabs() {
+    $('tabs').innerHTML = tabsDef().map((t) =>
+      '<button class="tab ' + (S.tab === t.k ? 'on' : '') + '" data-tab="' + t.k + '">' + esc(t.label) + (t.n !== undefined && t.n !== '' ? ' <span class="n">' + t.n + '</span>' : '') + '</button>'
+    ).join('');
+  }
+
+  function render() {
+    renderTabs();
+    const v = $('view');
+    if (S.loadError) { v.innerHTML = '<div class="panel"><div class="empty"><b>Could not load data</b><br>' + esc(S.loadError) + '<br><br><button class="btn" data-act="reload">Try again</button></div></div>'; return; }
+    if (!S.loaded) { v.innerHTML = '<div class="loading">Loading…</div>'; return; }
+    const views = { overview: viewOverview, apps: viewApps, chapters: viewChapters, network: viewNetwork, people: viewPeople };
+    const keepFocus = document.activeElement && document.activeElement.id;
+    const sel = keepFocus && document.activeElement.selectionStart;
+    v.innerHTML = (views[S.tab] || viewOverview)() + '<div class="foot">Resource-reader analytics live in the <a href="data-legacy.html">legacy view</a>.</div>';
+    if (keepFocus && $(keepFocus)) { const el = $(keepFocus); el.focus(); try { el.setSelectionRange(sel, sel); } catch (e) {} }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Shared row renderers
+   * ------------------------------------------------------------------ */
+  function rowHTML(r) {
+    const sm = stageMeta(r);
+    let sub = '';
+    if (r.type === 'application') sub = [r.kv.venture, r.display].filter(Boolean).join(' · ');
+    else if (r.type === 'investor') sub = [r.kv.firm || r.display, r.kv.chequesize].filter(Boolean).join(' · ');
+    else if (r.type === 'mentor') sub = [r.kv.company || r.display, clean(r.kv.expertise)].filter(Boolean).join(' · ');
+    else sub = r.display || r.email;
+    const pills = ['<span class="pill ' + sm.tone + '">' + esc(sm.label) + '</span>'];
+    if (r.type === 'application') {
+      if (S.perms.payments) {
+        if (r.payment === 'verified') pills.push('<span class="pill green">Paid ✓</span>');
+        else if (r.payment === 'claimed') pills.push('<span class="pill amber">Verify payment</span>');
       }
+      if (r.score) pills.push('<span class="pill orange">★ ' + r.score + '</span>');
+      if (r.hadWinter) pills.push('<span class="pill violet">Also in Winter</span>');
     }
+    if (r.owner) pills.push('<span class="pill">👤 ' + esc(r.owner) + '</span>');
+    if (r.notes.length) pills.push('<span class="pill">📝 ' + r.notes.length + '</span>');
+    pills.push('<span class="ago">' + esc(ago(r.created)) + '</span>');
+    return '<button class="row" data-open="' + r.id + '"><div class="avatar">' + esc(initials(r.name)) + '</div>' +
+      '<div><div class="nm">' + esc(r.name) + '</div><div class="sub">' + esc(sub) + '</div></div>' +
+      '<div class="meta">' + pills.join('') + '</div></button>';
+  }
+  const listHTML = (list, empty) => list.length ? '<div class="rows">' + list.map(rowHTML).join('') + '</div>' : '<div class="empty">' + esc(empty || 'Nothing here yet.') + '</div>';
 
-    // Calculate core metrics for Leads Tab
-    function calculateMetrics() {
-      let fsCount = 0;
-      let ambCount = 0;
-      let dropoffCount = 0;
-      let invCount = 0;
-      let mtrCount = 0;
+  function stageChips(list, type, current, key) {
+    const counts = {};
+    list.forEach((r) => { counts[r.stage] = (counts[r.stage] || 0) + 1; });
+    return '<div class="chips"><button class="fchip ' + (current === 'all' ? 'on' : '') + '" data-stage="' + key + ':all">All <i>' + list.length + '</i></button>' +
+      STAGES[type].map((s) => '<button class="fchip ' + (current === s.k ? 'on' : '') + '" data-stage="' + key + ':' + s.k + '">' + esc(s.label) + ' <i>' + (counts[s.k] || 0) + '</i></button>').join('') + '</div>';
+  }
 
-      let invVc = 0;
-      let invAngel = 0;
-      let invDemoDay = 0;
+  function exportBtn(label) {
+    return S.perms.export ? '<button class="btn ghost sm" data-act="export">⬇ ' + esc(label || 'Export CSV') + '</button>' : '';
+  }
 
-      let mtrFounders = 0;
-      let mtrTech = 0;
-      let mtrOffice = 0;
+  /* ------------------------------------------------------------------ *
+   * View: Overview
+   * ------------------------------------------------------------------ */
+  function viewOverview() {
+    const apps = appsFor('Spring02');
+    const completed = apps.filter((r) => r.stage !== 'incomplete');
+    const selected = apps.filter((r) => r.stage === 'selected').length;
+    const toVerify = apps.filter((r) => r.payment === 'claimed');
+    const dropoffs = apps.filter((r) => r.stage === 'incomplete').sort(newestFirst);
+    const toReview = apps.filter((r) => r.stage === 'applied' || r.stage === 'review').sort(newestFirst);
+    const newLeads = ['chapterlead', 'investor', 'mentor'].map((t) => byType(t).filter((r) => r.stage === 'new').length);
+    const winter = appsFor('Winter01');
 
-      cachedMembers.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        const isFellowship = meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
-        const isInvestor = m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
-        const isMentor = m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
+    const stats =
+      '<div class="grid stats">' +
+      '<div class="stat hot"><span>Spring applicants</span><b>' + apps.length + '</b><small>' + completed.length + ' completed the form</small></div>' +
+      (S.perms.payments ? '<div class="stat ' + (toVerify.length ? 'hot' : '') + '"><span>Payments to verify</span><b>' + toVerify.length + '</b><small>claimed, not confirmed</small></div>'
+                        : '<div class="stat"><span>To review</span><b>' + toReview.length + '</b><small>applied, awaiting review</small></div>') +
+      '<div class="stat"><span>Seats filled</span><b>' + selected + ' / ' + SEATS + '</b><small>Spring · Cohort 02</small></div>' +
+      '<div class="stat"><span>Winter applicants</span><b>' + winter.length + '</b><small>Cohort 01</small></div>' +
+      '</div>' +
+      '<div class="grid stats">' +
+      '<div class="stat"><span>New chapter leads</span><b>' + newLeads[0] + '</b><small>' + S.chapters.length + ' chapters listed</small></div>' +
+      '<div class="stat"><span>New investors</span><b>' + newLeads[1] + '</b><small>' + byType('investor').length + ' in network</small></div>' +
+      '<div class="stat"><span>New mentors</span><b>' + newLeads[2] + '</b><small>' + byType('mentor').length + ' in network</small></div>' +
+      '<div class="stat"><span>All people</span><b>' + S.records.length + '</b><small>in the database</small></div>' +
+      '</div>';
 
-        if (isFellowship) fsCount++;
-        if (isInvestor) {
-          invCount++;
-          const eType = (meta.entityType || '').toLowerCase();
-          if (eType.includes('vc') || eType.includes('syndicate') || eType.includes('fund')) invVc++;
-          if (eType.includes('angel')) invAngel++;
-          if ((meta.engagement || '').includes('Demo Day')) invDemoDay++;
-        }
-        if (isMentor) {
-          mtrCount++;
-          const r = (meta.role || '').toLowerCase();
-          const exp = (meta.experience || '').toLowerCase();
-          if (exp.includes('founder') || r.includes('founder') || r.includes('ceo') || r.includes('co-founder')) mtrFounders++;
-          const expDomain = (meta.expertise || '').toLowerCase();
-          if (expDomain.includes('product') || expDomain.includes('tech') || expDomain.includes('ai')) mtrTech++;
-          if ((meta.format || '').includes('Office Hours')) mtrOffice++;
-        }
-        if (m.tier === 'Campus Ambassador') ambCount++;
-        if (!isInvestor && !isMentor && ((isFellowship && meta.stepProgress && meta.stepProgress !== 'Completed') || !(meta.q1 || meta.q2 || meta.q3 || meta.q4 || meta.venture))) dropoffCount++;
-      });
+    const panel = (title, list, empty, tab) =>
+      '<div class="panel"><div class="panel-h"><h3>' + esc(title) + '</h3>' + (list.length ? '<span class="pill">' + list.length + '</span>' : '') + '</div>' +
+      listHTML(list.slice(0, 6), empty) +
+      (list.length > 6 ? '<div class="panel-h" style="border-top:1px solid var(--line);border-bottom:none"><span class="ago">+' + (list.length - 6) + ' more</span><button class="btn ghost sm" data-tab="' + tab + '">See all</button></div>' : '') + '</div>';
 
-      document.getElementById('totalRegistrants').textContent = cachedMembers.length;
-      document.getElementById('tabBadgeLeads').textContent = cachedMembers.length;
-      document.getElementById('fellowshipCount').textContent = fsCount;
-      document.getElementById('ambassadorCount').textContent = ambCount;
-      document.getElementById('activeReferrals').textContent = dropoffCount;
+    return '<div class="page-h"><div><h2>Overview</h2><p>What needs doing right now.</p></div><div class="actions">' +
+      '</div></div>' +
+      stats +
+      '<div class="grid two">' +
+      (S.perms.payments ? panel('Verify payments', toVerify.sort(newestFirst), 'No payments waiting. 🎉', 'apps') : panel('Applications to review', toReview, 'Nothing to review.', 'apps')) +
+      panel('Step-1 drop-offs to nudge', dropoffs, 'No drop-offs.', 'apps') +
+      panel('New chapter lead applications', byType('chapterlead').filter((r) => r.stage === 'new').sort(newestFirst), 'No new chapter leads.', 'chapters') +
+      panel('New investors & mentors', byType('investor').concat(byType('mentor')).filter((r) => r.stage === 'new').sort(newestFirst), 'No new network sign-ups.', 'network') +
+      '</div>';
+  }
 
-      const invBadge = document.getElementById('tabBadgeInvestors');
-      if (invBadge) invBadge.textContent = invCount;
-      const invMetric = document.getElementById('investorMetricCount');
-      if (invMetric) invMetric.textContent = invCount;
+  /* ------------------------------------------------------------------ *
+   * View: Applications
+   * ------------------------------------------------------------------ */
+  function filteredApps() {
+    const A = S.app;
+    let list = appsFor(A.cohort).filter((r) => matchQ(r, A.q));
+    return list;
+  }
+  function viewApps() {
+    const A = S.app;
+    const all = appsFor(A.cohort).filter((r) => matchQ(r, A.q));
+    let list = A.stage === 'all' ? all : all.filter((r) => r.stage === A.stage);
+    if (A.sort === 'score') list = list.slice().sort((a, b) => b.score - a.score || newestFirst(a, b));
+    else if (A.sort === 'name') list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
+    else list = list.slice().sort(newestFirst);
+    const selected = all.filter((r) => r.stage === 'selected').length;
+    const seats = A.cohort === 'Winter01' ? '' :
+      '<div class="seats"><b>' + selected + ' / ' + SEATS + ' seats selected</b><div class="track"><div class="fill" style="width:' + Math.min(100, selected / SEATS * 100) + '%"></div></div><span class="ago">' + cohortLabel(A.cohort === 'all' ? 'Spring02' : A.cohort) + '</span></div>';
+    return '<div class="page-h"><div><h2>Applications</h2><p>Review, score and select founders for each cohort.</p></div><div class="actions">' + exportBtn() + '</div></div>' +
+      '<div class="bar"><div class="seg">' +
+      ['Spring02', 'Winter01', 'all'].map((c) => '<button class="' + (A.cohort === c ? 'on' : '') + '" data-cohort="' + c + '">' + (c === 'all' ? 'Both' : c === 'Spring02' ? 'Spring 02' : 'Winter 01') + '</button>').join('') + '</div>' +
+      '<input class="in" id="appQ" placeholder="Search name, venture, college, phone…" value="' + esc(A.q) + '" />' +
+      '<select class="in" id="appSort" style="max-width:160px"><option value="new"' + (A.sort === 'new' ? ' selected' : '') + '>Newest first</option><option value="score"' + (A.sort === 'score' ? ' selected' : '') + '>Highest score</option><option value="name"' + (A.sort === 'name' ? ' selected' : '') + '>Name A–Z</option></select></div>' +
+      seats + stageChips(all, 'application', A.stage, 'app') +
+      '<div class="panel">' + listHTML(list, 'No applications match.') + '</div>';
+  }
 
-      const mtrBadge = document.getElementById('tabBadgeMentors');
-      if (mtrBadge) mtrBadge.textContent = mtrCount;
-      const mtrMetric = document.getElementById('mentorMetricCount');
-      if (mtrMetric) mtrMetric.textContent = mtrCount;
+  /* ------------------------------------------------------------------ *
+   * View: Chapters
+   * ------------------------------------------------------------------ */
+  function viewChapters() {
+    const C = S.chap;
+    const apps = byType('application');
+    const leads = byType('chapterlead').filter((r) => matchQ(r, C.q));
+    const ambs = byType('ambassador').filter((r) => matchQ(r, C.q));
+    const leadList = C.stage === 'all' ? leads : leads.filter((r) => r.stage === C.stage);
+    const cards = S.chapters.filter((c) => !C.q || (c.name + ' ' + c.city + ' ' + c.college).toLowerCase().includes(C.q.toLowerCase())).map((c) => {
+      const n = apps.filter((r) => (r.kv.chapterref || '').toLowerCase() === String(c.id).toLowerCase()).length;
+      const tone = String(c.status).toLowerCase() === 'active' ? 'green' : 'amber';
+      return '<div class="card"><h3>' + esc(c.name) + '</h3><div class="meta" style="margin-top:6px"><span class="pill ' + tone + '">' + esc(c.status || '—') + '</span><span class="pill">' + esc(c.city || '') + '</span>' + (n ? '<span class="pill orange">' + n + ' applicants</span>' : '') + '</div>' +
+        '<p><b>' + esc(c.leadName || 'No lead yet') + '</b>' + (c.leadRole ? ' · ' + esc(c.leadRole) : '') + '</p>' +
+        (c.lastEvent ? '<p>Last event: ' + esc(c.lastEvent) + '</p>' : '') + '</div>';
+    }).join('');
+    return '<div class="page-h"><div><h2>Chapters</h2><p>' + S.chapters.length + ' listed chapters, plus incoming chapter-lead applications.</p></div><div class="actions">' + exportBtn('Export leads') + '</div></div>' +
+      '<div class="bar"><input class="in" id="chapQ" placeholder="Search chapters or applicants…" value="' + esc(C.q) + '" /></div>' +
+      '<div class="section-t" style="margin-top:6px">Chapter-lead applications</div>' +
+      stageChips(leads, 'chapterlead', C.stage, 'chap') +
+      '<div class="panel">' + listHTML(leadList, 'No chapter-lead applications.') + '</div>' +
+      '<div class="section-t">Listed chapters</div>' +
+      (cards ? '<div class="grid cards">' + cards + '</div>' : '<div class="panel"><div class="empty">No chapters match.</div></div>') +
+      (ambs.length ? '<div class="section-t">Campus ambassadors</div><div class="panel">' + listHTML(ambs.sort(newestFirst)) + '</div>' : '');
+  }
 
-      // Investor tab metrics
-      if (document.getElementById('invTotalCount')) document.getElementById('invTotalCount').textContent = invCount;
-      if (document.getElementById('invVcCount')) document.getElementById('invVcCount').textContent = invVc;
-      if (document.getElementById('invAngelCount')) document.getElementById('invAngelCount').textContent = invAngel;
-      if (document.getElementById('invDemoDayCount')) document.getElementById('invDemoDayCount').textContent = invDemoDay;
+  /* ------------------------------------------------------------------ *
+   * View: Investors & mentors
+   * ------------------------------------------------------------------ */
+  function viewNetwork() {
+    const N = S.net;
+    const all = byType(N.kind).filter((r) => matchQ(r, N.q));
+    const list = (N.stage === 'all' ? all : all.filter((r) => r.stage === N.stage)).sort(newestFirst);
+    return '<div class="page-h"><div><h2>Investors &amp; mentors</h2><p>Build the network for Demo Day and cohort mentoring.</p></div><div class="actions">' + exportBtn() + '</div></div>' +
+      '<div class="bar"><div class="seg"><button class="' + (N.kind === 'investor' ? 'on' : '') + '" data-kind="investor">Investors ' + byType('investor').length + '</button><button class="' + (N.kind === 'mentor' ? 'on' : '') + '" data-kind="mentor">Mentors ' + byType('mentor').length + '</button></div>' +
+      '<input class="in" id="netQ" placeholder="Search name, firm, sector, expertise…" value="' + esc(N.q) + '" /></div>' +
+      stageChips(byType(N.kind).filter((r) => matchQ(r, N.q)), N.kind, N.stage, 'net') +
+      '<div class="panel">' + listHTML(list, 'Nobody here yet.') + '</div>';
+  }
 
-      // Mentor tab metrics
-      if (document.getElementById('mtrTotalCount')) document.getElementById('mtrTotalCount').textContent = mtrCount;
-      if (document.getElementById('mtrFounderCount')) document.getElementById('mtrFounderCount').textContent = mtrFounders;
-      if (document.getElementById('mtrTechProductCount')) document.getElementById('mtrTechProductCount').textContent = mtrTech;
-      if (document.getElementById('mtrOfficeHoursCount')) document.getElementById('mtrOfficeHoursCount').textContent = mtrOffice;
+  /* ------------------------------------------------------------------ *
+   * View: All people
+   * ------------------------------------------------------------------ */
+  function viewPeople() {
+    const P = S.people;
+    const list = S.records.filter((r) => (P.type === 'all' || r.type === P.type) && matchQ(r, P.q)).sort(newestFirst);
+    const shown = list.slice(0, 200);
+    return '<div class="page-h"><div><h2>All people</h2><p>Everyone in the database, across every form.</p></div><div class="actions">' + exportBtn() + '</div></div>' +
+      '<div class="bar"><input class="in" id="pplQ" placeholder="Search anyone…" value="' + esc(P.q) + '" />' +
+      '<select class="in" id="pplType" style="max-width:190px"><option value="all">All types</option>' +
+      Object.keys(TYPE_LABEL).map((t) => '<option value="' + t + '"' + (P.type === t ? ' selected' : '') + '>' + TYPE_LABEL[t] + ' (' + byType(t).length + ')</option>').join('') + '</select></div>' +
+      '<div class="panel">' + listHTML(shown, 'No one matches.') + (list.length > shown.length ? '<div class="empty">Showing the newest 200 of ' + list.length + '. Narrow the search to see more.</div>' : '') + '</div>';
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Detail drawer
+   * ------------------------------------------------------------------ */
+  const HIDE_KEYS = new Set(['phone', 'source', 'fellowship', 'country', 'formsubmittedat', 'submittedat', 'paymentfee', 'prevcohort01', 'cohort', 'stepprogress', 'enrolled']);
+  const LABELS = { venture: 'Venture', stage: 'Startup stage', teamsize: 'Team size', college: 'College', year: 'Year', course: 'Course', q1: 'Problem', q3: 'Traction / why', q4: 'Format', chapterref: 'Via chapter', paymentstatus: 'Payment status', payment: 'Payment', utr: 'UTR / reference', entitytype: 'Entity type', firm: 'Firm', chequesize: 'Cheque size', sectors: 'Sectors', engagement: 'Engagement', linkedin: 'LinkedIn', company: 'Company', role: 'Role', expertise: 'Expertise', exp: 'Experience', pastcompanies: 'Past companies', format: 'Format', commitment: 'Commitment', bio: 'Bio', notes: 'Notes', motivation: 'Motivation', refcode: 'Referral code', refby: 'Referred by', waiverrequested: 'Waiver asked', waiverreason: 'Waiver reason' };
+
+  function detailKV(r) {
+    const rows = [];
+    if (r.display) rows.push(['Profile', esc(r.display)]);
+    Object.keys(r.kv).forEach((k) => {
+      if (HIDE_KEYS.has(k) || k.startsWith('crm')) return;
+      if (!S.perms.payments && (k === 'utr' || k === 'paymentstatus' || k === 'payment')) return;
+      const v = clean(r.kv[k]);
+      if (!v) return;
+      const label = LABELS[k] || k.replace(/^./, (c) => c.toUpperCase());
+      const html = k === 'linkedin' ? '<a href="' + esc(v) + '" target="_blank" rel="noopener">' + esc(v) + '</a>' : esc(v);
+      rows.push([label, html]);
+    });
+    return rows.map((x) => '<dt>' + esc(x[0]) + '</dt><dd>' + x[1] + '</dd>').join('');
+  }
+
+  function waTemplate(r) {
+    const n = first(r.name);
+    if (r.type === 'application' && r.stage === 'incomplete') return 'Hi ' + n + ', this is the Future Council team. You started your Launchpad application but did not finish it. Need any help completing it? The Spring Cohort is open.';
+    if (r.type === 'application') return 'Hi ' + n + ', this is the Future Council team about your Launchpad application' + (r.kv.venture ? ' for ' + r.kv.venture : '') + '.';
+    if (r.type === 'investor') return 'Hi ' + n + ', thanks for joining the Future Council investor network. We would love to share our upcoming Launchpad Demo Day brief.';
+    if (r.type === 'mentor') return 'Hi ' + n + ', thank you for signing up to mentor with the Future Council. Could we find 10 minutes to talk about the cohort?';
+    if (r.type === 'chapterlead') return 'Hi ' + n + ', thanks for applying to lead a Future Council chapter. Could we set up a quick call?';
+    return 'Hi ' + n + ', this is the Future Council team.';
+  }
+
+  function openDrawer(id) {
+    const r = S.records.find((x) => x.id === id);
+    if (!r) return;
+    S.openId = id;
+    const sm = stageMeta(r);
+    const stages = STAGES[r.type] || STAGES.lead;
+    const wa = waLink(r.phone, waTemplate(r));
+    const staffNames = STAFF.map((s) => s.name);
+    const ownerOpts = ['<option value="">Unassigned</option>'].concat(staffNames.concat(r.owner && !staffNames.includes(r.owner) ? [r.owner] : []).map((n) => '<option' + (r.owner === n ? ' selected' : '') + '>' + esc(n) + '</option>')).join('');
+    let payBlock = '';
+    if (r.type === 'application' && S.perms.payments) {
+      const label = r.payment === 'verified' ? '<span class="pill green">Verified ✓</span>' : r.payment === 'claimed' ? '<span class="pill amber">Claimed by applicant, not verified</span>' : '<span class="pill">No payment yet</span>';
+      payBlock = '<div class="blk"><h4>Application fee (₹999)</h4><div class="meta" style="margin:0">' + label +
+        (S.perms.verify && r.payment === 'claimed' ? '<button class="btn sm orange" data-act="verify">Mark payment verified</button>' : '') +
+        (S.perms.verify && r.payment === 'verified' ? '<button class="btn ghost sm" data-act="unverify">Undo</button>' : '') + '</div>' +
+        (r.kv.utr ? '<p style="margin:8px 0 0;font-size:13px;color:var(--soft)">Reference: ' + esc(r.kv.utr) + '</p>' : '') + '</div>';
     }
-
-    // Process Resource Analytics (from Supabase members + local storage telemetry)
-    function processResourceAnalytics() {
-      let localData = {};
-      try {
-        localData = JSON.parse(localStorage.getItem('tfc_global_resource_tracking') || '{}');
-      } catch(e) {}
-
-      // Map member profiles
-      const memberMap = {};
-      cachedMembers.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        memberMap[m.email.toLowerCase().trim()] = {
-          name: m.name,
-          email: m.email,
-          college: meta.displayName,
-          phone: meta.phone,
-          tier: m.tier,
-          member_id: m.member_id || m.id,
-          resData: meta.resData
-        };
-      });
-
-      aggregatedResourceLogs = [];
-
-      // 1. Process from Supabase member metadata
-      Object.values(memberMap).forEach(mem => {
-        if (mem.resData) {
-          Object.entries(mem.resData).forEach(([resKey, stats]) => {
-            let resTitle = stats.title || (resKey === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : (resKey === 'how_to_find_startup_idea' ? 'How to Find a Startup Idea' : 'Zero-to-One Idea Validation Framework'));
-            aggregatedResourceLogs.push({
-              key: `${mem.email}_${resKey}`,
-              email: mem.email,
-              name: mem.name,
-              college: mem.college,
-              phone: mem.phone,
-              tier: mem.tier,
-              member_id: mem.member_id,
-              resourceId: resKey,
-              resourceTitle: resTitle,
-              isMemberOnly: resKey === 'swipe_file',
-              opens: stats.opens || 1,
-              totalSeconds: stats.totalSeconds || stats.seconds || 45,
-              lastOpened: stats.lastOpened || stats.last || new Date().toISOString()
-            });
-          });
-        }
-      });
-
-      // 2. Merge / add from localStorage telemetry
-      Object.entries(localData).forEach(([email, data]) => {
-        const cleanEmail = email.toLowerCase().trim();
-        const memProfile = memberMap[cleanEmail] || {
-          name: data.name || (cleanEmail === 'guest_reader' ? 'Guest Visitor' : cleanEmail.split('@')[0]),
-          email: cleanEmail,
-          college: 'University Campus',
-          phone: '',
-          tier: cleanEmail === 'guest_reader' ? 'Guest' : 'Student',
-          member_id: 'TFC-GUEST'
-        };
-
-        if (data.resources) {
-          Object.entries(data.resources).forEach(([resId, r]) => {
-            const existingIdx = aggregatedResourceLogs.findIndex(item => item.email === cleanEmail && item.resourceId === resId);
-            if (existingIdx >= 0) {
-              // Merge with larger values
-              aggregatedResourceLogs[existingIdx].opens = Math.max(aggregatedResourceLogs[existingIdx].opens, r.opens || 1);
-              aggregatedResourceLogs[existingIdx].totalSeconds = Math.max(aggregatedResourceLogs[existingIdx].totalSeconds, r.totalSeconds || 10);
-              aggregatedResourceLogs[existingIdx].lastOpened = r.lastOpened || aggregatedResourceLogs[existingIdx].lastOpened;
-            } else {
-              aggregatedResourceLogs.push({
-                key: `${cleanEmail}_${resId}`,
-                email: cleanEmail,
-                name: memProfile.name,
-                college: memProfile.college,
-                phone: memProfile.phone,
-                tier: memProfile.tier,
-                member_id: memProfile.member_id,
-                resourceId: resId,
-                resourceTitle: r.title || (resId === 'swipe_file' ? 'The Cold-to-Warm Networking Swipe File' : (resId === 'how_to_find_startup_idea' ? 'How to Find a Startup Idea' : 'Zero-to-One Idea Validation Framework')),
-                isMemberOnly: resId === 'swipe_file',
-                opens: r.opens || 1,
-                totalSeconds: r.totalSeconds || 25,
-                lastOpened: r.lastOpened || new Date().toISOString()
-              });
-            }
-          });
-        }
-      });
-
-      // Update badge
-      document.getElementById('tabBadgeResources').textContent = aggregatedResourceLogs.length;
-
-      // Calculate Metrics for Resources Tab
-      let totalOpens = 0;
-      let totalTimeSec = 0;
-      const uniqueEmails = new Set();
-
-      let swipeOpens = 0, swipeTime = 0, swipeReaders = new Set();
-      let valOpens = 0, valTime = 0, valReaders = new Set();
-
-      aggregatedResourceLogs.forEach(log => {
-        totalOpens += log.opens;
-        totalTimeSec += log.totalSeconds;
-        uniqueEmails.add(log.email);
-
-        if (log.resourceId === 'swipe_file') {
-          swipeOpens += log.opens;
-          swipeTime += log.totalSeconds;
-          swipeReaders.add(log.email);
-        } else {
-          valOpens += log.opens;
-          valTime += log.totalSeconds;
-          valReaders.add(log.email);
-        }
-      });
-
-      const uniqueCount = uniqueEmails.size;
-      const avgSec = uniqueCount > 0 ? totalTimeSec / uniqueCount : 0;
-
-      document.getElementById('resMetricTotalOpens').textContent = totalOpens;
-      document.getElementById('resMetricUniqueReaders').textContent = uniqueCount;
-      document.getElementById('resMetricTotalTime').textContent = formatDuration(totalTimeSec);
-      document.getElementById('resMetricAvgTime').textContent = formatDuration(avgSec);
-
-      // Card 1: Swipe file stats
-      document.getElementById('swipeStatsSummary').textContent = `${swipeOpens} Opens • ${swipeReaders.size} Readers`;
-      document.getElementById('swipeUniqueReaders').textContent = swipeReaders.size;
-      document.getElementById('swipeTotalTime').textContent = formatDuration(swipeTime);
-      document.getElementById('swipeAvgTime').textContent = swipeReaders.size > 0 ? formatDuration(swipeTime / swipeReaders.size) : '0s';
-
-      // Card 2: Validation stats
-      document.getElementById('valStatsSummary').textContent = `${valOpens} Opens • ${valReaders.size} Readers`;
-      document.getElementById('valUniqueReaders').textContent = valReaders.size;
-      document.getElementById('valTotalTime').textContent = formatDuration(valTime);
-      document.getElementById('valAvgTime').textContent = valReaders.size > 0 ? formatDuration(valTime / valReaders.size) : '0s';
-
-      renderResourceTable();
-    }
-
-    // Render Resource Reader Activity Table
-    function renderResourceTable() {
-      const tableBody = document.querySelector('#resourceTable tbody');
-      if (!tableBody) return;
-
-      const query = (document.getElementById('resSearchInput')?.value || '').toLowerCase().trim();
-      const resFilter = document.getElementById('resResourceFilter')?.value || 'all';
-      const engFilter = document.getElementById('resEngagementFilter')?.value || 'all';
-
-      let filtered = [...aggregatedResourceLogs];
-
-      // Query search
-      if (query) {
-        filtered = filtered.filter(item => 
-          item.name.toLowerCase().includes(query) ||
-          item.email.toLowerCase().includes(query) ||
-          item.college.toLowerCase().includes(query) ||
-          item.resourceTitle.toLowerCase().includes(query)
-        );
-      }
-
-      // Filter by resource
-      if (resFilter !== 'all') {
-        filtered = filtered.filter(item => item.resourceId === resFilter);
-      }
-
-      // Filter by engagement duration
-      if (engFilter !== 'all') {
-        if (engFilter === 'high') filtered = filtered.filter(item => item.totalSeconds >= 120);
-        else if (engFilter === 'moderate') filtered = filtered.filter(item => item.totalSeconds >= 30 && item.totalSeconds < 120);
-        else if (engFilter === 'quick') filtered = filtered.filter(item => item.totalSeconds < 30);
-      }
-
-      // Sort by last opened desc
-      filtered.sort((a, b) => new Date(b.lastOpened) - new Date(a.lastOpened));
-      currentFilteredResources = filtered;
-
-      document.getElementById('resFilteredCount').textContent = `${filtered.length} shown`;
-
-      tableBody.innerHTML = '';
-      if (filtered.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="7" class="text-center py-8 text-gray-500 font-semibold">
-              <span class="text-2xl block mb-2">📚</span>
-              No resource reading telemetry matching your filter criteria.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      filtered.forEach(log => {
-        let engagementBadge = '';
-        if (log.totalSeconds >= 120) {
-          engagementBadge = `<span class="bg-orange-100 text-orange-800 border border-orange-400 font-black text-[0.62rem] px-1.5 py-0.5 rounded uppercase">🔥 High Intent</span>`;
-        } else if (log.totalSeconds >= 30) {
-          engagementBadge = `<span class="bg-blue-100 text-blue-800 border border-blue-400 font-black text-[0.62rem] px-1.5 py-0.5 rounded uppercase">📖 Active Read</span>`;
-        } else {
-          engagementBadge = `<span class="bg-gray-100 text-gray-700 border border-gray-400 font-bold text-[0.62rem] px-1.5 py-0.5 rounded uppercase">⚡ Quick Scan</span>`;
-        }
-
-        let resourceBadge = log.isMemberOnly
-          ? `<span class="bg-yellow-200 text-black border border-black font-extrabold text-[0.65rem] px-1.5 py-0.5 rounded uppercase mr-1">🔒 Member Only</span>`
-          : `<span class="bg-green-100 text-green-800 border border-green-500 font-extrabold text-[0.65rem] px-1.5 py-0.5 rounded uppercase mr-1">🔓 Open</span>`;
-
-        let waUrl = '';
-        if (log.phone) {
-          let cleanPhone = log.phone.replace(/[^0-9]/g, '');
-          if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-          const msg = `Hey ${log.name.split(' ')[0]}! Saw you were checking out the ${log.resourceTitle} on The Future Council. Would love to share more founder playbooks with your team!`;
-          waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
-        }
-
-        const actionsHtml = `
-          <div class="flex flex-col gap-1">
-            <button onclick="openResourceDetailModal('${log.email}', '${log.resourceId}')" class="bg-amber-100 border border-black px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">🔍 Logs</button>
-            ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-          </div>
-        `;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>
-            <div class="font-extrabold text-black text-sm">${log.name}</div>
-            <div class="text-xs text-gray-500 font-mono">${log.email}</div>
-            <div class="text-[0.65rem] text-gray-400 font-black uppercase mt-0.5">${log.tier} • ${log.member_id}</div>
-          </td>
-          <td><span class="font-bold text-xs">${log.college}</span></td>
-          <td>
-            <div class="flex items-center gap-1 flex-wrap">
-              ${resourceBadge}
-              <strong class="text-xs">${log.resourceTitle}</strong>
-            </div>
-          </td>
-          <td>
-            <span class="bg-yellow-100 border border-black text-black font-black text-xs px-2 py-0.5 rounded inline-block font-mono">
-              ${log.opens}x Open${log.opens > 1 ? 's' : ''}
-            </span>
-          </td>
-          <td>
-            <div class="flex flex-col gap-0.5">
-              <span class="font-extrabold text-sm text-blue-700 font-mono">${formatDuration(log.totalSeconds)}</span>
-              ${engagementBadge}
-            </div>
-          </td>
-          <td>
-            <div class="text-xs font-bold text-gray-800">${timeAgo(log.lastOpened)}</div>
-            <div class="text-[0.65rem] text-gray-500 font-mono">${new Date(log.lastOpened).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-          </td>
-          <td>${actionsHtml}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // Modal: Resource Reader Session Details
-    window.openResourceDetailModal = (email, resId) => {
-      const log = aggregatedResourceLogs.find(l => l.email === email && l.resourceId === resId);
-      if (!log) return;
-
-      const modalDiv = document.createElement('div');
-      modalDiv.id = 'resDetailOverlay';
-      modalDiv.style.cssText = `
-        position: fixed; inset: 0; background: rgba(20, 17, 15, 0.65); backdrop-filter: blur(8px);
-        display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
-      `;
-
-      modalDiv.innerHTML = `
-        <div style="background: #FFFFFF; border: 1.5px solid var(--border-subtle); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 28px; max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; color: var(--ink);">
-          <button onclick="document.getElementById('resDetailOverlay').remove()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;">✕</button>
-          
-          <div style="margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 16px;">
-            <span class="tfc-badge tfc-badge-orange" style="font-size: 0.68rem; margin-bottom: 8px;">📊 Reader Engagement Telemetry</span>
-            <h2 style="font-size: 1.4rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: -0.5px;">
-              ${log.name}
-            </h2>
-            <div style="font-size: 0.85rem; color: var(--ink-soft);">${log.email} • ${log.college}</div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 14px; text-align: center;">
-              <span style="font-size: 1.8rem; font-weight: 800; display: block; line-height: 1.2;">${log.opens}x</span>
-              <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.05em;">Total Times Opened</span>
-            </div>
-            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 14px; text-align: center;">
-              <span style="font-size: 1.8rem; font-weight: 800; color: #2563EB; display: block; line-height: 1.2;">${formatDuration(log.totalSeconds)}</span>
-              <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); letter-spacing: 0.05em;">Active Reading Duration</span>
-            </div>
-          </div>
-
-          <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-bottom: 20px; font-size: 0.88rem; line-height: 1.6;">
-            <div><strong style="color: var(--ink-soft);">Resource:</strong> <span style="font-weight: 700;">${log.resourceTitle}</span></div>
-            <div><strong style="color: var(--ink-soft);">Access Type:</strong> <span style="font-weight: 700;">${log.isMemberOnly ? '🔒 Member Exclusive' : '🔓 Open Access'}</span></div>
-            <div><strong style="color: var(--ink-soft);">Last Activity:</strong> <span style="font-weight: 600;">${new Date(log.lastOpened).toLocaleString()} (${timeAgo(log.lastOpened)})</span></div>
-            ${log.phone ? `<div><strong style="color: var(--ink-soft);">Phone:</strong> <span style="font-weight: 700;">${log.phone}</span></div>` : ''}
-          </div>
-
-          <div style="display: flex; gap: 10px;">
-            <a href="mailto:${log.email}?subject=${encodeURIComponent('The Future Council — Founder Playbook Follow-up')}" class="tfc-btn tfc-btn-primary w-full justify-center" style="padding: 10px; font-size: 0.88rem; text-decoration: none;">
-              ✉️ Send Email Outreach
-            </a>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modalDiv);
-    };
-
-    // CSV Export for Resources (exports only the sorted, filtered entries)
-    window.exportResourceAnalyticsCSV = () => {
-      const exportList = (currentFilteredResources && currentFilteredResources.length > 0)
-        ? currentFilteredResources
-        : aggregatedResourceLogs;
-
-      if (!exportList || exportList.length === 0) {
-        alert("No resource telemetry to export!");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "Reader_Name,Email,College,Phone,Tier,Member_ID,Resource_Title,Resource_ID,Times_Opened,Total_Time_Seconds,Total_Time_Formatted,Last_Opened\n";
-
-      exportList.forEach(r => {
-        const row = [
-          `"${(r.name || '').replace(/"/g, '""')}"`,
-          r.email,
-          `"${(r.college || '').replace(/"/g, '""')}"`,
-          r.phone || '',
-          r.tier || '',
-          r.member_id || '',
-          `"${(r.resourceTitle || '').replace(/"/g, '""')}"`,
-          r.resourceId,
-          r.opens,
-          r.totalSeconds,
-          `"${formatDuration(r.totalSeconds)}"`,
-          r.lastOpened
-        ];
-        csvContent += row.join(",") + "\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `TFC_Resource_Engagement_${new Date().toISOString().slice(0,10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-
-    // Sort logic for Leads CRM
-    function sortCrmMembers(list, criterion) {
-      const sorted = [...list];
-      switch (criterion) {
-        case 'date_desc':
-          return sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
-        case 'date_asc':
-          return sorted.sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
-        case 'name_asc':
-          return sorted.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
-        case 'name_desc':
-          return sorted.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
-        case 'college_asc':
-          return sorted.sort((a, b) => {
-            const ca = parseCollegeField(a.college, a).displayName || '';
-            const cb = parseCollegeField(b.college, b).displayName || '';
-            return ca.localeCompare(cb);
-          });
-        case 'college_desc':
-          return sorted.sort((a, b) => {
-            const ca = parseCollegeField(a.college, a).displayName || '';
-            const cb = parseCollegeField(b.college, b).displayName || '';
-            return cb.localeCompare(ca);
-          });
-        case 'tier_asc':
-          return sorted.sort((a, b) => (a.tier || '').localeCompare(b.tier || ''));
-        case 'tier_desc':
-          return sorted.sort((a, b) => (b.tier || '').localeCompare(a.tier || ''));
-        case 'paid_first':
-          return sorted.sort((a, b) => {
-            const pa = parseCollegeField(a.college, a).payment === 'Paid' ? 1 : 0;
-            const pb = parseCollegeField(b.college, b).payment === 'Paid' ? 1 : 0;
-            return pb - pa;
-          });
-        case 'answers_first':
-          return sorted.sort((a, b) => {
-            const ma = parseCollegeField(a.college, a);
-            const mb = parseCollegeField(b.college, b);
-            const hasA = (ma.q1 || ma.q2 || ma.q3 || ma.q4 || ma.venture) ? 1 : 0;
-            const hasB = (mb.q1 || mb.q2 || mb.q3 || mb.q4 || mb.venture) ? 1 : 0;
-            return hasB - hasA;
-          });
-        default:
-          return sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
-      }
-    }
-
-    window.toggleCrmSort = (col) => {
-      const sortSelect = document.getElementById('crmSortSelect');
-      if (col === 'name') {
-        crmSortCriterion = (crmSortCriterion === 'name_asc') ? 'name_desc' : 'name_asc';
-      } else if (col === 'college') {
-        crmSortCriterion = (crmSortCriterion === 'college_asc') ? 'college_desc' : 'college_asc';
-      } else if (col === 'tier') {
-        crmSortCriterion = (crmSortCriterion === 'tier_asc') ? 'tier_desc' : 'tier_asc';
-      } else if (col === 'fellowship') {
-        crmSortCriterion = (crmSortCriterion === 'paid_first') ? 'answers_first' : 'paid_first';
-      }
-      if (sortSelect) {
-        const opt = Array.from(sortSelect.options).find(o => o.value === crmSortCriterion);
-        if (opt) sortSelect.value = crmSortCriterion;
-      }
-      renderCrmTable();
-    };
-
-    function updateSortHeaderIcons() {
-      const cols = ['name', 'college', 'tier', 'fellowship'];
-      cols.forEach(c => {
-        const el = document.getElementById(`sortCol_${c}`);
-        if (el) el.textContent = '↕';
-      });
-
-      if (crmSortCriterion === 'name_asc') {
-        const el = document.getElementById('sortCol_name');
-        if (el) el.textContent = '▲';
-      } else if (crmSortCriterion === 'name_desc') {
-        const el = document.getElementById('sortCol_name');
-        if (el) el.textContent = '▼';
-      } else if (crmSortCriterion === 'college_asc') {
-        const el = document.getElementById('sortCol_college');
-        if (el) el.textContent = '▲';
-      } else if (crmSortCriterion === 'college_desc') {
-        const el = document.getElementById('sortCol_college');
-        if (el) el.textContent = '▼';
-      } else if (crmSortCriterion === 'tier_asc') {
-        const el = document.getElementById('sortCol_tier');
-        if (el) el.textContent = '▲';
-      } else if (crmSortCriterion === 'tier_desc') {
-        const el = document.getElementById('sortCol_tier');
-        if (el) el.textContent = '▼';
-      } else if (crmSortCriterion === 'paid_first' || crmSortCriterion === 'answers_first') {
-        const el = document.getElementById('sortCol_fellowship');
-        if (el) el.textContent = '▼';
-      }
-    }
-
-    // Render Leads Table
-    function renderCrmTable() {
-      const tableBody = document.querySelector('#crmTable tbody');
-      if (!tableBody) return;
-
-      const query = document.getElementById('crmSearchInput').value.toLowerCase().trim();
-      const tierVal = document.getElementById('crmTierFilter').value.toLowerCase();
-      const fellowshipVal = document.getElementById('crmFellowshipFilter').value;
-      const sourceVal = document.getElementById('crmSourceFilter').value.toLowerCase();
-
-      let filtered = [...cachedMembers];
-
-      // Filters
-      if (query) {
-        filtered = filtered.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (m.name || '').toLowerCase().includes(query) ||
-                 (m.email || '').toLowerCase().includes(query) ||
-                 (meta.phone || '').includes(query) ||
-                 (meta.displayName || '').toLowerCase().includes(query) ||
-                 (m.member_id || '').toLowerCase().includes(query);
-        });
-      }
-
-      if (tierVal !== 'all') {
-        filtered = filtered.filter(m => (m.tier || '').toLowerCase() === tierVal);
-      }
-
-      if (fellowshipVal !== 'all') {
-        filtered = filtered.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          const isFellowship = meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
-          if (fellowshipVal === 'yes') return isFellowship;
-          if (fellowshipVal === 'no') return !isFellowship;
-          if (fellowshipVal === 'dropoff') return (isFellowship && meta.stepProgress && meta.stepProgress !== 'Completed') || !(meta.q1 || meta.q2 || meta.q3 || meta.q4);
-          if (fellowshipVal === 'paid') return isFellowship && meta.payment === 'Paid';
-          if (fellowshipVal === 'unpaid') return isFellowship && meta.payment !== 'Paid';
-          if (fellowshipVal === 'winter') return isFellowship && meta.cohort === 'Winter01';
-          if (fellowshipVal === 'spring') return isFellowship && meta.cohort === 'Spring02';
-          return true;
-        });
-      }
-
-      if (sourceVal !== 'all') {
-        filtered = filtered.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (meta.source || '').toLowerCase() === sourceVal;
-        });
-      }
-
-      // Read selected sort
-      const sortSelect = document.getElementById('crmSortSelect');
-      if (sortSelect && sortSelect.value) {
-        crmSortCriterion = sortSelect.value;
-      }
-
-      // Sort the filtered results
-      filtered = sortCrmMembers(filtered, crmSortCriterion);
-      currentFilteredMembers = filtered;
-      updateSortHeaderIcons();
-
-      const countEl = document.getElementById('filteredCount');
-      if (countEl) countEl.textContent = `${currentFilteredMembers.length} shown`;
-
-      const exportBtn = document.getElementById('crmExportBtn');
-      if (exportBtn) {
-        exportBtn.innerHTML = `📊 Export CSV (${currentFilteredMembers.length})`;
-      }
-
-      tableBody.innerHTML = '';
-      if (currentFilteredMembers.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-gray-500 font-semibold">No CRM entries found matching filters.</td></tr>';
-        return;
-      }
-
-      currentFilteredMembers.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        const isFellowship = meta.fellowship === 'Yes' || meta.source === 'FellowshipPage' || (m.member_id && m.member_id.startsWith('TFC-FEL-'));
-        const hasAnswers = Boolean(meta.q1 || meta.q2 || meta.q3 || meta.q4 || meta.venture);
-        const isGoogleUser = meta.isGoogleAuth || (m.password === 'google_oauth_verified') || (m.image && m.image.includes('googleusercontent.com'));
-
-        // Handle empty or blank names cleanly
-        let rawName = (m.name || '').trim();
-        let displayName = rawName;
-        let nameNotice = '';
-        if (!displayName) {
-          if (m.email && m.email.trim()) {
-            const userPrefix = m.email.split('@')[0];
-            displayName = userPrefix.charAt(0).toUpperCase() + userPrefix.slice(1);
-            nameNotice = `<span class="text-[0.62rem] text-amber-600 font-bold block">(Inferred from email)</span>`;
-          } else {
-            displayName = isGoogleUser ? 'Google User (Name Pending)' : 'Unspecified User';
-            nameNotice = `<span class="text-[0.62rem] text-red-500 font-bold block">(Missing name)</span>`;
-          }
-        }
-
-        const displayEmail = (m.email || '').trim() || '<span class="text-red-500 italic text-xs">No email provided</span>';
-
-        const isInvestor = m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
-        const isMentor = m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
-
-        let waUrl = '';
-        if (meta.phone) {
-          let cleanPhone = meta.phone.replace(/[^0-9]/g, '');
-          if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-          const firstName = displayName.split(' ')[0] || 'there';
-          let msg = `Hey ${firstName}! This is Brahmleen from The Future Council. Great to see you registered on our ecosystem.`;
-          if (isInvestor) {
-            msg = `Hey ${firstName}! This is Dhruv from The Future Council. Thank you for registering with our investor syndicate. Would love to share our upcoming Launchpad Demo Day cohort brief!`;
-          } else if (isMentor) {
-            msg = `Hey ${firstName}! This is Aryaveer from The Future Council. Thank you for applying to mentor collegiate founders. Excited to connect and match you with our founder pods!`;
-          }
-          waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
-        }
-
-        let actionsHtml = '';
-        if (isInvestor) {
-          actionsHtml = `
-            <div class="flex flex-col gap-1">
-              <button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">💼 Dossier</button>
-              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
-            </div>
-          `;
-        } else if (isMentor) {
-          actionsHtml = `
-            <div class="flex flex-col gap-1">
-              <button onclick="openModal('${m.id}')" class="bg-emerald-100 border border-emerald-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-emerald-200">🧠 Profile</button>
-              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
-            </div>
-          `;
-        } else {
-          actionsHtml = `
-            <div class="flex flex-col gap-1.5">
-              ${(hasAnswers || isFellowship) ? `<button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded hover:bg-amber-200">📋 Answers</button>` : ''}
-              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.7rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-            </div>
-          `;
-        }
-
-        const googleBadge = isGoogleUser
-          ? `<span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 border border-blue-200 text-[0.6rem] font-black uppercase px-1.5 py-0.5 rounded ml-1" title="Authenticated via Google OAuth">
-              <svg width="10" height="10" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-              Google
-            </span>`
-          : '';
-
-        let sourceBadge = '';
-        if (isInvestor || meta.source === 'InvestorPage') {
-          sourceBadge = `<span class="bg-amber-100 text-amber-900 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-amber-300 ml-1">Investor Form</span>`;
-        } else if (isMentor || meta.source === 'MentorPage') {
-          sourceBadge = `<span class="bg-emerald-100 text-emerald-900 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-emerald-300 ml-1">Mentor Form</span>`;
-        } else if (meta.source === 'JoinPage') {
-          sourceBadge = `<span class="bg-green-100 text-green-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-green-300 ml-1">Join Portal</span>`;
-        } else if (meta.source === 'FellowshipPage') {
-          sourceBadge = `<span class="bg-orange-100 text-orange-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-orange-300 ml-1">Fellowship Form</span>`;
-        } else if (meta.source === 'AmbassadorPage') {
-          sourceBadge = `<span class="bg-purple-100 text-purple-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-purple-300 ml-1">Ambassador Form</span>`;
-        } else if (meta.source === 'FinancialAid') {
-          sourceBadge = `<span class="bg-yellow-100 text-yellow-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-yellow-300 ml-1">Financial Aid</span>`;
-        } else if (meta.source === 'GoogleAuth') {
-          sourceBadge = `<span class="bg-blue-100 text-blue-800 text-[0.62rem] font-black uppercase px-1 py-0.5 rounded border border-blue-300 ml-1">Google Auth</span>`;
-        }
-
-        let collegeCellContent = `<strong>${meta.displayName}</strong>`;
-        let fellowshipStatusCell = '';
-
-        if (isInvestor) {
-          collegeCellContent = `
-            <div>
-              <strong class="text-amber-950 font-bold">${meta.firm || meta.displayName}</strong>
-              <div class="text-[0.68rem] text-zinc-500 font-semibold">${meta.entityType || 'Angel / Syndicate'}</div>
-            </div>
-          `;
-          fellowshipStatusCell = `
-            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-[0.65rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">
-              💰 ${meta.chequeSize || 'Cheque N/A'}
-            </span>
-            <span class="text-[0.65rem] text-zinc-500 font-bold block text-center mt-1">
-              ${meta.stage || 'Stage Agnostic'}
-            </span>
-          `;
-        } else if (isMentor) {
-          collegeCellContent = `
-            <div>
-              <strong class="text-emerald-950 font-bold">${meta.company || meta.displayName}</strong>
-              <div class="text-[0.68rem] text-zinc-500 font-semibold">${meta.role || 'Operator'} • ${meta.experience || ''}</div>
-            </div>
-          `;
-          fellowshipStatusCell = `
-            <span class="bg-emerald-100 text-emerald-900 border border-emerald-300 text-[0.65rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide">
-              ⏱️ ${meta.commitment || '1-2 hrs/mo'}
-            </span>
-            <span class="text-[0.65rem] text-zinc-500 font-bold block text-center mt-1 truncate" title="${meta.expertise}">
-              ${(meta.expertise || 'Advisory').split(',')[0]}
-            </span>
-          `;
-        } else if (isFellowship) {
-          let stepBadge = '';
-          if (meta.stepProgress === 'Completed' || meta.paymentStatus === 'awaiting_acceptance' || (meta.formSubmittedAt && hasAnswers)) {
-            stepBadge = '<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">✅ App Submitted</span>';
-          } else if (meta.stepProgress === 'Step 2 Completed' || meta.venture) {
-            stepBadge = '<span class="bg-blue-100 text-blue-800 border border-blue-300 text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">Step 2 (Venture Added)</span>';
-          } else {
-            stepBadge = '<span class="bg-amber-100 text-amber-800 border border-amber-300 text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">Step 1 Lead</span>';
-          }
-
-          let feeBadge = '';
-          if (meta.payment === 'Paid') {
-            feeBadge = '<span class="bg-green-600 text-white text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">💳 Paid</span>';
-          } else if (meta.stepProgress === 'Completed' || meta.paymentStatus === 'awaiting_acceptance') {
-            feeBadge = '<span class="bg-zinc-700 text-white text-[0.62rem] font-black px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">₹999 Due After Acceptance</span>';
-          }
-
-          fellowshipStatusCell = `
-            <span class="font-extrabold text-xs uppercase text-green-600 bg-green-50 px-2 block mb-1">Interested 🚀</span>
-            ${stepBadge}
-            ${feeBadge}
-          `;
-        } else {
-          fellowshipStatusCell = '<span class="text-gray-400 text-xs font-bold block mb-1">No</span>';
-          if (!hasAnswers) {
-            fellowshipStatusCell += '<span class="bg-red-100 text-red-700 border border-red-400 text-[0.62rem] font-bold px-1.5 py-0.5 rounded block text-center uppercase tracking-wide mt-1">⚠️ Dropoff</span>';
-          }
-        }
-
-        let tierDisplay = m.tier || 'Student';
-        let tierStyle = 'bg-gray-100 text-gray-800';
-        if (isInvestor) {
-          tierDisplay = '💼 Investor';
-          tierStyle = 'bg-amber-100 text-amber-900 border border-amber-300';
-        } else if (isMentor) {
-          tierDisplay = '🧠 Mentor';
-          tierStyle = 'bg-emerald-100 text-emerald-900 border border-emerald-300';
-        }
-
-        const row = document.createElement('tr');
-        if (!hasAnswers && !isFellowship && !isInvestor && !isMentor) {
-          row.style.background = '#fff8f8';
-        } else if (isInvestor) {
-          row.style.background = '#fffdf7';
-        } else if (isMentor) {
-          row.style.background = '#f7faf8';
-        }
-
-        row.innerHTML = `
-          <td>
-            <div class="flex items-center gap-1 flex-wrap">
-              <div class="font-extrabold text-black text-sm">${displayName}</div>
-              ${googleBadge}
-              ${sourceBadge}
-            </div>
-            ${nameNotice}
-            <div class="text-xs text-gray-500 font-semibold font-mono">${displayEmail}</div>
-            ${meta.country ? `<div class="text-[0.68rem] text-orange-600 font-extrabold mt-0.5">🌐 ${meta.country.toUpperCase()}</div>` : ''}
-          </td>
-          <td>${collegeCellContent}</td>
-          <td><span class="font-mono text-xs font-bold ${meta.phone ? 'text-gray-900' : 'text-gray-400'}">${meta.phone || 'No Phone'}</span></td>
-          <td><span class="font-black text-xs uppercase px-2 py-0.5 rounded ${tierStyle}">${tierDisplay}</span></td>
-          <td>
-            ${fellowshipStatusCell}
-          </td>
-          <td>${actionsHtml}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // Render Dedicated Investors Table
-    function renderInvestorsTable() {
-      const tableBody = document.querySelector('#investorsTable tbody');
-      if (!tableBody) return;
-
-      const query = (document.getElementById('invSearchInput')?.value || '').toLowerCase().trim();
-      const chequeVal = document.getElementById('invChequeFilter')?.value || 'all';
-      const stageVal = (document.getElementById('invStageFilter')?.value || 'all').toLowerCase();
-
-      let investors = cachedMembers.filter(m => {
-        const meta = parseCollegeField(m.college, m);
-        return m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
-      });
-
-      if (query) {
-        investors = investors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (m.name || '').toLowerCase().includes(query) ||
-                 (m.email || '').toLowerCase().includes(query) ||
-                 (meta.firm || '').toLowerCase().includes(query) ||
-                 (meta.sectors || '').toLowerCase().includes(query) ||
-                 (meta.phone || '').includes(query);
-        });
-      }
-
-      if (chequeVal !== 'all') {
-        investors = investors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (meta.chequeSize || '').includes(chequeVal);
-        });
-      }
-
-      if (stageVal !== 'all') {
-        investors = investors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (meta.stage || '').toLowerCase().includes(stageVal);
-        });
-      }
-
-      const countEl = document.getElementById('invFilteredCount');
-      if (countEl) countEl.textContent = `${investors.length} shown`;
-
-      tableBody.innerHTML = '';
-      if (investors.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="7" class="text-center py-8 text-zinc-500 font-semibold">
-              <span class="text-2xl block mb-2">💼</span>
-              No investors found matching the current search or filters.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      investors.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        let cleanPhone = (meta.phone || '').replace(/[^0-9]/g, '');
-        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-        const firstName = (m.name || '').split(' ')[0] || 'there';
-        const msg = `Hey ${firstName}! This is Dhruv from The Future Council. Great to have you on our investor network. Sharing our upcoming Demo Day cohort portfolio!`;
-        const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : '';
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>
-            <div class="font-extrabold text-black text-sm">${m.name || 'Investor'}</div>
-            <div class="text-xs text-gray-500 font-mono">${m.email}</div>
-            <div class="text-[0.68rem] font-mono text-zinc-400 mt-0.5">${meta.phone || 'No phone'} • ${m.member_id || 'TFC-INV'}</div>
-          </td>
-          <td>
-            <strong class="text-sm font-bold">${meta.firm || 'Independent Angel'}</strong>
-            <div class="text-xs text-zinc-500 font-medium">${meta.entityType || 'Angel Investor'}</div>
-          </td>
-          <td>
-            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black px-2 py-0.5 rounded font-mono">
-              ${meta.chequeSize || 'Not Specified'}
-            </span>
-          </td>
-          <td>
-            <span class="text-xs font-bold text-zinc-700">${meta.stage || 'Stage Agnostic'}</span>
-          </td>
-          <td>
-            <div class="text-xs font-medium text-zinc-700 max-w-xs truncate" title="${meta.sectors || ''}">
-              ${meta.sectors || 'All Sectors'}
-            </div>
-          </td>
-          <td>
-            <div class="text-[0.72rem] text-zinc-600 font-medium">
-              ${meta.engagement || 'Demo Day Invite'}
-            </div>
-          </td>
-          <td>
-            <div class="flex flex-col gap-1">
-              <button onclick="openModal('${m.id}')" class="bg-amber-100 border border-amber-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-amber-200">🔍 Dossier</button>
-              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
-            </div>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // Render Dedicated Mentors Table
-    function renderMentorsTable() {
-      const tableBody = document.querySelector('#mentorsTable tbody');
-      if (!tableBody) return;
-
-      const query = (document.getElementById('mtrSearchInput')?.value || '').toLowerCase().trim();
-      const domainVal = (document.getElementById('mtrExpertiseFilter')?.value || 'all').toLowerCase();
-      const expVal = (document.getElementById('mtrExpFilter')?.value || 'all').toLowerCase();
-
-      let mentors = cachedMembers.filter(m => {
-        const meta = parseCollegeField(m.college, m);
-        return m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
-      });
-
-      if (query) {
-        mentors = mentors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (m.name || '').toLowerCase().includes(query) ||
-                 (m.email || '').toLowerCase().includes(query) ||
-                 (meta.company || '').toLowerCase().includes(query) ||
-                 (meta.role || '').toLowerCase().includes(query) ||
-                 (meta.expertise || '').toLowerCase().includes(query) ||
-                 (meta.phone || '').includes(query);
-        });
-      }
-
-      if (domainVal !== 'all') {
-        mentors = mentors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (meta.expertise || '').toLowerCase().includes(domainVal);
-        });
-      }
-
-      if (expVal !== 'all') {
-        mentors = mentors.filter(m => {
-          const meta = parseCollegeField(m.college, m);
-          return (meta.experience || '').toLowerCase().includes(expVal) || (meta.role || '').toLowerCase().includes(expVal);
-        });
-      }
-
-      const countEl = document.getElementById('mtrFilteredCount');
-      if (countEl) countEl.textContent = `${mentors.length} shown`;
-
-      tableBody.innerHTML = '';
-      if (mentors.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="7" class="text-center py-8 text-zinc-500 font-semibold">
-              <span class="text-2xl block mb-2">🧠</span>
-              No mentors found matching the current search or filters.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      mentors.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        let cleanPhone = (meta.phone || '').replace(/[^0-9]/g, '');
-        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-        const firstName = (m.name || '').split(' ')[0] || 'there';
-        const msg = `Hey ${firstName}! This is Aryaveer from The Future Council. Great to have you on our mentor council. Excited to connect you with our founder pods!`;
-        const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}` : '';
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>
-            <div class="font-extrabold text-black text-sm">${m.name || 'Mentor'}</div>
-            <div class="text-xs text-gray-500 font-mono">${m.email}</div>
-            <div class="text-[0.68rem] font-mono text-zinc-400 mt-0.5">${meta.phone || 'No phone'} • ${m.member_id || 'TFC-MTR'}</div>
-          </td>
-          <td>
-            <strong class="text-sm font-bold">${meta.company || 'Organization'}</strong>
-            <div class="text-xs text-zinc-600 font-medium">${meta.role || 'Operator / Leader'}</div>
-          </td>
-          <td>
-            <span class="text-xs font-bold text-zinc-800">${meta.experience || 'Experienced'}</span>
-            ${meta.pastCompanies && meta.pastCompanies !== 'None' ? `<div class="text-[0.68rem] text-zinc-500">${meta.pastCompanies}</div>` : ''}
-          </td>
-          <td>
-            <div class="text-xs font-medium text-zinc-700 max-w-xs truncate" title="${meta.expertise || ''}">
-              ${meta.expertise || 'Advisory'}
-            </div>
-          </td>
-          <td>
-            <span class="bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-black px-2 py-0.5 rounded font-mono">
-              ${meta.commitment || '1-2 hrs/mo'}
-            </span>
-          </td>
-          <td>
-            <div class="text-[0.72rem] text-zinc-600 font-medium">
-              ${meta.format || '1:1 Office Hours'}
-            </div>
-          </td>
-          <td>
-            <div class="flex flex-col gap-1">
-              <button onclick="openModal('${m.id}')" class="bg-emerald-100 border border-emerald-600 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded hover:bg-emerald-200">🔍 Profile</button>
-              ${waUrl ? `<a href="${waUrl}" target="_blank" class="bg-green-100 text-green-700 border border-green-500 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-green-200" style="text-decoration:none;">💬 WhatsApp</a>` : ''}
-              ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" class="bg-blue-50 text-blue-700 border border-blue-300 px-2 py-0.5 text-[0.68rem] font-bold uppercase rounded text-center hover:bg-blue-100" style="text-decoration:none;">🔗 LinkedIn</a>` : ''}
-            </div>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    // Modal view for Leads Questionnaire & Profiles
-    window.openModal = (id) => {
-      const member = cachedMembers.find(m => m.id === id);
-      if (!member) return;
-      const meta = parseCollegeField(member.college, member);
-
-      const isInvestor = member.tier === 'Investor' || meta.source === 'InvestorPage' || (member.member_id && member.member_id.startsWith('TFC-INV-'));
-      const isMentor = member.tier === 'Mentor' || meta.source === 'MentorPage' || (member.member_id && member.member_id.startsWith('TFC-MTR-'));
-
-      const modalDiv = document.createElement('div');
-      modalDiv.id = 'crmDetailOverlay';
-      modalDiv.style.cssText = `
-        position: fixed; inset: 0; background: rgba(20, 17, 15, 0.65); backdrop-filter: blur(8px);
-        display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
-      `;
-
-      let badgeText = '📋 Lead Application Profile';
-      if (isInvestor) badgeText = '💼 Accredited Investor Profile';
-      else if (isMentor) badgeText = '🧠 Mentor & Operator Profile';
-
-      modalDiv.innerHTML = `
-        <div style="background: #FFFFFF; border: 1.5px solid var(--border-subtle); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 28px; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; color: var(--ink);">
-          <button onclick="document.getElementById('crmDetailOverlay').remove()" class="tfc-btn tfc-btn-outline" style="position: absolute; top: 18px; right: 18px; padding: 4px 10px; font-size: 0.8rem; border-radius: 9999px; line-height: 1;">✕</button>
-          
-          <div style="margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 16px;">
-            <span class="tfc-badge ${isInvestor ? 'tfc-badge-orange' : (isMentor ? 'tfc-badge-lime' : 'tfc-badge-neutral')}" style="font-size: 0.68rem; margin-bottom: 8px;">${badgeText}</span>
-            <h2 style="font-size: 1.4rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: -0.5px;">
-              ${member.name || 'Member Profile'}
-            </h2>
-            <div style="font-size: 0.85rem; color: var(--ink-soft); font-weight:600;">
-              ${isInvestor ? (meta.firm || 'Angel Investor') : (isMentor ? `${meta.role || 'Operator'} at ${meta.company || 'Tech Org'}` : meta.displayName)}
-            </div>
-            <div class="text-xs text-zinc-500 font-mono mt-1">${member.email} • ID: ${member.member_id || member.id}</div>
-          </div>
-
-          <div style="font-size: 0.88rem; line-height: 1.6;" class="space-y-4">
-            <div class="grid grid-cols-2 gap-3">
-              <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">Phone / WhatsApp</span>
-                <span style="font-weight: 700;">${meta.phone || 'No Phone'}</span>
-              </div>
-              <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 12px; padding: 10px 14px;">
-                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); display: block;">LinkedIn Profile</span>
-                <span style="font-weight: 700;">
-                  ${meta.linkedin ? `<a href="${meta.linkedin}" target="_blank" style="color:var(--primary-orange);text-decoration:underline;">View LinkedIn ↗</a>` : 'Not provided'}
-                </span>
-              </div>
-            </div>
-            
-            <div style="background: #FBF8F3; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 16px; margin-top: 16px;" class="space-y-3">
-              ${(() => {
-                if (isInvestor) {
-                  return `
-                    <div style="background: #FFF8E6; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #B45309; display: block; margin-bottom: 4px;">💼 Investor Syndicate Details</span>
-                      <div style="font-size: 0.84rem; color: #78350F; display: flex; flex-wrap: wrap; gap: 12px;">
-                        <span><strong>Entity:</strong> ${meta.entityType || 'Angel'}</span>
-                        <span><strong>Cheque:</strong> <span style="font-weight:800; color:#B45309;">${meta.chequeSize || 'N/A'}</span></span>
-                        <span><strong>Stage:</strong> ${meta.stage || 'Stage Agnostic'}</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Firm / Fund Name</p>
-                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.firm || 'Independent Angel'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Target Sectors & Verticals</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.sectors || 'All Sectors'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Preferred Engagement</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.engagement || 'Demo Day Invite'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Investment Thesis & Notes</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.notes || 'No specific thesis notes provided.'}</p>
-                    </div>
-
-                    ${meta.formSubmittedAt ? `<p style="margin: 10px 0 0; font-size: 0.72rem; color: var(--ink-soft); font-family: monospace;">Applied on: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
-                  `;
-                } else if (isMentor) {
-                  return `
-                    <div style="background: #ECFDF5; border: 1.5px solid #10B981; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #047857; display: block; margin-bottom: 4px;">🧠 Mentor Council Track</span>
-                      <div style="font-size: 0.84rem; color: #065F46; display: flex; flex-wrap: wrap; gap: 12px;">
-                        <span><strong>Org:</strong> ${meta.company || 'Tech Org'}</span>
-                        <span><strong>Role:</strong> ${meta.role || 'Operator'}</span>
-                        <span><strong>Experience:</strong> ${meta.experience || 'Senior'}</span>
-                        <span><strong>Commitment:</strong> ${meta.commitment || '1-2 hrs/mo'}</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Functional Domain Expertise</p>
-                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.expertise || 'Advisory'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Past Organizations / Background</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.pastCompanies || 'None provided'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Preferred Mentorship Format</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.format || '1:1 Office Hours'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #059669; margin: 0 0 4px;">Why Mentor / Bio</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.bio || 'No bio provided'}</p>
-                    </div>
-
-                    ${meta.formSubmittedAt ? `<p style="margin: 10px 0 0; font-size: 0.72rem; color: var(--ink-soft); font-family: monospace;">Applied on: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
-                  `;
-                } else if (meta.source === 'FellowshipPage' || (member.member_id && member.member_id.startsWith('TFC-FEL-'))) {
-                  return `
-                    <div style="background: #FFF4E5; border: 1.5px solid #FFD8A8; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                      <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #D9480F; display: block; margin-bottom: 4px;">🚀 Launchpad Candidate</span>
-                      <div style="font-size: 0.82rem; color: #495057; display: flex; flex-wrap: wrap; gap: 10px;">
-                        <span><strong>Progress:</strong> <span style="color:#D9480F;font-weight:700;">${meta.stepProgress || (meta.formSubmittedAt ? 'Completed' : 'Step 1 Lead')}</span></span>
-                        <span><strong>Status:</strong> ${meta.enrolled === 'Yes' ? 'Enrolled Student' : (meta.enrolled === 'No' ? 'Not Currently Enrolled' : (meta.enrolled || 'Student'))}</span>
-                        <span><strong>Team:</strong> ${meta.teamSize || '1'} Member(s)</span>
-                        <span><strong>Ref:</strong> ${meta.chapterRef || 'direct'}</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 1: Education & College</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">
-                        ${meta.collegeName || meta.displayName || 'Not Specified'}
-                        ${meta.collegeYear ? ` • Year: ${meta.collegeYear}` : ''}
-                        ${meta.collegeCourse ? ` • Course: ${meta.collegeCourse}` : ''}
-                      </p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: Venture Name & Stage</p>
-                      <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--ink);">${meta.venture || 'Untitled Venture'}</p>
-                      <p style="margin: 2px 0 0; font-size: 0.8rem; font-weight: 600; color: var(--ink-soft);">Stage: <strong>${meta.stage || 'Not specified'}</strong></p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: One-Line Pitch / Problem Solved</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q1 || 'Not Answered'}</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 2: Prototype / Deck / Demo Link</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">
-                        ${meta.q3 ? (meta.q3.startsWith('http') ? `<a href="${meta.q3}" target="_blank" style="color:var(--primary-orange);text-decoration:underline;word-break:break-all;">${meta.q3}</a>` : meta.q3) : '<span style="color:var(--ink-soft);font-style:italic;">No link provided</span>'}
-                      </p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Step 3: Program & Fee Commitment</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">Format: <strong>${meta.q4 || '4-Week Online Cohort'}</strong></p>
-                      <p style="margin: 2px 0 0; font-weight: 600; color: var(--ink);">Fee: <strong>₹${meta.paymentFee || '999'} Application Fee</strong> • Status: <span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.75rem; font-weight:800; text-transform:uppercase; background:${meta.payment === 'Paid' ? '#D3F9D8; color:#2B8A3E' : '#FFE3E3; color:#C92A2A'};">${meta.paymentStatus || meta.payment || 'awaiting_payment'}</span></p>
-                      ${meta.waiverRequested === 'Yes' ? `<div style="margin-top:6px; background:#FFF4E5; border:1px solid #FFD8A8; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#D9480F;"><strong>⚠️ Fee Waiver Requested:</strong> ${meta.waiverReason || 'Reason unspecified'}</div>` : ''}
-                      ${meta.formSubmittedAt ? `<p style="margin: 4px 0 0; font-size: 0.75rem; color: var(--ink-soft);">Submitted: ${new Date(meta.formSubmittedAt).toLocaleString()}</p>` : ''}
-                    </div>
-                  `;
-                } else if (meta.source === 'FinancialAid') {
-                  let aidCase = '';
-                  const caseParts = member.college.split(' | ');
-                  caseParts.forEach(p => {
-                    if (p.startsWith('Case: ')) aidCase = p.replace('Case: ', '').trim();
-                  });
-                  return `
-                    <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Financial Aid Case Justification</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${aidCase || 'Not Answered'}</p>
-                    </div>
-                  `;
-                } else {
-                  return `
-                    <div>
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q1: Why are you interested in entrepreneurship?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q1 || 'Not Answered'}</p>
-                    </div>
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q2: Are you building anything right now?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q2 || 'Not Answered'}</p>
-                    </div>
-                    <div style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-                      <p style="font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: var(--primary-orange); margin: 0 0 4px;">Q3: What's your motivation to join The Future Council?</p>
-                      <p style="margin: 0; font-weight: 600; color: var(--ink);">${meta.q3 || 'Not Answered'}</p>
-                    </div>
-                  `;
-                }
-              })()}
-            </div>
-          </div>
-          
-          <div style="display: flex; gap: 10px; margin-top: 20px;">
-            <a href="mailto:${member.email}?subject=${encodeURIComponent(isInvestor ? 'The Future Council — Investor Syndicate Welcome' : (isMentor ? 'The Future Council — Mentor Onboarding' : 'The Future Council — Follow-up'))}" class="tfc-btn tfc-btn-primary w-full justify-center" style="padding: 10px; font-size: 0.88rem; text-decoration: none;">
-              ✉️ Send Email Outreach
-            </a>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modalDiv);
-    };
-
-    // CSV Export for Investors
-    window.exportInvestorsCSV = () => {
-      const investors = cachedMembers.filter(m => {
-        const meta = parseCollegeField(m.college, m);
-        return m.tier === 'Investor' || meta.source === 'InvestorPage' || (m.member_id && m.member_id.startsWith('TFC-INV-'));
-      });
-
-      if (investors.length === 0) {
-        alert("No investors to export!");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,Phone,Firm,EntityType,ChequeSize,Stage,Sectors,Engagement,LinkedIn,Notes,SubmittedAt\n";
-
-      investors.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        const row = [
-          m.member_id || m.id,
-          `"${(m.name || '').replace(/"/g, '""')}"`,
-          m.email || '',
-          meta.phone || '',
-          `"${(meta.firm || '').replace(/"/g, '""')}"`,
-          `"${(meta.entityType || '').replace(/"/g, '""')}"`,
-          `"${(meta.chequeSize || '').replace(/"/g, '""')}"`,
-          `"${(meta.stage || '').replace(/"/g, '""')}"`,
-          `"${(meta.sectors || '').replace(/"/g, '""')}"`,
-          `"${(meta.engagement || '').replace(/"/g, '""')}"`,
-          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
-          `"${(meta.notes || '').replace(/"/g, '""')}"`,
-          meta.formSubmittedAt || m.created_at || ''
-        ];
-        csvContent += row.join(",") + "\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `TFC_Investors_${investors.length}_${new Date().toISOString().slice(0,10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-
-    // CSV Export for Mentors
-    window.exportMentorsCSV = () => {
-      const mentors = cachedMembers.filter(m => {
-        const meta = parseCollegeField(m.college, m);
-        return m.tier === 'Mentor' || meta.source === 'MentorPage' || (m.member_id && m.member_id.startsWith('TFC-MTR-'));
-      });
-
-      if (mentors.length === 0) {
-        alert("No mentors to export!");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,Phone,Company,Role,Experience,PastCompanies,Expertise,Commitment,Format,LinkedIn,Bio,SubmittedAt\n";
-
-      mentors.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        const row = [
-          m.member_id || m.id,
-          `"${(m.name || '').replace(/"/g, '""')}"`,
-          m.email || '',
-          meta.phone || '',
-          `"${(meta.company || '').replace(/"/g, '""')}"`,
-          `"${(meta.role || '').replace(/"/g, '""')}"`,
-          `"${(meta.experience || '').replace(/"/g, '""')}"`,
-          `"${(meta.pastCompanies || '').replace(/"/g, '""')}"`,
-          `"${(meta.expertise || '').replace(/"/g, '""')}"`,
-          `"${(meta.commitment || '').replace(/"/g, '""')}"`,
-          `"${(meta.format || '').replace(/"/g, '""')}"`,
-          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
-          `"${(meta.bio || '').replace(/"/g, '""')}"`,
-          meta.formSubmittedAt || m.created_at || ''
-        ];
-        csvContent += row.join(",") + "\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `TFC_Mentors_${mentors.length}_${new Date().toISOString().slice(0,10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-
-    // CSV Export for Leads (exports only the sorted, filtered entries currently visible in the CRM)
-    window.exportToCSV = () => {
-      const exportList = (currentFilteredMembers && currentFilteredMembers.length > 0)
-        ? currentFilteredMembers
-        : (document.getElementById('crmSearchInput')?.value || document.getElementById('crmTierFilter')?.value !== 'all' || document.getElementById('crmFellowshipFilter')?.value !== 'all' || document.getElementById('crmSourceFilter')?.value !== 'all')
-          ? []
-          : cachedMembers;
-
-      if (!exportList || exportList.length === 0) {
-        alert("No matching sorted entries found to export! Adjust your filters or search query.");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "ID,Name,Email,College,Phone,Country,Source,Tier,Firm_or_Company,Role_or_Title,Cheque_or_Commitment,Stage_or_Exp,Sectors_or_Expertise,LinkedIn,Fellowship,Submitted_At\n";
-
-      exportList.forEach(m => {
-        const meta = parseCollegeField(m.college, m);
-        let nameVal = (m.name || '').trim();
-        if (!nameVal && m.email) {
-          const userPrefix = m.email.split('@')[0];
-          nameVal = userPrefix.charAt(0).toUpperCase() + userPrefix.slice(1);
-        }
-        const row = [
-          m.member_id || m.id,
-          `"${nameVal.replace(/"/g, '""')}"`,
-          m.email || '',
-          `"${(meta.displayName || '').replace(/"/g, '""')}"`,
-          meta.phone || '',
-          meta.country || '',
-          meta.source || '',
-          m.tier || '',
-          `"${(meta.firm || meta.company || '').replace(/"/g, '""')}"`,
-          `"${(meta.role || meta.entityType || '').replace(/"/g, '""')}"`,
-          `"${(meta.chequeSize || meta.commitment || '').replace(/"/g, '""')}"`,
-          `"${(meta.stage || meta.experience || '').replace(/"/g, '""')}"`,
-          `"${(meta.sectors || meta.expertise || '').replace(/"/g, '""')}"`,
-          `"${(meta.linkedin || '').replace(/"/g, '""')}"`,
-          meta.fellowship || '',
-          meta.formSubmittedAt || m.created_at || ''
-        ];
-        csvContent += row.join(",") + "\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `TFC_CRM_Leads_Sorted_${exportList.length}_${new Date().toISOString().slice(0,10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-
-    // Event listeners
-    document.getElementById('crmSearchInput').addEventListener('input', renderCrmTable);
-    document.getElementById('crmTierFilter').addEventListener('change', renderCrmTable);
-    document.getElementById('crmFellowshipFilter').addEventListener('change', renderCrmTable);
-    document.getElementById('crmSourceFilter').addEventListener('change', renderCrmTable);
-    document.getElementById('crmSortSelect')?.addEventListener('change', renderCrmTable);
-
-    document.getElementById('invSearchInput')?.addEventListener('input', renderInvestorsTable);
-    document.getElementById('invChequeFilter')?.addEventListener('change', renderInvestorsTable);
-    document.getElementById('invStageFilter')?.addEventListener('change', renderInvestorsTable);
-
-    document.getElementById('mtrSearchInput')?.addEventListener('input', renderMentorsTable);
-    document.getElementById('mtrExpertiseFilter')?.addEventListener('change', renderMentorsTable);
-    document.getElementById('mtrExpFilter')?.addEventListener('change', renderMentorsTable);
-
-    document.getElementById('resSearchInput')?.addEventListener('input', renderResourceTable);
-    document.getElementById('resResourceFilter')?.addEventListener('change', renderResourceTable);
-    document.getElementById('resEngagementFilter')?.addEventListener('change', renderResourceTable);
-
-    // Zoho CRM Synchronization Handler
-    window.triggerZohoSync = async function() {
-      const btn = document.getElementById('btnZohoSync');
-      const icon = document.getElementById('zohoSyncIcon');
-      const text = document.getElementById('zohoSyncText');
-
-      btn.disabled = true;
-      icon.textContent = '⏳';
-      text.textContent = 'Syncing to Zoho CRM...';
-
-      try {
-        const res = await fetch('/api/zoho-sync?action=sync_all', { method: 'POST' });
-        const data = await res.json();
-        if (data.success && data.summary) {
-          alert(`✅ Zoho CRM Sync Complete!\n\nTotal records processed: ${data.summary.total}\nNew leads added: ${data.summary.inserted}\nExisting leads updated: ${data.summary.updated}\nErrors: ${data.summary.errors.length}`);
-          text.textContent = `Synced (${data.summary.total})`;
-          icon.textContent = '✅';
-        } else {
-          alert('⚠️ Sync notice: ' + (data.error || JSON.stringify(data)));
-          text.textContent = 'Sync Notice';
-          icon.textContent = '⚠️';
-        }
-      } catch (err) {
-        alert('❌ Error contacting Zoho Sync API: ' + err.message);
-        text.textContent = 'Sync to Zoho CRM';
-        icon.textContent = '⚡';
-      } finally {
-        setTimeout(() => {
-          btn.disabled = false;
-          text.textContent = 'Sync to Zoho CRM';
-          icon.textContent = '⚡';
-        }, 3500);
-      }
-    };
-
-    // Run auth checker
-    checkAuth();
-  </script>
+    const scoreBlock = r.type === 'application' ? '<div class="blk"><h4>Score</h4><div class="stars">' + [1, 2, 3, 4, 5].map((n) => '<button class="' + (r.score >= n ? 'on' : '') + '" data-score="' + n + '" aria-label="' + n + ' stars">★</button>').join('') + (r.score ? '<button class="btn ghost sm" data-score="0" style="margin-left:8px">Clear</button>' : '') + '</div></div>' : '';
+
+    $('overlay').innerHTML = '<div class="scrim" data-act="close"></div><aside class="drawer" role="dialog" aria-label="' + esc(r.name) + '">' +
+      '<div class="d-h"><div><h2>' + esc(r.name) + '</h2><div class="meta" style="margin-top:6px"><span class="pill ' + sm.tone + '">' + esc(sm.label) + '</span><span class="pill">' + TYPE_LABEL[r.type] + '</span>' +
+      (r.cohort ? '<span class="pill blue">' + esc(cohortLabel(r.cohort)) + '</span>' : '') + '<span class="ago">' + esc(ago(r.created)) + '</span></div></div><button class="x" data-act="close" aria-label="Close">×</button></div>' +
+      '<div class="d-b">' +
+      '<div class="blk"><h4>Contact</h4><div class="contact">' +
+      (wa ? '<a class="btn sm" href="' + esc(wa) + '" target="_blank" rel="noopener">WhatsApp</a>' : '') +
+      (r.phone ? '<a class="btn ghost sm" href="tel:' + esc(r.phone) + '">Call ' + esc(r.phone) + '</a>' : '') +
+      (r.email ? '<a class="btn ghost sm" href="mailto:' + esc(r.email) + '">Email</a>' : '') +
+      (!wa && !r.phone && !r.email ? '<span class="ago">No contact details.</span>' : '') + '</div>' +
+      (r.email ? '<p style="margin:10px 0 0;font-size:13px;color:var(--soft);overflow-wrap:anywhere">' + esc(r.email) + '</p>' : '') + '</div>' +
+      '<div class="blk"><h4>Stage</h4><div class="stagepick">' + stages.map((s) => '<button class="' + (r.stage === s.k ? 'on' : '') + '" data-setstage="' + s.k + '"' + (s.decide && !S.perms.decide ? ' disabled title="Needs manager access"' : '') + '>' + esc(s.label) + '</button>').join('') + '</div></div>' +
+      payBlock + scoreBlock +
+      '<div class="blk"><h4>Owner</h4><select class="in" id="ownerSel">' + ownerOpts + '</select>' +
+      (r.updatedBy ? '<p style="margin:8px 0 0;font-size:12px;color:var(--faint)">Last updated by ' + esc(r.updatedBy) + (r.updated ? ' · ' + esc(ago(r.updated)) : '') + '</p>' : '') + '</div>' +
+      '<div class="blk"><h4>Notes</h4><div class="notes">' +
+      (r.notes.length ? r.notes.map((n) => { const m = n.match(/^\[(.+?)\]\s*([\s\S]*)$/); return '<div class="note">' + (m ? '<small>' + esc(m[1]) + '</small>' + esc(m[2]) : esc(n)) + '</div>'; }).join('') : '<div class="ago">No notes yet.</div>') +
+      '</div><textarea class="in" id="noteIn" placeholder="Add a note for the team…"></textarea><div style="margin-top:8px"><button class="btn sm" data-act="addnote">Add note</button></div></div>' +
+      '<div class="blk"><h4>Details</h4>' + (detailKV(r) ? '<dl class="kv">' + detailKV(r) + '</dl>' : '<div class="ago">No extra details.</div>') +
+      (r.hadWinter ? '<p style="margin:10px 0 0;font-size:13px;color:var(--violet)">This person also applied to the Winter cohort. Their earlier answers are archived in this record.</p>' : '') + '</div>' +
+      '</div></aside>';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() { S.openId = null; $('overlay').innerHTML = ''; document.body.style.overflow = ''; }
+  function refreshDrawer() { if (S.openId != null) { const top = document.querySelector('.d-b'); const y = top ? top.scrollTop : 0; openDrawer(S.openId); const nb = document.querySelector('.d-b'); if (nb) nb.scrollTop = y; } render(); }
+
+  /* ------------------------------------------------------------------ *
+   * Actions
+   * ------------------------------------------------------------------ */
+  const cur = () => S.records.find((x) => x.id === S.openId);
+
+  async function setStage(k) {
+    const r = cur(); if (!r) return;
+    const meta = (STAGES[r.type] || []).find((s) => s.k === k);
+    if (meta && meta.decide && !S.perms.decide) { toast('Needs manager access', true); return; }
+    if (await saveRecord(r, { CrmStage: k }, 'Stage → ' + meta.label)) refreshDrawer();
+  }
+  async function setScore(n) { const r = cur(); if (r && await saveRecord(r, { CrmScore: n || '' }, n ? 'Score saved' : 'Score cleared')) refreshDrawer(); }
+  async function setOwner(v) { const r = cur(); if (r && await saveRecord(r, { CrmOwner: v ? encodeURIComponent(v) : '' }, 'Owner updated')) refreshDrawer(); }
+  async function addNote() {
+    const r = cur(); const el = $('noteIn'); if (!r || !el) return;
+    const text = el.value.trim(); if (!text) return;
+    const stamp = new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
+    const line = '[' + S.user.name + ' · ' + stamp + '] ' + text.replace(/\n+/g, ' ');
+    const next = r.notes.concat([line]).join('\n');
+    if (next.length > 3500) { toast('Notes are full for this person. Keep it short.', true); return; }
+    if (await saveRecord(r, { CrmNote: encodeURIComponent(next) }, 'Note added')) refreshDrawer();
+  }
+  async function setVerified(on) {
+    const r = cur(); if (!r || !S.perms.verify) return;
+    const ok = await saveRecord(r, on ? { PaymentStatus: 'verified', Payment: 'Paid' } : { PaymentStatus: 'pending_verification' }, on ? 'Payment verified' : 'Verification undone');
+    if (ok) refreshDrawer();
+  }
+
+  function currentExportRows() {
+    let list, name;
+    if (S.tab === 'apps') { list = filteredApps().filter((r) => S.app.stage === 'all' || r.stage === S.app.stage); name = 'applications'; }
+    else if (S.tab === 'chapters') { list = byType('chapterlead'); name = 'chapter-leads'; }
+    else if (S.tab === 'network') { list = byType(S.net.kind).filter((r) => matchQ(r, S.net.q)); name = S.net.kind + 's'; }
+    else { list = S.records.filter((r) => (S.people.type === 'all' || r.type === S.people.type) && matchQ(r, S.people.q)); name = 'people'; }
+    return { list, name };
+  }
+  function exportCSV() {
+    if (!S.perms.export) return;
+    const { list, name } = currentExportRows();
+    const cols = ['Name', 'Email', 'Phone', 'Type', 'Cohort', 'Stage', 'Owner', 'Score', 'Payment', 'Profile', 'Venture', 'Firm / company', 'Created'];
+    const q = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const rows = list.map((r) => [r.name, r.email, r.phone, TYPE_LABEL[r.type], r.cohort ? cohortLabel(r.cohort) : '', stageMeta(r).label, r.owner, r.score || '', r.payment, r.display, r.kv.venture || '', r.kv.firm || r.kv.company || '', r.created].map(q).join(','));
+    const blob = new Blob(['﻿' + [cols.map(q).join(',')].concat(rows).join('\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'tfc-' + name + '-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  /* ------------------------------------------------------------------ *
+   * Events (delegated)
+   * ------------------------------------------------------------------ */
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-tab],[data-open],[data-stage],[data-cohort],[data-kind],[data-act],[data-setstage],[data-score]');
+    if (!t) return;
+    if (t.dataset.tab) { S.tab = t.dataset.tab; closeDrawer(); render(); window.scrollTo(0, 0); }
+    else if (t.dataset.open) openDrawer(Number(t.dataset.open) || t.dataset.open);
+    else if (t.dataset.stage) { const [k, v] = t.dataset.stage.split(':'); ({ app: S.app, chap: S.chap, net: S.net })[k].stage = v; render(); }
+    else if (t.dataset.cohort) { S.app.cohort = t.dataset.cohort; S.app.stage = 'all'; render(); }
+    else if (t.dataset.kind) { S.net.kind = t.dataset.kind; S.net.stage = 'all'; render(); }
+    else if (t.dataset.setstage) setStage(t.dataset.setstage);
+    else if (t.dataset.score !== undefined) setScore(parseInt(t.dataset.score, 10));
+    else if (t.dataset.act === 'close') closeDrawer();
+    else if (t.dataset.act === 'export') exportCSV();
+    else if (t.dataset.act === 'reload') loadAll();
+    else if (t.dataset.act === 'addnote') addNote();
+    else if (t.dataset.act === 'verify') setVerified(true);
+    else if (t.dataset.act === 'unverify') setVerified(false);
+  });
+  document.addEventListener('input', (e) => {
+    const id = e.target.id;
+    if (id === 'appQ') { S.app.q = e.target.value; render(); }
+    else if (id === 'chapQ') { S.chap.q = e.target.value; render(); }
+    else if (id === 'netQ') { S.net.q = e.target.value; render(); }
+    else if (id === 'pplQ') { S.people.q = e.target.value; render(); }
+  });
+  document.addEventListener('change', (e) => {
+    const id = e.target.id;
+    if (id === 'appSort') { S.app.sort = e.target.value; render(); }
+    else if (id === 'pplType') { S.people.type = e.target.value; render(); }
+    else if (id === 'ownerSel') setOwner(e.target.value);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.openId != null) closeDrawer(); });
+
+  /* ------------------------------------------------------------------ *
+   * Auth
+   * ------------------------------------------------------------------ */
+  function startSession(user) {
+    S.user = user; S.perms = PERMS[user.role] || PERMS.intern;
+    $('loginView').classList.add('hidden'); $('appView').classList.remove('hidden');
+    $('whoLabel').innerHTML = '<b>' + esc(user.name) + '</b> · ' + esc(user.role);
+    loadAll();
+  }
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const u = $('lu').value.trim().toLowerCase();
+    const p = $('lp').value;
+    const staff = STAFF.find((s) => s.u === u || (s.alias || []).includes(u));
+    let ok = false;
+    try { ok = !!staff && (await sha256('tfc-crm-v2:' + staff.u + ':' + p)) === staff.hash; } catch (err) { ok = false; }
+    if (ok) {
+      try { sessionStorage.setItem(SESSION_KEY, JSON.stringify({ u: staff.u })); } catch (err) {}
+      $('loginErr').classList.add('hidden'); $('lp').value = '';
+      startSession(staff);
+    } else { $('loginErr').classList.remove('hidden'); }
+  });
+  $('btnLogout').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {} location.reload(); });
+  $('btnRefresh').addEventListener('click', loadAll);
+
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    const staff = saved && STAFF.find((s) => s.u === saved.u);
+    if (staff) startSession(staff);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>

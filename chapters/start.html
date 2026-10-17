@@ -302,9 +302,6 @@
             }]);
           }
         }
-        if (window.syncToZoho) {
-          window.syncToZoho({ name, email, phone, college: combinedData, tier: 'Ambassador' }, 'Chapter Lead Application');
-        }
       } catch (err) {
         console.warn('Lead application sync note:', err);
       }

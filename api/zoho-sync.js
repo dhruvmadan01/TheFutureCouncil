@@ -184,6 +184,9 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
+  // Zoho CRM sync is switched off.
+  return res.status(410).json({ success: false, error: 'Zoho sync is disabled' });
+
   try {
     const token = await getZohoAccessToken();
     const action = req.query.action || (req.body && req.body.action) || 'upsert_lead';

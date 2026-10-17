@@ -46,26 +46,8 @@
     return collegeStr.split(' | ')[0].trim();
   }
 
-  // Helper to push user registration / login to Zoho CRM
-  function syncToZohoCrm(userData, eventContext = '') {
-    if (!userData || !userData.email) return;
-    try {
-      const payload = {
-        name: userData.name || '',
-        email: userData.email || '',
-        phone: userData.phone || extractPhoneFromCollege(userData.college),
-        college: userData.college || '',
-        tier: userData.tier || 'Student',
-        member_id: userData.member_id || '',
-        source: eventContext || (userData.college && userData.college.includes('Source: ') ? userData.college.split('Source: ')[1].split(' | ')[0] : 'Website Auth')
-      };
-      fetch('/api/zoho-sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(err => console.warn('[ZohoSync] Async push notice:', err));
-    } catch (e) {}
-  }
+  // Zoho CRM sync is switched off. Kept as a no-op so existing callers keep working.
+  function syncToZohoCrm() {}
   window.syncToZoho = syncToZohoCrm;
 
   // Initialize from persisted storage
