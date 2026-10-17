@@ -1,0 +1,173 @@
+/* Ported from the approved TFC Premium Website preview. Every class is pv- prefixed and scoped under .pv-site. */
+.pv-site {
+  --ink: #0B0B0B;
+  --ivory: #F6F2EA;
+  --sunrise: #FF914D;
+  --ember: #E2542A;
+  --stone: #A8A196;
+  --smoke: #5A544C;
+  --line: rgba(11, 11, 11, 0.25);
+  --line-light: rgba(246, 242, 234, 0.25);
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --accent: 'Instrument Serif', Georgia, serif;
+  --text: 'DM Sans', system-ui, sans-serif;
+  --logo: url("/TFC.png");
+  color-scheme: light;
+}
+.pv-site * { box-sizing: border-box; }
+.pv-site { background: var(--ivory); }
+.pv-site { margin: 0; background: var(--ivory); color: var(--ink); font-family: var(--text); font-weight: 500; font-size: 18px; line-height: 1.5; }
+.pv-site a { color: inherit; }
+.pv-site a:focus-visible, .pv-site button:focus-visible, .pv-site summary:focus-visible, .pv-site input:focus-visible, .pv-site select:focus-visible, .pv-site textarea:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; }
+.pv-site .pv-wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.pv-site .pv-label { font-size: 13px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; margin: 0; }
+.pv-site .pv-display { font-family: var(--display); font-weight: 600; text-transform: uppercase; line-height: 0.95; margin: 0; text-wrap: balance; }
+.pv-site .pv-accent { font-family: var(--accent); font-style: italic; font-weight: 400; text-transform: none; }
+.pv-site .pv-muted { color: var(--smoke); }
+.pv-site .pv-logo { display: block; flex: none; background: var(--logo) center / contain no-repeat; }
+.pv-site .pv-site-header { border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--ivory); z-index: 5; }
+.pv-site .pv-site-header .pv-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; padding-block: 12px; }
+.pv-site .pv-lockup { display: flex; align-items: center; gap: 14px; text-decoration: none; flex: none; }
+.pv-site .pv-lockup .pv-logo { width: 52px; height: 52px; }
+.pv-site .pv-lockup span { font-size: 13px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; line-height: 1.4; }
+.pv-site .pv-nav { display: flex; align-items: center; gap: 4px 22px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.pv-site .pv-nav::-webkit-scrollbar { display: none; }
+.pv-site .pv-nav a { font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding-block: 14px; border-bottom: 2px solid transparent; white-space: nowrap; }
+.pv-site .pv-nav a:hover, .pv-site .pv-nav a[aria-current="page"] { border-bottom-color: var(--sunrise); }
+.pv-site .pv-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; background: var(--ink); color: var(--ivory); font-family: var(--text); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; border: 0; cursor: pointer; text-align: center; }
+.pv-site .pv-btn:hover { background: var(--smoke); }
+.pv-site .pv-btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.pv-site .pv-btn-ghost:hover { background: var(--ink); color: var(--ivory); }
+.pv-site .pv-btn-sun { background: var(--sunrise); color: var(--ink); }
+.pv-site .pv-btn-sun:hover { background: var(--ivory); }
+.pv-site .pv-nav .pv-btn { min-height: 44px; padding: 0 18px; border-bottom: 0; }
+.pv-site .pv-page-hero .pv-wrap { padding-block: 72px 80px; }
+.pv-site .pv-page-hero h1 { font-size: clamp(56px, 9vw, 128px); max-width: 15ch; }
+.pv-site .pv-page-hero h1 .pv-accent { font-size: 1.2em; color: var(--ember); }
+.pv-site .pv-page-hero .pv-lede { max-width: 60ch; margin: 28px 0 0; color: var(--smoke); }
+.pv-site .pv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 36px; }
+.pv-site .pv-actions .pv-note { font-size: 14px; color: var(--smoke); }
+.pv-site .pv-section { border-top: 1px solid var(--line); }
+.pv-site .pv-section .pv-wrap { padding-block: 80px; }
+.pv-site .pv-section-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 16px 64px; align-items: end; margin-bottom: 48px; }
+.pv-site .pv-section-head h2 { font-size: clamp(40px, 5.4vw, 76px); }
+.pv-site .pv-section-head p { margin: 0; color: var(--smoke); max-width: 52ch; }
+.pv-site .pv-cells { display: grid; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.pv-site .pv-cells.pv-c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pv-site .pv-cells.pv-c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pv-site .pv-cells.pv-c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pv-site .pv-cell { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pv-site .pv-cell h3 { font-family: var(--display); font-weight: 600; text-transform: uppercase; font-size: 32px; line-height: 1; margin: 0; }
+.pv-site .pv-cell p { margin: 0; color: var(--smoke); font-size: 17px; }
+.pv-site .pv-cell .pv-label { color: var(--smoke); }
+.pv-site .pv-cell b.pv-big { font-family: var(--display); font-weight: 600; font-size: clamp(48px, 5vw, 72px); line-height: 1; font-variant-numeric: tabular-nums; }
+.pv-site .pv-rows { border-top: 1px solid var(--line); }
+.pv-site .pv-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 12px 64px; padding: 26px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.pv-site .pv-row h3 { font-family: var(--display); font-weight: 600; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 46px); line-height: 1; margin: 0; }
+.pv-site .pv-row p { margin: 0; color: var(--smoke); max-width: 54ch; }
+.pv-site .pv-row .pv-stage { font-size: 13px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--smoke); display: block; margin-bottom: 8px; }
+.pv-site .pv-ink-band { background: var(--ink); color: var(--ivory); border-top: 0; }
+.pv-site .pv-ink-band .pv-section-head p, .pv-site .pv-ink-band .pv-row p, .pv-site .pv-ink-band .pv-cell p, .pv-site .pv-ink-band .pv-label { color: var(--stone); }
+.pv-site .pv-ink-band .pv-rows, .pv-site .pv-ink-band .pv-row, .pv-site .pv-ink-band .pv-cells, .pv-site .pv-ink-band .pv-cell { border-color: var(--line-light); }
+.pv-site .pv-ink-band .pv-row .pv-stage { color: var(--stone); }
+.pv-site .pv-sun-band { background: var(--sunrise); color: var(--ink); border-top: 0; }
+.pv-site .pv-sun-band .pv-section-head p, .pv-site .pv-sun-band .pv-label, .pv-site .pv-sun-band .pv-muted { color: var(--ink); }
+.pv-site .pv-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.pv-site .pv-tags li { border: 1px solid var(--ink); padding: 8px 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.pv-site .pv-table { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.pv-site .pv-table li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px 32px; padding: 16px 0; border-bottom: 1px solid var(--ink); font-size: 17px; }
+.pv-site .pv-table li span:first-child { font-size: 13px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; padding-top: 3px; }
+.pv-site .pv-table li b { font-weight: 700; }
+.pv-site .pv-ink-band .pv-table, .pv-site .pv-ink-band .pv-table li { border-color: var(--line-light); }
+.pv-site .pv-cta-band .pv-wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; padding-block: 72px; }
+.pv-site .pv-cta-band h2 { font-size: clamp(40px, 5.4vw, 76px); max-width: 16ch; }
+.pv-site details { border-bottom: 1px solid var(--line); }
+.pv-site details:first-of-type { border-top: 1px solid var(--line); }
+.pv-site summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 22px 0; font-family: var(--display); font-weight: 600; text-transform: uppercase; font-size: clamp(26px, 3vw, 36px); line-height: 1.05; }
+.pv-site summary::-webkit-details-marker { display: none; }
+.pv-site summary::after { content: "+"; font-family: var(--text); font-weight: 500; font-size: 28px; flex: none; }
+.pv-site details[open] summary::after { content: "\2212"; }
+.pv-site details p { margin: 0 0 24px; color: var(--smoke); max-width: 62ch; }
+.pv-site .pv-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
+.pv-site .pv-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pv-site .pv-field.pv-full { grid-column: 1 / -1; }
+.pv-site .pv-field label, .pv-site .pv-field legend { font-size: 12px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; padding: 0; }
+.pv-site .pv-field input, .pv-site .pv-field select, .pv-site .pv-field textarea { font: inherit; font-size: 17px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 12px 0; min-height: 48px; width: 100%; }
+.pv-site .pv-field textarea { min-height: 112px; resize: vertical; border: 1px solid var(--ink); padding: 12px; }
+.pv-site .pv-field input::placeholder, .pv-site .pv-field textarea::placeholder { color: var(--smoke); }
+.pv-site .pv-field fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.pv-site .pv-checks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.pv-site .pv-checks label { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--ink); padding: 8px 14px; font-size: 14px; font-weight: 500; letter-spacing: 0; text-transform: none; cursor: pointer; }
+.pv-site .pv-checks input { width: 16px; height: 16px; min-height: 0; accent-color: var(--ink); }
+.pv-site .pv-form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.pv-site .pv-status { font-size: 14px; font-weight: 700; margin: 0; }
+.pv-site .pv-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.pv-site .pv-chip { font: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; background: transparent; color: var(--ink); border: 1px solid var(--ink); padding: 10px 18px; min-height: 44px; cursor: pointer; }
+.pv-site .pv-chip[aria-pressed="true"] { background: var(--ink); color: var(--ivory); }
+.pv-site .pv-res-tag { font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ember); }
+.pv-site .pv-home-hero .pv-wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; padding-block: 72px 80px; }
+.pv-site .pv-home-hero h1 { font-size: clamp(64px, 11vw, 148px); }
+.pv-site .pv-home-hero h1 .pv-accent { font-size: 1.22em; color: var(--ember); }
+.pv-site .pv-tag-row { display: flex; align-items: center; gap: 18px; margin-top: 36px; }
+.pv-site .pv-tag-row .pv-rule { width: 56px; height: 1px; background: var(--sunrise); flex: none; }
+.pv-site .pv-tag-row p { margin: 0; font-size: 20px; letter-spacing: 0.04em; }
+.pv-site .pv-hero-mark { padding-left: 48px; border-left: 1px solid var(--line); align-self: stretch; display: flex; align-items: center; }
+.pv-site .pv-hero-mark .pv-logo { width: 260px; height: 260px; max-width: 100%; }
+.pv-site .pv-facts { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pv-site .pv-facts .pv-wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pv-site .pv-fact { padding: 32px 24px 32px 0; border-right: 1px solid var(--line); }
+.pv-site .pv-fact + .pv-fact { padding-left: 24px; }
+.pv-site .pv-fact:last-child { border-right: 0; }
+.pv-site .pv-fact b { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(52px, 6vw, 80px); line-height: 1; font-variant-numeric: tabular-nums; }
+.pv-site .pv-fact span { display: block; margin-top: 8px; font-size: 14px; color: var(--smoke); }
+.pv-site .pv-big-h2 { font-size: clamp(48px, 7.5vw, 104px); max-width: 14ch; }
+.pv-site .pv-big-h2 .pv-accent { color: var(--sunrise); font-size: 1.15em; }
+.pv-site .pv-lp-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: end; }
+.pv-site .pv-lp-grid h2 { font-size: clamp(52px, 8vw, 116px); }
+.pv-site .pv-stat-source { font-size: 13px; color: var(--smoke); }
+.pv-site .pv-vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); }
+.pv-site .pv-vs > div { padding: 32px; }
+.pv-site .pv-vs > div + div { border-left: 1px solid var(--line); background: var(--ink); color: var(--ivory); }
+.pv-site .pv-vs h3 { font-family: var(--display); font-weight: 600; text-transform: uppercase; font-size: 40px; line-height: 1; margin: 0 0 20px; }
+.pv-site .pv-vs ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.pv-site .pv-vs li { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.pv-site .pv-vs > div + div li { border-color: var(--line-light); }
+.pv-site .pv-letter { max-width: 64ch; }
+.pv-site .pv-letter p { margin: 0 0 18px; }
+.pv-site .pv-sign { font-weight: 700; letter-spacing: 0.04em; }
+.pv-site .pv-site-footer { background: var(--ink); color: var(--ivory); }
+.pv-site .pv-site-footer .pv-wrap { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); gap: 40px 48px; padding-block: 64px; }
+.pv-site .pv-site-footer .pv-logo { width: 64px; height: 64px; margin-bottom: 24px; }
+.pv-site .pv-foot-tag { font-family: var(--display); font-weight: 600; text-transform: uppercase; font-size: 36px; line-height: 1; margin: 0 0 20px; max-width: 14ch; }
+.pv-site .pv-site-footer p { margin: 0 0 8px; font-size: 14px; color: var(--stone); max-width: 44ch; }
+.pv-site .pv-foot-col h4 { margin: 0 0 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--stone); }
+.pv-site .pv-foot-col ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.pv-site .pv-foot-col a { text-decoration: none; font-size: 15px; display: inline-block; padding-block: 6px; }
+.pv-site .pv-foot-col a:hover { color: var(--sunrise); }
+@media (max-width: 900px) {
+.pv-site .pv-page-hero .pv-wrap, .pv-site .pv-home-hero .pv-wrap { padding-block: 48px 56px; }
+.pv-site .pv-home-hero .pv-wrap { grid-template-columns: minmax(0, 1fr); }
+.pv-site .pv-hero-mark { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+.pv-site .pv-hero-mark .pv-logo { width: 140px; height: 140px; }
+.pv-site .pv-facts .pv-wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pv-site .pv-fact:nth-child(2) { border-right: 0; }
+.pv-site .pv-fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+.pv-site .pv-fact:nth-child(3) { padding-left: 0; }
+.pv-site .pv-section .pv-wrap { padding-block: 56px; }
+.pv-site .pv-section-head, .pv-site .pv-row, .pv-site .pv-lp-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.pv-site .pv-lp-grid { gap: 40px; }
+.pv-site .pv-cells.pv-c3, .pv-site .pv-cells.pv-c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pv-site .pv-vs { grid-template-columns: minmax(0, 1fr); }
+.pv-site .pv-vs > div + div { border-left: 0; border-top: 1px solid var(--line); }
+.pv-site .pv-site-footer .pv-wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pv-site .pv-site-footer .pv-wrap > div:first-child { grid-column: 1 / -1; }
+.pv-site .pv-site-header .pv-wrap { flex-wrap: wrap; }
+.pv-site .pv-nav { width: 100%; }
+}
+@media (max-width: 560px) {
+.pv-site .pv-cells.pv-c2, .pv-site .pv-cells.pv-c3, .pv-site .pv-cells.pv-c4 { grid-template-columns: minmax(0, 1fr); }
+.pv-site .pv-form { grid-template-columns: minmax(0, 1fr); }
+.pv-site .pv-table li { grid-template-columns: minmax(0, 1fr); }
+.pv-site .pv-lockup span { display: none; }
+.pv-site .pv-tag-row p { font-size: 17px; }
+}

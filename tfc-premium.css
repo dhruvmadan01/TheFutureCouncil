@@ -1,3 +1,9 @@
+/* Self-hosted brand fonts (Latin subset) */
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/dm-sans-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:700;font-display:swap;src:url("/fonts/dm-sans-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url("/fonts/instrument-serif-latin-400-italic.woff2") format("woff2")}
+
 /* ==========================================================================
    THE FUTURE COUNCIL · PREMIUM BRAND LAYER
    Loaded AFTER tfc-theme.css on every themed page. It remaps the legacy
@@ -260,4 +266,41 @@ footer.tfc-footer .brand span { color: var(--ivory); }
 @media (max-width: 560px) {
   .pm-table li { grid-template-columns: minmax(0, 1fr); }
   .pm-tagrow p { font-size: 17px; }
+}
+
+
+/* ==========================================================================
+   FIDELITY + RESPONSIVE PASS
+   ========================================================================== */
+/* Buttons: Ink on Ivory (approved preview); Sunrise only on Ink bands */
+.btn.solid { background: var(--ink); border-color: var(--ink); color: var(--ivory) !important; }
+.btn.solid:hover { background: var(--smoke); border-color: var(--smoke); }
+.pm-ink .btn.solid, .bar .btn.solid, footer.tfc-footer .btn.solid, .nav.night-mode .btn.solid { background: var(--sunrise); border-color: var(--sunrise); color: var(--ink) !important; }
+.pm-ink .btn.solid:hover, .bar .btn.solid:hover { background: var(--ivory); border-color: var(--ivory); }
+.pm-sun .btn.dark { background: var(--ink); color: var(--ivory) !important; }
+.pm-ink .btn:not(.solid), .pm-ink .btn.lg:not(.solid) { color: var(--ivory); border-color: var(--ivory); }
+
+/* Nav: six links on laptops, four on small laptops, drawer below that */
+.nav-extra { display: none; }
+@media (min-width: 1180px) { .nav-extra { display: list-item; } }
+.nav ul.nav-links { flex-wrap: nowrap; white-space: nowrap; }
+
+/* Long headline words never force sideways scroll */
+.pm-hero h1, .pm-display { overflow-wrap: anywhere; }
+.pm-hero h1 { font-size: clamp(44px, 10vw, 148px); }
+
+/* Large screens: keep hero text readable */
+@media (min-width: 1600px) { .wrap { max-width: 1400px; } }
+
+/* Phones: comfortable touch targets, tighter rhythm, compact chapter cards */
+@media (max-width: 640px) {
+  .pm-band .wrap { padding-block: 48px; }
+  .pm-row { padding: 22px 0; }
+  .pm-actions .btn { width: 100%; }
+  .pm-fact b { font-size: 48px; }
+  .chapters-grid { gap: 10px; }
+  .chapter-box { padding: 16px; gap: 8px; }
+  .chapter-box p { display: none; }
+  .chapter-box h3 { font-size: 26px; }
+  .faq-item summary { font-size: 20px; }
 }
