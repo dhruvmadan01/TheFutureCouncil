@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Campus Chapters · The Future Council | Accelerator Scout &amp; Builder Network</title>
-  <meta name="description" content="The startup accelerator's campus network across 18 universities in India. Monthly build nights, co-founder matching, and the direct scout pipeline to Launchpad Accelerator." />
+  <meta name="description" content="The startup accelerator's campus network across 90+ colleges in India. Monthly build nights, co-founder matching, and the direct scout pipeline to Launchpad Accelerator." />
   <meta name="canonical" href="https://thefuturecouncil.in/chapters" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -13,8 +13,9 @@
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
 
   <!-- Analytics -->
   <script src="/mixpanel.min.js"></script>
@@ -272,49 +273,31 @@
 
   <main>
     <!-- HERO (CAMPUS AT NIGHT) -->
-    <header class="hero-chapters">
-      <div class="night-sky-dots" aria-hidden="true"></div>
-      <div class="wrap" style="position: relative; z-index: 2;">
-        <span class="mono" style="color: #F5A07F;">Accelerator Scout &amp; Campus Pipeline</span>
-        <h1>Every startup starts with the people next to you.</h1>
-        <p class="sub">
-          Student-run chapters across 18 campuses acting as the grassroots pipeline for India's student startup accelerator. Monthly build nights, co-founder matching, and semester demo days on your own campus. Free to join.
-        </p>
-
-        <!-- WHAT A CHAPTER DOES: 4 CARDS -->
-        <div class="four-cards">
-          <div class="ch-card">
-            <span class="mono">01 · Monthly</span>
-            <h3>Monthly Build Night</h3>
-            <p>Work sprints where student engineers, designers, and domain thinkers gather to build prototypes side by side.</p>
-          </div>
-          <div class="ch-card">
-            <span class="mono">02 · Always On</span>
-            <h3>Co-Founder Matching</h3>
-            <p>Meet peers on your campus with complementary skills who want to start something real instead of waiting in line.</p>
-          </div>
-          <div class="ch-card">
-            <span class="mono">03 · Semester</span>
-            <h3>Semester Demo Day</h3>
-            <p>Showcase working products to the wider campus, local alumni founders, and visiting startup operators.</p>
-          </div>
-          <div class="ch-card">
-            <span class="mono">04 · Founder Squads</span>
-            <h3>Build &amp; Pitch Sprints</h3>
-            <p>Peer co-working sprints to iterate on MVPs, practice mock pitches, and get candid feedback before demo day.</p>
-          </div>
+    <header class="pm-hero">
+      <div class="wrap">
+        <div>
+          <p class="pm-label pm-muted" style="margin-bottom:28px">Chapters at 90+ colleges · Free to join</p>
+          <h1>Every startup starts with the people next to <span class="accent">you.</span></h1>
+          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
+          <p class="pm-lede">Student-run Chapters are the grassroots pipeline for India's student startup accelerator. Monthly build nights, co-founder matching and semester demo days on your own campus.</p>
+          <div class="pm-actions"><a class="btn solid lg" href="#directory">Find your Chapter</a><a class="btn lg" href="#start">Start one</a></div>
         </div>
-
-        <!-- MEMBER PERK (SPEC 5.3) -->
-        <div class="perk-box">
-          <div>
-            <strong style="font-family: var(--display); font-size: 20px; display: block; color: var(--warm);">Chapter Member Perk</strong>
-            <span style="font-size: 14.5px; color: #E9DDD0;">Every verified chapter member gets direct access to local build nights, co-founders, and Demo Days.</span>
-          </div>
-          <a class="btn solid sm" href="#directory">Find Your Chapter ↓</a>
-        </div>
+        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
       </div>
     </header>
+
+    <section class="pm-band pm-ink" aria-labelledby="h-does">
+      <div class="wrap">
+        <p class="pm-label">What a Chapter does</p>
+        <h2 class="pm-display pm-big" id="h-does" style="margin-top:28px">Build next to <span class="accent">people.</span></h2>
+        <div class="pm-rows">
+          <div class="pm-row"><h3 class="pm-display">Monthly build night</h3><p>Work sprints where engineers, designers and domain thinkers build prototypes side by side.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Co-founder matching</h3><p>Meet peers on your campus with complementary skills who want to start something real.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Semester demo day</h3><p>Show working products to your campus, alumni founders and visiting operators.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Build and pitch sprints</h3><p>Co-working sprints to iterate on your MVP and practise pitches before demo day.</p></div>
+        </div>
+      </div>
+    </section>
 
     <!-- CHAPTERS DIRECTORY -->
     <section class="dir-sec" id="directory">
@@ -322,7 +305,7 @@
         <div class="sec-head">
           <div>
             <p class="mono kick">Directory</p>
-            <h2>Explore Active Campus Chapters.</h2>
+            <h2>Explore Live Campus Chapters.</h2>
           </div>
           <p class="lede">Search for your university or filter by region to join build nights and local groups.</p>
         </div>
@@ -338,7 +321,7 @@
         </div>
 
         <div style="font-family: var(--mono); font-size: 13px; color: var(--ink-soft); margin-top: 14px;" id="countLabel">
-          18 campus chapters active in the directory
+          95 Live Chapters
         </div>
 
         <!-- DYNAMIC CARDS CONTAINER -->
@@ -380,7 +363,7 @@
           <p class="mono kick">Next Stop on the Path</p>
           <h3 style="font-size: clamp(24px, 3.4vw, 36px); margin-top: 8px;">Building a venture on campus?</h3>
           <p style="color: var(--ink-soft); font-size: 16px; max-width: 44ch; margin: 10px auto 24px;">
-            Apply to Launchpad. 4 weeks fully online in small pods with operators and investors, ending at Demo Day. 2% equity in selected ventures. Zero success fees.
+            Apply to Launchpad, open to anyone. Fully online in small pods with operators and investors, ending at Demo Day. 2% equity in selected ventures. Zero success fees.
           </p>
           <a class="btn solid lg" href="/launchpad">Explore Launchpad →</a>
         </div>
@@ -423,6 +406,7 @@
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>
+            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -479,24 +463,19 @@
             <p style="color: var(--ink-soft); font-size: 14px; margin-top: 8px; line-height: 1.5;">${ch.desc}</p>
           </div>
           <div style="font-size: 12.5px; color: var(--ink-soft); margin-top: 4px;">
-            <b>Recent:</b> ${ch.lastEvent || 'Campus Build Night'}
+            ${ch.lastEvent ? '<b>Recent:</b> ' + ch.lastEvent : ''}
           </div>
           <div class="chapter-lead-row">
-            <div class="lead-avatar">
-              <img src="/${ch.photo || 'TFC.png'}" alt="${ch.leadName}" onerror="this.src='/TFC.png'" />
-            </div>
-            <div class="lead-meta">
-              <strong>${ch.leadName}</strong>
-              <span>${ch.leadRole}</span>
-            </div>
-            <a class="btn sm" href="/chapters/${ch.id}" style="margin-left: auto;">View Chapter</a>
+            ${ch.leadName ? `<div class="lead-avatar"><img src="/${ch.photo || 'TFC.png'}" alt="${ch.leadName}" onerror="this.src='/TFC.png'" /></div>
+            <div class="lead-meta"><strong>${ch.leadName}</strong><span>${ch.leadRole}</span></div>` : ''}
+            <a class="btn sm" href="${ch.hasPage ? '/chapters/' + ch.id : '/join'}" style="margin-left: auto;">${ch.hasPage ? 'View Chapter' : 'Join this Chapter'}</a>
           </div>
         </article>
       `).join('');
 
       if (countLabel) {
         countLabel.textContent = list.length === allChapters.length
-          ? '18 chapters active across the network'
+          ? list.length + ' Live Chapters across India'
           : `Showing ${list.length} chapters`;
       }
     }
@@ -507,7 +486,7 @@
 
       const filtered = allChapters.filter(ch => {
         const matchesQ = !q || ch.name.toLowerCase().includes(q) || ch.college.toLowerCase().includes(q) || ch.city.toLowerCase().includes(q);
-        const matchesState = state === 'all' || ch.state === state;
+        const matchesState = state === 'all' || ch.region === state;
         return matchesQ && matchesState;
       });
       renderChapters(filtered);

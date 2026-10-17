@@ -13,8 +13,9 @@
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
 
   <!-- Analytics -->
   <script src="/mixpanel.min.js"></script>
@@ -113,13 +114,16 @@
   </div>
 
   <main>
-    <header class="lib-hero">
+    <header class="pm-hero">
       <div class="wrap">
-        <span class="mono kick">Open Source Founder Library</span>
-        <h1 style="font-size: clamp(34px, 5.5vw, 68px); margin-top: 12px;">The Founder Library</h1>
-        <p class="lede" style="font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-soft); max-width: 52ch; margin-top: 12px; line-height: 1.5;">
-          Battle-tested frameworks, cold outreach swipe files, equity calculators, and college startup policy guides. Free for all student builders.
-        </p>
+        <div>
+          <p class="pm-label pm-muted" style="margin-bottom:28px">Open source founder library</p>
+          <h1>The Founder <span class="accent">Library.</span></h1>
+          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
+          <p class="pm-lede">Battle-tested frameworks, cold outreach swipe files, equity calculators and college startup policy guides. Free for all student builders.</p>
+          <div class="pm-actions"><a class="btn solid lg" href="/join">Join free</a></div>
+        </div>
+        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
       </div>
     </header>
 
@@ -310,6 +314,7 @@
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>
+            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
           </ul>
         </div>
         <div class="footer-col">

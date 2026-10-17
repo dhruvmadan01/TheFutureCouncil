@@ -13,8 +13,9 @@
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
 
   <!-- Supabase & Analytics -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -116,115 +117,59 @@
 
   <main>
     <!-- HERO: FOUNDERS' NOTE (SPEC 5.8 ITEM 1) -->
-    <header class="about-hero">
-      <div class="wrap letter">
+    <header class="pm-hero">
+      <div class="wrap">
         <div>
-          <span class="mono kick">The Founders' Note</span>
-          <div class="faces" style="margin-top: 18px;">
-            <div class="face"><img src="/dhruv.jpeg" alt="Dhruv Madan" onerror="this.parentNode.textContent='Photo: Dhruv'"></div>
-            <div class="face"><img src="/aryaveer.jpeg" alt="Aryaveer Chauhan" onerror="this.parentNode.textContent='Photo: Aryaveer'"></div>
-          </div>
-          <p class="sig" style="margin-top: 16px;">
-            Dhruv Madan &amp; Aryaveer Chauhan<br>
-            <span style="font-size: 11.5px; color: var(--ink-soft);">Founders, The Future Council</span>
-          </p>
-        </div>
-        <div>
-          <h1 style="font-size: clamp(32px, 4.8vw, 64px); line-height: 1.15; margin-bottom: 24px;">
-            Why we started The Future Council.
-          </h1>
-          <div style="font-size: 17px; line-height: 1.65; color: var(--ink-soft); display: grid; gap: 16px;">
-            <p>
-              We're students too. We watched friends spend three years preparing for one placement season, and a handful spend the same years building something of their own.
-            </p>
-            <p>
-              The students in the placement queue were memorizing answers to mock interviews, stressing over CGPA cut-offs, and waiting for someone else to pick them. The handful who were building had real users, learned how to sell, and gained genuine confidence.
-            </p>
-            <p>
-              We started The Future Council as a student startup accelerator so that the second path wouldn't depend on which college you got into. If you have the agency to build something real, you should have access to co-founders, operator mentorship, and venture capital from day one.
-            </p>
+          <p class="pm-label pm-muted" style="margin-bottom:28px">The founders' note</p>
+          <h1>Why we started <span class="accent">TFC.</span></h1>
+          <div class="pm-tagrow"><span class="rule"></span><p>Dhruv Madan &amp; Aryaveer Chauhan</p></div>
+          <div class="pm-lede">
+            <p style="margin:0 0 16px">We are students too. We watched friends spend three years preparing for one placement season, and a handful spend the same years building something of their own.</p>
+            <p style="margin:0 0 16px">The students in the queue memorized mock-interview answers, stressed over CGPA cut-offs and waited for someone else to pick them. The handful who built had real users, learned to sell and gained genuine confidence.</p>
+            <p style="margin:0">We started The Future Council so the second path would not depend on which college you got into. If you have the agency to build something real, you should have co-founders, operator mentorship and investors from day one.</p>
           </div>
         </div>
+        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
       </div>
     </header>
 
-    <!-- VISION & VALUES (SPEC 5.8 ITEM 2) -->
-    <section style="padding-block: clamp(64px, 9vw, 110px);">
+    <section class="pm-band pm-ink" aria-labelledby="h-values">
       <div class="wrap">
-        <div class="sec-head stacked">
-          <span class="mono kick">Principles</span>
-          <h2>Our Core Values</h2>
-          <p class="lede">How we make decisions, run cohorts, and treat student founders.</p>
-        </div>
-
-        <div class="values-grid">
-          <div class="value-card">
-            <span class="value-num">Value 01</span>
-            <h3>Access Over Pedigree</h3>
-            <p>Launchpad is fully online, with dedicated written feedback for every applicant. We evaluate what you have shipped, never your college brand or GPA.</p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-num">Value 02</span>
-            <h3>Build Over Talk</h3>
-            <p>No business plan competitions or theoretical pitch deck debates. We measure live prototypes, user interviews, and customer traction.</p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-num">Value 03</span>
-            <h3>We Win When You Win</h3>
-            <p>We take 2% equity in selected Launchpad accelerator companies, aligning our skin in the game directly with your venture's long-term success. No success fees.</p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-num">Value 04</span>
-            <h3>Community Before Competition</h3>
-            <p>Campus chapters, peer pods of 4–5 founders, and fellow founders across our chapters. We help each other debug, test, and distribute.</p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-num">Value 05</span>
-            <h3>Honest About Risk</h3>
-            <p>Most startups fail. We don't sell illusions. We teach the fundamentals and highlight deferred placement safety nets so students build with confidence.</p>
-          </div>
-
-          <div class="value-card">
-            <span class="value-num">Value 06</span>
-            <h3>Builders Pay It Forward</h3>
-            <p>Today's accelerated founders become tomorrow's campus chapter leads, mentor operators, and angel investors for the next cohort.</p>
-          </div>
+        <p class="pm-label">Principles</p>
+        <h2 class="pm-display pm-big" id="h-values" style="margin-top:28px">Our core <span class="accent">values.</span></h2>
+        <div class="pm-rows">
+          <div class="pm-row"><h3 class="pm-display">Access over pedigree</h3><p>Launchpad is fully online, with written feedback for every applicant. We evaluate what you have shipped, never your college brand or GPA.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Build over talk</h3><p>No business plan competitions or pitch deck debates. We measure live prototypes, user interviews and customer traction.</p></div>
+          <div class="pm-row"><h3 class="pm-display">We win when you win</h3><p>We take 2% equity in selected Launchpad companies and no success fee, so our incentives sit with your long-term success.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Community before competition</h3><p>Chapters, pods of 4–5 founders and fellow builders across India. We help each other debug, test and distribute.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Honest about risk</h3><p>Most startups fail. We do not sell illusions. We teach the fundamentals and point to the deferred-placement safety nets.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Builders pay it forward</h3><p>Founders from one cohort become mentors and angel investors for the next cohort.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- HOW WE MAKE MONEY (SPEC 5.8 ITEM 3) -->
-    <section class="deal" style="padding-block: clamp(48px, 8vw, 96px); background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
-      <div class="wrap">
-        <div class="sec-head stacked">
-          <span class="mono kick">Radical Transparency</span>
-          <h2>How our startup accelerator makes money.</h2>
-          <p class="lede">Being transparent about money is central to our brand. Here is our entire business model.</p>
+    <section class="pm-band pm-sun" aria-labelledby="h-money">
+      <div class="wrap pm-grid">
+        <div>
+          <p class="pm-label" style="margin-bottom:24px">Radical transparency</p>
+          <h2 class="pm-display" id="h-money">How we make <span class="accent" style="color:var(--ink)">money.</span></h2>
+          <p style="max-width:48ch;margin-top:28px">No hidden incentives. Chapters are free for every student. Launchpad takes a one-time ₹999 application fee and 2% equity in the 20 selected ventures, so founders keep 98%. There is no success fee.</p>
+          <div class="pm-actions"><a class="btn dark lg" href="/launchpad#terms">Read the full terms</a></div>
         </div>
+        <ul class="pm-table">
+          <li><span>Chapters</span><b>Free</b></li>
+          <li><span>Launchpad application</span><b>₹999, one time</b></li>
+          <li><span>Equity in selected ventures</span><b>2%</b></li>
+          <li><span>Success fee</span><b>Zero</b></li>
+        </ul>
+      </div>
+    </section>
 
-        <div class="ticket" style="margin-top: 24px;">
-          <div class="main">
-            <p class="mono kick">Revenue Streams · Single Source of Truth</p>
-            <h2>No hidden incentives.</h2>
-            <div class="terms">
-              <div><b>₹0</b><span>free campus chapters</span></div>
-              <div><b>₹999</b><span>Launchpad to apply</span></div>
-              <div><b>2%</b><span>equity in selected startups</span></div>
-              <div><b>₹0</b><span>success fees</span></div>
-            </div>
-            <p class="fine">
-              Campus chapters are 100% free for all students. Launchpad applications are ₹999 (a one-time fee to filter for serious candidates and fund individualized written feedback + masterclass access). Launchpad takes 2% equity in selected cohort startups to align our incentives directly with your long-term success. No success fees on capital raised.
-            </p>
-          </div>
-          <aside class="stub">
-            <span class="mono">Admissions &amp; Terms</span>
-            <div class="count">2% Equity<small>98% Founder Owned</small></div>
-            <a class="btn solid" href="/launchpad#terms">Read Full Terms Table</a>
-          </aside>
+    <section class="pm-band" aria-labelledby="h-partner">
+      <div class="wrap">
+        <div class="pm-head">
+          <div><p class="pm-label pm-muted" style="margin-bottom:24px">Career partner</p><h2 class="pm-display" id="h-partner">Building and your <span class="accent">career.</span></h2></div>
+          <p>We have partnered with <a href="https://www.ftbhustle.com/" target="_blank" rel="noopener" style="text-decoration:underline;text-decoration-color:var(--sunrise);text-decoration-thickness:2px;text-underline-offset:4px"><b>Fire in the Belly (FTB)</b></a> to help you in your career too, with internship support for TFC builders.</p>
         </div>
       </div>
     </section>
@@ -242,12 +187,12 @@
           <div class="council-person">
             <div class="face" style="margin: 0 auto 12px;"><img src="/dhruv.jpeg" alt="Dhruv Madan" onerror="this.parentNode.textContent='Dhruv'"></div>
             <strong>Dhruv Madan</strong>
-            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">Founder, CEO &amp; CTO</span>
+            <span style="display:block; font-size:13px; color:var(--ink-soft); margin-top:2px;">Founder · CEO, CTO &amp; CMO</span>
           </div>
           <div class="council-person">
             <div class="face" style="margin: 0 auto 12px;"><img src="/aryaveer.jpeg" alt="Aryaveer Chauhan" onerror="this.parentNode.textContent='Aryaveer'"></div>
             <strong>Aryaveer Chauhan</strong>
-            <span style="display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;">Co-Founder</span>
+            <span style="display:block; font-size:13px; color:var(--ink-soft); margin-top:2px;">Co-Founder · Partnerships &amp; Operations</span>
           </div>
         </div>
       </div>
@@ -347,6 +292,7 @@
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>
+            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
           </ul>
         </div>
         <div class="footer-col">

@@ -13,8 +13,9 @@
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
 
   <!-- Analytics -->
   <script src="/mixpanel.min.js"></script>
@@ -293,20 +294,20 @@
 
   <main>
     <!-- HERO -->
-    <header class="hero-launchpad">
+    <header class="pm-hero">
       <div class="wrap">
-        <div class="status-pill">
-          <i></i>
-          <span>Spring Cohort 02 · Registrations open · Deadline: Jan 15, 11:59 PM IST · Winter Cohort registrations closed (kicks off Nov 1)</span>
+        <div>
+          <p class="pm-label pm-muted" style="margin-bottom:28px">Launchpad Fellowship · Open to anyone</p>
+          <h1>From student project to funded <span class="accent">startup.</span></h1>
+          <div class="pm-tagrow"><span class="rule"></span><p>Twenty founders per cohort. Fully online.</p></div>
+          <p class="pm-lede">Launchpad is India's student startup accelerator. We select 20 founders per cohort to build with operators and investors, ending in Demo Day. You do not need to be in a Chapter to apply. Four cohorts every year.</p>
+          <div class="pm-actions">
+            <a class="btn solid lg" href="/launchpad/fellowship" data-apply-cta>Apply to Launchpad</a>
+            <a class="btn lg" href="#terms">See full terms</a>
+          </div>
+          <p class="pm-note">Cohort 02 (Spring) is open until 15 January 2027 and kicks off on 1 February 2027. Cohort 01 (Winter) is closed.</p>
         </div>
-        <h1>From student project to funded startup.</h1>
-        <p class="sub">
-          Launchpad is India's student startup accelerator selecting 20 collegiate founders per cohort for fully online building with operators and investors, ending in Demo Day. 2% equity taken in selected ventures. Four cohorts every year.
-        </p>
-        <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
-          <a class="btn solid lg" href="/launchpad/fellowship">Apply to Launchpad →</a>
-          <a class="btn lg" href="#terms">See full terms</a>
-        </div>
+        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
       </div>
     </header>
 
@@ -399,263 +400,54 @@
     </section>
 
     <!-- THE DEAL TICKET -->
-    <section class="deal" id="terms" aria-labelledby="h-deal">
-      <div class="wrap">
-        <div class="ticket">
-          <div class="main">
-            <p class="mono kick">The Accelerator Agreement · Spring Cohort 02</p>
-            <h2 id="h-deal">We only win if you do.</h2>
-            <div class="terms">
-              <div><b>20</b><span>founders selected</span></div>
-              <div><b>₹999</b><span>to apply, one-time</span></div>
-              <div><b>2%</b><span>equity taken</span></div>
-              <div><b>Sessions</b><span>included for all applicants</span></div>
-            </div>
-            <p class="fine">
-              The ₹999 fee filters for serious candidates and funds individualized written feedback. We take 2% equity in the 20 selected cohort ventures. <b>Not selected for the cohort?</b> You still receive personalized written feedback and full access to all virtual leader and mentor sessions throughout the cohort. (Founder pods, 1:1 mentor office hours, investor intros, and Demo Day pitch slots remain exclusive to the 20 selected founders.)
-            </p>
-          </div>
-          <aside class="stub">
-            <span class="mono">Spring Cohort Deadline</span>
-            <div class="count" id="countdown">Jan 15, 11:59 PM IST<small>&nbsp;</small></div>
-            <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
-            <span class="waiver">
-              Strictly 20 founders · Spring kickoff Feb 1 · Winter Cohort registrations closed (kicks off Nov 1)
-            </span>
-          </aside>
-        </div>
-
-        <!-- FULL TERMS TABLE -->
-        <div class="terms-table-sec">
-          <div class="mono kick">Full Transparency · Single Source of Truth</div>
-          <h3 style="font-size: clamp(24px, 3vw, 36px); margin-top: 8px;">The rules of the table.</h3>
-          <table class="terms-table">
-            <thead>
-              <tr>
-                <th>Term</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Cohort Size</td>
-                <td>20 founders per cohort, strictly selected.</td>
-              </tr>
-              <tr>
-                <td>Application Fee</td>
-                <td>₹999, one time, paid at application, non-refundable. Covers detailed written evaluation and actionable feedback from our review team.</td>
-              </tr>
-              <tr>
-                <td>Commitment Filter</td>
-                <td>The ₹999 fee ensures high-intent applicants, prevents spam or fake submissions, and guarantees serious peer cohorts.</td>
-              </tr>
-              <tr>
-                <td>Selection Basis</td>
-                <td>Selected entirely on the problem, your progress and your team. Never your college name or pedigree.</td>
-              </tr>
-
-              <tr>
-                <td>Equity Taken</td>
-                <td>2% equity in the 20 selected cohort ventures under a standard founder agreement.</td>
-              </tr>
-              <tr>
-                <td>Success Fee</td>
-                <td>None. 0% success fee on capital raised.</td>
-              </tr>
-              <tr>
-                <td>If Not Selected</td>
-                <td>Full access to all virtual leader &amp; mentor sessions throughout the cohort + individualized written feedback on your application. (Founder pods, 1:1 office hours, investor intros &amp; Demo Day remain exclusive to the 20 selected founders.)</td>
-              </tr>
-              <tr>
-                <td>Format &amp; Time</td>
-                <td>Fully online, 4 cohorts every year, pods of 4–5 founders, weekly Sunday Live Labs, 1:1 mentor office hours, ending in Demo Day. Commitment: 6–8 hours/week.</td>
-              </tr>
-              <tr>
-                <td>Cohort Dates</td>
-                <td>Winter Cohort (Cohort 01): registrations closed, kicks off Nov 1, 2026. Spring Cohort (Cohort 02): registrations open until Jan 15, 2027 at 11:59 PM IST, kickoff Feb 1, 2027.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS: 4 STOPS -->
-    <section class="path" style="padding-block: clamp(48px, 8vw, 96px); background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <p class="mono kick">The Accelerator Journey</p>
-            <h2>How Launchpad works.</h2>
-          </div>
-          <p class="lede">From your initial submission to pitching vetted angel investors at Demo Day.</p>
-        </div>
-
-        <div class="stops">
-          <!-- Step 1 -->
-          <article class="stop">
-            <div class="pin">01</div>
-            <div class="stop-card">
-              <div>
-                <span class="who">Stage 1 · Apply</span>
-                <h3>Apply<small>Submit what you've built.</small></h3>
-                <p>Fill out our short, straightforward application. Tell us what problem you're solving, who you've talked to, and your progress. ₹999 one-time application fee.</p>
-              </div>
-              <ul>
-                <li><b>No Deck Needed</b>Just honest answers about your project</li>
-                <li><b>Any College</b>Open to student founders and early-stage builders across India</li>
-                <li><b>High Intent</b>Fee filters for serious applicants and covers detailed written feedback</li>
-              </ul>
-              <div class="act">
-                <a class="btn solid sm" href="/launchpad/fellowship">Open Launchpad Application ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Step 2 -->
-          <article class="stop">
-            <div class="pin">02</div>
-            <div class="stop-card">
-              <div>
-                <span class="who">Stage 2 · Selection</span>
-                <h3>Review &amp; Feedback<small>20 in. Sessions for everyone.</small></h3>
-                <p>We review every application thoroughly. Twenty founders are admitted to each cohort. Every applicant not selected receives personalized written feedback and full access to attend all virtual leader and mentor sessions.</p>
-              </div>
-              <ul>
-                <li><b>20 Seats</b>Kept intimate so every team gets personal attention</li>
-                <li><b>Written Review</b>What worked and specific actionable fixes</li>
-                <li><b>Virtual Access</b>Full attendance to all leader &amp; mentor sessions</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Step 3 -->
-          <article class="stop">
-            <div class="pin">03</div>
-            <div class="stop-card">
-              <div>
-                <span class="who">Stage 3 · Build &amp; Refine</span>
-                <h3>Build &amp; Refine<small>Pods, labs, and office hours.</small></h3>
-                <p>Fully online. You are placed in a pod of 4–5 peer founders. Attend weekly Sunday Live Labs, iterate on customer feedback, and meet 1:1 with operators who have scaled companies.</p>
-              </div>
-              <ul>
-                <li><b>Kickoff</b>Pod orientation and founder pods</li>
-                <li><b>Live Labs</b>Live labs and mentor office hours</li>
-                <li><b>1:1 Mentors</b>Direct feedback from experienced operators</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Step 4 -->
-          <article class="stop">
-            <div class="pin">04</div>
-            <div class="stop-card">
-              <div>
-                <span class="who">Stage 4 · Pitch Prep</span>
-                <h3>Demo Prep &amp; Mock Pitches<small>Sharpen your deck and delivery.</small></h3>
-                <p>Run simulated investor pitch sessions with TFC partners and visiting angels. Dial in your unit economics, deck clarity, and 2-minute pitch before live investors.</p>
-              </div>
-              <ul>
-                <li><b>Pitch Practice</b>Word-by-word delivery critique</li>
-                <li><b>Deck Polish</b>Cut the noise and lead with metrics</li>
-                <li><b>Peer Scrimmages</b>Present to other pods</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Step 5 -->
-          <article class="stop last">
-            <div class="pin">05</div>
-            <div class="stop-card">
-              <div>
-                <span class="who">Stage 5 · Demo Day</span>
-                <h3>Demo Day<small>Pitch to real investors.</small></h3>
-                <p>Present your 2-minute pitch and live product demo to angel investors and early-stage funds. Connect directly for follow-up diligence and fundraising.</p>
-              </div>
-              <ul>
-                <li><b>Virtual Demo</b>Live virtual stage with verified investors</li>
-                <li><b>Direct Intros</b>Warm introductions to relevant angels and micro-VCs</li>
-                <li><b>Aligned Terms</b>2% equity in selected ventures · No success fee</li>
-              </ul>
-              <div class="act">
-                <a class="btn solid" href="/launchpad/fellowship">Apply to Launchpad</a>
-                <span>Spring Cohort kicks off Feb 1.</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT YOU GET -->
-    <section style="padding-block: clamp(64px, 9vw, 110px);">
-      <div class="wrap">
-        <div class="sec-head stacked">
-          <p class="mono kick">Core Program Components</p>
-          <h2>Everything built for momentum.</h2>
-          <p class="lede">No generic video lectures. Everything in Launchpad is focused on customer traction, product iteration, and investor readiness.</p>
-        </div>
-
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <span class="icon-num">01</span>
-            <h3>Founder Pods</h3>
-            <p>You are matched into a private pod of 4–5 student founders at a similar build stage. Weekly check-ins keep you shipping on schedule.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">02</span>
-            <h3>Weekly Live Cohort Labs</h3>
-            <p>Hands-on work sessions tackling user discovery, distribution playbooks, pricing psychology, and college startup policy navigation.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">03</span>
-            <h3>Mentor Office Hours</h3>
-            <p>Book 1:1 time with founders and operators who give sharp, no-bullshit feedback on your product, marketing, and metrics.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">04</span>
-            <h3>Virtual Demo Day</h3>
-            <p>A focused, invite-only pitch showcase where you present your traction to angels, scout funds, and early-stage investors looking for student builders.</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">05</span>
-            <h3>Targeted Investor Intros</h3>
-            <p>We match you directly with angels who invest in your specific sector (B2B SaaS, consumer, dev tools, AI, hardware, fintech).</p>
-          </div>
-          <div class="benefit-card">
-            <span class="icon-num">06</span>
-            <h3>Lifelong Builder Network</h3>
-            <p>Direct access to our national network of 90+ campus chapters and fellow founders across India.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NOT SELECTED RECEIPT -->
-    <section class="fails" style="background: var(--warm); border-top: 1px solid var(--line);">
-      <div class="wrap fails-grid">
+    <section class="pm-band pm-sun" id="terms" aria-labelledby="h-deal">
+      <div class="wrap pm-grid">
         <div>
-          <p class="mono kick">Guaranteed Return on Your Time</p>
-          <h2 style="margin-top:12px">Not selected? You still leave with something.</h2>
-          <p class="lede">
-            We believe applying should make your startup stronger, even if you don't get in.
-          </p>
-          <p style="margin-top: 18px; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6;">
-            Every applicant receives a dedicated evaluation. If you don't make the 20-founder cohort, you still get individualized written critique and full access to all virtual leader and mentor sessions throughout the cohort. (Pods, 1:1 office hours, investor intros, and Demo Day remain exclusive to the 20 selected founders.)
-          </p>
+          <p class="pm-label" style="margin-bottom:24px">The accelerator agreement</p>
+          <h2 class="pm-display" id="h-deal">We only win if <span class="accent" style="color:var(--ink)">you do.</span></h2>
+          <p style="max-width:48ch;margin-top:28px">The ₹999 fee filters for serious applicants and funds individualized written feedback on every application. We take 2% equity in the 20 selected ventures and no success fee on what you raise.</p>
+          <div class="pm-actions"><a class="btn dark lg" href="/launchpad/fellowship" data-apply-cta>Apply now</a></div>
         </div>
-        <div class="receipt" aria-label="What you receive even if not selected">
-          <h3>Launchpad Application · Value Guarantee</h3>
-          <ul>
-            <li><span>Written Review by TFC Partners</span><span>✓ Included</span></li>
-            <li><span>Personalized points to fix</span><span>✓ Included</span></li>
-            <li><span>All virtual leader &amp; mentor sessions</span><span>✓ Access Granted</span></li>
-            <li><span>Campus chapter co-founder network</span><span>✓ Free</span></li>
-          </ul>
-          <div class="tot">
-            <span>Guaranteed Feedback</span>
-            <span>Always</span>
-          </div>
+        <ul class="pm-table">
+          <li><span>Founders per cohort</span><b>20</b></li>
+          <li><span>Application fee</span><b>₹999, one time, non-refundable</b></li>
+          <li><span>Equity taken</span><b>2% in selected ventures</b></li>
+          <li><span>Success fee</span><b>Zero</b></li>
+          <li><span>Not selected?</span><b>Written feedback + 50% off your next application</b></li>
+          <li><span>Format</span><b>Fully online, pods of 4–5, 6–8 hrs/week</b></li>
+          <li><span>Cohorts</span><b>Four a year, one each season</b></li>
+          <li><span>Cohort 02 (Spring)</span><b>Apply by 15 Jan 2027 · kickoff 1 Feb 2027</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pm-band" aria-labelledby="h-how">
+      <div class="wrap">
+        <div class="pm-head">
+          <div><p class="pm-label pm-muted" style="margin-bottom:24px">The journey</p><h2 class="pm-display" id="h-how">How Launchpad <span class="accent">works.</span></h2></div>
+          <p>From your first application to pitching angel investors at Demo Day. Selection is on the problem, your progress and your team. Never your college name.</p>
+        </div>
+        <div class="pm-rows">
+          <div class="pm-row"><h3 class="pm-display">01 Apply</h3><p>Tell us what problem you are solving, who you have talked to and what you have built. No deck needed. ₹999 one-time fee.</p></div>
+          <div class="pm-row"><h3 class="pm-display">02 Review and feedback</h3><p>We review every application. Twenty founders are admitted. Everyone else gets personalized written feedback and 50% off the next application.</p></div>
+          <div class="pm-row"><h3 class="pm-display">03 Build and refine</h3><p>You join a pod of 4–5 peer founders, attend weekly Sunday Live Labs and meet 1:1 with operators who have scaled companies.</p></div>
+          <div class="pm-row"><h3 class="pm-display">04 Demo prep</h3><p>Mock pitches with TFC partners and visiting angels. Tighten your deck, your numbers and your two-minute pitch.</p></div>
+          <div class="pm-row"><h3 class="pm-display">05 Demo Day</h3><p>Pitch to angels and early-stage funds with a live product demo, then follow up on diligence and fundraising directly.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pm-band pm-ink" aria-labelledby="h-get">
+      <div class="wrap">
+        <p class="pm-label">What you get</p>
+        <h2 class="pm-display pm-big" id="h-get" style="margin-top:28px">Built for <span class="accent">momentum.</span></h2>
+        <div class="pm-rows">
+          <div class="pm-row"><h3 class="pm-display">Founder pods</h3><p>A private pod of 4–5 founders at a similar stage. Weekly check-ins keep you shipping.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Weekly Live Labs</h3><p>Hands-on sessions on user discovery, distribution, pricing and navigating college startup policy.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Mentor office hours</h3><p>1:1 time with founders and operators who give direct feedback on product, marketing and metrics.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Virtual Demo Day</h3><p>An invite-only pitch showcase for angels, scout funds and early-stage investors.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Investor intros</h3><p>Warm introductions to angels who back your sector.</p></div>
+          <div class="pm-row"><h3 class="pm-display">Builder network</h3><p>Access to our Chapters at 90+ colleges and founders across India, plus career support through our partner Fire in the Belly.</p></div>
         </div>
       </div>
     </section>
@@ -693,7 +485,7 @@
           <details class="faq-item">
             <summary>What happens if I am not selected for the 20-founder cohort?</summary>
             <div class="faq-body">
-              Every applicant receives personalized written feedback on their venture. Furthermore, all applicants receive full access to attend all virtual leader and mentor sessions across the cohort. Founder pods, 1:1 mentor office hours, direct investor introductions, and Demo Day presentation slots remain exclusive to the 20 selected founders.
+              Every applicant receives personalized written feedback on their venture, and 50% off your next application. Founder pods, 1:1 mentor office hours, direct investor introductions and Demo Day slots are for the 20 selected founders.
             </div>
           </details>
 
@@ -713,7 +505,7 @@
         </div>
 
         <div style="margin-top: 48px; text-align: center;">
-          <a class="btn solid lg" href="/launchpad/fellowship">Apply to Launchpad (Spring Cohort) →</a>
+          <a class="btn solid lg" href="/launchpad/fellowship" data-apply-cta>Apply to Launchpad →</a>
         </div>
       </div>
     </section>
@@ -752,6 +544,7 @@
             <li><a href="/resources">Resource Library</a></li>
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
+            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -776,7 +569,7 @@
 
   <!-- STICKY DEADLINE BAR -->
   <div class="bar hide" id="bar" role="region" aria-label="Launchpad deadline">
-    <span class="t"><span class="long">Launchpad Spring Cohort · 4 cohorts a year · </span>closes in <b id="barCount">--</b></span>
+    <span class="t"><span class="long">Launchpad Spring Cohort · 20 seats · </span>closes in <b id="barCount">--</b></span>
     <a class="btn solid sm" href="/launchpad/fellowship">Apply</a>
   </div>
 

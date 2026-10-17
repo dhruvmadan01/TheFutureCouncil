@@ -10,7 +10,7 @@
 
     // Ecosystem statistics
     CHAPTER_COUNT: 18,
-    CHAPTER_COUNT_LABEL: '18 campuses',
+    CHAPTER_COUNT_LABEL: '90+ colleges',
 
     // Launchpad Accelerator Program Facts
     LAUNCHPAD: {
@@ -38,7 +38,7 @@
       AUDIENCE: 'Student founders and early-stage builders from any college or university across India',
       UNSELECTED_BENEFITS: {
         FEEDBACK: 'Written feedback with specific actionable fixes',
-        MENTOR_SESSIONS: 'Full access to all virtual leader & mentor sessions (founder pods, 1:1 office hours, investor intros & Demo Day remain exclusive to the 20 selected founders)'
+        DISCOUNT: '50% off your next application'
       },
       WEEKLY_STRUCTURE: [
         { week: 'Week 1', title: 'Kickoff & founder pods' },

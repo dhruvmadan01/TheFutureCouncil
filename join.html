@@ -13,9 +13,10 @@
   <!-- Fonts & Design Tokens -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
 
   <!-- Single Source of Truth Config -->
   <script src="/tfc-config.js"></script>
@@ -360,13 +361,16 @@
   </div>
 
   <main>
-    <header class="join-hero">
-      <div class="wrap" style="text-align: center; max-width: 760px; margin: 0 auto;">
-        <span class="mono kick">Accelerator Campus Network</span>
-        <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">Step out of line.</h1>
-        <p class="lede" style="font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 48ch; margin: 16px auto 0; line-height: 1.5;">
-          Join your university chapter, attend monthly campus build nights, and meet co-founders. The direct on-campus pipeline to the Launchpad accelerator.
-        </p>
+    <header class="pm-hero">
+      <div class="wrap">
+        <div>
+          <p class="pm-label pm-muted" style="margin-bottom:28px">Free to join · Chapters at 90+ colleges</p>
+          <h1>Step out of <span class="accent">line.</span></h1>
+          <div class="pm-tagrow"><span class="rule"></span><p>Find your people. Fund your startup.</p></div>
+          <p class="pm-lede">Join your university Chapter, attend monthly campus build nights and meet co-founders. The on-campus pipeline to the Launchpad Fellowship, which is open to anyone.</p>
+          <div class="pm-actions"><a class="btn solid lg" href="#councilJoinForm">Join free</a><a class="btn lg" href="/launchpad">Explore the Launchpad</a></div>
+        </div>
+        <div class="pm-hero-mark"><img src="/TFC.png" alt="The Future Council logo" width="260" height="260"></div>
       </div>
     </header>
 
@@ -382,7 +386,7 @@
               <img src="/TFC.png" alt="TFC Logo" style="width:40px; height:40px; object-fit:contain; border-radius:8px; background:var(--ink); padding:4px;" />
               <div>
                 <h2 id="joinFormTitle" style="font-size: 24px; margin:0; line-height:1.2;">Join Your Campus Chapter</h2>
-                <span id="joinFormSubtitle" style="font-size: 13px; color:var(--ink-soft);">Free student builder membership · All 18 campus chapters</span>
+                <span id="joinFormSubtitle" style="font-size: 13px; color:var(--ink-soft);">Free student builder membership · Chapters at 90+ colleges</span>
               </div>
             </div>
 
@@ -474,6 +478,83 @@
                 <option value="IIIT Delhi (IIITD)" data-id="iiitd">IIIT Delhi (IIITD)</option>
                 <option value="IIT Delhi" data-id="iitd">IIT Delhi</option>
                 <option value="IIT Patna (Hybrid)" data-id="iitp">IIT Patna (Hybrid)</option>
+                <option value="Keshav Mahavidyalaya, DU" data-id="keshav-mahavidyalaya-du">Keshav Mahavidyalaya, DU</option>
+                <option value="Ramjas College, DU" data-id="ramjas-college-du">Ramjas College, DU</option>
+                <option value="SSCBS, DU" data-id="sscbs-du">SSCBS, DU</option>
+                <option value="Kamala Nehru College, DU" data-id="kamala-nehru-college-du">Kamala Nehru College, DU</option>
+                <option value="Gargi College, DU" data-id="gargi-college-du">Gargi College, DU</option>
+                <option value="Jesus and Mary College, DU" data-id="jesus-and-mary-college-du">Jesus and Mary College, DU</option>
+                <option value="Deen Dayal Upadhyaya College, DU" data-id="deen-dayal-upadhyaya-college-du">Deen Dayal Upadhyaya College, DU</option>
+                <option value="Acharya Narendra Dev College, DU" data-id="acharya-narendra-dev-college-du">Acharya Narendra Dev College, DU</option>
+                <option value="Ramanujan College, DU" data-id="ramanujan-college-du">Ramanujan College, DU</option>
+                <option value="Dyal Singh College, DU" data-id="dyal-singh-college-du">Dyal Singh College, DU</option>
+                <option value="Atma Ram Sanatan Dharma College, DU" data-id="atma-ram-sanatan-dharma-college-du">Atma Ram Sanatan Dharma College, DU</option>
+                <option value="Maharaja Agrasen Institute of Technology (MAIT)" data-id="maharaja-agrasen-institute-of-technology-mait">Maharaja Agrasen Institute of Technology (MAIT)</option>
+                <option value="Bharati Vidyapeeth College of Engineering" data-id="bharati-vidyapeeth-college-of-engineering">Bharati Vidyapeeth College of Engineering</option>
+                <option value="USICT, GGSIPU" data-id="usict-ggsipu">USICT, GGSIPU</option>
+                <option value="Jamia Millia Islamia" data-id="jamia-millia-islamia">Jamia Millia Islamia</option>
+                <option value="Jawaharlal Nehru University (JNU)" data-id="jawaharlal-nehru-university-jnu">Jawaharlal Nehru University (JNU)</option>
+                <option value="Amity University" data-id="amity-university">Amity University</option>
+                <option value="Shiv Nadar University" data-id="shiv-nadar-university">Shiv Nadar University</option>
+                <option value="Bennett University" data-id="bennett-university">Bennett University</option>
+                <option value="Ashoka University" data-id="ashoka-university">Ashoka University</option>
+                <option value="Shyam Lal College (SLC), DU" data-id="shyam-lal-college-slc-du">Shyam Lal College (SLC), DU</option>
+                <option value="IIT Kanpur" data-id="iit-kanpur">IIT Kanpur</option>
+                <option value="IIT (BHU) Varanasi" data-id="iit-bhu-varanasi">IIT (BHU) Varanasi</option>
+                <option value="IIT Roorkee" data-id="iit-roorkee">IIT Roorkee</option>
+                <option value="IIT Ropar" data-id="iit-ropar">IIT Ropar</option>
+                <option value="IIT Mandi" data-id="iit-mandi">IIT Mandi</option>
+                <option value="IIT Jammu" data-id="iit-jammu">IIT Jammu</option>
+                <option value="MNNIT Allahabad" data-id="mnnit-allahabad">MNNIT Allahabad</option>
+                <option value="NIT Kurukshetra" data-id="nit-kurukshetra">NIT Kurukshetra</option>
+                <option value="Punjab Engineering College (PEC)" data-id="punjab-engineering-college-pec">Punjab Engineering College (PEC)</option>
+                <option value="Panjab University" data-id="panjab-university">Panjab University</option>
+                <option value="Thapar Institute of Engineering &amp; Technology" data-id="thapar-institute-of-engineering-technology">Thapar Institute of Engineering &amp; Technology</option>
+                <option value="IIT Guwahati" data-id="iit-guwahati">IIT Guwahati</option>
+                <option value="Gauhati University" data-id="gauhati-university">Gauhati University</option>
+                <option value="NIT Silchar" data-id="nit-silchar">NIT Silchar</option>
+                <option value="Tezpur University" data-id="tezpur-university">Tezpur University</option>
+                <option value="NIT Meghalaya" data-id="nit-meghalaya">NIT Meghalaya</option>
+                <option value="NIT Agartala" data-id="nit-agartala">NIT Agartala</option>
+                <option value="IIT Kharagpur" data-id="iit-kharagpur">IIT Kharagpur</option>
+                <option value="IIT (ISM) Dhanbad" data-id="iit-ism-dhanbad">IIT (ISM) Dhanbad</option>
+                <option value="IIT Bhubaneswar" data-id="iit-bhubaneswar">IIT Bhubaneswar</option>
+                <option value="NIT Patna" data-id="nit-patna">NIT Patna</option>
+                <option value="NIT Rourkela" data-id="nit-rourkela">NIT Rourkela</option>
+                <option value="BIT Mesra" data-id="bit-mesra">BIT Mesra</option>
+                <option value="KIIT University" data-id="kiit-university">KIIT University</option>
+                <option value="Jadavpur University" data-id="jadavpur-university">Jadavpur University</option>
+                <option value="Presidency University" data-id="presidency-university">Presidency University</option>
+                <option value="IIT Bombay" data-id="iit-bombay">IIT Bombay</option>
+                <option value="VJTI" data-id="vjti">VJTI</option>
+                <option value="NMIMS" data-id="nmims">NMIMS</option>
+                <option value="COEP Technological University" data-id="coep-technological-university">COEP Technological University</option>
+                <option value="Symbiosis International University" data-id="symbiosis-international-university">Symbiosis International University</option>
+                <option value="IIT Gandhinagar" data-id="iit-gandhinagar">IIT Gandhinagar</option>
+                <option value="DA-IICT" data-id="da-iict">DA-IICT</option>
+                <option value="Nirma University" data-id="nirma-university">Nirma University</option>
+                <option value="MNIT Jaipur" data-id="mnit-jaipur">MNIT Jaipur</option>
+                <option value="BITS Pilani" data-id="bits-pilani">BITS Pilani</option>
+                <option value="IIT Madras" data-id="iit-madras">IIT Madras</option>
+                <option value="Anna University" data-id="anna-university">Anna University</option>
+                <option value="SRM Institute of Science &amp; Technology" data-id="srm-institute-of-science-technology">SRM Institute of Science &amp; Technology</option>
+                <option value="VIT Vellore" data-id="vit-vellore">VIT Vellore</option>
+                <option value="NIT Trichy" data-id="nit-trichy">NIT Trichy</option>
+                <option value="NIT Karnataka (Surathkal)" data-id="nit-karnataka-surathkal">NIT Karnataka (Surathkal)</option>
+                <option value="Manipal Institute of Technology" data-id="manipal-institute-of-technology">Manipal Institute of Technology</option>
+                <option value="IIIT Bangalore" data-id="iiit-bangalore">IIIT Bangalore</option>
+                <option value="RV College of Engineering" data-id="rv-college-of-engineering">RV College of Engineering</option>
+                <option value="PES University" data-id="pes-university">PES University</option>
+                <option value="Christ University" data-id="christ-university">Christ University</option>
+                <option value="IIT Hyderabad" data-id="iit-hyderabad">IIT Hyderabad</option>
+                <option value="IIIT Hyderabad" data-id="iiit-hyderabad">IIIT Hyderabad</option>
+                <option value="BITS Pilani, Hyderabad Campus" data-id="bits-pilani-hyderabad-campus">BITS Pilani, Hyderabad Campus</option>
+                <option value="IIT Indore" data-id="iit-indore">IIT Indore</option>
+                <option value="MANIT Bhopal" data-id="manit-bhopal">MANIT Bhopal</option>
+                <option value="IISER Bhopal" data-id="iiser-bhopal">IISER Bhopal</option>
+                <option value="IIITDM Jabalpur" data-id="iiitdm-jabalpur">IIITDM Jabalpur</option>
+                <option value="IIT Bhilai" data-id="iit-bhilai">IIT Bhilai</option>
+                <option value="NIT Raipur" data-id="nit-raipur">NIT Raipur</option>
                 <option value="other" data-id="other">Other College / University</option>
               </select>
               <div id="otherCollegeWrap" style="display: none; margin-top: 10px;">
@@ -610,6 +691,7 @@
             <li><a href="/about/partners">Partners</a></li>
             <li><a href="/about#hire">Hire Builders</a></li>
             <li><a href="/join">Join Free</a></li>
+            <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB ↗</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -686,7 +768,7 @@
     function setPlan(plan) {
       currentPlan = 'member';
       if (formTitle) formTitle.textContent = 'Join Your Campus Chapter';
-      if (formSubtitle) formSubtitle.textContent = 'Free student builder membership · All 18 campus chapters';
+      if (formSubtitle) formSubtitle.textContent = 'Free student builder membership · Chapters at 90+ colleges';
       if (perkHighlight) perkHighlight.style.display = 'none';
       if (trialHighlight) trialHighlight.style.display = 'none';
       if (schoolPaymentBox) schoolPaymentBox.style.display = 'none';

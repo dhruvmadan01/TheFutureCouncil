@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Launchpad Accelerator · Cohort 01 | The Future Council</title>
+<title>Launchpad Accelerator · Cohort 02 | The Future Council</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -179,7 +179,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div>
       <div class="eyebrow">Launchpad Accelerator · by The Future Council</div>
       <h1><span>Don't queue.</span><span>Build.</span></h1>
-      <p>A 4-week online startup accelerator cohort for 20 collegiate founders and early-stage builders. 2% equity in selected ventures. Zero success fees.</p>
+      <p>A fully online startup accelerator cohort for 20 collegiate founders and early-stage builders. 2% equity in selected ventures. Zero success fees.</p>
       <div class="ctas">
         <a class="btn dark" href="https://thefuturecouncil.in/launchpad" target="_blank" rel="noopener">Apply at thefuturecouncil.in</a>
         <a class="btn ghost" href="#investors">Browse 2,244 investors ↓</a>
@@ -206,7 +206,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <h2>Four weeks. Twenty founders.</h2>
     <p class="lead">Launchpad is for students and early builders who already have something going: a working prototype, early user interviews, or an active side project. You don't need a registered company.</p>
     <div class="facts">
-      <div class="fact"><b>4 weeks</b><span>Fully online</span></div>
+      <div class="fact"><b>Online</b><span>Fully remote</span></div>
       <div class="fact"><b>20</b><span>Founders per cohort, selected from applications</span></div>
       <div class="fact"><b>6–8 hrs</b><span>Expected commitment per week</span></div>
       <div class="fact"><b>2%</b><span>Equity in selected cohort ventures</span></div>
@@ -320,10 +320,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 <script>
 (function(){
   // countdown
-  var DEADLINE=Date.parse('2026-10-15T23:59:59+05:30');
+  var DEADLINE=Infinity;
   var cd=document.getElementById('countdown'),cl=document.getElementById('cd-label');
   function tick(){
     var ms=DEADLINE-Date.now();
+    if(ms===Infinity){cl.textContent='Cohort 02';cd.textContent='Applications open';return}
     if(ms<=0){cl.textContent='Applications';cd.textContent='Closed';cd.classList.add('closed');return}
     var s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;
     cd.textContent=(d?d+'d ':'')+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(x).padStart(2,'0')+'s';
