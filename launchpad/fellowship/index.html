@@ -819,6 +819,19 @@
     const PENDING_KEY = 'tfc_fellowship_spring02_pending';
     function queuePendingSync(payload, stageStatus) {
       try { localStorage.setItem(PENDING_KEY, JSON.stringify({ payload: payload, stageStatus: stageStatus, at: Date.now() })); } catch(e) {}
+      // Visible notice (no console needed, e.g. on a phone)
+      try {
+        const err = window.__tfcLastSyncError || {};
+        const card = document.getElementById('fellowshipApplyCard');
+        let n = document.getElementById('syncNotice');
+        if (!n && card) {
+          n = document.createElement('div');
+          n.id = 'syncNotice';
+          n.style.cssText = 'background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B;border-radius:12px;padding:12px 14px;margin:0 0 14px;font-size:14px;line-height:1.45;';
+          card.parentNode.insertBefore(n, card);
+        }
+        if (n) n.textContent = 'We could not save your details to our server just now (' + (err.code || 'network') + (err.message ? ': ' + String(err.message).slice(0, 120) : '') + '). Your answers are kept on this device and we will retry automatically. If this keeps happening, email support@thefuturecouncil.in.';
+      } catch(e) {}
     }
     async function flushPendingSync() {
       try {
