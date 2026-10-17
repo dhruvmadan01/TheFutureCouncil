@@ -14,7 +14,11 @@
 
     // Launchpad Accelerator Program Facts
     LAUNCHPAD: {
-      COHORT: 'Cohort 01',
+      COHORT: 'Cohort 02',
+      SEASON: 'Spring',
+      PREVIOUS_COHORT: 'Cohort 01',
+      PREVIOUS_COHORT_SEASON: 'Winter',
+      PREVIOUS_COHORT_STATUS: 'Registrations closed · kicks off Nov 1, 2026',
       SEATS: 20,
       SEATS_LABEL: '20 founders/cohort',
       FEE: 999,
@@ -25,12 +29,12 @@
       EQUITY_TERMS: '2% equity taken in selected cohort ventures',
       SUCCESS_FEE: '0%',
       SUCCESS_FEE_TERMS: 'No success fee on capital raised',
-      DURATION: '4 weeks fully online',
+      DURATION: 'Fully online',
       POD_SIZE: 'pods of 4–5',
       TIME_COMMITMENT: '6–8 hrs/week',
-      DEADLINE_ISO: '2026-10-15T23:59:59+05:30',
-      DEADLINE_DISPLAY: 'Oct 15, 2026, 11:59 PM IST',
-      KICKOFF_DISPLAY: 'Nov 1, 2026',
+      DEADLINE_ISO: '2027-01-15T23:59:59+05:30',
+      DEADLINE_DISPLAY: 'Jan 15, 2027, 11:59 PM IST',
+      KICKOFF_DISPLAY: 'Feb 1, 2027',
       AUDIENCE: 'Student founders and early-stage builders from any college or university across India',
       UNSELECTED_BENEFITS: {
         FEEDBACK: 'Written feedback with specific actionable fixes',

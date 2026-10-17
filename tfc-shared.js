@@ -6,8 +6,8 @@
   const config = window.TFC_CONFIG || {
     APPLY_URL: '/launchpad/fellowship',
     LAUNCHPAD: {
-      DEADLINE_ISO: '2026-10-15T23:59:59+05:30',
-      DEADLINE_DISPLAY: 'Oct 15, 2026, 11:59 PM IST'
+      DEADLINE_ISO: '2027-01-15T23:59:59+05:30',
+      DEADLINE_DISPLAY: 'Jan 15, 2027, 11:59 PM IST'
     }
   };
 
@@ -30,8 +30,8 @@
     });
   }
 
-  // Countdown timer to Launchpad Cohort 01 deadline
-  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2026-10-15T23:59:59+05:30';
+  // Countdown timer to Launchpad Spring Cohort (Cohort 02) deadline
+  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2027-01-15T23:59:59+05:30';
   const targetDate = new Date(targetDateStr).getTime();
 
   function updateDeadlines() {
@@ -43,7 +43,7 @@
 
     if (diff <= 0) {
       if (countdownEl) {
-        countdownEl.innerHTML = 'Applications closed<small>Join waitlist for Cohort 02</small>';
+        countdownEl.innerHTML = 'Applications closed<small>Join the waitlist for the next cohort</small>';
       }
       if (barCountEl) {
         barCountEl.textContent = 'Closed';
@@ -68,8 +68,8 @@
     }
 
     if (countdownEl) {
-      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Oct 15, 11:59 PM IST';
-      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel} · Final deadline</small>`;
+      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Jan 15, 11:59 PM IST';
+      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel}</small>`;
     }
   }
 
