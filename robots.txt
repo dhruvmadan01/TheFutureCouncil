@@ -3,16 +3,9 @@ User-agent: *
 Allow: /
 
 # Disallow admin, internal CRMs, analytics and scratch endpoints
-Disallow: /admin
-Disallow: /admin.html
 Disallow: /data
 Disallow: /data.html
-Disallow: /marketing
-Disallow: /marketing.html
-Disallow: /sales
-Disallow: /sales.html
-Disallow: /society
-Disallow: /society.html
+Disallow: /data-legacy
 Disallow: /ambassador
 Disallow: /ambassador.html
 Disallow: /api/
