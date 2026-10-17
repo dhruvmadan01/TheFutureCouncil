@@ -99,6 +99,10 @@
       "destination": "/resources/funding-rounds.html"
     },
     {
+      "source": "/resources/30dayfounderplan",
+      "destination": "/resources/30dayfounderplan.html"
+    },
+    {
       "source": "/resources",
       "destination": "/resources/index.html"
     },
