@@ -63,6 +63,17 @@
   footer .tag .blk{background:var(--ink);color:var(--o);padding:0 14px;margin-left:-14px}
   footer .meta{margin-top:20px;font-weight:700;font-size:18px}
   footer .meta span{display:block}
+
+  .lp{background:var(--ink);color:var(--paper);border-top:3px solid var(--ink);padding:40px 0 44px;margin-top:8px}
+  .lp .label{color:var(--o)}
+  .lp h2{margin:12px 0 14px;font-size:clamp(38px,10vw,64px);line-height:1.02}
+  .lp h2 .hl{background:var(--o);color:var(--ink);padding:0 12px;margin-left:-12px;display:inline-block}
+  .lp p{margin:0 0 18px;font-size:19px;max-width:34em}
+  .lp ul{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .lp li{border:2px solid var(--paper);padding:6px 12px;font-weight:700;font-size:16px}
+  .lp a.go{display:inline-block;background:var(--o);color:var(--ink);font-weight:700;font-size:20px;text-decoration:none;padding:16px 26px;border:3px solid var(--paper);box-shadow:-6px 6px 0 var(--paper);min-height:48px}
+  .lp a.go:hover,.lp a.go:focus-visible{transform:translate(-2px,2px);box-shadow:-4px 4px 0 var(--paper);outline:3px solid var(--paper);outline-offset:3px}
+  .lp .fine{margin:22px 0 0;font-size:15px;opacity:.85}
 </style>
 </head>
 <body>
@@ -101,6 +112,19 @@
 
   <button class="reset" id="reset">Reset everything</button>
 </main>
+
+<section class="lp" aria-labelledby="lp-title">
+  <div class="wrap">
+    <div class="label">TFC Launchpad · Cohort 02 open</div>
+    <h2 class="anton" id="lp-title">Idea passed? <span class="hl">Build it here.</span></h2>
+    <p>You have checked your idea. Now get founder pods, weekly labs, mentor office hours and a live Demo Day pitch to investors, with 19 other student founders.</p>
+    <ul>
+      <li>20 founders per cohort</li><li>In person, Delhi NCR</li><li>₹999 to apply</li><li>2% equity, zero success fee</li>
+    </ul>
+    <a class="go" href="/launchpad?utm_source=resources&amp;utm_medium=validationchecklist&amp;utm_campaign=cohort02">Apply to Launchpad &rarr;</a>
+    <p class="fine">Cohort 02 applications close 15 January 2027 and it kicks off on 1 February 2027. Not selected? You still get written feedback.</p>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
