@@ -32,6 +32,7 @@
     { "source": "/join-ambassador", "destination": "/chapters/start", "permanent": true },
     { "source": "/stories.html", "destination": "/chapters", "permanent": true },
     { "source": "/stories", "destination": "/chapters", "permanent": true },
+    { "source": "/launchpad/fellowship/winter", "destination": "/launchpad", "permanent": true },
     { "source": "/fellowship.html", "destination": "/launchpad/fellowship", "permanent": true },
     { "source": "/fellowship", "destination": "/launchpad/fellowship", "permanent": true },
     { "source": "/partners.html", "destination": "/about/partners", "permanent": true },
