@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launchpad · Student Startup Accelerator | The Future Council</title>
+  <meta name="description" content="Launchpad selects 20 student founders per cohort to build with operators and investors, ending in Demo Day. Cohort 02 runs in person in Delhi NCR. 2% equity. No success fee." />
+  <meta name="canonical" href="https://thefuturecouncil.in/launchpad" />
+  <link rel="icon" href="/TFC.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/TFC.png" />
+  <meta name="theme-color" content="#E2542A" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="stylesheet" href="/tfc-theme.css" />
+  <link rel="stylesheet" href="/tfc-premium.css" />
+  <link rel="stylesheet" href="/tfc-preview.css" />
+
+  <!-- Analytics -->
+  <script src="/mixpanel.min.js"></script>
+  <script src="/tfc-analytics.js"></script>
+
+  <style>
+    /* Specific styles for Launchpad */
+    .hero-launchpad {
+      padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 64px);
+    }
+    .hero-launchpad h1 {
+      font-size: clamp(38px, 6.5vw, 84px);
+      max-width: 14ch;
+      margin-top: 18px;
+    }
+    .hero-launchpad .sub {
+      font-size: clamp(17px, 1.6vw, 21px);
+      color: var(--ink-soft);
+      max-width: 48ch;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--warm-2);
+      border: 1px solid #E3B79C;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--orange-deep);
+    }
+    .status-pill i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 8px var(--orange);
+    }
+
+    /* Comparison Table / Full Terms */
+    .terms-table-sec {
+      margin-top: 48px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(20px, 4vw, 44px);
+      box-shadow: 0 14px 34px -18px rgba(27,23,18,0.08);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .terms-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 15px;
+    }
+    .terms-table th, .terms-table td {
+      padding: 16px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    .terms-table th {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      background: var(--warm);
+    }
+    .terms-table td:first-child {
+      font-weight: 600;
+      color: var(--ink);
+      width: 28%;
+    }
+    .terms-table td:last-child {
+      color: var(--ink-soft);
+    }
+    @media (max-width: 640px) {
+      .terms-table th, .terms-table td {
+        padding: 12px 8px;
+        font-size: 13.5px;
+      }
+      .terms-table td:first-child { width: 38%; }
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .benefit-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .benefit-card .icon-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      background: var(--warm-2);
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .benefit-card h3 {
+      font-size: 22px;
+    }
+    .benefit-card p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* Operator & Mentors Infinite Marquee */
+    .operator-marquee-sec {
+      padding-block: 28px 32px;
+      background: #faf8f5;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+    .marquee-label {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .marquee-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 32s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-right: 28px;
+      flex-shrink: 0;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(27, 23, 18, 0.07);
+      opacity: 0.65;
+      filter: grayscale(100%);
+      cursor: default;
+      user-select: none;
+      transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      white-space: nowrap;
+    }
+    .marquee-item:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+      transform: translateY(-2px);
+      background: #ffffff;
+      border-color: var(--line);
+      box-shadow: 0 4px 14px rgba(27, 23, 18, 0.08);
+    }
+    .marquee-logo {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
+    }
+    .marquee-name {
+      font-family: var(--body);
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .operator-marquee-sec {
+        padding-block: 22px 26px;
+      }
+      .marquee-label {
+        font-size: 10.5px;
+        letter-spacing: 0.11em;
+        margin-bottom: 16px;
+        padding-inline: 12px;
+      }
+      .marquee-group {
+        gap: 18px;
+        padding-right: 18px;
+      }
+      .marquee-item {
+        padding: 7px 14px;
+        gap: 8px;
+      }
+      .marquee-logo {
+        width: 18px;
+        height: 18px;
+      }
+      .marquee-name {
+        font-size: 13.5px;
+      }
+      .marquee-track {
+        animation-duration: 24s;
+      }
+    }
+  </style>
+</head>
+<body class="pv-site">
+
+  <!-- TOP NAVIGATION -->
+  <header class="pv-site-header" id="nav">
+  <div class="pv-wrap">
+    <a class="pv-lockup" href="/" aria-label="The Future Council home"><div class="pv-logo" role="img" aria-label="TFC logo"></div><span>The Future<br>Council</span></a>
+    <nav class="pv-nav" aria-label="Main"><a href="/chapters">Chapters</a><a href="/launchpad" aria-current="page">Launchpad</a><a href="/why">Why Build</a><a href="/investors">Investors</a><a href="/mentors">Mentors</a><a href="/about">About</a><a class="pv-btn" href="/join">Join free</a></nav>
+  </div>
+</header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/launchpad" class="active">Launchpad <span>→</span></a>
+    <a href="/chapters">Chapters <span>→</span></a>
+    <a href="/#investors">For Investors <span>→</span></a>
+    <a href="/about#team">Team <span>→</span></a>
+    <a href="/about">About <span>→</span></a>
+    <div style="margin-top: 20px;">
+      <a class="btn solid lg" href="/launchpad/fellowship" style="width: 100%; text-align: center;">Apply to Launchpad</a>
+    </div>
+  </div>
+
+  <main>
+  <section class="pv-page-hero">
+    <div class="pv-wrap">
+      <p class="pv-label pv-muted" style="margin-bottom: 28px">Launchpad Fellowship · Cohort 02 open</p>
+      <h1 class="pv-display">The accelerator open to <span class="pv-accent">anyone.</span></h1>
+      <p class="pv-lede">An accelerator for student founders. Cohort 02 runs in person in Delhi NCR. Twenty founders per cohort, four cohorts a year. You don't need a Chapter to apply.</p>
+      <div class="pv-actions"><a class="pv-btn" href="/launchpad/fellowship" data-apply-cta>Apply to Cohort 02</a><span class="pv-note">Applications close 15 January 2027 and Cohort 02 kicks off on 1 February 2027. Cohort 01 (Winter) is closed.</span></div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">The rules of the table</h2><p>Plain terms, the same for every cohort.</p></div>
+      <ul class="pv-table" style="border-color: var(--ink)">
+        <li><span>Cohort size</span><b>20 founders</b></li>
+        <li><span>Who can apply</span><b>Anyone who can attend in person in Delhi NCR. A Chapter is not required.</b></li>
+        <li><span>Application fee</span><b>₹999, one time</b></li>
+        <li><span>Equity</span><b>2% in selected ventures</b></li>
+        <li><span>Success fee</span><b>Zero</b></li>
+        <li><span>If you're not selected</span><b>Written feedback</b></li>
+        <li><span>Format</span><b>Cohort 02: in person in Delhi NCR, pods of 4 to 5 founders, 6 to 8 hours a week</b></li>
+        <li><span>Cohorts</span><b>Four a year, named by season</b></li>
+      </ul>
+    </div>
+  </section>
+  <section class="pv-section pv-ink-band">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">From application to Demo Day</h2><p>Five stages, in order.</p></div>
+      <div class="pv-rows">
+        <div class="pv-row"><div><span class="pv-stage">Stage 1</span><h3>Apply</h3></div><p>A short application and the one-time fee.</p></div>
+        <div class="pv-row"><div><span class="pv-stage">Stage 2</span><h3>Selection</h3></div><p>Every applicant is reviewed and gets written feedback.</p></div>
+        <div class="pv-row"><div><span class="pv-stage">Stage 3</span><h3>Build and refine</h3></div><p>Founder pods, live labs and mentor office hours, in person in Delhi NCR.</p></div>
+        <div class="pv-row"><div><span class="pv-stage">Stage 4</span><h3>Demo prep</h3></div><p>Mock pitches and deck polishing.</p></div>
+        <div class="pv-row"><div><span class="pv-stage">Stage 5</span><h3>Demo Day</h3></div><p>A live pitch to investors in Delhi NCR.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">What's inside</h2><p>Everything selected founders get for the length of the cohort.</p></div>
+      <div class="pv-cells pv-c3">
+        <div class="pv-cell"><h3>Founder pods</h3><p>Small groups of 4 to 5 founders who hold each other to the work.</p></div>
+        <div class="pv-cell"><h3>Weekly in-person labs</h3><p>Working sessions on the problems you're facing that week.</p></div>
+        <div class="pv-cell"><h3>Mentor office hours</h3><p>One-to-one time with operators who have shipped before.</p></div>
+        <div class="pv-cell"><h3>In-person Demo Day</h3><p>Pitch to investors in Delhi NCR, free for them to attend.</p></div>
+        <div class="pv-cell"><h3>Investor introductions</h3><p>Targeted introductions matched to your sector and stage.</p></div>
+        <div class="pv-cell"><h3>Builder network</h3><p>A community of founders across campuses and cohorts.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Not selected? You still leave with something</h2><p>Every applicant gets written feedback on what to improve.</p></div>
+      <div>
+        <details><summary>What does it cost?</summary><p>A one-time application fee of ₹999. If you're selected, TFC takes 2% equity in your venture, with no success fee.</p></details>
+        <details><summary>Do I need to be in Delhi NCR?</summary><p>Yes, for Cohort 02. It runs in person in Delhi NCR, so you need to be able to attend the sessions there. Cohort 01 (Winter) runs online.</p></details>
+        <details><summary>Do I need to be in a Chapter?</summary><p>No. Anyone can apply, whichever college you're at, or even if you're not in college.</p></details>
+        <details><summary>How competitive is it?</summary><p>Twenty founders are selected per cohort. We look at what you've built and learned, not your college or your grades.</p></details>
+        <details><summary>What if I'm not selected?</summary><p>You get written feedback on what to improve.</p></details>
+        <details><summary>How much time does it take?</summary><p>Plan for 6 to 8 hours a week, in person in Delhi NCR.</p></details>
+        <details><summary>Do you help with careers too?</summary><p>Yes. TFC has partnered with Fire in the Belly (FTB) for internship support, for members whose startup doesn't work out and for those who don't start one.</p></details>
+        <details><summary>When do cohorts start?</summary><p>There are four cohorts a year, named by season. Cohort 01 (Winter) kicks off on 1 November. Registrations for Cohort 02 (Spring) are open until 15 January 2027, and it kicks off on 1 February 2027.</p></details>
+      </div>
+    </div>
+  </section>
+  <section class="pv-section pv-sun-band" id="apply-block">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><h2 class="pv-display">Apply to Cohort 02</h2><p>Takes about ten minutes. The ₹999 fee is paid after you submit.</p></div>
+      <div class="pv-actions" style="margin-top:0"><a class="pv-btn" href="/launchpad/fellowship" data-apply-cta>Open the application</a><span class="pv-note">Decisions and feedback are sent by email after review.</span></div>
+    </div>
+  </section>
+</main>
+
+  <!-- FOOTER -->
+  <footer class="pv-site-footer">
+  <div class="pv-wrap">
+    <div>
+      <div class="pv-logo" role="img" aria-label="TFC logo"></div>
+      <p class="pv-foot-tag">Find your people. Fund your startup.</p>
+      <p>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213)<br>205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi 110009</p>
+      <p><a href="mailto:support@thefuturecouncil.in">support@thefuturecouncil.in</a></p>
+      <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
+    </div>
+    <div class="pv-foot-col"><h4>Explore</h4><ul>
+      <li><a href="/chapters">Chapters</a></li><li><a href="/launchpad">Launchpad</a></li><li><a href="/why">Why Build</a></li>
+      <li><a href="/investors">Investors</a></li><li><a href="/mentors">Mentors</a></li><li><a href="/about">About</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Community</h4><ul>
+      <li><a href="/join">Join free</a></li><li><a href="/chapters/start">Become a Chapter Lead</a></li><li><a href="/resources">Resource Library</a></li>
+      <li><a href="/about/partners">Partners</a></li><li><a href="/about#hire">Hire Builders</a></li>
+      <li><a href="https://www.ftbhustle.com/" target="_blank" rel="noopener">Career partner: FTB &#8599;</a></li></ul></div>
+    <div class="pv-foot-col"><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms of Service</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/refund">Refund Policy</a></li>
+      <li><a href="https://www.instagram.com/thefuturecouncil.in/" target="_blank" rel="noopener">Instagram &#8599;</a></li>
+      <li><a href="https://www.linkedin.com/company/thefuturecouncil/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+</footer>
+
+  <!-- STICKY DEADLINE BAR -->
+  <div class="bar hide" id="bar" role="region" aria-label="Launchpad deadline">
+    <span class="t"><span class="long">Launchpad Spring Cohort · 20 seats · </span>closes in <b id="barCount">--</b></span>
+    <a class="btn solid sm" href="/launchpad/fellowship">Apply</a>
+  </div>
+
+  <script src="/tfc-config.js"></script>
+  <script src="/tfc-shared.js"></script>
+</body>
+</html>

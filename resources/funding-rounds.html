@@ -19,7 +19,7 @@
   <script src="/tfc-analytics.js"></script>
 
   <style>
-/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
+/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, one orange Launchpad deal band, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
 :root {
   --office: #D6DCD3;
   --office-2: #C6CDC2;
@@ -200,7 +200,7 @@ section { scroll-margin-top: 72px; }
 .ink h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); margin-top: 8px; max-width: 26ch; }
 .ink p.sub { color: var(--dark-muted); margin-top: 8px; max-width: 40rem; }
 
-/* deal band */
+/* launchpad deal */
 .deal-sec { padding-block: clamp(56px, 8vw, 96px); background: var(--warm); }
 .deal { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
 .deal-main { background: var(--orange); color: #FFFFFF; padding: clamp(24px, 4vw, 48px); display: grid; gap: 26px; align-content: start; }
@@ -394,6 +394,8 @@ footer a { color: var(--peach); }
       <a href="#finder">Your stage</a>
       <a href="#dilution">Your stake</a>
       <a href="/resources">Library</a>
+      <a href="#launchpad">Launchpad</a>
+      <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
     </nav>
   </div>
 </header>
@@ -447,7 +449,7 @@ footer a { color: var(--peach); }
       <ol class="ladder">
         <li class="rung"><span class="n">00</span><div><h3>Bootstrapping</h3><span class="who">You</span></div><p>Building with your own savings or early revenue. You keep all the equity.</p><span class="sz">Your money</span></li>
         <li class="rung"><span class="n">01</span><div><h3>Friends &amp; family</h3><span class="who">People who trust you</span></div><p>A first small cheque from people who know you, before there's much to show.</p><span class="sz">A few lakh</span></li>
-        <li class="rung here"><span class="n">02</span><div><h3>Pre-seed</h3><span class="who">Angels, pre-seed funds, accelerators</span></div><p>Idea, team and maybe a prototype. Investors bet on the founders. Most student founders are here.</p><span class="sz">$150K–$500K<small>≈ ₹1.25–4 Cr</small></span></li>
+        <li class="rung here"><span class="n">02</span><div><h3>Pre-seed</h3><span class="who">Angels, pre-seed funds, accelerators</span></div><p>Idea, team and maybe a prototype. Investors bet on the founders. Most student founders are here.<br><a class="here-tag" href="#launchpad">Launchpad is built for this rung</a></p><span class="sz">$150K–$500K<small>≈ ₹1.25–4 Cr</small></span></li>
         <li class="rung"><span class="n">03</span><div><h3>Seed</h3><span class="who">Seed funds, micro-VCs, syndicates</span></div><p>A live product with early users and first revenue. Investors bet that people want it.</p><span class="sz">~$1.3M avg<small>≈ ₹12 Cr · H1 2026</small></span></li>
         <li class="rung"><span class="n">04</span><div><h3>Series A</h3><span class="who">Venture capital firms</span></div><p>Repeatable revenue and steady growth. Investors bet that it can scale.</p><span class="sz">$5M–$15M</span></li>
         <li class="rung"><span class="n">05</span><div><h3>Series B</h3><span class="who">Larger VCs, growth funds</span></div><p>A proven model growing fast. Money goes into new cities, customers and teams.</p><span class="sz">~$15M–$50M</span></li>
@@ -457,6 +459,17 @@ footer a { color: var(--peach); }
         <li class="rung"><span class="n">09</span><div><h3>IPO</h3><span class="who">The public</span></div><p>The company lists on the NSE or BSE and anyone can buy shares.</p><span class="sz">Varies widely</span></li>
       </ol>
       <p class="fine">Pre-seed and Series A ranges: Indian deal trackers via The Founder Nation (Jul 2026). Seed average: Tracxn India Tech H1 2026 via StartupFeed. Series B onwards: broad rules of thumb. Rupee figures are rough conversions.</p>
+    </div>
+  </section>
+
+  <section class="ink" aria-label="Launchpad">
+    <div class="wrap">
+      <div>
+        <p class="label">Stuck on the first rung?</p>
+        <h2>Launchpad takes pre-seed founders to a Demo Day with real investors.</h2>
+        <p class="sub">Cohort 02 · 20 seats · applications are open.</p>
+      </div>
+      <a class="btn" href="#launchpad">See the Launchpad deal</a>
     </div>
   </section>
 
@@ -477,6 +490,7 @@ footer a { color: var(--peach); }
           <p class="label" data-r-label>Your stage</p>
           <h3 data-r-title>Answer the questions</h3>
           <p data-r-text>Most student founders land on pre-seed. That's a good place to start.</p>
+          <a class="btn" data-r-cta href="#launchpad" hidden>See Launchpad</a>
         </div>
       </div>
     </div>
@@ -544,6 +558,46 @@ footer a { color: var(--peach); }
     </div>
   </section>
 
+  <section class="deal-sec" id="launchpad" aria-labelledby="lp-h">
+    <div class="wrap">
+      <div class="deal">
+        <div class="deal-main">
+          <p class="label">Launchpad · Cohort 02 · Startup accelerator</p>
+          <h2 id="lp-h">We only win if you do.</h2>
+          <p>Built for founders on the first rung. An in-person accelerator in Delhi NCR for student founders and early-stage builders from any college, ending in a Demo Day with real investors.</p>
+          <div class="stats">
+            <div><b>20</b><span>founders selected</span></div>
+            <div><b>₹999</b><span>to apply, once</span></div>
+            <div><b>2%</b><span>equity taken</span></div>
+            <div><b>0%</b><span>success fee on what you raise</span></div>
+          </div>
+          <ol class="path" aria-label="How the cohort runs">
+            <li><span class="when">Apply</span><div><h3>Apply</h3><p>No registered company needed. Selection is on your problem, progress and team, not your college or GPA.</p></div></li>
+            <li><span class="when">Feb 1</span><div><h3>Kickoff and founder pods</h3><p>You join a pod of 4–5 founders building alongside you.</p></div></li>
+            <li><span class="when">Weekly</span><div><h3>Live Labs and office hours</h3><p>Sunday Live Labs and 1:1 mentor office hours. About 6–8 hours a week.</p></div></li>
+            <li><span class="when">Before demo</span><div><h3>Mock pitches</h3><p>Get your deck and your ask ready for a pre-seed round.</p></div></li>
+            <li><span class="when">Finale</span><div><h3>Demo Day</h3><p>Pitch your startup to real investors.</p></div></li>
+          </ol>
+        </div>
+        <aside class="deal-side" aria-label="Deadline">
+          <p class="label">Final deadline</p>
+          <p class="big-clock" data-big>Open</p>
+          <p class="when-line">Cohort 02 applications are open.</p>
+          <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+          <p class="facts">In person · Delhi NCR · Starts Feb 1 · Four cohorts a year · 90+ campus chapters</p>
+          <div class="receipt" aria-label="What you get">
+            <p class="label">What you get</p>
+            <div><span class="k">Founder pod</span><span class="v">Selected 20</span></div>
+            <div><span class="k">1:1 office hours</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Investor intros &amp; Demo Day</span><span class="v">Selected 20</span></div>
+            <div><span class="k">Written feedback</span><span class="v">Every applicant</span></div>
+            <div><span class="k">All mentor sessions</span><span class="v">Every applicant</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <section class="warm" aria-labelledby="dict-h" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head">
@@ -566,6 +620,33 @@ footer a { color: var(--peach); }
       </dl>
     </div>
   </section>
+
+  <section class="sage" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Launchpad questions</p>
+        <h2 id="faq-h">Before you apply</h2>
+      </div>
+      <div class="faq">
+        <details><summary>I'm at the idea stage. Is that too early?</summary><p>No. Launchpad is built for the first rung. Selection looks at the problem you've picked, the progress you've made and your team.</p></details>
+        <details><summary>Do I need a registered company?</summary><p>No. You don't need a company or DPIIT recognition to apply.</p></details>
+        <details><summary>Is it only for college students?</summary><p>No. It's open to student founders and early-stage builders from any college, as long as you can attend in person in Delhi NCR.</p></details>
+        <details><summary>What does it cost?</summary><p>A one-time ₹999 application fee. If you're selected, there's no tuition. Launchpad takes 2% equity under a standard founder agreement, with no success fee on anything you raise.</p></details>
+        <details><summary>What if I'm not selected?</summary><p>You still get personal written feedback.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-h">
+    <div class="wrap">
+      <p class="label">Find your people. Fund your startup.</p>
+      <h2 id="close-h">Every IPO started with someone on the first rung.</h2>
+      <p>20 seats in Cohort 02. Applications are open.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -574,6 +655,14 @@ footer a { color: var(--peach); }
     <p>Sources: <a href="https://startupfeed.in/seed-funding-2026-india-bigger-cheques/" target="_blank" rel="noopener">Tracxn India Tech H1 2026 via StartupFeed</a> · <a href="https://www.thefoundernation.com/average-ticket-size-by-funding-stage-the-2026-data/" target="_blank" rel="noopener">The Founder Nation (Jul 2026)</a>. Figures change quickly. This guide is general information, not financial or legal advice.</p>
   </div>
 </footer>
+
+<div class="bar" role="region" aria-label="Launchpad deadline">
+  <div class="wrap">
+    <p>Launchpad Cohort 02<span class="hide-sm"> · 20 seats</span> · <span data-clock><b>applications open</b></span></p>
+    <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
+  </div>
+</div>
+
 <script>
 (function () {
   /* countdown */
@@ -593,10 +682,10 @@ footer a { color: var(--peach); }
   var answers = [null, null, null];
   var qs = document.querySelectorAll(".q");
   var RESULTS = {
-    idea: { t: "Pre-seed", x: "Investors at this stage back the founders. Show a sharp problem, why you, and a rough demo.", cta: true },
-    users: { t: "Pre-seed, moving to seed", x: "You have users, which is your best pitch. Get one monthly paying customer and you're seed-ready.", cta: true },
+    idea: { t: "Pre-seed", x: "Investors at this stage back the founders. Show a sharp problem, why you, and a rough demo. This is exactly where Launchpad helps.", cta: true },
+    users: { t: "Pre-seed, moving to seed", x: "You have users, which is your best pitch. Get one monthly paying customer and you're seed-ready. Launchpad's Demo Day puts this in front of investors.", cta: true },
     revenue: { t: "Seed", x: "Paying users means people want it. Seed investors will look at usage, retention and how fast revenue grows.", cta: true },
-    growth: { t: "Series A conversations", x: "Steady revenue growth is what VCs look for at Series A.", cta: false }
+    growth: { t: "Series A conversations", x: "Steady revenue growth is what VCs look for at Series A. You may be past Launchpad's stage, which is built for earlier founders.", cta: false }
   };
   function stage() {
     if (answers[0] === "n") return "idea";
@@ -617,6 +706,7 @@ footer a { color: var(--peach); }
     var s = stage(), r = s && RESULTS[s];
     document.querySelector("[data-r-title]").textContent = r ? r.t : "Answer the questions";
     document.querySelector("[data-r-text]").textContent = r ? r.x : "Most student founders land on pre-seed. That's a good place to start.";
+    document.querySelector("[data-r-cta]").hidden = !(r && r.cta);
   }
   qs.forEach(function (q, i) {
     q.querySelectorAll("button").forEach(function (b) {
