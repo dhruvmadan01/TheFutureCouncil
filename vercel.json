@@ -103,6 +103,10 @@
       "destination": "/resources/30dayfounderplan.html"
     },
     {
+      "source": "/resources/validationchecklist",
+      "destination": "/resources/validationchecklist.html"
+    },
+    {
       "source": "/resources",
       "destination": "/resources/index.html"
     },
