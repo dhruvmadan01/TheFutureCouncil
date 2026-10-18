@@ -37,8 +37,7 @@
       KICKOFF_DISPLAY: 'Feb 1, 2027',
       AUDIENCE: 'Student founders and early-stage builders from any college or university across India',
       UNSELECTED_BENEFITS: {
-        FEEDBACK: 'Written feedback with specific actionable fixes',
-        DISCOUNT: '50% off your next application'
+        FEEDBACK: 'Written feedback with specific actionable fixes'
       },
       WEEKLY_STRUCTURE: [
         { week: 'Week 1', title: 'Kickoff & founder pods' },
