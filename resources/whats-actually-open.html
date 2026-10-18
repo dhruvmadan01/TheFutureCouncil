@@ -19,7 +19,7 @@
   <script src="/tfc-analytics.js"></script>
 
   <style>
-/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, one orange Launchpad deal band, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
+/* Layout: TFC's own visual system (thefuturecouncil.in). Sage "office" hero and notice board, warm cream ledger sections, dark ink strip, and the site's sticky countdown bar. Single brand look, colors set explicitly. */
 :root {
   --office: #D6DCD3;
   --office-2: #C6CDC2;
@@ -204,7 +204,7 @@ section { scroll-margin-top: 72px; }
 .ink h2 { font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem); margin-top: 8px; max-width: 26ch; }
 .ink p.sub { color: var(--dark-muted); margin-top: 8px; max-width: 40rem; }
 
-/* launchpad deal */
+/* deal band */
 .deal-sec { padding-block: clamp(56px, 8vw, 96px); background: var(--warm); }
 .deal { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; border: 1px solid var(--line); }
 .deal-main { background: var(--orange); color: #FFFFFF; padding: clamp(24px, 4vw, 48px); display: grid; gap: 26px; align-content: start; }
@@ -323,8 +323,6 @@ footer a { color: var(--peach); }
       <a href="#incubators">Incubators</a>
       <a href="#credits">Credits</a>
       <a href="/resources/funddatabase">Fund Database</a>
-      <a href="#launchpad">Launchpad</a>
-      <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
     </nav>
   </div>
 </header>
@@ -338,7 +336,6 @@ footer a { color: var(--peach); }
         <p class="lede">Here's what Indian student founders can actually apply to right now: grants that are still running, incubators that take any college, free credits you can claim this week, and the fastest route to real investors.</p>
         <div class="hero-actions">
           <a class="btn btn-ink" href="#grants">See what's open</a>
-          <a class="btn btn-line" href="#launchpad">Skip to the fastest route</a>
         </div>
       </div>
       <aside class="slip" aria-label="Startup India Seed Fund status">
@@ -422,17 +419,6 @@ footer a { color: var(--peach); }
     </div>
   </section>
 
-  <section class="ink" aria-label="Launchpad">
-    <div class="wrap">
-      <div>
-        <p class="label">Grants fund the build. They don't fund the company.</p>
-        <h2>Launchpad ends with a Demo Day in front of real investors.</h2>
-        <p class="sub">Cohort 02 · 20 seats · applications are open.</p>
-      </div>
-      <a class="btn" href="#launchpad">See the Launchpad deal</a>
-    </div>
-  </section>
-
   <section class="warm" id="incubators" aria-labelledby="inc-h">
     <div class="wrap">
       <div class="sec-head">
@@ -486,46 +472,6 @@ footer a { color: var(--peach); }
     </div>
   </section>
 
-  <section class="deal-sec" id="launchpad" aria-labelledby="lp-h">
-    <div class="wrap">
-      <div class="deal">
-        <div class="deal-main">
-          <p class="label">Launchpad · Cohort 02 · Startup accelerator</p>
-          <h2 id="lp-h">We only win if you do.</h2>
-          <p>Grants and incubators help you build. Launchpad gets you funded. An in-person accelerator in Delhi NCR for student founders and early-stage builders, backed by a network of 90+ campus chapters.</p>
-          <div class="stats">
-            <div><b>20</b><span>founders selected</span></div>
-            <div><b>₹999</b><span>to apply, once</span></div>
-            <div><b>2%</b><span>equity taken</span></div>
-            <div><b>0%</b><span>success fee on what you raise</span></div>
-          </div>
-          <ol class="path" aria-label="How the cohort runs">
-            <li><span class="when">Apply</span><div><h3>Apply</h3><p>No registered company or DPIIT recognition needed.</p></div></li>
-            <li><span class="when">Feb 1</span><div><h3>Kickoff and founder pods</h3><p>You join a small pod of founders building alongside you.</p></div></li>
-            <li><span class="when">Weekly</span><div><h3>Live Labs and office hours</h3><p>Sunday Live Labs, mentor office hours and pod check-ins. About 6–8 hours a week.</p></div></li>
-            <li><span class="when">Before demo</span><div><h3>Mock pitches</h3><p>Sharpen your deck and story until it's investor-ready.</p></div></li>
-            <li><span class="when">Finale</span><div><h3>Demo Day</h3><p>Pitch your startup to real investors.</p></div></li>
-          </ol>
-        </div>
-        <aside class="deal-side" aria-label="Deadline">
-          <p class="label">Final deadline</p>
-          <p class="big-clock" data-big>Open</p>
-          <p class="when-line">Cohort 02 applications are open.</p>
-          <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
-          <p class="facts">In person · Delhi NCR · Starts Feb 1 · Strictly 20 founders</p>
-          <div class="receipt" aria-label="What you get">
-            <p class="label">What you get</p>
-            <div><span class="k">Founder pod</span><span class="v">Selected 20</span></div>
-            <div><span class="k">1:1 office hours</span><span class="v">Selected 20</span></div>
-            <div><span class="k">Investor intros &amp; Demo Day</span><span class="v">Selected 20</span></div>
-            <div><span class="k">Written feedback</span><span class="v">Every applicant</span></div>
-            <div><span class="k">All mentor sessions</span><span class="v">Every applicant</span></div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
   <section class="sage" id="credits" aria-labelledby="cr-h">
     <div class="wrap">
       <div class="sec-head">
@@ -561,39 +507,11 @@ footer a { color: var(--peach); }
       </div>
       <ol class="plan">
         <li><span class="step-dot">01</span><span class="when">Today</span><div><h3>Claim the student credits</h3><p>GitHub Student Pack and Azure for Students take minutes.</p></div></li>
-        <li class="hot"><span class="step-dot">02</span><span class="when">Apply</span><div><h3>Apply to Launchpad</h3><p>The only step here with a hard deadline, and the one that puts you in front of investors. <a href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply now ↗</a></p></div></li>
-        <li><span class="step-dot">03</span><span class="when">Week 2</span><div><h3>Set up a domain and site</h3><p>Then apply to AWS, Google Cloud, Cloudflare and Notion with your new email.</p></div></li>
-        <li><span class="step-dot">04</span><span class="when">Week 2–3</span><div><h3>Pick your grant path</h3><p>Hardware or deep tech: NIDHI-PRAYAS or BIRAC. Software or AI: TIDE 2.0 and GENESIS.</p></div></li>
-        <li><span class="step-dot">05</span><span class="when">Week 3–4</span><div><h3>Apply to one or two incubators</h3><p>Start with your own campus, then a national program like NSRCEL.</p></div></li>
-        <li><span class="step-dot">06</span><span class="when">When ready</span><div><h3>Register the company</h3><p>Do it when you're about to take grant money, then apply for DPIIT recognition.</p></div></li>
+        <li><span class="step-dot">02</span><span class="when">Week 2</span><div><h3>Set up a domain and site</h3><p>Then apply to AWS, Google Cloud, Cloudflare and Notion with your new email.</p></div></li>
+        <li><span class="step-dot">03</span><span class="when">Week 2–3</span><div><h3>Pick your grant path</h3><p>Hardware or deep tech: NIDHI-PRAYAS or BIRAC. Software or AI: TIDE 2.0 and GENESIS.</p></div></li>
+        <li><span class="step-dot">04</span><span class="when">Week 3–4</span><div><h3>Apply to one or two incubators</h3><p>Start with your own campus, then a national program like NSRCEL.</p></div></li>
+        <li><span class="step-dot">05</span><span class="when">When ready</span><div><h3>Register the company</h3><p>Do it when you're about to take grant money, then apply for DPIIT recognition.</p></div></li>
       </ol>
-    </div>
-  </section>
-
-  <section class="sage" aria-labelledby="faq-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label">Launchpad questions</p>
-        <h2 id="faq-h">Before you apply</h2>
-      </div>
-      <div class="faq">
-        <details><summary>Do I need a registered company?</summary><p>No. You don't need a company or DPIIT recognition to apply.</p></details>
-        <details><summary>Is it only for college students?</summary><p>No. It's open to student founders and early-stage builders who can attend in person in Delhi NCR.</p></details>
-        <details><summary>How much time does it take?</summary><p>About 6–8 hours a week, built around Sunday Live Labs, mentor office hours and pod check-ins. Sessions are in person in Delhi NCR.</p></details>
-        <details><summary>What does it cost?</summary><p>A one-time ₹999 application fee. If you're selected, Launchpad takes 2% equity in your venture under a standard founder agreement, with no success fee on anything you raise.</p></details>
-        <details><summary>What if I'm not selected?</summary><p>You still get personal written feedback on your application.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section class="closing" aria-labelledby="close-h">
-    <div class="wrap">
-      <p class="label">Find your people. Fund your startup.</p>
-      <h2 id="close-h">Grants take months. Cohort 02 starts February 1, in person in Delhi NCR.</h2>
-      <p>20 seats. Applications are open.</p>
-      <div class="hero-actions">
-        <a class="btn" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply to Launchpad</a>
-      </div>
     </div>
   </section>
 </main>
@@ -604,14 +522,6 @@ footer a { color: var(--peach); }
     <p>Scheme details checked against official and public sources in October 2026. Amounts, eligibility and deadlines change, so always confirm on the official page.</p>
   </div>
 </footer>
-
-<div class="bar" role="region" aria-label="Launchpad deadline">
-  <div class="wrap">
-    <p>Launchpad Cohort 02<span class="hide-sm"> · 20 seats</span> · <span data-clock><b>applications open</b></span></p>
-    <a class="btn btn-sm" href="https://www.thefuturecouncil.in/launchpad/fellowship" target="_blank" rel="noopener">Apply</a>
-  </div>
-</div>
-
 <script>
 (function () {
   var deadline = new Date("2026-10-15T23:59:00+05:30").getTime();

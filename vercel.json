@@ -11,7 +11,9 @@
     { "source": "/school", "destination": "/chapters", "permanent": true },
     { "source": "/school/library", "destination": "/resources", "permanent": true },
     { "source": "/school/library.html", "destination": "/resources", "permanent": true },
-    { "source": "/launchpad.html", "destination": "/launchpad", "permanent": true },
+    { "source": "/launchpad", "destination": "/", "permanent": false },
+    { "source": "/launchpad.html", "destination": "/", "permanent": false },
+    { "source": "/launchpad/:path*", "destination": "/", "permanent": false },
     { "source": "/connect.html", "destination": "/", "permanent": false },
     { "source": "/connect", "destination": "/", "permanent": false },
     { "source": "/connect/:path*", "destination": "/", "permanent": false },
@@ -32,8 +34,12 @@
     { "source": "/join-ambassador", "destination": "/chapters/start", "permanent": true },
     { "source": "/stories.html", "destination": "/chapters", "permanent": true },
     { "source": "/stories", "destination": "/chapters", "permanent": true },
-    { "source": "/fellowship.html", "destination": "/launchpad/fellowship", "permanent": true },
-    { "source": "/fellowship", "destination": "/launchpad/fellowship", "permanent": true },
+    { "source": "/fellowship.html", "destination": "/", "permanent": false },
+    { "source": "/fellowship", "destination": "/", "permanent": false },
+    { "source": "/fellowship-brochure", "destination": "/", "permanent": false },
+    { "source": "/fellowship-brochure.html", "destination": "/", "permanent": false },
+    { "source": "/fellowship-demo", "destination": "/", "permanent": false },
+    { "source": "/fellowship-demo.html", "destination": "/", "permanent": false },
     { "source": "/partners.html", "destination": "/about/partners", "permanent": true },
     { "source": "/partners", "destination": "/about/partners", "permanent": true },
     { "source": "/investors.html", "destination": "/investors", "permanent": true },
@@ -72,7 +78,7 @@
           "value": "fellowship.thefuturecouncil.in"
         }
       ],
-      "destination": "/launchpad/fellowship"
+      "destination": "/"
     },
     {
       "source": "/chapters/:college",

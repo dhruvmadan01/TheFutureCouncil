@@ -1143,9 +1143,6 @@
                 ${currentUser.member_id ? `<div class="tfc-user-dropdown-id">ID: ${currentUser.member_id}</div>` : ''}
               </div>
               <div class="tfc-user-dropdown-divider"></div>
-              <a href="/launchpad/fellowship" class="tfc-user-dropdown-link" role="menuitem">
-                <span>🚀 Launchpad Application</span>
-              </a>
               <a href="ambassador.html" class="tfc-user-dropdown-link" role="menuitem">
                 <span>🎓 Ambassador Console</span>
               </a>
@@ -1203,8 +1200,8 @@
           } else {
             const hasJoinedCouncil = window.TFCAuth.isCouncilMember(currentUser);
             if (hasJoinedCouncil) {
-              primaryBtn.href = '/launchpad';
-              primaryBtn.innerHTML = `Launchpad`;
+              primaryBtn.href = '/chapters';
+              primaryBtn.innerHTML = `Chapters`;
               primaryBtn.onclick = null;
             } else {
               primaryBtn.href = 'join.html';
@@ -1296,8 +1293,8 @@
           } else {
             const hasJoinedCouncil = window.TFCAuth.isCouncilMember(currentUser);
             if (hasJoinedCouncil) {
-              mobileActionBtn.href = '/launchpad';
-              mobileActionBtn.innerHTML = "Launchpad →";
+              mobileActionBtn.href = '/chapters';
+              mobileActionBtn.innerHTML = "Chapters →";
               mobileActionBtn.onclick = null;
             } else {
               mobileActionBtn.href = 'join.html';
