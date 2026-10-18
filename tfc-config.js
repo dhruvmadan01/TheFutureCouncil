@@ -29,13 +29,16 @@
       EQUITY_TERMS: '2% equity taken in selected cohort ventures',
       SUCCESS_FEE: '0%',
       SUCCESS_FEE_TERMS: 'No success fee on capital raised',
-      DURATION: 'Fully online',
+      DURATION: 'In person · Delhi NCR',
+      FORMAT: 'In person',
+      LOCATION: 'Delhi NCR',
+      PREVIOUS_COHORT_FORMAT: 'Fully online',
       POD_SIZE: 'pods of 4–5',
       TIME_COMMITMENT: '6–8 hrs/week',
       DEADLINE_ISO: '2027-01-15T23:59:59+05:30',
       DEADLINE_DISPLAY: 'Jan 15, 2027, 11:59 PM IST',
       KICKOFF_DISPLAY: 'Feb 1, 2027',
-      AUDIENCE: 'Student founders and early-stage builders from any college or university across India',
+      AUDIENCE: 'Student founders and early-stage builders from any college or university who can attend in person in Delhi NCR',
       UNSELECTED_BENEFITS: {
         FEEDBACK: 'Written feedback with specific actionable fixes'
       },

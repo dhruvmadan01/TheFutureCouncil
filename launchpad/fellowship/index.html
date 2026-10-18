@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Launchpad Spring Cohort | The Future Council</title>
-  <meta name="description" content="A selective online startup accelerator cohort for 20 student founders ending in Demo Day with vetted investors. 2% equity. No success fee." />
+  <meta name="description" content="A selective in-person startup accelerator cohort in Delhi NCR for 20 student founders, ending in Demo Day with vetted investors. 2% equity. No success fee." />
   <meta name="canonical" href="https://thefuturecouncil.in/launchpad/fellowship" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -266,12 +266,12 @@
         <span class="mono kick">Launchpad · Spring Cohort 02</span>
         <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">The Student Startup Accelerator</h1>
         <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
-          A selective online startup accelerator cohort for student founders ending in Demo Day with vetted angels and seed funds. No relocation. 2% equity in selected cohort ventures. Zero success fee.
+          A selective in-person startup accelerator cohort in Delhi NCR for student founders, ending in Demo Day with vetted angels and seed funds. You need to be able to attend in person. 2% equity in selected cohort ventures. Zero success fee.
         </p>
 
         <!-- SPEC 5.6 HERO STATS -->
         <div class="hero-stats">
-          <div class="stat-chip"><b>Fully Online</b> · No relocation</div>
+          <div class="stat-chip"><b>In person</b> · Delhi NCR</div>
           <div class="stat-chip"><b>20 Founders</b> · Selected</div>
           <div class="stat-chip"><b>2% Equity</b> · Selected Cohort</div>
           <div class="stat-chip"><b>₹999</b> · One-time application</div>
@@ -338,6 +338,22 @@
                   <label class="form-label" for="fPhone">WhatsApp Phone Number *</label>
                   <input class="form-input" id="fPhone" name="phone" type="tel" placeholder="+91 98765 43210" required />
                   <div class="form-hint">Used for urgent cohort logistics and founder pod communications.</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fLocation">Where are you based? *</label>
+                  <select class="form-input" id="fLocation" name="location" required>
+                    <option value="">Select your location</option>
+                    <option>Delhi</option>
+                    <option>Gurugram</option>
+                    <option>Noida / Greater Noida</option>
+                    <option>Ghaziabad</option>
+                    <option>Faridabad</option>
+                    <option>Other Delhi NCR area</option>
+                    <option>Outside Delhi NCR, I can attend in person</option>
+                    <option>Outside Delhi NCR, I cannot attend in person</option>
+                  </select>
+                  <div class="form-hint">Cohort 02 runs in person in Delhi NCR. Selected founders need to attend the sessions there.</div>
                 </div>
 
                 <div class="form-group">
@@ -444,7 +460,7 @@
                       <span>₹999</span>
                     </div>
                     <div class="fee-row">
-                      <span>Online Program (if selected)</span>
+                      <span>In-person Program, Delhi NCR (if selected)</span>
                       <span>₹0 additional fee</span>
                     </div>
                     <div class="fee-row">
@@ -466,7 +482,7 @@
                 <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start; margin-top: 24px;">
                   <input type="checkbox" id="fCommitHours" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
                   <label for="fCommitHours" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
-                    I commit to spending <b>6–8 hours per week</b> throughout the cohort on cohort labs, founder pods, and mentor office hours if selected.
+                    I commit to attending <b>in person in Delhi NCR</b> and spending <b>6–8 hours per week</b> throughout the cohort on cohort labs, founder pods, and mentor office hours if selected.
                   </label>
                 </div>
 
@@ -766,6 +782,7 @@
         stage: document.getElementById('fStage')?.value || 'Prototype / MVP Built',
         q1: (document.getElementById('fQ1')?.value || '').trim(),
         q3: (document.getElementById('fQ3')?.value || '').trim(),
+        location: (document.getElementById('fLocation')?.value || '').trim(),
         upiRef: isPaymentMarkedDone ? 'Payment Done (Verifying within 24 hrs)' : 'Pending',
         chapterRef: chapterRef
       };
@@ -828,7 +845,8 @@
         `Stage: ${payload.stage}`,
         `Q1: ${payload.q1}`,
         `Q3: ${payload.q3}`,
-        `Q4: Online Cohort`,
+        `Q4: In-person Cohort (Delhi NCR)`,
+        `Location: ${payload.location}`,
         `PaymentFee: 999`,
         `PaymentStatus: ${isCompleted ? 'pending_verification' : (stageStatus === 'Step 2 Completed' ? 'awaiting_payment' : 'awaiting_step2')}`,
         `Payment: ${isCompleted ? 'Paid' : 'Pending'}`,
@@ -902,6 +920,12 @@
       if (!name) { alert('Please enter your full name.'); return; }
       if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
       if (!phone || phone.replace(/\D/g,'').length < 10) { alert('Please enter your 10-digit WhatsApp contact number.'); return; }
+      const loc = (document.getElementById('fLocation')?.value || '').trim();
+      if (!loc) { alert('Please tell us where you are based.'); return; }
+      if (loc === 'Outside Delhi NCR, I cannot attend in person') {
+        alert('Cohort 02 runs in person in Delhi NCR, so you can only apply if you can attend there. Cohort 01 (Winter) runs online, but its registrations are closed.');
+        return;
+      }
 
       const payload = gatherFormData();
 
@@ -1121,6 +1145,7 @@
           enrolledNo.checked = true;
           checkEnrolled();
         }
+        if (draft.location && document.getElementById('fLocation')) document.getElementById('fLocation').value = draft.location;
         if (draft.collegeName && document.getElementById('fCollegeName')) document.getElementById('fCollegeName').value = draft.collegeName;
         if (draft.collegeYear && document.getElementById('fCollegeYear')) document.getElementById('fCollegeYear').value = draft.collegeYear;
         if (draft.collegeCourse && document.getElementById('fCollegeCourse')) document.getElementById('fCollegeCourse').value = draft.collegeCourse;
