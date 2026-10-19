@@ -20,8 +20,8 @@
       EQUITY_TERMS: 'No equity taken',
       SUCCESS_FEE: '0%',
       SUCCESS_FEE_TERMS: 'No success fee on capital raised',
-      SELECTION: 'Apply, interview, then selection',
-      APPLICATIONS: 'Open any time. No cohorts, no deadlines.',
+      SELECTION: 'Apply, build through 8 milestones, then rank and interview for Demo Day',
+      APPLICATIONS: 'Open now. Run and Demo Day dates are announced on the Launchpad page.',
       UNSELECTED_BENEFITS: {
         FEEDBACK: 'Written feedback with specific actionable fixes'
       }
