@@ -210,3 +210,23 @@
 .pv-site .real-form .tfc-google-btn { border-radius: 0 !important; box-shadow: none !important; border: 1px solid var(--ink) !important; background: var(--ivory) !important; }
 .pv-site .real-form .join-form-shell > div:first-child { display: none; }
 @media (min-width: 900px) { .pv-site .real-form { max-width: 760px; } }
+
+/* ---- Home video (click-to-play, loads YouTube only on demand) ---- */
+.pv-site .pv-video-sec { border-top: 1px solid var(--line); }
+.pv-site .pv-video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--ink); border: 1px solid var(--ink); overflow: hidden; margin-top: 8px; }
+.pv-site .pv-video-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .82; transition: opacity .2s, transform .5s; }
+.pv-site .pv-video:hover .pv-video-poster { opacity: 1; transform: scale(1.015); }
+.pv-site .pv-video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,11,11,.55), rgba(11,11,11,0) 55%); pointer-events: none; }
+.pv-site .pv-video.is-playing::after { display: none; }
+.pv-site .pv-video-play { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 96px; border: 0; border-radius: 0; background: var(--sunrise); cursor: pointer; display: grid; place-items: center; transition: background .2s, transform .2s; }
+.pv-site .pv-video-play:hover { background: var(--ivory); transform: translate(-50%, -50%) scale(1.04); }
+.pv-site .pv-video-play:focus-visible { outline: 3px solid var(--ivory); outline-offset: 4px; }
+.pv-site .pv-play-tri { width: 0; height: 0; margin-left: 8px; border-style: solid; border-width: 17px 0 17px 28px; border-color: transparent transparent transparent var(--ink); }
+.pv-site .pv-video-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.pv-site .pv-video-note { margin: 16px 0 0; font-size: 14px; text-align: right; }
+.pv-site .pv-video-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 720px) {
+  .pv-site .pv-video-play { width: 68px; height: 68px; }
+  .pv-site .pv-play-tri { margin-left: 5px; border-width: 12px 0 12px 20px; }
+  .pv-site .pv-video-note { text-align: left; }
+}

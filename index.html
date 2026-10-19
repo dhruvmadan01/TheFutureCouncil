@@ -86,6 +86,16 @@
       <div class="pv-fact"><b>Interview</b><span>then selection</span></div>
     </div>
   </section>
+  <section class="pv-section pv-video-sec" id="watch" aria-label="Watch The Future Council">
+    <div class="pv-wrap">
+      <div class="pv-section-head"><div><p class="pv-label pv-muted" style="margin-bottom: 20px">Watch</p><h2 class="pv-display">See what we're <span class="pv-accent">building</span></h2></div><p>India's best startups start on campus. A short look at The Future Council.</p></div>
+      <div class="pv-video" data-yt="-rf8Ra8VnIg">
+        <img class="pv-video-poster" src="https://i.ytimg.com/vi/-rf8Ra8VnIg/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/-rf8Ra8VnIg/hqdefault.jpg'">
+        <button class="pv-video-play" type="button" aria-label="Play video: The Future Council, India's Best Startups Start on Campus"><span class="pv-play-tri" aria-hidden="true"></span></button>
+      </div>
+      <p class="pv-video-note"><a href="https://www.youtube.com/watch?v=-rf8Ra8VnIg" target="_blank" rel="noopener">Watch on YouTube &#8599;</a></p>
+    </div>
+  </section>
   <section class="pv-section pv-ink-band">
     <div class="pv-wrap">
       <p class="pv-label" style="margin-bottom: 28px">What we do</p>
@@ -154,5 +164,22 @@
 
   <script src="/tfc-config.js"></script>
   <script src="/tfc-shared.js"></script>
+<script>
+(function(){
+  document.querySelectorAll('.pv-video[data-yt]').forEach(function(box){
+    var btn = box.querySelector('.pv-video-play');
+    function play(){
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + box.getAttribute('data-yt') + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'The Future Council, India\'s Best Startups Start on Campus';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.className = 'pv-video-frame';
+      box.innerHTML = ''; box.appendChild(f); box.classList.add('is-playing');
+    }
+    btn.addEventListener('click', play);
+  });
+})();
+</script>
 </body>
 </html>
