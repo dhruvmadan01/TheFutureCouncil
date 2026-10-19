@@ -59,7 +59,7 @@ ${body}
       <p>&copy; 2026 TFC Innovations Pvt. Ltd. &middot; The Future Council</p>
     </div>
     <div class="pv-foot-col"><h4>Launchpad</h4><ul>
-      <li><a href="/launchpad">Overview</a></li><li><a href="/launchpad/course">The course</a></li><li><a href="/launchpad/dashboard">Your dashboard</a></li>
+      <li><a href="/launchpad">Overview</a></li><li><a href="/launchpad/course">The course</a></li><li><a href="/launchpad/playbook">Open playbook</a></li><li><a href="/launchpad/dashboard">Your dashboard</a></li>
       <li><a href="/launchpad/leaderboard">Leaderboard</a></li><li><a href="/launchpad/demo-day">Demo Day</a></li></ul></div>
     <div class="pv-foot-col"><h4>Explore</h4><ul>
       <li><a href="/chapters">Chapters</a></li><li><a href="/why">Why Build</a></li><li><a href="/investors">Investors</a></li>
@@ -163,7 +163,78 @@ function appShell({ label, h1, lede, id, urlPath, title, description, scripts, n
   return page({ title, description, path: urlPath, body, scripts: ['/launchpad/lp-client.js'].concat(scripts), noindex });
 }
 
+
+// ---------- open playbook ----------
+
+const LICENCE = 'The playbook text, checklists and templates written by The Future Council are shared under Creative Commons Attribution 4.0 (CC BY 4.0). Use them, copy them and adapt them, including to run your own program, as long as you credit The Future Council and link back to thefuturecouncil.in/launchpad/playbook. The linked talks and essays belong to their authors and are not covered by this licence.';
+const RUBRIC = [
+  ['Demand', 'Evidence that real people want this: conversations, signups, returning users.'],
+  ['Execution', 'Quality of what was built and shipped, and how fast.'],
+  ['Pitch', 'Clarity of the idea, the brief and the ask.'],
+  ['Momentum', 'Progress across the eight weeks, not just the final state.']
+];
+const RUN = [
+  ['Start a batch on a fixed date each month', 'Everyone in a batch starts together. Week 1 opens on the start date and a new week opens every seven days.'],
+  ['Put founders in pods of four to five', 'Mix colleges where you can. Pods give accountability: each founder can see where the others are.'],
+  ['Review against the written checklist', 'A week is passed only when every line on its checklist is met. Give specific feedback and allow resubmission.'],
+  ['Check the work that cannot be checked in writing', 'Sample passed weeks by hand, open the links, and have pod members confirm each other\'s landing pages, MVPs and users.'],
+  ['Rank at the end, then interview', 'Score everyone who passed weeks 1 to 7 on the four-part rubric. Interview the top 25 to 30 and ask for a live demo.'],
+  ['Hold a Demo Day', 'Up to 20 founders pitch for three minutes each to invited investors and mentors, followed by questions. Send investors a one-page brief per founder beforehand.']
+];
+
+function playbookMarkdown() {
+  const L = [];
+  L.push('# The Launchpad Playbook', '', 'A free eight-week path from idea to Demo Day for student founders, by The Future Council.', '', `Read it online: https://thefuturecouncil.in/launchpad/playbook`, '', '## How it works', '', 'One milestone a week for eight weeks, in pods of four to five founders, then a ranked selection and a Demo Day. Batches start monthly.', '');
+  content.milestones.forEach((m) => {
+    L.push(`## Week ${m.n}: ${m.title}`, '', m.tagline, '', `**Hand in:** ${m.outcome}`, '', `**Why it matters:** ${m.why}`, '', '**Watch and read**', '');
+    m.watch.forEach((w) => L.push(`- [${w.title}](${w.url}) (${w.by}${w.org ? ', ' + w.org : ''})${w.focus ? '. ' + w.focus : ''}`));
+    L.push('', '**Steps**', '');
+    m.steps.forEach((x, i) => L.push(`${i + 1}. ${x}`));
+    L.push('', `**${m.template.title}**`, '', '```', m.template.body, '```', '', '**Pass checklist**', '');
+    m.checklist.forEach((c) => L.push(`- [ ] ${c}`));
+    L.push('', '**Common mistakes**', '');
+    m.mistakes.forEach((c) => L.push(`- ${c}`));
+    L.push('');
+  });
+  L.push('## Choosing the Demo Day founders', '', 'Score each of four areas from 0 to 25, on what the founder built and learned, never on college or grades.', '');
+  RUBRIC.forEach((r) => L.push(`- **${r[0]}:** ${r[1]}`));
+  L.push('', '## Running it yourself', '');
+  RUN.forEach((r, i) => L.push(`${i + 1}. **${r[0]}.** ${r[1]}`));
+  L.push('', '## Licence', '', LICENCE, '', P.credit, '');
+  return L.join('\n');
+}
+
+function playbookPage() {
+  const stages = content.milestones.map((m) => `<details class="lp-card"><summary><b>Week ${m.n}: ${esc(m.title)}</b> <span class="lp-muted">${esc(m.tagline)}</span></summary>
+        <p class="lp-p"><b>Hand in:</b> ${esc(m.outcome)}</p>
+        <p class="lp-p">${esc(m.why)}</p>
+        <h3 class="lp-h3">Pass checklist</h3><ul class="lp-check">${m.checklist.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+        <p style="margin-top:14px"><a href="/launchpad/course/${m.slug}">Open the full week: talks, steps and template &rarr;</a></p></details>`).join('\n      ');
+  const body = `${hero('Launchpad · Open playbook', `The Launchpad <span class="pv-accent">playbook.</span>`, `The whole framework from idea to Demo Day, free for anyone to read, copy and run. Use it on your own, with friends, or to start a program at your college.`, `<div class="pv-actions"><a class="pv-btn" href="/launchpad/playbook.md" download>Download as Markdown</a><a class="pv-note" href="/launchpad/dashboard">Or join the next batch</a></div>`)}
+  <section class="pv-section">
+    <div class="lp-wrap lp-narrow">
+      <h2 class="lp-h2 pv-display">The path</h2>
+      <p class="lp-p">Eight weeks, one milestone a week. Each milestone has one thing to hand in and a written checklist that decides whether it counts. Do the weeks in order, in a group of four or five founders, and finish with a Demo Day.</p>
+      <div style="margin-top:18px">
+      ${stages}
+      </div>
+      <h2 class="lp-h2 pv-display">How Demo Day founders are chosen</h2>
+      <p class="lp-p">Everyone who passes weeks 1 to 7 and submits week 8 is scored from 0 to 25 on each area below. College and grades are not part of it.</p>
+      <ul class="lp-list">${RUBRIC.map((r) => `<li><b>${r[0]}.</b> ${esc(r[1])}</li>`).join('')}</ul>
+      <h2 class="lp-h2 pv-display">Run it yourself</h2>
+      <ol class="lp-list">${RUN.map((r) => `<li><b>${esc(r[0])}.</b> ${esc(r[1])}</li>`).join('')}</ol>
+      <div class="lp-notice">Want to run Launchpad at your college or incubator, with our course pages, review system and Demo Day? Write to <a href="mailto:support@thefuturecouncil.in?subject=Run%20Launchpad%20at%20our%20college">support@thefuturecouncil.in</a>.</div>
+      <h2 class="lp-h2 pv-display">Licence</h2>
+      <p class="lp-p">${esc(LICENCE)}</p>
+      <p class="lp-credit">${esc(P.credit)}</p>
+    </div>
+  </section>`;
+  return page({ title: 'Open playbook', description: 'The Launchpad playbook: a free eight-week path from idea to Demo Day for student founders. Read it, copy it, run it.', path: '/launchpad/playbook', body });
+}
+
 const out = [];
+write('launchpad/playbook/index.html', playbookPage()); 
+write('launchpad/playbook.md', playbookMarkdown());
 write('launchpad/course/index.html', courseIndex()); out.push('launchpad/course/index.html');
 content.milestones.forEach((m) => {
   const rel = `launchpad/course/${m.slug}/index.html`;
@@ -181,4 +252,5 @@ shells.forEach((s) => {
   write(rel, appShell(Object.assign({ urlPath: `/launchpad/${s.dir}` }, s))); out.push(rel);
 });
 
-console.log('Wrote ' + out.length + ' pages:\n  ' + out.join('\n  '));
+out.push('launchpad/playbook/index.html', 'launchpad/playbook.md');
+console.log('Wrote ' + out.length + ' files:\n  ' + out.join('\n  '));
