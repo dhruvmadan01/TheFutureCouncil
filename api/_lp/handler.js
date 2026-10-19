@@ -52,7 +52,7 @@ function createHandler(deps) {
   async function ensureBatch(startsOn) {
     const found = await db.select('lp_batches', { eq: { starts_on: startsOn } });
     if (found[0]) return found[0];
-    return (await db.insert('lp_batches', { name: L.batchName(startsOn), starts_on: startsOn }))[0];
+    return (await db.insert('lp_batches', { name: L.groupName(startsOn), starts_on: startsOn }))[0];
   }
 
   async function nextDemoDay() {
@@ -83,7 +83,7 @@ function createHandler(deps) {
         you: m.id === enrollment.id
       }));
     }
-    const states = L.milestoneStates(batch.starts_on, today(), subs);
+    const states = L.milestoneStates(subs);
     const passedCount = states.filter((s) => s.state === 'passed').length;
     const finalistDays = finalists.length ? await db.select('lp_demo_days', { in: { id: finalists.map((f) => f.demo_day_id) } }) : [];
     return {
@@ -91,7 +91,7 @@ function createHandler(deps) {
       today: today(),
       user: { name: enrollment.name, email: enrollment.email },
       enrollment: { id: enrollment.id, college: enrollment.college, showPublic: enrollment.show_public },
-      batch: { id: batch.id, name: batch.name, startsOn: batch.starts_on, started: today() >= batch.starts_on },
+      batch: { id: batch.id, name: batch.name, startsOn: batch.starts_on, started: true },
       pod: pod ? { id: pod.id, name: pod.name, members: mates } : null,
       milestones: states,
       passedCount,
@@ -223,7 +223,7 @@ function createHandler(deps) {
     let enrollment = await findEnrollment(user.email);
     if (!enrollment) {
       const college = String(body.college || '').trim().slice(0, 120);
-      const startsOn = L.nextIntake(today(), P.intakeDay);
+      const startsOn = L.monthStart(today());
       const batch = await ensureBatch(startsOn);
       const pods = await db.select('lp_pods', { eq: { batch_id: batch.id }, order: ['id', 'asc'] });
       const members = pods.length ? await db.select('lp_enrollments', { in: { pod_id: pods.map((p) => p.id) } }) : [];
@@ -247,10 +247,11 @@ function createHandler(deps) {
     if (!milestone) throw httpError(400, 'Unknown milestone.');
     const enrollment = await findEnrollment(user.email);
     if (!enrollment) throw httpError(403, 'Join Launchpad first.');
-    const batch = (await db.select('lp_batches', { eq: { id: enrollment.batch_id } }))[0];
-    const unlocksOn = L.addDays(batch.starts_on, (n - 1) * 7);
-    if (today() < unlocksOn) throw httpError(403, `Milestone ${n} opens on ${unlocksOn}.`);
 
+    if (n > 1) {
+      const prev = await db.select('lp_submissions', { eq: { enrollment_id: enrollment.id, milestone: n - 1, status: 'passed' }, limit: 1 });
+      if (!prev.length) throw httpError(403, `Pass week ${n - 1} first. Each week opens when the one before it is passed.`);
+    }
     const existing = await db.select('lp_submissions', { eq: { enrollment_id: enrollment.id, milestone: n }, order: ['created_at', 'desc'], limit: 50 });
     if (existing.some((s) => s.status === 'passed')) throw httpError(409, 'You have already passed this milestone.');
     const dayAgo = now() - 86400000;
@@ -458,6 +459,79 @@ function createHandler(deps) {
     return { status: 200, body: { pods: needed, founders: members.length } };
   }
 
+
+  // ---------- community ----------
+
+  const POST_MAX = 500;
+
+  async function actionPodWall(req) {
+    const user = await requireUser(req);
+    const enrollment = await findEnrollment(user.email);
+    if (!enrollment) throw httpError(403, 'Join Launchpad first.');
+    if (!enrollment.pod_id) return { status: 200, body: { feed: [] } };
+    const members = await db.select('lp_enrollments', { eq: { pod_id: enrollment.pod_id } });
+    const ids = members.map((m) => m.id);
+    const [posts, passed] = await Promise.all([
+      db.select('lp_posts', { eq: { pod_id: enrollment.pod_id }, order: ['created_at', 'desc'], limit: 40 }),
+      ids.length ? db.select('lp_submissions', { in: { enrollment_id: ids }, eq: { status: 'passed' }, order: ['created_at', 'desc'], limit: 60 }) : Promise.resolve([])
+    ]);
+    const nameOf = (id) => { const m = members.find((x) => x.id === id); return !m ? 'Founder' : m.id === enrollment.id ? 'You' : L.publicName(m.name); };
+    const seen = new Set();
+    const events = [];
+    passed.forEach((x) => {
+      const key = x.enrollment_id + ':' + x.milestone;
+      if (seen.has(key)) return;
+      seen.add(key);
+      events.push({ type: 'pass', name: nameOf(x.enrollment_id), milestone: x.milestone, title: (milestoneByN[x.milestone] || {}).title || '', createdAt: x.scored_at || x.created_at });
+    });
+    const talk = posts.map((x) => ({ type: 'post', id: x.id, name: nameOf(x.enrollment_id), body: x.body, createdAt: x.created_at, mine: x.enrollment_id === enrollment.id }));
+    const feed = events.concat(talk).sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1)).slice(0, 50);
+    return { status: 200, body: { feed } };
+  }
+
+  async function actionPost(req) {
+    const user = await requireUser(req);
+    const enrollment = await findEnrollment(user.email);
+    if (!enrollment || !enrollment.pod_id) throw httpError(403, 'Join Launchpad first.');
+    const text = String((req.body || {}).body || '').replace(/\s+/g, ' ').trim();
+    if (text.length < 2) throw httpError(400, 'Write a few words first.');
+    if (text.length > POST_MAX) throw httpError(400, `Keep it under ${POST_MAX} characters.`);
+    const mine = await db.select('lp_posts', { eq: { enrollment_id: enrollment.id }, order: ['created_at', 'desc'], limit: 20 });
+    const dayAgo = now() - 86400000;
+    if (mine.filter((x) => Date.parse(x.created_at) > dayAgo).length >= 10) throw httpError(429, 'That is plenty for today. Try again tomorrow.');
+    await db.insert('lp_posts', { enrollment_id: enrollment.id, pod_id: enrollment.pod_id, body: text, created_at: new Date(now()).toISOString() });
+    return actionPodWall(req);
+  }
+
+  async function actionPostDelete(req) {
+    const user = await requireUser(req);
+    const id = (req.body || {}).id;
+    const post = (await db.select('lp_posts', { eq: { id } }))[0];
+    if (!post) throw httpError(404, 'Post not found.');
+    const enrollment = await findEnrollment(user.email);
+    const isOwner = enrollment && enrollment.id === post.enrollment_id;
+    if (!isOwner && !adminEmails.includes(user.email)) throw httpError(403, 'You can only delete your own posts.');
+    await db.remove('lp_posts', { eq: { id } });
+    return { status: 200, body: { ok: true } };
+  }
+
+  async function actionWins() {
+    const [passed, enrollments] = await Promise.all([
+      db.select('lp_submissions', { eq: { status: 'passed' }, order: ['created_at', 'desc'], limit: 150 }),
+      db.select('lp_enrollments', { eq: { show_public: true } })
+    ]);
+    const seen = new Set();
+    const wins = [];
+    passed.forEach((x) => {
+      const e = enrollments.find((r) => r.id === x.enrollment_id);
+      const key = x.enrollment_id + ':' + x.milestone;
+      if (!e || seen.has(key)) return;
+      seen.add(key);
+      wins.push({ name: L.publicName(e.name), college: e.college || null, milestone: x.milestone, title: (milestoneByN[x.milestone] || {}).title || '', at: x.scored_at || x.created_at });
+    });
+    return { status: 200, cache: 30, body: { wins: wins.slice(0, 30) } };
+  }
+
   const routes = {
     'GET program': actionProgram,
     'GET leaderboard': actionLeaderboard,
@@ -466,6 +540,10 @@ function createHandler(deps) {
     'POST enroll': actionEnroll,
     'POST submit': actionSubmit,
     'POST settings': actionSettings,
+    'GET pod-wall': actionPodWall,
+    'POST post': actionPost,
+    'POST post-delete': actionPostDelete,
+    'GET wins': actionWins,
     'GET admin-overview': actionAdminOverview,
     'POST admin-review': actionAdminReview,
     'POST admin-rescore': actionAdminRescore,

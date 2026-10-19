@@ -112,7 +112,7 @@ function weekPage(m) {
       <h2 class="lp-h2 pv-display">2. Do the work</h2>
       <ol class="lp-list">${m.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
       <h2 class="lp-h2 pv-display">3. Use the template</h2>
-      <p class="lp-muted" style="margin-bottom:8px">${esc(m.template.title)}. Copy it, fill it in, then enter your answers on your dashboard.</p>
+      <p class="lp-muted" style="margin-bottom:8px">${esc(m.template.title)}. Copy it, fill it in, then hand in your answers in the app.</p>
       <div class="lp-pre">${esc(m.template.body)}</div>
       <h2 class="lp-h2 pv-display">4. What a pass looks like</h2>
       <p class="lp-muted">Your submission is checked against this list. Meet every line and the week is passed.</p>
@@ -120,7 +120,7 @@ function weekPage(m) {
       <h2 class="lp-h2 pv-display">Common mistakes</h2>
       <ul class="lp-list">${m.mistakes.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
       <div class="lp-notice">${m.n === P.pathWeeks ? 'Your final submission is what investors see on Demo Day, so write it for a stranger who has never heard of your startup. Your startup name, one-liner, deck and pitch link may be shown publicly if you are chosen as a finalist.' : `Passing this week unlocks: ${esc(m.unlocks)}.`}</div>
-      <div class="pv-actions" style="margin-top:20px"><a class="pv-btn" href="/launchpad/dashboard">Submit week ${m.n} on your dashboard</a></div>
+      <div class="pv-actions" style="margin-top:20px"><a class="pv-btn" href="/launchpad/dashboard#week-${m.n}">Do week ${m.n} in the app</a></div>
       <div class="lp-weeknav">
         ${prev ? `<a href="/launchpad/course/${prev.slug}">&larr; Week ${prev.n}: ${esc(prev.title)}</a>` : '<span></span>'}
         ${next ? `<a href="/launchpad/course/${next.slug}">Week ${next.n}: ${esc(next.title)} &rarr;</a>` : '<a href="/launchpad/demo-day">See Demo Day &rarr;</a>'}
@@ -138,7 +138,7 @@ function weekPage(m) {
 
 function courseIndex() {
   const rows = content.milestones.map((m) => `<a class="lp-card" href="/launchpad/course/${m.slug}" style="display:block;text-decoration:none;color:inherit"><span class="lp-tag">Week ${m.n}</span><h3 class="lp-h3" style="margin-top:10px">${esc(m.title)}</h3><p class="lp-muted" style="margin:0">${esc(m.tagline)}</p></a>`).join('\n');
-  const body = `${hero('Launchpad · The course', `Eight weeks. <span class="pv-accent">Idea to Demo Day.</span>`, `Every week has the best free talks on the internet, a short list of steps, a template and a clear checklist. Anyone can read the course. Sign in to submit your work, get reviewed and join a pod.`, `<div class="pv-actions"><a class="pv-btn" href="/launchpad/dashboard">Start on your dashboard</a><a class="pv-note" href="${esc(P.hub.url)}" target="_blank" rel="noopener">${esc(P.hub.title)} &#8599;</a></div>`)}
+  const body = `${hero('Launchpad · The course', `Eight weeks. <span class="pv-accent">Idea to Demo Day.</span>`, `Every week has the best free talks on the internet, a short list of steps, a template and a clear checklist. Anyone can read the course. Sign in to do it in the app: submit your work, get reviewed and join a pod.`, `<div class="pv-actions"><a class="pv-btn" href="/launchpad/dashboard">Start Week 1</a><a class="pv-note" href="${esc(P.hub.url)}" target="_blank" rel="noopener">${esc(P.hub.title)} &#8599;</a></div>`)}
   <section class="pv-section">
     <div class="lp-wrap">
       <div class="lp-grid">
@@ -152,8 +152,9 @@ ${rows}
 
 // ---------- app shells ----------
 
-function appShell({ label, h1, lede, id, urlPath, title, description, scripts, noindex }) {
-  const body = `${hero(label, h1, lede)}
+function appShell({ label, h1, lede, id, urlPath, title, description, scripts, noindex, compact }) {
+  const heroHtml = hero(label, h1, lede).replace('<section class="pv-page-hero">', compact ? '<section class="pv-page-hero" style="padding-block:28px 8px">' : '<section class="pv-page-hero">').replace('class="pv-display">', compact ? 'class="pv-display" style="font-size:clamp(34px,5vw,56px);margin-bottom:8px">' : 'class="pv-display">');
+  const body = `${heroHtml}
   <section class="pv-section">
     <div class="lp-wrap">
       <div id="${id}" aria-live="polite"><p class="lp-muted lp-state">Loading&hellip;</p></div>
@@ -242,7 +243,7 @@ content.milestones.forEach((m) => {
 });
 
 const shells = [
-  { dir: 'dashboard', label: 'Launchpad · Your dashboard', h1: 'Your <span class="pv-accent">dashboard.</span>', lede: 'Enroll, submit each week, see your pod and your feedback.', id: 'lp-app', title: 'Dashboard', description: 'Your Launchpad dashboard.', scripts: ['/launchpad/lp-dashboard.js'], noindex: true },
+  { dir: 'dashboard', label: 'Launchpad · Your journey', h1: 'Build your <span class="pv-accent">startup.</span>', lede: 'Eight steps from idea to Demo Day. Start any day, go at your own pace.', id: 'lp-app', compact: true, title: 'Dashboard', description: 'Your Launchpad dashboard.', scripts: ['/launchpad/lp-dashboard.js'], noindex: true },
   { dir: 'leaderboard', label: 'Launchpad · Leaderboard', h1: 'Who is <span class="pv-accent">moving.</span>', lede: 'Founders and pods ranked by milestones passed. First name and last initial only, and anyone can opt out.', id: 'lp-app', title: 'Leaderboard', description: 'Launchpad leaderboard of founders and pods by milestones passed.', scripts: ['/launchpad/lp-leaderboard.js'] },
   { dir: 'demo-day', label: 'Launchpad · Demo Day', h1: 'The founders of <span class="pv-accent">the month.</span>', lede: 'Each month, up to twenty founders who finished the eight weeks pitch to investors.', id: 'lp-app', title: 'Demo Day', description: 'Launchpad Demo Day: the founders of the month and past pitches.', scripts: ['/launchpad/lp-demoday.js'] },
   { dir: 'admin', label: 'Launchpad · Admin', h1: 'Run the <span class="pv-accent">program.</span>', lede: 'Reviews, Demo Day ranking and pods.', id: 'lp-app', title: 'Admin', description: 'Launchpad admin.', scripts: ['/launchpad/lp-admin.js'], noindex: true }

@@ -43,21 +43,21 @@ function lastSaturday(year, month) {
   return d.toISOString().slice(0, 10);
 }
 
-// One milestone unlocks each week. Milestone n opens at start + (n-1) weeks and is due when n+1 opens.
-function milestoneStates(startsOn, todayIso, submissions) {
+// Self-paced: a week opens when the previous week is passed. There are no calendar deadlines.
+// States: locked, open, pending (waiting for a person), needs_work, passed.
+function milestoneStates(submissions) {
   const byMilestone = {};
   (submissions || []).forEach((s) => {
     (byMilestone[s.milestone] = byMilestone[s.milestone] || []).push(s);
   });
   const out = [];
+  let previousPassed = true;
   for (let n = 1; n <= 8; n += 1) {
-    const unlocksOn = addDays(startsOn, (n - 1) * 7);
-    const dueOn = addDays(startsOn, n * 7);
     const subs = (byMilestone[n] || []).slice().sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
     const passed = subs.find((s) => s.status === 'passed');
     const latest = subs[0] || null;
     let state;
-    if (todayIso < unlocksOn) state = 'locked';
+    if (!previousPassed) state = 'locked';
     else if (passed) state = 'passed';
     else if (latest && latest.status === 'pending') state = 'pending';
     else if (latest && latest.status === 'needs_work') state = 'needs_work';
@@ -65,10 +65,8 @@ function milestoneStates(startsOn, todayIso, submissions) {
     out.push({
       n,
       state,
-      unlocksOn,
-      dueOn,
-      overdue: state !== 'passed' && state !== 'locked' && todayIso >= dueOn,
       attempts: subs.length,
+      passedAt: passed ? (passed.scored_at || passed.created_at) : null,
       latest: latest ? {
         id: latest.id,
         status: latest.status,
@@ -79,8 +77,18 @@ function milestoneStates(startsOn, todayIso, submissions) {
         answers: latest.answers
       } : null
     });
+    previousPassed = state === 'passed';
   }
   return out;
+}
+
+// People join the program on any day. Pods are formed from people who joined in the same month.
+function monthStart(todayIso) {
+  return todayIso.slice(0, 8) + '01';
+}
+
+function groupName(startsOn) {
+  return `${monthName(startsOn)} ${startsOn.slice(0, 4)} group`;
 }
 
 function passedSet(submissions) {
@@ -159,6 +167,8 @@ function podCount(members, maxSize) {
 }
 
 module.exports = {
+  monthStart,
+  groupName,
   istToday, addDays, nextIntake, monthName, batchName, lastSaturday,
   milestoneStates, passedSet, demoEligible, validateAnswers, choosePod, publicName, podCount
 };

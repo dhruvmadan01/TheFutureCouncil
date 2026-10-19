@@ -34,14 +34,17 @@ test('last Saturday of the month', () => {
   assert.strictEqual(L.lastSaturday(2026, 12), '2026-12-26');
 });
 
-test('milestones unlock weekly and fall due when the next opens', () => {
-  const states = L.milestoneStates('2026-11-01', '2026-11-10', []);
+test('weeks open one at a time, as each previous week is passed', () => {
+  let states = L.milestoneStates([]);
   assert.strictEqual(states[0].state, 'open');
-  assert.strictEqual(states[0].overdue, true);   // week 1 was due 2026-11-08
-  assert.strictEqual(states[1].state, 'open');   // week 2 opened 2026-11-08
-  assert.strictEqual(states[1].overdue, false);
-  assert.strictEqual(states[2].state, 'locked'); // week 3 opens 2026-11-15
-  assert.strictEqual(states[7].dueOn, '2026-12-27');
+  assert.strictEqual(states[1].state, 'locked');
+  states = L.milestoneStates([{ milestone: 1, status: 'passed', created_at: '2026-11-02T00:00:00Z' }]);
+  assert.strictEqual(states[0].state, 'passed');
+  assert.strictEqual(states[1].state, 'open');
+  assert.strictEqual(states[2].state, 'locked');
+  states = L.milestoneStates([{ milestone: 1, status: 'passed', created_at: 'a' }, { milestone: 2, status: 'needs_work', created_at: 'b' }]);
+  assert.strictEqual(states[1].state, 'needs_work');
+  assert.strictEqual(states[2].state, 'locked');
 });
 
 test('a passed milestone stays passed even if a later attempt failed', () => {
@@ -49,7 +52,12 @@ test('a passed milestone stays passed even if a later attempt failed', () => {
     { milestone: 1, status: 'passed', created_at: '2026-11-02T00:00:00Z' },
     { milestone: 1, status: 'needs_work', created_at: '2026-11-03T00:00:00Z' }
   ];
-  assert.strictEqual(L.milestoneStates('2026-11-01', '2026-11-04', subs)[0].state, 'passed');
+  assert.strictEqual(L.milestoneStates(subs)[0].state, 'passed');
+});
+
+test('join month start and group name', () => {
+  assert.strictEqual(L.monthStart('2026-10-19'), '2026-10-01');
+  assert.strictEqual(L.groupName('2026-10-01'), 'October 2026 group');
 });
 
 test('demo eligibility needs milestones 1 to 7 passed and 8 submitted', () => {
@@ -182,13 +190,15 @@ test('unknown actions and wrong methods are rejected', async () => {
   assert.strictEqual((await env.call('GET', '')).code, 400);
 });
 
-test('enrolling creates the next batch, a pod, and is idempotent', async () => {
+test('enrolling puts you in this month\'s group straight away, in a pod, and is idempotent', async () => {
   const env = makeEnv();
   const tok = env.signIn('a@example.com', 'Aarav Sharma');
   const first = await env.call('POST', 'enroll', { token: tok, body: { college: 'DTU' } });
   assert.strictEqual(first.code, 200);
-  assert.strictEqual(first.body.batch.startsOn, '2026-11-01');
-  assert.strictEqual(first.body.batch.started, false);
+  assert.strictEqual(first.body.batch.startsOn, '2026-10-01');
+  assert.strictEqual(first.body.batch.started, true);
+  assert.strictEqual(first.body.milestones[0].state, 'open');
+  assert.strictEqual(first.body.milestones[1].state, 'locked');
   assert.strictEqual(first.body.pod.members.length, 1);
   const again = await env.call('POST', 'enroll', { token: tok, body: { college: 'Other' } });
   assert.strictEqual(again.body.enrollment.college, 'DTU');
@@ -212,14 +222,15 @@ test('pods fill to five, then a new pod opens', async () => {
   assert.deepStrictEqual(after, [3, 3]);
 });
 
-test('a milestone cannot be submitted before it unlocks', async () => {
+test('a week cannot be submitted until the previous week is passed', async () => {
   const env = makeEnv();
   const tok = env.signIn('a@example.com', 'Aarav Sharma');
   await env.call('POST', 'enroll', { token: tok, body: {} });
-  const r = await env.call('POST', 'submit', { token: tok, body: { milestone: 1, answers: goodAnswers(1) } });
+  const r = await env.call('POST', 'submit', { token: tok, body: { milestone: 2, answers: goodAnswers(2) } });
   assert.strictEqual(r.code, 403);
-  env.nowMs = Date.UTC(2026, 10, 2, 5, 0, 0); // Nov 2
-  assert.strictEqual((await env.call('POST', 'submit', { token: tok, body: { milestone: 2, answers: goodAnswers(2) } })).code, 403);
+  // Week 1 is open from day one, with no waiting for a start date.
+  assert.strictEqual((await env.call('POST', 'submit', { token: tok, body: { milestone: 1, answers: goodAnswers(1) } })).code, 200);
+  assert.strictEqual((await env.call('POST', 'submit', { token: tok, body: { milestone: 2, answers: goodAnswers(2) } })).code, 200);
 });
 
 test('invalid answers are rejected with field errors and nothing is stored', async () => {
@@ -385,6 +396,64 @@ test('carry-over ends after the allowed number of Demo Days', async () => {
   }
   // First Demo Day plus two carry-overs, then they drop out of the pool.
   assert.deepStrictEqual(counts, [1, 1, 1, 0]);
+});
+
+test('pod wall shows posts and passes for pod members only', async () => {
+  const env = makeEnv();
+  const a = env.signIn('a@example.com', 'Aarav Sharma');
+  const b = env.signIn('b@example.com', 'Bela Nair');
+  await env.call('POST', 'enroll', { token: a, body: { college: 'DTU' } });
+  await env.call('POST', 'enroll', { token: b, body: { college: 'SRCC' } });
+  await env.call('POST', 'submit', { token: b, body: { milestone: 1, answers: goodAnswers(1) } });
+  let wall = (await env.call('POST', 'post', { token: a, body: { body: 'Spoke to 4 society heads today.' } })).body.feed;
+  assert.strictEqual(wall.filter((x) => x.type === 'post').length, 1);
+  assert.strictEqual(wall.find((x) => x.type === 'post').name, 'You');
+  const pass = wall.find((x) => x.type === 'pass');
+  assert.strictEqual(pass.name, 'Bela N.');
+  assert.strictEqual(pass.milestone, 1);
+  // A stranger in another pod does not see it.
+  for (let i = 0; i < 5; i += 1) env.signIn(`x${i}@example.com`, `X${i} Y`);
+  for (let i = 0; i < 5; i += 1) await env.call('POST', 'enroll', { token: env.signIn(`x${i}@example.com`, `X${i} Y`), body: { college: 'C' + i } });
+  const outsider = env.signIn('z@example.com', 'Zed Z');
+  await env.call('POST', 'enroll', { token: outsider, body: {} });
+  const zwall = (await env.call('GET', 'pod-wall', { token: outsider })).body.feed;
+  assert.ok(!zwall.some((x) => x.body === 'Spoke to 4 society heads today.'));
+});
+
+test('posts are validated, limited, and deletable by the owner or an admin only', async () => {
+  const env = makeEnv();
+  const a = env.signIn('a@example.com', 'Aarav Sharma');
+  const b = env.signIn('b@example.com', 'Bela Nair');
+  const admin = env.signIn('admin@thefuturecouncil.in', 'Admin');
+  await env.call('POST', 'enroll', { token: a, body: {} });
+  await env.call('POST', 'enroll', { token: b, body: {} });
+  assert.strictEqual((await env.call('POST', 'post', { token: a, body: { body: ' ' } })).code, 400);
+  assert.strictEqual((await env.call('POST', 'post', { token: a, body: { body: 'x'.repeat(501) } })).code, 400);
+  const posted = await env.call('POST', 'post', { token: a, body: { body: 'First post here' } });
+  const id = posted.body.feed.find((x) => x.type === 'post').id;
+  assert.strictEqual((await env.call('POST', 'post-delete', { token: b, body: { id } })).code, 403);
+  assert.strictEqual((await env.call('POST', 'post-delete', { token: a, body: { id } })).code, 200);
+  const again = await env.call('POST', 'post', { token: a, body: { body: 'Second post' } });
+  const id2 = again.body.feed.find((x) => x.type === 'post').id;
+  assert.strictEqual((await env.call('POST', 'post-delete', { token: admin, body: { id: id2 } })).code, 200);
+  for (let i = 0; i < 10; i += 1) { await env.call('POST', 'post', { token: a, body: { body: 'spam ' + i } }); env.nowMs += 1000; }
+  assert.strictEqual((await env.call('POST', 'post', { token: a, body: { body: 'one too many' } })).code, 429);
+});
+
+test('public wins feed lists passes by first name and initial and honours opt-out', async () => {
+  const env = makeEnv();
+  const a = env.signIn('a@example.com', 'Aarav Sharma');
+  const b = env.signIn('b@example.com', 'Bela Nair');
+  await env.call('POST', 'enroll', { token: a, body: { college: 'DTU' } });
+  await env.call('POST', 'enroll', { token: b, body: {} });
+  await env.call('POST', 'submit', { token: a, body: { milestone: 1, answers: goodAnswers(1) } });
+  await env.call('POST', 'submit', { token: b, body: { milestone: 1, answers: goodAnswers(1) } });
+  await env.call('POST', 'settings', { token: b, body: { showPublic: false } });
+  const wins = (await env.call('GET', 'wins')).body.wins;
+  assert.strictEqual(wins.length, 1);
+  assert.strictEqual(wins[0].name, 'Aarav S.');
+  assert.strictEqual(wins[0].title, 'Pick a problem');
+  assert.ok(!JSON.stringify(wins).includes('@'));
 });
 
 // ---------- auth and AI plumbing ----------

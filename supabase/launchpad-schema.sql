@@ -1,4 +1,4 @@
--- Launchpad: monthly intake, 8 weekly milestones, pods, rankings and Demo Day.
+-- Launchpad: self-paced 8-week path (start any day), pods formed by join month, pod wall, rankings and a monthly Demo Day.
 -- Run once in the Supabase SQL editor for the project used by the site.
 --
 -- Security model: every table has row level security switched on with NO policies,
@@ -82,6 +82,16 @@ create table if not exists lp_finalists (
   unique (demo_day_id, enrollment_id)
 );
 
+create table if not exists lp_posts (
+  id             bigint generated always as identity primary key,
+  enrollment_id  bigint not null references lp_enrollments(id) on delete cascade,
+  pod_id         bigint not null references lp_pods(id) on delete cascade,
+  body           text not null,
+  created_at     timestamptz not null default now()
+);
+create index if not exists lp_posts_pod on lp_posts (pod_id, created_at desc);
+
+alter table lp_posts        enable row level security;
 alter table lp_batches      enable row level security;
 alter table lp_pods         enable row level security;
 alter table lp_enrollments  enable row level security;
@@ -90,4 +100,4 @@ alter table lp_demo_days    enable row level security;
 alter table lp_rankings     enable row level security;
 alter table lp_finalists    enable row level security;
 
-revoke all on lp_batches, lp_pods, lp_enrollments, lp_submissions, lp_demo_days, lp_rankings, lp_finalists from anon, authenticated;
+revoke all on lp_batches, lp_pods, lp_enrollments, lp_submissions, lp_demo_days, lp_rankings, lp_finalists, lp_posts from anon, authenticated;
