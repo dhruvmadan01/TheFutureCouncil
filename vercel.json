@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "framework": null,
+  "functions": { "api/lp.js": { "maxDuration": 30 } },
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/join.html", "destination": "/join", "permanent": true },
