@@ -58,7 +58,7 @@ Warm intros to angel syndicates when you're ready to raise, and first access to 
 ### Fellowship CTA Banner
 **Eyebrow:** Cohort 01 · Applications close Oct 15 (Strictly no extension)
 **Headline:** Fellowship '26 is open. 20 seats. 2% equity. Zero success fees. ₹0 program fee.
-**Body:** Starts November 1. The standard ₹1.5L program fee is waived completely for all 20 admitted founders — 2% equity in selected ventures, zero tuition, zero success fee.
+**Body:** Starts November 1. The standard ₹1,50,000 program fee is waived completely for all 20 admitted founders — 2% equity in selected ventures, zero tuition, zero success fee.
 **Primary CTA:** Apply Now →
 **Secondary CTA:** See What's Included
 

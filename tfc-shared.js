@@ -115,3 +115,13 @@
     });
   }
 })();
+
+/* Start the fee-cut animation when it scrolls into view */
+(function(){
+  var els=document.querySelectorAll('.fee-cut');
+  if(!els.length)return;
+  function go(el){el.classList.add('fee-go');}
+  if(!('IntersectionObserver' in window)){els.forEach(go);return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go(e.target);io.unobserve(e.target);}});},{threshold:.6});
+  els.forEach(function(el){io.observe(el);});
+})();
