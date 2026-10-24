@@ -128,7 +128,7 @@ Opens in **the Line** world, then turns warm.
    > That's why The Future Council exists. **Don't queue. Build.**
 3. **What a startup teaches that placement prep doesn't:** customers, selling, shipping, hiring, failing well. A two-column "Placement prep vs Building" comparison.
 4. **The safety nets** `#safety-nets` (forest green): Deferred placement at IIT Bombay, IIT Delhi, IIT Kanpur, IIT Guwahati, IIIT Bangalore and several IIMs (up to 2 years). The National Innovation & Startup Policy 2019 asks colleges to allow semester/year breaks, academic credit and attendance relaxation for student founders ([NISP](https://nisp.mic.gov.in/assets/html/AboutNationalInnovationAndStartu.html)). "Ask your college for these."
-5. **A note for parents** `#parents`: calm, one screen, simple language. What TFC is, no equity taken, the safety nets, the experience counts even if the startup fails. A "Share with your parents on WhatsApp" button (`https://wa.me/?text=` + message + link to `/why#parents`).
+5. **A note for parents** `#parents`: calm, one screen, simple language. What TFC is, 0% equity taken, the safety nets, the experience counts even if the startup fails. A "Share with your parents on WhatsApp" button (`https://wa.me/?text=` + message + link to `/why#parents`).
 6. CTA: "Find your chapter →"
 
 ### 5.3 Chapters `/chapters`: "The campus at night"
@@ -165,7 +165,7 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 8. CTA: "Built something? → Apply to Launchpad"
 
 ### 5.5 Launchpad `/launchpad`: "The ticket"
-1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. ₹1.5 lakh program fee, 100% waived. No equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
+1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. ₹1.5 lakh program fee, 100% waived. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
 3. **How it works:** a path of 5 stops: Apply (₹999 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.

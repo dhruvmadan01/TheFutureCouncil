@@ -29,7 +29,7 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 ### Hero
 **Eyebrow:** Future Council · Global Startup Ecosystem
 **Headline:** You're one chapter away from your co-founder.
-**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, a 4-week founder launchpad (100% fee waiver, no equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
+**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, a 4-week founder launchpad (100% fee waiver, 0% equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
 **Primary CTA:** Join the Council →
 **Secondary CTA:** Fellowship '26 — Applications Open
 
