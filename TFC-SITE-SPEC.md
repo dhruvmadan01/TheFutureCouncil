@@ -10,7 +10,7 @@ This is the complete brief for rebuilding thefuturecouncil.in. It covers the sto
 The Future Council (TFC) is a student startup ecosystem in India with three initiatives:
 - **Chapters**: free, student-run communities on 90+ campuses. Build nights, co-founder matching, demo days.
 - **Startup School**: a practical course on starting a company as a student. ₹399/month subscription. Chapter members get 7 days free.
-- **Launchpad**: a selective 4-week online fellowship for 20 founders per cohort, ending in Demo Day with investors. Fellowship '26 is Cohort 01.
+- **Launchpad**: a selective in-person bootcamp for 20 founders per cohort, ending in Demo Day with investors. Fellowship '26 is Cohort 01.
 
 **Vision:** A generation where building something is the default way to spend college, not the risky exception.
 **Mission:** Give every student in India, from any college, the community, the skills and the capital access to build a startup while they study.
@@ -70,10 +70,10 @@ Every page, FAQ, form, email and legal page must match this table exactly.
 | Fee filter | The ₹999 fee filters for serious candidates, avoids fake applications, and covers individualized written feedback |
 | Selection basis | The problem, progress and team. Never the college. |
 | If not selected | Written feedback + full access to all virtual leader & mentor sessions (pods, 1:1s, investor intros & Demo Day remain exclusive to cohort) |
-| Equity | 2% equity in selected cohort startups |
+| Equity | 0% equity |
 | Success fee | None (0% success fee on capital raised) |
 | Raised alone, or didn't raise | Owe nothing |
-| Format | 4 weeks, fully online, pods of 4–5, weekly live lab, mentor office hours, Demo Day |
+| Format | in person, Delhi NCR, pods of 4–5, weekly live lab, mentor office hours, Demo Day |
 | Cohort 01 dates | Final deadline Oct 15, 2026, 11:59 PM IST (no further extension). Kickoff Nov 1, 2026. |
 | Startup School | ₹399/month, cancel anytime. Chapter members get 7 days free. |
 
@@ -165,22 +165,22 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 8. CTA: "Built something? → Apply to Launchpad"
 
 ### 5.5 Launchpad `/launchpad`: "The ticket"
-1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for four weeks of fully online building with operators and investors, ending in a Demo Day. ₹1,50,000 program fee, 100% waived. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
+1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for an in-person bootcamp of building with operators and investors, ending in a Demo Day. ₹1,50,000 program fee, 100% waived. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
-3. **How it works:** a path of 5 stops: Apply (₹999 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (4 weeks, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
+3. **How it works:** a path of 5 stops: Apply (₹999 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (in person, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.
 5. **"Not selected? You still leave with something."** Individualized written feedback + full access to all virtual leader & mentor sessions throughout the cohort.
 6. **Investors & mentors / Results:** hidden until real names and results exist (leave commented placeholders).
-7. **FAQ:** What does it cost? (₹999) · Is admission competitive? (20 founders) · What is the equity model? (2% equity, 0% success fee) · What happens if I'm not selected? (Feedback + virtual mentor session access) · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
+7. **FAQ:** What does it cost? (₹999) · Is admission competitive? (20 founders) · What is the equity model? (0% equity, 0% success fee) · What happens if I'm not selected? (Feedback + virtual mentor session access) · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
 8. Link to the Cohort 01 page and application form: `/launchpad/fellowship`.
 
 ### 5.6 Fellowship '26 `/launchpad/fellowship`
 Keep the existing page and application form, but restyle it into the new world and update the text to section 3. Specifically:
-- Hero stats: 4 Weeks · 20 Founders · 2% Equity · Virtual Mentor Sessions Included
+- Hero stats: In person · 20 Founders · 0% Equity · Virtual Mentor Sessions Included
 - Eligibility: "We select 20 founders per cohort based on the problem, your progress and your team, never your college."
 - FAQ answers updated to section 3 (cost, competitive, equity, unselected benefits)
-- Form fee box: "₹999 application fee · includes written feedback & virtual mentor sessions" + "2% equity in selected cohort startups"
-- Required checkbox: "I understand the ₹999 application fee is non-refundable, and that Launchpad takes 2% equity in selected cohort ventures. If not selected, I retain access to all virtual mentor sessions and written feedback."
+- Form fee box: "₹999 application fee · includes written feedback & virtual mentor sessions" + "0% equity"
+- Required checkbox: "I understand the ₹999 application fee is non-refundable, and that Launchpad takes 0% equity. If not selected, I retain access to all virtual mentor sessions and written feedback."
 - Collect the fee at submission using the UPI QR / UTR reference pipeline.
 - Confirmation: "Decisions and feedback go out by October 22, 2026. Selected founders get the founder agreement to sign before kickoff."
 - **The form submits directly on-site to Supabase (members table) with progressive Step 1/Step 2 auto-saving and reflection in data.html.**
@@ -193,9 +193,9 @@ Keep the existing page and application form, but restyle it into the new world a
 ### 5.8 About `/about`: "The letter"
 1. **Why we started:** the founders' letter from the homepage, longer, with photos (placeholders).
 2. Vision, mission and values:
-   - Access over pedigree: fully online, dedicated feedback for every applicant. We select on what you've built, never your college name.
+   - Access over pedigree: in person in Delhi NCR, dedicated feedback for every applicant. We select on what you've built, never your college name.
    - Build over talk: we measure what you ship.
-   - We win when you win: 2% equity in selected cohort startups. Zero success fees.
+   - We win when you win: 0% equity. Zero success fees.
    - Community before competition: chapters, pods, alumni.
    - Honest about risk: most startups fail. We show you the safety nets.
    - Builders pay it forward: today's fellows become tomorrow's chapter leads, mentors and investors.
@@ -208,7 +208,7 @@ Keep the existing page and application form, but restyle it into the new world a
 Keep the existing join form. Restyle it into the warm world. Headline: "Step out of line."
 
 ### 5.10 Terms, Privacy, Refunds
-Keep them. Terms and Refunds: the non-refundable ₹999 application fee, 2% equity for selected cohort ventures, 0% success fee on capital raised, and written feedback + virtual mentor sessions for unselected applicants.
+Keep them. Terms and Refunds: the non-refundable ₹999 application fee, 0% equity for selected cohort ventures, 0% success fee on capital raised, and written feedback + virtual mentor sessions for unselected applicants.
 
 ---
 
@@ -225,7 +225,7 @@ Keep them. Terms and Refunds: the non-refundable ₹999 application fee, 2% equi
 > Reviewed by {reviewer_name}. Keep building, The Future Council
 
 **Selected**, subject: "You're in: Launchpad {cohort}"
-> Hi {first_name}, you're one of 20 founders in Launchpad {cohort}. Kickoff is {kickoff_date}. Before then, please sign the founder agreement (it covers the 2% equity terms): {agreement_link}. Your pod and first session details follow this week. See you on the inside, The Future Council
+> Hi {first_name}, you're one of 20 founders in Launchpad {cohort}. Kickoff is {kickoff_date}. Before then, please sign the founder agreement (it covers the 0% equity terms): {agreement_link}. Your pod and first session details follow this week. See you on the inside, The Future Council
 
 ---
 

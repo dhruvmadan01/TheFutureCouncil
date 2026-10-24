@@ -35,7 +35,7 @@
       DURATION: 'In person · Delhi NCR',
       FORMAT: 'In person',
       LOCATION: 'Delhi NCR',
-      PREVIOUS_COHORT_FORMAT: 'Fully online',
+      PREVIOUS_COHORT_FORMAT: 'In person',
       POD_SIZE: 'pods of 4–5',
       TIME_COMMITMENT: '6–8 hrs/week',
       DEADLINE_ISO: '2027-01-15T23:59:59+05:30',

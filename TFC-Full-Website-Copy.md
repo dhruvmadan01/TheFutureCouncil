@@ -12,7 +12,7 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 **Before you ship this:** paste me the actual current text of Resources, Partners, and the branch pages (branch-fot.html, branch-srcc.html, branch-iitd.html, branch-dtu.html) if you want those rewritten against what's really there instead of rebuilt from scratch. Everything below is safe to use as-is for Fellowship, Branches, Join, and Ambassador since those are fully specified in your own FAQ copy — just sanity-check every number against reality before publishing.
 
 **The rules I held constant across every page below**, so nothing contradicts anything else:
-- "90+ chapters," "20 founders," "2% equity in selected cohort ventures," "Fellowship '26 · Cohort 01," "Applications close Oct 15," "Starts November 1" — identical everywhere they appear.
+- "90+ chapters," "20 founders," "0% equity," "Fellowship '26 · Cohort 01," "Applications close Oct 15," "Starts November 1" — identical everywhere they appear.
 - Founders named the same way every time: Dhruv Madan (Founder), Aryaveer Chauhan (Co-founder).
 - One CTA hierarchy per page: one primary action, one secondary. Never three competing buttons.
 - Same three-act structure underneath everything: **Connect → Build → Scale.**
@@ -22,21 +22,21 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 ## 1. HOME (`index.html`)
 
 **Meta title:** Future Council | India's Largest Student Startup Ecosystem & Founder Launchpad
-**Meta description:** The Future Council connects 90+ university chapters, runs a 4-week founder fellowship with 2% equity alignment and zero success fees, and puts student builders in front of the operators and investors who can move their startup forward.
+**Meta description:** The Future Council connects 90+ university chapters, runs an in-person founder bootcamp with 0% equity and zero success fees, and puts student builders in front of the operators and investors who can move their startup forward.
 **Nav:** Home · Fellowship '26 · Branches · Resources · Join Council
 **Footer tagline:** Where student builders stop waiting for permission.
 
 ### Hero
 **Eyebrow:** Future Council · Global Startup Ecosystem
 **Headline:** You're one chapter away from your co-founder.
-**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, a 4-week founder launchpad (100% fee waiver, 0% equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
+**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, an in-person founder launchpad (100% fee waiver, 0% equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
 **Primary CTA:** Join the Council →
 **Secondary CTA:** Fellowship '26 — Applications Open
 
 **Stat strip:**
 - 90+ Chapters
 - 20 Founders per cohort
-- 2% Equity in selected ventures (Zero success fees)
+- 0% Equity (Zero success fees)
 - Open To All
 
 ### What We Build
@@ -47,7 +47,7 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 Officially recognized startup societies inside India's top colleges — a standing home for founders on your own campus, not a one-off event.
 
 **02 · Launchpad — The Founder Fellowship**
-4 weeks, 2% equity alignment in selected ventures, zero success fees, ₹0 tuition fee. Twenty founders go from raw idea to a product people actually use.
+In person, 0% equity, zero success fees, ₹0 tuition fee. Twenty founders go from raw idea to a product people actually use.
 
 **03 · Operators — 1-on-1 Operator Advisory**
 Weekly sessions with people who've actually built and sold companies. Product critiques and strategy audits on your specific startup — not generic mentorship.
@@ -57,8 +57,8 @@ Warm intros to angel syndicates when you're ready to raise, and first access to 
 
 ### Fellowship CTA Banner
 **Eyebrow:** Cohort 01 · Applications close Oct 15 (Strictly no extension)
-**Headline:** Fellowship '26 is open. 20 seats. 2% equity. Zero success fees. ₹0 program fee.
-**Body:** Starts November 1. The standard ₹1,50,000 program fee is waived completely for all 20 admitted founders — 2% equity in selected ventures, zero tuition, zero success fee.
+**Headline:** Fellowship '26 is open. 20 seats. 0% equity. Zero success fees. ₹0 program fee.
+**Body:** Starts November 1. The standard ₹1,50,000 program fee is waived completely for all 20 admitted founders — 0% equity, zero tuition, zero success fee.
 **Primary CTA:** Apply Now →
 **Secondary CTA:** See What's Included
 
@@ -104,10 +104,10 @@ Warm intros to angel syndicates when you're ready to raise, and first access to 
 **Subhead:** Answers to common questions about Future Council, membership, and the Fellowship.
 
 **What is Future Council?**
-Future Council (officially The Future Council or TFC) is India's leading grassroots student startup ecosystem. We establish officially incorporated startup societies directly within top colleges (SRCC, IIT Delhi, DTU, NSUT, IIITD, Hansraj, and more) and run an intensive 4-week founder launchpad designed to take ambitious student builders from idea to venture-ready companies.
+Future Council (officially The Future Council or TFC) is India's leading grassroots student startup ecosystem. We establish officially incorporated startup societies directly within top colleges (SRCC, IIT Delhi, DTU, NSUT, IIITD, Hansraj, and more) and run an intensive in-person founder launchpad designed to take ambitious student builders from idea to venture-ready companies.
 
 **What is The Future Council Fellowship '26?**
-Fellowship '26 (Cohort 01) is an intensive four-week, fully remote launchpad for early-stage student founders across all 90+ university chapters (2% equity in selected cohort ventures, zero success fees). Fellows are organized into dedicated 4–5 person builder pods and receive weekly live cohort labs, 1-on-1 operator advisory, strategy audits, and direct pitch access to venture capital and angel syndicates at our virtual demo day.
+Fellowship '26 (Cohort 01) is an intensive four-week, fully remote launchpad for early-stage student founders across all 90+ university chapters (0% equity, zero success fees). Fellows are organized into dedicated 4–5 person builder pods and receive weekly live cohort labs, 1-on-1 operator advisory, strategy audits, and direct pitch access to venture capital and angel syndicates at our virtual demo day.
 
 **Who can join Future Council?**
 Future Council is open to all ambitious student builders, engineers, designers, and operators across universities. Whether you have an existing startup or are looking for a team and project, Join the Council for free access to mixers, builder vaults, and project squads.
@@ -128,8 +128,8 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 
 ### Hero
 **Eyebrow:** Cohort 01 · Applications close October 15 (Strictly no further extension)
-**Headline:** Four weeks. 2% Equity. Twenty founders.
-**Subhead:** Fellowship '26 is the Council's flagship launchpad — a structured 4-week sprint that takes early-stage student founders from raw concept to a product real users have actually touched. 2% equity in selected cohort ventures with zero success fees, and the standard ₹1.5 Lakh program fee has been reduced to ₹0 for all 20 admitted founders.
+**Headline:** In person. 0% Equity. Twenty founders.
+**Subhead:** Fellowship '26 is the Council's flagship launchpad — a structured in-person bootcamp that takes early-stage student founders from raw concept to a product real users have actually touched. 0% equity with zero success fees, and the standard ₹1,50,000h program fee has been reduced to ₹0 for all 20 admitted founders.
 **Primary CTA:** Apply Now →
 **Secondary CTA:** Download Brochure ⚡
 
@@ -142,14 +142,14 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 ### How It Runs
 **Section label:** Selection & Sprint Cycle
 **Headline:** How It Runs
-**Subhead:** A structured 4-week sprint taking you from raw concept to validated product and Demo Day.
+**Subhead:** A structured in-person bootcamp taking you from raw concept to validated product and Demo Day.
 
 **Week 1 · Diagnose & Pods** — Strategy audit, founder pod matching (4–5 fellows), and roadmap refinement.
 **Week 2 · Build & Ship** — Execution sprints with operator check-ins. You ship, we push back, you ship again.
 **Week 3 · Traction & Refine** — Metric review, deck teardowns, and closed-door masterclasses.
 **Week 4 · Demo Day & Backing** — Investor pitch prep, private Demo Day with angel syndicates and VCs.
 
-**Key dates:** Applications close October 15 (Strictly no extension) · Cohort starts November 1 · Format: 4 weeks, fully online
+**Key dates:** Applications close October 15 (Strictly no extension) · Cohort starts November 1 · Format: in person, Delhi NCR
 
 ### What You Get (9 pillars)
 **Section label:** Cohort Curriculum & Perks
@@ -189,14 +189,14 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 1. **Submit Application** — Fill the founder questionnaire and pitch details.
 2. **Confirm Slot (₹999)** — Registration pass, paid securely, to filter non-serious applicants.
 3. **Admissions Interview** — 15-minute founder drill assessing ambition, technical depth, and velocity.
-4. **Cohort 01 Welcome** — Selected founders kick off the online 4-week cohort on November 1.
+4. **Cohort 01 Welcome** — Selected founders kick off the in-person cohort in Delhi NCR on November 1.
 
 ### FAQ
 **Do I need a registered company to apply?**
 No. Idea-stage founders with genuine conviction are welcome — no registered legal entity, no incorporated business, no complete team required.
 
 **What is the equity model and program fee?**
-The Future Council takes a standard 2% equity in the 20 selected cohort ventures to align our long-term incentives with your success. There are zero success fees on capital raised (0% / ₹0). The standard ₹1,50,000 program tuition is waived completely (₹0) for all 20 admitted fellows.
+The Future Council takes a standard 0% equity in the 20 selected cohort ventures to align our long-term incentives with your success. There are zero success fees on capital raised (0% / ₹0). The standard ₹1,50,000 program tuition is waived completely (₹0) for all 20 admitted fellows.
 
 **What happens if I'm not selected?**
 You're still eligible to join the wider Council for free — mixers, builder vaults, and project squads stay open so you can keep building alongside the community.
