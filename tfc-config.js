@@ -56,13 +56,13 @@
     // Startup School: Discontinued
     STARTUP_SCHOOL: null,
 
-    // Legal Entity & Brand Footer
+    // Legal Entity & Brand Footer (company name/CIN/address hidden until business commences; restore then)
     ENTITY: {
-      NAME: 'TFC Innovations Pvt. Ltd.',
-      CIN: 'CIN U62011DC2026PTC475213',
-      ADDRESS: '205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009',
-      FULL_LEGAL_ENTITY: 'TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009',
-      FOOTER_COPYRIGHT: '© 2026 TFC Innovations Pvt. Ltd. · The Future Council',
+      NAME: 'The Future Council',
+      CIN: '',
+      ADDRESS: '',
+      FULL_LEGAL_ENTITY: 'The Future Council',
+      FOOTER_COPYRIGHT: '© 2026 The Future Council',
       SUPPORT_EMAIL: 'support@thefuturecouncil.in',
       INSTAGRAM: 'https://www.instagram.com/thefuturecouncil.in/',
       LINKEDIN: 'https://www.linkedin.com/company/thefuturecouncil/'

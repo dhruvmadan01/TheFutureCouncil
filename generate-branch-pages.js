@@ -150,8 +150,7 @@ function generateChapterHtml(ch) {
         </div>
       </div>
       <div class="footer-line">
-        <strong>TFC Innovations Pvt. Ltd. (CIN U62011DC2026PTC475213), 205 GF, Indra Vihar, Near Mukherjee Nagar, G.T.B. Nagar, North West Delhi, Delhi – 110009</strong>
-        <span>© 2026 TFC Innovations Pvt. Ltd. · The Future Council</span>
+        <span>© 2026 The Future Council</span>
       </div>
     </div>
   </footer>
