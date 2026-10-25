@@ -54,7 +54,7 @@ window.mixpanel.init(MIXPANEL_TOKEN, {
 | 3 | `eligibility_check_completed` | User checks commitment terms or finishes Step 3 validation | `acquisition_channel`, `university`, `eligibility_result`, `eligibility_ineligibility_reason` |
 | 4 | `application_completed` | User successfully submits fellowship application form | `acquisition_channel`, `university`, `submission_status`, `completion_time` |
 | 5 | `selection_outcome_recorded` | System / Admin records selection decision after review | `acquisition_channel`, `university`, `selection_outcome`, `review_batch` |
-| 6 | `fellowship_enrollment_started` | Selected applicant begins payment / enrollment steps (₹999 pass) | `acquisition_channel`, `university`, `enrollment_step`, `review_batch` |
+| 6 | `fellowship_enrollment_started` | Selected applicant begins payment / enrollment steps (₹99 pass) | `acquisition_channel`, `university`, `enrollment_step`, `review_batch` |
 | 7 | `fellowship_enrolled` | Applicant successfully completes payment / enrollment confirmed | `acquisition_channel`, `university`, `fellowship_fee_amount`, `payment_status`, `review_batch` |
 | 8 | `application_abandoned` | User leaves application before submission (`beforeunload`) | `acquisition_channel`, `university`, `abandon_step`, `abandon_duration_seconds` |
 | 9 | `eligibility_filter_shown` | Step 3 commitment displayed or `#eligibility` viewed | `acquisition_channel`, `university`, `eligibility_version`, `eligibility_check_entry_point` |

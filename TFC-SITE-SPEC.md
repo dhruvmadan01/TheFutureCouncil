@@ -66,8 +66,8 @@ Every page, FAQ, form, email and legal page must match this table exactly.
 | Term | Value |
 |---|---|
 | Seats | 20 founders per cohort, selected |
-| Application fee | ₹999, one time, paid at application, non-refundable. |
-| Fee filter | The ₹999 fee filters for serious candidates, avoids fake applications, and covers individualized written feedback |
+| Application fee | ₹99, one time, paid at application, non-refundable. |
+| Fee filter | The ₹99 fee filters for serious candidates, avoids fake applications, and covers individualized written feedback |
 | Selection basis | The problem, progress and team. Never the college. |
 | If not selected | Written feedback + full access to all virtual leader & mentor sessions (pods, 1:1s, investor intros & Demo Day remain exclusive to cohort) |
 | Equity | 0% equity |
@@ -167,11 +167,11 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 ### 5.5 Launchpad `/launchpad`: "The ticket"
 1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for an in-person bootcamp of building with operators and investors, ending in a Demo Day. ₹1,50,000 program fee, 100% waived. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
-3. **How it works:** a path of 5 stops: Apply (₹999 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (in person, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
+3. **How it works:** a path of 5 stops: Apply (₹99 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (in person, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.
 5. **"Not selected? You still leave with something."** Individualized written feedback + full access to all virtual leader & mentor sessions throughout the cohort.
 6. **Investors & mentors / Results:** hidden until real names and results exist (leave commented placeholders).
-7. **FAQ:** What does it cost? (₹999) · Is admission competitive? (20 founders) · What is the equity model? (0% equity, 0% success fee) · What happens if I'm not selected? (Feedback + virtual mentor session access) · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
+7. **FAQ:** What does it cost? (₹99) · Is admission competitive? (20 founders) · What is the equity model? (0% equity, 0% success fee) · What happens if I'm not selected? (Feedback + virtual mentor session access) · Time commitment (6–8 hrs/week) · Do I need a registered company? (No)
 8. Link to the Cohort 01 page and application form: `/launchpad/fellowship`.
 
 ### 5.6 Fellowship '26 `/launchpad/fellowship`
@@ -179,8 +179,8 @@ Keep the existing page and application form, but restyle it into the new world a
 - Hero stats: In person · 20 Founders · 0% Equity · Virtual Mentor Sessions Included
 - Eligibility: "We select 20 founders per cohort based on the problem, your progress and your team, never your college."
 - FAQ answers updated to section 3 (cost, competitive, equity, unselected benefits)
-- Form fee box: "₹999 application fee · includes written feedback & virtual mentor sessions" + "0% equity"
-- Required checkbox: "I understand the ₹999 application fee is non-refundable, and that Launchpad takes 0% equity. If not selected, I retain access to all virtual mentor sessions and written feedback."
+- Form fee box: "₹99 application fee · includes written feedback & virtual mentor sessions" + "0% equity"
+- Required checkbox: "I understand the ₹99 application fee is non-refundable, and that Launchpad takes 0% equity. If not selected, I retain access to all virtual mentor sessions and written feedback."
 - Collect the fee at submission using the UPI QR / UTR reference pipeline.
 - Confirmation: "Decisions and feedback go out by October 22, 2026. Selected founders get the founder agreement to sign before kickoff."
 - **The form submits directly on-site to Supabase (members table) with progressive Step 1/Step 2 auto-saving and reflection in data.html.**
@@ -208,7 +208,7 @@ Keep the existing page and application form, but restyle it into the new world a
 Keep the existing join form. Restyle it into the warm world. Headline: "Step out of line."
 
 ### 5.10 Terms, Privacy, Refunds
-Keep them. Terms and Refunds: the non-refundable ₹999 application fee, 0% equity for selected cohort ventures, 0% success fee on capital raised, and written feedback + virtual mentor sessions for unselected applicants.
+Keep them. Terms and Refunds: the non-refundable ₹99 application fee, 0% equity for selected cohort ventures, 0% success fee on capital raised, and written feedback + virtual mentor sessions for unselected applicants.
 
 ---
 
@@ -216,7 +216,7 @@ Keep them. Terms and Refunds: the non-refundable ₹999 application fee, 0% equi
 
 **Not selected**, subject: "Your Launchpad application: feedback and what's next"
 > Hi {first_name},
-> Thank you for applying to Launchpad {cohort}. We had {n_applicants} applications for 20 seats, and yours wasn't selected this time. Here's our honest read, so the ₹999 goes toward making your next attempt stronger.
+> Thank you for applying to Launchpad {cohort}. We had {n_applicants} applications for 20 seats, and yours wasn't selected this time. Here's our honest read, so the ₹99 goes toward making your next attempt stronger.
 > **What's working:** {strengths}
 > **What to fix before you reapply:** 1. {fix_1} 2. {fix_2} 3. {fix_3}
 > **Your next steps:**

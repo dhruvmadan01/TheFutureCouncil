@@ -705,7 +705,7 @@
     let payBlock = '';
     if (r.type === 'application' && S.perms.payments) {
       const label = r.payment === 'verified' ? '<span class="pill green">Verified ✓</span>' : r.payment === 'claimed' ? '<span class="pill amber">Claimed by applicant, not verified</span>' : '<span class="pill">No payment yet</span>';
-      payBlock = '<div class="blk"><h4>Application fee (₹999)</h4><div class="meta" style="margin:0">' + label +
+      payBlock = '<div class="blk"><h4>Application fee (₹99)</h4><div class="meta" style="margin:0">' + label +
         (S.perms.verify && r.payment === 'claimed' ? '<button class="btn sm orange" data-act="verify">Mark payment verified</button>' : '') +
         (S.perms.verify && r.payment === 'verified' ? '<button class="btn ghost sm" data-act="unverify">Undo</button>' : '') + '</div>' +
         (r.kv.utr ? '<p style="margin:8px 0 0;font-size:13px;color:var(--soft)">Reference: ' + esc(r.kv.utr) + '</p>' : '') + '</div>';
