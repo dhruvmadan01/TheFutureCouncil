@@ -26,10 +26,9 @@
       FEE_TERMS: '₹99 application fee, one time, non-refundable',
       FEE_INTENT_TEXT: 'Application fee filters for serious candidates and funds individualized written feedback.',
       EQUITY: '0%',
-      PROGRAM_FEE: 150000,
-      PROGRAM_FEE_FORMATTED: '₹1,50,000',
-      PROGRAM_FEE_WAIVER: '100% waived',
-      EQUITY_TERMS: '0% equity taken. The ₹1,50,000 program fee is 100% waived.',
+      PROGRAM_FEE: 0,
+      PROGRAM_FEE_FORMATTED: 'No program fee',
+      EQUITY_TERMS: '0% equity taken. No program fee and no success fee.',
       SUCCESS_FEE: '0%',
       SUCCESS_FEE_TERMS: 'No success fee on capital raised',
       DURATION: 'In person · Delhi NCR',
@@ -46,10 +45,10 @@
         FEEDBACK: 'Written feedback with specific actionable fixes'
       },
       WEEKLY_STRUCTURE: [
-        { week: 'Week 1', title: 'Kickoff & founder pods' },
-        { week: 'Week 2', title: 'Live labs & mentor office hours' },
-        { week: 'Week 3', title: 'Demo prep & mock pitches' },
-        { week: 'Week 4', title: 'Demo Day' }
+        { week: 'Week 1', title: 'Problem & customer discovery' },
+        { week: 'Week 2', title: 'Validation sprint' },
+        { week: 'Week 3', title: 'MVP build sprint' },
+        { week: 'Week 4', title: 'Investor readiness & Demo Day' }
       ]
     },
 

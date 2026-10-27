@@ -305,15 +305,5 @@ footer.tfc-footer .brand span { color: var(--ivory); }
   .faq-item summary { font-size: 20px; }
 }
 
-/* Program fee cut: ₹1,50,000 struck through, then ₹0 */
-.fee-cut{display:inline-flex;align-items:baseline;gap:.45em;font-weight:800;white-space:nowrap}
-.fee-old{position:relative;display:inline-block;text-decoration:none;animation:fee-dim .4s ease 1.2s forwards;animation-play-state:paused}
-.fee-old::after{content:"";position:absolute;left:-3%;right:-3%;top:54%;height:.13em;background:var(--orange,#E2542A);border-radius:2px;transform:scaleX(0);transform-origin:left center;animation:fee-strike .6s ease-out .5s forwards;animation-play-state:paused}
-.fee-new{display:inline-block;color:var(--orange,#E2542A);opacity:0;transform:translateY(.45em) scale(.7);animation:fee-pop .55s cubic-bezier(.2,1.5,.4,1) 1.35s forwards;animation-play-state:paused}
-.fee-cut.fee-go .fee-old,.fee-cut.fee-go .fee-old::after,.fee-cut.fee-go .fee-new{animation-play-state:running}
-.fee-lg{font-size:clamp(28px,5vw,52px);vertical-align:middle;margin:0 .15em}
+/* Terms banner under the Launchpad hero */
 .fee-banner{margin-top:18px;font-size:clamp(16px,1.6vw,20px);font-weight:600}
-@keyframes fee-strike{to{transform:scaleX(1)}}
-@keyframes fee-dim{to{opacity:.45}}
-@keyframes fee-pop{to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.fee-old,.fee-old::after,.fee-new{animation-duration:.01s;animation-delay:0s}}

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Launchpad Spring Cohort | The Future Council</title>
-  <meta name="description" content="A selective in-person startup accelerator cohort in Delhi NCR for 20 student founders, ending in Demo Day with vetted investors. ₹1,50,000 program fee, 100% waived. ₹99 application fee. 0% equity. No success fee." />
+  <meta name="description" content="A selective in-person startup accelerator cohort in Delhi NCR for 20 student founders, ending in Demo Day with vetted investors. No program fee. ₹99 application fee. 0% equity. No success fee." />
   <meta name="canonical" href="https://thefuturecouncil.in/launchpad/fellowship" />
   <link rel="icon" href="/TFC.png" type="image/png" />
   <link rel="apple-touch-icon" href="/TFC.png" />
@@ -266,15 +266,13 @@
         <span class="mono kick">Launchpad · Spring Cohort 02</span>
         <h1 style="font-size: clamp(38px, 6.4vw, 84px); margin-top: 14px;">From idea to investor.</h1>
         <p class="lede" style="font-size: clamp(18px, 1.8vw, 22px); color: var(--ink-soft); max-width: 52ch; margin-top: 16px; line-height: 1.5;">
-          A 4-week offline bootcamp in Delhi NCR that teaches you how to start a startup, with or without an idea, and ends in Demo Day in front of investors. You need to be able to attend in person. ₹1,50,000 program fee, 100% waived. 0% equity. Zero success fee.
+          A 4-week in-person accelerator in Delhi NCR where you build a company, with or without an idea to start with, ending in Demo Day in front of investors. You need to be able to attend in person. No program fee. 0% equity. Zero success fee.
         </p>
-        <p style="margin-top: 18px;"><a class="btn sm" href="/launchpad/TFC-Launchpad-Brochure.pdf" download>Download brochure ↓</a></p>
-
         <!-- SPEC 5.6 HERO STATS -->
         <div class="hero-stats">
           <div class="stat-chip"><b>In person</b> · Delhi NCR</div>
           <div class="stat-chip"><b>20 Founders</b> · Selected</div>
-          <div class="stat-chip"><b><span class="fee-cut"><s class="fee-old">₹1,50,000</s><span class="fee-new">₹0</span></span></b> · Waived for everyone</div>
+          <div class="stat-chip"><b>No program fee</b> · Free for every founder</div>
           <div class="stat-chip"><b>₹99</b> · One-time application</div>
         </div>
       </div>
@@ -474,8 +472,8 @@
                   
                   <div style="margin-top: 16px;">
                     <div class="fee-row">
-                      <span>Launchpad Program Fee (100% waived for everyone)</span>
-                      <span><span class="fee-cut"><s class="fee-old">₹1,50,000</s><span class="fee-new">₹0</span></span></span>
+                      <span>Launchpad Program Fee</span>
+                      <span>None</span>
                     </div>
                     <div class="fee-row">
                       <span>Application Evaluation Fee</span>
@@ -511,7 +509,7 @@
                 <div class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
                   <input type="checkbox" id="fUnderstandFee" required style="margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px;" />
                   <label for="fUnderstandFee" style="font-size: 14px; line-height: 1.5; color: var(--ink);">
-                    I understand the <b>₹99 application fee is non-refundable</b>, and that the ₹1,50,000 program fee is <b>100% waived for everyone</b>, with 0% equity taken. If not selected, I receive written feedback.
+                    I understand the <b>₹99 application fee is non-refundable</b>, and that Launchpad charges <b>no program fee</b>, with 0% equity taken. If not selected, I receive written feedback.
                   </label>
                 </div>
 
@@ -686,7 +684,7 @@
           <details class="faq-item">
             <summary>Does TFC take equity?</summary>
             <div class="faq-body">
-              No. The Launchpad program fee is ₹1,50,000, but it is 100% waived, so nobody pays it and the only cost is the ₹99 application fee. TFC takes 0% equity and charges zero success fees on capital you raise.
+              No. Launchpad has no program fee, so the only cost is the ₹99 application fee. TFC takes 0% equity and charges zero success fees on capital you raise.
             </div>
           </details>
 
@@ -1041,7 +1039,7 @@
       const commit = document.getElementById('fCommitHours').checked;
       const understand = document.getElementById('fUnderstandFee').checked;
       if (!commit || !understand) {
-        alert('Please review and check both checkboxes above (time commitment and ₹99 fee and fee waiver terms) before confirming payment.');
+        alert('Please review and check both checkboxes above (time commitment and ₹99 application fee terms) before confirming payment.');
         if (!commit) document.getElementById('fCommitHours').focus();
         else document.getElementById('fUnderstandFee').focus();
         return;

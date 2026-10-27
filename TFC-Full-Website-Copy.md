@@ -22,14 +22,14 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 ## 1. HOME (`index.html`)
 
 **Meta title:** Future Council | India's Largest Student Startup Ecosystem & Founder Launchpad
-**Meta description:** The Future Council connects 90+ university chapters, runs an in-person founder bootcamp with 0% equity and zero success fees, and puts student builders in front of the operators and investors who can move their startup forward.
+**Meta description:** The Future Council connects 90+ university chapters, runs an in-person founder accelerator with 0% equity and zero success fees, and puts student builders in front of the operators and investors who can move their startup forward.
 **Nav:** Home · Fellowship '26 · Branches · Resources · Join Council
 **Footer tagline:** Where student builders stop waiting for permission.
 
 ### Hero
 **Eyebrow:** Future Council · Global Startup Ecosystem
 **Headline:** You're one chapter away from your co-founder.
-**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, an in-person founder launchpad (100% fee waiver, 0% equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
+**Subhead:** The Future Council is India's largest grassroots student startup ecosystem — 90+ university chapters, an in-person founder accelerator (no program fee, 0% equity, zero success fees), and direct lines to the operators and investors who can actually move your startup forward.
 **Primary CTA:** Join the Council →
 **Secondary CTA:** Fellowship '26 — Applications Open
 
@@ -47,7 +47,7 @@ I was able to fully pull and rewrite your **homepage** from the live site. For t
 Officially recognized startup societies inside India's top colleges — a standing home for founders on your own campus, not a one-off event.
 
 **02 · Launchpad — The Founder Fellowship**
-In person, 0% equity, zero success fees, ₹0 tuition fee. Twenty founders go from raw idea to a product people actually use.
+In person, 0% equity, zero success fees, no program fee. Twenty founders go from raw idea to a product people actually use.
 
 **03 · Operators — 1-on-1 Operator Advisory**
 Weekly sessions with people who've actually built and sold companies. Product critiques and strategy audits on your specific startup — not generic mentorship.
@@ -57,8 +57,8 @@ Warm intros to angel syndicates when you're ready to raise, and first access to 
 
 ### Fellowship CTA Banner
 **Eyebrow:** Cohort 01 · Applications close Oct 15 (Strictly no extension)
-**Headline:** Fellowship '26 is open. 20 seats. 0% equity. Zero success fees. ₹0 program fee.
-**Body:** Starts November 1. The standard ₹1,50,000 program fee is waived completely for all 20 admitted founders — 0% equity, zero tuition, zero success fee.
+**Headline:** Fellowship '26 is open. 20 seats. 0% equity. Zero success fees. No program fee.
+**Body:** Starts November 1. There is no program fee for any of the 20 admitted founders — 0% equity, no tuition, zero success fee.
 **Primary CTA:** Apply Now →
 **Secondary CTA:** See What's Included
 
@@ -129,30 +129,29 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 ### Hero
 **Eyebrow:** Cohort 01 · Applications close October 15 (Strictly no further extension)
 **Headline:** In person. 0% Equity. Twenty founders.
-**Subhead:** Fellowship '26 is the Council's flagship launchpad — a structured in-person bootcamp that takes early-stage student founders from raw concept to a product real users have actually touched. 0% equity with zero success fees, and the standard ₹1,50,000h program fee has been reduced to ₹0 for all 20 admitted founders.
+**Subhead:** Fellowship '26 is the Council's flagship launchpad — a structured in-person accelerator that takes early-stage student founders from raw concept to a product real users have actually touched. 0% equity with zero success fees, and no program fee for any of the 20 admitted founders.
 **Primary CTA:** Apply Now →
-**Secondary CTA:** Download Brochure ⚡
 
 **Stat strip:**
 - Cohort 01 · 2026 Batch
 - 20 Founders — Only 20 in total
-- ₹1,50,000 → ₹0 Program fee (100% waived)
+- ₹0 Program fee (there is no program fee)
 - Starts Nov 1 · Closes Oct 15
 
 ### How It Runs
 **Section label:** Selection & Sprint Cycle
 **Headline:** How It Runs
-**Subhead:** A structured in-person bootcamp taking you from raw concept to validated product and Demo Day.
+**Subhead:** Four weeks, four milestones. Launchpad is not a course — every week ends in something you have shipped.
 
-**Week 1 · Diagnose & Pods** — Strategy audit, founder pod matching (4–5 fellows), and roadmap refinement.
-**Week 2 · Build & Ship** — Execution sprints with operator check-ins. You ship, we push back, you ship again.
-**Week 3 · Traction & Refine** — Metric review, deck teardowns, and closed-door masterclasses.
-**Week 4 · Demo Day & Backing** — Investor pitch prep, private Demo Day with angel syndicates and VCs.
+**Week 1 · Problem & customers** — Lock onto a problem worth solving and get out of the building. Founder pods (4–5 fellows) are matched here. You ship: a sharp problem statement and 15 customer conversations.
+**Week 2 · Validation sprint** — Prove demand before you write a line of code, and kill the idea early if it does not hold. You ship: hard evidence people want it — signups, waitlist, pre-orders or letters of intent.
+**Week 3 · MVP build sprint** — Build the smallest thing a real user can use, then put it in front of them. You ship: a working MVP in users' hands and your first usage numbers.
+**Week 4 · Investor readiness** — Turn what you built into a story a cheque can follow. You ship: a tight deck, your traction numbers, and a Demo Day pitch to investors.
 
 **Key dates:** Applications close October 15 (Strictly no extension) · Cohort starts November 1 · Format: in person, Delhi NCR
 
 ### What You Get (9 pillars)
-**Section label:** Cohort Curriculum & Perks
+**Section label:** What the Cohort Gives You
 **Headline:** What You Get
 **Subhead:** Nine pillars designed to take your prototype to real market traction.
 
@@ -196,7 +195,7 @@ Future Council was founded by Dhruv Madan (Founder) and Aryaveer Chauhan (Co-fou
 No. Idea-stage founders with genuine conviction are welcome — no registered legal entity, no incorporated business, no complete team required.
 
 **What is the equity model and program fee?**
-The Future Council takes a standard 0% equity in the 20 selected cohort ventures to align our long-term incentives with your success. There are zero success fees on capital raised (0% / ₹0). The standard ₹1,50,000 program tuition is waived completely (₹0) for all 20 admitted fellows.
+The Future Council takes a standard 0% equity in the 20 selected cohort ventures to align our long-term incentives with your success. There are zero success fees on capital raised (0% / ₹0). There is no program fee or tuition for any of the 20 admitted fellows.
 
 **What happens if I'm not selected?**
 You're still eligible to join the wider Council for free — mixers, builder vaults, and project squads stay open so you can keep building alongside the community.

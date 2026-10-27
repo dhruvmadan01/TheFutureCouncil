@@ -165,7 +165,7 @@ Warm world, workbench feel: modules as tool cards, each ending in a deliverable.
 8. CTA: "Built something? → Apply to Launchpad"
 
 ### 5.5 Launchpad `/launchpad`: "The ticket"
-1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for an in-person bootcamp of building with operators and investors, ending in a Demo Day. ₹1,50,000 program fee, 100% waived. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
+1. **Hero:** "From student project to funded startup." Sub: "Launchpad selects 20 student founders a cohort for an in-person accelerator of building with operators and investors, ending in a Demo Day. No program fee. 0% equity. Zero success fees." Status pill: "Cohort 01 · Final Deadline: Oct 15, 11:59 PM IST (No further extension)" or, when closed, "Next cohort: join the waitlist".
 2. **The deal** `#terms`: the orange ticket from the homepage, with the full terms table from section 3.
 3. **How it works:** a path of 5 stops: Apply (₹99 one-time application fee) → Selection (20 founders; everyone else gets written feedback and full access to all virtual mentor sessions) → Build (in person, pods of 4–5, weekly labs, 1:1 mentors) → Demo Day (pitch to angels and early-stage funds).
 4. **What you get:** founder pods, weekly cohort lab, mentor office hours, investor intros, Demo Day, alumni network.
