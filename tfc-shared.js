@@ -1,14 +1,11 @@
 /**
  * The Future Council · Shared Interactive Logic
- * Handles Nav, Mobile Menu, Launchpad Countdown, and Sticky Bars
+ * Handles Nav, Mobile Menu, Program Countdown, and Sticky Bars
  */
 (function() {
   const config = window.TFC_CONFIG || {
-    APPLY_URL: '/launchpad/fellowship',
-    LAUNCHPAD: {
-      DEADLINE_ISO: '2027-01-15T23:59:59+05:30',
-      DEADLINE_DISPLAY: 'Jan 15, 2027, 11:59 PM IST'
-    }
+    APPLY_URL: '/join',
+    LAUNCHPAD: null
   };
 
   // Mobile Nav Drawer Toggle
@@ -30,16 +27,24 @@
     });
   }
 
-  // Countdown timer to Launchpad Spring Cohort (Cohort 02) deadline
-  const targetDateStr = (config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO) || '2027-01-15T23:59:59+05:30';
-  const targetDate = new Date(targetDateStr).getTime();
+  // Countdown timer: driven by config.LAUNCHPAD.DEADLINE_ISO when a program is running.
+  // No active program means nothing to count down to, so the bar and clock stay hidden.
+  const targetDateStr = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_ISO;
+  const targetDate = targetDateStr ? new Date(targetDateStr).getTime() : null;
 
   function updateDeadlines() {
     const now = Date.now();
-    const diff = targetDate - now;
     const barEl = document.getElementById('bar');
     const barCountEl = document.getElementById('barCount');
     const countdownEl = document.getElementById('countdown');
+
+    if (targetDate === null) {
+      if (barEl) { barEl.classList.add('hide'); }
+      if (countdownEl) { countdownEl.textContent = ''; }
+      return;
+    }
+
+    const diff = targetDate - now;
 
     if (diff <= 0) {
       if (countdownEl) {
@@ -68,8 +73,8 @@
     }
 
     if (countdownEl) {
-      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY ? config.LAUNCHPAD.DEADLINE_DISPLAY : 'Jan 15, 11:59 PM IST';
-      countdownEl.innerHTML = `${formattedShort}<small>Closes ${displayLabel}</small>`;
+      const displayLabel = config.LAUNCHPAD && config.LAUNCHPAD.DEADLINE_DISPLAY;
+      countdownEl.innerHTML = displayLabel ? `${formattedShort}<small>Closes ${displayLabel}</small>` : formattedShort;
     }
   }
 

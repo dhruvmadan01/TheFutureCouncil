@@ -685,9 +685,9 @@
 
   function waTemplate(r) {
     const n = first(r.name);
-    if (r.type === 'application' && r.stage === 'incomplete') return 'Hi ' + n + ', this is the Future Council team. You started your Launchpad application but did not finish it. Need any help completing it? The Spring Cohort is open.';
-    if (r.type === 'application') return 'Hi ' + n + ', this is the Future Council team about your Launchpad application' + (r.kv.venture ? ' for ' + r.kv.venture : '') + '.';
-    if (r.type === 'investor') return 'Hi ' + n + ', thanks for joining the Future Council investor network. We would love to share our upcoming Launchpad Demo Day brief.';
+    if (r.type === 'application' && r.stage === 'incomplete') return 'Hi ' + n + ', this is the Future Council team following up on your application.';
+    if (r.type === 'application') return 'Hi ' + n + ', this is the Future Council team about your application' + (r.kv.venture ? ' for ' + r.kv.venture : '') + '.';
+    if (r.type === 'investor') return 'Hi ' + n + ', thanks for joining the Future Council investor network. We would love to share our upcoming Demo Day brief.';
     if (r.type === 'mentor') return 'Hi ' + n + ', thank you for signing up to mentor with the Future Council. Could we find 10 minutes to talk about the cohort?';
     if (r.type === 'chapterlead') return 'Hi ' + n + ', thanks for applying to lead a Future Council chapter. Could we set up a quick call?';
     return 'Hi ' + n + ', this is the Future Council team.';

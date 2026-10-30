@@ -39,7 +39,6 @@ function generateChapterHtml(ch) {
       </a>
       <ul class="nav-links">
         <li><a href="/chapters" class="active">Chapters</a></li>
-        <li><a href="/launchpad">Launchpad</a></li>
         <li class="nav-extra"><a href="/investors">Investors</a></li>
         <li class="nav-extra"><a href="/mentors">Mentors</a></li>
         <li><a href="/why">Why Build</a></li>
@@ -55,7 +54,6 @@ function generateChapterHtml(ch) {
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="/chapters" class="active">All Chapters <span>→</span></a>
-    <a href="/launchpad">Launchpad <span>→</span></a>
     <a href="/why">Why Build <span>→</span></a>
     <a href="/about">About TFC <span>→</span></a>
     <div style="margin-top: 20px;">
@@ -68,7 +66,7 @@ function generateChapterHtml(ch) {
       <div class="pv-wrap">
         <p class="pv-label pv-muted" style="margin-bottom: 28px">${ch.region} &middot; ${ch.city} &middot; TFC Chapter</p>
         <h1 class="pv-display">${ch.name}</h1>
-        <p class="pv-lede">Join the TFC Chapter at ${ch.name}. Find co-founders on your campus, build real products and get a direct path to the Launchpad Fellowship. Free to join.</p>
+        <p class="pv-lede">Join the TFC Chapter at ${ch.name}. Find co-founders on your campus and build real products. Free to join.</p>
         <div class="pv-actions"><a class="pv-btn" href="/join?chapter=${ch.id}">Join this Chapter, free</a><a class="pv-btn pv-btn-ghost" href="/chapters">All Chapters</a></div>
       </div>
     </section>
@@ -94,7 +92,6 @@ function generateChapterHtml(ch) {
           <li><span>Membership cost</span><b>&#8377;0</b></li>
           <li><span>Campus build nights</span><b>Included</b></li>
           <li><span>Co-founder matching</span><b>Included</b></li>
-          <li><span>Launchpad Fellowship</span><b>Open to anyone</b></li>
         </ul>
       </div>
     </section>
@@ -120,7 +117,6 @@ function generateChapterHtml(ch) {
         <div class="footer-col">
           <h4>Accelerator</h4>
           <ul>
-            <li><a href="/launchpad">Launchpad</a></li>
             <li><a href="/chapters">Campus Chapters</a></li>
             <li><a href="/why">Why Build</a></li>
             <li><a href="/about">About TFC</a></li>

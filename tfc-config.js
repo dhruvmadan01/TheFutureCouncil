@@ -5,52 +5,15 @@
 (function(root) {
   var TFC_CONFIG = {
     // Primary routing & CTAs
-    APPLY_URL: '/launchpad/fellowship',
-    GOOGLE_FORM_URL: '/launchpad/fellowship',
+    APPLY_URL: '/join',
+    GOOGLE_FORM_URL: '/join',
 
     // Ecosystem statistics
     CHAPTER_COUNT: 18,
     CHAPTER_COUNT_LABEL: '90+ colleges',
 
-    // Launchpad Accelerator Program Facts
-    LAUNCHPAD: {
-      COHORT: 'Cohort 02',
-      SEASON: 'Spring',
-      PREVIOUS_COHORT: 'Cohort 01',
-      PREVIOUS_COHORT_SEASON: 'Winter',
-      PREVIOUS_COHORT_STATUS: 'Registrations closed · kicks off Nov 1, 2026',
-      SEATS: 20,
-      SEATS_LABEL: '20 founders/cohort',
-      FEE: 99,
-      FEE_FORMATTED: '₹99',
-      FEE_TERMS: '₹99 application fee, one time, non-refundable',
-      FEE_INTENT_TEXT: 'Application fee filters for serious candidates and funds individualized written feedback.',
-      EQUITY: '0%',
-      PROGRAM_FEE: 0,
-      PROGRAM_FEE_FORMATTED: 'No program fee',
-      EQUITY_TERMS: '0% equity taken. No program fee and no success fee.',
-      SUCCESS_FEE: '0%',
-      SUCCESS_FEE_TERMS: 'No success fee on capital raised',
-      DURATION: 'In person · Delhi NCR',
-      FORMAT: 'In person',
-      LOCATION: 'Delhi NCR',
-      PREVIOUS_COHORT_FORMAT: 'In person',
-      POD_SIZE: 'pods of 4–5',
-      TIME_COMMITMENT: '6–8 hrs/week',
-      DEADLINE_ISO: '2027-01-15T23:59:59+05:30',
-      DEADLINE_DISPLAY: 'Jan 15, 2027, 11:59 PM IST',
-      KICKOFF_DISPLAY: 'Feb 1, 2027',
-      AUDIENCE: 'Student founders and early-stage builders from any college or university who can attend in person in Delhi NCR',
-      UNSELECTED_BENEFITS: {
-        FEEDBACK: 'Written feedback with specific actionable fixes'
-      },
-      WEEKLY_STRUCTURE: [
-        { week: 'Week 1', title: 'Problem & customer discovery' },
-        { week: 'Week 2', title: 'Validation sprint' },
-        { week: 'Week 3', title: 'MVP build sprint' },
-        { week: 'Week 4', title: 'Investor readiness & Demo Day' }
-      ]
-    },
+    // Launchpad: Discontinued
+    LAUNCHPAD: null,
 
     // Startup School: Discontinued
     STARTUP_SCHOOL: null,
