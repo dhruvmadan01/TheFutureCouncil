@@ -230,3 +230,6 @@
   .pv-site .pv-play-tri { margin-left: 5px; border-width: 12px 0 12px 20px; }
   .pv-site .pv-video-note { text-align: left; }
 }
+
+/* "Soon" badge for nav items that aren't live yet */
+.pv-site .pv-nav .pv-soon { display: inline-block; margin-left: 6px; padding: 2px 6px; font-size: 9px; letter-spacing: 0.14em; line-height: 1.4; border-radius: 999px; background: var(--sunrise); color: var(--ink); vertical-align: 2px; }

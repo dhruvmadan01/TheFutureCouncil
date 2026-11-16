@@ -3,6 +3,121 @@
   "framework": null,
   "redirects": [
     {
+      "source": "/launchpad.html",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/launchpad/:path+",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/fellowship",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/fellowship.html",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/fellowship/:path*",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/fellowship-brochure",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/fellowship-demo",
+      "destination": "/launchpad",
+      "permanent": false
+    },
+    {
+      "source": "/chapters",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/chapters.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/chapters/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/branches",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/branches.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/branch-:college",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/stories",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/stories.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/school",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/school.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/join",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/join.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/join-ambassador",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/join-ambassador.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ambassador",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ambassador.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
@@ -28,16 +143,6 @@
       "permanent": true
     },
     {
-      "source": "/school.html",
-      "destination": "/chapters",
-      "permanent": true
-    },
-    {
-      "source": "/school",
-      "destination": "/chapters",
-      "permanent": true
-    },
-    {
       "source": "/school/library",
       "destination": "/resources",
       "permanent": true
@@ -46,36 +151,6 @@
       "source": "/school/library.html",
       "destination": "/resources",
       "permanent": true
-    },
-    {
-      "source": "/launchpad",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/launchpad.html",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/launchpad/:path*",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/fellowship",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/fellowship.html",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/fellowship/:path*",
-      "destination": "/",
-      "permanent": false
     },
     {
       "source": "/connect.html",
@@ -105,76 +180,6 @@
     {
       "source": "/refund.html",
       "destination": "/refund",
-      "permanent": true
-    },
-    {
-      "source": "/branches.html",
-      "destination": "/chapters",
-      "permanent": true
-    },
-    {
-      "source": "/branches",
-      "destination": "/chapters",
-      "permanent": true
-    },
-    {
-      "source": "/branch-srcc.html",
-      "destination": "/chapters/srcc",
-      "permanent": true
-    },
-    {
-      "source": "/branch-srcc",
-      "destination": "/chapters/srcc",
-      "permanent": true
-    },
-    {
-      "source": "/branch-iitd.html",
-      "destination": "/chapters/iitd",
-      "permanent": true
-    },
-    {
-      "source": "/branch-iitd",
-      "destination": "/chapters/iitd",
-      "permanent": true
-    },
-    {
-      "source": "/branch-dtu.html",
-      "destination": "/chapters/dtu",
-      "permanent": true
-    },
-    {
-      "source": "/branch-dtu",
-      "destination": "/chapters/dtu",
-      "permanent": true
-    },
-    {
-      "source": "/branch-:college.html",
-      "destination": "/chapters/:college",
-      "permanent": true
-    },
-    {
-      "source": "/branch-:college",
-      "destination": "/chapters/:college",
-      "permanent": true
-    },
-    {
-      "source": "/join-ambassador.html",
-      "destination": "/chapters/start",
-      "permanent": true
-    },
-    {
-      "source": "/join-ambassador",
-      "destination": "/chapters/start",
-      "permanent": true
-    },
-    {
-      "source": "/stories.html",
-      "destination": "/chapters",
-      "permanent": true
-    },
-    {
-      "source": "/stories",
-      "destination": "/chapters",
       "permanent": true
     },
     {
@@ -319,10 +324,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/chapters/:college",
-      "destination": "/chapters/:college.html"
-    },
     {
       "source": "/funddatabase",
       "destination": "/resources/funddatabase.html"
