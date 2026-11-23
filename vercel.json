@@ -4,37 +4,37 @@
   "redirects": [
     {
       "source": "/launchpad.html",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/launchpad/:path+",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/fellowship",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/fellowship.html",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/fellowship/:path*",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/fellowship-brochure",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
       "source": "/fellowship-demo",
-      "destination": "/launchpad",
+      "destination": "/",
       "permanent": false
     },
     {
