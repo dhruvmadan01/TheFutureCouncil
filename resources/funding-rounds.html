@@ -476,7 +476,7 @@ footer a { color: var(--peach); }
         <div class="result" aria-live="polite">
           <p class="label" data-r-label>Your stage</p>
           <h3 data-r-title>Answer the questions</h3>
-          <p data-r-text>Most student founders land on pre-seed. That's a good place to start.</p>
+          <p data-r-text>Most first-time founders land on pre-seed. That's a good place to start.</p>
         </div>
       </div>
     </div>
@@ -572,9 +572,8 @@ footer a { color: var(--peach); }
     <div class="wrap">
       <p class="label">We back the founders who build it.</p>
       <h2 id="close-h">Every IPO started with someone on the first rung.</h2>
-      <p>20 seats in Cohort 02. Applications are open.</p>
-      <div class="hero-actions">
-      </div>
+      <p>Applications to the TFC Incubator are open. 0% equity.</p>
+      <div class="hero-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScTMu4LRhbzbGPtL2Mvic0ncbOU3xBwWp9x9hvsY9U8YqgIug/viewform?usp=header" target="_blank" rel="noopener">Apply to the Incubator</a></div>
     </div>
   </section>
 </main>
@@ -628,7 +627,7 @@ footer a { color: var(--peach); }
     });
     var s = stage(), r = s && RESULTS[s];
     document.querySelector("[data-r-title]").textContent = r ? r.t : "Answer the questions";
-    document.querySelector("[data-r-text]").textContent = r ? r.x : "Most student founders land on pre-seed. That's a good place to start.";
+    document.querySelector("[data-r-text]").textContent = r ? r.x : "Most first-time founders land on pre-seed. That's a good place to start.";
     document.querySelector("[data-r-cta]").hidden = !(r && r.cta);
   }
   qs.forEach(function (q, i) {
